@@ -32,10 +32,10 @@ void create_syncNtuple_objectbased(){
   TString dir_in="/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/";
   TString dir_out="/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_syncformat/";
 
-  TString file="sync_ntuple_objects_syncformat_ttHNonbb_2016_v1.root";
+  TString file="sync_ntuple_objects_syncformat_ttHNonbb_2016_v2b_1k.root";
 
   vector<TString> list;
-  list.push_back(dir_in+"sync_ntuple_converted_ttHNonbb_2016_v1.root");
+  list.push_back(dir_in+"sync_ntuple_converted_ttHNonbb_2016_v2b_1k.root");
 
   TChain * tree = new TChain("HTauTauTree");
   int nFiles = list.size();
@@ -575,7 +575,7 @@ void create_syncNtuple_objectbased(){
   vector<int>   *_recomu_jetNDauChargedMVASel;
   vector<int>   *_recomu_jetNDauChargedMVASel_nanoAOD;
   vector<float> *_recomu_miniRelIso;
-  vector<float> *_recomu_miniRelIsoAll_nanoAOD;
+  vector<float> *_recomu_miniRelIso_nanoAOD;
   vector<float> *_recomu_miniIsoCharged;
   vector<float> *_recomu_miniIsoCharged_nanoAOD;
   vector<float> *_recomu_miniIsoNeutral;
@@ -608,7 +608,7 @@ void create_syncNtuple_objectbased(){
   vector<int>   *_recoele_jetNDauChargedMVASel;
   vector<int>   *_recoele_jetNDauChargedMVASel_nanoAOD;
   vector<float> *_recoele_miniRelIso;
-  vector<float> *_recoele_miniRelIsoAll_nanoAOD;
+  vector<float> *_recoele_miniRelIso_nanoAOD;
   vector<float> *_recoele_miniIsoCharged;
   vector<float> *_recoele_miniIsoCharged_nanoAOD;
   vector<float> *_recoele_miniIsoNeutral;
@@ -691,7 +691,7 @@ void create_syncNtuple_objectbased(){
   tree->SetBranchAddress("recomu_jetNDauChargedMVASel", &_recomu_jetNDauChargedMVASel);
   tree->SetBranchAddress("recomu_jetNDauChargedMVASel_nanoAOD", &_recomu_jetNDauChargedMVASel_nanoAOD);
   tree->SetBranchAddress("recomu_miniRelIso",           &_recomu_miniRelIso);
-  tree->SetBranchAddress("recomu_miniRelIsoAll_nanoAOD",      &_recomu_miniRelIsoAll_nanoAOD);
+  tree->SetBranchAddress("recomu_miniRelIso_nanoAOD",      &_recomu_miniRelIso_nanoAOD);
   tree->SetBranchAddress("recomu_miniIsoCharged",       &_recomu_miniIsoCharged);
   tree->SetBranchAddress("recomu_miniIsoCharged_nanoAOD",         &_recomu_miniIsoCharged_nanoAOD);
   tree->SetBranchAddress("recomu_miniIsoNeutral",       &_recomu_miniIsoNeutral);
@@ -724,7 +724,7 @@ void create_syncNtuple_objectbased(){
   tree->SetBranchAddress("recoele_jetNDauChargedMVASel",&_recoele_jetNDauChargedMVASel);
   tree->SetBranchAddress("recoele_jetNDauChargedMVASel_nanoAOD",&_recoele_jetNDauChargedMVASel_nanoAOD);
   tree->SetBranchAddress("recoele_miniRelIso",          &_recoele_miniRelIso);
-  tree->SetBranchAddress("recoele_miniRelIsoAll_nanoAOD",     &_recoele_miniRelIsoAll_nanoAOD);
+  tree->SetBranchAddress("recoele_miniRelIso_nanoAOD",     &_recoele_miniRelIso_nanoAOD);
   tree->SetBranchAddress("recoele_miniIsoCharged",      &_recoele_miniIsoCharged);
   tree->SetBranchAddress("recoele_miniIsoCharged_nanoAOD",        &_recoele_miniIsoCharged_nanoAOD);
   tree->SetBranchAddress("recoele_miniIsoNeutral",      &_recoele_miniIsoNeutral);
@@ -1060,7 +1060,7 @@ void create_syncNtuple_objectbased(){
     _recomu_jetNDauChargedMVASel = 0;
     _recomu_jetNDauChargedMVASel_nanoAOD = 0;
     _recomu_miniRelIso           = 0;
-    _recomu_miniRelIsoAll_nanoAOD      = 0;
+    _recomu_miniRelIso_nanoAOD      = 0;
     _recomu_miniIsoCharged       = 0;
     _recomu_miniIsoCharged_nanoAOD         = 0;
     _recomu_miniIsoNeutral       = 0;
@@ -1092,7 +1092,7 @@ void create_syncNtuple_objectbased(){
     _recoele_jetNDauChargedMVASel = 0;
     _recoele_jetNDauChargedMVASel_nanoAOD = 0;
     _recoele_miniRelIso            = 0;
-    _recoele_miniRelIsoAll_nanoAOD      = 0;
+    _recoele_miniRelIso_nanoAOD      = 0;
     _recoele_miniIsoCharged       = 0;
     _recoele_miniIsoCharged_nanoAOD         = 0;
     _recoele_miniIsoNeutral       = 0;
@@ -1167,19 +1167,22 @@ void create_syncNtuple_objectbased(){
     tree->GetEntry(i);
     
     if(_n_presel_mu>0){
-
-      cout<<"mu1"<<endl;
-
       _mu1_pt     = (*_recomu_pt)[0];
       _mu1_conept = (*_recomu_conept)[0];
       _mu1_eta    = (*_recomu_eta)[0];
       _mu1_phi    = (*_recomu_phi)[0];
       _mu1_E      = (*_recomu_e)[0];
       _mu1_charge = (*_recomu_charge)[0];
+      cout<<"here1"<<endl;
       _mu1_jetNDauChargedMVASel = (*_recomu_jetNDauChargedMVASel_nanoAOD)[0];
-      _mu1_miniRelIso           = (*_recomu_miniRelIsoAll_nanoAOD)[0];
+      /*_mu1_miniRelIso           = (*_recomu_miniRelIso_nanoAOD)[0];
       _mu1_miniIsoCharged       = (*_recomu_miniIsoCharged_nanoAOD)[0];
       _mu1_miniIsoNeutral       = (*_recomu_miniIsoNeutral_nanoAOD)[0];
+      _mu1_jetNDauChargedMVASel = (*_recomu_jetNDauChargedMVASel)[0];*/
+      cout<<"here2"<<endl;
+      _mu1_miniRelIso           = (*_recomu_miniRelIso)[0];
+      _mu1_miniIsoCharged       = (*_recomu_miniIsoCharged)[0];
+      _mu1_miniIsoNeutral       = (*_recomu_miniIsoNeutral)[0];
       _mu1_PFRelIso04           = (*_recomu_combreliso04)[0];
       _mu1_jetPtRel             = (*_recomu_jetPtRel_nanoAOD)[0];
       _mu1_jetPtRatio           = (*_recomu_jetPtRatio_nanoAOD)[0];
@@ -1201,9 +1204,6 @@ void create_syncNtuple_objectbased(){
     }
     
    if(_n_presel_mu>1){
-
-      cout<<"mu2"<<endl;
-
       _mu2_pt     = (*_recomu_pt)[1];
       _mu2_conept = (*_recomu_conept)[1];
       _mu2_eta    = (*_recomu_eta)[1];
@@ -1211,9 +1211,13 @@ void create_syncNtuple_objectbased(){
       _mu2_E      = (*_recomu_e)[1];
       _mu2_charge = (*_recomu_charge)[1];
       _mu2_jetNDauChargedMVASel = (*_recomu_jetNDauChargedMVASel_nanoAOD)[1];
-      _mu2_miniRelIso           = (*_recomu_miniRelIsoAll_nanoAOD)[1];
+      /*_mu2_miniRelIso           = (*_recomu_miniRelIso_nanoAOD)[1];
       _mu2_miniIsoCharged       = (*_recomu_miniIsoCharged_nanoAOD)[1];
       _mu2_miniIsoNeutral       = (*_recomu_miniIsoNeutral_nanoAOD)[1];
+      _mu2_jetNDauChargedMVASel = (*_recomu_jetNDauChargedMVASel)[1];*/
+      _mu2_miniRelIso           = (*_recomu_miniRelIso)[1];
+      _mu2_miniIsoCharged       = (*_recomu_miniIsoCharged)[1];
+      _mu2_miniIsoNeutral       = (*_recomu_miniIsoNeutral)[1];
       _mu2_PFRelIso04           = (*_recomu_combreliso04)[1];
       _mu2_jetPtRel             = (*_recomu_jetPtRel_nanoAOD)[1];
       _mu2_jetPtRatio           = (*_recomu_jetPtRatio_nanoAOD)[1];
@@ -1234,9 +1238,6 @@ void create_syncNtuple_objectbased(){
     }
     
     if(_n_presel_ele>0){
-
-      cout<<"ele1"<<endl;
-
       _ele1_pt     = (*_recoele_pt)[0];
       _ele1_conept = (*_recoele_conept)[0];
       _ele1_eta    = (*_recoele_eta)[0];
@@ -1244,9 +1245,14 @@ void create_syncNtuple_objectbased(){
       _ele1_E      = (*_recoele_e)[0];
       _ele1_charge = (*_recoele_charge)[0];
       _ele1_jetNDauChargedMVASel = (*_recoele_jetNDauChargedMVASel_nanoAOD)[0];
-      _ele1_miniRelIso           = (*_recoele_miniRelIsoAll_nanoAOD)[0];
+      /*_ele1_miniRelIso           = (*_recoele_miniRelIso_nanoAOD)[0];
       _ele1_miniIsoCharged       = (*_recoele_miniIsoCharged_nanoAOD)[0];
       _ele1_miniIsoNeutral       = (*_recoele_miniIsoNeutral_nanoAOD)[0];
+      _ele1_PFRelIso04           = (*_recoele_PFRelIsoAll04_nanoAOD)[0];
+      _ele1_jetNDauChargedMVASel = (*_recoele_jetNDauChargedMVASel)[0];*/
+      _ele1_miniRelIso           = (*_recoele_miniRelIso)[0];
+      _ele1_miniIsoCharged       = (*_recoele_miniIsoCharged)[0];
+      _ele1_miniIsoNeutral       = (*_recoele_miniIsoNeutral)[0];
       _ele1_PFRelIso04           = (*_recoele_PFRelIsoAll04_nanoAOD)[0];
       _ele1_jetPtRel             = (*_recoele_jetPtRel_nanoAOD)[0];
       _ele1_jetPtRatio           = (*_recoele_jetPtRatio_nanoAOD)[0];
@@ -1270,13 +1276,9 @@ void create_syncNtuple_objectbased(){
       _ele1_isfakeablesel        = (*_recoele_isfakeable)[0];
       _ele1_ismvasel             = (*_recoele_ismvasel)[0];
       _ele1_isGenMatched         = (*_recoele_isGenMatched)[0];
-
     }
 
     if(_n_presel_ele>1){
-
-      cout<<"ele2"<<endl;
-
       _ele2_pt     = (*_recoele_pt)[1];
       _ele2_conept = (*_recoele_conept)[1];
       _ele2_eta    = (*_recoele_eta)[1];
@@ -1284,21 +1286,27 @@ void create_syncNtuple_objectbased(){
       _ele2_E      = (*_recoele_e)[1];
       _ele2_charge = (*_recoele_charge)[1];
       _ele2_jetNDauChargedMVASel = (*_recoele_jetNDauChargedMVASel_nanoAOD)[1];
-      _ele2_miniRelIso           = (*_recoele_miniRelIsoAll_nanoAOD)[1];
+      /*_ele2_miniRelIso           = (*_recoele_miniRelIso_nanoAOD)[1];
       _ele2_miniIsoCharged       = (*_recoele_miniIsoCharged_nanoAOD)[1];
       _ele2_miniIsoNeutral       = (*_recoele_miniIsoNeutral_nanoAOD)[1];
       _ele2_PFRelIso04           = (*_recoele_PFRelIsoAll04_nanoAOD)[1];
+      _ele2_jetNDauChargedMVASel = (*_recoele_jetNDauChargedMVASel)[1];*/
+      _ele2_miniRelIso           = (*_recoele_miniRelIso)[1];
+      _ele2_miniIsoCharged       = (*_recoele_miniIsoCharged)[1];
+      _ele2_miniIsoNeutral       = (*_recoele_miniIsoNeutral)[1];
+      _ele2_PFRelIso04           = (*_recoele_PFRelIsoAll04_nanoAOD)[1];
       _ele2_jetPtRel             = (*_recoele_jetPtRel_nanoAOD)[1];
       _ele2_jetPtRatio           = (*_recoele_jetPtRatio_nanoAOD)[1];
-      _ele2_jetCSV               = (*_recoele_jetCSV)[1];
-      _ele2_jetDeepCSV           = (*_recoele_jetDeepCSV)[1];
-      _ele2_jetDeepJet           = (*_recoele_jetDeepJet)[1];
+      _ele2_jetCSV               = (*_recoele_jetCSV)[1] ;
+      _ele2_jetDeepCSV           = (*_recoele_jetDeepCSV)[1] ;
+      _ele2_jetDeepJet           = (*_recoele_jetDeepJet)[1] ;
       _ele2_sip3D                = (*_recoele_sip3D)[1];
+      _ele2_dxy                  = (*_recoele_dxy)[1];
       _ele2_dxyAbs               = abs((*_recoele_dxy)[1]);
       _ele2_dz                   = (*_recoele_dz)[1];
       _ele2_ntMVAeleID           = (*_recoele_lepMVA_mvaId)[1];
       _ele2_leptonMVA            = (*_recoele_leptonMVA)[1];
-      _ele2_isChargeConsistent   = (*_recoele_isChargeConsistent)[1];      
+      _ele2_isChargeConsistent   = (*_recoele_isChargeConsistent)[1];
       _ele2_passesConversionVeto = (*_recoele_passConversionVeto)[1];
       _ele2_nMissingHits         = (*_recoele_nMissingHits)[1];
       _ele2_sigmaEtaEta          = (*_recoele_sigmaEtaEta)[1];
@@ -1311,11 +1319,8 @@ void create_syncNtuple_objectbased(){
       _ele2_isGenMatched         = (*_recoele_isGenMatched)[1];
 
     }
-    
+
     if(_n_presel_tau>0){
-
-      cout<<"tau1"<<endl;
-
       _tau1_pt     = (*_recotauh_pt)[0];
       _tau1_eta    = (*_recotauh_eta)[0];
       _tau1_phi    = (*_recotauh_phi)[0];
@@ -1350,9 +1355,6 @@ void create_syncNtuple_objectbased(){
     }
 
     if(_n_presel_tau>1){
-
-      cout<<"tau2"<<endl;
-
       _tau2_pt     = (*_recotauh_pt)[1];
       _tau2_eta    = (*_recotauh_eta)[1];
       _tau2_phi    = (*_recotauh_phi)[1];
@@ -1387,9 +1389,6 @@ void create_syncNtuple_objectbased(){
     }
     
     if(_n_presel_jet>0){
-
-      cout<<"jet1"<<endl;
-
       _jet1_pt   = (*_recoPFJet_pt)[0];
       _jet1_eta  = (*_recoPFJet_eta)[0];
       _jet1_phi  = (*_recoPFJet_phi)[0];
@@ -1402,9 +1401,6 @@ void create_syncNtuple_objectbased(){
     }
 
     if(_n_presel_jet>1){
-
-      cout<<"jet2"<<endl;
-
       _jet2_pt   = (*_recoPFJet_pt)[1];
       _jet2_eta  = (*_recoPFJet_eta)[1];
       _jet2_phi  = (*_recoPFJet_phi)[1];
@@ -1417,9 +1413,6 @@ void create_syncNtuple_objectbased(){
     }
     
     if(_n_presel_jet>2){
-
-      cout<<"jet3"<<endl;
-
       _jet3_pt   = (*_recoPFJet_pt)[2];
       _jet3_eta  = (*_recoPFJet_eta)[2];
       _jet3_phi  = (*_recoPFJet_phi)[2];
@@ -1432,9 +1425,6 @@ void create_syncNtuple_objectbased(){
     }
   
     if(_n_presel_jet>3){
-
-      cout<<"jet4"<<endl;
-
       _jet4_pt   = (*_recoPFJet_pt)[3];
       _jet4_eta  = (*_recoPFJet_eta)[3];
       _jet4_phi  = (*_recoPFJet_phi)[3];
@@ -1444,7 +1434,6 @@ void create_syncNtuple_objectbased(){
       _jet4_DeepJet  = (*_recoPFJet_DeepJetscore)[3];
       _jet4_QGdiscr  = (*_recoPFJet_QGdiscr)[3];
 
-      cout<<"jet4 end"<<endl;
 
     }
 
@@ -2565,7 +2554,7 @@ void create_syncNtuple_objectbased(){
   vector<int>   *_recomu_jetNDauChargedMVASel;
   vector<int>   *_recomu_jetNDauChargedMVASel_nanoAOD;
   vector<float> *_recomu_miniRelIso;
-  vector<float> *_recomu_miniRelIsoAll_nanoAOD;
+  vector<float> *_recomu_miniRelIso_nanoAOD;
   vector<float> *_recomu_miniIsoCharged;
   vector<float> *_recomu_miniIsoCharged_nanoAOD;
   vector<float> *_recomu_miniIsoNeutral;
@@ -2594,7 +2583,7 @@ void create_syncNtuple_objectbased(){
   vector<int>   *_recoele_jetNDauChargedMVASel;
   vector<int>   *_recoele_jetNDauChargedMVASel_nanoAOD;
   vector<float> *_recoele_miniRelIso;
-  vector<float> *_recoele_miniRelIsoAll_nanoAOD;
+  vector<float> *_recoele_miniRelIso_nanoAOD;
   vector<float> *_recoele_miniIsoCharged;
   vector<float> *_recoele_miniIsoCharged_nanoAOD;
   vector<float> *_recoele_miniIsoNeutral;
@@ -2692,7 +2681,7 @@ void create_syncNtuple_objectbased(){
     tree[i]->SetBranchAddress("recomu_jetNDauChargedMVASel", &_recomu_jetNDauChargedMVASel);
     tree[i]->SetBranchAddress("recomu_jetNDauChargedMVASel_nanoAOD", &_recomu_jetNDauChargedMVASel_nanoAOD);
     tree[i]->SetBranchAddress("recomu_miniRelIso",           &_recomu_miniRelIso);
-    tree[i]->SetBranchAddress("recomu_miniRelIsoAll_nanoAOD",      &_recomu_miniRelIsoAll_nanoAOD);
+    tree[i]->SetBranchAddress("recomu_miniRelIso_nanoAOD",      &_recomu_miniRelIso_nanoAOD);
     tree[i]->SetBranchAddress("recomu_miniIsoCharged",       &_recomu_miniIsoCharged);
     tree[i]->SetBranchAddress("recomu_miniIsoCharged_nanoAOD",         &_recomu_miniIsoCharged_nanoAOD);
     tree[i]->SetBranchAddress("recomu_miniIsoNeutral",       &_recomu_miniIsoNeutral);
@@ -2721,7 +2710,7 @@ void create_syncNtuple_objectbased(){
     tree[i]->SetBranchAddress("recoele_jetNDauChargedMVASel",&_recoele_jetNDauChargedMVASel);
     tree[i]->SetBranchAddress("recoele_jetNDauChargedMVASel_nanoAOD",&_recoele_jetNDauChargedMVASel_nanoAOD);
     tree[i]->SetBranchAddress("recoele_miniRelIso",           &_recoele_miniRelIso);
-    tree[i]->SetBranchAddress("recoele_miniRelIsoAll_nanoAOD",      &_recoele_miniRelIsoAll_nanoAOD);
+    tree[i]->SetBranchAddress("recoele_miniRelIso_nanoAOD",      &_recoele_miniRelIso_nanoAOD);
     tree[i]->SetBranchAddress("recoele_miniIsoCharged",       &_recoele_miniIsoCharged);
     tree[i]->SetBranchAddress("recoele_miniIsoCharged_nanoAOD",         &_recoele_miniIsoCharged_nanoAOD);
     tree[i]->SetBranchAddress("recoele_miniIsoNeutral",       &_recoele_miniIsoNeutral);
@@ -3098,7 +3087,7 @@ void create_syncNtuple_objectbased(){
     _recomu_jetNDauChargedMVASel = 0;
     _recomu_jetNDauChargedMVASel_nanoAOD = 0;
     _recomu_miniRelIso = 0;
-    _recomu_miniRelIsoAll_nanoAOD = 0;
+    _recomu_miniRelIso_nanoAOD = 0;
     _recomu_miniIsoCharged = 0;
     _recomu_miniIsoCharged_nanoAOD = 0;
     _recomu_miniIsoNeutral = 0;
@@ -3127,7 +3116,7 @@ void create_syncNtuple_objectbased(){
     _recoele_jetNDauChargedMVASel = 0;
     _recoele_jetNDauChargedMVASel_nanoAOD = 0;
     _recoele_miniRelIso           = 0;
-    _recoele_miniRelIsoAll_nanoAOD      = 0;
+    _recoele_miniRelIso_nanoAOD      = 0;
     _recoele_miniIsoCharged       = 0;
     _recoele_miniIsoCharged_nanoAOD         = 0;
     _recoele_miniIsoNeutral       = 0;
@@ -3220,7 +3209,7 @@ void create_syncNtuple_objectbased(){
       _mu1_E      = (*_recomu_e)[0];
       _mu1_charge = (*_recomu_charge)[0];
       _mu1_jetNDauChargedMVASel = (*_recomu_jetNDauChargedMVASel_nanoAOD)[0];
-      _mu1_miniRelIso           = (*_recomu_miniRelIsoAll_nanoAOD)[0];
+      _mu1_miniRelIso           = (*_recomu_miniRelIso_nanoAOD)[0];
       _mu1_miniIsoCharged       = (*_recomu_miniIsoCharged_nanoAOD)[0];
       _mu1_miniIsoNeutral       = (*_recomu_miniIsoNeutral_nanoAOD)[0];
       _mu1_jetPtRel             = (*_recomu_jetPtRel_nanoAOD)[0];
@@ -3246,7 +3235,7 @@ void create_syncNtuple_objectbased(){
       _mu2_E      = (*_recomu_e)[1];
       _mu2_charge = (*_recomu_charge)[1];
       _mu2_jetNDauChargedMVASel = (*_recomu_jetNDauChargedMVASel_nanoAOD)[1];
-      _mu2_miniRelIso           = (*_recomu_miniRelIsoAll_nanoAOD)[1];
+      _mu2_miniRelIso           = (*_recomu_miniRelIso_nanoAOD)[1];
       _mu2_miniIsoCharged       = (*_recomu_miniIsoCharged_nanoAOD)[1];
       _mu2_miniIsoNeutral       = (*_recomu_miniIsoNeutral_nanoAOD)[1];
       _mu2_jetPtRel             = (*_recomu_jetPtRel_nanoAOD)[1];
@@ -3271,7 +3260,7 @@ void create_syncNtuple_objectbased(){
       _ele1_E      = (*_recoele_e)[0];
       _ele1_charge = (*_recoele_charge)[0];
       _ele1_jetNDauChargedMVASel = (*_recoele_jetNDauChargedMVASel_nanoAOD)[0];
-      _ele1_miniRelIso           = (*_recoele_miniRelIsoAll_nanoAOD)[0];
+      _ele1_miniRelIso           = (*_recoele_miniRelIso_nanoAOD)[0];
       _ele1_miniIsoCharged       = (*_recoele_miniIsoCharged_nanoAOD)[0];
       _ele1_miniIsoNeutral       = (*_recoele_miniIsoNeutral_nanoAOD)[0];
       _ele1_jetPtRel             = (*_recoele_jetPtRel_nanoAOD)[0];
@@ -3297,7 +3286,7 @@ void create_syncNtuple_objectbased(){
       _ele2_E      = (*_recoele_e)[1];
       _ele2_charge = (*_recoele_charge)[1];
       _ele2_jetNDauChargedMVASel = (*_recoele_jetNDauChargedMVASel_nanoAOD)[1];
-      _ele2_miniRelIso           = (*_recoele_miniRelIsoAll_nanoAOD)[1];
+      _ele2_miniRelIso           = (*_recoele_miniRelIso_nanoAOD)[1];
       _ele2_miniIsoCharged       = (*_recoele_miniIsoCharged_nanoAOD)[1];
       _ele2_miniIsoNeutral       = (*_recoele_miniIsoNeutral_nanoAOD)[1];
       _ele2_jetPtRel             = (*_recoele_jetPtRel_nanoAOD)[1];
@@ -4011,7 +4000,7 @@ void create_syncNtuple_objectbased(){
   vector<int>   *_recomu_jetNDauChargedMVASel;
   vector<int>   *_recomu_jetNDauChargedMVASel_nanoAOD;
   vector<float> *_recomu_miniRelIso;
-  vector<float> *_recomu_miniRelIsoAll_nanoAOD;
+  vector<float> *_recomu_miniRelIso_nanoAOD;
   vector<float> *_recomu_miniIsoCharged;
   vector<float> *_recomu_miniIsoCharged_nanoAOD;
   vector<float> *_recomu_miniIsoNeutral;
@@ -4040,7 +4029,7 @@ void create_syncNtuple_objectbased(){
   vector<int>   *_recoele_jetNDauChargedMVASel;
   vector<int>   *_recoele_jetNDauChargedMVASel_nanoAOD;
   vector<float> *_recoele_miniRelIso;
-  vector<float> *_recoele_miniRelIsoAll_nanoAOD;
+  vector<float> *_recoele_miniRelIso_nanoAOD;
   vector<float> *_recoele_miniIsoCharged;
   vector<float> *_recoele_miniIsoCharged_nanoAOD;
   vector<float> *_recoele_miniIsoNeutral;
@@ -4142,7 +4131,7 @@ void create_syncNtuple_objectbased(){
     tree[i]->SetBranchAddress("recomu_jetNDauChargedMVASel", &_recomu_jetNDauChargedMVASel);
     tree[i]->SetBranchAddress("recomu_jetNDauChargedMVASel_nanoAOD", &_recomu_jetNDauChargedMVASel_nanoAOD);
     tree[i]->SetBranchAddress("recomu_miniRelIso",           &_recomu_miniRelIso);
-    tree[i]->SetBranchAddress("recomu_miniRelIsoAll_nanoAOD",      &_recomu_miniRelIsoAll_nanoAOD);
+    tree[i]->SetBranchAddress("recomu_miniRelIso_nanoAOD",      &_recomu_miniRelIso_nanoAOD);
     tree[i]->SetBranchAddress("recomu_miniIsoCharged",       &_recomu_miniIsoCharged);
     tree[i]->SetBranchAddress("recomu_miniIsoCharged_nanoAOD",         &_recomu_miniIsoCharged_nanoAOD);
     tree[i]->SetBranchAddress("recomu_miniIsoNeutral",       &_recomu_miniIsoNeutral);
@@ -4171,7 +4160,7 @@ void create_syncNtuple_objectbased(){
     tree[i]->SetBranchAddress("recoele_jetNDauChargedMVASel",&_recoele_jetNDauChargedMVASel);
     tree[i]->SetBranchAddress("recoele_jetNDauChargedMVASel_nanoAOD",&_recoele_jetNDauChargedMVASel_nanoAOD);
     tree[i]->SetBranchAddress("recoele_miniRelIso",           &_recoele_miniRelIso);
-    tree[i]->SetBranchAddress("recoele_miniRelIsoAll_nanoAOD",      &_recoele_miniRelIsoAll_nanoAOD);
+    tree[i]->SetBranchAddress("recoele_miniRelIso_nanoAOD",      &_recoele_miniRelIso_nanoAOD);
     tree[i]->SetBranchAddress("recoele_miniIsoCharged",       &_recoele_miniIsoCharged);
     tree[i]->SetBranchAddress("recoele_miniIsoCharged_nanoAOD",         &_recoele_miniIsoCharged_nanoAOD);
     tree[i]->SetBranchAddress("recoele_miniIsoNeutral",       &_recoele_miniIsoNeutral);
@@ -4532,7 +4521,7 @@ void create_syncNtuple_objectbased(){
     _recomu_charge  = 0;
     _recomu_jetNDauChargedMVASel = 0;
     _recomu_miniRelIso           = 0;
-    _recomu_miniRelIsoAll_nanoAOD      = 0;
+    _recomu_miniRelIso_nanoAOD      = 0;
     _recomu_miniIsoCharged       = 0;
     _recomu_miniIsoCharged_nanoAOD         = 0;
     _recomu_miniIsoNeutral       = 0;
@@ -4560,7 +4549,7 @@ void create_syncNtuple_objectbased(){
     _recoele_charge  = 0;
     _recoele_jetNDauChargedMVASel = 0;
     _recoele_miniRelIso           = 0;
-    _recoele_miniRelIsoAll_nanoAOD      = 0;
+    _recoele_miniRelIso_nanoAOD      = 0;
     _recoele_miniIsoCharged       = 0;
     _recoele_miniIsoCharged_nanoAOD         = 0;
     _recoele_miniIsoNeutral       = 0;
@@ -4657,7 +4646,7 @@ void create_syncNtuple_objectbased(){
       _mu1_E      = (*_recomu_e)[0];
       _mu1_charge = (*_recomu_charge)[0];
       _mu1_jetNDauChargedMVASel = (*_recomu_jetNDauChargedMVASel_nanoAOD)[0];
-      _mu1_miniRelIso           = (*_recomu_miniRelIsoAll_nanoAOD)[0];
+      _mu1_miniRelIso           = (*_recomu_miniRelIso_nanoAOD)[0];
       _mu1_miniIsoCharged       = (*_recomu_miniIsoCharged_nanoAOD)[0];
       _mu1_miniIsoNeutral       = (*_recomu_miniIsoNeutral_nanoAOD)[0];
       _mu1_jetPtRel             = (*_recomu_jetPtRel_nanoAOD)[0];
@@ -4683,7 +4672,7 @@ void create_syncNtuple_objectbased(){
       _mu2_E      = (*_recomu_e)[1];
       _mu2_charge = (*_recomu_charge)[1];
       _mu2_jetNDauChargedMVASel = (*_recomu_jetNDauChargedMVASel_nanoAOD)[1];
-      _mu2_miniRelIso           = (*_recomu_miniRelIsoAll_nanoAOD)[1];
+      _mu2_miniRelIso           = (*_recomu_miniRelIso_nanoAOD)[1];
       _mu2_miniIsoCharged       = (*_recomu_miniIsoCharged_nanoAOD)[1];
       _mu2_miniIsoNeutral       = (*_recomu_miniIsoNeutral_nanoAOD)[1];
       _mu2_jetPtRel             = (*_recomu_jetPtRel_nanoAOD)[1];
@@ -4709,7 +4698,7 @@ void create_syncNtuple_objectbased(){
       _ele1_E      = (*_recoele_e)[0];
       _ele1_charge = (*_recoele_charge)[0];
       _ele1_jetNDauChargedMVASel = (*_recoele_jetNDauChargedMVASel_nanoAOD)[0];
-      _ele1_miniRelIso           = (*_recoele_miniRelIsoAll_nanoAOD)[0];
+      _ele1_miniRelIso           = (*_recoele_miniRelIso_nanoAOD)[0];
       _ele1_miniIsoCharged       = (*_recoele_miniIsoCharged_nanoAOD)[0];
       _ele1_miniIsoNeutral       = (*_recoele_miniIsoNeutral_nanoAOD)[0];
       _ele1_jetPtRel             = (*_recoele_jetPtRel_nanoAOD)[0];
@@ -4735,7 +4724,7 @@ void create_syncNtuple_objectbased(){
       _ele2_E      = (*_recoele_e)[1];
       _ele2_charge = (*_recoele_charge)[1];
       _ele2_jetNDauChargedMVASel = (*_recoele_jetNDauChargedMVASel_nanoAOD)[1];
-      _ele2_miniRelIso           = (*_recoele_miniRelIsoAll_nanoAOD)[1];
+      _ele2_miniRelIso           = (*_recoele_miniRelIso_nanoAOD)[1];
       _ele2_miniIsoCharged       = (*_recoele_miniIsoCharged_nanoAOD)[1];
       _ele2_miniIsoNeutral       = (*_recoele_miniIsoNeutral_nanoAOD)[1];
       _ele2_jetPtRel             = (*_recoele_jetPtRel_nanoAOD)[1];
