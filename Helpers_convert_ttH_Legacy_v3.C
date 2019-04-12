@@ -134,65 +134,41 @@ float get_pu_weight(int nPU, bool isMC, TString samplename)
 
 float lepMVA_pt;
 float lepMVA_eta;
+float lepMVA_jetNDauChargedMVASel;
 float lepMVA_miniRelIsoCharged;
 float lepMVA_miniRelIsoNeutral;
-float lepMVA_jetPtRatio;
 float lepMVA_jetPtRel;
-float lepMVA_jetBTagCSV;
-float lepMVA_jetBTagDeepCSV;
-float lepMVA_sip3d;
+float lepMVA_jetDF;
+float lepMVA_jetPtRatio;
 float lepMVA_dxy;
+float lepMVA_sip3d;
 float lepMVA_dz;
-float lepMVA_mvaId;
-float lepMVA_jetNDauChargedMVASel;
+float lepMVA_Id;
 
 
-TMVA::Reader* BookLeptonMVAReader2016(std::string basePath, std::string weightFileName, std::string type)
+TMVA::Reader* BookLeptonMVAReader(std::string basePath, std::string weightFileName, std::string type)
 {
    TMVA::Reader* reader = new TMVA::Reader("!Color:!Silent");
 
-   reader->AddVariable("LepGood_pt",                                  &lepMVA_pt);
-   reader->AddVariable("LepGood_eta",                                 &lepMVA_eta);
-   reader->AddVariable("LepGood_jetNDauChargedMVASel",                &lepMVA_jetNDauChargedMVASel);
-   reader->AddVariable("LepGood_miniRelIsoCharged",                   &lepMVA_miniRelIsoCharged);
-   reader->AddVariable("LepGood_miniRelIsoNeutral",                   &lepMVA_miniRelIsoNeutral);
-   reader->AddVariable("LepGood_jetPtRelv2",                          &lepMVA_jetPtRel);
-   reader->AddVariable("min(LepGood_jetPtRatiov2,1.5)",               &lepMVA_jetPtRatio);
-   reader->AddVariable("max(LepGood_jetBTagCSV,0)",                   &lepMVA_jetBTagCSV);
-   reader->AddVariable("LepGood_sip3d",                               &lepMVA_sip3d);
-   reader->AddVariable("log(abs(LepGood_dxy))",                       &lepMVA_dxy);
-   reader->AddVariable("log(abs(LepGood_dz))",                        &lepMVA_dz);
-   if( type == "ele" ) reader->AddVariable("LepGood_mvaIdSpring16HZZ",   &lepMVA_mvaId);
-   else reader->AddVariable("LepGood_segmentCompatibility",           &lepMVA_mvaId);
+   reader->AddVariable("LepGood_pt",                                     &lepMVA_pt);
+   reader->AddVariable("LepGood_eta",                                    &lepMVA_eta);
+   reader->AddVariable("LepGood_jetNDauChargedMVASel",                   &lepMVA_jetNDauChargedMVASel);
+   reader->AddVariable("LepGood_miniRelIsoCharged",                      &lepMVA_miniRelIsoCharged);
+   reader->AddVariable("LepGood_miniRelIsoNeutral",                      &lepMVA_miniRelIsoNeutral);
+   reader->AddVariable("LepGood_jetPtRelv2",                             &lepMVA_jetPtRel);
+   reader->AddVariable("LepGood_jetDF",                                  &lepMVA_jetDF);
+   reader->AddVariable("LepGood_jetPtRatio",                             &lepMVA_jetPtRatio);
+   reader->AddVariable("LepGood_dxy",                                    &lepMVA_dxy);
+   reader->AddVariable("LepGood_sip3d",                                  &lepMVA_sip3d);
+   reader->AddVariable("LepGood_dz",                                     &lepMVA_dz);
+   if( type == "ele" ) reader->AddVariable("LepGood_mvaFall17V2noIso",   &lepMVA_Id);
+   else reader->AddVariable("LepGood_segmentComp",                       &lepMVA_Id);
 
    reader->BookMVA("BDTG method", basePath+"/"+weightFileName);
 
    return reader;
 }
 
-
-TMVA::Reader* BookLeptonMVAReader2017(std::string basePath, std::string weightFileName, std::string type)
-{
-   TMVA::Reader* reader = new TMVA::Reader("!Color:!Silent");
-
-   reader->AddVariable("LepGood_pt",                                  &lepMVA_pt); //0
-   reader->AddVariable("LepGood_eta",                                 &lepMVA_eta); //1
-   reader->AddVariable("LepGood_jetNDauChargedMVASel",                &lepMVA_jetNDauChargedMVASel); //2
-   reader->AddVariable("LepGood_miniRelIsoCharged",                   &lepMVA_miniRelIsoCharged); //3
-   reader->AddVariable("LepGood_miniRelIsoNeutral",                   &lepMVA_miniRelIsoNeutral); //4
-   reader->AddVariable("LepGood_jetPtRelv2",                          &lepMVA_jetPtRel); //5
-   reader->AddVariable("max(LepGood_jetBTagCSV,0)",                   &lepMVA_jetBTagCSV); //6
-   reader->AddVariable("(LepGood_jetBTagCSV>-5)*min(LepGood_jetPtRatiov2,1.5)+(LepGood_jetBTagCSV<-5)/(1+LepGood_relIso04)", &lepMVA_jetPtRatio);
-   reader->AddVariable("LepGood_sip3d",                               &lepMVA_sip3d); //8
-   reader->AddVariable("log(abs(LepGood_dxy))",                       &lepMVA_dxy); // 9
-   reader->AddVariable("log(abs(LepGood_dz))",                        &lepMVA_dz); //10
-   if( type == "ele" ) reader->AddVariable("LepGood_mvaIdFall17noIso",   &lepMVA_mvaId); //11 ele
-   else reader->AddVariable("LepGood_segmentCompatibility",           &lepMVA_mvaId); //11 ele
-
-   reader->BookMVA("BDTG method", basePath+"/"+weightFileName);
-
-   return reader;
-}
 
 
 // variables for BDT multilepton categories
@@ -369,9 +345,9 @@ void convert_tree(
 
   if(sample=="sync16"){
 
-    file="sync_ntuple_converted_ttHNonbb_2016_v2";
+    file="sync_ntuple_converted_ttHNonbb_2016_v4";
     dir_out="/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/";
-    list.push_back("/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_LLRHtautau/sync_ntuple_LLRHtautau_ttHNonbb_2016_v2.root");
+    list.push_back("/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_LLRHtautau/sync_ntuple_LLRHtautau_ttHNonbb_2016_v4.root");
 
   }
 
@@ -1921,6 +1897,9 @@ void convert_tree(
   f_new = TFile::Open(dir_out+file,"RECREATE");
 
   //Old branches used
+  unsigned long long _EventNumber = -1;
+  int _RunNumber = -1, _lumi = -1;
+
   float _npu = -1.;
 
   vector<float> *_jets_e;
@@ -2031,6 +2010,10 @@ void convert_tree(
   vector<int> *_genpart_HZDecayMode;
   vector<int> *_genpart_TauGenDecayMode;
   vector<int> *_genpart_flags;
+
+  tree->SetBranchAddress("EventNumber",&_EventNumber);
+  tree->SetBranchAddress("RunNumber",&_RunNumber);
+  tree->SetBranchAddress("lumi",&_lumi);
 
   tree->SetBranchAddress("jets_px",&_jets_px);
   tree->SetBranchAddress("jets_py",&_jets_py);
@@ -2178,6 +2161,8 @@ void convert_tree(
   vector<float> _recomu_phi;
   vector<float> _recomu_dxy;
   vector<float> _recomu_dz;
+  vector<float> _recomu_dxy_innerTrack;
+  vector<float> _recomu_dz_innerTrack;
   vector<int>   _recomu_jetNDauChargedMVASel;
   vector<int>   _recomu_jetNDauChargedMVASel_nanoAOD;
   vector<float> _recomu_miniRelIso;
@@ -2195,7 +2180,7 @@ void convert_tree(
   vector<float> _recomu_jetDeepJet;
   vector<float> _recomu_jetPtRatio;
   vector<float> _recomu_jetPtRatio_nanoAOD;
-  vector<float> _recomu_lepMVA_mvaId;
+  vector<float> _recomu_lepMVA_Id;
   vector<float> _recomu_leptonMVA;
   vector<float> _recomu_rel_error_trackpt;
   vector<bool>  _recomu_mediumID;
@@ -2253,7 +2238,7 @@ void convert_tree(
   vector<float> _recoele_jetDeepJet;
   vector<float> _recoele_jetPtRatio;
   vector<float> _recoele_jetPtRatio_nanoAOD;
-  vector<float> _recoele_lepMVA_mvaId;
+  vector<float> _recoele_lepMVA_Id;
   vector<float> _recoele_leptonMVA;
   vector<bool>  _recoele_isChargeConsistent;
   vector<bool>  _recoele_passConversionVeto;
@@ -2775,6 +2760,8 @@ void convert_tree(
   tree_new->Branch("recomu_phi",&_recomu_phi);
   tree_new->Branch("recomu_dxy",&_recomu_dxy);
   tree_new->Branch("recomu_dz",&_recomu_dz);
+  tree_new->Branch("recomu_dxy_innerTrack",&_recomu_dxy_innerTrack);
+  tree_new->Branch("recomu_dz_innerTrack",&_recomu_dz_innerTrack);
   tree_new->Branch("recomu_jetNDauChargedMVASel",&_recomu_jetNDauChargedMVASel); //as taken for 2016 analysis
   tree_new->Branch("recomu_jetNDauChargedMVASel_nanoAOD",&_recomu_jetNDauChargedMVASel_nanoAOD); //taken from nanoAOD plugin
   tree_new->Branch("recomu_miniRelIso",&_recomu_miniRelIso);
@@ -2792,7 +2779,7 @@ void convert_tree(
   tree_new->Branch("recomu_jetPtRatio",&_recomu_jetPtRatio);
   tree_new->Branch("recomu_jetPtRatio_nanoAOD",&_recomu_jetPtRatio_nanoAOD);
   tree_new->Branch("recomu_combreliso04",&_recomu_combreliso04);
-  tree_new->Branch("recomu_lepMVA_mvaId",&_recomu_lepMVA_mvaId);
+  tree_new->Branch("recomu_lepMVA_Id",&_recomu_lepMVA_Id);
   tree_new->Branch("recomu_leptonMVA",&_recomu_leptonMVA);
   tree_new->Branch("recomu_rel_error_trackpt",&_recomu_rel_error_trackpt);
   tree_new->Branch("recomu_mediumID",&_recomu_mediumID);
@@ -2849,7 +2836,7 @@ void convert_tree(
   tree_new->Branch("recoele_jetDeepJet",&_recoele_jetDeepJet);
   tree_new->Branch("recoele_jetPtRatio",&_recoele_jetPtRatio);
   tree_new->Branch("recoele_jetPtRatio_nanoAOD",&_recoele_jetPtRatio_nanoAOD);
-  tree_new->Branch("recoele_lepMVA_mvaId",&_recoele_lepMVA_mvaId);
+  tree_new->Branch("recoele_lepMVA_Id",&_recoele_lepMVA_Id);
   tree_new->Branch("recoele_leptonMVA",&_recoele_leptonMVA);
   tree_new->Branch("recoele_isChargeConsistent",&_recoele_isChargeConsistent);
   tree_new->Branch("recoele_passConversionVeto",&_recoele_passConversionVeto);
@@ -3431,16 +3418,16 @@ void convert_tree(
 
   //Branches need even with JEC/TES Up/Down
 
-  unsigned long long _EventNumber = -1;
-  int _RunNumber = -1, _lumi = -1;
+  //unsigned long long _EventNumber = -1;
+  //int _RunNumber = -1, _lumi = -1;
 
   float _PFMETCov00=-1., _PFMETCov01=-1., _PFMETCov10=-1., _PFMETCov11=-1.;
 
   if(JEC!=0 || TES!=0){
 
-    tree->SetBranchAddress("EventNumber",&_EventNumber);
-    tree->SetBranchAddress("RunNumber",&_RunNumber);
-    tree->SetBranchAddress("lumi",&_lumi);
+    //tree->SetBranchAddress("EventNumber",&_EventNumber);
+    //tree->SetBranchAddress("RunNumber",&_RunNumber);
+    //tree->SetBranchAddress("lumi",&_lumi);
 
     tree->SetBranchAddress("triggerbit",&_triggerbit);
     tree->SetBranchAddress("metfilterbit",&_metfilterbit);
@@ -3492,21 +3479,21 @@ void convert_tree(
   std::map<std::string,int> map_tauID;
 
   cout<<endl;
-  cout<<"TauID"<<endl;
+  //cout<<"TauID"<<endl;
   for(int i=1; i<=h_tauID->GetNbinsX();i++){
     const char* bin_label=h_tauID->GetXaxis()->GetBinLabel(i);
     std::string str(bin_label);
-    cout<<"i="<<i<<" bin_label="<<bin_label<<endl;
+    //cout<<"i="<<i<<" bin_label="<<bin_label<<endl;
     map_tauID[str]=i-1;
 }
 
 
   //Lepton MVA
   cout<<"Getting BDT lepton MVA"<<endl;
-  TMVA::Reader* mu_reader_2016  = BookLeptonMVAReader2016("lepMVA_weights", "mu_BDTG_80X.weights.xml", "mu");
-  TMVA::Reader* ele_reader_2016 = BookLeptonMVAReader2016("lepMVA_weights", "el_BDTG_80X.weights.xml", "ele");
-  TMVA::Reader* mu_reader_2017  = BookLeptonMVAReader2017("lepMVA_weights", "mu_BDTG_94X.weights.xml", "mu");
-  TMVA::Reader* ele_reader_2017 = BookLeptonMVAReader2017("lepMVA_weights", "el_BDTG_94X.weights.xml", "ele");
+  TMVA::Reader* mu_reader_2016  = BookLeptonMVAReader("lepMVA_weights", "mu_BDTG_2016.weights.xml", "mu");
+  TMVA::Reader* ele_reader_2016 = BookLeptonMVAReader("lepMVA_weights", "el_BDTG_2016.weights.xml", "ele");
+  TMVA::Reader* mu_reader_2017  = BookLeptonMVAReader("lepMVA_weights", "mu_BDTG_2017.weights.xml", "mu");
+  TMVA::Reader* ele_reader_2017 = BookLeptonMVAReader("lepMVA_weights", "el_BDTG_2017.weights.xml", "ele");
 
   //BDTs multileptons
   cout<<"Getting BDT multileptons signal extraction"<<endl;
@@ -3624,15 +3611,16 @@ void convert_tree(
   cout<<"Getting btag SFs"<<endl;
 
   bTagSF_CSVshape* bTagSF_CSVshape_DeepJet;
-  if (year==2016) bTagSF_CSVshape_DeepJet = new bTagSF_CSVshape("bTagSF_weights/DeepJet_2016LegacySF_V1.csv");    
+  bTagSF_CSVshape_DeepJet = new bTagSF_CSVshape("bTagSF_weights/DeepJet_2016LegacySF_V1.csv");
+  /*if (year==2016) bTagSF_CSVshape_DeepJet = new bTagSF_CSVshape("bTagSF_weights/DeepJet_2016LegacySF_V1.csv");    
   else if (year==2017) bTagSF_CSVshape_DeepJet = new bTagSF_CSVshape("bTagSF_weights/DeepFlavour_94XSF_V2_B_F.csv"); 
-  else if (year==2018) bTagSF_CSVshape_DeepJet = new bTagSF_CSVshape("bTagSF_weights/DeepJet_102XSF_V1.csv"); 
+  else if (year==2018) bTagSF_CSVshape_DeepJet = new bTagSF_CSVshape("bTagSF_weights/DeepJet_102XSF_V1.csv");*/ 
 
   /*bTagSF_CSVshape* bTagSF_CSVshape_DeepCSV;
   if (year==2016) bTagSF_CSVshape_DeepCSV = new bTagSF_CSVshape("bTagSF_weights/DeepCSV_2016LegacySF_V1.csv"); 
   else if (year==2017) bTagSF_CSVshape_DeepCSV = new bTagSF_CSVshape("bTagSF_weights/DeepCSV_94XSF_V4_B_F.csv"); 
-  else if (year==2018) bTagSF_CSVshape_DeepCSV = new bTagSF_CSVshape("bTagSF_weights/DeepCSV_102XSF_V1.csv");
-  */
+  else if (year==2018) bTagSF_CSVshape_DeepCSV = new bTagSF_CSVshape("bTagSF_weights/DeepCSV_102XSF_V1.csv");*/
+  
 
   int skip_entries = 0;
 
@@ -3671,6 +3659,8 @@ void convert_tree(
     _recomu_phi.clear();
     _recomu_dxy.clear();
     _recomu_dz.clear();
+    _recomu_dxy_innerTrack.clear();
+    _recomu_dz_innerTrack.clear();
     _recomu_jetNDauChargedMVASel.clear();
     _recomu_jetNDauChargedMVASel_nanoAOD.clear();
     _recomu_miniRelIso.clear();
@@ -3688,7 +3678,7 @@ void convert_tree(
     _recomu_jetPtRatio.clear();
     _recomu_jetPtRatio_nanoAOD.clear();
     _recomu_combreliso04.clear();
-    _recomu_lepMVA_mvaId.clear();
+    _recomu_lepMVA_Id.clear();
     _recomu_leptonMVA.clear();
     _recomu_rel_error_trackpt.clear();
     _recomu_mediumID.clear();
@@ -3746,7 +3736,7 @@ void convert_tree(
     _recoele_jetDeepJet.clear();
     _recoele_jetPtRatio.clear();
     _recoele_jetPtRatio_nanoAOD.clear();
-    _recoele_lepMVA_mvaId.clear();
+    _recoele_lepMVA_Id.clear();
     _recoele_leptonMVA.clear();
     _recoele_isChargeConsistent.clear();
     _recoele_passConversionVeto.clear();
@@ -4335,6 +4325,9 @@ void convert_tree(
     int entry_ok = tree->GetEntry(i);
     if(entry_ok<0) continue;
 
+    //cout<<"EventNumber "<<_EventNumber<<endl;
+
+   
     _PU_weight = get_pu_weight(_npu,isMC,sample);
     //cout << "_PU_weight " << _PU_weight << endl;
     
@@ -4342,7 +4335,8 @@ void convert_tree(
     //////////////////////////////////////////////
     ///                 Muons                  ///
     //////////////////////////////////////////////
-    
+   
+
     vector< pair<int,TLorentzVector> > reco_mus;
    	
     for(unsigned int i_daughter=0; i_daughter<(*_daughters_e).size(); i_daughter++){
@@ -4365,52 +4359,92 @@ void convert_tree(
 
       _daughters_dR_closest_jet.push_back(dR_min);
 
-      
+
+      /*bool loosetest = (*_daughters_muonID)[i_daughter] & 1;
+      bool miss = false;
+      if (_EventNumber==46639 || _EventNumber==46678 || _EventNumber==46738 || _EventNumber== 61929 || _EventNumber==61974 || _EventNumber==61999 || _EventNumber==62018 || _EventNumber==62087 || _EventNumber==62098) miss = true;
+
+      if (miss == true){
+          cout<<"---event "<<_EventNumber<<endl;
+          cout<<"(*_PDGIdDaughters)[i_daughter] "<<(*_PDGIdDaughters)[i_daughter]<<endl;
+          cout<<"daughter.Pt() "<<daughter.Pt()<<endl;
+          cout<<"fabs(daughter.Eta()) "<<fabs(daughter.Eta())<<endl;
+          cout<<"fabs((*_dxy)[i_daughter]) "<<fabs((*_dxy)[i_daughter])<<endl;
+          cout<<"fabs((*_dz)[i_daughter]) "<<fabs((*_dz)[i_daughter])<<endl;
+          cout<<"miniRelIsoAll "<<(*_daughters_miniRelIsoNeutral)[i_daughter] + (*_daughters_miniRelIsoCharged)[i_daughter]<<endl;
+          cout<<"sip "<<(*_SIP)[i_daughter]<<endl;
+          cout<<"looseID "<<loosetest<<endl;
+      }*/
+
       if( fabs(PDGId)==13 ){
 	
-        float dxy = (*_dxy_innerTrack)[i_daughter];
-	float dz = (*_dz_innerTrack)[i_daughter];
-	float miniRelIsoCharged = (*_daughters_miniRelIsoCharged)[i_daughter];
+        //float dxy = (*_dxy_innerTrack)[i_daughter];
+	      //float dz = (*_dz_innerTrack)[i_daughter];
+	      float dxy = (*_dxy)[i_daughter];
+	      float dz = (*_dz)[i_daughter];
+	      float miniRelIsoCharged = (*_daughters_miniRelIsoCharged)[i_daughter];
         float miniRelIsoNeutral = (*_daughters_miniRelIsoNeutral)[i_daughter];
         float miniRelIsoAll = miniRelIsoCharged + miniRelIsoNeutral;
         float miniRelIsoCharged_nanoAOD = (*_daughters_miniRelIsoCharged_nanoAOD)[i_daughter]; //rel
         float miniRelIso_nanoAOD = (*_daughters_miniRelIso_nanoAOD)[i_daughter]; //rel
-	float miniRelIsoNeutral_nanoAOD = miniRelIso_nanoAOD - miniRelIsoCharged_nanoAOD; // rel
+	      float miniRelIsoNeutral_nanoAOD = miniRelIso_nanoAOD - miniRelIsoCharged_nanoAOD; // rel
         float sip = (*_SIP)[i_daughter];
-	bool  looseID = (*_daughters_muonID)[i_daughter] & 1;
+	      bool  looseID = (*_daughters_muonID)[i_daughter] & 1;
         bool  mediumID = ((*_daughters_muonID)[i_daughter]>>2) & 1; 
 
+        bool miss = false;
+        if (_EventNumber==46639 || _EventNumber==46678 || _EventNumber==46738 || _EventNumber== 61929 || _EventNumber==61974 || _EventNumber==61999 || _EventNumber==62018 || _EventNumber==62087 || _EventNumber==62098) miss = true;
+ 
+        if (miss == true){
+          cout<<"---event "<<_EventNumber<<endl;
+          cout<<"daughter.Pt() "<<daughter.Pt()<<endl;
+          cout<<"fabs(daughter.Eta()) "<<fabs(daughter.Eta())<<endl;
+          cout<<"fabs(dxy) "<<fabs(dxy)<<endl;
+          cout<<"fabs(dz) "<<fabs(dz)<<endl;
+          cout<<"miniRelIsoAll "<<miniRelIsoAll<<endl;
+          cout<<"sip "<<sip<<endl;
+          cout<<"looseID "<<looseID<<endl;
+        }
+ 
         if(daughter.Pt()>5 && fabs(daughter.Eta())<2.4 && fabs(dxy)<=0.05 && fabs(dz)<0.1 && miniRelIsoAll<0.4 && sip < 8 && looseID){
-	  
-                lepMVA_pt = daughter.Pt();
-	        lepMVA_eta = daughter.Eta();
-	        lepMVA_jetNDauChargedMVASel = (*_daughters_jetNDauChargedMVASel_nanoAOD)[i_daughter]; //from nanoAOD
-          	lepMVA_miniRelIsoCharged = miniRelIsoCharged_nanoAOD; //from nanoAOD
-	        lepMVA_miniRelIsoNeutral = miniRelIsoNeutral_nanoAOD; //from nanoAOD
+	  cout<<"pass"<<endl;
+          ////////////////
+          // Lepton MVA //
+          ////////////////
+          float leptonMVA = -999;
 
-	        lepMVA_jetPtRel   = 0.; 
-	        lepMVA_jetPtRatio = 1.;      
-	  
-          if(_daughters_dR_closest_jet[i_daughter]<0.4){   
-	          lepMVA_jetPtRel   = (*_daughters_jetPtRel_nanoAOD)[i_daughter]; //nanoAOD
-	          lepMVA_jetPtRatio = std::min((*_daughters_jetPtRatio_nanoAOD)[i_daughter],float(1.5)); //nanoAOD     
+          lepMVA_pt = daughter.Pt();
+          lepMVA_eta = daughter.Eta();
+          lepMVA_jetNDauChargedMVASel = (*_daughters_jetNDauChargedMVASel)[i_daughter]; //from nanoAOD
+
+          if(year==2016) {
+            lepMVA_miniRelIsoCharged = miniRelIsoCharged; 
+            lepMVA_miniRelIsoNeutral = miniRelIsoNeutral; 
           }
-	        else{
-            lepMVA_jetPtRel   = 0. ; //nanoAOD
+          else if (year==2017 || year == 2018){
+            lepMVA_miniRelIsoCharged = miniRelIsoCharged_nanoAOD; //from nanoAOD
+            lepMVA_miniRelIsoNeutral = miniRelIsoNeutral_nanoAOD; //from nanoAOD
+          }
+
+          lepMVA_jetPtRel   = (*_daughters_jetPtRel_nanoAOD)[i_daughter]; //nanoAOD
+          lepMVA_jetDF = std::max((*_daughters_jetBTagDeepJet)[i_daughter],float(0.)); //old CSV for now  
+
+          if(_daughters_dR_closest_jet[i_daughter]<0.4){
+            lepMVA_jetPtRatio = std::min((*_daughters_jetPtRatio_nanoAOD)[i_daughter],float(1.5)); //nanoAOD 
+          }
+          else{
             lepMVA_jetPtRatio = 1 / ( 1+(*_combreliso)[i_daughter] ); //new (with 0.4)
           } 
-	
-          lepMVA_jetBTagCSV = std::max((*_daughters_jetBTagCSV)[i_daughter],float(0.)); //old CSV for now  
-	  lepMVA_jetBTagDeepCSV = std::max((*_daughters_jetBTagDeepCSV)[i_daughter],float(0.)); 
           lepMVA_sip3d = (*_SIP)[i_daughter];
-	  lepMVA_dxy = log(fabs((*_dxy_innerTrack)[i_daughter]));
-	  lepMVA_dz = log(fabs((*_dz_innerTrack)[i_daughter]));
-	  lepMVA_mvaId = (*_daughters_lepMVA_mvaId)[i_daughter]; //segment compatibility
+	        lepMVA_dxy = log(fabs((*_dxy)[i_daughter]));
+	        lepMVA_dz = log(fabs((*_dz)[i_daughter]));
+          lepMVA_Id = (*_daughters_lepMVA_mvaId)[i_daughter]; //segment compatibility
 
-	  float leptonMVA = -999;
-	  if(year==2016) leptonMVA = mu_reader_2016->EvaluateMVA("BDTG method");
-	  else if(year==2017 || year==2018) leptonMVA = mu_reader_2017->EvaluateMVA("BDTG method");
-	  
+          
+          if(year==2016) leptonMVA = mu_reader_2016->EvaluateMVA("BDTG method");
+          else if(year==2017 || year==2018) leptonMVA = mu_reader_2017->EvaluateMVA("BDTG method");
+
+
           float conept;
           if (leptonMVA > 0.9 && mediumID) { conept = daughter.Pt(); }
           else { conept = 0.90*daughter.Pt()/lepMVA_jetPtRatio; }	
@@ -4444,8 +4478,10 @@ void convert_tree(
       _recomu_pt.push_back( muon.Pt() );
       _recomu_eta.push_back( muon.Eta() );
       _recomu_phi.push_back( muon.Phi() );
-      _recomu_dxy.push_back( (*_dxy_innerTrack)[i_daughter] );
-      _recomu_dz.push_back( (*_dz_innerTrack)[i_daughter] );
+      _recomu_dxy_innerTrack.push_back( (*_dxy_innerTrack)[i_daughter] );
+      _recomu_dz_innerTrack.push_back( (*_dz_innerTrack)[i_daughter] );
+      _recomu_dxy.push_back( (*_dxy)[i_daughter] );
+      _recomu_dz.push_back( (*_dz)[i_daughter] );
       _recomu_jetNDauChargedMVASel.push_back( (*_daughters_jetNDauChargedMVASel)[i_daughter] );
       _recomu_jetNDauChargedMVASel_nanoAOD.push_back( (*_daughters_jetNDauChargedMVASel_nanoAOD)[i_daughter] );     
       _recomu_miniRelIso.push_back( (*_daughters_miniRelIsoCharged)[i_daughter] + (*_daughters_miniRelIsoNeutral)[i_daughter] );
@@ -4459,41 +4495,49 @@ void convert_tree(
       _recomu_jetDeepCSV.push_back( std::max((*_daughters_jetBTagDeepCSV)[i_daughter],float(0.)) );
       _recomu_jetDeepJet.push_back( std::max((*_daughters_jetBTagDeepJet)[i_daughter],float(0.)) );
       _recomu_combreliso04.push_back( (*_combreliso)[i_daughter] );  
- 
-     if(_daughters_dR_closest_jet[i_daughter]<0.4){      
-	      _recomu_jetPtRel.push_back( (*_daughters_jetPtRel)[i_daughter] );
-	      _recomu_jetPtRel_nanoAOD.push_back( (*_daughters_jetPtRel_nanoAOD)[i_daughter] );
-        _recomu_jetPtRatio.push_back( std::min((*_daughters_jetPtRatio)[i_daughter],float(1.5)) );
-        _recomu_jetPtRatio_nanoAOD.push_back( std::min((*_daughters_jetPtRatio_nanoAOD)[i_daughter],float(1.5)) );
-      }
+	    _recomu_jetPtRel.push_back( (*_daughters_jetPtRel)[i_daughter] );
+	    _recomu_jetPtRel_nanoAOD.push_back( (*_daughters_jetPtRel_nanoAOD)[i_daughter] );
+      _recomu_jetPtRatio.push_back( std::min((*_daughters_jetPtRatio)[i_daughter],float(1.5)) );
+      _recomu_jetPtRatio_nanoAOD.push_back( std::min((*_daughters_jetPtRatio_nanoAOD)[i_daughter],float(1.5)) );   
+      _recomu_lepMVA_Id.push_back( (*_daughters_lepMVA_mvaId)[i_daughter] );
 
-      else{
-        _recomu_jetPtRel.push_back( 0. );  
-	      _recomu_jetPtRel_nanoAOD.push_back( 0. );
-        _recomu_jetPtRatio.push_back( 1 / ( 1+(*_combreliso)[i_daughter] ) );
-        _recomu_jetPtRatio_nanoAOD.push_back( 1 / ( 1+(*_combreliso)[i_daughter] ) );
-      }
-    
-      _recomu_lepMVA_mvaId.push_back( (*_daughters_lepMVA_mvaId)[i_daughter] );
-    
+
+      ////////////////
+      // Lepton MVA //
+      ////////////////
+      
+      float leptonMVA_ = -999;
+
       lepMVA_pt = _recomu_pt[i_mu];
       lepMVA_eta = _recomu_eta[i_mu];
-      lepMVA_jetNDauChargedMVASel = _recomu_jetNDauChargedMVASel_nanoAOD[i_mu];
-      lepMVA_miniRelIsoCharged = _recomu_miniIsoCharged_nanoAOD[i_mu] / lepMVA_pt;
-      lepMVA_miniRelIsoNeutral = _recomu_miniIsoNeutral_nanoAOD[i_mu] / lepMVA_pt;
+      lepMVA_jetNDauChargedMVASel = _recomu_jetNDauChargedMVASel[i_mu];
+
+      if(year==2016) {
+        lepMVA_miniRelIsoCharged = _recomu_miniIsoCharged[i_mu] / lepMVA_pt;
+        lepMVA_miniRelIsoNeutral = _recomu_miniIsoNeutral[i_mu] / lepMVA_pt;
+      }
+      else if (year==2017 || year == 2018){
+        lepMVA_miniRelIsoCharged =_recomu_miniIsoCharged_nanoAOD[i_mu] / lepMVA_pt; //from nanoAOD
+        lepMVA_miniRelIsoNeutral = _recomu_miniIsoNeutral_nanoAOD[i_mu] / lepMVA_pt;
+      }
+
       lepMVA_jetPtRel   = _recomu_jetPtRel_nanoAOD[i_mu]; 
-      lepMVA_jetPtRatio = _recomu_jetPtRatio_nanoAOD[i_mu]; 
-      lepMVA_jetBTagCSV = std::max(_recomu_jetCSV[i_mu],float(0.));
-      lepMVA_jetBTagDeepCSV = std::max(_recomu_jetDeepCSV[i_mu],float(0.));
+      lepMVA_jetDF = std::max(_recomu_jetDeepJet[i_mu],float(0.)); //old CSV for now  
+
+      if(_daughters_dR_closest_jet[i_daughter]<0.4){
+        lepMVA_jetPtRatio = _recomu_jetPtRatio_nanoAOD[i_mu];    
+      }
+      else{
+        lepMVA_jetPtRatio = 1 / ( 1+ _recomu_combreliso04[i_mu] ); //new (with 0.4)
+      } 
       lepMVA_sip3d = _recomu_sip3D[i_mu];
       lepMVA_dxy = log(fabs(_recomu_dxy[i_mu]));
       lepMVA_dz = log(fabs(_recomu_dz[i_mu]));
-      lepMVA_mvaId = _recomu_lepMVA_mvaId[i_mu];
-
-
-      float leptonMVA_ = -999;
+      lepMVA_Id = _recomu_lepMVA_Id[i_mu];
+    
       if(year==2016) leptonMVA_ = mu_reader_2016->EvaluateMVA("BDTG method");
       else if(year==2017 || year==2018) leptonMVA_ = mu_reader_2017->EvaluateMVA("BDTG method");
+
       _recomu_leptonMVA.push_back( leptonMVA_ );
 
       bool  mediumID = ((*_daughters_muonID)[i_daughter]>>2) & 1; //mediumID
@@ -4511,9 +4555,9 @@ void convert_tree(
       //Fakeable
       bool isfakeable=false;
 
-      if(conept>10 && _recomu_leptonMVA[i_mu]>=0.90 && lepMVA_jetBTagDeepCSV<0.4941) 
+      if(conept>10 && _recomu_leptonMVA[i_mu]>=0.90 && lepMVA_jetDF<0.4941) 
 	      isfakeable=true;	
-      else if(conept>10 && _recomu_leptonMVA[i_mu]<0.90 && lepMVA_jetBTagDeepCSV<0.07 && lepMVA_jetPtRatio>0.6 && segm_comp > 0.3)
+      else if(conept>10 && _recomu_leptonMVA[i_mu]<0.90 && lepMVA_jetDF<0.07 && lepMVA_jetPtRatio>0.6 && segm_comp > 0.3)
 	       isfakeable=true;	
 
       _recomu_isfakeable.push_back(isfakeable);
@@ -4545,7 +4589,8 @@ void convert_tree(
 
       //MVA-based selection 
       bool ismvasel=false;
-      if(conept>10 && _recomu_leptonMVA[i_mu]>=0.9 && lepMVA_jetBTagDeepCSV<0.4941 && mediumID) 
+
+      if(conept>10 && _recomu_leptonMVA[i_mu]>=0.9 && lepMVA_jetDF<0.4941 && mediumID) 
 	      ismvasel=true;
 	
       _recomu_ismvasel.push_back(ismvasel);
@@ -4609,8 +4654,8 @@ void convert_tree(
       if( fabs(PDGId)==11 ){
 	
         float dxy = (*_dxy)[i_daughter];
-	float dz = (*_dz)[i_daughter];
-	float miniRelIsoCharged = (*_daughters_miniRelIsoCharged)[i_daughter];
+	      float dz = (*_dz)[i_daughter];
+	      float miniRelIsoCharged = (*_daughters_miniRelIsoCharged)[i_daughter];
         float miniRelIsoNeutral = (*_daughters_miniRelIsoNeutral)[i_daughter];
         float miniRelIsoAll = miniRelIsoCharged + miniRelIsoNeutral;
         float miniRelIsoCharged_nanoAOD = (*_daughters_miniRelIsoCharged_nanoAOD)[i_daughter]; 
@@ -4619,9 +4664,9 @@ void convert_tree(
         float PFRelIsoAll04_nanoAOD = (*_daughters_PFRelIsoAll04_nanoAOD)[i_daughter]; 
         float PFRelIsoAll_nanoAOD = (*_daughters_PFRelIsoAll_nanoAOD)[i_daughter]; 
         float sip = (*_SIP)[i_daughter];
-	float eleMVA = (*_daughters_eleMVAntNoIso)[i_daughter];
+	      float eleMVA = (*_daughters_eleMVAntNoIso)[i_daughter];
         bool LooseIdWP = (*_daughters_iseleNoIsoWPLoose)[i_daughter]; 
-	int eleMissingHits = (*_daughters_eleMissingHits)[i_daughter];
+	      int eleMissingHits = (*_daughters_eleMissingHits)[i_daughter];
         int eleMissingLostHits = (*_daughters_eleMissingLostHits)[i_daughter];
 	
 	      if(daughter.Pt()>7 && fabs(daughter.Eta())<2.5 && fabs(dxy)<=0.05 && fabs(dz)<0.1 && miniRelIsoAll<0.4 && sip < 8 && LooseIdWP && eleMissingLostHits<=1){
@@ -4641,36 +4686,44 @@ void convert_tree(
 	        if(dR_veto)
 	          continue;
 
-	        lepMVA_pt = daughter.Pt();
-	        lepMVA_eta = daughter.Eta();
-	        lepMVA_jetNDauChargedMVASel = (*_daughters_jetNDauChargedMVASel_nanoAOD)[i_daughter]; //from nanoAOD
-          	lepMVA_miniRelIsoCharged = miniRelIsoCharged_nanoAOD; // from nanoAOD
-          	lepMVA_miniRelIsoNeutral = miniRelIso_nanoAOD - miniRelIsoCharged_nanoAOD; //from nanoAOD
- 
-	        lepMVA_jetPtRel   = 0.; 
-	        lepMVA_jetPtRatio = 1.;      
-          
-          if(_daughters_dR_closest_jet[i_daughter]<0.4){   
-	          lepMVA_jetPtRel   = (*_daughters_jetPtRel_nanoAOD)[i_daughter]; 
-	          lepMVA_jetPtRatio = std::min((*_daughters_jetPtRatio_nanoAOD)[i_daughter],float(1.5)); 
-	        }
+          ////////////////
+          // Lepton MVA //
+          ////////////////
 
-          else{
-            lepMVA_jetPtRel  = 0. ;
-            lepMVA_jetPtRatio = 1 / ( 1 + PFRelIsoAll04_nanoAOD ); 
+          float leptonMVA = -999;
+
+          lepMVA_pt = daughter.Pt();
+          lepMVA_eta = daughter.Eta();
+          lepMVA_jetNDauChargedMVASel = (*_daughters_jetNDauChargedMVASel)[i_daughter]; //from nanoAOD
+
+          if(year==2016) {
+            lepMVA_miniRelIsoCharged = miniRelIsoCharged; 
+            lepMVA_miniRelIsoNeutral = miniRelIsoNeutral; 
           }
-	  
-          	lepMVA_jetBTagCSV = std::max((*_daughters_jetBTagCSV)[i_daughter],float(0.)); 
-	        lepMVA_jetBTagDeepCSV = std::max((*_daughters_jetBTagDeepCSV)[i_daughter],float(0.));
-          	lepMVA_sip3d = (*_SIP)[i_daughter];
-	        lepMVA_dxy = log(fabs((*_dxy)[i_daughter]));
-	        lepMVA_dz = log(fabs((*_dz)[i_daughter]));
-	        lepMVA_mvaId = (*_daughters_lepMVA_mvaId)[i_daughter]; //electron MVA ID score, Fall17 noIso version
+          else if (year==2017 || year == 2018){
+            lepMVA_miniRelIsoCharged = miniRelIsoCharged_nanoAOD; //from nanoAOD
+            lepMVA_miniRelIsoNeutral = miniRelIsoNeutral_nanoAOD; //from nanoAOD
+          }
 
-		float leptonMVA = -999;
-	        if(year==2016) leptonMVA = ele_reader_2016->EvaluateMVA("BDTG method");
-		else if(year==2017 || year==2018) leptonMVA = ele_reader_2017->EvaluateMVA("BDTG method");
-                  
+          lepMVA_jetPtRel   = (*_daughters_jetPtRel_nanoAOD)[i_daughter]; //nanoAOD
+          lepMVA_jetDF = std::max((*_daughters_jetBTagDeepJet)[i_daughter],float(0.)); //old CSV for now  
+
+          if(_daughters_dR_closest_jet[i_daughter]<0.4){
+            lepMVA_jetPtRatio = std::min((*_daughters_jetPtRatio_nanoAOD)[i_daughter],float(1.5)); //nanoAOD 
+          }
+          else{
+            lepMVA_jetPtRatio = 1 / ( 1 + PFRelIsoAll04_nanoAOD ); 
+          } 
+          lepMVA_sip3d = (*_SIP)[i_daughter];
+          lepMVA_dxy = log(fabs((*_dxy)[i_daughter]));
+          lepMVA_dz = log(fabs((*_dz)[i_daughter]));
+          lepMVA_Id = (*_daughters_lepMVA_mvaId)[i_daughter]; //segment compatibility
+
+          
+          if(year==2016) leptonMVA = ele_reader_2016->EvaluateMVA("BDTG method");
+          else if(year==2017 || year==2018) leptonMVA = ele_reader_2017->EvaluateMVA("BDTG method");
+
+
 	        float conept = daughter.Pt();
 	        if(leptonMVA<0.90)
 	          conept = 0.90*daughter.Pt()/lepMVA_jetPtRatio;
@@ -4679,7 +4732,7 @@ void convert_tree(
 	          daughter.SetPtEtaPhiM(conept,daughter.Eta(),daughter.Phi(),daughter.M());	  
 	 
           	pair<int,TLorentzVector> daughter_pair = make_pair(i_daughter,daughter);
-	        reco_eles.push_back(daughter_pair);
+	          reco_eles.push_back(daughter_pair);
 
 	      }
 
@@ -4690,6 +4743,7 @@ void convert_tree(
     sort(reco_eles.begin(), reco_eles.end(), pT_comparison_pairs);
 
     _n_recoele_presel = reco_eles.size();
+
 
     for(unsigned int i_ele=0; i_ele<reco_eles.size(); i_ele++){
       
@@ -4723,40 +4777,50 @@ void convert_tree(
       _recoele_jetCSV.push_back( std::max((*_daughters_jetBTagCSV)[i_daughter],float(0.)) );
       _recoele_jetDeepCSV.push_back( std::max((*_daughters_jetBTagDeepCSV)[i_daughter],float(0.)) );
       _recoele_jetDeepJet.push_back( std::max((*_daughters_jetBTagDeepJet)[i_daughter],float(0.)) );
- 
-      if(_daughters_dR_closest_jet[i_daughter]<0.4){      
-	      _recoele_jetPtRel.push_back( (*_daughters_jetPtRel)[i_daughter] );
-	      _recoele_jetPtRel_nanoAOD.push_back( (*_daughters_jetPtRel_nanoAOD)[i_daughter] );
-	      _recoele_jetPtRatio.push_back( std::min((*_daughters_jetPtRatio)[i_daughter],float(1.5)) );
-        _recoele_jetPtRatio_nanoAOD.push_back( std::min((*_daughters_jetPtRatio_nanoAOD)[i_daughter],float(1.5)) );
-      }
-      else{
-	      _recoele_jetPtRel.push_back( 0. );
-	      _recoele_jetPtRel_nanoAOD.push_back( 0. );
-	      _recoele_jetPtRatio.push_back( 1 / ( 1 + (*_daughters_PFRelIsoAll04_nanoAOD)[i_daughter] ) ); 
-        _recoele_jetPtRatio_nanoAOD.push_back( 1 / ( 1 + (*_daughters_PFRelIsoAll04_nanoAOD)[i_daughter] ) );
-      }
-
-      _recoele_lepMVA_mvaId.push_back( (*_daughters_lepMVA_mvaId)[i_daughter] );
+	    _recoele_jetPtRel.push_back( (*_daughters_jetPtRel)[i_daughter] );
+	    _recoele_jetPtRel_nanoAOD.push_back( (*_daughters_jetPtRel_nanoAOD)[i_daughter] );
+	    _recoele_jetPtRatio.push_back( std::min((*_daughters_jetPtRatio)[i_daughter],float(1.5)) );
+      _recoele_jetPtRatio_nanoAOD.push_back( std::min((*_daughters_jetPtRatio_nanoAOD)[i_daughter],float(1.5)) );
+      _recoele_lepMVA_Id.push_back( (*_daughters_lepMVA_mvaId)[i_daughter] );
       _recoele_isChargeConsistent.push_back( (*_daughters_iseleChargeConsistent)[i_daughter] );
+
+
+      ////////////////
+      // Lepton MVA //
+      ////////////////
+      
+      float leptonMVA_ = -999;
 
       lepMVA_pt = _recoele_pt[i_ele];
       lepMVA_eta = _recoele_eta[i_ele];
-      lepMVA_jetNDauChargedMVASel = _recoele_jetNDauChargedMVASel_nanoAOD[i_ele];
-      lepMVA_miniRelIsoCharged = _recoele_miniIsoCharged_nanoAOD[i_ele] / lepMVA_pt;
-      lepMVA_miniRelIsoNeutral = _recoele_miniIsoNeutral_nanoAOD[i_ele] / lepMVA_pt;
-      lepMVA_jetPtRel  = _recoele_jetPtRel_nanoAOD[i_ele]; 
-      lepMVA_jetPtRatio = _recoele_jetPtRatio_nanoAOD[i_ele];      
-      lepMVA_jetBTagCSV = _recoele_jetCSV[i_ele];
-      lepMVA_jetBTagDeepCSV = _recoele_jetDeepCSV[i_ele];
+      lepMVA_jetNDauChargedMVASel = _recoele_jetNDauChargedMVASel[i_ele];
+
+      if(year==2016) {
+        lepMVA_miniRelIsoCharged = _recoele_miniIsoCharged[i_ele] / lepMVA_pt;
+        lepMVA_miniRelIsoNeutral = _recoele_miniIsoNeutral[i_ele] / lepMVA_pt;
+      }
+      else if (year==2017 || year == 2018){
+        lepMVA_miniRelIsoCharged =_recoele_miniIsoCharged_nanoAOD[i_ele] / lepMVA_pt; //from nanoAOD
+        lepMVA_miniRelIsoNeutral = _recoele_miniIsoNeutral_nanoAOD[i_ele] / lepMVA_pt;
+      }
+
+      lepMVA_jetPtRel   = _recoele_jetPtRel_nanoAOD[i_ele]; 
+      lepMVA_jetDF = std::max(_recoele_jetDeepJet[i_ele],float(0.)); //old CSV for now  
+
+      if(_daughters_dR_closest_jet[i_daughter]<0.4){
+        lepMVA_jetPtRatio = _recoele_jetPtRatio_nanoAOD[i_ele];    
+      }
+      else{
+        lepMVA_jetPtRatio = 1 / _recoele_PFRelIsoAll04_nanoAOD[i_ele]; //new (with 0.4)
+      } 
       lepMVA_sip3d = _recoele_sip3D[i_ele];
       lepMVA_dxy = log(fabs(_recoele_dxy[i_ele]));
       lepMVA_dz = log(fabs(_recoele_dz[i_ele]));
-      lepMVA_mvaId = _recoele_lepMVA_mvaId[i_ele];
-     
-      float leptonMVA_ = -999;
+      lepMVA_Id = _recoele_lepMVA_Id[i_ele];
+    
       if(year==2016) leptonMVA_ = ele_reader_2016->EvaluateMVA("BDTG method");
       else if(year==2017 || year==2018) leptonMVA_ = ele_reader_2017->EvaluateMVA("BDTG method");
+
       _recoele_leptonMVA.push_back( leptonMVA_ );
 
       bool eleIDcut=false;
@@ -4800,20 +4864,18 @@ void convert_tree(
       // fakeable selection
       bool isfakeable=false;
       if(conept>10 && eleIDcut && eleMissingLostHits==0 && passConversionVeto){
-	      if(_recoele_leptonMVA[i_ele]>0.9 && lepMVA_jetBTagDeepCSV<0.4941)
+            if(_recoele_leptonMVA[i_ele]>0.9 && lepMVA_jetDF<0.4941)
 	        isfakeable=true;	
-	    else if(_recoele_leptonMVA[i_ele]<=0.9 && lepMVA_jetBTagDeepCSV<0.07 && lepMVA_jetPtRatio>0.6 && lepMVA_mvaId>0.5)
+	    else if(_recoele_leptonMVA[i_ele]<=0.9 && lepMVA_jetDF<0.07 && lepMVA_jetPtRatio>0.6 && lepMVA_Id>0.5)
 	      isfakeable=true;
       }	
-      
       _recoele_isfakeable.push_back(isfakeable);
       _recolep_isfakeable.push_back(isfakeable);
-
       if(isfakeable){
 	      _n_recoele_fakeable++;
         _n_recolep_fakeable++;
       }
-	  
+
       //Cut-based selection - to be updated for 2017
       float miniIso = lepMVA_miniRelIsoCharged + lepMVA_miniRelIsoNeutral;
 
@@ -4840,7 +4902,7 @@ void convert_tree(
       	
       //MVA-based selection
       bool ismvasel=false;
-      if(conept>10 && eleIDcut && eleMissingLostHits==0 && _recoele_leptonMVA[i_ele]>0.9 && lepMVA_jetBTagDeepCSV<0.4941 && passConversionVeto) 
+      if(conept>10 && eleIDcut && eleMissingLostHits==0 && _recoele_leptonMVA[i_ele]>0.9 && lepMVA_jetDF<0.4941 && passConversionVeto) 
 	      ismvasel=true;
       
       _recoele_ismvasel.push_back(ismvasel);
@@ -5006,7 +5068,7 @@ void convert_tree(
     //////////////////////////////////////////////
     ///                Taus                    ///
     //////////////////////////////////////////////
-    
+   
     vector< pair<int,TLorentzVector> > reco_taus;
     
     for(unsigned int i_daughter=0; i_daughter<(*_daughters_e).size(); i_daughter++){

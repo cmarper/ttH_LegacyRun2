@@ -32,10 +32,10 @@ void create_syncNtuple_objectbased(){
   TString dir_in="/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/";
   TString dir_out="/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_syncformat/";
 
-  TString file="sync_ntuple_objects_syncformat_ttHNonbb_2016_v2b_1k.root";
+  TString file="sync_ntuple_objects_syncformat_ttHNonbb_2016_v4.root";
 
   vector<TString> list;
-  list.push_back(dir_in+"sync_ntuple_converted_ttHNonbb_2016_v2b_1k.root");
+  list.push_back(dir_in+"sync_ntuple_converted_ttHNonbb_2016_v4.root");
 
   TChain * tree = new TChain("HTauTauTree");
   int nFiles = list.size();
@@ -47,12 +47,13 @@ void create_syncNtuple_objectbased(){
 
 
   Long64_t nentries = tree->GetEntries();
+  cout<<"nentries "<<nentries<<endl;
 
   TFile* f_new = TFile::Open(dir_out+file);
-  if(f_new!=0){
+  /*if(f_new!=0){
     cout<<dir_out+file<<" already exists, please delete it before converting again"<<endl;
     return;
-  }
+  }*/
   
   f_new = TFile::Open(dir_out+file,"RECREATE");
 
@@ -102,7 +103,6 @@ void create_syncNtuple_objectbased(){
   float _mu1_dpt_div_pt;
   bool  _mu1_isfakeablesel;
   bool  _mu1_ismvasel;
-  bool  _mu1_isGenMatched;
 
   float _mu2_pt;
   float _mu2_conept;
@@ -130,7 +130,6 @@ void create_syncNtuple_objectbased(){
   float _mu2_dpt_div_pt;
   bool  _mu2_isfakeablesel;
   bool  _mu2_ismvasel;
-  bool  _mu2_isGenMatched;
 
   float _ele1_pt;
   float _ele1_conept;
@@ -164,7 +163,6 @@ void create_syncNtuple_objectbased(){
   float _ele1_OoEminusOoP; 
   bool  _ele1_isfakeablesel;
   bool  _ele1_ismvasel;
-  bool  _ele1_isGenMatched;
  
   float _ele2_pt;
   float _ele2_conept;
@@ -198,7 +196,6 @@ void create_syncNtuple_objectbased(){
   float _ele2_OoEminusOoP; 
   bool  _ele2_isfakeablesel;
   bool  _ele2_ismvasel;
-  bool  _ele2_isGenMatched;
 
   float _tau1_pt;
   float _tau1_eta;
@@ -229,7 +226,6 @@ void create_syncNtuple_objectbased(){
   int   _tau1_againstElectronMediumMVA6;
   int   _tau1_againstElectronTightMVA6;
   int   _tau1_againstElectronVTightMVA6;
-  bool  _tau1_isGenMatched;
 
   float _tau2_pt;
   float _tau2_eta;
@@ -260,7 +256,6 @@ void create_syncNtuple_objectbased(){
   int   _tau2_againstElectronMediumMVA6;
   int   _tau2_againstElectronTightMVA6;
   int   _tau2_againstElectronVTightMVA6;
-  bool  _tau2_isGenMatched;
 
   float _jet1_pt;
   float _jet1_eta;
@@ -303,7 +298,6 @@ void create_syncNtuple_objectbased(){
   float _MHT;
   float _metLD;
 
-  bool _isGenMatched;
 
   
   tree_new->Branch("nEvent",        &_nEvent,         "nEvent/L");
@@ -347,7 +341,6 @@ void create_syncNtuple_objectbased(){
   tree_new->Branch("mu1_dpt_div_pt",    &_mu1_dpt_div_pt,    "mu1_dpt_div_pt/F");
   tree_new->Branch("mu1_isfakeablesel", &_mu1_isfakeablesel, "mu1_isfakeablesel/O");
   tree_new->Branch("mu1_ismvasel",      &_mu1_ismvasel,      "mu1_ismvasel/O");
-  tree_new->Branch("mu1_isGenMatched",      &_mu1_isGenMatched,      "mu1_isGenMatched/O");
 
   tree_new->Branch("mu2_pt",        &_mu2_pt,         "mu2_pt/F");
   tree_new->Branch("mu2_conept",    &_mu2_conept,     "mu2_conept/F");
@@ -375,7 +368,6 @@ void create_syncNtuple_objectbased(){
   tree_new->Branch("mu2_dpt_div_pt",    &_mu2_dpt_div_pt,    "mu2_dpt_div_pt/F");
   tree_new->Branch("mu2_isfakeablesel", &_mu2_isfakeablesel, "mu2_isfakeablesel/O");
   tree_new->Branch("mu2_ismvasel",      &_mu2_ismvasel,      "mu2_ismvasel/O");
-  tree_new->Branch("mu2_isGenMatched",      &_mu2_isGenMatched,      "mu2_isGenMatched/O");
 
   tree_new->Branch("ele1_pt",        &_ele1_pt,         "ele1_pt/F");
   tree_new->Branch("ele1_conept",    &_ele1_conept,     "ele1_conept/F");
@@ -409,7 +401,6 @@ void create_syncNtuple_objectbased(){
   tree_new->Branch("ele1_OoEminusOoP", &_ele1_OoEminusOoP, "ele1_OoEminusOoP");
   tree_new->Branch("ele1_isfakeablesel", &_ele1_isfakeablesel, "ele1_isfakeablesel/O");
   tree_new->Branch("ele1_ismvasel",      &_ele1_ismvasel,      "ele1_ismvasel/O");
-  tree_new->Branch("ele1_isGenMatched",      &_ele1_isGenMatched,      "ele1_isGenMatched/O");
 
   
   tree_new->Branch("ele2_pt",        &_ele2_pt,         "ele2_pt/F");
@@ -444,7 +435,6 @@ void create_syncNtuple_objectbased(){
   tree_new->Branch("ele2_OoEminusOoP", &_ele2_OoEminusOoP, "ele2_OoEminusOoP");
   tree_new->Branch("ele2_isfakeablesel", &_ele2_isfakeablesel, "ele2_isfakeablesel/O");
   tree_new->Branch("ele2_ismvasel",      &_ele2_ismvasel,      "ele2_ismvasel/O");
-  tree_new->Branch("ele2_isGenMatched",      &_ele2_isGenMatched,      "ele2_isGenMatched/O");
 
 
   tree_new->Branch("tau1_pt",        &_tau1_pt,         "tau1_pt/F");
@@ -476,7 +466,6 @@ void create_syncNtuple_objectbased(){
   tree_new->Branch("tau1_againstElectronMediumMVA6", &_tau1_againstElectronMediumMVA6, "tau1_againstElectronMediumMVA6/I");                         
   tree_new->Branch("tau1_againstElectronTightMVA6",  &_tau1_againstElectronTightMVA6,  "tau1_againstElectronTightMVA6/I");   
   tree_new->Branch("tau1_againstElectronVTightMVA6", &_tau1_againstElectronVTightMVA6, "tau1_againstElectronVTightMVA6/I");
-  tree_new->Branch("tau1_isGenMatched",      &_tau1_isGenMatched,      "tau1_isGenMatched/O");   
 
   tree_new->Branch("tau2_pt",        &_tau2_pt,         "tau2_pt/F");
   tree_new->Branch("tau2_eta",       &_tau2_eta,        "tau2_eta/F");
@@ -507,7 +496,6 @@ void create_syncNtuple_objectbased(){
   tree_new->Branch("tau2_againstElectronMediumMVA6", &_tau2_againstElectronMediumMVA6, "tau2_againstElectronMediumMVA6/I");                         
   tree_new->Branch("tau2_againstElectronTightMVA6",  &_tau2_againstElectronTightMVA6,  "tau2_againstElectronTightMVA6/I");   
   tree_new->Branch("tau2_againstElectronVTightMVA6", &_tau2_againstElectronVTightMVA6,  "tau2_againstElectronVTightMVA6/I"); 
-  tree_new->Branch("tau2_isGenMatched",      &_tau2_isGenMatched,      "tau2_isGenMatched/O");    
                       
   tree_new->Branch("jet1_pt",  &_jet1_pt,  "jet1_pt/F");
   tree_new->Branch("jet1_eta", &_jet1_eta, "jet1_eta/F");
@@ -549,6 +537,7 @@ void create_syncNtuple_objectbased(){
   tree_new->Branch("PFMETphi", &_PFMETphi, "PFMETphi/F");
   tree_new->Branch("MHT",      &_MHT,      "MHT/F");
   tree_new->Branch("metLD",    &_metLD,    "metLD/F");
+ 
 
   //Old branches used
   tree->SetBranchAddress("EventNumber",&_nEvent);
@@ -591,13 +580,12 @@ void create_syncNtuple_objectbased(){
   vector<float> *_recomu_sip3D;
   vector<float> *_recomu_dxy;
   vector<float> *_recomu_dz;
-  vector<float> *_recomu_lepMVA_mvaId;
+  vector<float> *_recomu_lepMVA_Id;
   vector<float> *_recomu_leptonMVA;
   vector<bool>  *_recomu_mediumID;
   vector<float> *_recomu_rel_error_trackpt;
   vector<bool>  *_recomu_isfakeable;
   vector<bool>  *_recomu_ismvasel;
-  vector<bool>  *_recomu_isGenMatched;
 
   vector<float> *_recoele_pt;
   vector<float> *_recoele_conept;
@@ -624,7 +612,7 @@ void create_syncNtuple_objectbased(){
   vector<float> *_recoele_sip3D;
   vector<float> *_recoele_dxy;
   vector<float> *_recoele_dz;
-  vector<float> *_recoele_lepMVA_mvaId;
+  vector<float> *_recoele_lepMVA_Id;
   vector<float> *_recoele_leptonMVA;
   vector<bool>  *_recoele_isChargeConsistent;
   vector<bool>  *_recoele_passConversionVeto;
@@ -636,7 +624,6 @@ void create_syncNtuple_objectbased(){
   vector<float> *_recoele_OoEminusOoP;
   vector<bool>  *_recoele_isfakeable;
   vector<bool>  *_recoele_ismvasel;
-  vector<bool>  *_recoele_isGenMatched;
 
   vector<float> *_recotauh_pt;
   vector<float> *_recotauh_eta;
@@ -671,7 +658,6 @@ void create_syncNtuple_objectbased(){
   vector<int>   *_recotauh_againstElectronMediumMVA6;
   vector<int>   *_recotauh_againstElectronTightMVA6;
   vector<int>   *_recotauh_againstElectronVTightMVA6;
-  vector<bool>  *_recotauh_isGenMatched;
 
   vector<float> *_recoPFJet_pt;
   vector<float> *_recoPFJet_eta;
@@ -707,13 +693,12 @@ void create_syncNtuple_objectbased(){
   tree->SetBranchAddress("recomu_sip3D",                &_recomu_sip3D);
   tree->SetBranchAddress("recomu_dxy",                  &_recomu_dxy);
   tree->SetBranchAddress("recomu_dz",                   &_recomu_dz);
-  tree->SetBranchAddress("recomu_lepMVA_mvaId",         &_recomu_lepMVA_mvaId);
+  tree->SetBranchAddress("recomu_lepMVA_Id",            &_recomu_lepMVA_Id);
   tree->SetBranchAddress("recomu_leptonMVA",            &_recomu_leptonMVA);
   tree->SetBranchAddress("recomu_mediumID",             &_recomu_mediumID);
   tree->SetBranchAddress("recomu_rel_error_trackpt",    &_recomu_rel_error_trackpt);
   tree->SetBranchAddress("recomu_isfakeable",           &_recomu_isfakeable);
   tree->SetBranchAddress("recomu_ismvasel",             &_recomu_ismvasel);
-  tree->SetBranchAddress("recomu_isGenMatched",         &_recomu_isGenMatched);
 
   tree->SetBranchAddress("recoele_pt",                  &_recoele_pt);
   tree->SetBranchAddress("recoele_conept",              &_recoele_conept);
@@ -740,7 +725,7 @@ void create_syncNtuple_objectbased(){
   tree->SetBranchAddress("recoele_sip3D",               &_recoele_sip3D);
   tree->SetBranchAddress("recoele_dxy",                 &_recoele_dxy);
   tree->SetBranchAddress("recoele_dz",                  &_recoele_dz);
-  tree->SetBranchAddress("recoele_lepMVA_mvaId",        &_recoele_lepMVA_mvaId);
+  tree->SetBranchAddress("recoele_lepMVA_Id",           &_recoele_lepMVA_Id);
   tree->SetBranchAddress("recoele_leptonMVA",           &_recoele_leptonMVA);
   tree->SetBranchAddress("recoele_isChargeConsistent",  &_recoele_isChargeConsistent);
   tree->SetBranchAddress("recoele_passConversionVeto",  &_recoele_passConversionVeto);
@@ -753,7 +738,6 @@ void create_syncNtuple_objectbased(){
   tree->SetBranchAddress("recoele_deltaPhi",		&_recoele_deltaPhi);
   tree->SetBranchAddress("recoele_OoEminusOoP",		&_recoele_OoEminusOoP);
   tree->SetBranchAddress("recoele_isfakeable",		&_recoele_isfakeable);
-  tree->SetBranchAddress("recoele_isGenMatched",    &_recoele_isGenMatched);
 
   tree->SetBranchAddress("recotauh_pt",                 &_recotauh_pt);
   tree->SetBranchAddress("recotauh_eta",                &_recotauh_eta);
@@ -788,7 +772,6 @@ void create_syncNtuple_objectbased(){
   tree->SetBranchAddress("recotauh_againstElectronMediumMVA6",   &_recotauh_againstElectronMediumMVA6);
   tree->SetBranchAddress("recotauh_againstElectronTightMVA6",    &_recotauh_againstElectronTightMVA6);
   tree->SetBranchAddress("recotauh_againstElectronVTightMVA6",   &_recotauh_againstElectronVTightMVA6);
-  tree->SetBranchAddress("recotauh_isGenMatched",    &_recotauh_isGenMatched);
 
   tree->SetBranchAddress("recoPFJet_pt",       &_recoPFJet_pt);
   tree->SetBranchAddress("recoPFJet_eta",      &_recoPFJet_eta);
@@ -807,7 +790,7 @@ void create_syncNtuple_objectbased(){
   //nentries = 100;
   for (int i=0;i<nentries;i++) {
 
-    if(i%10000==0)
+    if(i%100==0)
       cout<<"i="<<i<<endl;
 
     _nEvent       = -9999;
@@ -1046,7 +1029,6 @@ void create_syncNtuple_objectbased(){
     _MHT       = -9999;
     _metLD     = -9999;    
 
-    _isGenMatched = -0;
     
 
     ////
@@ -1076,7 +1058,7 @@ void create_syncNtuple_objectbased(){
     _recomu_sip3D                = 0;
     _recomu_dxy                  = 0;
     _recomu_dz                   = 0;
-    _recomu_lepMVA_mvaId         = 0;
+    _recomu_lepMVA_Id         = 0;
     _recomu_leptonMVA            = 0;
     _recomu_mediumID             = 0;
     _recomu_rel_error_trackpt    = 0;
@@ -1108,7 +1090,7 @@ void create_syncNtuple_objectbased(){
     _recoele_sip3D                = 0;
     _recoele_dxy                  = 0;
     _recoele_dz                   = 0;
-    _recoele_lepMVA_mvaId         = 0;
+    _recoele_lepMVA_Id         = 0;
     _recoele_leptonMVA            = 0;    
     _recoele_isChargeConsistent   = 0;
     _recoele_passConversionVeto   = 0;
@@ -1165,7 +1147,7 @@ void create_syncNtuple_objectbased(){
     _recoPFJet_QGdiscr = 0; 
 
     tree->GetEntry(i);
-    
+ 
     if(_n_presel_mu>0){
       _mu1_pt     = (*_recomu_pt)[0];
       _mu1_conept = (*_recomu_conept)[0];
@@ -1173,13 +1155,7 @@ void create_syncNtuple_objectbased(){
       _mu1_phi    = (*_recomu_phi)[0];
       _mu1_E      = (*_recomu_e)[0];
       _mu1_charge = (*_recomu_charge)[0];
-      cout<<"here1"<<endl;
       _mu1_jetNDauChargedMVASel = (*_recomu_jetNDauChargedMVASel_nanoAOD)[0];
-      /*_mu1_miniRelIso           = (*_recomu_miniRelIso_nanoAOD)[0];
-      _mu1_miniIsoCharged       = (*_recomu_miniIsoCharged_nanoAOD)[0];
-      _mu1_miniIsoNeutral       = (*_recomu_miniIsoNeutral_nanoAOD)[0];
-      _mu1_jetNDauChargedMVASel = (*_recomu_jetNDauChargedMVASel)[0];*/
-      cout<<"here2"<<endl;
       _mu1_miniRelIso           = (*_recomu_miniRelIso)[0];
       _mu1_miniIsoCharged       = (*_recomu_miniIsoCharged)[0];
       _mu1_miniIsoNeutral       = (*_recomu_miniIsoNeutral)[0];
@@ -1193,14 +1169,12 @@ void create_syncNtuple_objectbased(){
       _mu1_dxy                  = (*_recomu_dxy)[0];
       _mu1_dxyAbs               = abs((*_recomu_dxy)[0]);
       _mu1_dz                   = (*_recomu_dz)[0];
-      _mu1_segmentCompatibility = (*_recomu_lepMVA_mvaId)[0];
+      _mu1_segmentCompatibility = (*_recomu_lepMVA_Id)[0];
       _mu1_leptonMVA            = (*_recomu_leptonMVA)[0];
       _mu1_mediumID             = (*_recomu_mediumID)[0];
       _mu1_dpt_div_pt           = (*_recomu_rel_error_trackpt)[0];
       _mu1_isfakeablesel        = (*_recomu_isfakeable)[0];      
       _mu1_ismvasel             = (*_recomu_ismvasel)[0];
-      _mu1_isGenMatched         = (*_recomu_isGenMatched)[0];
-
     }
     
    if(_n_presel_mu>1){
@@ -1211,10 +1185,6 @@ void create_syncNtuple_objectbased(){
       _mu2_E      = (*_recomu_e)[1];
       _mu2_charge = (*_recomu_charge)[1];
       _mu2_jetNDauChargedMVASel = (*_recomu_jetNDauChargedMVASel_nanoAOD)[1];
-      /*_mu2_miniRelIso           = (*_recomu_miniRelIso_nanoAOD)[1];
-      _mu2_miniIsoCharged       = (*_recomu_miniIsoCharged_nanoAOD)[1];
-      _mu2_miniIsoNeutral       = (*_recomu_miniIsoNeutral_nanoAOD)[1];
-      _mu2_jetNDauChargedMVASel = (*_recomu_jetNDauChargedMVASel)[1];*/
       _mu2_miniRelIso           = (*_recomu_miniRelIso)[1];
       _mu2_miniIsoCharged       = (*_recomu_miniIsoCharged)[1];
       _mu2_miniIsoNeutral       = (*_recomu_miniIsoNeutral)[1];
@@ -1228,13 +1198,11 @@ void create_syncNtuple_objectbased(){
       _mu2_dxy                  = (*_recomu_dxy)[1];
       _mu2_dxyAbs               = abs((*_recomu_dxy)[1]);
       _mu2_dz                   = (*_recomu_dz)[1];
-      _mu2_segmentCompatibility = (*_recomu_lepMVA_mvaId)[1];
+      _mu2_segmentCompatibility = (*_recomu_lepMVA_Id)[1];
       _mu2_leptonMVA            = (*_recomu_leptonMVA)[1];
       _mu2_mediumID             = (*_recomu_mediumID)[1];
       _mu2_dpt_div_pt           = (*_recomu_rel_error_trackpt)[1];
       _mu2_isfakeablesel        = (*_recomu_isfakeable)[1];      
-      _mu2_isGenMatched         = (*_recomu_isGenMatched)[1];   
-
     }
     
     if(_n_presel_ele>0){
@@ -1245,11 +1213,6 @@ void create_syncNtuple_objectbased(){
       _ele1_E      = (*_recoele_e)[0];
       _ele1_charge = (*_recoele_charge)[0];
       _ele1_jetNDauChargedMVASel = (*_recoele_jetNDauChargedMVASel_nanoAOD)[0];
-      /*_ele1_miniRelIso           = (*_recoele_miniRelIso_nanoAOD)[0];
-      _ele1_miniIsoCharged       = (*_recoele_miniIsoCharged_nanoAOD)[0];
-      _ele1_miniIsoNeutral       = (*_recoele_miniIsoNeutral_nanoAOD)[0];
-      _ele1_PFRelIso04           = (*_recoele_PFRelIsoAll04_nanoAOD)[0];
-      _ele1_jetNDauChargedMVASel = (*_recoele_jetNDauChargedMVASel)[0];*/
       _ele1_miniRelIso           = (*_recoele_miniRelIso)[0];
       _ele1_miniIsoCharged       = (*_recoele_miniIsoCharged)[0];
       _ele1_miniIsoNeutral       = (*_recoele_miniIsoNeutral)[0];
@@ -1263,7 +1226,7 @@ void create_syncNtuple_objectbased(){
       _ele1_dxy                  = (*_recoele_dxy)[0];
       _ele1_dxyAbs               = abs((*_recoele_dxy)[0]);
       _ele1_dz                   = (*_recoele_dz)[0];
-      _ele1_ntMVAeleID           = (*_recoele_lepMVA_mvaId)[0];
+      _ele1_ntMVAeleID           = (*_recoele_lepMVA_Id)[0];
       _ele1_leptonMVA            = (*_recoele_leptonMVA)[0];
       _ele1_isChargeConsistent   = (*_recoele_isChargeConsistent)[0];      
       _ele1_passesConversionVeto = (*_recoele_passConversionVeto)[0];
@@ -1275,7 +1238,6 @@ void create_syncNtuple_objectbased(){
       _ele1_OoEminusOoP		 = (*_recoele_OoEminusOoP)[0];
       _ele1_isfakeablesel        = (*_recoele_isfakeable)[0];
       _ele1_ismvasel             = (*_recoele_ismvasel)[0];
-      _ele1_isGenMatched         = (*_recoele_isGenMatched)[0];
     }
 
     if(_n_presel_ele>1){
@@ -1286,11 +1248,6 @@ void create_syncNtuple_objectbased(){
       _ele2_E      = (*_recoele_e)[1];
       _ele2_charge = (*_recoele_charge)[1];
       _ele2_jetNDauChargedMVASel = (*_recoele_jetNDauChargedMVASel_nanoAOD)[1];
-      /*_ele2_miniRelIso           = (*_recoele_miniRelIso_nanoAOD)[1];
-      _ele2_miniIsoCharged       = (*_recoele_miniIsoCharged_nanoAOD)[1];
-      _ele2_miniIsoNeutral       = (*_recoele_miniIsoNeutral_nanoAOD)[1];
-      _ele2_PFRelIso04           = (*_recoele_PFRelIsoAll04_nanoAOD)[1];
-      _ele2_jetNDauChargedMVASel = (*_recoele_jetNDauChargedMVASel)[1];*/
       _ele2_miniRelIso           = (*_recoele_miniRelIso)[1];
       _ele2_miniIsoCharged       = (*_recoele_miniIsoCharged)[1];
       _ele2_miniIsoNeutral       = (*_recoele_miniIsoNeutral)[1];
@@ -1304,7 +1261,7 @@ void create_syncNtuple_objectbased(){
       _ele2_dxy                  = (*_recoele_dxy)[1];
       _ele2_dxyAbs               = abs((*_recoele_dxy)[1]);
       _ele2_dz                   = (*_recoele_dz)[1];
-      _ele2_ntMVAeleID           = (*_recoele_lepMVA_mvaId)[1];
+      _ele2_ntMVAeleID           = (*_recoele_lepMVA_Id)[1];
       _ele2_leptonMVA            = (*_recoele_leptonMVA)[1];
       _ele2_isChargeConsistent   = (*_recoele_isChargeConsistent)[1];
       _ele2_passesConversionVeto = (*_recoele_passConversionVeto)[1];
@@ -1316,7 +1273,6 @@ void create_syncNtuple_objectbased(){
       _ele2_OoEminusOoP          = (*_recoele_OoEminusOoP)[1];
       _ele2_isfakeablesel        = (*_recoele_isfakeable)[1];
       _ele2_ismvasel             = (*_recoele_ismvasel)[1];
-      _ele2_isGenMatched         = (*_recoele_isGenMatched)[1];
 
     }
 
@@ -1350,7 +1306,6 @@ void create_syncNtuple_objectbased(){
       _tau1_againstElectronMediumMVA6  = (*_recotauh_againstElectronMediumMVA6)[0];
       _tau1_againstElectronTightMVA6   = (*_recotauh_againstElectronTightMVA6)[0];
       _tau1_againstElectronVTightMVA6  = (*_recotauh_againstElectronVTightMVA6)[0];
-      _tau1_isGenMatched         = (*_recotauh_isGenMatched)[0];
 
     }
 
@@ -1384,7 +1339,6 @@ void create_syncNtuple_objectbased(){
       _tau2_againstElectronMediumMVA6  = (*_recotauh_againstElectronMediumMVA6)[1];
       _tau2_againstElectronTightMVA6   = (*_recotauh_againstElectronTightMVA6)[1];
       _tau2_againstElectronVTightMVA6  = (*_recotauh_againstElectronVTightMVA6)[1];
-      _tau2_isGenMatched         = (*_recotauh_isGenMatched)[1];
 
     }
     
@@ -1436,7 +1390,7 @@ void create_syncNtuple_objectbased(){
 
 
     }
-
+    
 
     tree_new->Fill();
 
@@ -2293,7 +2247,6 @@ void create_syncNtuple_objectbased(){
   float _PU_weight;
   float _MC_weight;
 
-  bool _isGenMatched;
 
 
 
@@ -2567,7 +2520,7 @@ void create_syncNtuple_objectbased(){
   vector<float> *_recomu_sip3D;
   vector<float> *_recomu_dxy;
   vector<float> *_recomu_dz;
-  vector<float> *_recomu_lepMVA_mvaId;
+  vector<float> *_recomu_lepMVA_Id;
   vector<float> *_recomu_leptonMVA;
   vector<bool>  *_recomu_mediumID;
   vector<float> *_recomu_rel_error_trackpt;
@@ -2596,7 +2549,7 @@ void create_syncNtuple_objectbased(){
   vector<float> *_recoele_sip3D;
   vector<float> *_recoele_dxy;
   vector<float> *_recoele_dz;
-  vector<float> *_recoele_lepMVA_mvaId;
+  vector<float> *_recoele_lepMVA_Id;
   vector<float> *_recoele_leptonMVA;
   vector<bool>  *_recoele_isChargeConsistent;
   vector<bool>  *_recoele_passConversionVeto;
@@ -2694,7 +2647,7 @@ void create_syncNtuple_objectbased(){
     tree[i]->SetBranchAddress("recomu_sip3D",                &_recomu_sip3D);
     tree[i]->SetBranchAddress("recomu_dxy",                  &_recomu_dxy);
     tree[i]->SetBranchAddress("recomu_dz",                   &_recomu_dz);
-    tree[i]->SetBranchAddress("recomu_lepMVA_mvaId",         &_recomu_lepMVA_mvaId);
+    tree[i]->SetBranchAddress("recomu_lepMVA_Id",         &_recomu_lepMVA_Id);
     tree[i]->SetBranchAddress("recomu_leptonMVA",            &_recomu_leptonMVA);
     tree[i]->SetBranchAddress("recomu_mediumID",             &_recomu_mediumID);
     tree[i]->SetBranchAddress("recomu_rel_error_trackpt",    &_recomu_rel_error_trackpt);
@@ -2723,7 +2676,7 @@ void create_syncNtuple_objectbased(){
     tree[i]->SetBranchAddress("recoele_sip3D",               &_recoele_sip3D);
     tree[i]->SetBranchAddress("recoele_dxy",                 &_recoele_dxy);
     tree[i]->SetBranchAddress("recoele_dz",                  &_recoele_dz);
-    tree[i]->SetBranchAddress("recoele_lepMVA_mvaId",        &_recoele_lepMVA_mvaId);
+    tree[i]->SetBranchAddress("recoele_lepMVA_Id",        &_recoele_lepMVA_Id);
     tree[i]->SetBranchAddress("recoele_leptonMVA",           &_recoele_leptonMVA);
     tree[i]->SetBranchAddress("recoele_isChargeConsistent",  &_recoele_isChargeConsistent);
     tree[i]->SetBranchAddress("recoele_passConversionVeto",  &_recoele_passConversionVeto);
@@ -3100,7 +3053,7 @@ void create_syncNtuple_objectbased(){
     _recomu_sip3D                = 0;
     _recomu_dxy                  = 0;
     _recomu_dz                   = 0;
-    _recomu_lepMVA_mvaId         = 0;
+    _recomu_lepMVA_Id         = 0;
     _recomu_leptonMVA            = 0;
     _recomu_mediumID             = 0;
     _recomu_rel_error_trackpt    = 0;
@@ -3129,7 +3082,7 @@ void create_syncNtuple_objectbased(){
     _recoele_sip3D                = 0;
     _recoele_dxy                  = 0;
     _recoele_dz                   = 0;
-    _recoele_lepMVA_mvaId         = 0;
+    _recoele_lepMVA_Id         = 0;
     _recoele_leptonMVA            = 0;    
     _recoele_isChargeConsistent   = 0;
     _recoele_passConversionVeto   = 0;
@@ -3218,7 +3171,7 @@ void create_syncNtuple_objectbased(){
       _mu1_sip3D                = (*_recomu_sip3D)[0];
       _mu1_dxyAbs               = abs((*_recomu_dxy)[0]);
       _mu1_dz                   = (*_recomu_dz)[0];
-      _mu1_segmentCompatibility = (*_recomu_lepMVA_mvaId)[0];
+      _mu1_segmentCompatibility = (*_recomu_lepMVA_Id)[0];
       _mu1_leptonMVA            = (*_recomu_leptonMVA)[0];
       _mu1_mediumID             = (*_recomu_mediumID)[0];
       _mu1_dpt_div_pt           = (*_recomu_rel_error_trackpt)[0];
@@ -3244,7 +3197,7 @@ void create_syncNtuple_objectbased(){
       _mu2_sip3D                = (*_recomu_sip3D)[1];
       _mu2_dxyAbs               = abs((*_recomu_dxy)[1]);
       _mu2_dz                   = (*_recomu_dz)[1];
-      _mu2_segmentCompatibility = (*_recomu_lepMVA_mvaId)[1];
+      _mu2_segmentCompatibility = (*_recomu_lepMVA_Id)[1];
       _mu2_leptonMVA            = (*_recomu_leptonMVA)[1];
       _mu2_mediumID             = (*_recomu_mediumID)[1];
       _mu2_dpt_div_pt           = (*_recomu_rel_error_trackpt)[1];
@@ -3269,7 +3222,7 @@ void create_syncNtuple_objectbased(){
       _ele1_sip3D                = (*_recoele_sip3D)[0];
       _ele1_dxyAbs               = abs((*_recoele_dxy)[0]);
       _ele1_dz                   = (*_recoele_dz)[0];
-      _ele1_ntMVAeleID           = (*_recoele_lepMVA_mvaId)[0];
+      _ele1_ntMVAeleID           = (*_recoele_lepMVA_Id)[0];
       _ele1_leptonMVA            = (*_recoele_leptonMVA)[0];
       _ele1_isChargeConsistent   = (*_recoele_isChargeConsistent)[0];      
       _ele1_passesConversionVeto = (*_recoele_passConversionVeto)[0];
@@ -3295,7 +3248,7 @@ void create_syncNtuple_objectbased(){
       _ele2_sip3D                = (*_recoele_sip3D)[1];
       _ele2_dxyAbs               = abs((*_recoele_dxy)[1]);
       _ele2_dz                   = (*_recoele_dz)[1];
-      _ele2_ntMVAeleID           = (*_recoele_lepMVA_mvaId)[1];
+      _ele2_ntMVAeleID           = (*_recoele_lepMVA_Id)[1];
       _ele2_leptonMVA            = (*_recoele_leptonMVA)[1];
       _ele2_isChargeConsistent   = (*_recoele_isChargeConsistent)[1];      
       _ele2_passesConversionVeto = (*_recoele_passConversionVeto)[1];
@@ -4013,7 +3966,7 @@ void create_syncNtuple_objectbased(){
   vector<float> *_recomu_sip3D;
   vector<float> *_recomu_dxy;
   vector<float> *_recomu_dz;
-  vector<float> *_recomu_lepMVA_mvaId;
+  vector<float> *_recomu_lepMVA_Id;
   vector<float> *_recomu_leptonMVA;
   vector<bool>  *_recomu_mediumID;
   vector<float> *_recomu_rel_error_trackpt;
@@ -4042,7 +3995,7 @@ void create_syncNtuple_objectbased(){
   vector<float> *_recoele_sip3D;
   vector<float> *_recoele_dxy;
   vector<float> *_recoele_dz;
-  vector<float> *_recoele_lepMVA_mvaId;
+  vector<float> *_recoele_lepMVA_Id;
   vector<float> *_recoele_leptonMVA;
   vector<bool>  *_recoele_isChargeConsistent;
   vector<bool>  *_recoele_passConversionVeto;
@@ -4144,7 +4097,7 @@ void create_syncNtuple_objectbased(){
     tree[i]->SetBranchAddress("recomu_sip3D",                &_recomu_sip3D);
     tree[i]->SetBranchAddress("recomu_dxy",                  &_recomu_dxy);
     tree[i]->SetBranchAddress("recomu_dz",                   &_recomu_dz);
-    tree[i]->SetBranchAddress("recomu_lepMVA_mvaId",         &_recomu_lepMVA_mvaId);
+    tree[i]->SetBranchAddress("recomu_lepMVA_Id",         &_recomu_lepMVA_Id);
     tree[i]->SetBranchAddress("recomu_leptonMVA",            &_recomu_leptonMVA);
     tree[i]->SetBranchAddress("recomu_mediumID",             &_recomu_mediumID);
     tree[i]->SetBranchAddress("recomu_rel_error_trackpt",    &_recomu_rel_error_trackpt);
@@ -4173,7 +4126,7 @@ void create_syncNtuple_objectbased(){
     tree[i]->SetBranchAddress("recoele_sip3D",               &_recoele_sip3D);
     tree[i]->SetBranchAddress("recoele_dxy",                 &_recoele_dxy);
     tree[i]->SetBranchAddress("recoele_dz",                  &_recoele_dz);
-    tree[i]->SetBranchAddress("recoele_lepMVA_mvaId",        &_recoele_lepMVA_mvaId);
+    tree[i]->SetBranchAddress("recoele_lepMVA_Id",        &_recoele_lepMVA_Id);
     tree[i]->SetBranchAddress("recoele_leptonMVA",           &_recoele_leptonMVA);
     tree[i]->SetBranchAddress("recoele_isChargeConsistent",  &_recoele_isChargeConsistent);
     tree[i]->SetBranchAddress("recoele_passConversionVeto",  &_recoele_passConversionVeto);
@@ -4534,7 +4487,7 @@ void create_syncNtuple_objectbased(){
     _recomu_sip3D                = 0;
     _recomu_dxy                  = 0;
     _recomu_dz                   = 0;
-    _recomu_lepMVA_mvaId         = 0;
+    _recomu_lepMVA_Id         = 0;
     _recomu_leptonMVA            = 0;
     _recomu_mediumID             = 0;
     _recomu_rel_error_trackpt    = 0;
@@ -4562,7 +4515,7 @@ void create_syncNtuple_objectbased(){
     _recoele_sip3D                = 0;
     _recoele_dxy                  = 0;
     _recoele_dz                   = 0;
-    _recoele_lepMVA_mvaId         = 0;
+    _recoele_lepMVA_Id         = 0;
     _recoele_leptonMVA            = 0;    
     _recoele_isChargeConsistent   = 0;
     _recoele_passConversionVeto   = 0;
@@ -4655,7 +4608,7 @@ void create_syncNtuple_objectbased(){
       _mu1_sip3D                = (*_recomu_sip3D)[0];
       _mu1_dxyAbs               = abs((*_recomu_dxy)[0]);
       _mu1_dz                   = (*_recomu_dz)[0];
-      _mu1_segmentCompatibility = (*_recomu_lepMVA_mvaId)[0];
+      _mu1_segmentCompatibility = (*_recomu_lepMVA_Id)[0];
       _mu1_leptonMVA            = (*_recomu_leptonMVA)[0];
       _mu1_mediumID             = (*_recomu_mediumID)[0];
       _mu1_dpt_div_pt           = (*_recomu_rel_error_trackpt)[0];
@@ -4681,7 +4634,7 @@ void create_syncNtuple_objectbased(){
       _mu2_sip3D                = (*_recomu_sip3D)[1];
       _mu2_dxyAbs               = abs((*_recomu_dxy)[1]);
       _mu2_dz                   = (*_recomu_dz)[1];
-      _mu2_segmentCompatibility = (*_recomu_lepMVA_mvaId)[1];
+      _mu2_segmentCompatibility = (*_recomu_lepMVA_Id)[1];
       _mu2_leptonMVA            = (*_recomu_leptonMVA)[1];
       _mu2_mediumID             = (*_recomu_mediumID)[1];
       _mu2_dpt_div_pt           = (*_recomu_rel_error_trackpt)[1];
@@ -4707,7 +4660,7 @@ void create_syncNtuple_objectbased(){
       _ele1_sip3D                = (*_recoele_sip3D)[0];
       _ele1_dxyAbs                  = abs((*_recoele_dxy)[0]);
       _ele1_dz                   = (*_recoele_dz)[0];
-      _ele1_ntMVAeleID           = (*_recoele_lepMVA_mvaId)[0];
+      _ele1_ntMVAeleID           = (*_recoele_lepMVA_Id)[0];
       _ele1_leptonMVA            = (*_recoele_leptonMVA)[0];
       _ele1_isChargeConsistent   = (*_recoele_isChargeConsistent)[0];      
       _ele1_passesConversionVeto = (*_recoele_passConversionVeto)[0];
@@ -4733,7 +4686,7 @@ void create_syncNtuple_objectbased(){
       _ele2_sip3D                = (*_recoele_sip3D)[1];
       _ele2_dxyAbs               = abs((*_recoele_dxy)[1]);
       _ele2_dz                   = (*_recoele_dz)[1];
-      _ele2_ntMVAeleID           = (*_recoele_lepMVA_mvaId)[1];
+      _ele2_ntMVAeleID           = (*_recoele_lepMVA_Id)[1];
       _ele2_leptonMVA            = (*_recoele_leptonMVA)[1];
       _ele2_isChargeConsistent   = (*_recoele_isChargeConsistent)[1];      
       _ele2_passesConversionVeto = (*_recoele_passConversionVeto)[1];
