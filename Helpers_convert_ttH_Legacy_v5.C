@@ -345,25 +345,25 @@ void convert_tree(
 
   if(sample=="sync16"){
 
-    file="sync_ntuple_converted_ttHNonbb_2016_v7_100";
-    dir_out="/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/";
-    list.push_back("/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_LLRHtautau/sync_ntuple_LLRHtautau_ttHNonbb_2016_v7_100.root");
+    file="sync_ntuple_converted_ttHNonbb_2016_v9";
+    dir_out="/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2016/";
+    list.push_back("/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_LLRHtautau/2016/sync_ntuple_LLRHtautau_ttHNonbb_2016_v7.root");
 
   }
 
   else if(sample=="sync17"){
 
-    file="sync_ntuple_converted_ttHNonbb_2017_v1_1k";
-    dir_out="/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/";
-    list.push_back("/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_LLRHtautau/sync_ntuple_LLRHtautau_ttHNonbb_2017_v1_1k.root");
+    file="sync_ntuple_converted_ttHNonbb_2017_v4_100";
+    dir_out="/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2017/";
+    list.push_back("/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_LLRHtautau/2017/sync_ntuple_LLRHtautau_ttHNonbb_2017_v3_100.root");
 
   }
 
   else if(sample=="sync18"){
 
-    file="sync_ntuple_converted_ttHNonbb_2018_v1_1k";
-    dir_out="/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/";
-    list.push_back("/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_LLRHtautau/sync_ntuple_LLRHtautau_ttHNonbb_2018_v1_1k.root");
+    file="sync_ntuple_converted_ttHNonbb_2018_v3";
+    dir_out="/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2018/";
+    list.push_back("/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_LLRHtautau/2018/sync_ntuple_LLRHtautau_ttHNonbb_2018_v2.root");
 
   }
 
@@ -4456,23 +4456,25 @@ void convert_tree(
 
           lepMVA_pt = daughter.Pt();
           lepMVA_eta = daughter.Eta();
-          lepMVA_jetNDauChargedMVASel = (*_daughters_jetNDauChargedMVASel)[i_daughter]; //from nanoAOD
+          lepMVA_jetNDauChargedMVASel = (*_daughters_jetNDauChargedMVASel_nanoAOD)[i_daughter]; 
+          lepMVA_miniRelIsoCharged = miniRelIsoCharged_nanoAOD; 
+          lepMVA_miniRelIsoNeutral = miniRelIsoNeutral_nanoAOD; 
 
-          lepMVA_miniRelIsoCharged = miniRelIsoCharged_nanoAOD; //from nanoAOD
-          lepMVA_miniRelIsoNeutral = miniRelIsoNeutral_nanoAOD; //from nanoAOD
-
-          lepMVA_jetPtRel   = (*_daughters_jetPtRel_nanoAOD)[i_daughter]; //nanoAOD
-          lepMVA_jetDF = std::max((*_daughters_jetBTagDeepJet)[i_daughter],float(0.)); //old CSV for now  
-
+          lepMVA_jetPtRel = 0.; 
+	  lepMVA_jetPtRatio = 1.;      
           if(_daughters_dR_closest_jet[i_daughter]<0.4){
-            lepMVA_jetPtRatio = std::min((*_daughters_jetPtRatio_nanoAOD)[i_daughter],float(1.5)); //nanoAOD 
+            lepMVA_jetPtRel   = (*_daughters_jetPtRel_nanoAOD)[i_daughter]; 
+            lepMVA_jetPtRatio = std::min((*_daughters_jetPtRatio_nanoAOD)[i_daughter],float(1.5));
           }
           else{
-            lepMVA_jetPtRatio = 1 / ( 1+(*_combreliso)[i_daughter] ); //new (with 0.4)
+            lepMVA_jetPtRel = 0.;
+            lepMVA_jetPtRatio = 1 / ( 1+(*_combreliso)[i_daughter] ); 
           } 
+
+          lepMVA_jetDF = std::max((*_daughters_jetBTagDeepJet)[i_daughter],float(0.));
           lepMVA_sip3d = (*_SIP)[i_daughter];
-	        lepMVA_dxy = log(fabs((*_dxy)[i_daughter]));
-	        lepMVA_dz = log(fabs((*_dz)[i_daughter]));
+	  lepMVA_dxy = log(fabs((*_dxy)[i_daughter]));
+	  lepMVA_dz = log(fabs((*_dz)[i_daughter]));
           lepMVA_Id = (*_daughters_lepMVA_mvaId)[i_daughter]; //segment compatibility
 
           
@@ -4547,29 +4549,50 @@ void convert_tree(
 
       lepMVA_pt = _recomu_pt[i_mu];
       lepMVA_eta = _recomu_eta[i_mu];
-      lepMVA_jetNDauChargedMVASel = _recomu_jetNDauChargedMVASel[i_mu];
-
-      lepMVA_miniRelIsoCharged =_recomu_miniIsoCharged_nanoAOD[i_mu] / lepMVA_pt; //from nanoAOD
+      lepMVA_jetNDauChargedMVASel = _recomu_jetNDauChargedMVASel_nanoAOD[i_mu];
+      lepMVA_miniRelIsoCharged =_recomu_miniIsoCharged_nanoAOD[i_mu] / lepMVA_pt; 
       lepMVA_miniRelIsoNeutral = _recomu_miniIsoNeutral_nanoAOD[i_mu] / lepMVA_pt;
 
-      lepMVA_jetPtRel   = _recomu_jetPtRel_nanoAOD[i_mu]; 
-      lepMVA_jetDF = std::max(_recomu_jetDeepJet[i_mu],float(0.)); //old CSV for now  
-
+      lepMVA_jetPtRel = 0.;
+      lepMVA_jetPtRatio = 1.;
       if(_daughters_dR_closest_jet[i_daughter]<0.4){
+        lepMVA_jetPtRel   = _recomu_jetPtRel_nanoAOD[i_mu];
         lepMVA_jetPtRatio = _recomu_jetPtRatio_nanoAOD[i_mu];    
       }
       else{
-        lepMVA_jetPtRatio = 1 / ( 1+ _recomu_combreliso04[i_mu] ); //new (with 0.4)
+        lepMVA_jetPtRel = 0.;
+        lepMVA_jetPtRatio = 1 / ( 1 + _recomu_combreliso04[i_mu] ); 
       } 
+
+      lepMVA_jetDF = std::max(_recomu_jetDeepJet[i_mu],float(0.));  
       lepMVA_sip3d = _recomu_sip3D[i_mu];
       lepMVA_dxy = log(fabs(_recomu_dxy[i_mu]));
       lepMVA_dz = log(fabs(_recomu_dz[i_mu]));
       lepMVA_Id = _recomu_lepMVA_Id[i_mu];
-    
+   
       if(year==2016) 
         leptonMVA_ = mu_reader_2016->EvaluateMVA("BDTG method");
       else if(year==2017 || year==2018) 
         leptonMVA_ = mu_reader_2017->EvaluateMVA("BDTG method");
+
+      /*if(_EventNumber == 46612 || _EventNumber == 46622 || _EventNumber == 46671 || _EventNumber == 46743 || _EventNumber == 46814 || _EventNumber == 46812 || _EventNumber == 46805){
+
+         cout<<"----"<<endl;
+         cout<<"nEvent "<<_EventNumber<<endl;
+         cout<<"pt "<<lepMVA_pt<<endl;
+         cout<<"eta "<<lepMVA_eta<<endl;
+         cout<<"jetNDauChargedMVASel "<<lepMVA_jetNDauChargedMVASel<<endl;
+         cout<<"miniRelIsoCharged "<<lepMVA_miniRelIsoCharged<<endl;
+         cout<<"miniRelIsoNeutral "<<lepMVA_miniRelIsoNeutral<<endl;
+         cout<<"jetPtRel "<<lepMVA_jetPtRel<<endl;
+         cout<<"jetDF "<<lepMVA_jetDF<<endl;
+         cout<<"jetPtRatio "<<lepMVA_jetPtRatio<<endl;
+         cout<<"sip3d "<<lepMVA_sip3d<<endl;
+         cout<<"abs(dxy) "<<lepMVA_dxy<<endl;
+         cout<<"abs(dz) "<<lepMVA_dz<<endl;
+         cout<<"seg comp "<<lepMVA_Id<<endl;
+         cout<<"lep mva "<<leptonMVA_<<endl;
+      }*/
 
       _recomu_leptonMVA.push_back( leptonMVA_ );
 
@@ -4744,34 +4767,38 @@ void convert_tree(
 
           float leptonMVA = -999;
 
-          lepMVA_pt = daughter.Pt(); //use the uncorrected pt for lepMVA
+          lepMVA_pt = daughter.Pt(); //uncorrected pt
           lepMVA_eta = daughter.Eta();
-          lepMVA_jetNDauChargedMVASel = (*_daughters_jetNDauChargedMVASel)[i_daughter]; 
-          lepMVA_miniRelIsoCharged = miniRelIsoCharged_nanoAOD; //from nanoAOD
-          lepMVA_miniRelIsoNeutral = miniRelIsoNeutral_nanoAOD; //from nanoAOD
-          lepMVA_jetPtRel   = (*_daughters_jetPtRel_nanoAOD)[i_daughter]; //nanoAOD
-          lepMVA_jetDF = std::max((*_daughters_jetBTagDeepJet)[i_daughter],float(0.));  
+          lepMVA_jetNDauChargedMVASel = (*_daughters_jetNDauChargedMVASel_nanoAOD)[i_daughter]; 
+          lepMVA_miniRelIsoCharged = miniRelIsoCharged_nanoAOD; 
+          lepMVA_miniRelIsoNeutral = miniRelIsoNeutral_nanoAOD;
+
+          lepMVA_jetPtRel = 0.;
+          lepMVA_jetPtRatio = 1.;
           if(_daughters_dR_closest_jet[i_daughter]<0.4){
-            lepMVA_jetPtRatio = std::min((*_daughters_jetPtRatio_nanoAOD)[i_daughter],float(1.5)); //nanoAOD 
+            lepMVA_jetPtRel   = (*_daughters_jetPtRel_nanoAOD)[i_daughter]; 
+            lepMVA_jetPtRatio = std::min((*_daughters_jetPtRatio_nanoAOD)[i_daughter],float(1.5)); 
           }
           else{
+            lepMVA_jetPtRel = 0.;
             lepMVA_jetPtRatio = 1 / ( 1 + PFRelIsoAll04_nanoAOD ); 
           } 
+
+          lepMVA_jetDF = std::max((*_daughters_jetBTagDeepJet)[i_daughter],float(0.));
           lepMVA_sip3d = (*_SIP)[i_daughter];
           lepMVA_dxy = log(fabs((*_dxy)[i_daughter]));
           lepMVA_dz = log(fabs((*_dz)[i_daughter]));
           lepMVA_Id = (*_daughters_lepMVA_mvaId)[i_daughter]; //eleID
 
-          
           if(year==2016) 
             leptonMVA = ele_reader_2016->EvaluateMVA("BDTG method");
           else if(year==2017 || year==2018) 
             leptonMVA = ele_reader_2017->EvaluateMVA("BDTG method");
 
-
-	        float conept = daughter.Pt();
+                float pt_forcone = (*_daughters_pt_corr)[i_daughter];
+	        float conept = pt_forcone;
 	        if(leptonMVA<0.90)
-	          conept = 0.90*daughter.Pt()/lepMVA_jetPtRatio;
+	          conept = 0.90*pt_forcone/lepMVA_jetPtRatio;
           
 	        if(conept_sorting)
 	          daughter.SetPtEtaPhiM(conept,daughter.Eta(),daughter.Phi(),daughter.M());	  
@@ -4844,17 +4871,22 @@ void convert_tree(
 
       lepMVA_pt = _recoele_pt[i_ele]; //uncorrected one
       lepMVA_eta = _recoele_eta[i_ele];
-      lepMVA_jetNDauChargedMVASel = _recoele_jetNDauChargedMVASel[i_ele];
-      lepMVA_miniRelIsoCharged =_recoele_miniIsoCharged_nanoAOD[i_ele] / lepMVA_pt; //from nanoAOD
+      lepMVA_jetNDauChargedMVASel = _recoele_jetNDauChargedMVASel_nanoAOD[i_ele];
+      lepMVA_miniRelIsoCharged = _recoele_miniIsoCharged_nanoAOD[i_ele] / lepMVA_pt;
       lepMVA_miniRelIsoNeutral = _recoele_miniIsoNeutral_nanoAOD[i_ele] / lepMVA_pt;
-      lepMVA_jetPtRel   = _recoele_jetPtRel_nanoAOD[i_ele]; 
-      lepMVA_jetDF = std::max(_recoele_jetDeepJet[i_ele],float(0.)); //old CSV for now  
+
+      lepMVA_jetPtRel = 0.;
+      lepMVA_jetPtRatio = 1.;
       if(_daughters_dR_closest_jet[i_daughter]<0.4){
+        lepMVA_jetPtRel   = _recoele_jetPtRel_nanoAOD[i_ele];
         lepMVA_jetPtRatio = _recoele_jetPtRatio_nanoAOD[i_ele];    
       }
       else{
-        lepMVA_jetPtRatio = 1 / _recoele_PFRelIsoAll04_nanoAOD[i_ele]; //new (with 0.4)
+        lepMVA_jetPtRel = 0.;
+        lepMVA_jetPtRatio = 1 / 1 + _recoele_PFRelIsoAll04_nanoAOD[i_ele];
       } 
+
+      lepMVA_jetDF = std::max(_recoele_jetDeepJet[i_ele],float(0.));  
       lepMVA_sip3d = _recoele_sip3D[i_ele];
       lepMVA_dxy = log(fabs(_recoele_dxy[i_ele]));
       lepMVA_dz = log(fabs(_recoele_dz[i_ele]));
@@ -4864,6 +4896,25 @@ void convert_tree(
         leptonMVA_ = ele_reader_2016->EvaluateMVA("BDTG method");
       else if(year==2017 || year==2018) 
         leptonMVA_ = ele_reader_2017->EvaluateMVA("BDTG method");
+
+      /*if(_EventNumber == 62084 || _EventNumber == 1694425 || _EventNumber == 1665111 || _EventNumber == 1665121 || _EventNumber == 2334303){
+
+         cout<<"----"<<endl;
+         cout<<"nEvent "<<_EventNumber<<endl;
+         cout<<"pt "<<lepMVA_pt<<endl;
+         cout<<"eta "<<lepMVA_eta<<endl;
+         cout<<"jetNDauChargedMVASel "<<lepMVA_jetNDauChargedMVASel<<endl;
+         cout<<"miniRelIsoCharged "<<lepMVA_miniRelIsoCharged<<endl;
+         cout<<"miniRelIsoNeutral "<<lepMVA_miniRelIsoNeutral<<endl;
+         cout<<"jetPtRel "<<lepMVA_jetPtRel<<endl;
+         cout<<"jetDF "<<lepMVA_jetDF<<endl;
+         cout<<"jetPtRatio "<<lepMVA_jetPtRatio<<endl;
+         cout<<"sip3d "<<lepMVA_sip3d<<endl;
+         cout<<"abs(dxy) "<<lepMVA_dxy<<endl;
+         cout<<"abs(dz) "<<lepMVA_dz<<endl;
+         cout<<"seg comp "<<lepMVA_Id<<endl;
+         cout<<"lep mva "<<leptonMVA_<<endl;
+      }*/
 
       _recoele_leptonMVA.push_back( leptonMVA_ );
 
@@ -4899,9 +4950,9 @@ void convert_tree(
 
       float conept;
       if (leptonMVA_ > 0.9 ) 
-        conept = elec.Pt();
+        conept = elec_corr.Pt();
       else 
-        conept = 0.90*elec.Pt()/lepMVA_jetPtRatio;
+        conept = 0.90*elec_corr.Pt()/lepMVA_jetPtRatio;
 
       _recoele_conept.push_back( conept );
 
@@ -5485,9 +5536,11 @@ void convert_tree(
 
       if(jet.Pt()>25 && fabs(jet.Eta())>2.4 && fabs(jet.Eta())<5 && passPFjetID){  
 
-        bool pass = true;
+        bool pass_noise = true;
         if(fabs(jet.Eta())>2.7 && fabs(jet.Eta())<3) 
-          pass = jet.Pt()>60;
+          pass_noise = jet.Pt()>60;
+ 
+        if(!pass_noise) continue;
 
         bool dR_veto=false;
 
