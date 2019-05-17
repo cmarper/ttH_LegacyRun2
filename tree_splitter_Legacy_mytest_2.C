@@ -489,7 +489,7 @@ void split_tree(TString filename_in, TString filename_out,
   */
 
   int _n_loose_lep;
-  int _n_fake_lep;
+  int _n_fakeable_lep;
   int _n_tight_lep;
 
   vector<int>   _recolep_fakeable_charge;
@@ -568,7 +568,7 @@ void split_tree(TString filename_in, TString filename_out,
     tree_new[i]->Branch("category",&_category);
 
     tree_new[i]->Branch("n_loose_lep",&_n_loose_lep);
-    tree_new[i]->Branch("n_fake_lep",&_n_fake_lep);
+    tree_new[i]->Branch("n_fakeable_lep",&_n_fakeable_lep);
     tree_new[i]->Branch("n_tight_lep",&_n_tight_lep);
 
     tree_new[i]->Branch("recolep_fakeable_charge",&_recolep_fakeable_charge);
@@ -664,7 +664,7 @@ void split_tree(TString filename_in, TString filename_out,
     _category = -1;
 
     _n_loose_lep = 0;
-    _n_fake_lep = 0;
+    _n_fakeable_lep = 0;
     _n_tight_lep = 0;
 
     _recolep_fakeable_charge.clear();
@@ -870,7 +870,7 @@ void split_tree(TString filename_in, TString filename_out,
 
       }
 
-      _n_fake_lep = _recolep_fakeable_pt.size();
+      _n_fakeable_lep = _recolep_fakeable_pt.size();
       _n_tight_lep = _recolep_tight_pt.size();
 
 
@@ -945,7 +945,9 @@ void split_tree(TString filename_in, TString filename_out,
 
     bool inv_mass_lep_pairs=true;
 
-    bool SFOS_pair=false;
+    bool SFOS_loose_pair=false;
+    bool SFOS_fakeable_pair=false;
+
     bool inv_mass_Z=true;
     bool inv_mass_Zee=true;
 
@@ -956,10 +958,14 @@ void split_tree(TString filename_in, TString filename_out,
         TLorentzVector lep2((*_recolep_px)[i_lep2],(*_recolep_py)[i_lep2],(*_recolep_pz)[i_lep2],(*_recolep_e)[i_lep2]);
         float m_ll = (lep1 + lep2).M();
 
-        if(m_ll<12) inv_mass_lep_pairs=false;
+        if((*_recolep_pdg)[i_lep1]==-(*_recolep_pdg)[i_lep2] && (*_recolep_isfakeable)[i_lep1]==1 && (*_recolep_isfakeable)[i_lep2]) 
+          SFOS_fakeable_pair=true;
+
+        if(m_ll<12) 
+          inv_mass_lep_pairs=false;
 
         if((*_recolep_pdg)[i_lep1]==-(*_recolep_pdg)[i_lep2]){
-          SFOS_pair=true;
+          SFOS_loose_pair=true;
           if(fabs(m_ll-91.2)<10) {
             inv_mass_Z=false;
             if(abs((*_recolep_pdg)[i_lep1])==11 && abs((*_recolep_pdg)[i_lep2])==11){
@@ -1084,7 +1090,7 @@ void split_tree(TString filename_in, TString filename_out,
     ////////////////////////////////
 
     bool sig_1l2tau_base = //passTriggerMatch &&
-      (_n_fake_lep>=1) &&
+      (_n_fakeable_lep>=1) &&
       ( (_recolep_fakeable_conept[0]>25 && abs(_recolep_fakeable_pdg[0])==13) || (_recolep_fakeable_conept[0]>30 && abs(_recolep_fakeable_pdg[0])==11) ) &&
       ((abs(_recolep_fakeable_eta[0]))<2.1) &&
       (_n_tight_lep<=1) &&
@@ -1121,23 +1127,23 @@ void split_tree(TString filename_in, TString filename_out,
     //////////// 2lss  /////////////
     ////////////////////////////////
 
-    bool metLD = true;
+    bool metLD_e = true;
     if(abs(_recolep_fakeable_pdg[0])==11 && abs(_recolep_fakeable_pdg[1])==11) 
-      metLD = (_ETmissLD>0.3); 
+      metLD_e = (_ETmissLD>0.3); 
 
     bool jets_ttH = (_n_recoPFJet>=4 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) );
     bool jets_tH = (_n_recoPFJet_btag_medium>=1 &&  _n_light_jet>=1) && 
       !(_n_recoPFJet>=4 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) );
 
-    bool sig_2lss_base =
-      (_n_fake_lep>=2) &&
+    bool sig_2lss_base = //passTriggerMatch &&
+      (_n_fakeable_lep>=2) &&
       (_recolep_fakeable_conept[0]>25 && _recolep_fakeable_conept[1]>15) &&
       inv_mass_lep_pairs &&
       (_n_tight_lep<=2) &&
       (_recolep_fakeable_tightcharge[0]==1 && _recolep_fakeable_tightcharge[1]==1) &&
       (_n_tight_WPL_tau==0) &&
       inv_mass_Zee && 
-      metLD;
+      metLD_e;
 
     bool sig_2lss_SR =
       sig_2lss_base &&
@@ -1146,11 +1152,11 @@ void split_tree(TString filename_in, TString filename_out,
       _recolep_fakeable_isGenMatched[0] && _recolep_fakeable_isGenMatched[1];
 
     bool sig_2lss_SR_ttH =
-      sig_2lss_base &&
+      sig_2lss_SR &&
       jets_ttH;
 
     bool sig_2lss_SR_tH =
-      sig_2lss_base &&
+      sig_2lss_SR &&
       jets_tH;
 
     if (sig_2lss_SR_ttH) {
@@ -1212,61 +1218,480 @@ void split_tree(TString filename_in, TString filename_out,
     }
 
 
+    ////////////////////////////////
+    ////////// 2lss1tau  ///////////
+    ////////////////////////////////
+
+    bool sig_2lss1tau_base = //passTriggerMatch &&
+      (_n_fakeable_lep>=2) &&
+      (_recolep_fakeable_conept[0]>25 && _recolep_fakeable_conept[1]>15) &&
+      inv_mass_lep_pairs &&
+      (_n_tight_lep<=2) &&
+      (_recolep_fakeable_tightcharge[0]==1 && _recolep_fakeable_tightcharge[1]==1) &&
+      (_n_recotauh>=1) &&
+      (_n_tight_WPM_tau<=1) &&
+      inv_mass_Zee && 
+      metLD_e;
+
+    bool sig_2lss1tau_SR =
+      sig_2lss1tau_base &&
+      (_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1]) &&
+      (_recolep_fakeable_charge[0]*_recolep_fakeable_charge[1]>0) &&
+      (_recolep_fakeable_charge[0]*_recotauh_tight_WPM_charge[0]<0) &&
+      _recolep_fakeable_isGenMatched[0] && _recolep_fakeable_isGenMatched[1] &&
+      (_n_recoPFJet>=3 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) );
+
+    if (sig_2lss1tau_SR) {
+      n_2lss1tau_SR += 1;
+      _category = 3110;
+    }
+
+    bool sig_2lss1tau_fake =
+      sig_2lss1tau_base &&
+      (_n_recoPFJet>=3 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) ) &&
+      (_recolep_fakeable_charge[0]*_recolep_fakeable_charge[1]>0) &&
+      (_n_tight_WPL_tau>=1) &&
+      (_recolep_fakeable_charge[0]*_recotauh_tight_WPM_charge[0]<0) &&
+      !(_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1]);
+
+    if (sig_2lss1tau_fake) {
+      n_2lss1tau_fake += 1;
+      _category = 3120;
+    }
+
+    bool sig_2lss1tau_flip =
+      sig_2lss1tau_base &&
+      ( abs(_recolep_fakeable_pdg[0])==11 || abs(_recolep_fakeable_pdg[1])==11) &&
+      (_n_recoPFJet>=3 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) ) &&
+      (_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1]) &&
+      (_recolep_fakeable_charge[0]*_recolep_fakeable_charge[1]<0) &&
+      _recolep_fakeable_isGenMatched[0] && _recolep_fakeable_isGenMatched[1] &&
+      (_n_tight_WPL_tau<=1) &&
+      (_recolep_fakeable_charge[0]*_recotauh_tight_WPL_charge[0]>0 || _recolep_fakeable_charge[1]*_recotauh_tight_WPL_charge[0]>0);
+
+    if (sig_2lss1tau_flip) {
+      n_2lss1tau_flip += 1;
+      _category = 3130;
+    }
+
+
+    ////////////////////////////////
+    ////////// 2los1tau  ///////////
+    ////////////////////////////////
+
+    bool sig_2los1tau_SR = //passTriggerMatch &&
+      (_n_tight_lep==2) &&
+      (_recolep_tight_conept[0]>25) &&
+      ( (_recolep_tight_conept[1]>15 && abs(_recolep_tight_pdg[1])==11) || (_recolep_tight_conept[1]>10 && abs(_recolep_tight_pdg[1])==13) ) &&
+      (_n_tight_WPM_tau>=1) &&
+      (_recotauh_tight_WPM_pt[0]>=40) &&
+      inv_mass_lep_pairs &&
+      (_ETmissLD>0.3) &&
+      (_recolep_tight_isGenMatched[0] && _recolep_tight_isGenMatched[1] && _recotauh_tight_WPM_isGenMatched[0]);
+
+    if (sig_2los1tau_SR) {
+      n_2los1tau_SR += 1;
+      _category = 3210;
+    }
+
+
+    bool sig_2los1tau_fake = //passTriggerMatch &&
+      (_n_fakeable_lep==2) &&
+      (_recolep_fakeable_conept[0]>25) &&
+      ( (_recolep_fakeable_conept[1]>15 && abs(_recolep_fakeable_pdg[1])==11) || (_recolep_fakeable_conept[1]>10 && abs(_recolep_fakeable_pdg[1])==13) ) &&
+      (_n_recotauh>=1) &&
+      ((*_recotauh_pt)[0]>=40) &&
+      inv_mass_lep_pairs &&
+      (_ETmissLD>0.3);
+
+    if (sig_2los1tau_fake) {
+      n_2los1tau_fake += 1;
+      _category = 3220;
+    }
+
+
+    ////////////////////////////////
+    /////////// 2l2tau  ////////////
+    ////////////////////////////////
+
+    bool metLD_f = true;
+    if (_n_recoPFJet<=3){
+      if(SFOS_fakeable_pair) metLD_f = _ETmissLD>0.45;
+      else if (!SFOS_fakeable_pair) metLD_f = _ETmissLD>0.3;
+    }
+
+    bool sig_2l2tau_base = //passTriggerMatch &&
+      (_n_fakeable_lep>=2) &&
+      (_recolep_fakeable_conept[0]>25) &&
+      ( (_recolep_fakeable_conept[1]>15 && abs(_recolep_fakeable_pdg[1])==11) || (_recolep_fakeable_conept[1]>10 && abs(_recolep_fakeable_pdg[1])==13) ) &&
+      inv_mass_lep_pairs &&
+      inv_mass_Z &&
+      (_n_fakeable_tau>=2) &&
+      metLD_f &&
+      ( (*_recotauh_charge)[0] + (*_recotauh_charge)[1] + _recolep_fakeable_charge[0] + _recolep_fakeable_charge[1] == 0) &&
+      (_n_recoPFJet>=2 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) );
+
+    bool sig_2l2tau_SR =
+      sig_2l2tau_base &&
+      (_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1]) &&
+      ((*_recotauh_byMediumIsolationMVArun2v2017v2DBoldDMwLT)[0] && (*_recotauh_byMediumIsolationMVArun2v2017v2DBoldDMwLT)[1] )&&
+      (_recolep_fakeable_isGenMatched[0] && _recolep_fakeable_isGenMatched[1] && (*_recotauh_isGenMatched)[0] && (*_recotauh_isGenMatched)[1]);
+
+    if (sig_2l2tau_SR) {
+      n_2l2tau_SR += 1;
+      _category = 3310;
+    }
+
+    bool sig_2l2tau_fake =
+      sig_2l2tau_base &&
+      (!(_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1]) || !((*_recotauh_byMediumIsolationMVArun2v2017v2DBoldDMwLT)[0] && (*_recotauh_byMediumIsolationMVArun2v2017v2DBoldDMwLT)[1] ));
+
+    if (sig_2l2tau_fake) {
+      n_2l2tau_fake += 1;
+      _category = 3320;
+    }
+
+
+    ////////////////////////////////
+    //////////// 3l  ///////////////
+    ////////////////////////////////
+
+    bool sig_3l_base = //passTriggerMatch &&
+      (_n_fakeable_lep>=3) &&
+      (_recolep_fakeable_conept[0]>25 && _recolep_fakeable_conept[1]>15 && _recolep_fakeable_conept[2]>10) &&
+      inv_mass_lep_pairs &&
+      inv_mass_Z &&
+      (_n_tight_WPL_tau==0) &&
+      ( abs( _recolep_fakeable_charge[0]+_recolep_fakeable_charge[1]+_recolep_fakeable_charge[2] ) == 1 ) &&
+      inv_mass_4l &&
+      (_n_tight_lep<=3);
+
+    bool sig_3l_SR =
+      sig_3l_base &&
+      (_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1] && _recolep_fakeable_ismvasel[2]) &&
+      (_recolep_fakeable_isGenMatched[0] && _recolep_fakeable_isGenMatched[1] && _recolep_fakeable_isGenMatched[2]);
+
+    bool sig_3l_SR_ttH =
+      sig_3l_SR &&
+      (_n_recoPFJet>=2 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) ) &&
+      metLD_f;
+
+    bool sig_3l_SR_tH =
+      sig_3l_SR &&
+      (_n_recoPFJet_btag_medium>=1 && _n_light_jet>=1) &&
+      !(_n_recoPFJet>=2 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) );
+
+    if (sig_3l_SR_ttH) {
+      n_3l_SR_ttH += 1;
+      _category = 4010;
+    }
+
+    if (sig_3l_SR_tH) {
+      n_3l_SR_tH += 1;
+      _category = 4011;
+    }
+
+    bool sig_3l_fake_ttH =
+      sig_3l_base &&
+      (metLD_f || (_n_recoPFJet_btag_medium>=1 && _n_light_jet>=1)) &&
+      ( _n_recoPFJet>=2 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) ) &&
+      !(_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1] && _recolep_fakeable_ismvasel[2]);
+
+    bool sig_3l_fake_tH =
+      sig_3l_base &&
+      (metLD_f || (_n_recoPFJet_btag_medium>=1 && _n_light_jet>=1)) &&
+      !( _n_recoPFJet>=2 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) ) &&
+      !(_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1] && _recolep_fakeable_ismvasel[2]);
+
+    if (sig_3l_fake_ttH) {
+      n_3l_fake_ttH += 1;
+      _category = 4020;
+    }
+
+    if (sig_3l_fake_tH) {
+      n_3l_fake_tH += 1;
+      _category = 4021;
+    }
+
+
+    ////////////////////////////////
+    ////////// 3l1tau  /////////////
+    ////////////////////////////////
+
+    bool sig_3l1tau_base = //passTriggerMatch &&
+      (_n_fakeable_lep>=3) &&
+      (_recolep_fakeable_conept[0]>25 && _recolep_fakeable_conept[1]>15 && _recolep_fakeable_conept[2]>10) &&
+      inv_mass_lep_pairs &&
+      inv_mass_Z &&
+      (_n_recotauh>=1) &&
+      metLD_f &&
+      ( (*_recotauh_charge)[0] + (*_recotauh_charge)[1] + _recolep_fakeable_charge[0] + _recolep_fakeable_charge[1] == 0) &&
+      ( _n_recoPFJet>=2 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) );
+
+    bool sig_3l1tau_SR =
+      sig_3l1tau_base &&
+      (_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1] && _recolep_fakeable_ismvasel[2]) &&
+      (_n_tight_WPL_tau>=1) &&
+      (_recolep_fakeable_isGenMatched[0] && _recolep_fakeable_isGenMatched[1] && _recolep_fakeable_isGenMatched[2]);
+
+    if (sig_3l1tau_SR) {
+      n_3l1tau_SR += 1;
+      _category = 4110;
+    }
+
+    bool sig_3l1tau_fake =
+      sig_3l1tau_base &&
+      !(_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1] && _recolep_fakeable_ismvasel[2]) &&
+      (_n_tight_WPL_tau>=1);
+
+    if (sig_3l1tau_fake) {
+      n_3l1tau_fake += 1;
+      _category = 4120;
+    }
+
+
+    //////////////////////////////
+    //////////// 4l  /////////////
+    //////////////////////////////
+
+    bool sig_4l_base = //passTriggerMatch &&
+      (_n_fakeable_lep>=4) &&
+      (_recolep_fakeable_conept[0]>25 && _recolep_fakeable_conept[1]>15 && _recolep_fakeable_conept[2]>15  && _recolep_fakeable_conept[3]>10) &&
+      inv_mass_lep_pairs &&
+      inv_mass_Z &&
+      metLD_f &&
+      ( _recolep_fakeable_charge[0] + _recolep_fakeable_charge[1] == 0 + _recolep_fakeable_charge[2] + _recolep_fakeable_charge[3] == 0) &&
+      ( _n_recoPFJet>=2 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) ) && 
+      inv_mass_4l;
+
+    bool sig_4l_SR =
+      sig_4l_base &&
+      (_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1] && _recolep_fakeable_ismvasel[2] && _recolep_fakeable_ismvasel[3]) &&
+      (_recolep_fakeable_isGenMatched[0] && _recolep_fakeable_isGenMatched[1] && _recolep_fakeable_isGenMatched[2] && _recolep_fakeable_isGenMatched[3]);
+
+    if (sig_4l_SR) {
+      n_4l_SR += 1;
+      _category = 5010;
+    }
+
+    bool sig_4l_fake =
+      sig_4l_base &&
+      !(_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1] && _recolep_fakeable_ismvasel[2] && _recolep_fakeable_ismvasel[3]);
+   
+    if (sig_4l_fake) {
+      n_4l_fake += 1;
+      _category = 5020;
+    }
+
+    //////////////////////////////
+    //////////// ttW  ////////////
+    //////////////////////////////
+
+    bool sig_ttW_CR_base = //passTriggerMatch &&
+      sig_2lss_base;
+
+    bool sig_ttW_CR_SR =
+      sig_ttW_CR_base &&
+      (_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1]) &&
+      (_recolep_fakeable_charge[0]*_recolep_fakeable_charge[1]>0) &&
+      _recolep_fakeable_isGenMatched[0] && _recolep_fakeable_isGenMatched[1] &&
+      (_n_recoPFJet==3 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) );
+
+    if (sig_ttW_CR_SR) {
+      n_ttW_CR_SR += 1;
+      _category = 6010;
+    }
+
+    bool sig_ttW_CR_fake =
+      sig_ttW_CR_base &&
+      !(_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1]) &&
+      (_recolep_fakeable_charge[0]*_recolep_fakeable_charge[1]>0) &&
+      _recolep_fakeable_isGenMatched[0] && _recolep_fakeable_isGenMatched[1] &&
+      (_n_recoPFJet==3 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) );
+
+    if (sig_ttW_CR_fake) {
+      n_ttW_CR_fake += 1;
+      _category = 6020;
+    }
+
+    bool sig_ttW_CR_flip =
+      sig_ttW_CR_base &&
+      (_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1]) &&
+      (_recolep_fakeable_charge[0]*_recolep_fakeable_charge[1]<0) &&
+      _recolep_fakeable_isGenMatched[0] && _recolep_fakeable_isGenMatched[1] &&
+      (_n_recoPFJet==3 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) ) &&
+      (abs(_recolep_fakeable_pdg[0])==11 || abs(_recolep_fakeable_pdg[1])==11);
+
+    if (sig_ttW_CR_flip) {
+      n_ttW_CR_flip += 1;
+      _category = 6030;
+    }
+
+
+    ////////////////////////////////
+    //////////// ttZ_CR  ///////////
+    ////////////////////////////////
+
+    bool sig_ttZ_CR_base = //passTriggerMatch &&
+      (_n_fakeable_lep>=3) &&
+      (_recolep_fakeable_conept[0]>25 && _recolep_fakeable_conept[1]>15 && _recolep_fakeable_conept[2]>10) &&
+      inv_mass_lep_pairs &&
+      !inv_mass_Z &&
+      (_n_tight_WPL_tau==0) &&
+      ( abs( _recolep_fakeable_charge[0]+_recolep_fakeable_charge[1]+_recolep_fakeable_charge[2] ) == 1 ) &&
+      inv_mass_4l &&
+      (_n_tight_lep<=3);
+
+    bool sig_ttZ_CR_SR =
+      sig_ttZ_CR_base &&
+      (_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1] && _recolep_fakeable_ismvasel[2]) &&
+      (_recolep_fakeable_isGenMatched[0] && _recolep_fakeable_isGenMatched[1] && _recolep_fakeable_isGenMatched[2]) &&
+      (_n_recoPFJet>=2 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) ) &&
+      metLD_f;
+
+
+    if (sig_ttZ_CR_SR) {
+      n_ttZ_CR_SR += 1;
+      _category = 7010;
+    }
+
+    bool sig_ttZ_CR_fake =
+      sig_ttZ_CR_base &&
+      !(_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1] && _recolep_fakeable_ismvasel[2]) &&
+      (_recolep_fakeable_isGenMatched[0] && _recolep_fakeable_isGenMatched[1] && _recolep_fakeable_isGenMatched[2]) &&
+      (_n_recoPFJet>=2 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) ) &&
+      metLD_f;
+
+    if (sig_ttZ_CR_fake) {
+      n_ttZ_CR_fake += 1;
+      _category = 7020;
+    }
+
+    ////////////////////////////////
+    //////////// WZ_CR  ////////////
+    ////////////////////////////////
+
+    bool sig_WZ_CR_base = //passTriggerMatch &&
+      (_n_fakeable_lep>=3) &&
+      (_recolep_fakeable_conept[0]>25 && _recolep_fakeable_conept[1]>15 && _recolep_fakeable_conept[2]>10) &&
+      inv_mass_lep_pairs &&
+      !inv_mass_Z &&
+      (_n_tight_WPL_tau==0) &&
+      ( abs( _recolep_fakeable_charge[0]+_recolep_fakeable_charge[1]+_recolep_fakeable_charge[2] ) == 1 ) &&
+      inv_mass_4l &&
+      (_n_tight_lep<=3);
+
+    bool sig_WZ_CR_SR =
+      sig_WZ_CR_base &&
+      (_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1] && _recolep_fakeable_ismvasel[2]) &&
+      (_recolep_fakeable_isGenMatched[0] && _recolep_fakeable_isGenMatched[1] && _recolep_fakeable_isGenMatched[2]) &&
+      (_n_recoPFJet_btag_medium==0 || _n_recoPFJet_btag_loose<2) &&
+      metLD_f;
+
+
+    if (sig_WZ_CR_SR) {
+      n_WZ_CR_SR += 1;
+      _category = 8010;
+    }
+
+    bool sig_WZ_CR_fake =
+      sig_WZ_CR_base &&
+      !(_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1] && _recolep_fakeable_ismvasel[2]) &&
+      (_recolep_fakeable_isGenMatched[0] && _recolep_fakeable_isGenMatched[1] && _recolep_fakeable_isGenMatched[2]) &&
+      (_n_recoPFJet_btag_medium==0 || _n_recoPFJet_btag_loose<2) &&
+      metLD_f;
+
+    if (sig_WZ_CR_fake) {
+      n_WZ_CR_fake += 1;
+      _category = 8020;
+    }
+
+
+    //////////////////////////////
+    //////////// ZZ_CR  //////////
+    //////////////////////////////
+
+    bool sig_ZZ_CR_base = //passTriggerMatch &&
+      (_n_fakeable_lep>=4) &&
+      (_recolep_fakeable_conept[0]>25 && _recolep_fakeable_conept[1]>15 && _recolep_fakeable_conept[2]>15  && _recolep_fakeable_conept[3]>10) &&
+      inv_mass_lep_pairs &&
+      !inv_mass_Z &&
+      metLD_f &&
+      ( _recolep_fakeable_charge[0] + _recolep_fakeable_charge[1] == 0 + _recolep_fakeable_charge[2] + _recolep_fakeable_charge[3] == 0) &&
+      (_n_recoPFJet_btag_medium==0 || _n_recoPFJet_btag_loose<2) &&
+      inv_mass_4l;
+
+    bool sig_ZZ_CR_SR =
+      sig_ZZ_CR_base &&
+      (_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1] && _recolep_fakeable_ismvasel[2] && _recolep_fakeable_ismvasel[3]) &&
+      (_recolep_fakeable_isGenMatched[0] && _recolep_fakeable_isGenMatched[1] && _recolep_fakeable_isGenMatched[2] && _recolep_fakeable_isGenMatched[3]);
+
+    if (sig_ZZ_CR_SR) {
+      n_ZZ_CR_SR += 1;
+      _category = 9010;
+    }
+
+    bool sig_ZZ_CR_fake =
+      sig_ZZ_CR_base &&
+      !(_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1] && _recolep_fakeable_ismvasel[2] && _recolep_fakeable_ismvasel[3]);
+   
+    if (sig_ZZ_CR_fake) {
+      n_ZZ_CR_fake += 1;
+      _category = 9020;
+    }
+
+
   }
 
   
   cout<<" "<<endl;
-  cout<<"n_2tau_SR: "<<n_2tau_SR<<endl;
-  cout<<"n_2tau_fake: "<<n_2tau_fake<<endl;
-  cout<<"n_2tau_DY: "<<n_2tau_DY<<endl;
+  cout<<"2lss SR: "<<n_2lss_SR_ttH<<"/"<<n_2lss_SR_tH<<endl;
+  cout<<"2lss fake: "<<n_2lss_fake_ttH<<"/"<<n_2lss_fake_tH<<endl;
+  cout<<"2lss flip: "<<n_2lss_flip_ttH<<"/"<<n_2lss_flip_tH<<endl;
   cout<<" "<<endl;
-  cout<<"n_1l1tau_SR: "<<n_1l1tau_SR<<endl;
-  cout<<"n_1l1tau_fake: "<<n_1l1tau_fake<<endl; 
+  cout<<"3l SR: "<<n_3l_SR_ttH<<"/"<<n_3l_SR_tH<<endl;
+  cout<<"3l fake: "<<n_3l_fake_ttH<<"/"<<n_3l_fake_tH<<endl;
   cout<<" "<<endl;
-  cout<<"n_1l2tau_SR: "<<n_1l2tau_SR<<endl;  
-  cout<<"n_1l2tau_fake: "<<n_1l2tau_fake<<endl;
+  cout<<"4l SR: "<<n_4l_SR<<endl;
+  cout<<"4l fake: "<<n_4l_fake<<endl;
   cout<<" "<<endl;
-  cout<<"n_2lss_SR_ttH: "<<n_2lss_SR_ttH<<endl;
-  cout<<"n_2lss_SR_tH: "<<n_2lss_SR_tH<<endl;
-  cout<<"n_2lss_fake_ttH: "<<n_2lss_fake_ttH<<endl;
-  cout<<"n_2lss_fake_tH: "<<n_2lss_fake_tH<<endl;
-  cout<<"n_2lss_flip_ttH: "<<n_2lss_flip_ttH<<endl;
-  cout<<"n_2lss_flip_tH: "<<n_2lss_flip_tH<<endl;
-  cout<<" "<<endl;/*
-  cout<<"n_2lss1tau_SR: "<<n_2lss1tau_SR<<endl;
-  cout<<"n_2lss1tau_fake: "<<n_2lss1tau_fake<<endl;
-  cout<<"n_2lss1tau_flip: "<<n_2lss1tau_flip<<endl;
   cout<<" "<<endl;
-  cout<<"n_2los1tau_SR: "<<n_2los1tau_SR<<endl;
-  cout<<"n_2los1tau_fake: "<<n_2los1tau_fake<<endl;
+  cout<<"2tau SR: "<<n_2tau_SR<<endl;
+  cout<<"2tau fake: "<<n_2tau_fake<<endl;
+  cout<<"2tau DY: "<<n_2tau_DY<<endl;
   cout<<" "<<endl;
-  cout<<"n_2l2tau_SR: "<<n_2l2tau_SR<<endl;
-  cout<<"n_2l2tau_fake: "<<n_2l2tau_fake<<endl;
+  cout<<"1l1tau SR: "<<n_1l1tau_SR<<endl;
+  cout<<"1l1tau fake: "<<n_1l1tau_fake<<endl; 
   cout<<" "<<endl;
-  cout<<"n_3l_SR_ttH: "<<n_3l_SR_ttH<<endl;
-  cout<<"n_3l_SR_tH: "<<n_3l_SR_tH<<endl;
-  cout<<"n_3l_fake_ttH: "<<n_3l_fake_ttH<<endl;
-  cout<<"n_3l_fake_tH: "<<n_3l_fake_tH<<endl;
+  cout<<"1l2tau SR: "<<n_1l2tau_SR<<endl;  
+  cout<<"1l2tau fake: "<<n_1l2tau_fake<<endl;
   cout<<" "<<endl;
-  cout<<"n_3l1tau_SR: "<<n_3l1tau_SR<<endl;
-  cout<<"n_3l1tau_fake: "<<n_3l1tau_fake<<endl;
+  cout<<"2lss1tau SR: "<<n_2lss1tau_SR<<endl;
+  cout<<"2lss1tau fake: "<<n_2lss1tau_fake<<endl;
+  cout<<"2lss1tau flip: "<<n_2lss1tau_flip<<endl;
   cout<<" "<<endl;
-  cout<<"n_4l_SR: "<<n_4l_SR<<endl;
-  cout<<"n_4l_fake: "<<n_4l_fake<<endl;
+  cout<<"2los1tau SR: "<<n_2los1tau_SR<<endl;
+  cout<<"2los1tau fake: "<<n_2los1tau_fake<<endl;
   cout<<" "<<endl;
-  cout<<"n_ttW_CR_SR: "<<n_ttW_CR_SR<<endl;
-  cout<<"n_ttW_CR_fake: "<<n_ttW_CR_fake<<endl;
-  cout<<"n_ttW_CR_flip: "<<n_ttW_CR_flip<<endl;
+  cout<<"2l2tau SR: "<<n_2l2tau_SR<<endl;
+  cout<<"2l2tau fake: "<<n_2l2tau_fake<<endl;
   cout<<" "<<endl;
-  cout<<"n_ttZ_CR_SR: "<<n_ttZ_CR_SR<<endl;
-  cout<<"n_ttZ_CR_fake: "<<n_ttZ_CR_fake<<endl;
+  cout<<"3l1tau SR: "<<n_3l1tau_SR<<endl;
+  cout<<"3l1tau fake: "<<n_3l1tau_fake<<endl;
   cout<<" "<<endl;
-  cout<<"n_WZ_CR_SR: "<<n_WZ_CR_SR<<endl;
-  cout<<"n_WZ_CR_fake: "<<n_WZ_CR_fake<<endl;
   cout<<" "<<endl;
-  cout<<"n_ZZ_CR_SR: "<<n_ZZ_CR_SR<<endl;
-  cout<<"n_ZZ_CR_fake: "<<n_ZZ_CR_fake<<endl;
-  */
+  cout<<"ttW SR: "<<n_ttW_CR_SR<<endl;
+  cout<<"ttW fake: "<<n_ttW_CR_fake<<endl;
+  cout<<"ttW flip: "<<n_ttW_CR_flip<<endl;
+  cout<<" "<<endl;
+  cout<<"ttZ SR: "<<n_ttZ_CR_SR<<endl;
+  cout<<"ttZ fake: "<<n_ttZ_CR_fake<<endl;
+  cout<<" "<<endl;
+  cout<<"WZ SR: "<<n_WZ_CR_SR<<endl;
+  cout<<"WZ fake: "<<n_WZ_CR_fake<<endl;
+  cout<<" "<<endl;
+  cout<<"ZZ SR: "<<n_ZZ_CR_SR<<endl;
+  cout<<"ZZ fake: "<<n_ZZ_CR_fake<<endl;
 
   f_new->cd();
   
