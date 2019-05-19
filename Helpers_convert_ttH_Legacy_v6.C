@@ -345,7 +345,7 @@ void convert_tree(
 
   if(sample=="sync16"){
 
-    file="sync_ntuple_converted_ttHNonbb_2016_v10";
+    file="sync_ntuple_converted_ttHNonbb_2016_v11";
     dir_out="/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2016/";
     list.push_back("/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_LLRHtautau/2016/sync_ntuple_LLRHtautau_ttHNonbb_2016_v8.root");
 
@@ -1977,7 +1977,8 @@ void convert_tree(
   vector<Long64_t> *_tauID;
 
   Long64_t _triggerbit;
-  int _metfilterbit;
+  Int_t _metfilterbit;
+  bool _passecalBadCalibFilterUpdate;
 
   vector<int>   *_daughters_jetNDauChargedMVASel;
   vector<float> *_daughters_miniRelIsoCharged;
@@ -2084,6 +2085,8 @@ void convert_tree(
   tree->SetBranchAddress("tauID",&_tauID);
   tree->SetBranchAddress("triggerbit",&_triggerbit);
   tree->SetBranchAddress("metfilterbit",&_metfilterbit);
+  tree->SetBranchAddress("passecalBadCalibFilterUpdate",&_passecalBadCalibFilterUpdate);
+
   tree->SetBranchAddress("daughters_byIsolationMVArun2017v2DBoldDMwLTraw2017",&_daughters_byIsolationMVArun2017v2DBoldDMwLTraw2017);
 
   tree->SetBranchAddress("daughters_jetNDauChargedMVASel",&_daughters_jetNDauChargedMVASel);
@@ -2831,7 +2834,7 @@ void convert_tree(
   tree_new->Branch("recomu_fakerate_up",&_recomu_fakerate_up);
   tree_new->Branch("recomu_fakerate_down",&_recomu_fakerate_down);
   tree_new->Branch("recomu_fakerate_pt1",&_recomu_fakerate_pt1);
-  tree_new->Branch("recomu_fakerate_pt1",&_recomu_fakerate_pt2);
+  tree_new->Branch("recomu_fakerate_pt2",&_recomu_fakerate_pt2);
   tree_new->Branch("recomu_fakerate_be1",&_recomu_fakerate_be1);
   tree_new->Branch("recomu_fakerate_be2",&_recomu_fakerate_be2);
   tree_new->Branch("recomu_fakerate_QCD_MC",&_recomu_fakerate_QCD_MC);
@@ -2897,7 +2900,7 @@ void convert_tree(
   tree_new->Branch("recoele_fakerate_up",&_recoele_fakerate_up);
   tree_new->Branch("recoele_fakerate_down",&_recoele_fakerate_down);
   tree_new->Branch("recoele_fakerate_pt1",&_recoele_fakerate_pt1);
-  tree_new->Branch("recoele_fakerate_pt1",&_recoele_fakerate_pt2);
+  tree_new->Branch("recoele_fakerate_pt2",&_recoele_fakerate_pt2);
   tree_new->Branch("recoele_fakerate_be1",&_recoele_fakerate_be1);
   tree_new->Branch("recoele_fakerate_be2",&_recoele_fakerate_be2);
   tree_new->Branch("recoele_fakerate_QCD_MC",&_recoele_fakerate_QCD_MC);
@@ -2926,7 +2929,7 @@ void convert_tree(
   tree_new->Branch("recolep_fakerate_up",&_recolep_fakerate_up);
   tree_new->Branch("recolep_fakerate_down",&_recolep_fakerate_down);
   tree_new->Branch("recolep_fakerate_pt1",&_recolep_fakerate_pt1);
-  tree_new->Branch("recolep_fakerate_pt1",&_recolep_fakerate_pt2);
+  tree_new->Branch("recolep_fakerate_pt2",&_recolep_fakerate_pt2);
   tree_new->Branch("recolep_fakerate_be1",&_recolep_fakerate_be1);
   tree_new->Branch("recolep_fakerate_be2",&_recolep_fakerate_be2);
   tree_new->Branch("recolep_fakerate_QCD_MC",&_recolep_fakerate_QCD_MC);
@@ -2983,7 +2986,6 @@ void convert_tree(
   tree_new->Branch("recotauh_againstElectronTightMVA6",&_recotauh_againstElectronTightMVA6);
   tree_new->Branch("recotauh_againstElectronVTightMVA6",&_recotauh_againstElectronVTightMVA6);
 
-  tree_new->Branch("recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT",&_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT);
   tree_new->Branch("recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT",&_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT);
   tree_new->Branch("recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT",&_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT);
   tree_new->Branch("recotauh_fakerate_byTightIsolationMVArun2v2017v2DBdR03oldDMwLT",&_recotauh_fakerate_byTightIsolationMVArun2v2017v2DBdR03oldDMwLT);
@@ -3489,6 +3491,7 @@ void convert_tree(
 
     tree->SetBranchAddress("triggerbit",&_triggerbit);
     tree->SetBranchAddress("metfilterbit",&_metfilterbit);
+    tree->SetBranchAddress("passecalBadCalibFilterUpdate",&_passecalBadCalibFilterUpdate);
 
     tree->SetBranchAddress("PFMETCov00",&_PFMETCov00);
     tree->SetBranchAddress("PFMETCov01",&_PFMETCov01);
@@ -3510,7 +3513,7 @@ void convert_tree(
 
     tree_new->Branch("triggerbit",&_triggerbit,"triggerbit/L");
     tree_new->Branch("metfilterbit",&_metfilterbit,"metfilterbit/L");
-
+    tree_new->Branch("passecalBadCalibFilterUpdate",&_passecalBadCalibFilterUpdate,"passecalBadCalibFilterUpdate/O");
     tree_new->Branch("PFMETCov00",&_PFMETCov00,"PFMETCov00/F");
     tree_new->Branch("PFMETCov01",&_PFMETCov01,"PFMETCov01/F");
     tree_new->Branch("PFMETCov10",&_PFMETCov10,"PFMETCov10/F");
@@ -4356,6 +4359,7 @@ void convert_tree(
     _tauID = 0;
     _triggerbit = 0;
     _metfilterbit = 0;
+    _passecalBadCalibFilterUpdate = 0;
 
     _daughters_jetNDauChargedMVASel = 0;
     _daughters_jetNDauChargedMVASel_nanoAOD = 0;
@@ -5076,7 +5080,7 @@ void convert_tree(
     
     for(unsigned int i_mu=0; i_mu<reco_mus.size(); i_mu++){
 
-      if(_recomu_isfakeable[i_mu]==0) continue; 
+      //if(_recomu_isfakeable[i_mu]==0) continue; 
 
       pair<int,int> p_ind_pdg = make_pair(13,i_mu);
       TLorentzVector mu = reco_mus[i_mu].second;
@@ -5089,7 +5093,7 @@ void convert_tree(
 
     for(unsigned int i_ele=0; i_ele<reco_eles.size(); i_ele++){
 
-      if(_recoele_isfakeable[i_ele]==0) continue;
+      //if(_recoele_isfakeable[i_ele]==0) continue;
 
       pair<int,int> p_ind_pdg = make_pair(11,i_ele);
       TLorentzVector ele = reco_eles[i_ele].second;

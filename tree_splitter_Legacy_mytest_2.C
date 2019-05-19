@@ -51,9 +51,11 @@ void split_tree(TString filename_in, TString filename_out,
   //Old branches used
 
   Long64_t _EventNumber;
-   
+  int _year;  
+ 
   Long64_t _triggerbit; 
-  int _metfilterbit;
+  Int_t _metfilterbit;
+  bool _passecalBadCalibFilterUpdate;
 
   vector<int> *_recolep_charge;
   vector<int> *_recolep_pdg;
@@ -131,10 +133,17 @@ void split_tree(TString filename_in, TString filename_out,
   vector<bool> *_recotauh_isGenMatched;
   vector<int> *_recotauh_genMatchInd;
 
+  vector<float> *_recoPFJet_e;
+  vector<float> *_recoPFJet_px;
+  vector<float> *_recoPFJet_py;
+  vector<float> *_recoPFJet_pz;
+
   tree->SetBranchAddress("EventNumber",&_EventNumber);
+  tree->SetBranchAddress("year",&_year);
 
   tree->SetBranchAddress("triggerbit",&_triggerbit);
   tree->SetBranchAddress("metfilterbit",&_metfilterbit);
+  tree->SetBranchAddress("passecalBadCalibFilterUpdate",&_passecalBadCalibFilterUpdate);
 
   tree->SetBranchAddress("recolep_charge",&_recolep_charge);
   tree->SetBranchAddress("recolep_pdg",&_recolep_pdg);
@@ -211,6 +220,11 @@ void split_tree(TString filename_in, TString filename_out,
   tree->SetBranchAddress("recotauh_pz",&_recotauh_pz);
   tree->SetBranchAddress("recotauh_isGenMatched",&_recotauh_isGenMatched);
   tree->SetBranchAddress("recotauh_genMatchInd",&_recotauh_genMatchInd);
+
+  tree->SetBranchAddress("recoPFJet_e", &_recoPFJet_e);
+  tree->SetBranchAddress("recoPFJet_px",&_recoPFJet_px);
+  tree->SetBranchAddress("recoPFJet_py",&_recoPFJet_py);
+  tree->SetBranchAddress("recoPFJet_pz",&_recoPFJet_pz);
   
   //Long64_t nentries=100;
   Long64_t nentries = tree->GetEntries();
@@ -562,6 +576,43 @@ void split_tree(TString filename_in, TString filename_out,
 
   int _n_light_jet;
 
+  float _lep1_conePt;
+  float _lep2_conePt;
+  float _lep3_conePt;
+  float _lep1_charge;
+  float _mindr_lep1_jet;
+  float _mindr_lep2_jet;
+  float _mindr_lep3_jet;
+  float _mindr_tau1_jet;
+  float _mindr_tau2_jet;
+  float _avg_dr_jet;
+  float _avg_dr_lep_tau;
+  float _max_dr_lep_tau;
+  float _mindr_tau_jet;
+  float _min_dr_lep_tau;
+  float _min_dr_lep_jet;
+  float _dr_leps;
+  float _dr_taus;
+  float _dR_lep_tau_ss;
+  float _dr_lep1_tau;
+  float _dr_lep2_tau;
+  float _max_lep_eta;
+  float _mT_lep1;
+  float _mT_lep2;
+  float _mTauTauVis;
+  float _mTauTauVis1;
+  float _mTauTauVis2;
+  float _mbb;
+  float _mbb_loose;
+  float _cosThetaS_hadTau;
+  float _HTT;
+  float _HadTop_pt;
+  float _Hj_tagger;
+  int _nBJetLoose;
+  int _nLightJet;
+  int _nBJetMedium;
+  float _massL;
+
 
   for(unsigned int i=0; i<tree_new.size();i++){
     
@@ -640,6 +691,43 @@ void split_tree(TString filename_in, TString filename_out,
     tree_new[i]->Branch("recotauh_tight_WPM_genMatchInd",&_recotauh_tight_WPM_genMatchInd);
 
     tree_new[i]->Branch("n_light_jet",&_n_light_jet);
+
+    tree_new[i]->Branch("lep1_conePt",&_lep1_conePt);
+    tree_new[i]->Branch("lep2_conePt",&_lep2_conePt);
+    tree_new[i]->Branch("lep3_conePt",&_lep3_conePt);
+    tree_new[i]->Branch("lep1_charge",&_lep1_charge);
+    tree_new[i]->Branch("mindr_lep1_jet",&_mindr_lep1_jet);
+    tree_new[i]->Branch("mindr_lep2_jet",&_mindr_lep2_jet);
+    tree_new[i]->Branch("mindr_lep3_jet",&_mindr_lep3_jet);
+    tree_new[i]->Branch("mindr_tau1_jet",&_mindr_tau1_jet);
+    tree_new[i]->Branch("mindr_tau2_jet",&_mindr_tau2_jet);
+    tree_new[i]->Branch("avg_dr_jet",&_avg_dr_jet);
+    tree_new[i]->Branch("avg_dr_lep_tau",&_avg_dr_lep_tau);
+    tree_new[i]->Branch("max_dr_lep_tau",&_max_dr_lep_tau);
+    tree_new[i]->Branch("mindr_tau_jet",&_mindr_tau_jet);
+    tree_new[i]->Branch("min_dr_lep_tau",&_min_dr_lep_tau);
+    tree_new[i]->Branch("min_dr_lep_jet",&_min_dr_lep_jet);
+    tree_new[i]->Branch("dr_leps",&_dr_leps);
+    tree_new[i]->Branch("dr_taus",&_dr_taus);
+    tree_new[i]->Branch("dR_lep_tau_ss",&_dR_lep_tau_ss);
+    tree_new[i]->Branch("dr_lep1_tau",&_dr_lep1_tau);
+    tree_new[i]->Branch("dr_lep2_tau",&_dr_lep2_tau);
+    tree_new[i]->Branch("max_lep_eta",&_max_lep_eta);
+    tree_new[i]->Branch("mT_lep1",&_mT_lep1);
+    tree_new[i]->Branch("mT_lep2",&_mT_lep2);
+    tree_new[i]->Branch("mTauTauVis",&_mTauTauVis);
+    tree_new[i]->Branch("mTauTauVis1",&_mTauTauVis1);
+    tree_new[i]->Branch("mTauTauVis2",&_mTauTauVis2);
+    tree_new[i]->Branch("mbb",&_mbb);
+    tree_new[i]->Branch("mbb_loose",&_mbb_loose);
+    tree_new[i]->Branch("cosThetaS_hadTau",&_cosThetaS_hadTau);
+    tree_new[i]->Branch("HTT",&_HTT);
+    tree_new[i]->Branch("HadTop_pt",&_HadTop_pt);
+    tree_new[i]->Branch("Hj_tagger",&_Hj_tagger);
+    tree_new[i]->Branch("nBJetLoose",&_nBJetLoose);
+    tree_new[i]->Branch("nLightJet",&_nLightJet);
+    tree_new[i]->Branch("nBJetMedium",&_nBJetMedium);
+    tree_new[i]->Branch("massL",&_massL);
    
   }
 
@@ -737,11 +825,54 @@ void split_tree(TString filename_in, TString filename_out,
 
     _n_light_jet = 0;
 
+    //MVA variables
+
+    _lep1_conePt = -999.;
+    _lep2_conePt = -999.;
+    _lep3_conePt = -999.;
+    _lep1_charge = -999.;
+    _mindr_lep1_jet = -999.;
+    _mindr_lep2_jet = -999.;
+    _mindr_lep3_jet = -999.;
+    _mindr_tau1_jet = -999.;
+    _mindr_tau2_jet = -999.;
+    _avg_dr_jet = -999.;
+    _avg_dr_lep_tau = -999.;
+    _max_dr_lep_tau = -999.;
+    _mindr_tau_jet = -999.;
+    _min_dr_lep_tau = -999.;
+    _min_dr_lep_jet = -999.;
+    _dr_leps = -999.;
+    _dr_taus = -999.;
+    _dR_lep_tau_ss = -999.;
+    _dr_lep1_tau = -999.;
+    _dr_lep2_tau = -999.;
+    _max_lep_eta = -999.;
+    _mT_lep1 = -999.;
+    _mT_lep2 = -999.;
+    _mTauTauVis = -999.;
+    _mTauTauVis1 = -999.;
+    _mTauTauVis2 = -999.;
+    _mbb = -999.;
+    _mbb_loose = -999.;
+    _cosThetaS_hadTau = -999.;
+    _HTT = -999.;
+    _HadTop_pt = -999.;
+    _Hj_tagger = -999.;
+    _nBJetLoose = -999.;
+    _nLightJet = -999.;
+    _nBJetMedium = -999.;
+    _massL = -999.;
+
+
     // old branches
 
     _EventNumber = 0;  
+    _year = 0;
+ 
     _triggerbit = 0;  
     _metfilterbit = 0;  
+    _passecalBadCalibFilterUpdate = 0;
 
     _recolep_charge = 0;
     _recolep_pdg = 0;
@@ -819,8 +950,33 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_isGenMatched = 0;
     _recotauh_genMatchInd = 0;
 
+    _recoPFJet_e = 0;
+    _recoPFJet_px = 0;
+    _recoPFJet_py = 0;
+    _recoPFJet_pz = 0;
+
     tree->GetEntry(i);
 
+
+    /////////////////////////////////
+    ////////// MET filters //////////
+    /////////////////////////////////
+
+    bool Flag_goodVertices = (_metfilterbit>>0)&1;
+    bool Flag_HBHENoiseFilter = (_metfilterbit>>1)&1;
+    bool Flag_HBHENoiseIsoFilter = (_metfilterbit>>2)&1;
+    bool Flag_EcalDeadCellTriggerPrimitiveFilter = (_metfilterbit>>3)&1;
+    bool Flag_globalSuperTightHalo2016Filter = (_metfilterbit>>4)&1;
+    bool Flag_BadPFMuonFilter = (_metfilterbit>>5)&1;
+    bool Flag_BadChargedCandidateFilter = (_metfilterbit>>6)&1;
+    bool Flag_eeBadScFilter = (_metfilterbit>>7)&1;
+    bool Flag_ecalBadCalibReducedMINIAODFilter = _passecalBadCalibFilterUpdate;
+
+    bool metcut_base = Flag_goodVertices && Flag_globalSuperTightHalo2016Filter && Flag_HBHENoiseFilter && Flag_HBHENoiseIsoFilter && Flag_EcalDeadCellTriggerPrimitiveFilter && Flag_BadPFMuonFilter;
+    
+    if (_year == 2017 || _year == 2018) metcut_base = metcut_base && Flag_ecalBadCalibReducedMINIAODFilter;
+    if (!isMC) metcut_base = metcut_base && Flag_eeBadScFilter;
+    
 
     /////////////////////////////////
     //////////// Leptons ////////////
@@ -930,12 +1086,175 @@ void split_tree(TString filename_in, TString filename_out,
     _n_tight_WPL_tau = _recotauh_tight_WPL_pt.size();
     _n_tight_WPM_tau = _recotauh_tight_WPM_pt.size();
 
+    _n_light_jet = (_n_recoPFJet - _n_recoPFJet_btag_loose) + _n_recoPFFwdJet;
 
-    ////////////////////////////////
-    ////////// light jets  /////////
-    ////////////////////////////////
 
-    int _n_light_jet = (_n_recoPFJet - _n_recoPFJet_btag_loose) + _n_recoPFFwdJet;
+    /////////////////////////////////////
+    ////////// MVA input vbles  /////////
+    /////////////////////////////////////
+
+    /*if(_n_loose_lep>0) {
+      _lep1_conePt = (*_recolep_conept)[0];
+      _lep1_charge = (*_recolep_charge)[0];
+      TLorentzVector lep1((*_recolep_px)[0],(*_recolep_py)[0],(*_recolep_pz)[0],(*_recolep_e)[0]);
+      float minDR_l1_j = 9999;
+      for(int i_jet = 0; i_jet<_n_recoPFJet; i_jet++){
+        TLorentzVector jet((*_recoPFJet_px)[i_jet],(*_recoPFJet_py)[i_jet],(*_recoPFJet_pz)[i_jet],(*_recoPFJet_e)[i_jet]);
+        float mydR = jet.DeltaR(lep1);
+        if(mydR < minDR_l1_j) minDR_l1_j = mydR;
+      }
+      _mindr_lep1_jet = minDR_l1_j;
+    }
+
+    if(_n_loose_lep>1) {
+      _lep2_conePt = (*_recolep_conept)[1];
+      TLorentzVector lep2((*_recolep_px)[1],(*_recolep_py)[1],(*_recolep_pz)[1],(*_recolep_e)[1]);
+      float minDR_l2_j = 9999;
+      for(int i_jet = 0; i_jet<_n_recoPFJet; i_jet++){
+        TLorentzVector jet((*_recoPFJet_px)[i_jet],(*_recoPFJet_py)[i_jet],(*_recoPFJet_pz)[i_jet],(*_recoPFJet_e)[i_jet]);
+        float mydR = jet.DeltaR(lep2);
+        if(mydR < minDR_l2_j) minDR_l2_j = mydR;
+      }
+      _mindr_lep2_jet = minDR_l2_j;
+    }
+
+    if(_n_loose_lep>2) {
+      _lep3_conePt = (*_recolep_conept)[2];
+      TLorentzVector lep3((*_recolep_px)[2],(*_recolep_py)[2],(*_recolep_pz)[2],(*_recolep_e)[2]);
+      float minDR_l3_j = 9999;
+      for(int i_jet = 0; i_jet<_n_recoPFJet; i_jet++){
+        TLorentzVector jet((*_recoPFJet_px)[i_jet],(*_recoPFJet_py)[i_jet],(*_recoPFJet_pz)[i_jet],(*_recoPFJet_e)[i_jet]);
+        float mydR = jet.DeltaR(lep3);
+        if(mydR < minDR_l3_j) minDR_l3_j = mydR;
+      }
+      _mindr_lep3_jet = minDR_l3_j;
+    }
+
+
+    if(_n_recotauh>0) {
+      TLorentzVector tau1((*_recotauh_px)[0],(*_recotauh_py)[0],(*_recotauh_pz)[0],(*_recotauh_e)[0]);
+      float minDR_t1_j = 9999;
+      for(int i_jet = 0; i_jet<_n_recoPFJet; i_jet++){
+        TLorentzVector jet((*_recoPFJet_px)[i_jet],(*_recoPFJet_py)[i_jet],(*_recoPFJet_pz)[i_jet],(*_recoPFJet_e)[i_jet]);
+        float mydR = jet.DeltaR(tau1);
+        if(mydR < minDR_t1_j) minDR_t1_j = mydR;
+      }
+      _mindr_tau1_jet = minDR_t1_j;
+    }
+
+    if(_n_recotauh>1) {
+      TLorentzVector tau2((*_recotauh_px)[1],(*_recotauh_py)[1],(*_recotauh_pz)[1],(*_recotauh_e)[1]);
+      float minDR_t2_j = 9999;
+      for(int i_jet = 0; i_jet<_n_recoPFJet; i_jet++){
+        TLorentzVector jet((*_recoPFJet_px)[i_jet],(*_recoPFJet_py)[i_jet],(*_recoPFJet_pz)[i_jet],(*_recoPFJet_e)[i_jet]);
+        float mydR = jet.DeltaR(tau2);
+        if(mydR < minDR_t2_j) minDR_t2_j = mydR;
+      }
+      _mindr_tau2_jet = minDR_t2_j;
+    }
+
+    if(_n_recoPFJet>1){
+      int n_pair_jets = 0;
+      for(int i_jet1=0; i_jet1<_n_recoPFJet; i_jet1++){  
+        TLorentzVector jet1((*_recoPFJet_px)[i_jet1],(*_recoPFJet_py)[i_jet1],(*_recoPFJet_pz)[i_jet1],(*_recoPFJet_e)[i_jet1]);
+        for(int i_jet2=i_jet1+1; i_jet2<_n_recoPFJet; i_jet2++){  
+          TLorentzVector jet2((*_recoPFJet_px)[i_jet2],(*_recoPFJet_py)[i_jet2],(*_recoPFJet_pz)[i_jet2],(*_recoPFJet_e)[i_jet2]);
+          _avg_dr_jet+=jet1.DeltaR(jet2);
+          n_pair_jets++;
+        }
+      }
+      _avg_dr_jet/=n_pair_jets;
+    }
+
+    if(_n_loose_lep>0 && _n_recotauh>0){
+      int n_pair_lep_tau = 0;
+      float maxDR_l_t = 0;
+      for(int i_lep=0; i_lep<_n_loose_lep; i_lep++){  
+        TLorentzVector lep((*_recolep_px)[i_lep],(*_recolep_py)[i_lep],(*_recolep_pz)[i_lep],(*_recolep_e)[i_lep]);
+        for(int i_tau=0; i_tau<_n_recotauh; i_tau++){  
+          TLorentzVector tau((*_recotauh_px)[i_tau],(*_recotauh_py)[i_tau],(*_recotauh_pz)[i_tau],(*_recotauh_e)[i_tau]);
+          float mydR = lep.DeltaR(tau);
+          _avg_dr_lep_tau+=mydR;
+          n_pair_lep_tau++;
+          if(mydR > maxDR_l_t) maxDR_l_t = mydR ;
+        }
+      }
+      _avg_dr_lep_tau/=n_pair_lep_tau;
+      _max_dr_lep_tau = maxDR_l_t;
+    }
+
+    if(_n_recotauh>0 && _n_recoPFJet>0) {
+      float minDR_t_j = 9999;
+      for(int i_tau = 0; i_tau<_n_recotauh; i_tau++){
+        TLorentzVector tau((*_recotauh_px)[i_tau],(*_recotauh_py)[i_tau],(*_recotauh_pz)[i_tau],(*_recotauh_e)[i_tau]);    
+        for(int i_jet = 0; i_jet<_n_recoPFJet; i_jet++){
+          TLorentzVector jet((*_recoPFJet_px)[i_jet],(*_recoPFJet_py)[i_jet],(*_recoPFJet_pz)[i_jet],(*_recoPFJet_e)[i_jet]);
+          float mydR = jet.DeltaR(tau);
+          if(mydR < minDR_t_j) minDR_t_j = mydR;
+        }
+      }
+      _mindr_tau_jet = minDR_t_j;
+    }
+
+    if(_n_loose_lep>0 && _n_recotauh>0) {
+      float minDR_l_t = 9999;
+      for(int i_lep = 0; i_lep<_n_loose_lep; i_lep++){
+        TLorentzVector lep((*_recolep_px)[i_lep],(*_recolep_py)[i_lep],(*_recolep_pz)[i_lep],(*_recolep_e)[i_lep]);    
+        for(int i_tau = 0; i_tau<_n_recotauh; i_tau++){
+          TLorentzVector tau((*_recotauh_px)[i_tau],(*_recotauh_py)[i_tau],(*_recotauh_pz)[i_tau],(*_recotauh_e)[i_tau]);    
+          float mydR = tau.DeltaR(lep);
+          if(mydR < minDR_l_t) minDR_l_t = mydR;
+        }
+      }
+      _mindr_lep_tau = minDR_l_t;
+    }
+
+
+    if(_n_loose_lep>0 && _n_recoPFJet>0) {
+      float minDR_l_j = 9999;
+      for(int i_lep = 0; i_lep<_n_loose_lep; i_lep++){
+        TLorentzVector lep((*_recolep_px)[i_lep],(*_recolep_py)[i_lep],(*_recolep_pz)[i_lep],(*_recolep_e)[i_lep]);    
+        for(int i_jet = 0; i_jet<_n_recoPFJet; i_jet++){
+          TLorentzVector jet((*_recoPFJet_px)[i_jet],(*_recoPFJet_py)[i_jet],(*_recoPFJet_pz)[i_jet],(*_recoPFJet_e)[i_jet]);
+          float mydR = jet.DeltaR(lep);
+          if(mydR < minDR_l_j) minDR_l_j = mydR;
+        }
+      }
+      _mindr_lep_jet = minDR_l_j;
+    }
+
+    if(_n_loose_lep>1) {
+      TLorentzVector lep1((*_recolep_px)[0],(*_recolep_py)[0],(*_recolep_pz)[0],(*_recolep_e)[0]); 
+      TLorentzVector lep2((*_recolep_px)[1],(*_recolep_py)[1],(*_recolep_pz)[1],(*_recolep_e)[1]); 
+      _dr_leps = lep1.DeltaR(lep2);
+    } 
+
+    if(_n_recotauh>1) {
+      TLorentzVector tau1((*_recotauh_px)[0],(*_recotauh_py)[0],(*_recotauh_pz)[0],(*_recotauh_e)[0]); 
+      TLorentzVector tau2((*_recotauh_px)[1],(*_recotauh_py)[1],(*_recotauh_pz)[1],(*_recotauh_e)[1]); 
+      _dr_taus = tau1.DeltaR(tau2);
+    } 
+
+
+    _dR_lep_tau_ss = 0;
+    _dr_lep1_tau = 0;
+    _dr_lep2_tau = 0;
+    _max_lep_eta = 0;
+    _mT_lep1 = 0;
+    _mT_lep2 = 0;
+    _mTauTauVis = 0;
+    _mTauTauVis1 = 0;
+    _mTauTauVis2 = 0;
+    _mbb = 0;
+    _mbb_loose = 0;
+    _cosThetaS_hadTau = 0;
+    _HTT = 0;
+    _HadTop_pt = 0;
+    _Hj_tagger = 0;
+    _nBJetLoose = 0;
+    _nLightJet = 0;
+    _nBJetMedium = 0;
+    _massL = 0;*/
 
 
     ////////////////////////////////
@@ -1029,6 +1348,7 @@ void split_tree(TString filename_in, TString filename_out,
     if (sig_2tau_SR) {
       n_2tau_SR += 1;
       _category = 1010;
+      tree_2tau_SR->Fill();
     }
 
     bool sig_2tau_fake = 
@@ -1039,6 +1359,7 @@ void split_tree(TString filename_in, TString filename_out,
     if (sig_2tau_fake) {
       n_2tau_fake += 1;
       _category = 1020;
+      tree_2tau_fake->Fill();
     }
 
     bool sig_2tau_DY = 
@@ -1049,6 +1370,7 @@ void split_tree(TString filename_in, TString filename_out,
     if (sig_2tau_DY) {
       n_2tau_DY += 1;
       _category = 1040;
+      tree_2tau_DY->Fill();
     }
 
 
@@ -1073,6 +1395,7 @@ void split_tree(TString filename_in, TString filename_out,
     if (sig_1l1tau_SR) {
       n_1l1tau_SR += 1;
       _category = 2010;
+      tree_1l1tau_SR->Fill();
     }
 
     bool sig_1l1tau_fake = 
@@ -1082,6 +1405,7 @@ void split_tree(TString filename_in, TString filename_out,
     if (sig_1l1tau_fake) {
       n_1l1tau_fake += 1;
       _category = 2020;
+      tree_1l1tau_fake->Fill();
     }
   
 
@@ -1109,6 +1433,7 @@ void split_tree(TString filename_in, TString filename_out,
     if (sig_1l2tau_SR) {
       n_1l2tau_SR += 1;
       _category = 2110;
+      tree_1l2tau_SR->Fill();
     }
 
     bool sig_1l2tau_fake = 
@@ -1120,6 +1445,7 @@ void split_tree(TString filename_in, TString filename_out,
     if (sig_1l2tau_fake) {
       n_1l2tau_fake += 1;
       _category = 2120;
+      tree_1l2tau_fake->Fill();
     }
 
 
@@ -1162,11 +1488,13 @@ void split_tree(TString filename_in, TString filename_out,
     if (sig_2lss_SR_ttH) {
       n_2lss_SR_ttH += 1;
       _category = 3010;
+      tree_2lss_SR_ttH->Fill();
     }
 
     if (sig_2lss_SR_tH) {
       n_2lss_SR_tH += 1;
       _category = 3011;
+      tree_2lss_SR_tH->Fill();
     }
 
     bool sig_2lss_fake =
@@ -1185,11 +1513,13 @@ void split_tree(TString filename_in, TString filename_out,
     if (sig_2lss_fake_ttH) {
       n_2lss_fake_ttH += 1;
       _category = 3020;
+      tree_2lss_fake_ttH->Fill();
     }
 
     if (sig_2lss_fake_tH) {
       n_2lss_fake_tH += 1;
       _category = 3021;
+      tree_2lss_fake_tH->Fill();
     }
 
     bool sig_2lss_flip =
@@ -1210,11 +1540,13 @@ void split_tree(TString filename_in, TString filename_out,
     if (sig_2lss_flip_ttH) {
       n_2lss_flip_ttH += 1;
       _category = 3030;
+      tree_2lss_flip_ttH->Fill();
     }
 
     if (sig_2lss_flip_tH) {
       n_2lss_flip_tH += 1;
       _category = 3031;
+      tree_2lss_flip_tH->Fill();
     }
 
 
@@ -1244,6 +1576,7 @@ void split_tree(TString filename_in, TString filename_out,
     if (sig_2lss1tau_SR) {
       n_2lss1tau_SR += 1;
       _category = 3110;
+      tree_2lss1tau_SR->Fill();
     }
 
     bool sig_2lss1tau_fake =
@@ -1257,6 +1590,7 @@ void split_tree(TString filename_in, TString filename_out,
     if (sig_2lss1tau_fake) {
       n_2lss1tau_fake += 1;
       _category = 3120;
+      tree_2lss1tau_fake->Fill();
     }
 
     bool sig_2lss1tau_flip =
@@ -1272,6 +1606,7 @@ void split_tree(TString filename_in, TString filename_out,
     if (sig_2lss1tau_flip) {
       n_2lss1tau_flip += 1;
       _category = 3130;
+      tree_2lss1tau_flip->Fill();
     }
 
 
@@ -1292,6 +1627,7 @@ void split_tree(TString filename_in, TString filename_out,
     if (sig_2los1tau_SR) {
       n_2los1tau_SR += 1;
       _category = 3210;
+      tree_2los1tau_SR->Fill();
     }
 
 
@@ -1307,6 +1643,7 @@ void split_tree(TString filename_in, TString filename_out,
     if (sig_2los1tau_fake) {
       n_2los1tau_fake += 1;
       _category = 3220;
+      tree_2los1tau_fake->Fill();
     }
 
 
@@ -1340,6 +1677,7 @@ void split_tree(TString filename_in, TString filename_out,
     if (sig_2l2tau_SR) {
       n_2l2tau_SR += 1;
       _category = 3310;
+      tree_2l2tau_SR->Fill();
     }
 
     bool sig_2l2tau_fake =
@@ -1349,6 +1687,7 @@ void split_tree(TString filename_in, TString filename_out,
     if (sig_2l2tau_fake) {
       n_2l2tau_fake += 1;
       _category = 3320;
+      tree_2l2tau_fake->Fill();
     }
 
 
@@ -1384,11 +1723,13 @@ void split_tree(TString filename_in, TString filename_out,
     if (sig_3l_SR_ttH) {
       n_3l_SR_ttH += 1;
       _category = 4010;
+      tree_3l_SR_ttH->Fill();
     }
 
     if (sig_3l_SR_tH) {
       n_3l_SR_tH += 1;
       _category = 4011;
+      tree_3l_SR_tH->Fill();
     }
 
     bool sig_3l_fake_ttH =
@@ -1406,11 +1747,13 @@ void split_tree(TString filename_in, TString filename_out,
     if (sig_3l_fake_ttH) {
       n_3l_fake_ttH += 1;
       _category = 4020;
+      tree_3l_fake_ttH->Fill();
     }
 
     if (sig_3l_fake_tH) {
       n_3l_fake_tH += 1;
       _category = 4021;
+      tree_3l_fake_tH->Fill();
     }
 
 
@@ -1437,6 +1780,7 @@ void split_tree(TString filename_in, TString filename_out,
     if (sig_3l1tau_SR) {
       n_3l1tau_SR += 1;
       _category = 4110;
+      tree_3l1tau_SR->Fill();
     }
 
     bool sig_3l1tau_fake =
@@ -1447,6 +1791,7 @@ void split_tree(TString filename_in, TString filename_out,
     if (sig_3l1tau_fake) {
       n_3l1tau_fake += 1;
       _category = 4120;
+      tree_3l1tau_fake->Fill();
     }
 
 
@@ -1472,6 +1817,7 @@ void split_tree(TString filename_in, TString filename_out,
     if (sig_4l_SR) {
       n_4l_SR += 1;
       _category = 5010;
+      tree_4l_SR->Fill();
     }
 
     bool sig_4l_fake =
@@ -1481,6 +1827,7 @@ void split_tree(TString filename_in, TString filename_out,
     if (sig_4l_fake) {
       n_4l_fake += 1;
       _category = 5020;
+      tree_4l_fake->Fill();
     }
 
     //////////////////////////////
@@ -1500,6 +1847,7 @@ void split_tree(TString filename_in, TString filename_out,
     if (sig_ttW_CR_SR) {
       n_ttW_CR_SR += 1;
       _category = 6010;
+      tree_ttW_CR_SR->Fill();
     }
 
     bool sig_ttW_CR_fake =
@@ -1512,6 +1860,7 @@ void split_tree(TString filename_in, TString filename_out,
     if (sig_ttW_CR_fake) {
       n_ttW_CR_fake += 1;
       _category = 6020;
+      tree_ttW_CR_fake->Fill();
     }
 
     bool sig_ttW_CR_flip =
@@ -1525,6 +1874,7 @@ void split_tree(TString filename_in, TString filename_out,
     if (sig_ttW_CR_flip) {
       n_ttW_CR_flip += 1;
       _category = 6030;
+      tree_ttW_CR_flip->Fill();
     }
 
 
@@ -1549,10 +1899,10 @@ void split_tree(TString filename_in, TString filename_out,
       (_n_recoPFJet>=2 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) ) &&
       metLD_f;
 
-
     if (sig_ttZ_CR_SR) {
       n_ttZ_CR_SR += 1;
       _category = 7010;
+      tree_ttZ_CR_SR->Fill();
     }
 
     bool sig_ttZ_CR_fake =
@@ -1565,6 +1915,7 @@ void split_tree(TString filename_in, TString filename_out,
     if (sig_ttZ_CR_fake) {
       n_ttZ_CR_fake += 1;
       _category = 7020;
+      tree_ttZ_CR_fake->Fill();
     }
 
     ////////////////////////////////
@@ -1588,10 +1939,10 @@ void split_tree(TString filename_in, TString filename_out,
       (_n_recoPFJet_btag_medium==0 || _n_recoPFJet_btag_loose<2) &&
       metLD_f;
 
-
     if (sig_WZ_CR_SR) {
       n_WZ_CR_SR += 1;
       _category = 8010;
+      tree_WZ_CR_SR->Fill();
     }
 
     bool sig_WZ_CR_fake =
@@ -1604,6 +1955,7 @@ void split_tree(TString filename_in, TString filename_out,
     if (sig_WZ_CR_fake) {
       n_WZ_CR_fake += 1;
       _category = 8020;
+      tree_WZ_CR_fake->Fill();
     }
 
 
@@ -1629,6 +1981,7 @@ void split_tree(TString filename_in, TString filename_out,
     if (sig_ZZ_CR_SR) {
       n_ZZ_CR_SR += 1;
       _category = 9010;
+      tree_ZZ_CR_SR->Fill();
     }
 
     bool sig_ZZ_CR_fake =
@@ -1638,8 +1991,8 @@ void split_tree(TString filename_in, TString filename_out,
     if (sig_ZZ_CR_fake) {
       n_ZZ_CR_fake += 1;
       _category = 9020;
+      tree_ZZ_CR_fake->Fill();
     }
-
 
   }
 
@@ -1654,7 +2007,6 @@ void split_tree(TString filename_in, TString filename_out,
   cout<<" "<<endl;
   cout<<"4l SR: "<<n_4l_SR<<endl;
   cout<<"4l fake: "<<n_4l_fake<<endl;
-  cout<<" "<<endl;
   cout<<" "<<endl;
   cout<<"2tau SR: "<<n_2tau_SR<<endl;
   cout<<"2tau fake: "<<n_2tau_fake<<endl;
@@ -1679,7 +2031,6 @@ void split_tree(TString filename_in, TString filename_out,
   cout<<"3l1tau SR: "<<n_3l1tau_SR<<endl;
   cout<<"3l1tau fake: "<<n_3l1tau_fake<<endl;
   cout<<" "<<endl;
-  cout<<" "<<endl;
   cout<<"ttW SR: "<<n_ttW_CR_SR<<endl;
   cout<<"ttW fake: "<<n_ttW_CR_fake<<endl;
   cout<<"ttW flip: "<<n_ttW_CR_flip<<endl;
@@ -1692,6 +2043,7 @@ void split_tree(TString filename_in, TString filename_out,
   cout<<" "<<endl;
   cout<<"ZZ SR: "<<n_ZZ_CR_SR<<endl;
   cout<<"ZZ fake: "<<n_ZZ_CR_fake<<endl;
+  cout<<" "<<endl;
 
   f_new->cd();
   
