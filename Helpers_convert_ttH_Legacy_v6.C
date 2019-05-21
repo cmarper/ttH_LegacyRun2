@@ -2019,6 +2019,7 @@ void convert_tree(
   vector<int> *_genpart_HZDecayMode;
   vector<int> *_genpart_TauGenDecayMode;
   vector<int> *_genpart_flags;
+  vector<int> *_genpart_status;
 
   tree->SetBranchAddress("EventNumber",&_EventNumber);
   tree->SetBranchAddress("RunNumber",&_RunNumber);
@@ -2145,7 +2146,8 @@ void convert_tree(
     tree->SetBranchAddress("genpart_HZDecayMode",&_genpart_HZDecayMode);
     tree->SetBranchAddress("genpart_TauGenDecayMode",&_genpart_TauGenDecayMode);
     tree->SetBranchAddress("genpart_flags",&_genpart_flags);
-  
+    tree->SetBranchAddress("genpart_status",&_genpart_status); 
+ 
   }
 
 
@@ -3430,7 +3432,8 @@ void convert_tree(
     tree_new->Branch("genpart_TauGenDecayMode",&_genpart_TauGenDecayMode_dummy);
     tree_new->Branch("genpart_TauGenDetailedDecayMode",&_genpart_TauGenDetailedDecayMode_dummy);
     tree_new->Branch("genpart_flags",&_genpart_flags_dummy);
-     
+    tree_new->Branch("genpart_status",&_genpart_status_dummy);    
+ 
     tree_new->Branch("genjet_px",&_genjet_px_dummy);
     tree_new->Branch("genjet_py",&_genjet_py_dummy);
     tree_new->Branch("genjet_pz",&_genjet_pz_dummy);
@@ -4399,6 +4402,7 @@ void convert_tree(
     _genpart_WDecayMode = 0;
     _genpart_TauGenDecayMode = 0;
     _genpart_flags = 0;
+    _genpart_status = 0;
 
     _EventNumber = -1;
     _RunNumber = -1;
@@ -6651,28 +6655,49 @@ void convert_tree(
       for(unsigned int i_mu=0; i_mu<reco_mus.size(); i_mu++){
 
         TLorentzVector mu = reco_mus[i_mu].second;
+        float pt = (_recomu_pt)[i_mu];
+	float conept = (_recomu_conept)[i_mu];
 
         float dRmin = 1.0;
         int genMatchInd = -1;
 
         for(unsigned int i_gen=0; i_gen<(*_genpart_pdg).size();i_gen++){
-        
+
+	  if(!( abs((*_genpart_pdg)[i_gen])==13)) continue;
+
+	  TLorentzVector gen((*_genpart_px)[i_gen],(*_genpart_py)[i_gen],(*_genpart_pz)[i_gen],(*_genpart_e)[i_gen]);        
+
+          // check generator flags
           int flags = (*_genpart_flags)[i_gen];
+          bool isprompt = flags&1;
+          bool isdirectprompttau = (flags>>5)&1;
+          if( !(isprompt || isdirectprompttau) ) continue;
 
-          if( !( abs((*_genpart_pdg)[i_gen])==13 && _genpart_pt[i_gen]>8 && (flags&1 || (flags>>5)&1) ) ) continue;
+	  // check if particle is stable
+	  bool isstable = (*_genpart_status)[i_gen]==1;
+          if( !isstable) continue;
+ 	
+	  // check if particle has mother H/W/Z
+          bool hasHmother = (*_genpart_HMothInd)[i_gen]>0;
+          bool hasWmother = (*_genpart_WMothInd)[i_gen]>0;
+          bool hasZmother = (*_genpart_ZMothInd)[i_gen]>0;
+          if( !(hasHmother || hasWmother || hasZmother) ) continue;
+    
+          // check delta_pT
+          float delta_pt = (fabs(pt - gen.Pt()) / gen.Pt());
+          if(delta_pt > 0.5) continue;
 
-          TLorentzVector gen((*_genpart_px)[i_gen],(*_genpart_py)[i_gen],(*_genpart_pz)[i_gen],(*_genpart_e)[i_gen]);
-
+	  // check dR
           float dR = mu.DeltaR(gen);    
-          if(dR<0.2 && dR<dRmin){
+          if(dR<dRmin){
             dRmin = dR;
-            if(flags&1) genMatchInd = 2;
-            else if((flags>>5)&1) genMatchInd = 4;         
+            if(isprompt) genMatchInd = 2;
+            else if(isdirectprompttau) genMatchInd = 4;         
           }
 
         }
 
-        _recomu_isGenMatched.push_back(dRmin<0.2);
+        _recomu_isGenMatched.push_back(dRmin<0.3);
         _recomu_genMatchInd.push_back(genMatchInd);
 
       }
@@ -6681,28 +6706,50 @@ void convert_tree(
       for(unsigned int i_ele=0; i_ele<reco_eles.size(); i_ele++){
 
         TLorentzVector ele = reco_eles[i_ele].second;
+        float pt = (_recoele_pt)[i_ele];
+        float conept = (_recoele_conept)[i_ele];
 
         float dRmin = 1.0;
         int genMatchInd = -1;
 
         for(unsigned int i_gen=0; i_gen<(*_genpart_pdg).size();i_gen++){
           
+          //for ele, also try to match to photons (for conversion bkg)
+	  if( !( abs((*_genpart_pdg)[i_gen])==11 || abs((*_genpart_pdg)[i_gen])==22 )) continue;
+
+	  TLorentzVector gen((*_genpart_px)[i_gen],(*_genpart_py)[i_gen],(*_genpart_pz)[i_gen],(*_genpart_e)[i_gen]);
+
+	  //check the generator flags
           int flags = (*_genpart_flags)[i_gen];
+          bool isprompt = flags&1;
+          bool isdirectprompttau = (flags>>5)&1;
+          if( !(isprompt || isdirectprompttau) ) continue;
 
-          if( !( abs((*_genpart_pdg)[i_gen])==11 && _genpart_pt[i_gen]>8 && (flags&1 || (flags>>5)&1) ) ) continue;
+	  //check if particle is stable
+	  bool isstable = (*_genpart_status)[i_gen]==1;
+          if( !isstable) continue;
 
-          TLorentzVector gen((*_genpart_px)[i_gen],(*_genpart_py)[i_gen],(*_genpart_pz)[i_gen],(*_genpart_e)[i_gen]);
+	  //check if particle has mother H/W/Z
+	  bool hasHmother = (*_genpart_HMothInd)[i_gen]>0;
+          bool hasWmother = (*_genpart_WMothInd)[i_gen]>0;
+          bool hasZmother = (*_genpart_ZMothInd)[i_gen]>0;
+          if( !(hasHmother || hasWmother || hasZmother) ) continue;
 
-          float dR = ele.DeltaR(gen);  
-          if(dR<0.2 && dR<dRmin){
+	  //check delta_pT
+	  float delta_pt = (fabs(pt - gen.Pt()) / gen.Pt());
+          if(delta_pt > 0.5) continue;
+
+	  //check dR
+	  float dR = ele.DeltaR(gen);
+          if(dR<dRmin){
             dRmin = dR;
-            if(flags&1) genMatchInd = 1;
-            else if((flags>>5)&1) genMatchInd = 3;
+            if(isprompt) genMatchInd = 2;
+            else if(isdirectprompttau) genMatchInd = 4;
           }
 
         }
 
-        _recoele_isGenMatched.push_back(dRmin<0.2);
+        _recoele_isGenMatched.push_back(dRmin<0.3);
         _recoele_genMatchInd.push_back(genMatchInd);
 
       }
@@ -6711,35 +6758,49 @@ void convert_tree(
       for(unsigned int i_lep=0; i_lep<reco_leptons.size(); i_lep++){
 
         TLorentzVector lep = reco_leptons[i_lep].second;
+	float pt = (_recolep_pt)[i_lep];
+        float conept = (_recolep_conept)[i_lep];
 
         float dRmin = 1.0;
         int genMatchInd = -1;
 
         for(unsigned int i_gen=0; i_gen<(*_genpart_pdg).size();i_gen++){
-    
-          int flags = (*_genpart_flags)[i_gen];
 
-          if( !( abs((*_genpart_pdg)[i_gen])==abs(_recolep_pdg[i_lep]) && _genpart_pt[i_gen]>8 && (flags&1 || (flags>>5)&1) ) ) continue;
+	  if( !( abs((*_genpart_pdg)[i_gen])==abs(_recolep_pdg[i_lep]) || abs((*_genpart_pdg)[i_gen])==22 )) continue;
 
           TLorentzVector gen((*_genpart_px)[i_gen],(*_genpart_py)[i_gen],(*_genpart_pz)[i_gen],(*_genpart_e)[i_gen]);
 
-          float dR = lep.DeltaR(gen);
+	  //check the generator flags
+	  int flags = (*_genpart_flags)[i_gen];
+          bool isprompt = flags&1;
+          bool isdirectprompttau = (flags>>5)&1;
+          if( !(isprompt || isdirectprompttau) ) continue;
+          
+	  //check if particle is stable
+	  bool isstable = (*_genpart_status)[i_gen]==1;
+          if( !isstable) continue;
 
-          if(dR<0.2 && dR<dRmin){
+          //check if particle has mother H/W/Z
+          bool hasHmother = (*_genpart_HMothInd)[i_gen]>0;
+          bool hasWmother = (*_genpart_WMothInd)[i_gen]>0;
+          bool hasZmother = (*_genpart_ZMothInd)[i_gen]>0;
+          if( !(hasHmother || hasWmother || hasZmother) ) continue;
+
+	  //check delta_pT
+          float delta_pt = (fabs(pt - gen.Pt()) / gen.Pt());
+          if(delta_pt > 0.5) continue;
+          
+	  //check dR
+	  float dR = lep.DeltaR(gen);
+          if(dR<dRmin){
             dRmin = dR;
-            if(abs(_genlep_pdg[i_gen])==11){
-              if(flags&1) genMatchInd = 1;
-              else if((flags>>5)&1) genMatchInd = 3;
-            }
-            else if(abs(_genlep_pdg[i_gen])==13){
-              if(flags&1) genMatchInd = 2;
-              else if((flags>>5)&1) genMatchInd = 4;
-            }     
-          }
+            if(isprompt) genMatchInd = 2;
+            else if(isdirectprompttau) genMatchInd = 4;
+          }	
 
         }   
 
-        _recolep_isGenMatched.push_back(dRmin<0.2);
+        _recolep_isGenMatched.push_back(dRmin<0.3);
         _recolep_genMatchInd.push_back(genMatchInd);
 
       }
@@ -6753,26 +6814,49 @@ void convert_tree(
         int genMatchInd = -1;
 
         for(unsigned int i_gen=0; i_gen<(*_genpart_pdg).size();i_gen++){
-    
-          int flags = (*_genpart_flags)[i_gen];
-          int apdg = abs((*_genpart_pdg)[i_gen]);
 
+          // require tau matched to electron, muon or tauh
+	  int apdg = abs((*_genpart_pdg)[i_gen]);
           if( !( apdg==11 || apdg==13 || apdg==66615) ) continue;
-
+		
+          // require isPrompt
+          int flags = (*_genpart_flags)[i_gen];
           if( apdg==11 || apdg==13){
-            if( !(_genpart_pt[i_gen]>8 && (flags&1 || (flags>>5)&1)) ) continue;
-
+             if( !( flags&1 || (flags>>5)&1) ) continue;
           }
           else if(apdg==66615){
-            int flags_tau = (*_genpart_flags)[(*_genpart_TauMothInd)[i_gen]];
-            if( !(_genpart_pt[i_gen]>15 && flags_tau&1) ) continue;
+	    int flags_tau = (*_genpart_flags)[(*_genpart_TauMothInd)[i_gen]];
+	    if( !(flags_tau&1) ) continue; //!isprompt
+          }
+
+          // require mother is H,W or Z
+          if( apdg==11 || apdg==13){
+            bool hasHmother = ((*_genpart_HMothInd)[i_gen]>0);
+            bool hasWmother = ((*_genpart_WMothInd)[i_gen]>0);
+            bool hasZmother = ((*_genpart_ZMothInd)[i_gen]>0);
+            if( !(hasHmother || hasWmother || hasZmother) ) continue;
+          }
+          else if(apdg==66615){
+            bool hasHmother = ((*_genpart_HMothInd)[(*_genpart_TauMothInd)[i_gen]]>0);
+            bool hasWmother = ((*_genpart_WMothInd)[(*_genpart_TauMothInd)[i_gen]]>0);
+            bool hasZmother = ((*_genpart_ZMothInd)[(*_genpart_TauMothInd)[i_gen]]>0);
+            if( !(hasHmother || hasWmother || hasZmother) ) continue;
           }
 
           TLorentzVector gen((*_genpart_px)[i_gen],(*_genpart_py)[i_gen],(*_genpart_pz)[i_gen],(*_genpart_e)[i_gen]);
 
+          // require delta_pt<0.5/1.0
+          float delta_pt = (fabs(tauh.Pt() - gen.Pt()) / gen.Pt());
+          if( apdg==11 || apdg==13 ) {
+	     if (delta_pt>0.5) continue;
+          }
+          else if(apdg==66615){
+	     if (delta_pt>1.0) continue;
+          }
 
+	  // require dR<0.3
           float dR = tauh.DeltaR(gen);
-          if(dR<0.2 && dR<dRmin){
+          if(dR<dRmin){
             dRmin = dR;
             if(apdg==11){
               if(flags&1) genMatchInd = 1;
@@ -6788,7 +6872,7 @@ void convert_tree(
 
         }
 
-        _recotauh_isGenMatched.push_back(dRmin<0.2);
+        _recotauh_isGenMatched.push_back(dRmin<0.3);
         _recotauh_genMatchInd.push_back(genMatchInd);
 
       }
