@@ -353,7 +353,7 @@ void convert_tree(
 
   else if(sample=="sync17"){
 
-    file="sync_ntuple_converted_ttHNonbb_2017_v5";
+    file="sync_ntuple_converted_ttHNonbb_2017_v6";
     dir_out="/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2017/";
     list.push_back("/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_LLRHtautau/2017/sync_ntuple_LLRHtautau_ttHNonbb_2017_v4.root");
 
@@ -361,7 +361,7 @@ void convert_tree(
 
   else if(sample=="sync18"){
 
-    file="sync_ntuple_converted_ttHNonbb_2018_v4";
+    file="sync_ntuple_converted_ttHNonbb_2018_v5";
     dir_out="/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2018/";
     list.push_back("/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_LLRHtautau/2018/sync_ntuple_LLRHtautau_ttHNonbb_2018_v3.root");
 
@@ -4639,7 +4639,7 @@ void convert_tree(
 
       if(conept>10 && _recomu_leptonMVA[i_mu]>=0.90 && _recomu_jetDeepCSV[i_mu]<0.4941) 
 	  isfakeable=true;	
-      else if(conept>10 && _recomu_leptonMVA[i_mu]<0.90 && _recomu_jetDeepCSV[i_mu]<0.07 && lepMVA_jetPtRatio>0.6 && segm_comp > 0.3)
+      else if(conept>10 && _recomu_leptonMVA[i_mu]<0.90 && _recomu_jetDeepCSV[i_mu]<0.07 && lepMVA_jetPtRatio>0.6 && segm_comp>0.3)
 	  isfakeable=true;	
 
       _recomu_isfakeable.push_back(isfakeable);
@@ -5958,7 +5958,7 @@ void convert_tree(
     }
 
     _HTmiss = HTmiss_tlv.Pt();    
-    _ETmissLD = _PFMET*0.00397 + _HTmiss*0.00265;
+    _ETmissLD = _PFMET*0.6 + _HTmiss*0.4;
 
 
     //////////////////////////////////////////

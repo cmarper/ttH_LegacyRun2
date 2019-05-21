@@ -810,7 +810,7 @@ void split_tree(TString filename_in, TString filename_out,
     h->Fill(1);
 
     if(i%10000==0) 
-      cout<<"i="<<i<<endl;
+      //cout<<"i="<<i<<endl;
 
     //new branches
 
@@ -1125,11 +1125,10 @@ void split_tree(TString filename_in, TString filename_out,
 
       }
 
-      _n_fakeable_lep = _recolep_fakeable_pt.size();
-      _n_tight_lep = _recolep_tight_pt.size();
-
-
     }
+
+    _n_fakeable_lep = _recolep_fakeable_pt.size();
+    _n_tight_lep = _recolep_tight_pt.size();
 
 
     ////////////////////////////////
@@ -1186,8 +1185,6 @@ void split_tree(TString filename_in, TString filename_out,
     _n_tight_WPM_tau = _recotauh_tight_WPM_pt.size();
 
     _n_light_jet = (_n_recoPFJet - _n_recoPFJet_btag_loose) + _n_recoPFFwdJet;
-
-
 
 
 
@@ -1379,7 +1376,7 @@ void split_tree(TString filename_in, TString filename_out,
         TLorentzVector lep2((*_recolep_px)[i_lep2],(*_recolep_py)[i_lep2],(*_recolep_pz)[i_lep2],(*_recolep_e)[i_lep2]);
         float m_ll = (lep1 + lep2).M();
 
-        if((*_recolep_pdg)[i_lep1]==-(*_recolep_pdg)[i_lep2] && (*_recolep_isfakeable)[i_lep1]==1 && (*_recolep_isfakeable)[i_lep2]) 
+        if((*_recolep_pdg)[i_lep1]==-(*_recolep_pdg)[i_lep2] && ((*_recolep_isfakeable)[i_lep1] && (*_recolep_isfakeable)[i_lep2])) 
           SFOS_fakeable_pair=true;
 
         if(m_ll<12) 
@@ -1389,12 +1386,11 @@ void split_tree(TString filename_in, TString filename_out,
           SFOS_loose_pair=true;
           if(fabs(m_ll-91.2)<10) {
             inv_mass_Z=false;
-            if(abs((*_recolep_pdg)[i_lep1])==11 && abs((*_recolep_pdg)[i_lep2])==11){
+            if(abs((*_recolep_pdg)[i_lep1])==11 && abs((*_recolep_pdg)[i_lep2])==11 && (*_recolep_isfakeable)[i_lep1] && (*_recolep_isfakeable)[i_lep2]){
               inv_mass_Zee=false;
             }
           }
         }
-
       }
     }
 
@@ -1443,18 +1439,18 @@ void split_tree(TString filename_in, TString filename_out,
 
     bool sig_2tau_SR = 
       sig_2tau_base &&
-      (_recotauh_tight_WPM_charge[0]*_recotauh_tight_WPM_charge[1]<0) &&
+      ((_recotauh_tight_WPM_charge[0]*_recotauh_tight_WPM_charge[1])<0) &&
       (_n_recoPFJet>=4 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) ) &&
       (_recotauh_tight_WPM_isGenMatched[0] && _recotauh_tight_WPM_isGenMatched[1]);
 
     bool sig_2tau_fake = 
       sig_2tau_base &&
-      (_recotauh_tight_WPM_charge[0]*_recotauh_tight_WPM_charge[1]>0) &&
+      ((_recotauh_tight_WPM_charge[0]*_recotauh_tight_WPM_charge[1])>0) &&
       (_n_recoPFJet>=4 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) );
 
     bool sig_2tau_DY = 
       sig_2tau_base &&
-      (_recotauh_tight_WPM_charge[0]*_recotauh_tight_WPM_charge[1]<0) &&
+      ((_recotauh_tight_WPM_charge[0]*_recotauh_tight_WPM_charge[1])<0) &&
       (_n_recoPFJet>=2);
 
     ////////////////////////////////
@@ -1472,12 +1468,12 @@ void split_tree(TString filename_in, TString filename_out,
 
     bool sig_1l1tau_SR = 
       sig_1l1tau_base &&
-      (_recotauh_tight_WPM_charge[0]*_recolep_tight_charge[0]<0) &&
+      ((_recotauh_tight_WPM_charge[0]*_recolep_tight_charge[0])<0) &&
       _recotauh_tight_WPM_isGenMatched[0] && _recolep_tight_isGenMatched[0];
 
     bool sig_1l1tau_fake = 
         sig_1l1tau_base &&
-        (_recotauh_tight_WPM_charge[0]*_recolep_tight_charge[0]>0);
+        ((_recotauh_tight_WPM_charge[0]*_recolep_tight_charge[0])>0);
   
     ////////////////////////////////
     /////////// 1l2tau  ////////////
@@ -1513,11 +1509,10 @@ void split_tree(TString filename_in, TString filename_out,
 
     bool metLD_e = true;
     if(abs(_recolep_fakeable_pdg[0])==11 && abs(_recolep_fakeable_pdg[1])==11) 
-      metLD_e = (_ETmissLD>0.3); 
+      metLD_e = (_ETmissLD>30); 
 
-    bool jets_ttH = (_n_recoPFJet>=4 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) );
-    bool jets_tH = (_n_recoPFJet_btag_medium>=1 &&  _n_light_jet>=1) && 
-      !(_n_recoPFJet>=4 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) );
+    bool pass_njet_2l_ttH = (_n_recoPFJet>=4 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) );
+    bool pass_njet_2l_tH = (_n_recoPFJet_btag_medium>=1 &&  _n_light_jet>=1) && !pass_njet_2l_ttH;
 
     bool sig_2lss_base = //passTriggerMatch &&
       (_n_fakeable_lep>=2) &&
@@ -1532,44 +1527,44 @@ void split_tree(TString filename_in, TString filename_out,
     bool sig_2lss_SR =
       sig_2lss_base &&
       (_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1]) &&
-      (_recolep_fakeable_charge[0]*_recolep_fakeable_charge[1]>0) &&
+      ((_recolep_fakeable_charge[0]*_recolep_fakeable_charge[1])>0) &&
       _recolep_fakeable_isGenMatched[0] && _recolep_fakeable_isGenMatched[1];
 
     bool sig_2lss_SR_ttH =
       sig_2lss_SR &&
-      jets_ttH;
+      pass_njet_2l_ttH;
 
     bool sig_2lss_SR_tH =
       sig_2lss_SR &&
-      jets_tH;
+      pass_njet_2l_tH;
 
     bool sig_2lss_fake =
       sig_2lss_base &&
-      (_recolep_fakeable_charge[0]*_recolep_fakeable_charge[1]>0) &&
+      ((_recolep_fakeable_charge[0]*_recolep_fakeable_charge[1])>0) &&
       !((_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1]));
 
     bool sig_2lss_fake_ttH =
       sig_2lss_fake &&
-      jets_ttH;
+      pass_njet_2l_ttH;
 
     bool sig_2lss_fake_tH =
       sig_2lss_fake &&
-      jets_tH;
+      pass_njet_2l_tH;
 
     bool sig_2lss_flip =
       sig_2lss_base &&
-      (_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1]) &&
-      (_recolep_fakeable_charge[0]*_recolep_fakeable_charge[1]<0) &&
+      ((_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1])) &&
+      ((_recolep_fakeable_charge[0]*_recolep_fakeable_charge[1])<0) &&
       (abs(_recolep_fakeable_pdg[0])==11 || abs(_recolep_fakeable_pdg[1])==11) &&
       _recolep_fakeable_isGenMatched[0] && _recolep_fakeable_isGenMatched[1];
 
     bool sig_2lss_flip_ttH =
       sig_2lss_flip &&
-      jets_ttH;
+      pass_njet_2l_ttH;
 
     bool sig_2lss_flip_tH =
       sig_2lss_flip &&
-      jets_tH;
+      pass_njet_2l_tH;
 
     ////////////////////////////////
     ////////// 2lss1tau  ///////////
@@ -1589,17 +1584,17 @@ void split_tree(TString filename_in, TString filename_out,
     bool sig_2lss1tau_SR =
       sig_2lss1tau_base &&
       (_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1]) &&
-      (_recolep_fakeable_charge[0]*_recolep_fakeable_charge[1]>0) &&
-      (_recolep_fakeable_charge[0]*_recotauh_tight_WPM_charge[0]<0) &&
+      ((_recolep_fakeable_charge[0]*_recolep_fakeable_charge[1])>0) &&
+      ((_recolep_fakeable_charge[0]*_recotauh_tight_WPM_charge[0])<0) &&
       _recolep_fakeable_isGenMatched[0] && _recolep_fakeable_isGenMatched[1] &&
       (_n_recoPFJet>=3 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) );
 
     bool sig_2lss1tau_fake =
       sig_2lss1tau_base &&
       (_n_recoPFJet>=3 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) ) &&
-      (_recolep_fakeable_charge[0]*_recolep_fakeable_charge[1]>0) &&
+      ( (_recolep_fakeable_charge[0]*_recolep_fakeable_charge[1])>0 ) &&
       (_n_tight_WPL_tau>=1) &&
-      (_recolep_fakeable_charge[0]*_recotauh_tight_WPM_charge[0]<0) &&
+      ( (_recolep_fakeable_charge[0]*_recotauh_tight_WPM_charge[0])<0 ) &&
       !(_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1]);
 
 
@@ -1611,7 +1606,7 @@ void split_tree(TString filename_in, TString filename_out,
       (_recolep_fakeable_charge[0]*_recolep_fakeable_charge[1]<0) &&
       _recolep_fakeable_isGenMatched[0] && _recolep_fakeable_isGenMatched[1] &&
       (_n_tight_WPL_tau<=1) &&
-      (_recolep_fakeable_charge[0]*_recotauh_tight_WPL_charge[0]>0 || _recolep_fakeable_charge[1]*_recotauh_tight_WPL_charge[0]>0);
+      ( (_recolep_fakeable_charge[0]*_recotauh_tight_WPL_charge[0])>0 || (_recolep_fakeable_charge[1]*_recotauh_tight_WPL_charge[0])>0);
 
 
     ////////////////////////////////
@@ -1625,7 +1620,7 @@ void split_tree(TString filename_in, TString filename_out,
       (_n_tight_WPM_tau>=1) &&
       (_recotauh_tight_WPM_pt[0]>=40) &&
       inv_mass_lep_pairs &&
-      (_ETmissLD>0.3) &&
+      (_ETmissLD>30) &&
       (_recolep_tight_isGenMatched[0] && _recolep_tight_isGenMatched[1] && _recotauh_tight_WPM_isGenMatched[0]);
 
 
@@ -1636,7 +1631,7 @@ void split_tree(TString filename_in, TString filename_out,
       (_n_recotauh>=1) &&
       ((*_recotauh_pt)[0]>=40) &&
       inv_mass_lep_pairs &&
-      (_ETmissLD>0.3);
+      (_ETmissLD>30);
 
 
     ////////////////////////////////
@@ -1645,8 +1640,8 @@ void split_tree(TString filename_in, TString filename_out,
 
     bool metLD_f = true;
     if (_n_recoPFJet<=3){
-      if(SFOS_fakeable_pair) metLD_f = _ETmissLD>0.45;
-      else if (!SFOS_fakeable_pair) metLD_f = _ETmissLD>0.3;
+      if(SFOS_fakeable_pair) metLD_f = _ETmissLD>45;
+      else if (!SFOS_fakeable_pair) metLD_f = _ETmissLD>30;
     }
 
     bool sig_2l2tau_base = //passTriggerMatch &&
@@ -1657,7 +1652,7 @@ void split_tree(TString filename_in, TString filename_out,
       inv_mass_Z &&
       (_n_fakeable_tau>=2) &&
       metLD_f &&
-      ( (*_recotauh_charge)[0] + (*_recotauh_charge)[1] + _recolep_fakeable_charge[0] + _recolep_fakeable_charge[1] == 0) &&
+      ( ((*_recotauh_charge)[0]+(*_recotauh_charge)[1]+_recolep_fakeable_charge[0]+_recolep_fakeable_charge[1]) == 0) &&
       (_n_recoPFJet>=2 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) );
 
     bool sig_2l2tau_SR =
@@ -1675,42 +1670,46 @@ void split_tree(TString filename_in, TString filename_out,
     //////////// 3l  /////////////
     //////////////////////////////
 
+    //Overall good
+
     bool sig_3l_base = //passTriggerMatch &&
       (_n_fakeable_lep>=3) &&
       (_recolep_fakeable_conept[0]>25 && _recolep_fakeable_conept[1]>15 && _recolep_fakeable_conept[2]>10) &&
       inv_mass_lep_pairs &&
       inv_mass_Z &&
       (_n_tight_WPL_tau==0) &&
-      ( abs( _recolep_fakeable_charge[0]+_recolep_fakeable_charge[1]+_recolep_fakeable_charge[2] ) == 1 ) &&
+      ( abs(_recolep_fakeable_charge[0]+_recolep_fakeable_charge[1]+_recolep_fakeable_charge[2]) == 1 ) &&
       inv_mass_4l &&
       (_n_tight_lep<=3);
 
     bool sig_3l_SR =
       sig_3l_base &&
-      (_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1] && _recolep_fakeable_ismvasel[2]) &&
-      (_recolep_fakeable_isGenMatched[0] && _recolep_fakeable_isGenMatched[1] && _recolep_fakeable_isGenMatched[2]);
+      (_recolep_fakeable_ismvasel[0]==1 && _recolep_fakeable_ismvasel[1]==1 && _recolep_fakeable_ismvasel[2]==1) &&
+      (_recolep_fakeable_isGenMatched[0]==1 && _recolep_fakeable_isGenMatched[1]==1 && _recolep_fakeable_isGenMatched[2]==1);
+
+    bool pass_njet_3l_ttH = (_n_recoPFJet>=2 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) ) && metLD_f;
 
     bool sig_3l_SR_ttH =
       sig_3l_SR &&
-      (_n_recoPFJet>=2 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) ) &&
-      metLD_f;
+      pass_njet_3l_ttH;
+
+    bool pass_njet_3l_tH = (_n_recoPFJet_btag_medium>=1 && _n_light_jet>=1) && !pass_njet_3l_ttH;
 
     bool sig_3l_SR_tH =
       sig_3l_SR &&
-      (_n_recoPFJet_btag_medium>=1 && _n_light_jet>=1) &&
-      !(_n_recoPFJet>=2 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) );
+      pass_njet_3l_tH;
+
+    bool sig_3l_fake =
+      sig_3l_base &&
+      !(_recolep_fakeable_ismvasel[0]==1 && _recolep_fakeable_ismvasel[1]==1 && _recolep_fakeable_ismvasel[2]==1);
 
     bool sig_3l_fake_ttH =
-      sig_3l_base &&
-      (metLD_f || (_n_recoPFJet_btag_medium>=1 && _n_light_jet>=1)) &&
-      ( _n_recoPFJet>=2 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) ) &&
-      !(_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1] && _recolep_fakeable_ismvasel[2]);
+      sig_3l_fake &&
+      pass_njet_3l_ttH;
 
     bool sig_3l_fake_tH =
-      sig_3l_base &&
-      (metLD_f || (_n_recoPFJet_btag_medium>=1 && _n_light_jet>=1)) &&
-      !( _n_recoPFJet>=2 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) ) &&
-      !(_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1] && _recolep_fakeable_ismvasel[2]);
+      sig_3l_fake &&
+      pass_njet_3l_tH;
 
     ////////////////////////////////
     ////////// 3l1tau  /////////////
@@ -1723,7 +1722,7 @@ void split_tree(TString filename_in, TString filename_out,
       inv_mass_Z &&
       (_n_recotauh>=1) &&
       metLD_f &&
-      ( (*_recotauh_charge)[0] + (*_recotauh_charge)[1] + _recolep_fakeable_charge[0] + _recolep_fakeable_charge[1] == 0) &&
+      ( ((*_recotauh_charge)[0]+_recolep_fakeable_charge[0]+_recolep_fakeable_charge[1]+_recolep_fakeable_charge[2]) == 0) &&
       ( _n_recoPFJet>=2 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) );
 
     bool sig_3l1tau_SR =
@@ -1742,13 +1741,15 @@ void split_tree(TString filename_in, TString filename_out,
     //////////// 4l  /////////////
     //////////////////////////////
 
+    //To check: event 136224 fails 4l selection because 4th lepton is not fakeable
+
     bool sig_4l_base = //passTriggerMatch &&
       (_n_fakeable_lep>=4) &&
-      (_recolep_fakeable_conept[0]>25 && _recolep_fakeable_conept[1]>15 && _recolep_fakeable_conept[2]>15  && _recolep_fakeable_conept[3]>10) &&
+      (_recolep_fakeable_conept[0]>25 && _recolep_fakeable_conept[1]>15 && _recolep_fakeable_conept[2]>15 && _recolep_fakeable_conept[3]>10) &&
       inv_mass_lep_pairs &&
       inv_mass_Z &&
       metLD_f &&
-      ( _recolep_fakeable_charge[0] + _recolep_fakeable_charge[1] == 0 + _recolep_fakeable_charge[2] + _recolep_fakeable_charge[3] == 0) &&
+      ( (_recolep_fakeable_charge[0]+_recolep_fakeable_charge[1]+_recolep_fakeable_charge[2]+_recolep_fakeable_charge[3]) == 0) &&
       ( _n_recoPFJet>=2 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) ) && 
       inv_mass_4l;
 
@@ -1759,8 +1760,7 @@ void split_tree(TString filename_in, TString filename_out,
 
     bool sig_4l_fake =
       sig_4l_base &&
-      !(_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1] && _recolep_fakeable_ismvasel[2] && _recolep_fakeable_ismvasel[3]);
-
+      !(_recolep_fakeable_ismvasel[0]==1 && _recolep_fakeable_ismvasel[1]==1 && _recolep_fakeable_ismvasel[2]==1 && _recolep_fakeable_ismvasel[3]==1);  
 
     //////////////////////////////
     //////////// ttW  ////////////
@@ -1772,21 +1772,21 @@ void split_tree(TString filename_in, TString filename_out,
     bool sig_ttW_CR_SR =
       sig_ttW_CR_base &&
       (_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1]) &&
-      (_recolep_fakeable_charge[0]*_recolep_fakeable_charge[1]>0) &&
+      ( (_recolep_fakeable_charge[0]*_recolep_fakeable_charge[1])>0 ) &&
       _recolep_fakeable_isGenMatched[0] && _recolep_fakeable_isGenMatched[1] &&
       (_n_recoPFJet==3 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) );
 
     bool sig_ttW_CR_fake =
       sig_ttW_CR_base &&
       !(_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1]) &&
-      (_recolep_fakeable_charge[0]*_recolep_fakeable_charge[1]>0) &&
+      ( (_recolep_fakeable_charge[0]*_recolep_fakeable_charge[1]) >0) &&
       _recolep_fakeable_isGenMatched[0] && _recolep_fakeable_isGenMatched[1] &&
       (_n_recoPFJet==3 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) );
 
     bool sig_ttW_CR_flip =
       sig_ttW_CR_base &&
       (_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1]) &&
-      (_recolep_fakeable_charge[0]*_recolep_fakeable_charge[1]<0) &&
+      ( (_recolep_fakeable_charge[0]*_recolep_fakeable_charge[1])<0 ) &&
       _recolep_fakeable_isGenMatched[0] && _recolep_fakeable_isGenMatched[1] &&
       (_n_recoPFJet==3 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) ) &&
       (abs(_recolep_fakeable_pdg[0])==11 || abs(_recolep_fakeable_pdg[1])==11);
@@ -1858,7 +1858,7 @@ void split_tree(TString filename_in, TString filename_out,
       inv_mass_lep_pairs &&
       !inv_mass_Z &&
       metLD_f &&
-      ( _recolep_fakeable_charge[0] + _recolep_fakeable_charge[1] == 0 + _recolep_fakeable_charge[2] + _recolep_fakeable_charge[3] == 0) &&
+      ( (_recolep_fakeable_charge[0] + _recolep_fakeable_charge[1] == 0 + _recolep_fakeable_charge[2] + _recolep_fakeable_charge[3]) == 0) &&
       (_n_recoPFJet_btag_medium==0 || _n_recoPFJet_btag_loose<2) &&
       inv_mass_4l;
 

@@ -32,10 +32,6 @@ void create_syncNtuple_objectbased(int year=2016){
   TString dir_in="/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/";
   TString dir_out="/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_syncformat/";
  
-  /*TString file="sync_ntuple_objects_syncformat_ttHNonbb_2017_v1.root";
-  vector<TString> list;
-  list.push_back(dir_in+"sync_ntuple_converted_ttHNonbb_2017_v1.root");*/
-
   if(year==2016) dir_in+="2016/";
   else if(year==2017) dir_in+="2017/";
   else if(year==2018) dir_in+="2018/";
@@ -46,13 +42,13 @@ void create_syncNtuple_objectbased(int year=2016){
 
   TString file;
   if(year==2016) file="sync_ntuple_objects_syncformat_ttHNonbb_2016_v11.root";
-  else if(year==2017) file="sync_ntuple_objects_syncformat_ttHNonbb_2017_v5.root";
-  else if(year==2018) file="sync_ntuple_objects_syncformat_ttHNonbb_2018_v4.root";
+  else if(year==2017) file="sync_ntuple_objects_syncformat_ttHNonbb_2017_v6.root";
+  else if(year==2018) file="sync_ntuple_objects_syncformat_ttHNonbb_2018_v5.root";
 
   vector<TString> list;
   if(year==2016) list.push_back(dir_in+"sync_ntuple_converted_ttHNonbb_2016_v11.root");
-  else if(year==2017) list.push_back(dir_in+"sync_ntuple_converted_ttHNonbb_2017_v5.root");
-  else if(year==2018) list.push_back(dir_in+"sync_ntuple_converted_ttHNonbb_2018_v4.root");
+  else if(year==2017) list.push_back(dir_in+"sync_ntuple_converted_ttHNonbb_2017_v6.root");
+  else if(year==2018) list.push_back(dir_in+"sync_ntuple_converted_ttHNonbb_2018_v5.root");
 
   TChain * tree = new TChain("HTauTauTree");
   int nFiles = list.size();
