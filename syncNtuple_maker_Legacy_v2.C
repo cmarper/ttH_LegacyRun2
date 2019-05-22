@@ -1713,16 +1713,16 @@ void create_syncNtuple_eventbased(int year=2016){
   }
 
   TFile* f_new = TFile::Open(dir_out+file);
-  if(f_new!=0){
+  /*if(f_new!=0){
     cout<<dir_out+file<<" already exists, please delete it before converting again"<<endl;
     return;
-  }
+  }*/
 
   f_new = TFile::Open(dir_out+file,"RECREATE");
 
-  TTree* tree_new_2tau_SR = new TTree("syncTree_2tau_SR","syncTree_2tau_SR");
-  TTree* tree_new_2tau_fake = new TTree("syncTree_2tau_Fake","syncTree_2tau_Fake");
-  TTree* tree_new_2tau_DY = new TTree("syncTree_2tau_DY","syncTree_2tau_DY");
+  TTree* tree_new_2tau_SR = new TTree("syncTree_0l2tau_SR","syncTree_0l2tau_SR");
+  TTree* tree_new_2tau_fake = new TTree("syncTree_0l2tau_Fake","syncTree_0l2tau_Fake");
+  TTree* tree_new_2tau_DY = new TTree("syncTree_0l2tau_DY","syncTree_0l2tau_DY");
   TTree* tree_new_1l1tau_SR = new TTree("syncTree_1l1tau_SR","syncTree_1l1tau_SR");
   TTree* tree_new_1l1tau_fake = new TTree("syncTree_1l1tau_Fake","syncTree_1l1tau_Fake");
   TTree* tree_new_1l2tau_SR = new TTree("syncTree_1l2tau_SR","syncTree_1l2tau_SR");
@@ -2324,6 +2324,7 @@ void create_syncNtuple_eventbased(int year=2016){
 
 
   int _category;
+  int _n_recotauh_sel;
 
   vector<float> *_recomu_pt;
   vector<float> *_recomu_conept;
@@ -2434,6 +2435,22 @@ void create_syncNtuple_eventbased(int year=2016){
   vector<int>   *_recotauh_againstElectronVTightMVA6;
   vector<bool>  *_recotauh_isGenMatched;
 
+  vector<float> *_recotauh_sel_eta;
+  vector<float> *_recotauh_sel_phi;
+  vector<float> *_recotauh_sel_pt;
+  vector<int>   *_recotauh_sel_charge;
+  vector<int>   *_recotauh_sel_byVLooseIsolationMVArun2v2017v2DBoldDMwLT;
+  vector<int>   *_recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT;
+  vector<int>   *_recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT;
+  vector<int>   *_recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT;
+  vector<int>   *_recotauh_sel_decayMode;
+  vector<float> *_recotauh_sel_e;
+  vector<float> *_recotauh_sel_px;
+  vector<float> *_recotauh_sel_py;
+  vector<float> *_recotauh_sel_pz;
+  vector<bool>  *_recotauh_sel_isGenMatched;
+  vector<int>   *_recotauh_sel_genMatchInd;
+
   vector<float> *_recoPFJet_pt;
   vector<float> *_recoPFJet_eta;
   vector<float> *_recoPFJet_phi;
@@ -2454,6 +2471,8 @@ void create_syncNtuple_eventbased(int year=2016){
     tree[i]->SetBranchAddress("category",&_category);
     tree[i]->SetBranchAddress("is_tH_like_and_not_ttH_like",&_is_tH_like_and_not_ttH_like);
 
+    tree[i]->SetBranchAddress("n_recotauh_sel",&_n_recotauh_sel);
+
     tree[i]->SetBranchAddress("EventNumber",&_nEvent);
     tree[i]->SetBranchAddress("lumi",&_ls);
     tree[i]->SetBranchAddress("RunNumber",&_run);
@@ -2468,7 +2487,7 @@ void create_syncNtuple_eventbased(int year=2016){
 
     tree[i]->SetBranchAddress("n_recotauh",&_n_presel_tau);
     tree[i]->SetBranchAddress("n_recoPFJet",&_n_presel_jet);
-    tree[i]->SetBranchAddress("n_recoPFJetFwd",&_n_presel_jetFwd);
+    tree[i]->SetBranchAddress("n_recoPFFwdJet",&_n_presel_jetFwd);
 
     tree[i]->SetBranchAddress("recomu_pt",                   &_recomu_pt);
     tree[i]->SetBranchAddress("recomu_conept",               &_recomu_conept);
@@ -2578,6 +2597,22 @@ void create_syncNtuple_eventbased(int year=2016){
     tree[i]->SetBranchAddress("recotauh_againstElectronTightMVA6",    &_recotauh_againstElectronTightMVA6);
     tree[i]->SetBranchAddress("recotauh_againstElectronVTightMVA6",   &_recotauh_againstElectronVTightMVA6);
     tree[i]->SetBranchAddress("recotauh_isGenMatched", &_recotauh_isGenMatched);
+
+    tree[i]->SetBranchAddress("recotauh_sel_eta",&_recotauh_sel_eta);
+    tree[i]->SetBranchAddress("recotauh_sel_phi",&_recotauh_sel_phi);
+    tree[i]->SetBranchAddress("recotauh_sel_pt",&_recotauh_sel_pt);
+    tree[i]->SetBranchAddress("recotauh_sel_charge",&_recotauh_sel_charge);
+    tree[i]->SetBranchAddress("recotauh_sel_byVLooseIsolationMVArun2v2017v2DBoldDMwLT",&_recotauh_sel_byVLooseIsolationMVArun2v2017v2DBoldDMwLT);
+    tree[i]->SetBranchAddress("recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT",&_recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT);
+    tree[i]->SetBranchAddress("recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT",&_recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT);
+    tree[i]->SetBranchAddress("recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT",&_recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT);
+    tree[i]->SetBranchAddress("recotauh_sel_decayMode",&_recotauh_sel_decayMode);
+    tree[i]->SetBranchAddress("recotauh_sel_e",&_recotauh_sel_e);
+    tree[i]->SetBranchAddress("recotauh_sel_px",&_recotauh_sel_px);
+    tree[i]->SetBranchAddress("recotauh_sel_py",&_recotauh_sel_py);
+    tree[i]->SetBranchAddress("recotauh_sel_pz",&_recotauh_sel_pz);
+    tree[i]->SetBranchAddress("recotauh_sel_isGenMatched",&_recotauh_sel_isGenMatched);
+    tree[i]->SetBranchAddress("recotauh_sel_genMatchInd",&_recotauh_sel_genMatchInd);
 
     tree[i]->SetBranchAddress("recoPFJet_pt",       &_recoPFJet_pt);
     tree[i]->SetBranchAddress("recoPFJet_eta",      &_recoPFJet_eta);
@@ -2875,6 +2910,8 @@ void create_syncNtuple_eventbased(int year=2016){
     
     ////
 
+    _category = 0;
+    _n_recotauh_sel = 0;
     _is_tH_like_and_not_ttH_like = 0;
     
     _recomu_pt      = 0;
@@ -2985,6 +3022,22 @@ void create_syncNtuple_eventbased(int year=2016){
     _recotauh_againstElectronTightMVA6    = 0;
     _recotauh_againstElectronVTightMVA6   = 0;
     _recotauh_isGenMatched = 0;
+
+    _recotauh_sel_eta = 0;
+    _recotauh_sel_phi = 0;
+    _recotauh_sel_pt = 0;
+    _recotauh_sel_charge = 0;
+    _recotauh_sel_byVLooseIsolationMVArun2v2017v2DBoldDMwLT = 0;
+    _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT = 0;
+    _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT = 0;
+    _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT = 0;
+    _recotauh_sel_decayMode = 0;
+    _recotauh_sel_e = 0;
+    _recotauh_sel_px = 0;
+    _recotauh_sel_py = 0;
+    _recotauh_sel_pz = 0;
+    _recotauh_sel_isGenMatched = 0;
+    _recotauh_sel_genMatchInd = 0;
 
     _recoPFJet_pt           = 0;
     _recoPFJet_eta          = 0;
@@ -3142,9 +3195,10 @@ void create_syncNtuple_eventbased(int year=2016){
 
     }
 
-    if(_n_presel_tau>0){
+    //if(_n_presel_tau>0){
+    if(_n_recotauh_sel>0){
 
-      _tau1_pt     = (*_recotauh_pt)[0];
+      /*_tau1_pt     = (*_recotauh_pt)[0];
       _tau1_eta    = (*_recotauh_eta)[0];
       _tau1_phi    = (*_recotauh_phi)[0];
       _tau1_E      = (*_recotauh_e)[0];
@@ -3173,13 +3227,25 @@ void create_syncNtuple_eventbased(int year=2016){
       _tau1_againstElectronMediumMVA6  = (*_recotauh_againstElectronMediumMVA6)[0];
       _tau1_againstElectronTightMVA6   = (*_recotauh_againstElectronTightMVA6)[0];
       _tau1_againstElectronVTightMVA6  = (*_recotauh_againstElectronVTightMVA6)[0];
-      _tau1_isGenMatched = (*_recotauh_isGenMatched)[0];
+      _tau1_isGenMatched = (*_recotauh_isGenMatched)[0];*/
+
+      _tau1_pt     = (*_recotauh_sel_pt)[0];
+      _tau1_eta    = (*_recotauh_sel_eta)[0];
+      _tau1_phi    = (*_recotauh_sel_phi)[0];
+      _tau1_E      = (*_recotauh_sel_e)[0];
+      _tau1_charge = (*_recotauh_sel_charge)[0]; 
+      _tau1_byVLooseIsolationMVArun2v1DBdR03oldDMwLT         = (*_recotauh_sel_byVLooseIsolationMVArun2v2017v2DBoldDMwLT)[0];
+      _tau1_byLooseIsolationMVArun2v1DBdR03oldDMwLT          = (*_recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT)[0];
+      _tau1_byMediumIsolationMVArun2v1DBdR03oldDMwLT         = (*_recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT)[0];
+      _tau1_byTightIsolationMVArun2v1DBdR03oldDMwLT          = (*_recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT)[0];
+      _tau1_isGenMatched = (*_recotauh_sel_isGenMatched)[0];
 
     }
 
-    if(_n_presel_tau>1){
+    //if(_n_presel_tau>1){
+    if(_n_recotauh_sel>1){
 
-      _tau2_pt     = (*_recotauh_pt)[1];
+      /*_tau2_pt     = (*_recotauh_pt)[1];
       _tau2_eta    = (*_recotauh_eta)[1];
       _tau2_phi    = (*_recotauh_phi)[1];
       _tau2_E      = (*_recotauh_e)[1];
@@ -3208,7 +3274,18 @@ void create_syncNtuple_eventbased(int year=2016){
       _tau2_againstElectronMediumMVA6  = (*_recotauh_againstElectronMediumMVA6)[1];
       _tau2_againstElectronTightMVA6   = (*_recotauh_againstElectronTightMVA6)[1];
       _tau2_againstElectronVTightMVA6  = (*_recotauh_againstElectronVTightMVA6)[1];
-      _tau2_isGenMatched  = (*_recotauh_isGenMatched)[1];
+      _tau2_isGenMatched  = (*_recotauh_isGenMatched)[1];*/
+
+      _tau2_pt     = (*_recotauh_sel_pt)[1];
+      _tau2_eta    = (*_recotauh_sel_eta)[1];
+      _tau2_phi    = (*_recotauh_sel_phi)[1];
+      _tau2_E      = (*_recotauh_sel_e)[1];
+      _tau2_charge = (*_recotauh_sel_charge)[1]; 
+      _tau2_byVLooseIsolationMVArun2v1DBdR03oldDMwLT         = (*_recotauh_sel_byVLooseIsolationMVArun2v2017v2DBoldDMwLT)[1];
+      _tau2_byLooseIsolationMVArun2v1DBdR03oldDMwLT          = (*_recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT)[1];
+      _tau2_byMediumIsolationMVArun2v1DBdR03oldDMwLT         = (*_recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT)[1];
+      _tau2_byTightIsolationMVArun2v1DBdR03oldDMwLT          = (*_recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT)[1];
+      _tau2_isGenMatched = (*_recotauh_sel_isGenMatched)[1];
 
     }
     

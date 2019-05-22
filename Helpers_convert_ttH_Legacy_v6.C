@@ -5161,7 +5161,11 @@ void convert_tree(
 	      _recolep_px.push_back(ele.Px());
 	      _recolep_py.push_back(ele.Py());
 	      _recolep_pz.push_back(ele.Pz());
-	      _recolep_pt.push_back(ele.Pt());
+	      _recolep_pt.push_back(_recoele_corr_pt[i_ele]);
+              if(_EventNumber==46809) {
+                 cout<<"_recoele_corr_pt[i_ele]"<<_recoele_corr_pt[i_ele]<<endl;
+                 cout<<"_recoele_pt[i_ele]"<<_recoele_pt[i_ele]<<endl;
+              }
 	      _recolep_conept.push_back(_recoele_conept[i_ele]);
 	      _recolep_eta.push_back(ele.Eta());
 	      _recolep_phi.push_back(ele.Phi());
