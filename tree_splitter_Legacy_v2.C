@@ -810,7 +810,7 @@ void split_tree(TString filename_in, TString filename_out,
     h->Fill(1);
 
     if(i%10000==0) 
-      //cout<<"i="<<i<<endl;
+      cout<<"i="<<i<<endl;
 
     //new branches
 
@@ -1185,7 +1185,6 @@ void split_tree(TString filename_in, TString filename_out,
     _n_tight_WPM_tau = _recotauh_tight_WPM_pt.size();
 
     _n_light_jet = (_n_recoPFJet - _n_recoPFJet_btag_loose) + _n_recoPFFwdJet;
-
 
 
     /////////////////////////////////////
@@ -1572,6 +1571,7 @@ void split_tree(TString filename_in, TString filename_out,
       sig_2lss_flip &&
       pass_njet_2l_tH;
 
+
     ////////////////////////////////
     ////////// 2lss1tau  ///////////
     ////////////////////////////////
@@ -1872,6 +1872,7 @@ void split_tree(TString filename_in, TString filename_out,
       !(_recolep_fakeable_ismvasel[0]==1 && _recolep_fakeable_ismvasel[1]==1 && _recolep_fakeable_ismvasel[2]==1) &&
       (_n_recoPFJet>=2 && (_n_recoPFJet_btag_medium==0 && _n_recoPFJet_btag_loose<2) ) && metLD_f;
 
+
     //////////////////////////////
     //////////// ZZ_CR  //////////
     //////////////////////////////
@@ -1899,9 +1900,9 @@ void split_tree(TString filename_in, TString filename_out,
       !(_recolep_fakeable_ismvasel[0]==1 && _recolep_fakeable_ismvasel[1]==1 && _recolep_fakeable_ismvasel[2]==1 && _recolep_fakeable_ismvasel[3]==1); 
    
 
-    //////////////////////////////
-    /////// Fill branches ////////
-    //////////////////////////////
+    /////////////////////////////////////
+    /////// Fill lepton branches ////////
+    /////////////////////////////////////
 
     _recolep_sel_charge.clear();
     _recolep_sel_pdg.clear();
@@ -1966,8 +1967,10 @@ void split_tree(TString filename_in, TString filename_out,
 
     }
 
-    int recolep = _recolep_sel_charge.size();
-    if(recolep!=nlep) cout<<"Problem!"<<endl;
+
+    /////////////////////////////////////
+    ///////// Fill tau branches /////////
+    /////////////////////////////////////
 
     _recotauh_sel_eta.clear();
     _recotauh_sel_phi.clear();
@@ -1984,6 +1987,102 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_pz.clear();
     _recotauh_sel_isGenMatched.clear();
     _recotauh_sel_genMatchInd.clear();
+
+
+    bool has1tau = 
+      sig_1l1tau_SR || sig_1l1tau_fake ||
+      sig_2lss1tau_SR || sig_2lss1tau_fake || sig_2lss1tau_flip || 
+      sig_2los1tau_SR || sig_2los1tau_fake ||
+      sig_3l1tau_SR || sig_3l1tau_fake;
+
+    bool has2tau = 
+      sig_2tau_SR || sig_2tau_fake ||
+      sig_1l2tau_SR || sig_1l2tau_fake || 
+      sig_2l2tau_SR || sig_2l2tau_fake;
+      
+    int ntau = 0;
+    if(has1tau) ntau = 1;
+    if(has2tau) ntau = 2;
+
+    bool hasfaketau =
+      sig_1l2tau_fake ||
+      sig_2l2tau_fake;
+
+    bool hasWPLtau =
+      sig_2lss1tau_SR || sig_2lss1tau_fake || sig_2lss1tau_flip || 
+      sig_2los1tau_SR || sig_2los1tau_fake ||
+      sig_3l1tau_SR || sig_3l1tau_fake;
+
+    bool hasWPMtau =
+      sig_2tau_SR || sig_2tau_fake ||
+      sig_1l1tau_SR || sig_1l1tau_fake ||
+      sig_1l2tau_SR ||
+      sig_2l2tau_SR;
+
+
+    for(int i_tau = 0; i_tau<ntau; i_tau++){
+
+      if(hasfaketau){
+
+        _recotauh_sel_eta.push_back((*_recotauh_eta)[i_tau]);
+        _recotauh_sel_phi.push_back((*_recotauh_phi)[i_tau]);
+        _recotauh_sel_pt.push_back((*_recotauh_pt)[i_tau]);
+        _recotauh_sel_charge.push_back((*_recotauh_charge)[i_tau]);
+        _recotauh_sel_byVLooseIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byVLooseIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
+        _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byLooseIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
+        _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byMediumIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
+        _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byTightIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
+        _recotauh_sel_decayMode.push_back((*_recotauh_decayMode)[i_tau]);
+        _recotauh_sel_e.push_back((*_recotauh_e)[i_tau]);
+        _recotauh_sel_px.push_back((*_recotauh_px)[i_tau]);
+        _recotauh_sel_py.push_back((*_recotauh_py)[i_tau]);
+        _recotauh_sel_pz.push_back((*_recotauh_pz)[i_tau]);
+        _recotauh_sel_isGenMatched.push_back((*_recotauh_isGenMatched)[i_tau]);
+        _recotauh_sel_isGenMatched.push_back((*_recotauh_isGenMatched)[i_tau]);
+
+      }
+
+      else if(hasWPLtau){
+
+        _recotauh_sel_eta.push_back(_recotauh_tight_WPL_eta[i_tau]);
+        _recotauh_sel_phi.push_back(_recotauh_tight_WPL_phi[i_tau]);
+        _recotauh_sel_pt.push_back(_recotauh_tight_WPL_pt[i_tau]);
+        _recotauh_sel_charge.push_back(_recotauh_tight_WPL_charge[i_tau]);
+        _recotauh_sel_byVLooseIsolationMVArun2v2017v2DBoldDMwLT.push_back(_recotauh_tight_WPL_byVLooseIsolationMVArun2v2017v2DBoldDMwLT[i_tau]);
+        _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.push_back(_recotauh_tight_WPL_byLooseIsolationMVArun2v2017v2DBoldDMwLT[i_tau]);
+        _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.push_back(_recotauh_tight_WPL_byMediumIsolationMVArun2v2017v2DBoldDMwLT[i_tau]);
+        _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.push_back(_recotauh_tight_WPL_byTightIsolationMVArun2v2017v2DBoldDMwLT[i_tau]);
+        _recotauh_sel_decayMode.push_back(_recotauh_tight_WPL_decayMode[i_tau]);
+        _recotauh_sel_e.push_back(_recotauh_tight_WPL_e[i_tau]);
+        _recotauh_sel_px.push_back(_recotauh_tight_WPL_px[i_tau]);
+        _recotauh_sel_py.push_back(_recotauh_tight_WPL_py[i_tau]);
+        _recotauh_sel_pz.push_back(_recotauh_tight_WPL_pz[i_tau]);
+        _recotauh_sel_isGenMatched.push_back(_recotauh_tight_WPL_isGenMatched[i_tau]);
+        _recotauh_sel_isGenMatched.push_back(_recotauh_tight_WPL_isGenMatched[i_tau]);
+
+      }
+
+      else if(hasWPMtau){
+
+        _recotauh_sel_eta.push_back(_recotauh_tight_WPM_eta[i_tau]);
+        _recotauh_sel_phi.push_back(_recotauh_tight_WPM_phi[i_tau]);
+        _recotauh_sel_pt.push_back(_recotauh_tight_WPM_pt[i_tau]);
+        _recotauh_sel_charge.push_back(_recotauh_tight_WPM_charge[i_tau]);
+        _recotauh_sel_byVLooseIsolationMVArun2v2017v2DBoldDMwLT.push_back(_recotauh_tight_WPM_byVLooseIsolationMVArun2v2017v2DBoldDMwLT[i_tau]);
+        _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.push_back(_recotauh_tight_WPM_byLooseIsolationMVArun2v2017v2DBoldDMwLT[i_tau]);
+        _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.push_back(_recotauh_tight_WPM_byMediumIsolationMVArun2v2017v2DBoldDMwLT[i_tau]);
+        _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.push_back(_recotauh_tight_WPM_byTightIsolationMVArun2v2017v2DBoldDMwLT[i_tau]);
+        _recotauh_sel_decayMode.push_back(_recotauh_tight_WPM_decayMode[i_tau]);
+        _recotauh_sel_e.push_back(_recotauh_tight_WPM_e[i_tau]);
+        _recotauh_sel_px.push_back(_recotauh_tight_WPM_px[i_tau]);
+        _recotauh_sel_py.push_back(_recotauh_tight_WPM_py[i_tau]);
+        _recotauh_sel_pz.push_back(_recotauh_tight_WPM_pz[i_tau]);
+        _recotauh_sel_isGenMatched.push_back(_recotauh_tight_WPM_isGenMatched[i_tau]);
+        _recotauh_sel_isGenMatched.push_back(_recotauh_tight_WPM_isGenMatched[i_tau]);
+
+      }
+
+    }
 
 
     //////////////////////////
