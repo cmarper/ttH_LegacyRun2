@@ -239,20 +239,12 @@ void split_tree(TString filename_in, TString filename_out,
 
   TTree* tree_2tau_SR=tree->GetTree()->CloneTree(0);
   TTree* tree_2tau_fake=tree->GetTree()->CloneTree(0);
-  TTree* tree_2tau_DY=tree->GetTree()->CloneTree(0);
 
   TTree* tree_1l1tau_SR=tree->GetTree()->CloneTree(0);
   TTree* tree_1l1tau_fake=tree->GetTree()->CloneTree(0);
 
   TTree* tree_1l2tau_SR=tree->GetTree()->CloneTree(0);
   TTree* tree_1l2tau_fake=tree->GetTree()->CloneTree(0);
-
-  /*TTree* tree_2lss_SR_ttH=tree->GetTree()->CloneTree(0);
-  TTree* tree_2lss_SR_tH=tree->GetTree()->CloneTree(0);
-  TTree* tree_2lss_fake_ttH=tree->GetTree()->CloneTree(0);
-  TTree* tree_2lss_fake_tH=tree->GetTree()->CloneTree(0);
-  TTree* tree_2lss_flip_ttH=tree->GetTree()->CloneTree(0);
-  TTree* tree_2lss_flip_tH=tree->GetTree()->CloneTree(0);*/
 
   TTree* tree_2lss_SR=tree->GetTree()->CloneTree(0);
   TTree* tree_2lss_fake=tree->GetTree()->CloneTree(0);
@@ -267,11 +259,6 @@ void split_tree(TString filename_in, TString filename_out,
 
   TTree* tree_2l2tau_SR=tree->GetTree()->CloneTree(0);
   TTree* tree_2l2tau_fake=tree->GetTree()->CloneTree(0);
-
-  /*TTree* tree_3l_SR_ttH=tree->GetTree()->CloneTree(0);
-  TTree* tree_3l_SR_tH=tree->GetTree()->CloneTree(0);
-  TTree* tree_3l_fake_ttH=tree->GetTree()->CloneTree(0);
-  TTree* tree_3l_fake_tH=tree->GetTree()->CloneTree(0);*/
 
   TTree* tree_3l_SR=tree->GetTree()->CloneTree(0);
   TTree* tree_3l_fake=tree->GetTree()->CloneTree(0);
@@ -297,7 +284,6 @@ void split_tree(TString filename_in, TString filename_out,
 
   tree_2tau_SR->SetNameTitle("HTauTauTree_2tau_SR","HTauTauTree_2tau_SR");
   tree_2tau_fake->SetNameTitle("HTauTauTree_2tau_fake","HTauTauTree_2tau_fake");
-  tree_2tau_DY->SetNameTitle("HTauTauTree_2tau_DY","HTauTauTree_2tau_DY");
   
   tree_1l1tau_SR->SetNameTitle("HTauTauTree_1l1tau_SR","HTauTauTree_1l1tau_SR");
   tree_1l1tau_fake->SetNameTitle("HTauTauTree_1l1tau_fake","HTauTauTree_1l1tau_fake");
@@ -305,12 +291,6 @@ void split_tree(TString filename_in, TString filename_out,
   tree_1l2tau_SR->SetNameTitle("HTauTauTree_1l2tau_SR","HTauTauTree_1l2tau_SR");
   tree_1l2tau_fake->SetNameTitle("HTauTauTree_1l2tau_fake","HTauTauTree_1l2tau_fake");
 
-  /*tree_2lss_SR_ttH->SetNameTitle("HTauTauTree_2lss_SR_ttH","HTauTauTree_2lss_SR_ttH");
-  tree_2lss_SR_tH->SetNameTitle("HTauTauTree_2lss_SR_tH","HTauTauTree_2lss_SR_tH");
-  tree_2lss_fake_ttH->SetNameTitle("HTauTauTree_2lss_fake_ttH","HTauTauTree_2lss_fake_ttH");
-  tree_2lss_fake_tH->SetNameTitle("HTauTauTree_2lss_fake_tH","HTauTauTree_2lss_fake_tH");
-  tree_2lss_flip_ttH->SetNameTitle("HTauTauTree_2lss_flip_ttH","HTauTauTree_2lss_flip_ttH");
-  tree_2lss_flip_tH->SetNameTitle("HTauTauTree_2lss_flip_tH","HTauTauTree_2lss_flip_tH");*/
   tree_2lss_SR->SetNameTitle("HTauTauTree_2lss_SR","HTauTauTree_2lss_SR");
   tree_2lss_fake->SetNameTitle("HTauTauTree_2lss_fake","HTauTauTree_2lss_fake");
   tree_2lss_flip->SetNameTitle("HTauTauTree_2lss_flip","HTauTauTree_2lss_flip");
@@ -324,11 +304,6 @@ void split_tree(TString filename_in, TString filename_out,
 
   tree_2l2tau_SR->SetNameTitle("HTauTauTree_2l2tau_SR","HTauTauTree_2l2tau_SR");
   tree_2l2tau_fake->SetNameTitle("HTauTauTree_2l2tau_fake","HTauTauTree_2l2tau_fake");
-
-  /*tree_3l_SR_ttH->SetNameTitle("HTauTauTree_3l_SR_ttH","HTauTauTree_3l_SR_ttH");
-  tree_3l_SR_tH->SetNameTitle("HTauTauTree_3l_SR_tH","HTauTauTree_3l_SR_tH");
-  tree_3l_fake_ttH->SetNameTitle("HTauTauTree_3l_fake_ttH","HTauTauTree_3l_fake_ttH");
-  tree_3l_fake_tH->SetNameTitle("HTauTauTree_3l_fake_tH","HTauTauTree_3l_fake_tH");*/
 
   tree_3l_SR->SetNameTitle("HTauTauTree_3l_SR","HTauTauTree_3l_SR");
   tree_3l_fake->SetNameTitle("HTauTauTree_3l_fake","HTauTauTree_3l_fake");
@@ -356,20 +331,12 @@ void split_tree(TString filename_in, TString filename_out,
 
   tree_new.push_back(tree_2tau_SR);
   tree_new.push_back(tree_2tau_fake);
-  tree_new.push_back(tree_2tau_DY);
 
   tree_new.push_back(tree_1l1tau_SR);
   tree_new.push_back(tree_1l1tau_fake);
 
   tree_new.push_back(tree_1l2tau_SR);
   tree_new.push_back(tree_1l2tau_fake);
-
-  /*tree_new.push_back(tree_2lss_SR_ttH);
-  tree_new.push_back(tree_2lss_SR_tH);
-  tree_new.push_back(tree_2lss_fake_ttH);
-  tree_new.push_back(tree_2lss_fake_tH);
-  tree_new.push_back(tree_2lss_flip_ttH);
-  tree_new.push_back(tree_2lss_flip_tH);*/
 
   tree_new.push_back(tree_2lss_SR);
   tree_new.push_back(tree_2lss_fake);
@@ -384,11 +351,6 @@ void split_tree(TString filename_in, TString filename_out,
 
   tree_new.push_back(tree_2l2tau_SR);
   tree_new.push_back(tree_2l2tau_fake);
-
-  /*tree_new.push_back(tree_3l_SR_ttH);
-  tree_new.push_back(tree_3l_SR_tH);
-  tree_new.push_back(tree_3l_fake_ttH);
-  tree_new.push_back(tree_3l_fake_tH);*/
 
   tree_new.push_back(tree_3l_SR);
   tree_new.push_back(tree_3l_fake);
@@ -414,7 +376,6 @@ void split_tree(TString filename_in, TString filename_out,
 
   int n_2tau_SR = 0;
   int n_2tau_fake = 0;
-  int n_2tau_DY = 0;
 
   int n_1l1tau_SR = 0;
   int n_1l1tau_fake = 0; 
@@ -476,7 +437,6 @@ void split_tree(TString filename_in, TString filename_out,
   /*
   1010 2tau_SR
   1020 2tau_fake
-  1040 2tau_DY
 
   2010 1l1tau_SR
   2020 1l1tau_fake
@@ -484,12 +444,9 @@ void split_tree(TString filename_in, TString filename_out,
   2110 1l2tau_SR
   2120 1l2tau_fake
 
-  3010 2lss_SR_ttH
-  3011 2lss_SR_tH
-  3020 2lss_fake_ttH
-  3021 2lss_fake_tH
-  3030 2lss_flip_ttH
-  3031 2lss_flip_tH
+  3010 2lss_SR
+  3020 2lss_fake
+  3030 2lss_flip
 
   3110 2lss1tau_SR
   3120 2lss1tau_fake
@@ -501,10 +458,8 @@ void split_tree(TString filename_in, TString filename_out,
   3310 2l2tau_SR
   3320 2l2tau_fake
 
-  4010 3l_SR_ttH
-  4011 3l_SR_tH
-  4020 3l_fake_ttH
-  4021 3l_fake_tH
+  4010 3l_SR
+  4020 3l_fake
 
   4110 3l1tau_SR
   4120 3l1tau_fake
@@ -1127,6 +1082,22 @@ void split_tree(TString filename_in, TString filename_out,
     
     if (_year == 2017 || _year == 2018) metcut_base = metcut_base && Flag_ecalBadCalibReducedMINIAODFilter;
     if (!isMC) metcut_base = metcut_base && Flag_eeBadScFilter;
+
+    ////////////////////////////////////////
+    ////////// Trigger selections //////////
+    ////////////////////////////////////////
+
+    bool pass_e   = pass_trigger_list_1e(_triggerbit);
+    bool pass_m   = pass_trigger_list_1m(_triggerbit);
+    bool pass_2e  = pass_trigger_list_2e(_triggerbit); 
+    bool pass_2m  = pass_trigger_list_2m(_triggerbit);
+    bool pass_em  = pass_trigger_list_em(_triggerbit);
+    bool pass_et  = pass_trigger_list_et(_triggerbit);
+    bool pass_mt  = pass_trigger_list_mt(_triggerbit);
+    bool pass_3e  = pass_trigger_list_3e(_triggerbit);
+    bool pass_m2e = pass_trigger_list_m2e(_triggerbit);
+    bool pass_2me = pass_trigger_list_e2m(_triggerbit);
+    bool pass_3m = pass_trigger_list_3m(_triggerbit);
     
 
     /////////////////////////////////
@@ -1137,6 +1108,7 @@ void split_tree(TString filename_in, TString filename_out,
 
     for(int i_lep=0; i_lep<_n_loose_lep; i_lep++){
 
+      
       if((*_recolep_isfakeable)[i_lep]==1){
 
         _recolep_fakeable_charge.push_back((*_recolep_charge)[i_lep]);
@@ -1421,10 +1393,12 @@ void split_tree(TString filename_in, TString filename_out,
     bool inv_mass_Zee=true;
 
     for(int i_lep1=0; i_lep1<_n_loose_lep; i_lep1++){
-      TLorentzVector lep1((*_recolep_px)[i_lep1],(*_recolep_py)[i_lep1],(*_recolep_pz)[i_lep1],(*_recolep_e)[i_lep1]);
+      TLorentzVector lep1; //use standard pt here (smeared for electrons)
+      lep1.SetPtEtaPhiE((*_recolep_pt)[i_lep1],(*_recolep_eta)[i_lep1],(*_recolep_phi)[i_lep1],(*_recolep_e)[i_lep1]);
 
       for(int i_lep2=i_lep1+1; i_lep2<_n_loose_lep; i_lep2++){
-        TLorentzVector lep2((*_recolep_px)[i_lep2],(*_recolep_py)[i_lep2],(*_recolep_pz)[i_lep2],(*_recolep_e)[i_lep2]);
+        TLorentzVector lep2;
+        lep2.SetPtEtaPhiE((*_recolep_pt)[i_lep2],(*_recolep_eta)[i_lep2],(*_recolep_phi)[i_lep2],(*_recolep_e)[i_lep2]);
         float m_ll = (lep1 + lep2).M();
 
         if((*_recolep_pdg)[i_lep1]==-(*_recolep_pdg)[i_lep2] && ((*_recolep_isfakeable)[i_lep1] && (*_recolep_isfakeable)[i_lep2])) 
@@ -1437,13 +1411,16 @@ void split_tree(TString filename_in, TString filename_out,
           SFOS_loose_pair=true;
           if(fabs(m_ll-91.2)<10) {
             inv_mass_Z=false;
-            if(abs((*_recolep_pdg)[i_lep1])==11 && abs((*_recolep_pdg)[i_lep2])==11 && (*_recolep_isfakeable)[i_lep1] && (*_recolep_isfakeable)[i_lep2]){
-              inv_mass_Zee=false;
-            }
           }
         }
+
+        if( (fabs(m_ll-91.2)<10) && abs((*_recolep_pdg)[i_lep1]) == 11 && abs((*_recolep_pdg)[i_lep2]) == 11 && (*_recolep_isfakeable)[i_lep1] && (*_recolep_isfakeable)[i_lep2] ){
+          inv_mass_Zee=false;
+        }
+
       }
     }
+
 
     bool inv_mass_4l=true;
     bool SFOS_doublepair=false;
@@ -1451,13 +1428,17 @@ void split_tree(TString filename_in, TString filename_out,
 
     if (_n_loose_lep>=4){
       for(int i_lep=0; i_lep<_n_loose_lep; i_lep++){
-        TLorentzVector lep1((*_recolep_px)[i_lep],(*_recolep_py)[i_lep],(*_recolep_pz)[i_lep],(*_recolep_e)[i_lep]);
+      TLorentzVector lep1;
+      lep1.SetPtEtaPhiE((*_recolep_pt)[i_lep],(*_recolep_eta)[i_lep],(*_recolep_phi)[i_lep],(*_recolep_e)[i_lep]);
         for(int i_lep2=i_lep+1; i_lep2<_n_loose_lep; i_lep2++){
-          TLorentzVector lep2((*_recolep_px)[i_lep2],(*_recolep_py)[i_lep2],(*_recolep_pz)[i_lep2],(*_recolep_e)[i_lep2]);
+          TLorentzVector lep2;
+          lep2.SetPtEtaPhiE((*_recolep_pt)[i_lep2],(*_recolep_eta)[i_lep2],(*_recolep_phi)[i_lep2],(*_recolep_e)[i_lep2]);
           for(int i_lep3=i_lep+2; i_lep3<_n_loose_lep; i_lep3++){
-            TLorentzVector lep3((*_recolep_px)[i_lep3],(*_recolep_py)[i_lep3],(*_recolep_pz)[i_lep3],(*_recolep_e)[i_lep3]);
+            TLorentzVector lep3;
+            lep3.SetPtEtaPhiE((*_recolep_pt)[i_lep3],(*_recolep_eta)[i_lep3],(*_recolep_phi)[i_lep3],(*_recolep_e)[i_lep3]);
             for(int i_lep4=i_lep+3; i_lep4<_n_loose_lep; i_lep4++){
-              TLorentzVector lep4((*_recolep_px)[i_lep4],(*_recolep_py)[i_lep4],(*_recolep_pz)[i_lep4],(*_recolep_e)[i_lep4]);
+              TLorentzVector lep4;
+              lep4.SetPtEtaPhiE((*_recolep_pt)[i_lep4],(*_recolep_eta)[i_lep4],(*_recolep_phi)[i_lep4],(*_recolep_e)[i_lep4]);
               if( (i_lep != i_lep2) && (i_lep != i_lep3) && (i_lep != i_lep4) && (i_lep2 != i_lep3) && (i_lep2 != i_lep4) && (i_lep3 != i_lep4)){ 
                 if( ((*_recolep_pdg)[i_lep]==-(*_recolep_pdg)[i_lep2] && (*_recolep_pdg)[i_lep3]==-(*_recolep_pdg)[i_lep4])
                   || ((*_recolep_pdg)[i_lep]==-(*_recolep_pdg)[i_lep3] && (*_recolep_pdg)[i_lep2]==-(*_recolep_pdg)[i_lep4]) 
@@ -1481,55 +1462,47 @@ void split_tree(TString filename_in, TString filename_out,
     /////////// 2tau  ////////////
     //////////////////////////////
 
-    // tight tau == WP Medium
-
     bool sig_2tau_base = //passTriggerMatch &&
-      (_n_tight_WPM_tau==2) &&
-      (_recotauh_tight_WPM_pt[0]>40 && _recotauh_tight_WPM_pt[1]>40) &&
-      (abs(_recotauh_tight_WPM_eta[0])<2.1 && abs(_recotauh_tight_WPM_eta[1])<2.1) &&
+      (_n_recotauh>=2) &&
+      (((*_recotauh_charge)[0]*(*_recotauh_charge)[1])<0) &&
+      (*_recotauh_pt)[0]>40 && (*_recotauh_pt)[1]>40 &&
+      (abs((*_recotauh_eta)[0])<2.1) && (abs((*_recotauh_eta)[1])<2.1) &&
       inv_mass_lep_pairs &&
-      (_n_tight_lep==0);
+      (_n_tight_lep==0) &&
+      (_n_recoPFJet>=4 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) );
 
     bool sig_2tau_SR = 
       sig_2tau_base &&
-      ((_recotauh_tight_WPM_charge[0]*_recotauh_tight_WPM_charge[1])<0) &&
-      (_n_recoPFJet>=4 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) ) &&
-      (_recotauh_tight_WPM_isGenMatched[0] && _recotauh_tight_WPM_isGenMatched[1]);
+      ((*_recotauh_byMediumIsolationMVArun2v2017v2DBoldDMwLT)[0]>0.5 && (*_recotauh_byMediumIsolationMVArun2v2017v2DBoldDMwLT)[1]>0.5) &&
+      (*_recotauh_isGenMatched)[0] && (*_recotauh_isGenMatched)[1];
 
     bool sig_2tau_fake = 
       sig_2tau_base &&
-      ((_recotauh_tight_WPM_charge[0]*_recotauh_tight_WPM_charge[1])>0) &&
-      (_n_recoPFJet>=4 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) );
-
-    bool sig_2tau_DY = 
-      sig_2tau_base &&
-      ((_recotauh_tight_WPM_charge[0]*_recotauh_tight_WPM_charge[1])<0) &&
-      (_n_recoPFJet>=2);
+      !((*_recotauh_byMediumIsolationMVArun2v2017v2DBoldDMwLT)[0]>0.5 && (*_recotauh_byMediumIsolationMVArun2v2017v2DBoldDMwLT)[1]>0.5);
 
 
     ////////////////////////////////
     /////////// 1l1tau  ////////////
     ////////////////////////////////
 
-    // tight tau == WP Medium
-
     bool sig_1l1tau_base = //passTriggerMatch &&
-      (_n_tight_lep==1) &&
-      ( (_recolep_tight_conept[0]>25 && abs(_recolep_tight_pdg[0])==13) || (_recolep_tight_conept[0]>30 && abs(_recolep_tight_pdg[0])==11) ) &&
-      ((abs(_recolep_tight_eta[0]))<2.1) &&
-      (_n_tight_WPM_tau==1) &&
-      (_recotauh_tight_WPM_pt[0]>30) &&
+      (_n_fakeable_lep>=1) &&
+      ( (_recolep_fakeable_conept[0]>25 && abs(_recolep_fakeable_pdg[0])==13) || (_recolep_fakeable_conept[0]>30 && abs(_recolep_fakeable_pdg[0])==11) ) &&
+      ((abs(_recolep_fakeable_eta[0]))<2.1) &&
+      (_n_recotauh>=1) &&
+      ((*_recotauh_pt)[0]>30) &&
       inv_mass_lep_pairs &&
-      (_n_recoPFJet>=4 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) );
+      (_n_recoPFJet>=4 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2));
 
     bool sig_1l1tau_SR = 
       sig_1l1tau_base &&
-      ( (_recotauh_tight_WPM_charge[0]*_recolep_tight_charge[0])<0 ) &&
-      _recotauh_tight_WPM_isGenMatched[0] && _recolep_tight_isGenMatched[0];
+      (_n_tight_lep==1) && (_recolep_fakeable_ismvasel[0]) &&
+      (_n_tight_WPM_tau==1) && ((*_recotauh_byMediumIsolationMVArun2v2017v2DBoldDMwLT)[0]>0.5) &&
+      ((*_recotauh_isGenMatched)[0] && _recolep_fakeable_isGenMatched[0]); 
 
     bool sig_1l1tau_fake = 
-        sig_1l1tau_base &&
-        ( (_recotauh_tight_WPM_charge[0]*_recolep_tight_charge[0])>0 );
+      sig_1l1tau_base &&
+      (!(_recolep_fakeable_ismvasel[0]) || !((*_recotauh_byMediumIsolationMVArun2v2017v2DBoldDMwLT)[0]>0.5));
 
   
     ////////////////////////////////
@@ -1568,9 +1541,6 @@ void split_tree(TString filename_in, TString filename_out,
     if(abs(_recolep_fakeable_pdg[0])==11 && abs(_recolep_fakeable_pdg[1])==11) 
       metLD_e = (_ETmissLD>30); 
 
-    bool pass_njet_2l_ttH = (_n_recoPFJet>=4 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) );
-    bool pass_njet_2l_tH = (_n_recoPFJet_btag_medium>=1 &&  _n_light_jet>=1) && !pass_njet_2l_ttH;
-
     bool sig_2lss_base = //passTriggerMatch &&
       (_n_fakeable_lep>=2) &&
       (_recolep_fakeable_conept[0]>25 && _recolep_fakeable_conept[1]>15) &&
@@ -1587,13 +1557,24 @@ void split_tree(TString filename_in, TString filename_out,
       ((_recolep_fakeable_charge[0]*_recolep_fakeable_charge[1])>0) &&
       _recolep_fakeable_isGenMatched[0] && _recolep_fakeable_isGenMatched[1];
 
+    bool pass_njet_2l_ttH = (_n_recoPFJet>=4 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) );
+    bool pass_njet_2l_tH = (_n_recoPFJet_btag_medium>=1 &&  _n_light_jet>=1);
+
+    bool is_2l_ttH_like = pass_njet_2l_ttH;
+    bool is_2l_tH_like = pass_njet_2l_tH;
+    bool is_2l_ttH_like_and_not_tH_like = pass_njet_2l_ttH && !pass_njet_2l_tH;
+    bool is_2l_tH_like_and_not_ttH_like = pass_njet_2l_tH && !pass_njet_2l_ttH;
+
     bool sig_2lss_SR_ttH =
       sig_2lss_SR &&
       pass_njet_2l_ttH;
 
     bool sig_2lss_SR_tH =
       sig_2lss_SR &&
-      pass_njet_2l_tH;
+      pass_njet_2l_tH && !pass_njet_2l_ttH;
+
+    if(sig_2lss_SR_ttH && sig_2lss_SR_tH)
+      cout<<"OVERLAP: sig_2lss_SR_ttH "<<sig_2lss_SR_ttH<<",sig_2lss_SR_tH "<<sig_2lss_SR_tH<<",is_2l_ttH_like "<<is_2l_ttH_like<<",is_2l_tH_like_and_not_ttH_like "<<is_2l_tH_like_and_not_ttH_like<<",is_2l_ttH_like_and_not_tH_like" <<is_2l_ttH_like_and_not_tH_like<<endl;
 
     bool sig_2lss_fake =
       sig_2lss_base &&
@@ -1606,7 +1587,7 @@ void split_tree(TString filename_in, TString filename_out,
 
     bool sig_2lss_fake_tH =
       sig_2lss_fake &&
-      pass_njet_2l_tH;
+      pass_njet_2l_tH && !pass_njet_2l_ttH;
 
     bool sig_2lss_flip =
       sig_2lss_base &&
@@ -1621,10 +1602,7 @@ void split_tree(TString filename_in, TString filename_out,
 
     bool sig_2lss_flip_tH =
       sig_2lss_flip &&
-      pass_njet_2l_tH;
-
-    if(sig_2lss_SR_ttH || sig_2lss_fake_ttH || sig_2lss_flip_ttH ) _is_ttH_like = true;
-    if(sig_2lss_SR_tH || sig_2lss_fake_tH || sig_2lss_flip_tH ) _is_tH_like = true;
+      pass_njet_2l_tH && !pass_njet_2l_ttH;
 
 
     ////////////////////////////////
@@ -1659,7 +1637,6 @@ void split_tree(TString filename_in, TString filename_out,
       ( (_recolep_fakeable_charge[0]*_recotauh_tight_WPL_charge[0])<0 ) &&
       !(_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1]);
 
-
     bool sig_2lss1tau_flip =
       sig_2lss1tau_base &&
       ( abs(_recolep_fakeable_pdg[0])==11 || abs(_recolep_fakeable_pdg[1])==11) &&
@@ -1676,33 +1653,29 @@ void split_tree(TString filename_in, TString filename_out,
     ////////// 2los1tau  ///////////
     ////////////////////////////////
 
-    // tight tau == WP Loose
-
-    bool sig_2los1tau_SR = //passTriggerMatch &&
-      (_n_tight_lep==2) &&
-      ((_recolep_fakeable_charge[0]*_recolep_fakeable_charge[1])<0) &&
-      (_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1]) &&
-      (_recolep_fakeable_conept[0]>25) &&
-      ( (_recolep_fakeable_conept[1]>15 && abs(_recolep_fakeable_pdg[1])==11) || (_recolep_fakeable_conept[1]>10 && abs(_recolep_fakeable_pdg[1])==13) ) &&
-      (_n_tight_WPL_tau==1) && //check if tight == loose
-      (_recotauh_tight_WPL_pt[0]>=40) &&
-      inv_mass_lep_pairs &&
-      inv_mass_Z && //check 
-      (_ETmissLD>30) &&
-      (_recolep_fakeable_isGenMatched[0] && _recolep_fakeable_isGenMatched[1] && _recotauh_tight_WPL_isGenMatched[0]);
-
-    //Not needed: the control region is taken as the low score region of the MVA used for signal extraction
-    bool sig_2los1tau_fake = //passTriggerMatch &&
+    bool sig_2los1tau_base = //passTriggerMatch &&
       (_n_fakeable_lep>=2) &&
       ((_recolep_fakeable_charge[0]*_recolep_fakeable_charge[1])<0) &&
-      !(_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1]) &&
-      (_recolep_fakeable_conept[0]>25) &&
-      ( (_recolep_fakeable_conept[1]>15 && abs(_recolep_fakeable_pdg[1])==11) || (_recolep_fakeable_conept[1]>10 && abs(_recolep_fakeable_pdg[1])==13) ) &&
-      (_n_tight_WPL_tau==1) && //check if tight == loose
-      (_recotauh_tight_WPL_pt[0]>=40) &&
+      (_recolep_fakeable_conept[0]>25) && ( (_recolep_fakeable_conept[1]>10 && abs(_recolep_fakeable_pdg[1])==11) || (_recolep_fakeable_conept[1]>15 && abs(_recolep_fakeable_pdg[1])==13) ) &&
+      (_n_recotauh>=1) &&
+      (_n_tight_WPM_tau<=1) &&
+      ((*_recotauh_pt)[0]>40) &&
       inv_mass_lep_pairs &&
-      inv_mass_Z && 
+      inv_mass_Z &&
       (_ETmissLD>30);
+
+    bool sig_2los1tau_SR =
+      sig_2los1tau_base &&
+      (_n_tight_lep==2) &&
+      ((_recolep_fakeable_charge[0]*_recolep_fakeable_charge[1])<0) &&
+      ( _recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1]) &&
+      (_n_tight_WPL_tau==1) &&
+      ((*_recotauh_byLooseIsolationMVArun2v2017v2DBoldDMwLT)[0]>0.5) &&
+      (_recolep_fakeable_isGenMatched[0] && _recolep_fakeable_isGenMatched[1] && (*_recotauh_isGenMatched)[0]);
+
+    bool sig_2los1tau_fake =
+      sig_2los1tau_base &&
+      ( (_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1]) || !((*_recotauh_byLooseIsolationMVArun2v2017v2DBoldDMwLT)[0]>0.5) );
 
 
     ////////////////////////////////
@@ -1757,16 +1730,20 @@ void split_tree(TString filename_in, TString filename_out,
       (_recolep_fakeable_isGenMatched[0]==1 && _recolep_fakeable_isGenMatched[1]==1 && _recolep_fakeable_isGenMatched[2]==1);
 
     bool pass_njet_3l_ttH = (_n_recoPFJet>=2 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) ) && metLD_f;
+    bool pass_njet_3l_tH = (_n_recoPFJet_btag_medium>=1 && _n_light_jet>=1);
+
+    bool is_3l_ttH_like = pass_njet_3l_ttH;
+    bool is_3l_tH_like = pass_njet_3l_tH;
+    bool is_3l_ttH_like_and_not_tH_like = pass_njet_3l_ttH && !pass_njet_3l_tH;
+    bool is_3l_tH_like_and_not_ttH_like = pass_njet_3l_tH && !pass_njet_3l_ttH;
 
     bool sig_3l_SR_ttH =
       sig_3l_SR &&
       pass_njet_3l_ttH;
 
-    bool pass_njet_3l_tH = (_n_recoPFJet_btag_medium>=1 && _n_light_jet>=1) && !pass_njet_3l_ttH;
-
     bool sig_3l_SR_tH =
       sig_3l_SR &&
-      pass_njet_3l_tH;
+      pass_njet_3l_tH && !pass_njet_3l_ttH;
 
     bool sig_3l_fake =
       sig_3l_base &&
@@ -1778,10 +1755,7 @@ void split_tree(TString filename_in, TString filename_out,
 
     bool sig_3l_fake_tH =
       sig_3l_fake &&
-      pass_njet_3l_tH;
-
-    if(sig_3l_SR_ttH || sig_3l_fake_ttH ) _is_ttH_like = true;
-    if(sig_3l_SR_tH || sig_3l_fake_tH ) _is_tH_like = true;
+      pass_njet_3l_tH && !pass_njet_3l_ttH;
 
 
     ////////////////////////////////
@@ -2183,229 +2157,357 @@ void split_tree(TString filename_in, TString filename_out,
     /////// Fill tree ////////
     //////////////////////////
 
-    if(_is_ttH_like && !_is_tH_like) _is_ttH_like_and_not_tH_like = true;
-    if(_is_tH_like && !_is_ttH_like) _is_tH_like_and_not_ttH_like = true;
 
     if (sig_2tau_SR) {
+
+      _is_ttH_like = true;
+      _is_tH_like_and_not_ttH_like = false;
+
       n_2tau_SR += 1;
       _category = 1010;
       tree_2tau_SR->Fill();
+
     }
 
     if (sig_2tau_fake) {
+
+      _is_ttH_like = true;
+      _is_tH_like_and_not_ttH_like = false;
+
       n_2tau_fake += 1;
       _category = 1020;
       tree_2tau_fake->Fill();
-    }
 
-    if (sig_2tau_DY) {
-      n_2tau_DY += 1;
-      _category = 1040;
-      tree_2tau_DY->Fill();
     }
 
     if(sig_1l1tau_SR){
+
+      _is_ttH_like = true;
+      _is_tH_like_and_not_ttH_like = false;
+
       n_1l1tau_SR += 1;
       _category = 2010;
       tree_1l1tau_SR->Fill();
+
     }
 
     if (sig_1l1tau_fake) {
+
+      _is_ttH_like = true;
+      _is_tH_like_and_not_ttH_like = false;
+
       n_1l1tau_fake += 1;
       _category = 2020;
       tree_1l1tau_fake->Fill();
+
     }
 
     if (sig_1l2tau_SR) {
+
+      _is_ttH_like = true;
+      _is_tH_like_and_not_ttH_like = false;
+
       n_1l2tau_SR += 1;
       _category = 2110;
       tree_1l2tau_SR->Fill();
+
     }
 
     if (sig_1l2tau_fake) {
+
+      _is_ttH_like = true;
+      _is_tH_like_and_not_ttH_like = false;
+
       n_1l2tau_fake += 1;
       _category = 2120;
       tree_1l2tau_fake->Fill();
+
     }
 
-    if (sig_2lss_SR_ttH) {
-      n_2lss_SR_ttH += 1;
+    if (sig_2lss_SR_ttH || sig_2lss_SR_tH) {
+
+      if (sig_2lss_SR_ttH) n_2lss_SR_ttH += 1;
+      if (sig_2lss_SR_tH)  n_2lss_SR_tH += 1;
+
+      _is_ttH_like = sig_2lss_SR_ttH;
+      _is_tH_like_and_not_ttH_like = sig_2lss_SR_tH;
+
+      tree_2lss_SR->Fill();
       _category = 3010;
-      tree_2lss_SR->Fill();
+
     }
 
-    if (sig_2lss_SR_tH) {
-      n_2lss_SR_tH += 1;
-      _category = 3011;
-      tree_2lss_SR->Fill();
-    }
 
-    if (sig_2lss_fake_ttH) {
-      n_2lss_fake_ttH += 1;
+    if (sig_2lss_fake_ttH || sig_2lss_fake_tH) {
+
+      if (sig_2lss_fake_ttH) n_2lss_fake_ttH += 1;
+      if (sig_2lss_fake_tH)  n_2lss_fake_tH += 1;
+
+      _is_ttH_like = sig_2lss_fake_ttH;
+      _is_tH_like_and_not_ttH_like = sig_2lss_fake_tH;
+
+      tree_2lss_fake->Fill();
       _category = 3020;
-      tree_2lss_fake->Fill();
     }
 
-    if (sig_2lss_fake_tH) {
-      n_2lss_fake_tH += 1;
-      _category = 3021;
-      tree_2lss_fake->Fill();
-    }
 
-    if (sig_2lss_flip_ttH) {
-      n_2lss_flip_ttH += 1;
+    if (sig_2lss_flip_ttH || sig_2lss_flip_tH) {
+
+      if (sig_2lss_flip_ttH) n_2lss_flip_ttH += 1;
+      if (sig_2lss_flip_tH)  n_2lss_flip_tH += 1;
+
+      _is_ttH_like = sig_2lss_flip_ttH;
+      _is_tH_like_and_not_ttH_like = sig_2lss_flip_tH;
+
+      tree_2lss_flip->Fill();
       _category = 3030;
-      tree_2lss_flip->Fill();
-    }
 
-    if (sig_2lss_flip_tH) {
-      n_2lss_flip_tH += 1;
-      _category = 3031;
-      tree_2lss_flip->Fill();
     }
 
     if (sig_2lss1tau_SR) {
+
+      _is_ttH_like = true;
+      _is_tH_like_and_not_ttH_like = false;
+
       n_2lss1tau_SR += 1;
       _category = 3110;
       tree_2lss1tau_SR->Fill();
+
     }
 
     if (sig_2lss1tau_fake) {
+
+      _is_ttH_like = true;
+      _is_tH_like_and_not_ttH_like = false;
+
       n_2lss1tau_fake += 1;
       _category = 3120;
       tree_2lss1tau_fake->Fill();
+
     }
 
     if (sig_2lss1tau_flip) {
+
+      _is_ttH_like = true;
+      _is_tH_like_and_not_ttH_like = false;
+
       n_2lss1tau_flip += 1;
       _category = 3130;
       tree_2lss1tau_flip->Fill();
+
     }
 
     if (sig_2los1tau_SR) {
+
+      _is_ttH_like = true;
+      _is_tH_like_and_not_ttH_like = false;
+
       n_2los1tau_SR += 1;
       _category = 3210;
       tree_2los1tau_SR->Fill();
+
     }
 
     if (sig_2los1tau_fake) {
+
+      _is_ttH_like = true;
+      _is_tH_like_and_not_ttH_like = false;
+
       n_2los1tau_fake += 1;
       _category = 3220;
       tree_2los1tau_fake->Fill();
+
     }
 
     if (sig_2l2tau_SR) {
+
+      _is_ttH_like = true;
+      _is_tH_like_and_not_ttH_like = false;
+
       n_2l2tau_SR += 1;
       _category = 3310;
       tree_2l2tau_SR->Fill();
+
     }
 
     if (sig_2l2tau_fake) {
+
+      _is_ttH_like = true;
+      _is_tH_like_and_not_ttH_like = false;
+
       n_2l2tau_fake += 1;
       _category = 3320;
       tree_2l2tau_fake->Fill();
+
     }
 
-    if(sig_3l_SR_ttH){
-      n_3l_SR_ttH += 1;
+    if (sig_3l_SR_ttH || sig_3l_SR_tH) {
+
+      if (sig_3l_SR_ttH) n_3l_SR_ttH += 1;
+      if (sig_3l_SR_tH)  n_3l_SR_tH += 1;
+
+      _is_ttH_like = sig_3l_SR_ttH;
+      _is_tH_like_and_not_ttH_like = sig_3l_SR_tH;
+      
+      tree_3l_SR->Fill();
       _category = 4010;
-      tree_3l_SR->Fill();
+
     }
 
-    if(sig_3l_SR_tH){
-      n_3l_SR_tH += 1;
-      _category = 4011;
-      tree_3l_SR->Fill();
-    }
+    if (sig_3l_fake_ttH || sig_3l_fake_tH) {
 
-    if (sig_3l_fake_ttH) {
-      n_3l_fake_ttH += 1;
+      if (sig_3l_fake_ttH) n_3l_fake_ttH += 1;
+      if (sig_3l_fake_tH)  n_3l_fake_tH += 1;
+
+      _is_ttH_like = sig_3l_fake_ttH;
+      _is_tH_like_and_not_ttH_like = sig_3l_fake_tH;
+
+      tree_3l_fake->Fill();
       _category = 4020;
-      tree_3l_fake->Fill();
     }
 
-    if (sig_3l_fake_tH) {
-      n_3l_fake_tH += 1;
-      _category = 4021;
-      tree_3l_fake->Fill();
-    }
     
     if (sig_3l1tau_SR) {
+
+      _is_ttH_like = true;
+      _is_tH_like_and_not_ttH_like = false;
+
       n_3l1tau_SR += 1;
       _category = 4110;
       tree_3l1tau_SR->Fill();
+
     }
     
     if (sig_3l1tau_fake) {
+
+      _is_ttH_like = true;
+      _is_tH_like_and_not_ttH_like = false;
+
       n_3l1tau_fake += 1;
       _category = 4120;
       tree_3l1tau_fake->Fill();
+
     }
 
     if (sig_4l_SR) {
+
+      _is_ttH_like = true;
+      _is_tH_like_and_not_ttH_like = false;
+
       n_4l_SR += 1;
       _category = 5010;
       tree_4l_SR->Fill();
+
     }
 
     if (sig_4l_fake) {
+
+      _is_ttH_like = true;
+      _is_tH_like_and_not_ttH_like = false;
+
       n_4l_fake += 1;
       _category = 5020;
       tree_4l_fake->Fill();
+
     }
 
     if (sig_ttW_CR_SR) {
+
+      _is_ttH_like = true;
+      _is_tH_like_and_not_ttH_like = false;
+
       n_ttW_CR_SR += 1;
       _category = 6010;
       tree_ttW_CR_SR->Fill();
+
     }
 
     if (sig_ttW_CR_fake) {
+
+      _is_ttH_like = true;
+      _is_tH_like_and_not_ttH_like = false;
+
       n_ttW_CR_fake += 1;
       _category = 6020;
       tree_ttW_CR_fake->Fill();
+
     }
 
     if (sig_ttW_CR_flip) {
+
+      _is_ttH_like = true;
+      _is_tH_like_and_not_ttH_like = false;
+
       n_ttW_CR_flip += 1;
       _category = 6030;
       tree_ttW_CR_flip->Fill();
+
     }
 
     if (sig_ttZ_CR_SR) {
+
+      _is_ttH_like = true;
+      _is_tH_like_and_not_ttH_like = false;
+
       n_ttZ_CR_SR += 1;
       _category = 7010;
       tree_ttZ_CR_SR->Fill();
+
     }
 
     if (sig_ttZ_CR_fake) {
+
+      _is_ttH_like = true;
+      _is_tH_like_and_not_ttH_like = false;
+
       n_ttZ_CR_fake += 1;
       _category = 7020;
       tree_ttZ_CR_fake->Fill();
+
     }
 
     if (sig_WZ_CR_SR) {
+
+      _is_ttH_like = true;
+      _is_tH_like_and_not_ttH_like = false;
+
       n_WZ_CR_SR += 1;
       _category = 8010;
       tree_WZ_CR_SR->Fill();
+
     }
 
     if (sig_WZ_CR_fake) {
+
+      _is_ttH_like = true;
+      _is_tH_like_and_not_ttH_like = false;
+
       n_WZ_CR_fake += 1;
       _category = 8020;
       tree_WZ_CR_fake->Fill();
+
     }
 
     if (sig_ZZ_CR_SR) {
+
+      _is_ttH_like = true;
+      _is_tH_like_and_not_ttH_like = false;
+
       n_ZZ_CR_SR += 1;
       _category = 9010;
       tree_ZZ_CR_SR->Fill();
+
     }
     
     if (sig_ZZ_CR_fake) {
+
+      _is_ttH_like = true;
+      _is_tH_like_and_not_ttH_like = false;
+
       n_ZZ_CR_fake += 1;
       _category = 9020;
       tree_ZZ_CR_fake->Fill();
+
     }
 
 
@@ -2425,7 +2527,6 @@ void split_tree(TString filename_in, TString filename_out,
   cout<<" "<<endl;
   cout<<"2tau SR: "<<n_2tau_SR<<endl;
   cout<<"2tau fake: "<<n_2tau_fake<<endl;
-  cout<<"2tau DY: "<<n_2tau_DY<<endl;
   cout<<" "<<endl;
   cout<<"1l1tau SR: "<<n_1l1tau_SR<<endl;
   cout<<"1l1tau fake: "<<n_1l1tau_fake<<endl; 
@@ -2476,8 +2577,8 @@ void split_tree(TString filename_in, TString filename_out,
 
 void test16(){
 
-  TString fin = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2016/sync_ntuple_converted_ttHNonbb_2016_v11.root";
-  TString fout = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_splitted/2016/sync_ntuple_splitted_ttHNonbb_2016_v1.root";
+  TString fin = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2016/sync_ntuple_converted_ttHNonbb_2016_v13.root";
+  TString fout = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_splitted/2016/sync_ntuple_splitted_ttHNonbb_2016_v3.root";
 
   split_tree(fin,fout,0,0,true);
 
@@ -2485,8 +2586,8 @@ void test16(){
 
 void test17(){
 
-  TString fin = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2017/sync_ntuple_converted_ttHNonbb_2017_v6.root";
-  TString fout = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_splitted/2017/sync_ntuple_splitted_ttHNonbb_2017_v1.root";
+  TString fin = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2017/sync_ntuple_converted_ttHNonbb_2017_v8.root";
+  TString fout = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_splitted/2017/sync_ntuple_splitted_ttHNonbb_2017_v3.root";
 
   split_tree(fin,fout,0,0,true);
 
@@ -2494,8 +2595,8 @@ void test17(){
 
 void test18(){
 
-  TString fin = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2018/sync_ntuple_converted_ttHNonbb_2018_v5.root";
-  TString fout = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_splitted/2018/sync_ntuple_splitted_ttHNonbb_2018_v1.root";
+  TString fin = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2018/sync_ntuple_converted_ttHNonbb_2018_v7.root";
+  TString fout = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_splitted/2018/sync_ntuple_splitted_ttHNonbb_2018_v3.root";
 
   split_tree(fin,fout,0,0,true);
 
