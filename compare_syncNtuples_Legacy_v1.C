@@ -416,20 +416,20 @@ void compareSyncNtuples()
 
   //TH1::AddDirectory(false);
 
-  //std::string inputFilePath_ref = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_groups";
-  //std::string inputFileName_ref = "sync_Tallinn_2017_v3.root";
-  std::string inputFilePath_ref = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_syncformat/2017";
-  std::string inputFileName_ref = "sync_ntuple_objects_syncformat_ttHNonbb_2017_v5.root";
+  std::string inputFilePath_ref = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_groups/objects/2017/";
+  std::string inputFileName_ref = "sync_Tallinn_2017_v9.root";
+  //std::string inputFilePath_ref = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_syncformat/2017";
+  //std::string inputFileName_ref = "sync_ntuple_objects_syncformat_ttHNonbb_2017_v5.root";
   TFile* inputFile_ref = openFile(inputFilePath_ref, inputFileName_ref);
   std::string treeName_ref = "syncTree";
   TTree* tree_ref = loadTree(inputFile_ref, treeName_ref);
-  std::string legendEntry_ref = "LLR";
+  std::string legendEntry_ref = "Tallinn";
   //std::string legendEntry_ref = "Tallinn";
   std::string selection_ref = "n_presel_jet >= 1";
 
-  std::string inputFilePath_test = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_groups/2017";
-  std::string inputFileName_test = "IHEP_ttHsync_2017_V4.root"; 
-  std::string legendEntry_test = "IHEP";
+  std::string inputFilePath_test = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_groups/objects/2017/";
+  std::string inputFileName_test = "synchTuples_2017_v5_CERN.root"; 
+  std::string legendEntry_test = "CERN";
   //std::string inputFileName_test = "sync_Tallinn_2017_v3.root";
   //std::string legendEntry_test = "Tallinn"; 
   //std::string inputFileName_test = "syncTree_TTH_Sergio.root";
@@ -440,7 +440,7 @@ void compareSyncNtuples()
   TTree* tree_test = loadTree(inputFile_test, treeName_test);
   std::string selection_test = "n_presel_jet >= 1";
 
-  std::string outputFilePath = "../plots_sync/2017/objects_LLRv5_IHEPv4";
+  std::string outputFilePath = "../plots_sync/2017/plots2017/";
   //std::string outputFilePath = "../plots_sync/2017/objects_LLRv3_Tallinnv3";
   //std::string outputFilePath = "../plots_sync/2017/objects_IHEPv1_Tallinnv3";
   //std::string outputFilePath = "../plots_sync/objects_LLRv4_CERNv1"; 

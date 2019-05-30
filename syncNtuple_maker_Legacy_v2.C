@@ -1598,18 +1598,17 @@ void create_syncNtuple_eventbased(int year=2016){
   else if(year==2018) dir_out+="events/2018/";
 
   TString file;
-  if(year==2016) file="sync_ntuple_events_syncformat_ttHNonbb_2016_v1.root";
-  else if(year==2017) file="sync_ntuple_events_syncformat_ttHNonbb_2017_v1.root";
-  else if(year==2018) file="sync_ntuple_events_syncformat_ttHNonbb_2018_v1.root";
+  if(year==2016) file="sync_ntuple_events_syncformat_ttHNonbb_2016_v3.root";
+  else if(year==2017) file="sync_ntuple_events_syncformat_ttHNonbb_2017_v3.root";
+  else if(year==2018) file="sync_ntuple_events_syncformat_ttHNonbb_2018_v3.root";
 
   vector<TString> list;
-  if(year==2016) list.push_back(dir_in+"sync_ntuple_splitted_ttHNonbb_2016_v1.root");
-  else if(year==2017) list.push_back(dir_in+"sync_ntuple_splitted_ttHNonbb_2017_v1.root");
-  else if(year==2018) list.push_back(dir_in+"sync_ntuple_splitted_ttHNonbb_2018_v1.root");
+  if(year==2016) list.push_back(dir_in+"sync_ntuple_splitted_ttHNonbb_2016_v3.root");
+  else if(year==2017) list.push_back(dir_in+"sync_ntuple_splitted_ttHNonbb_2017_v3.root");
+  else if(year==2018) list.push_back(dir_in+"sync_ntuple_splitted_ttHNonbb_2018_v3.root");
 
   TChain * tree_2tau_SR = new TChain ("HTauTauTree_2tau_SR");
   TChain * tree_2tau_fake = new TChain ("HTauTauTree_2tau_fake");
-  TChain * tree_2tau_DY = new TChain ("HTauTauTree_2tau_DY");
   TChain * tree_1l1tau_SR = new TChain ("HTauTauTree_1l1tau_SR");
   TChain * tree_1l1tau_fake = new TChain ("HTauTauTree_1l1tau_fake");
   TChain * tree_1l2tau_SR = new TChain ("HTauTauTree_1l2tau_SR");
@@ -1643,7 +1642,6 @@ void create_syncNtuple_eventbased(int year=2016){
   vector<TChain*> tree;
   tree.push_back(tree_2tau_SR);
   tree.push_back(tree_2tau_fake);
-  tree.push_back(tree_2tau_DY);
   tree.push_back(tree_1l1tau_SR);
   tree.push_back(tree_1l1tau_fake);
   tree.push_back(tree_1l2tau_SR);
@@ -1680,7 +1678,6 @@ void create_syncNtuple_eventbased(int year=2016){
   for(int i=0;i<nFiles;i++){
     tree_2tau_SR->Add(list[i]);
     tree_2tau_fake->Add(list[i]);
-    tree_2tau_DY->Add(list[i]);
     tree_1l1tau_SR->Add(list[i]);
     tree_1l1tau_fake->Add(list[i]);
     tree_1l2tau_SR->Add(list[i]);
@@ -1722,7 +1719,6 @@ void create_syncNtuple_eventbased(int year=2016){
 
   TTree* tree_new_2tau_SR = new TTree("syncTree_0l2tau_SR","syncTree_0l2tau_SR");
   TTree* tree_new_2tau_fake = new TTree("syncTree_0l2tau_Fake","syncTree_0l2tau_Fake");
-  TTree* tree_new_2tau_DY = new TTree("syncTree_0l2tau_DY","syncTree_0l2tau_DY");
   TTree* tree_new_1l1tau_SR = new TTree("syncTree_1l1tau_SR","syncTree_1l1tau_SR");
   TTree* tree_new_1l1tau_fake = new TTree("syncTree_1l1tau_Fake","syncTree_1l1tau_Fake");
   TTree* tree_new_1l2tau_SR = new TTree("syncTree_1l2tau_SR","syncTree_1l2tau_SR");
@@ -1756,7 +1752,6 @@ void create_syncNtuple_eventbased(int year=2016){
   vector<TTree*> tree_new;
   tree_new.push_back(tree_new_2tau_SR);
   tree_new.push_back(tree_new_2tau_fake);
-  tree_new.push_back(tree_new_2tau_DY);
   tree_new.push_back(tree_new_1l1tau_SR);
   tree_new.push_back(tree_new_1l1tau_fake);
   tree_new.push_back(tree_new_1l2tau_SR);
@@ -1792,6 +1787,7 @@ void create_syncNtuple_eventbased(int year=2016){
   int _ls;
   int _run;
 
+  bool _is_ttH_like;
   bool _is_tH_like_and_not_ttH_like;
 
   int _n_presel_mu;
@@ -2059,7 +2055,8 @@ void create_syncNtuple_eventbased(int year=2016){
      tree_new[i]->Branch("nEvent",   &_nEvent,    "nEvent/L");
      tree_new[i]->Branch("ls",       &_ls,        "ls/I");
      tree_new[i]->Branch("run",      &_run,       "run/I");
-
+ 
+     tree_new[i]->Branch("is_ttH_like",  &_is_ttH_like,  "is_ttH_like/O");
      tree_new[i]->Branch("is_tH_like_and_not_ttH_like",  &_is_tH_like_and_not_ttH_like,  "is_tH_like_and_not_ttH_like/O");
 
      tree_new[i]->Branch("n_presel_mu",      &_n_presel_mu,      "n_presel_mu/I");
@@ -2469,6 +2466,7 @@ void create_syncNtuple_eventbased(int year=2016){
   for(unsigned int i=0;i<tree.size();i++){
 
     tree[i]->SetBranchAddress("category",&_category);
+    tree[i]->SetBranchAddress("is_ttH_like",&_is_ttH_like);
     tree[i]->SetBranchAddress("is_tH_like_and_not_ttH_like",&_is_tH_like_and_not_ttH_like);
 
     tree[i]->SetBranchAddress("n_recotauh_sel",&_n_recotauh_sel);
@@ -2912,6 +2910,7 @@ void create_syncNtuple_eventbased(int year=2016){
 
     _category = 0;
     _n_recotauh_sel = 0;
+    _is_ttH_like = 0;
     _is_tH_like_and_not_ttH_like = 0;
     
     _recomu_pt      = 0;
@@ -3380,7 +3379,6 @@ void create_syncNtuple_eventbased(int year=2016){
 
     if(_category==1010) tree_new_2tau_SR->Fill();
     if(_category==1020) tree_new_2tau_fake->Fill();
-    if(_category==1040) tree_new_2tau_DY->Fill();
 
     if(_category==2010) tree_new_1l1tau_SR->Fill();
     if(_category==2020) tree_new_1l1tau_fake->Fill();
@@ -3388,9 +3386,9 @@ void create_syncNtuple_eventbased(int year=2016){
     if(_category==2110) tree_new_1l2tau_SR->Fill();
     if(_category==2120) tree_new_1l2tau_fake->Fill();
 
-    if(_category==3010 || _category==3011) tree_new_2lss_SR->Fill();
-    if(_category==3020 || _category==3021) tree_new_2lss_fake->Fill();
-    if(_category==3030 || _category==3031) tree_new_2lss_flip->Fill();
+    if(_category==3010) tree_new_2lss_SR->Fill();
+    if(_category==3020) tree_new_2lss_fake->Fill();
+    if(_category==3030) tree_new_2lss_flip->Fill();
 
     if(_category==3110) tree_new_2lss1tau_SR->Fill();
     if(_category==3120) tree_new_2lss1tau_fake->Fill();
@@ -3402,8 +3400,8 @@ void create_syncNtuple_eventbased(int year=2016){
     if(_category==3310) tree_new_2l2tau_SR->Fill();
     if(_category==3320) tree_new_2l2tau_fake->Fill();
 
-    if(_category==4010 || _category==4011) tree_new_3l_SR->Fill();
-    if(_category==4020 || _category==4021) tree_new_3l_fake->Fill();
+    if(_category==4010) tree_new_3l_SR->Fill();
+    if(_category==4020) tree_new_3l_fake->Fill();
 
     if(_category==4110) tree_new_3l1tau_SR->Fill();
     if(_category==4120) tree_new_3l1tau_fake->Fill();

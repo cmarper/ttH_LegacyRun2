@@ -73,6 +73,7 @@ void split_tree(TString filename_in, TString filename_out,
   vector<bool>  *_recolep_ismvasel;
   vector<bool>  *_recolep_tightcharge;
   vector<bool>  *_recolep_isGenMatched;
+  vector<bool>  *_recolep_isGenChargeMatched;
   vector<int>   *_recolep_genMatchInd;
 
   vector<int>   *_recomu_charge;
@@ -87,6 +88,7 @@ void split_tree(TString filename_in, TString filename_out,
   vector<bool>  *_recomu_ismvasel;
   vector<bool>  *_recomu_isfakeable;
   vector<bool>  *_recomu_isGenMatched;
+  vector<bool>  *_recomu_isGenChargeMatched;
   vector<int>   *_recomu_genMatchInd;
   vector<float> *_recomu_rel_error_trackpt;
 
@@ -102,6 +104,7 @@ void split_tree(TString filename_in, TString filename_out,
   vector<bool>  *_recoele_ismvasel;
   vector<bool>  *_recoele_isfakeable;
   vector<bool>  *_recoele_isGenMatched;
+  vector<bool>  *_recoele_isGenChargeMatched;
   vector<int>   *_recoele_genMatchInd;
   vector<bool>  *_recoele_isChargeConsistent;
 
@@ -169,6 +172,7 @@ void split_tree(TString filename_in, TString filename_out,
   tree->SetBranchAddress("recolep_tightcharge",&_recolep_tightcharge);
   tree->SetBranchAddress("recolep_isGenMatched",&_recolep_isGenMatched);
   tree->SetBranchAddress("recolep_genMatchInd",&_recolep_genMatchInd);
+  tree->SetBranchAddress("recolep_isGenChargeMatched",&_recolep_isGenChargeMatched);
 
   tree->SetBranchAddress("recomu_charge",&_recomu_charge);
   tree->SetBranchAddress("recomu_e",&_recomu_e);
@@ -182,6 +186,7 @@ void split_tree(TString filename_in, TString filename_out,
   tree->SetBranchAddress("recomu_isfakeable",&_recomu_isfakeable);
   tree->SetBranchAddress("recomu_ismvasel",&_recomu_ismvasel);
   tree->SetBranchAddress("recomu_isGenMatched",&_recomu_isGenMatched);
+  tree->SetBranchAddress("recomu_isGenChargeMatched",&_recomu_isGenChargeMatched);
   tree->SetBranchAddress("recomu_genMatchInd",&_recomu_genMatchInd);
   tree->SetBranchAddress("recomu_rel_error_trackpt",&_recomu_rel_error_trackpt);
 
@@ -197,6 +202,7 @@ void split_tree(TString filename_in, TString filename_out,
   tree->SetBranchAddress("recoele_isfakeable",&_recoele_isfakeable);
   tree->SetBranchAddress("recoele_ismvasel",&_recoele_ismvasel);
   tree->SetBranchAddress("recoele_isGenMatched",&_recoele_isGenMatched);
+  tree->SetBranchAddress("recoele_isGenChargeMatched",&_recoele_isGenChargeMatched);
   tree->SetBranchAddress("recoele_genMatchInd",&_recoele_genMatchInd);
   tree->SetBranchAddress("recoele_isChargeConsistent",&_recoele_isChargeConsistent);
 
@@ -520,6 +526,7 @@ void split_tree(TString filename_in, TString filename_out,
   vector<bool>  _recolep_fakeable_tightcharge;
   vector<bool>  _recolep_fakeable_isGenMatched;
   vector<int>   _recolep_fakeable_genMatchInd;
+  vector<bool>  _recolep_fakeable_isGenChargeMatched;
 
   vector<int>   _recolep_sel_charge;
   vector<int>   _recolep_sel_pdg;
@@ -539,6 +546,7 @@ void split_tree(TString filename_in, TString filename_out,
   vector<bool>  _recolep_sel_ismvasel;
   vector<bool>  _recolep_sel_tightcharge;
   vector<bool>  _recolep_sel_isGenMatched;
+  vector<bool>  _recolep_sel_isGenChargeMatched;
   vector<int>   _recolep_sel_genMatchInd;
 
   int _n_fakeable_tau;
@@ -662,6 +670,7 @@ void split_tree(TString filename_in, TString filename_out,
     tree_new[i]->Branch("recolep_sel_ismvasel",&_recolep_sel_ismvasel);
     tree_new[i]->Branch("recolep_sel_tightcharge",&_recolep_sel_tightcharge);
     tree_new[i]->Branch("recolep_sel_isGenMatched",&_recolep_sel_isGenMatched);
+    tree_new[i]->Branch("recolep_sel_isGenChargeMatched",&_recolep_sel_isGenChargeMatched);
     tree_new[i]->Branch("recolep_sel_genMatchInd",&_recolep_sel_genMatchInd);
 
     tree_new[i]->Branch("n_fakeable_tau",&_n_fakeable_tau);
@@ -795,6 +804,7 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_fakeable_ismvasel.clear();
     _recolep_fakeable_tightcharge.clear();
     _recolep_fakeable_isGenMatched.clear();
+    _recolep_fakeable_isGenChargeMatched.clear();
     _recolep_fakeable_genMatchInd.clear();
 
     _recolep_sel_charge.clear();
@@ -815,6 +825,7 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_ismvasel.clear();
     _recolep_sel_tightcharge.clear();
     _recolep_sel_isGenMatched.clear();
+    _recolep_sel_isGenChargeMatched.clear();
     _recolep_sel_genMatchInd.clear();
 
     _n_fakeable_tau = 0;
@@ -937,6 +948,7 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_ismvasel = 0;
     _recolep_tightcharge = 0;
     _recolep_isGenMatched = 0;
+    _recolep_isGenChargeMatched = 0;
     _recolep_genMatchInd = 0;
 
     _recomu_charge = 0;
@@ -951,6 +963,7 @@ void split_tree(TString filename_in, TString filename_out,
     _recomu_ismvasel = 0;
     _recomu_isfakeable = 0;
     _recomu_isGenMatched = 0;
+    _recomu_isGenChargeMatched = 0;
     _recomu_genMatchInd = 0;
     _recomu_rel_error_trackpt = 0;
 
@@ -966,6 +979,7 @@ void split_tree(TString filename_in, TString filename_out,
     _recoele_ismvasel = 0;
     _recoele_isfakeable = 0;
     _recoele_isGenMatched = 0;
+    _recoele_isGenChargeMatched = 0;
     _recoele_genMatchInd = 0;
     _recoele_isChargeConsistent = 0;
 
@@ -1040,6 +1054,7 @@ void split_tree(TString filename_in, TString filename_out,
     ////////// Trigger selections //////////
     ////////////////////////////////////////
 
+    //cout<<" --- "<<endl;
     bool pass_e   = pass_trigger_list_1e(_triggerbit);
     bool pass_m   = pass_trigger_list_1m(_triggerbit);
     bool pass_2e  = pass_trigger_list_2e(_triggerbit); 
@@ -1086,6 +1101,7 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_fakeable_ismvasel.push_back((*_recolep_ismvasel)[i_lep]);
         _recolep_fakeable_tightcharge.push_back((*_recolep_tightcharge)[i_lep]);
         _recolep_fakeable_isGenMatched.push_back((*_recolep_isGenMatched)[i_lep]);
+        _recolep_fakeable_isGenChargeMatched.push_back((*_recolep_isGenChargeMatched)[i_lep]);
         _recolep_fakeable_genMatchInd.push_back((*_recolep_genMatchInd)[i_lep]);
 
       }
@@ -1308,6 +1324,7 @@ void split_tree(TString filename_in, TString filename_out,
       for(int i_lep2=i_lep1+1; i_lep2<_n_loose_lep; i_lep2++){
         TLorentzVector lep2;
         lep2.SetPtEtaPhiE((*_recolep_pt)[i_lep2],(*_recolep_eta)[i_lep2],(*_recolep_phi)[i_lep2],(*_recolep_e)[i_lep2]);
+
         float m_ll = (lep1 + lep2).M();
 
         if((*_recolep_pdg)[i_lep1]==-(*_recolep_pdg)[i_lep2] && ((*_recolep_isfakeable)[i_lep1] && (*_recolep_isfakeable)[i_lep2])) 
@@ -1322,13 +1339,13 @@ void split_tree(TString filename_in, TString filename_out,
           }
         }
 
-        if((*_recolep_pdg)[i_lep1]==-(*_recolep_pdg)[i_lep2]){
+        if( (*_recolep_pdg)[i_lep1] == -(*_recolep_pdg)[i_lep2] ){
           if(fabs(m_ll-91.2)<10) {
             inv_mass_Z_SFOS=false;
           }
         }
 
-        if(abs((*_recolep_pdg)[i_lep1]) == 11 && abs((*_recolep_pdg)[i_lep2]) == 11){
+        if( (abs((*_recolep_pdg)[i_lep1])==11) && (abs((*_recolep_pdg)[i_lep2])==11) ){
           if(fabs(m_ll-91.2)<10) {
             inv_mass_Z_ee=false;
           }
@@ -1476,6 +1493,7 @@ void split_tree(TString filename_in, TString filename_out,
     //////////// 2lss  /////////////
     ////////////////////////////////
 
+    //if(_EventNumber == 2548080 || _EventNumber == 2798872 || _EventNumber==1542634) cout<<"hello pass_2m"<<pass_2m<<endl;
     bool passTriggers_2lep0tau = (pass_e || pass_m || pass_2e || pass_2m || pass_em);
 
     bool metLD_e = true;
@@ -1489,20 +1507,34 @@ void split_tree(TString filename_in, TString filename_out,
       (_n_tight_lep<=2) &&
       (_recolep_fakeable_tightcharge[0]==1 && _recolep_fakeable_tightcharge[1]==1) &&
       (_n_tight_WPL_tau==0) &&
-      inv_mass_Z_ee_fakeable && 
+      //inv_mass_Z_ee_fakeable && 
+      inv_mass_Z_SFOS && 
       metLD_e;
 
     bool sig_2lss_SR =
       sig_2lss_base &&
       (_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1]) &&
       ((_recolep_fakeable_charge[0]*_recolep_fakeable_charge[1])>0) &&
-      _recolep_fakeable_isGenMatched[0] && _recolep_fakeable_isGenMatched[1];
+      _recolep_fakeable_isGenMatched[0] && _recolep_fakeable_isGenMatched[1] &&
+      _recolep_fakeable_isGenChargeMatched[0] && _recolep_fakeable_isGenChargeMatched[1];
 
     bool pass_njet_2l_ttH = (_n_recoPFJet>=4 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) );
-    bool pass_njet_2l_tH = (_n_recoPFJet_btag_medium>=1 &&  _n_light_jet>=1);
+    bool pass_njet_2l_tH = (_n_recoPFJet_btag_medium>=1 && _n_light_jet>=1);
+
+   /*bool passmu1 = _triggerbit & (long(1) << 40);
+   bool passmu2 = _triggerbit & (long(1) << 41);
+   bool passmu3 = _triggerbit & (long(1) << 42);
+   bool passmu4 = _triggerbit & (long(1) << 43);*/
+
+  /* if(_EventNumber == 2548080 || _EventNumber == 2798872 || _EventNumber==1542634){ 
+     cout<<"hey!"<<passTriggers_2lep0tau<<" "<<pass_e<<" "<<pass_m<<" "<<pass_em<<" "<<pass_2m<<" "<<pass_2e<<endl;
+     cout<<"  "<<passmu1<<" "<<passmu2<<" "<<passmu3<<" "<<passmu4<<endl;
+   }*/
 
     bool is_2l_ttH_like = pass_njet_2l_ttH;
     bool is_2l_tH_like_and_not_ttH_like = pass_njet_2l_tH && !pass_njet_2l_ttH;
+
+    //if(_EventNumber == 1665341 || _EventNumber == 3818026) cout<<"here jets "<<_n_recoPFJet<<",pass tH"<<is_2l_tH_like_and_not_ttH_like<<endl;
 
     bool sig_2lss_SR_ttH =
       sig_2lss_SR &&
@@ -1512,10 +1544,23 @@ void split_tree(TString filename_in, TString filename_out,
       sig_2lss_SR &&
       pass_njet_2l_tH && !pass_njet_2l_ttH;
 
+   /*if(_EventNumber==1903492 || _EventNumber==2331156 || _EventNumber==428278){
+     cout<<"event "<<_EventNumber<<endl;
+     cout<<"mva sel "<<_recolep_fakeable_ismvasel[0]<<" "<<_recolep_fakeable_ismvasel[1]<<endl;
+     cout<<"charge "<<_recolep_fakeable_charge[0]<<" "<<_recolep_fakeable_charge[1]<<endl;
+     cout<<"gen "<<_recolep_fakeable_isGenMatched[0]<<" "<<_recolep_fakeable_isGenMatched[1]<<endl;
+     cout<<"gen charge "<<_recolep_fakeable_isGenChargeMatched[0]<<" "<<_recolep_fakeable_isGenChargeMatched[1]<<endl;
+     cout<<"pass_njet_2l_ttH "<<pass_njet_2l_ttH<<endl;
+     cout<<"pass_njet_2l_tH "<<pass_njet_2l_tH<<endl;
+     cout<<sig_2lss_SR_ttH<<" "<<sig_2lss_SR_tH<<endl;
+   }*/
+
     bool sig_2lss_fake =
       sig_2lss_base &&
       ((_recolep_fakeable_charge[0]*_recolep_fakeable_charge[1])>0) &&
-      !(_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1]);
+      !(_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1]) &&
+      _recolep_fakeable_isGenMatched[0] && _recolep_fakeable_isGenMatched[1] &&
+      _recolep_fakeable_isGenChargeMatched[0] && _recolep_fakeable_isGenChargeMatched[1];
 
     bool sig_2lss_fake_ttH =
       sig_2lss_fake &&
@@ -1530,7 +1575,8 @@ void split_tree(TString filename_in, TString filename_out,
       (_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1]) &&
       ((_recolep_fakeable_charge[0]*_recolep_fakeable_charge[1])<0) &&
       (abs(_recolep_fakeable_pdg[0])==11 || abs(_recolep_fakeable_pdg[1])==11) &&
-      _recolep_fakeable_isGenMatched[0] && _recolep_fakeable_isGenMatched[1];
+      _recolep_fakeable_isGenMatched[0] && _recolep_fakeable_isGenMatched[1] &&
+      _recolep_fakeable_isGenChargeMatched[0] && _recolep_fakeable_isGenChargeMatched[1];
 
     bool sig_2lss_flip_ttH =
       sig_2lss_flip &&
@@ -1565,6 +1611,7 @@ void split_tree(TString filename_in, TString filename_out,
       (_n_tight_WPL_tau>=1) && (*_recotauh_byLooseIsolationMVArun2v2017v2DBoldDMwLT)[0] &&
       ((_recolep_fakeable_charge[0]*(*_recotauh_charge)[0])<0) &&
       (_recolep_fakeable_isGenMatched[0] && _recolep_fakeable_isGenMatched[1]) &&
+      (_recolep_fakeable_isGenChargeMatched[0] && _recolep_fakeable_isGenChargeMatched[1]) &&
       (_n_recoPFJet>=3 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) );
 
     bool sig_2lss1tau_fake =
@@ -1685,7 +1732,8 @@ void split_tree(TString filename_in, TString filename_out,
 
     bool sig_3l_fake =
       sig_3l_base &&
-      !(_recolep_fakeable_ismvasel[0]==1 && _recolep_fakeable_ismvasel[1]==1 && _recolep_fakeable_ismvasel[2]==1);
+      !(_recolep_fakeable_ismvasel[0]==1 && _recolep_fakeable_ismvasel[1]==1 && _recolep_fakeable_ismvasel[2]==1) &&
+      (_recolep_fakeable_isGenMatched[0]==1 && _recolep_fakeable_isGenMatched[1]==1 && _recolep_fakeable_isGenMatched[2]==1);
 
     bool sig_3l_fake_ttH =
       sig_3l_fake &&
@@ -1745,8 +1793,8 @@ void split_tree(TString filename_in, TString filename_out,
 
     bool sig_4l_fake =
       sig_4l_base &&
-      !(_recolep_fakeable_ismvasel[0]==1 && _recolep_fakeable_ismvasel[1]==1 && _recolep_fakeable_ismvasel[2]==1 && _recolep_fakeable_ismvasel[3]==1);  
-
+      !(_recolep_fakeable_ismvasel[0]==1 && _recolep_fakeable_ismvasel[1]==1 && _recolep_fakeable_ismvasel[2]==1 && _recolep_fakeable_ismvasel[3]==1) &&
+      (_recolep_fakeable_isGenMatched[0] && _recolep_fakeable_isGenMatched[1] && _recolep_fakeable_isGenMatched[2] && _recolep_fakeable_isGenMatched[3]);
  
     //////////////////////////////
     //////////// ttW /////////////
@@ -1769,6 +1817,7 @@ void split_tree(TString filename_in, TString filename_out,
       (_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1]) &&
       ((_recolep_fakeable_charge[0]*_recolep_fakeable_charge[1])>0) &&
       _recolep_fakeable_isGenMatched[0] && _recolep_fakeable_isGenMatched[1] &&
+      _recolep_fakeable_isGenChargeMatched[0] && _recolep_fakeable_isGenChargeMatched[1] &&
       (_n_recoPFJet==3) && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) ;
 
     bool sig_ttW_CR_fake =
@@ -1919,6 +1968,7 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_ismvasel.clear();
     _recolep_sel_tightcharge.clear();
     _recolep_sel_isGenMatched.clear();
+    _recolep_sel_isGenChargeMatched.clear();
     _recolep_sel_genMatchInd.clear();
 
     for(int i_lep = 0; i_lep<nlep; i_lep++){
@@ -1941,6 +1991,7 @@ void split_tree(TString filename_in, TString filename_out,
       _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
       _recolep_sel_tightcharge.push_back(_recolep_fakeable_tightcharge[i_lep]);
       _recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
+      _recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
       _recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
 
     }
@@ -2105,8 +2156,8 @@ void split_tree(TString filename_in, TString filename_out,
       _is_ttH_like = sig_2lss_SR_ttH;
       _is_tH_like_and_not_ttH_like = sig_2lss_SR_tH;
 
-      tree_2lss_SR->Fill();
       _category = 3010;
+      tree_2lss_SR->Fill();
 
     }
 
@@ -2119,8 +2170,8 @@ void split_tree(TString filename_in, TString filename_out,
       _is_ttH_like = sig_2lss_fake_ttH;
       _is_tH_like_and_not_ttH_like = sig_2lss_fake_tH;
 
-      tree_2lss_fake->Fill();
       _category = 3020;
+      tree_2lss_fake->Fill();
     }
 
 
@@ -2132,8 +2183,8 @@ void split_tree(TString filename_in, TString filename_out,
       _is_ttH_like = sig_2lss_flip_ttH;
       _is_tH_like_and_not_ttH_like = sig_2lss_flip_tH;
 
-      tree_2lss_flip->Fill();
       _category = 3030;
+      tree_2lss_flip->Fill();
 
     }
 
@@ -2221,9 +2272,9 @@ void split_tree(TString filename_in, TString filename_out,
 
       _is_ttH_like = sig_3l_SR_ttH;
       _is_tH_like_and_not_ttH_like = sig_3l_SR_tH;
-      
+
+      _category = 4010;      
       tree_3l_SR->Fill();
-      _category = 4010;
 
     }
 
@@ -2235,8 +2286,8 @@ void split_tree(TString filename_in, TString filename_out,
       _is_ttH_like = sig_3l_fake_ttH;
       _is_tH_like_and_not_ttH_like = sig_3l_fake_tH;
 
-      tree_3l_fake->Fill();
       _category = 4020;
+      tree_3l_fake->Fill();
     }
 
     
@@ -2450,7 +2501,7 @@ void split_tree(TString filename_in, TString filename_out,
 
 void test16(){
 
-  TString fin = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2016/sync_ntuple_converted_ttHNonbb_2016_v13.root";
+  TString fin = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2016/sync_ntuple_converted_ttHNonbb_2016_v14.root";
   TString fout = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_splitted/2016/sync_ntuple_splitted_ttHNonbb_2016_v3.root";
 
   split_tree(fin,fout,0,0,true,2016);
@@ -2459,7 +2510,7 @@ void test16(){
 
 void test17(){
 
-  TString fin = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2017/sync_ntuple_converted_ttHNonbb_2017_v8.root";
+  TString fin = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2017/sync_ntuple_converted_ttHNonbb_2017_v9.root";
   TString fout = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_splitted/2017/sync_ntuple_splitted_ttHNonbb_2017_v3.root";
 
   split_tree(fin,fout,0,0,true,2017);
@@ -2468,7 +2519,7 @@ void test17(){
 
 void test18(){
 
-  TString fin = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2018/sync_ntuple_converted_ttHNonbb_2018_v7.root";
+  TString fin = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2018/sync_ntuple_converted_ttHNonbb_2018_v8.root";
   TString fout = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_splitted/2018/sync_ntuple_splitted_ttHNonbb_2018_v3.root";
 
   split_tree(fin,fout,0,0,true,2018);

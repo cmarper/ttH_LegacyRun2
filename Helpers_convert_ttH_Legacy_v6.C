@@ -345,25 +345,25 @@ void convert_tree(
 
   if(sample=="sync16"){
 
-    file="sync_ntuple_converted_ttHNonbb_2016_v11";
+    file="sync_ntuple_converted_ttHNonbb_2016_v14";
     dir_out="/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2016/";
-    list.push_back("/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_LLRHtautau/2016/sync_ntuple_LLRHtautau_ttHNonbb_2016_v8.root");
+    list.push_back("/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_LLRHtautau/2016/sync_ntuple_LLRHtautau_ttHNonbb_2016_v9.root");
 
   }
 
   else if(sample=="sync17"){
 
-    file="sync_ntuple_converted_ttHNonbb_2017_v6";
+    file="sync_ntuple_converted_ttHNonbb_2017_v9";
     dir_out="/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2017/";
-    list.push_back("/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_LLRHtautau/2017/sync_ntuple_LLRHtautau_ttHNonbb_2017_v4.root");
+    list.push_back("/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_LLRHtautau/2017/sync_ntuple_LLRHtautau_ttHNonbb_2017_v5.root");
 
   }
 
   else if(sample=="sync18"){
 
-    file="sync_ntuple_converted_ttHNonbb_2018_v5";
+    file="sync_ntuple_converted_ttHNonbb_2018_v8";
     dir_out="/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2018/";
-    list.push_back("/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_LLRHtautau/2018/sync_ntuple_LLRHtautau_ttHNonbb_2018_v3.root");
+    list.push_back("/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_LLRHtautau/2018/sync_ntuple_LLRHtautau_ttHNonbb_2018_v4.root");
 
   }
 
@@ -1956,7 +1956,7 @@ void convert_tree(
   vector<float> *_daughters_pt_corr;//corrected pt
   vector<float> *_daughters_energy_corr;//corrected energy
 
-  vector<int>   * _daughters_TauUpExists;
+  vector<int>   *_daughters_TauUpExists;
   vector<float> *_daughters_e_TauUp;
   vector<float> *_daughters_px_TauUp;
   vector<float> *_daughters_py_TauUp;
@@ -2222,6 +2222,7 @@ void convert_tree(
   vector<float> _recomu_fakerate_ttbar_MC;
   vector<bool>  _recomu_isGenMatched;
   vector<int>   _recomu_genMatchInd;
+  vector<bool>  _recomu_isGenChargeMatched;
   vector<int>   _recomu_matchedJetIndex;
 
   int _n_recoele_presel;
@@ -2290,6 +2291,7 @@ void convert_tree(
   vector<float> _recoele_QFrate; 
   vector<bool>  _recoele_isGenMatched;
   vector<int>   _recoele_genMatchInd;
+  vector<bool>  _recoele_isGenChargeMatched;
   vector<int>   _recoele_matchedJetIndex;
 
   int _n_recolep_presel;
@@ -2324,6 +2326,7 @@ void convert_tree(
   vector<bool>  _recolep_tightcharge;
   vector<bool>  _recolep_eleconv_misshits;
   vector<bool>  _recolep_isGenMatched;
+  vector<bool>  _recolep_isGenChargeMatched;
   vector<int>   _recolep_genMatchInd;
 
 
@@ -2843,6 +2846,7 @@ void convert_tree(
   tree_new->Branch("recomu_fakerate_ttbar_MC",&_recomu_fakerate_ttbar_MC);
   tree_new->Branch("recomu_isGenMatched",&_recomu_isGenMatched);
   tree_new->Branch("recomu_genMatchInd",&_recomu_genMatchInd);
+  tree_new->Branch("recomu_isGenChargeMatched",&_recomu_isGenChargeMatched);
   tree_new->Branch("recomu_matchedJetIndex",&_recomu_matchedJetIndex);
 
   tree_new->Branch("n_recoele_presel",&_n_recoele_presel,"n_recoele_presel/I");
@@ -2909,6 +2913,7 @@ void convert_tree(
   tree_new->Branch("recoele_fakerate_ttbar_MC",&_recoele_fakerate_ttbar_MC);
   tree_new->Branch("recoele_QFrate",&_recoele_QFrate);
   tree_new->Branch("recoele_isGenMatched",&_recoele_isGenMatched);
+  tree_new->Branch("recoele_isGenChargeMatched",&_recoele_isGenChargeMatched);
   tree_new->Branch("recoele_genMatchInd",&_recoele_genMatchInd);
   tree_new->Branch("recoele_matchedJetIndex",&_recoele_matchedJetIndex);
   
@@ -2943,6 +2948,7 @@ void convert_tree(
   tree_new->Branch("recolep_tightcharge",&_recolep_tightcharge);
   tree_new->Branch("recolep_eleconv_misshits",&_recolep_eleconv_misshits);
   tree_new->Branch("recolep_isGenMatched",&_recolep_isGenMatched);
+  tree_new->Branch("recolep_isGenChargeMatched",&_recolep_isGenChargeMatched);
   tree_new->Branch("recolep_genMatchInd",&_recolep_genMatchInd);
 
   tree_new->Branch("n_recotauh",&_n_recotauh,"n_recotauh/I");
@@ -3763,6 +3769,7 @@ void convert_tree(
     _recomu_fakerate_QCD_MC.clear();
     _recomu_fakerate_ttbar_MC.clear();
     _recomu_isGenMatched.clear();
+    _recomu_isGenChargeMatched.clear();
     _recomu_genMatchInd.clear();
     _recomu_matchedJetIndex.clear();
 
@@ -3831,6 +3838,7 @@ void convert_tree(
     _recoele_fakerate_ttbar_MC.clear();
     _recoele_QFrate.clear();
     _recoele_isGenMatched.clear();
+    _recoele_isGenChargeMatched.clear();
     _recoele_genMatchInd.clear();
     _recoele_matchedJetIndex.clear();
 
@@ -3865,6 +3873,7 @@ void convert_tree(
     _recolep_tightcharge.clear();
     _recolep_eleconv_misshits.clear();
     _recolep_isGenMatched.clear();
+    _recolep_isGenChargeMatched.clear();
     _recolep_genMatchInd.clear();
 
     _n_recotauh = 0;
@@ -4643,7 +4652,6 @@ void convert_tree(
 	  isfakeable=true;	
 
       _recomu_isfakeable.push_back(isfakeable);
-      _recolep_isfakeable.push_back(isfakeable);
 
       if(isfakeable){
 	      _n_recomu_fakeable++;
@@ -4676,7 +4684,6 @@ void convert_tree(
 	      ismvasel=true;
 	
       _recomu_ismvasel.push_back(ismvasel);
-      _recolep_ismvasel.push_back(ismvasel);
       
       if(ismvasel){
 	      _n_recomu_mvasel++;	
@@ -4992,7 +4999,6 @@ void convert_tree(
       }	
 
       _recoele_isfakeable.push_back(isfakeable);
-      _recolep_isfakeable.push_back(isfakeable);
 
       if(isfakeable){
 	      _n_recoele_fakeable++;
@@ -5027,9 +5033,8 @@ void convert_tree(
       bool ismvasel=false;
       if(conept>10 && eleIDcut && eleMissingLostHits==0 && _recoele_leptonMVA[i_ele]>0.9 && _recoele_jetDeepCSV[i_ele]<0.4941 && passConversionVeto) 
 	   ismvasel=true;
-      
+     
       _recoele_ismvasel.push_back(ismvasel);
-      _recolep_ismvasel.push_back(ismvasel);
 
       if(ismvasel){
 	      _n_recoele_mvasel++;
@@ -5120,22 +5125,24 @@ void convert_tree(
 	      _recolep_charge.push_back(_recomu_charge[i_mu]);
 	      _recolep_pdg.push_back(-13*_recomu_charge[i_mu]);
 	      TLorentzVector mu = reco_mus[i_mu].second;
-	      _recolep_e.push_back(mu.E());
-	      _recolep_px.push_back(mu.Px());
-	      _recolep_py.push_back(mu.Py());
-	      _recolep_pz.push_back(mu.Pz());
-	      _recolep_pt.push_back(mu.Pt());
+	      _recolep_e.push_back(_recomu_e[i_mu]);
+	      _recolep_px.push_back(_recomu_px[i_mu]);
+	      _recolep_py.push_back(_recomu_py[i_mu]);
+	      _recolep_pz.push_back(_recomu_pz[i_mu]);
+	      _recolep_pt.push_back(_recomu_pt[i_mu]);
 	      _recolep_conept.push_back(_recomu_conept[i_mu]);
-	      _recolep_eta.push_back(mu.Eta());
-	      _recolep_phi.push_back(mu.Phi());
+	      _recolep_eta.push_back(_recomu_eta[i_mu]);
+	      _recolep_phi.push_back(_recomu_phi[i_mu]);
 	      _recolep_leptonMVA.push_back(_recomu_leptonMVA[i_mu]);
+              _recolep_isfakeable.push_back(_recomu_isfakeable[i_mu]);
+              _recolep_ismvasel.push_back(_recomu_ismvasel[i_mu]);
 	      _recolep_fakerate.push_back(_recomu_fakerate[i_mu]);
-        _recolep_fakerate_up.push_back(_recomu_fakerate_up[i_mu]);
-        _recolep_fakerate_down.push_back(_recomu_fakerate_down[i_mu]);
-        _recolep_fakerate_pt1.push_back(_recomu_fakerate_pt1[i_mu]);
-        _recolep_fakerate_pt2.push_back(_recomu_fakerate_pt2[i_mu]);
-        _recolep_fakerate_be1.push_back(_recomu_fakerate_be1[i_mu]);
-        _recolep_fakerate_be2.push_back(_recomu_fakerate_be2[i_mu]);
+              _recolep_fakerate_up.push_back(_recomu_fakerate_up[i_mu]);
+              _recolep_fakerate_down.push_back(_recomu_fakerate_down[i_mu]);
+              _recolep_fakerate_pt1.push_back(_recomu_fakerate_pt1[i_mu]);
+              _recolep_fakerate_pt2.push_back(_recomu_fakerate_pt2[i_mu]);
+              _recolep_fakerate_be1.push_back(_recomu_fakerate_be1[i_mu]);
+              _recolep_fakerate_be2.push_back(_recomu_fakerate_be2[i_mu]);
 	      _recolep_fakerate_QCD_MC.push_back(_recomu_fakerate_QCD_MC[i_mu]);	
 	      _recolep_fakerate_ttbar_MC.push_back(_recomu_fakerate_ttbar_MC[i_mu]);
 	      _recolep_QFrate.push_back(0);
@@ -5157,26 +5164,24 @@ void convert_tree(
 
 	      TLorentzVector ele = reco_eles[i_ele].second;
 
-	      _recolep_e.push_back(ele.E());
-	      _recolep_px.push_back(ele.Px());
-	      _recolep_py.push_back(ele.Py());
-	      _recolep_pz.push_back(ele.Pz());
+	      _recolep_e.push_back(_recoele_corr_e[i_ele]);
+	      _recolep_px.push_back(_recoele_px[i_ele]);
+	      _recolep_py.push_back(_recoele_py[i_ele]);
+	      _recolep_pz.push_back(_recoele_pz[i_ele]);
 	      _recolep_pt.push_back(_recoele_corr_pt[i_ele]);
-              if(_EventNumber==46809) {
-                 cout<<"_recoele_corr_pt[i_ele]"<<_recoele_corr_pt[i_ele]<<endl;
-                 cout<<"_recoele_pt[i_ele]"<<_recoele_pt[i_ele]<<endl;
-              }
 	      _recolep_conept.push_back(_recoele_conept[i_ele]);
-	      _recolep_eta.push_back(ele.Eta());
-	      _recolep_phi.push_back(ele.Phi());
+	      _recolep_eta.push_back(_recoele_eta[i_ele]);
+	      _recolep_phi.push_back(_recoele_phi[i_ele]);
 	      _recolep_leptonMVA.push_back(_recoele_leptonMVA[i_ele]);
+              _recolep_isfakeable.push_back(_recoele_isfakeable[i_ele]);
+              _recolep_ismvasel.push_back(_recoele_ismvasel[i_ele]);
 	      _recolep_fakerate.push_back(_recoele_fakerate[i_ele]);	
-        _recolep_fakerate_up.push_back(_recoele_fakerate_up[i_ele]);
-        _recolep_fakerate_down.push_back(_recoele_fakerate_down[i_ele]);
-        _recolep_fakerate_pt1.push_back(_recoele_fakerate_pt1[i_ele]);
-        _recolep_fakerate_pt2.push_back(_recoele_fakerate_pt2[i_ele]);
-        _recolep_fakerate_be1.push_back(_recoele_fakerate_be1[i_ele]);
-        _recolep_fakerate_be2.push_back(_recoele_fakerate_be2[i_ele]);
+              _recolep_fakerate_up.push_back(_recoele_fakerate_up[i_ele]);
+              _recolep_fakerate_down.push_back(_recoele_fakerate_down[i_ele]);
+              _recolep_fakerate_pt1.push_back(_recoele_fakerate_pt1[i_ele]);
+              _recolep_fakerate_pt2.push_back(_recoele_fakerate_pt2[i_ele]);
+              _recolep_fakerate_be1.push_back(_recoele_fakerate_be1[i_ele]);
+              _recolep_fakerate_be2.push_back(_recoele_fakerate_be2[i_ele]);
 	      _recolep_fakerate_QCD_MC.push_back(_recoele_fakerate_QCD_MC[i_ele]);	
 	      _recolep_fakerate_ttbar_MC.push_back(_recoele_fakerate_ttbar_MC[i_ele]);	
 	      _recolep_QFrate.push_back(_recoele_QFrate[i_ele]);
@@ -5190,6 +5195,7 @@ void convert_tree(
       }
 
     }
+ 
     
 
     //////////////////////////////////////////////
@@ -6661,16 +6667,17 @@ void convert_tree(
         TLorentzVector mu = reco_mus[i_mu].second;
         float pt = (_recomu_pt)[i_mu];
 	float conept = (_recomu_conept)[i_mu];
+        int charge = (_recomu_charge)[i_mu];
 
         float dRmin = 1.0;
         int genMatchInd = -1;
+        bool genchargematch = false;
 
         for(unsigned int i_gen=0; i_gen<(*_genpart_pdg).size();i_gen++){
 
 	  if(!( abs((*_genpart_pdg)[i_gen])==13)) continue;
-
+          
 	  TLorentzVector gen((*_genpart_px)[i_gen],(*_genpart_py)[i_gen],(*_genpart_pz)[i_gen],(*_genpart_e)[i_gen]);        
-
           // check generator flags
           int flags = (*_genpart_flags)[i_gen];
           bool isprompt = flags&1;
@@ -6691,17 +6698,26 @@ void convert_tree(
           float delta_pt = (fabs(pt - gen.Pt()) / gen.Pt());
           if(delta_pt > 0.5) continue;
 
+          // check charge match
+          int chargematch = false;
+          if ( abs((*_genpart_pdg)[i_gen])==13 ){
+            int charge_gen = (*_genpart_pdg)[i_gen] > 0 ? -1 : 1;
+            if (charge_gen == charge) chargematch = true;
+          }
+
 	  // check dR
           float dR = mu.DeltaR(gen);    
           if(dR<dRmin){
             dRmin = dR;
             if(isprompt) genMatchInd = 2;
-            else if(isdirectprompttau) genMatchInd = 4;         
+            else if(isdirectprompttau) genMatchInd = 4;
+            genchargematch = chargematch;
           }
 
         }
 
         _recomu_isGenMatched.push_back(dRmin<0.3);
+        _recomu_isGenChargeMatched.push_back(genchargematch);
         _recomu_genMatchInd.push_back(genMatchInd);
 
       }
@@ -6712,9 +6728,11 @@ void convert_tree(
         TLorentzVector ele = reco_eles[i_ele].second;
         float pt = (_recoele_pt)[i_ele];
         float conept = (_recoele_conept)[i_ele];
+        int charge = (_recoele_charge)[i_ele];
 
         float dRmin = 1.0;
         int genMatchInd = -1;
+        bool genchargematch = false;
 
         for(unsigned int i_gen=0; i_gen<(*_genpart_pdg).size();i_gen++){
           
@@ -6743,17 +6761,26 @@ void convert_tree(
 	  float delta_pt = (fabs(pt - gen.Pt()) / gen.Pt());
           if(delta_pt > 0.5) continue;
 
+          //check charge match
+          bool chargematch = false;
+          if ( abs((*_genpart_pdg)[i_gen])==11 ){
+            int charge_gen = (*_genpart_pdg)[i_gen] > 0 ? -1 : 1;
+            if (charge_gen == charge) chargematch = true;
+          }
+
 	  //check dR
 	  float dR = ele.DeltaR(gen);
           if(dR<dRmin){
             dRmin = dR;
             if(isprompt) genMatchInd = 2;
             else if(isdirectprompttau) genMatchInd = 4;
+            genchargematch = chargematch;
           }
 
         }
 
         _recoele_isGenMatched.push_back(dRmin<0.3);
+        _recoele_isGenChargeMatched.push_back(genchargematch);
         _recoele_genMatchInd.push_back(genMatchInd);
 
       }
@@ -6764,13 +6791,21 @@ void convert_tree(
         TLorentzVector lep = reco_leptons[i_lep].second;
 	float pt = (_recolep_pt)[i_lep];
         float conept = (_recolep_conept)[i_lep];
+        int charge = (_recolep_charge)[i_lep];
 
         float dRmin = 1.0;
         int genMatchInd = -1;
+        bool genchargematch = false;
 
         for(unsigned int i_gen=0; i_gen<(*_genpart_pdg).size();i_gen++){
 
 	  if( !( abs((*_genpart_pdg)[i_gen])==abs(_recolep_pdg[i_lep]) || abs((*_genpart_pdg)[i_gen])==22 )) continue;
+    
+          //check charge
+          if ( abs((*_genpart_pdg)[i_gen])==11 || abs((*_genpart_pdg)[i_gen])==13 ){
+            int charge_gen = (*_genpart_pdg)[i_gen] > 0 ? -1 : 1;
+            if (charge_gen != charge) continue;
+          }          
 
           TLorentzVector gen((*_genpart_px)[i_gen],(*_genpart_py)[i_gen],(*_genpart_pz)[i_gen],(*_genpart_e)[i_gen]);
 
@@ -6794,17 +6829,26 @@ void convert_tree(
           float delta_pt = (fabs(pt - gen.Pt()) / gen.Pt());
           if(delta_pt > 0.5) continue;
           
+	  //check charge match
+          bool chargematch = false;
+	  if ( abs((*_genpart_pdg)[i_gen])==11 || abs((*_genpart_pdg)[i_gen])==13 ){
+            int charge_gen = (*_genpart_pdg)[i_gen] > 0 ? -1 : 1;
+            if (charge_gen == charge) chargematch = true;
+          }
+
 	  //check dR
 	  float dR = lep.DeltaR(gen);
           if(dR<dRmin){
             dRmin = dR;
             if(isprompt) genMatchInd = 2;
             else if(isdirectprompttau) genMatchInd = 4;
+            genchargematch = chargematch;
           }	
 
         }   
 
         _recolep_isGenMatched.push_back(dRmin<0.3);
+        _recolep_isGenChargeMatched.push_back(genchargematch);
         _recolep_genMatchInd.push_back(genMatchInd);
 
       }
@@ -6822,7 +6866,7 @@ void convert_tree(
           // require tau matched to electron, muon or tauh
 	  int apdg = abs((*_genpart_pdg)[i_gen]);
           if( !( apdg==11 || apdg==13 || apdg==66615) ) continue;
-		
+	
           // require isPrompt
           int flags = (*_genpart_flags)[i_gen];
           if( apdg==11 || apdg==13){
