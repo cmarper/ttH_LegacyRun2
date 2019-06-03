@@ -1054,7 +1054,7 @@ void split_tree(TString filename_in, TString filename_out,
     ////////// Trigger selections //////////
     ////////////////////////////////////////
 
-    bool pass_e   = pass_trigger_list_1e(_triggerbit);
+    /*bool pass_e   = pass_trigger_list_1e(_triggerbit);
     bool pass_m   = pass_trigger_list_1m(_triggerbit);
     bool pass_2e  = pass_trigger_list_2e(_triggerbit); 
     bool pass_2m  = pass_trigger_list_2m(_triggerbit);
@@ -1065,12 +1065,184 @@ void split_tree(TString filename_in, TString filename_out,
     bool pass_3e  = pass_trigger_list_3e(_triggerbit);
     bool pass_m2e = pass_trigger_list_m2e(_triggerbit);
     bool pass_2me = pass_trigger_list_e2m(_triggerbit);
-    bool pass_3m  = pass_trigger_list_3m(_triggerbit);
+    bool pass_3m  = pass_trigger_list_3m(_triggerbit);*/
+
+
+    /*
+    0 HLT_IsoMu22_v
+    1 HLT_IsoTkMu22_v
+    2 HLT_IsoMu22_eta2p1_v
+    3 HLT_IsoTkMu22_eta2p1_v
+    4 HLT_IsoMu24_v
+    5 HLT_IsoTkMu24_v
+    6 HLT_IsoMu27_v
+    7 HLT_Ele25_eta2p1_WPTight_Gsf_v
+    8 HLT_Ele27_WPTight_Gsf_v
+    9 HLT_Ele27_eta2p1_WPLoose_Gsf_v
+    10 HLT_Ele32_WPTight_Gsf_v
+    11 HLT_Ele35_WPTight_Gsf_v
+    12 HLT_IsoMu19_eta2p1_LooseIsoPFTau20_SingleL1_v
+    13 HLT_IsoMu20_eta2p1_LooseChargedIsoPFTau27_eta2p1_CrossL1_v
+    14 HLT_IsoMu20_eta2p1_LooseChargedIsoPFTauHPS27_eta2p1_CrossL1_v
+    15 HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau20_v
+    16 HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau20_SingleL1_v
+    17 HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau30_v
+    18 HLT_Ele24_eta2p1_WPTight_Gsf_LooseChargedIsoPFTau30_eta2p1_CrossL1_v
+    19 HLT_Ele24_eta2p1_WPTight_Gsf_LooseChargedIsoPFTauHPS30_eta2p1_CrossL1_v
+    20 HLT_DoubleMediumIsoPFTau35_Trk1_eta2p1_Reg_v
+    21 HLT_DoubleMediumCombinedIsoPFTau35_Trk1_eta2p1_Reg_v
+    22 HLT_DoubleMediumChargedIsoPFTau35_Trk1_eta2p1_Reg_v
+    23 HLT_DoubleTightChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg_v
+    24 HLT_DoubleMediumChargedIsoPFTau40_Trk1_TightID_eta2p1_Reg_v
+    25 HLT_DoubleTightChargedIsoPFTau40_Trk1_eta2p1_Reg_v
+    26 HLT_DoubleMediumChargedIsoPFTauHPS35_Trk1_eta2p1_Reg_v
+    27 HLT_Mu8_TrkIsoVVL_Ele17_CaloIdL_TrackIdL_IsoVL_v
+    28 HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_v
+    29 HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v
+    30 HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v
+    31 HLT_Mu17_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_v
+    32 HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_v
+    33 HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ_v
+    34 HLT_Mu23_TrkIsoVVL_Ele8_CaloIdL_TrackIdL_IsoVL_v
+    35 HLT_Mu23_TrkIsoVVL_Ele8_CaloIdL_TrackIdL_IsoVL_DZ_v
+    36 HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_v
+    37 HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_v
+    38 HLT_Mu17_TrkIsoVVL_TkMu8_TrkIsoVVL_v
+    39 HLT_Mu17_TrkIsoVVL_TkMu8_TrkIsoVVL_DZ_v
+    40 HLT_TkMu17_TrkIsoVVL_TkMu8_TrkIsoVVL_v
+    41 HLT_TkMu17_TrkIsoVVL_TkMu8_TrkIsoVVL_DZ_v
+    42 HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8_v
+    43 HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8_v
+    44 HLT_Ele17_Ele12_CaloIdL_TrackIdL_IsoVL_DZ_v
+    45 HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_v
+    46 HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ_v
+    47 HLT_Ele16_Ele12_Ele8_CaloIdL_TrackIdL_v
+    48 HLT_TripleMu_12_10_5_v
+    49 HLT_Mu8_DiEle12_CaloIdL_TrackIdL_v
+    50 HLT_Mu8_DiEle12_CaloIdL_TrackIdL_DZ_v
+    51 HLT_DiMu9_Ele9_CaloIdL_TrackIdL_v
+    52 HLT_DiMu9_Ele9_CaloIdL_TrackIdL_DZ_v
+    */
     
-    if(_EventNumber==2548080 || _EventNumber==2798872 || _EventNumber==1542634 || _EventNumber==2462564)
-       cout<<"Event "<<_EventNumber<<", triggerbit "<<_triggerbit<<endl;
-    
-    
+
+    Long64_t bitdigit = 1;
+
+    bool pass_HLT_IsoMu22_v = _triggerbit & (bitdigit << 0);
+    bool pass_HLT_IsoTkMu22_v = _triggerbit & (bitdigit << 1);
+    bool pass_HLT_IsoMu22_eta2p1_v = _triggerbit & (bitdigit << 2);
+    bool pass_HLT_IsoTkMu22_eta2p1_v = _triggerbit & (bitdigit << 3);
+    bool pass_HLT_IsoMu24_v = _triggerbit & (bitdigit << 4);
+    bool pass_HLT_IsoTkMu24_v = _triggerbit & (bitdigit << 5);
+    bool pass_HLT_IsoMu27_v = _triggerbit & (bitdigit << 6);
+    bool pass_HLT_Ele25_eta2p1_WPTight_Gsf_v = _triggerbit & (bitdigit << 7);
+    bool pass_HLT_Ele27_WPTight_Gsf_v = _triggerbit & (bitdigit << 8);
+    bool pass_HLT_Ele27_eta2p1_WPLoose_Gsf_v = _triggerbit & (bitdigit << 9);
+    bool pass_HLT_Ele32_WPTight_Gsf_v = _triggerbit & (bitdigit << 10);
+    bool pass_HLT_Ele35_WPTight_Gsf_v = _triggerbit & (bitdigit << 11);
+    bool pass_HLT_IsoMu19_eta2p1_LooseIsoPFTau20_SingleL1_v = _triggerbit & (bitdigit << 12);
+    bool pass_HLT_IsoMu20_eta2p1_LooseChargedIsoPFTau27_eta2p1_CrossL1_v = _triggerbit & (bitdigit << 13);
+    bool pass_HLT_IsoMu20_eta2p1_LooseChargedIsoPFTauHPS27_eta2p1_CrossL1_v = _triggerbit & (bitdigit << 14);
+    bool pass_HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau20_v = _triggerbit & (bitdigit << 15);
+    bool pass_HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau20_SingleL1_v = _triggerbit & (bitdigit << 16);
+    bool pass_HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau30_v = _triggerbit & (bitdigit << 17);
+    bool pass_HLT_Ele24_eta2p1_WPTight_Gsf_LooseChargedIsoPFTau30_eta2p1_CrossL1_v = _triggerbit & (bitdigit << 18);
+    bool pass_HLT_Ele24_eta2p1_WPTight_Gsf_LooseChargedIsoPFTauHPS30_eta2p1_CrossL1_v = _triggerbit & (bitdigit << 19);
+    bool pass_HLT_DoubleMediumIsoPFTau35_Trk1_eta2p1_Reg_v = _triggerbit & (bitdigit << 20);
+    bool pass_HLT_DoubleMediumCombinedIsoPFTau35_Trk1_eta2p1_Reg_v = _triggerbit & (bitdigit << 21);
+    bool pass_HLT_DoubleMediumChargedIsoPFTau35_Trk1_eta2p1_Reg_v = _triggerbit & (bitdigit << 22);
+    bool pass_HLT_DoubleTightChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg_v = _triggerbit & (bitdigit << 23);
+    bool pass_HLT_DoubleMediumChargedIsoPFTau40_Trk1_TightID_eta2p1_Reg_v = _triggerbit & (bitdigit << 24);
+    bool pass_HLT_DoubleTightChargedIsoPFTau40_Trk1_eta2p1_Reg_v = _triggerbit & (bitdigit << 25);
+    bool pass_HLT_DoubleMediumChargedIsoPFTauHPS35_Trk1_eta2p1_Reg_v = _triggerbit & (bitdigit << 26);
+    bool pass_HLT_Mu8_TrkIsoVVL_Ele17_CaloIdL_TrackIdL_IsoVL_v = _triggerbit & (bitdigit << 27);
+    bool pass_HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_v = _triggerbit & (bitdigit << 28);
+    bool pass_HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v = _triggerbit & (bitdigit << 29);
+    bool pass_HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v = _triggerbit & (bitdigit << 30);
+    bool pass_HLT_Mu17_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_v = _triggerbit & (bitdigit << 31);
+    bool pass_HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_v = _triggerbit & (bitdigit << 32);
+    bool pass_HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ_v = _triggerbit & (bitdigit << 33);
+    bool pass_HLT_Mu23_TrkIsoVVL_Ele8_CaloIdL_TrackIdL_IsoVL_v = _triggerbit & (bitdigit << 34);
+    bool pass_HLT_Mu23_TrkIsoVVL_Ele8_CaloIdL_TrackIdL_IsoVL_DZ_v = _triggerbit & (bitdigit << 35);
+    bool pass_HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_v = _triggerbit & (bitdigit << 36);
+    bool pass_HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_v = _triggerbit & (bitdigit << 37);
+    bool pass_HLT_Mu17_TrkIsoVVL_TkMu8_TrkIsoVVL_v = _triggerbit & (bitdigit << 38);
+    bool pass_HLT_Mu17_TrkIsoVVL_TkMu8_TrkIsoVVL_DZ_v = _triggerbit & (bitdigit << 39);
+    bool pass_HLT_TkMu17_TrkIsoVVL_TkMu8_TrkIsoVVL_v = _triggerbit & (bitdigit << 40);
+    bool pass_HLT_TkMu17_TrkIsoVVL_TkMu8_TrkIsoVVL_DZ_v = _triggerbit & (bitdigit << 41);
+    bool pass_HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8_v = _triggerbit & (bitdigit << 42);
+    bool pass_HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8_v = _triggerbit & (bitdigit << 43);
+    bool pass_HLT_Ele17_Ele12_CaloIdL_TrackIdL_IsoVL_DZ_v = _triggerbit & (bitdigit << 44);
+    bool pass_HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_v = _triggerbit & (bitdigit << 45);
+    bool pass_HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ_v = _triggerbit & (bitdigit << 46);
+    bool pass_HLT_Ele16_Ele12_Ele8_CaloIdL_TrackIdL_v = _triggerbit & (bitdigit << 47);
+    bool pass_HLT_TripleMu_12_10_5_v = _triggerbit & (bitdigit << 48);
+    bool pass_HLT_Mu8_DiEle12_CaloIdL_TrackIdL_v = _triggerbit & (bitdigit << 49);
+    bool pass_HLT_Mu8_DiEle12_CaloIdL_TrackIdL_DZ_v = _triggerbit & (bitdigit << 50);
+    bool pass_HLT_DiMu9_Ele9_CaloIdL_TrackIdL_v = _triggerbit & (bitdigit << 51);
+    bool pass_HLT_DiMu9_Ele9_CaloIdL_TrackIdL_DZ_v  = _triggerbit & (bitdigit << 52);
+
+
+    bool pass_m = false;
+    if(_year==2016) pass_m = ( pass_HLT_IsoMu22_v || pass_HLT_IsoTkMu22_v || pass_HLT_IsoMu22_eta2p1_v || pass_HLT_IsoTkMu22_eta2p1_v || pass_HLT_IsoMu24_v || pass_HLT_IsoTkMu24_v );
+    else if(_year==2017) pass_m = ( pass_HLT_IsoMu24_v || pass_HLT_IsoMu27_v );
+    else if(_year==2018) pass_m = ( pass_HLT_IsoMu24_v || pass_HLT_IsoMu27_v );
+
+    bool pass_e = false;
+    if(_year==2016) pass_e = ( pass_HLT_Ele27_WPTight_Gsf_v || pass_HLT_Ele25_eta2p1_WPTight_Gsf_v || pass_HLT_Ele27_eta2p1_WPLoose_Gsf_v );
+    else if(_year==2017) pass_e = ( pass_HLT_Ele35_WPTight_Gsf_v || pass_HLT_Ele32_WPTight_Gsf_v );
+    else if(_year==2018) pass_e = ( pass_HLT_Ele32_WPTight_Gsf_v );
+
+    bool pass_2e = false;
+    if(_year==2016) pass_2e = pass_HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ_v;
+    else if(_year==2017) pass_2e = pass_HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_v;
+    else if(_year==2018) pass_2e = pass_HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_v;
+
+    bool pass_2m = false;
+    if(_year==2016) pass_2m = (pass_HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_v || pass_HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_v || pass_HLT_Mu17_TrkIsoVVL_TkMu8_TrkIsoVVL_v || pass_HLT_Mu17_TrkIsoVVL_TkMu8_TrkIsoVVL_DZ_v);
+    else if(_year==2017) pass_2m = (pass_HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8_v || pass_HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass8_v);
+    else if(_year==2018) pass_2m = pass_HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8_v;
+
+    bool pass_em = false;
+    if(_year==2016) pass_em = (pass_HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_v || pass_HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v || pass_HLT_Mu23_TrkIsoVVL_Ele8_CaloIdL_TrackIdL_IsoVL_v || pass_HLT_Mu23_TrkIsoVVL_Ele8_CaloIdL_TrackIdL_IsoVL_DZ_v);
+    else if(_year==2017) pass_em = (pass_HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v || pass_HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v || pass_HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_v || pass_HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ_v);
+    else if(_year==2018) pass_em = (pass_HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v || pass_HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ_v || pass_HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_v);
+
+    bool pass_et = false;
+    if(_year==2016) pass_et = (pass_HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau20_v || pass_HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau20_SingleL1_v || pass_HLT_Ele24_eta2p1_WPLoose_Gsf_LooseIsoPFTau30_v);
+    else if(_year==2017) pass_et = pass_HLT_Ele24_eta2p1_WPTight_Gsf_LooseChargedIsoPFTau30_eta2p1_CrossL1_v;
+    else if(_year==2018) pass_et = (pass_HLT_Ele24_eta2p1_WPTight_Gsf_LooseChargedIsoPFTau30_eta2p1_CrossL1_v || pass_HLT_Ele24_eta2p1_WPTight_Gsf_LooseChargedIsoPFTauHPS30_eta2p1_CrossL1_v);
+
+    bool pass_mt = false;
+    if(_year==2016) pass_mt = pass_HLT_IsoMu19_eta2p1_LooseIsoPFTau20_SingleL1_v;
+    else if(_year==2017) pass_mt = pass_HLT_IsoMu20_eta2p1_LooseChargedIsoPFTau27_eta2p1_CrossL1_v;
+    else if(_year==2018) pass_mt = (pass_HLT_IsoMu20_eta2p1_LooseChargedIsoPFTau27_eta2p1_CrossL1_v || pass_HLT_IsoMu20_eta2p1_LooseChargedIsoPFTauHPS27_eta2p1_CrossL1_v);
+
+    bool pass_2t = false;
+    if(_year==2016) pass_2t = (pass_HLT_DoubleMediumIsoPFTau35_Trk1_eta2p1_Reg_v || pass_HLT_DoubleMediumCombinedIsoPFTau35_Trk1_eta2p1_Reg_v );
+    else if(_year==2017) pass_2t = (pass_HLT_DoubleMediumChargedIsoPFTau35_Trk1_eta2p1_Reg_v || pass_HLT_DoubleTightChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg_v || pass_HLT_DoubleMediumChargedIsoPFTau40_Trk1_TightID_eta2p1_Reg_v || pass_HLT_DoubleTightChargedIsoPFTau40_Trk1_eta2p1_Reg_v);
+    else if(_year==2018) pass_2t = (pass_HLT_DoubleTightChargedIsoPFTau35_Trk1_TightID_eta2p1_Reg_v || pass_HLT_DoubleMediumChargedIsoPFTau40_Trk1_TightID_eta2p1_Reg_v || pass_HLT_DoubleTightChargedIsoPFTau40_Trk1_eta2p1_Reg_v || pass_HLT_DoubleMediumChargedIsoPFTauHPS35_Trk1_eta2p1_Reg_v);
+
+    bool pass_3e = false;
+    if(_year==2016) pass_3e = pass_HLT_Ele16_Ele12_Ele8_CaloIdL_TrackIdL_v;
+    else if(_year==2017) pass_3e = pass_HLT_Ele16_Ele12_Ele8_CaloIdL_TrackIdL_v;
+    else if(_year==2018) pass_3e = pass_HLT_Ele16_Ele12_Ele8_CaloIdL_TrackIdL_v;
+
+    bool pass_3m = false;
+    if(_year==2016) pass_3m = pass_HLT_TripleMu_12_10_5_v;
+    else if(_year==2017) pass_3m = pass_HLT_TripleMu_12_10_5_v;
+    else if(_year==2018) pass_3m = pass_HLT_TripleMu_12_10_5_v;
+
+    bool pass_m2e = false;
+    if(_year==2016) pass_m2e = pass_HLT_Mu8_DiEle12_CaloIdL_TrackIdL_v;
+    else if(_year==2017) pass_m2e = pass_HLT_Mu8_DiEle12_CaloIdL_TrackIdL_v;
+    else if(_year==2018) pass_m2e = pass_HLT_Mu8_DiEle12_CaloIdL_TrackIdL_v;
+
+    bool pass_2me = false;
+    if(_year==2016) pass_2me = pass_HLT_DiMu9_Ele9_CaloIdL_TrackIdL_v;
+    else if(_year==2017) pass_2me = pass_HLT_DiMu9_Ele9_CaloIdL_TrackIdL_DZ_v;
+    else if(_year==2018) pass_2me = pass_HLT_DiMu9_Ele9_CaloIdL_TrackIdL_DZ_v;
+
+
 
     /////////////////////////////////
     //////////// Leptons ////////////
@@ -1813,7 +1985,7 @@ void split_tree(TString filename_in, TString filename_out,
       (_n_tight_lep<=2) &&
       (_recolep_fakeable_tightcharge[0]==1 && _recolep_fakeable_tightcharge[1]==1) &&
       (_n_tight_WPL_tau==0) &&
-      inv_mass_Z_ee_fakeable && 
+      inv_mass_Z_SFOS && 
       metLD_e &&
       genmatch_2l;
 
@@ -1821,20 +1993,20 @@ void split_tree(TString filename_in, TString filename_out,
       sig_ttW_CR_base &&
       (_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1]) &&
       ((_recolep_fakeable_charge[0]*_recolep_fakeable_charge[1])>0) &&
-      (_n_recoPFJet==3) && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) ;
+      (_n_recoPFJet==3 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) );
 
     bool sig_ttW_CR_fake =
       sig_ttW_CR_base &&
       ((_recolep_fakeable_charge[0]*_recolep_fakeable_charge[1])>0) &&
-      !((_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1])) &&
-      (_n_recoPFJet==3) && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) ;
+      !(_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1]) &&
+      (_n_recoPFJet==3 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) );
 
     bool sig_ttW_CR_flip =
       sig_ttW_CR_base &&
-      ((_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1])) &&
+      (_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1]) &&
       ((_recolep_fakeable_charge[0]*_recolep_fakeable_charge[1])<0) &&
       (abs(_recolep_fakeable_pdg[0])==11 || abs(_recolep_fakeable_pdg[1])==11) &&
-      (_n_recoPFJet==3) && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) ;
+      (_n_recoPFJet==3 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) );
 
 
     ////////////////////////////////
@@ -1918,7 +2090,7 @@ void split_tree(TString filename_in, TString filename_out,
 
     bool sig_ZZ_CR_fake =
       sig_ZZ_CR_base &&
-      !(_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1] && _recolep_fakeable_ismvasel[2] && _recolep_fakeable_ismvasel[3]); 
+      !(_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1] && _recolep_fakeable_ismvasel[2] && _recolep_fakeable_ismvasel[3]);
    
 
     /////////////////////////////////////
