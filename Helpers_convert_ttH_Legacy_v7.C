@@ -327,6 +327,7 @@ float fakerate_from_TGraph(TGraphAsymmErrors* graph, float pt){
 void convert_tree(
       TString sample, 
       int iso_tau=0,
+      TString iso_type="byVLooseIsolationMVArun2v2017v2DBoldDMdR0p3wLT", 
       bool conept_sorting=true,
       int split=0, int i_split=0,
       bool isMC=true,
@@ -346,13 +347,13 @@ void convert_tree(
 
     file="sync_ntuple_converted_ttHNonbb_2016_v15";
     dir_out="/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2016/";
-    list.push_back("/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_LLRHtautau/2016/sync_ntuple_LLRHtautau_ttHNonbb_2016_v10.root");
+    list.push_back("/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_LLRHtautau/2016/sync_ntuple_LLRHtautau_ttHNonbb_2016_v9.root");
 
   }
 
   else if(sample=="sync17"){
 
-    file="sync_ntuple_converted_ttHNonbb_2017_v9";
+    file="sync_ntuple_converted_ttHNonbb_2017_v10";
     dir_out="/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2017/";
     list.push_back("/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_LLRHtautau/2017/sync_ntuple_LLRHtautau_ttHNonbb_2017_v5.root");
 
@@ -360,7 +361,7 @@ void convert_tree(
 
   else if(sample=="sync18"){
 
-    file="sync_ntuple_converted_ttHNonbb_2018_v8";
+    file="sync_ntuple_converted_ttHNonbb_2018_v9";
     dir_out="/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2018/";
     list.push_back("/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_LLRHtautau/2018/sync_ntuple_LLRHtautau_ttHNonbb_2018_v4.root");
 
@@ -1852,6 +1853,15 @@ void convert_tree(
 	
   file+=Form("_%i",i_split);
 
+  /*if(iso_type=="")
+    file+=Form("_iso%i",iso_tau);
+  else
+    file+="_"+iso_type;*/
+
+  /*if(tau_cleaning!="presel")
+    file+="_"+tau_cleaning+"_tau_cleaning";*/
+
+
   if(JEC>0)
     file+="_JECup";
   else if(JEC<0)
@@ -1925,6 +1935,13 @@ void convert_tree(
   vector<float> *_ak8jets_CSV; // CSV score
   vector<int>   *_ak8jets_nsubjets;
 
+  vector<float> *_subjets_px;
+  vector<float> *_subjets_py;
+  vector<float> *_subjets_pz;
+  vector<float> *_subjets_e;
+  vector<float> *_subjets_CSV;
+  vector<int>   *_subjets_ak8MotherIdx;
+
   vector<float> *_dxy;
   vector<float> *_dz;
   vector<float> *_dxy_innerTrack;
@@ -1978,8 +1995,6 @@ void convert_tree(
   vector<int>   *_daughters_decayModeFindingOldDMs;
   vector<int>   *_daughters_decayModeFindingNewDMs;
   vector<float> *_daughters_byIsolationMVArun2017v2DBoldDMwLTraw2017;
-  vector<float> *_daughters_byDeepTau2017v2VSjetraw;
-
   vector<Long64_t> *_tauID;
 
   Long64_t _triggerbit;
@@ -2063,6 +2078,13 @@ void convert_tree(
   tree->SetBranchAddress("ak8jets_CSV", &_ak8jets_CSV);
   tree->SetBranchAddress("ak8jets_nsubjets", &_ak8jets_nsubjets);
 
+  tree->SetBranchAddress("subjets_px", &_subjets_px);
+  tree->SetBranchAddress("subjets_py", &_subjets_py);
+  tree->SetBranchAddress("subjets_pz", &_subjets_pz);
+  tree->SetBranchAddress("subjets_e", &_subjets_e);
+  tree->SetBranchAddress("subjets_CSV", &_subjets_CSV);
+  tree->SetBranchAddress("subjets_ak8MotherIdx", &_subjets_ak8MotherIdx);
+
   tree->SetBranchAddress("dxy",&_dxy);
   tree->SetBranchAddress("dz",&_dz);
   tree->SetBranchAddress("dxy_innerTrack",&_dxy_innerTrack);
@@ -2109,7 +2131,6 @@ void convert_tree(
   tree->SetBranchAddress("passecalBadCalibFilterUpdate",&_passecalBadCalibFilterUpdate);
 
   tree->SetBranchAddress("daughters_byIsolationMVArun2017v2DBoldDMwLTraw2017",&_daughters_byIsolationMVArun2017v2DBoldDMwLTraw2017);
-  tree->SetBranchAddress("daughters_byDeepTau2017v2VSjetraw",&_daughters_byDeepTau2017v2VSjetraw);
 
   tree->SetBranchAddress("daughters_jetNDauChargedMVASel",&_daughters_jetNDauChargedMVASel);
   tree->SetBranchAddress("daughters_miniRelIsoCharged",&_daughters_miniRelIsoCharged);
@@ -2394,15 +2415,7 @@ void convert_tree(
   vector<int>   _recotauh_againstElectronMediumMVA6;
   vector<int>   _recotauh_againstElectronTightMVA6;
   vector<int>   _recotauh_againstElectronVTightMVA6;
-  vector<int>   _recotauh_byVVVLooseDeepTau2017v2VSjet;
-  vector<int>   _recotauh_byVVLooseDeepTau2017v2VSjet;
-  vector<int>   _recotauh_byVLooseDeepTau2017v2VSjet;
-  vector<int>   _recotauh_byLooseDeepTau2017v2VSjet;
-  vector<int>   _recotauh_byMediumDeepTau2017v2VSjet;
-  vector<int>   _recotauh_byTightDeepTau2017v2VSjet;
-  vector<int>   _recotauh_byVTightDeepTau2017v2VSjet;
-  vector<int>   _recotauh_byVVTightDeepTau2017v2VSjet;
-  vector<float> _recotauh_byDeepTau2017v2VSjetraw;
+
   vector<float> _recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT;
   vector<float> _recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT;
   vector<float> _recotauh_fakerate_byTightIsolationMVArun2v2017v2DBdR03oldDMwLT;
@@ -2470,6 +2483,15 @@ void convert_tree(
   vector<float> _recoPFak8Jet_tau2;
   vector<float> _recoPFak8Jet_tau3;
   vector<int>   _recoPFak8Jet_nsubjets;
+
+  vector<vector<float>> _recoPFak8Jet_subjets_e;
+  vector<vector<float>> _recoPFak8Jet_subjets_pt;
+  vector<vector<float>> _recoPFak8Jet_subjets_px;
+  vector<vector<float>> _recoPFak8Jet_subjets_py;
+  vector<vector<float>> _recoPFak8Jet_subjets_pz;
+  vector<vector<float>> _recoPFak8Jet_subjets_eta;
+  vector<vector<float>> _recoPFak8Jet_subjets_phi;
+  vector<vector<int>>   _recoPFak8Jet_subjets_ak8MotherIdx;
 
   vector<int>   _recoPFJet_i_closest_genpart;
   vector<float> _recoPFJet_dR_closest_genpart;
@@ -2833,8 +2855,8 @@ void convert_tree(
   
   tree_new->Branch("jets_pt",&_jets_pt);
   tree_new->Branch("jets_eta",&_jets_eta);
-  tree_new->Branch("jets_phi",&_jets_phi);
-      
+  tree_new->Branch("jets_phi",&_jets_phi);   
+
   tree_new->Branch("n_recomu_presel",&_n_recomu_presel,"n_recomu_presel/I");
   tree_new->Branch("n_recomu_fakeable",&_n_recomu_fakeable,"n_recomu_fakeable/I");
   tree_new->Branch("n_recomu_cutsel",&_n_recomu_cutsel,"n_recomu_cutsel/I");
@@ -3037,15 +3059,6 @@ void convert_tree(
   tree_new->Branch("recotauh_againstElectronMediumMVA6",&_recotauh_againstElectronMediumMVA6);
   tree_new->Branch("recotauh_againstElectronTightMVA6",&_recotauh_againstElectronTightMVA6);
   tree_new->Branch("recotauh_againstElectronVTightMVA6",&_recotauh_againstElectronVTightMVA6);
-  tree_new->Branch("recotauh_byVVVLooseDeepTau2017v2VSjet",&_recotauh_byVVVLooseDeepTau2017v2VSjet);
-  tree_new->Branch("recotauh_byVVLooseDeepTau2017v2VSjet",&_recotauh_byVVLooseDeepTau2017v2VSjet);
-  tree_new->Branch("recotauh_byVLooseDeepTau2017v2VSjet",&_recotauh_byVLooseDeepTau2017v2VSjet);
-  tree_new->Branch("recotauh_byLooseDeepTau2017v2VSjet",&_recotauh_byLooseDeepTau2017v2VSjet);
-  tree_new->Branch("recotauh_byMediumDeepTau2017v2VSjet",&_recotauh_byMediumDeepTau2017v2VSjet);
-  tree_new->Branch("recotauh_byTightDeepTau2017v2VSjet",&_recotauh_byTightDeepTau2017v2VSjet);
-  tree_new->Branch("recotauh_byVTightDeepTau2017v2VSjet",&_recotauh_byVTightDeepTau2017v2VSjet);
-  tree_new->Branch("recotauh_byVVTightDeepTau2017v2VSjet",&_recotauh_byVVTightDeepTau2017v2VSjet);
-  tree_new->Branch("recotauh_byDeepTau2017v2VSjetraw",&_recotauh_byDeepTau2017v2VSjetraw);
 
   tree_new->Branch("recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT",&_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT);
   tree_new->Branch("recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT",&_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT);
@@ -3086,7 +3099,7 @@ void convert_tree(
   tree_new->Branch("recoPFFwdJet_Flavour",&_recoPFFwdJet_Flavour);
   tree_new->Branch("recoPFFwdJet_hadronFlavour",&_recoPFFwdJet_hadronFlavour);
   tree_new->Branch("recoPFFwdJet_QGdiscr",&_recoPFFwdJet_QGdiscr);
- 
+
   tree_new->Branch("n_recoPFak8Jet",&_n_recoPFak8Jet,"n_recoPFJet/I");
   tree_new->Branch("recoPFak8Jet_e",&_recoPFak8Jet_e);
   tree_new->Branch("recoPFak8Jet_pt",&_recoPFak8Jet_pt);
@@ -3100,7 +3113,16 @@ void convert_tree(
   tree_new->Branch("recoPFak8Jet_tau2",&_recoPFak8Jet_tau2); 
   tree_new->Branch("recoPFak8Jet_tau3",&_recoPFak8Jet_tau3); 
   tree_new->Branch("recoPFak8Jet_nsubjets",&_recoPFak8Jet_nsubjets);
- 
+
+  tree_new->Branch("recoPFak8Jet_subjets_e",&_recoPFak8Jet_subjets_e);
+  tree_new->Branch("recoPFak8Jet_subjets_pt",&_recoPFak8Jet_subjets_pt);
+  tree_new->Branch("recoPFak8Jet_subjets_px",&_recoPFak8Jet_subjets_px);
+  tree_new->Branch("recoPFak8Jet_subjets_py",&_recoPFak8Jet_subjets_py);
+  tree_new->Branch("recoPFak8Jet_subjets_pz",&_recoPFak8Jet_subjets_pz);
+  tree_new->Branch("recoPFak8Jet_subjets_eta",&_recoPFak8Jet_subjets_eta);
+  tree_new->Branch("recoPFak8Jet_subjets_phi",&_recoPFak8Jet_subjets_phi);
+  tree_new->Branch("recoPFak8Jet_subjets_ak8MotherIdx",&_recoPFak8Jet_subjets_ak8MotherIdx);
+
   tree_new->Branch("recoPFJet_i_closest_genpart",&_recoPFJet_i_closest_genpart);
   tree_new->Branch("recoPFJet_dR_closest_genpart",&_recoPFJet_dR_closest_genpart);
   tree_new->Branch("recoPFJet_i_2nd_closest_genpart",&_recoPFJet_i_2nd_closest_genpart);
@@ -3561,10 +3583,6 @@ void convert_tree(
 
   if(JEC!=0 || TES!=0){
 
-    //tree->SetBranchAddress("EventNumber",&_EventNumber);
-    //tree->SetBranchAddress("RunNumber",&_RunNumber);
-    //tree->SetBranchAddress("lumi",&_lumi);
-
     tree->SetBranchAddress("triggerbit",&_triggerbit);
     tree->SetBranchAddress("metfilterbit",&_metfilterbit);
     tree->SetBranchAddress("passecalBadCalibFilterUpdate",&_passecalBadCalibFilterUpdate);
@@ -3985,16 +4003,7 @@ void convert_tree(
     _recotauh_againstElectronMediumMVA6.clear();
     _recotauh_againstElectronTightMVA6.clear();
     _recotauh_againstElectronVTightMVA6.clear();
-    _recotauh_byVVVLooseDeepTau2017v2VSjet.clear();
-    _recotauh_byVVLooseDeepTau2017v2VSjet.clear();
-    _recotauh_byVLooseDeepTau2017v2VSjet.clear();
-    _recotauh_byLooseDeepTau2017v2VSjet.clear();
-    _recotauh_byMediumDeepTau2017v2VSjet.clear();
-    _recotauh_byTightDeepTau2017v2VSjet.clear();
-    _recotauh_byVTightDeepTau2017v2VSjet.clear();
-    _recotauh_byVVTightDeepTau2017v2VSjet.clear();
-    _recotauh_byDeepTau2017v2VSjetraw.clear();
- 
+
     _recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT.clear();
     _recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT.clear();
     _recotauh_fakerate_byTightIsolationMVArun2v2017v2DBdR03oldDMwLT.clear();
@@ -4048,6 +4057,14 @@ void convert_tree(
     _recoPFak8Jet_tau2.clear();
     _recoPFak8Jet_tau3.clear();
     _recoPFak8Jet_nsubjets.clear();
+
+    _recoPFak8Jet_subjets_e.clear();
+    _recoPFak8Jet_subjets_pt.clear();
+    _recoPFak8Jet_subjets_px.clear();
+    _recoPFak8Jet_subjets_py.clear();
+    _recoPFak8Jet_subjets_pz.clear();
+    _recoPFak8Jet_subjets_eta.clear();
+    _recoPFak8Jet_subjets_phi.clear();
 
     _recoPFJet_i_closest_genpart.clear();
     _recoPFJet_dR_closest_genpart.clear();
@@ -4419,6 +4436,13 @@ void convert_tree(
     _ak8jets_CSV = 0;
     _ak8jets_nsubjets = 0;
 
+    _subjets_px = 0;
+    _subjets_py = 0;
+    _subjets_pz = 0;
+    _subjets_e = 0;
+    _subjets_CSV = 0;
+    _subjets_ak8MotherIdx = 0;
+
     _dxy = 0;
     _dz = 0;
     _dxy_innerTrack = 0;
@@ -4472,7 +4496,6 @@ void convert_tree(
     _daughters_decayModeFindingOldDMs = 0;
     _daughters_decayModeFindingNewDMs = 0;
     _daughters_byIsolationMVArun2017v2DBoldDMwLTraw2017 = 0;
-    _daughters_byDeepTau2017v2VSjetraw = 0;
     _tauID = 0;
     _triggerbit = 0;
     _metfilterbit = 0;
@@ -4535,9 +4558,6 @@ void convert_tree(
     int entry_ok = tree->GetEntry(i);
     if(entry_ok<0) continue;
 
-    //cout<<"EventNumber "<<_EventNumber<<endl;
-
-   
     _PU_weight = get_pu_weight(_npu,isMC,sample);
     //cout << "_PU_weight " << _PU_weight << endl;
     
@@ -4671,11 +4691,7 @@ void convert_tree(
       _recomu_miniIsoNeutral_nanoAOD.push_back( muon.Pt()*(((*_daughters_miniRelIso_nanoAOD)[i_daughter]) - (*_daughters_miniRelIsoCharged_nanoAOD)[i_daughter]));
       _recomu_sip3D.push_back( (*_SIP)[i_daughter] );
       _recomu_jetCSV.push_back( std::max((*_daughters_jetBTagCSV)[i_daughter],float(0.)) );   
-
-      float deepcsv = (*_daughters_jetBTagDeepCSV)[i_daughter];
-      if(isnan(deepcsv)) deepcsv = -2;
-      _recomu_jetDeepCSV.push_back( std::max(deepcsv,float(0.)) );
-
+      _recomu_jetDeepCSV.push_back( std::max((*_daughters_jetBTagDeepCSV)[i_daughter],float(0.)) );
       _recomu_jetDeepJet.push_back( std::max((*_daughters_jetBTagDeepJet)[i_daughter],float(0.)) );
       _recomu_combreliso04.push_back( (*_combreliso)[i_daughter] );  
 	    _recomu_jetPtRel.push_back( (*_daughters_jetPtRel)[i_daughter] );
@@ -4858,8 +4874,8 @@ void convert_tree(
       if( fabs(PDGId)==11 ){
 	
         float dxy = (*_dxy)[i_daughter];
-	float dz = (*_dz)[i_daughter];
-	float miniRelIsoCharged = (*_daughters_miniRelIsoCharged)[i_daughter];
+	      float dz = (*_dz)[i_daughter];
+	      float miniRelIsoCharged = (*_daughters_miniRelIsoCharged)[i_daughter];
         float miniRelIsoNeutral = (*_daughters_miniRelIsoNeutral)[i_daughter];
         float miniRelIsoAll = miniRelIsoCharged + miniRelIsoNeutral;
         float miniRelIsoCharged_nanoAOD = (*_daughters_miniRelIsoCharged_nanoAOD)[i_daughter]; 
@@ -4868,7 +4884,7 @@ void convert_tree(
         float PFRelIsoAll04_nanoAOD = (*_daughters_PFRelIsoAll04_nanoAOD)[i_daughter]; 
         float PFRelIsoAll_nanoAOD = (*_daughters_PFRelIsoAll_nanoAOD)[i_daughter]; 
         float sip = (*_SIP)[i_daughter];
-	float eleMVA = (*_daughters_eleMVAntNoIso)[i_daughter];
+	      float eleMVA = (*_daughters_eleMVAntNoIso)[i_daughter];
         bool LooseIdWP = (*_daughters_iseleNoIsoWPLoose)[i_daughter]; 
 	      int eleMissingHits = (*_daughters_eleMissingHits)[i_daughter];
         int eleMissingLostHits = (*_daughters_eleMissingLostHits)[i_daughter];
@@ -4995,11 +5011,7 @@ void convert_tree(
       _recoele_PFIsoNeutral_nanoAOD.push_back( elec.Pt()*(((*_daughters_PFRelIsoAll_nanoAOD)[i_daughter]) - (*_daughters_PFRelIsoCharged_nanoAOD)[i_daughter]));
       _recoele_sip3D.push_back( (*_SIP)[i_daughter] );
       _recoele_jetCSV.push_back( std::max((*_daughters_jetBTagCSV)[i_daughter],float(0.)) );
-
-      float deepcsv = (*_daughters_jetBTagDeepCSV)[i_daughter];
-      if(isnan(deepcsv)) deepcsv = -2;
-      _recoele_jetDeepCSV.push_back( std::max(deepcsv,float(0.)) );
-
+      _recoele_jetDeepCSV.push_back( std::max((*_daughters_jetBTagDeepCSV)[i_daughter],float(0.)) );
       _recoele_jetDeepJet.push_back( std::max((*_daughters_jetBTagDeepJet)[i_daughter],float(0.)) );
 	    _recoele_jetPtRel.push_back( (*_daughters_jetPtRel)[i_daughter] );
 	    _recoele_jetPtRel_nanoAOD.push_back( (*_daughters_jetPtRel_nanoAOD)[i_daughter] );
@@ -5043,6 +5055,25 @@ void convert_tree(
       else if(year==2017 || year==2018) 
         leptonMVA_ = ele_reader_2017->EvaluateMVA("BDTG method");
 
+      /*if(_EventNumber == 62084 || _EventNumber == 1694425 || _EventNumber == 1665111 || _EventNumber == 1665121 || _EventNumber == 2334303){
+
+         cout<<"----"<<endl;
+         cout<<"nEvent "<<_EventNumber<<endl;
+         cout<<"pt "<<lepMVA_pt<<endl;
+         cout<<"eta "<<lepMVA_eta<<endl;
+         cout<<"jetNDauChargedMVASel "<<lepMVA_jetNDauChargedMVASel<<endl;
+         cout<<"miniRelIsoCharged "<<lepMVA_miniRelIsoCharged<<endl;
+         cout<<"miniRelIsoNeutral "<<lepMVA_miniRelIsoNeutral<<endl;
+         cout<<"jetPtRel "<<lepMVA_jetPtRel<<endl;
+         cout<<"jetDF "<<lepMVA_jetDF<<endl;
+         cout<<"jetPtRatio "<<lepMVA_jetPtRatio<<endl;
+         cout<<"sip3d "<<lepMVA_sip3d<<endl;
+         cout<<"abs(dxy) "<<lepMVA_dxy<<endl;
+         cout<<"abs(dz) "<<lepMVA_dz<<endl;
+         cout<<"seg comp "<<lepMVA_Id<<endl;
+         cout<<"lep mva "<<leptonMVA_<<endl;
+      }*/
+
       _recoele_leptonMVA.push_back( leptonMVA_ );
 
       bool eleIDcut=false;
@@ -5083,8 +5114,6 @@ void convert_tree(
 
       _recoele_conept.push_back( conept );
 
-
-      if(_EventNumber==136224) cout<<"lepMVA "<<_recoele_leptonMVA[i_ele]<<",deepCSV "<<_recoele_jetDeepCSV[i_ele]<<",ptratio "<<lepMVA_jetPtRatio<<",lepmvaid "<<lepMVA_Id<<endl;
       // fakeable selection
       bool isfakeable=false;
       if(conept>10 && eleIDcut && eleMissingLostHits==0 && passConversionVeto){
@@ -5230,15 +5259,15 @@ void convert_tree(
 	      _recolep_eta.push_back(_recomu_eta[i_mu]);
 	      _recolep_phi.push_back(_recomu_phi[i_mu]);
 	      _recolep_leptonMVA.push_back(_recomu_leptonMVA[i_mu]);
-              _recolep_isfakeable.push_back(_recomu_isfakeable[i_mu]);
-              _recolep_ismvasel.push_back(_recomu_ismvasel[i_mu]);
+        _recolep_isfakeable.push_back(_recomu_isfakeable[i_mu]);
+        _recolep_ismvasel.push_back(_recomu_ismvasel[i_mu]);
 	      _recolep_fakerate.push_back(_recomu_fakerate[i_mu]);
-              _recolep_fakerate_up.push_back(_recomu_fakerate_up[i_mu]);
-              _recolep_fakerate_down.push_back(_recomu_fakerate_down[i_mu]);
-              _recolep_fakerate_pt1.push_back(_recomu_fakerate_pt1[i_mu]);
-              _recolep_fakerate_pt2.push_back(_recomu_fakerate_pt2[i_mu]);
-              _recolep_fakerate_be1.push_back(_recomu_fakerate_be1[i_mu]);
-              _recolep_fakerate_be2.push_back(_recomu_fakerate_be2[i_mu]);
+        _recolep_fakerate_up.push_back(_recomu_fakerate_up[i_mu]);
+        _recolep_fakerate_down.push_back(_recomu_fakerate_down[i_mu]);
+        _recolep_fakerate_pt1.push_back(_recomu_fakerate_pt1[i_mu]);
+        _recolep_fakerate_pt2.push_back(_recomu_fakerate_pt2[i_mu]);
+        _recolep_fakerate_be1.push_back(_recomu_fakerate_be1[i_mu]);
+        _recolep_fakerate_be2.push_back(_recomu_fakerate_be2[i_mu]);
 	      _recolep_fakerate_QCD_MC.push_back(_recomu_fakerate_QCD_MC[i_mu]);	
 	      _recolep_fakerate_ttbar_MC.push_back(_recomu_fakerate_ttbar_MC[i_mu]);
 	      _recolep_QFrate.push_back(0);
@@ -5269,15 +5298,15 @@ void convert_tree(
 	      _recolep_eta.push_back(_recoele_eta[i_ele]);
 	      _recolep_phi.push_back(_recoele_phi[i_ele]);
 	      _recolep_leptonMVA.push_back(_recoele_leptonMVA[i_ele]);
-              _recolep_isfakeable.push_back(_recoele_isfakeable[i_ele]);
-              _recolep_ismvasel.push_back(_recoele_ismvasel[i_ele]);
+        _recolep_isfakeable.push_back(_recoele_isfakeable[i_ele]);
+        _recolep_ismvasel.push_back(_recoele_ismvasel[i_ele]);
 	      _recolep_fakerate.push_back(_recoele_fakerate[i_ele]);	
-              _recolep_fakerate_up.push_back(_recoele_fakerate_up[i_ele]);
-              _recolep_fakerate_down.push_back(_recoele_fakerate_down[i_ele]);
-              _recolep_fakerate_pt1.push_back(_recoele_fakerate_pt1[i_ele]);
-              _recolep_fakerate_pt2.push_back(_recoele_fakerate_pt2[i_ele]);
-              _recolep_fakerate_be1.push_back(_recoele_fakerate_be1[i_ele]);
-              _recolep_fakerate_be2.push_back(_recoele_fakerate_be2[i_ele]);
+        _recolep_fakerate_up.push_back(_recoele_fakerate_up[i_ele]);
+        _recolep_fakerate_down.push_back(_recoele_fakerate_down[i_ele]);
+        _recolep_fakerate_pt1.push_back(_recoele_fakerate_pt1[i_ele]);
+        _recolep_fakerate_pt2.push_back(_recoele_fakerate_pt2[i_ele]);
+        _recolep_fakerate_be1.push_back(_recoele_fakerate_be1[i_ele]);
+        _recolep_fakerate_be2.push_back(_recoele_fakerate_be2[i_ele]);
 	      _recolep_fakerate_QCD_MC.push_back(_recoele_fakerate_QCD_MC[i_ele]);	
 	      _recolep_fakerate_ttbar_MC.push_back(_recoele_fakerate_ttbar_MC[i_ele]);	
 	      _recolep_QFrate.push_back(_recoele_QFrate[i_ele]);
@@ -5325,22 +5354,23 @@ void convert_tree(
       int byTightIsolationMVArun2v2017v2DBoldDMdR0p3wLT = ((*_tauID)[i_daughter]>>map_tauID["byTightIsolationMVArun2017v2DBoldDMdR0p3wLT2017"])&1;
       int byVTightIsolationMVArun2v2017v2DBoldDMdR0p3wLT = ((*_tauID)[i_daughter]>>map_tauID["byVTightIsolationMVArun2017v2DBoldDMdR0p3wLT2017"])&1;
 
-      int byVVVLooseDeepTau2017v2VSjet = ((*_tauID)[i_daughter]>>map_tauID["byVVVLooseDeepTau2017v2VSjet"])&1;
-      int byVVLooseDeepTau2017v2VSjet = ((*_tauID)[i_daughter]>>map_tauID["byVVLooseDeepTau2017v2VSjet"])&1;
-      int byVLooseDeepTau2017v2VSjet = ((*_tauID)[i_daughter]>>map_tauID["byVLooseDeepTau2017v2VSjet"])&1;
-      int byLooseDeepTau2017v2VSjet = ((*_tauID)[i_daughter]>>map_tauID["byLooseDeepTau2017v2VSjet"])&1;
-      int byMediumDeepTau2017v2VSjet = ((*_tauID)[i_daughter]>>map_tauID["byMediumDeepTau2017v2VSjet"])&1;
-      int byTightDeepTau2017v2VSjet = ((*_tauID)[i_daughter]>>map_tauID["byTightDeepTau2017v2VSjet"])&1;
-      int byVTightDeepTau2017v2VSjet = ((*_tauID)[i_daughter]>>map_tauID["byVTightDeepTau2017v2VSjet"])&1;
-      int byVVTightDeepTau2017v2VSjet = ((*_tauID)[i_daughter]>>map_tauID["byVVTightDeepTau2017v2VSjet"])&1;
-
       int decayModeFinding=(*_daughters_decayModeFindingOldDMs)[i_daughter];
 
       float dxy = (*_dxy)[i_daughter];
       float dz = (*_dz)[i_daughter];
       
       bool iso_cut = iso<(0.1*iso_tau);
-      iso_cut = byVLooseIsolationMVArun2v2017v2DBoldDMdR0p3wLT;
+
+      if(iso_type=="byLooseCombinedIsolationDeltaBetaCorr3Hits")
+	      iso_cut = byLooseCombinedIsolationDeltaBetaCorr3Hits;
+      else if(iso_type=="byLooseCombinedIsolationDeltaBetaCorr3HitsdR03")
+	      iso_cut = byLooseCombinedIsolationDeltaBetaCorr3HitsdR03;
+      else if(iso_type=="byLooseIsolationMVArun2v1DBdR03oldDMwLT")
+	      iso_cut = byLooseIsolationMVArun2v1DBdR03oldDMwLT;
+      else if(iso_type=="byVLooseIsolationMVArun2v2017v2DBoldDMdR0p3wLT")
+        iso_cut = byVLooseIsolationMVArun2v2017v2DBoldDMdR0p3wLT;
+      else if(iso_type=="byLooseIsolationMVArun2v2017v2DBoldDMdR0p3wLT")
+        iso_cut = byLooseIsolationMVArun2v2017v2DBoldDMdR0p3wLT;
  
       bool nomin_cut = fabs(PDGId)==15 && daughter.Pt()>20 && fabs(daughter.Eta())<2.3 && iso_cut && decayModeFinding>0.5 && abs(dxy)<=1000 && abs(dz)<=0.2;     
       
@@ -5429,17 +5459,6 @@ void convert_tree(
       _recotauh_againstElectronMediumMVA6.push_back( ((*_tauID)[i_daughter]>>map_tauID["againstElectronMediumMVA6"])&1 );
       _recotauh_againstElectronTightMVA6.push_back( ((*_tauID)[i_daughter]>>map_tauID["againstElectronTightMVA6"])&1 );
       _recotauh_againstElectronVTightMVA6.push_back( ((*_tauID)[i_daughter]>>map_tauID["againstElectronVTightMVA6"])&1 );
-
-      _recotauh_byVVVLooseDeepTau2017v2VSjet.push_back( ((*_tauID)[i_daughter]>>map_tauID["byVVVLooseDeepTau2017v2VSjet"])&1 );
-      _recotauh_byVVLooseDeepTau2017v2VSjet.push_back( ((*_tauID)[i_daughter]>>map_tauID["byVVLooseDeepTau2017v2VSjet"])&1 );
-      _recotauh_byVLooseDeepTau2017v2VSjet.push_back( ((*_tauID)[i_daughter]>>map_tauID["byVLooseDeepTau2017v2VSjet"])&1 );
-      _recotauh_byLooseDeepTau2017v2VSjet.push_back( ((*_tauID)[i_daughter]>>map_tauID["byLooseDeepTau2017v2VSjet"])&1 );
-      _recotauh_byMediumDeepTau2017v2VSjet.push_back( ((*_tauID)[i_daughter]>>map_tauID["byMediumDeepTau2017v2VSjet"])&1 );
-      _recotauh_byTightDeepTau2017v2VSjet.push_back( ((*_tauID)[i_daughter]>>map_tauID["byTightDeepTau2017v2VSjet"])&1 );
-      _recotauh_byVTightDeepTau2017v2VSjet.push_back( ((*_tauID)[i_daughter]>>map_tauID["byVTightDeepTau2017v2VSjet"])&1 );
-      _recotauh_byVVTightDeepTau2017v2VSjet.push_back( ((*_tauID)[i_daughter]>>map_tauID["byVVTightDeepTau2017v2VSjet"])&1 );
-
-      _recotauh_byDeepTau2017v2VSjetraw.push_back( (*_daughters_byDeepTau2017v2VSjetraw)[i_daughter] );
 
       float fakerate_loose = 0;
       float fakerate_medium = 0;
@@ -5595,7 +5614,6 @@ void convert_tree(
 
       float CSVscore = (*_bCSVscore)[i_jet];
       float DeepCSVscore = ( (*_bDeepCSV_probb)[i_jet] + (*_bDeepCSV_probbb)[i_jet] );
-      if(isnan(DeepCSVscore)) DeepCSVscore = -2;
       float DeepJetscore = ( (*_bDeepFlavor_probb)[i_jet] + (*_bDeepFlavor_probbb)[i_jet] + (*_bDeepFlavor_problepb)[i_jet]);
 
       pair<int,float> CSV_pair = make_pair(i_jet,CSVscore);
@@ -5797,11 +5815,7 @@ void convert_tree(
       _recoPFJet_eta.push_back( jet.Eta() );
       _recoPFJet_phi.push_back( jet.Phi() );
       _recoPFJet_CSVscore.push_back(  (*_bCSVscore)[i_jet] );
-
-      float deepcsv = (*_bDeepCSV_probb)[i_jet] + (*_bDeepCSV_probbb)[i_jet];
-      if(isnan(deepcsv)) deepcsv = -2;
-      _recoPFJet_DeepCSVscore.push_back( deepcsv );
-
+      _recoPFJet_DeepCSVscore.push_back(  (*_bDeepCSV_probb)[i_jet] + (*_bDeepCSV_probbb)[i_jet] );
       _recoPFJet_DeepJetscore.push_back(  (*_bDeepFlavor_probb)[i_jet] + (*_bDeepFlavor_probbb)[i_jet] + (*_bDeepFlavor_problepb)[i_jet]);
       _recoPFJet_jecUnc.push_back(  (*_jets_jecUnc)[i_jet] );
       _recoPFJet_Flavour.push_back(  (*_jets_Flavour)[i_jet] );
@@ -5869,11 +5883,7 @@ void convert_tree(
       _recoPFFwdJet_eta.push_back( jet_fwd.Eta() );
       _recoPFFwdJet_phi.push_back( jet_fwd.Phi() );
       _recoPFFwdJet_CSVscore.push_back(  (*_bCSVscore)[i_jet] );
-
-      float deepcsv = (*_bDeepCSV_probb)[i_jet] + (*_bDeepCSV_probbb)[i_jet];
-      if(isnan(deepcsv)) deepcsv = -2;
-      _recoPFFwdJet_DeepCSVscore.push_back( deepcsv );
-
+      _recoPFFwdJet_DeepCSVscore.push_back(  (*_bDeepCSV_probb)[i_jet] + (*_bDeepCSV_probbb)[i_jet] );
       _recoPFFwdJet_DeepJetscore.push_back(  (*_bDeepFlavor_probb)[i_jet] + (*_bDeepFlavor_probbb)[i_jet] + (*_bDeepFlavor_problepb)[i_jet]);
       _recoPFFwdJet_jecUnc.push_back(  (*_jets_jecUnc)[i_jet] );
       _recoPFFwdJet_Flavour.push_back(  (*_jets_Flavour)[i_jet] );
@@ -5967,16 +5977,12 @@ void convert_tree(
 	      _recoPFJet_untag_eta.push_back( jet.Eta() );
 	      _recoPFJet_untag_phi.push_back( jet.Phi() );
 	      _recoPFJet_untag_CSVscore.push_back( (*_bCSVscore)[i_jet] );
-
-              float deepcsv = (*_bDeepCSV_probb)[i_jet] + (*_bDeepCSV_probbb)[i_jet];
-              if(isnan(deepcsv)) deepcsv = -2;
-              _recoPFJet_untag_DeepCSVscore.push_back( deepcsv );
-
-              _recoPFJet_untag_DeepJetscore.push_back( (*_bDeepFlavor_probb)[i_jet] + (*_bDeepFlavor_probbb)[i_jet] + (*_bDeepFlavor_problepb)[i_jet]);
+        _recoPFJet_untag_DeepCSVscore.push_back( (*_bDeepCSV_probb)[i_jet] + (*_bDeepCSV_probbb)[i_jet] );
+        _recoPFJet_untag_DeepJetscore.push_back( (*_bDeepFlavor_probb)[i_jet] + (*_bDeepFlavor_probbb)[i_jet] + (*_bDeepFlavor_problepb)[i_jet]);
 	      _recoPFJet_untag_jecUnc.push_back( (*_jets_jecUnc)[i_jet] );
 	      _recoPFJet_untag_Flavour.push_back(  (*_jets_Flavour)[i_jet] );
 	      _recoPFJet_untag_hadronFlavour.push_back(  (*_jets_HadronFlavour)[i_jet] );
-              _recoPFJet_untag_QGdiscr.push_back(  (*_jets_QGdiscr)[i_jet] );
+        _recoPFJet_untag_QGdiscr.push_back(  (*_jets_QGdiscr)[i_jet] );
 
       }
 
@@ -6046,12 +6052,81 @@ void convert_tree(
       }
 
     }
-    
+
+
     //////////////////////////////////////////////
     ///             ak8   Jets                 ///
     //////////////////////////////////////////////
 
-    
+
+    vector< pair<int,TLorentzVector> > reco_ak8jets;
+
+    for(unsigned int i_jet=0; i_jet<(*_ak8jets_e).size(); i_jet++){
+
+      TLorentzVector ak8jet ( (*_ak8jets_px)[i_jet] , (*_ak8jets_py)[i_jet] , (*_ak8jets_pz)[i_jet] , (*_ak8jets_e)[i_jet] );
+
+      if(ak8jet.Pt()>170) cout<<"here"<<endl;
+
+      float msoftdrop = (*_ak8jets_SoftDropMass)[i_jet];
+
+      pair<int,TLorentzVector> ak8jet_pair = make_pair(i_jet,ak8jet);
+
+      int nsubjets = _recoPFak8Jet_nsubjets[i_jet];
+
+      vector< pair<int,TLorentzVector> > reco_subjets;
+      for(int i_subjet=0; i_subjet<nsubjets; i_subjet++){
+        //TLorentzVector subjet ( (*_subjets_px)[i_jet] , (*_subjets_py)[i_jet] , (*_subjets_pz)[i_jet] , (*_subjets_e)[i_jet] );
+        //unsigned int motherindex = (*_subjets_ak8MotherIdx)[i_subjet];
+        //if(motherindex!=i_jet) continue;
+        //pair<int,TLorentzVector> subjet_pair = make_pair(i_subjet,subjet);
+        //reco_subjets.push_back(subjet_pair);
+      }
+      //sort(reco_subjets.begin(), reco_subjets.end(), pT_comparison_pairs);
+
+      /*for(unsigned int i = 0; i<reco_subjets.size(); i++) {
+        TLorentzVector mysubjet = reco_subjets[i].second;
+        cout<<"i "<<mysubjet.Pt()<<endl;
+      }*/
+
+      if(ak8jet.Pt()>100 && fabs(ak8jet.Eta())<2.4 && msoftdrop>50){
+
+        bool dR_veto=false;
+
+        //cleaning here
+
+        /*for(unsigned int i_lep=0; i_lep<_recolep_pt.size(); i_lep++){
+
+          TLorentzVector lep;
+          lep.SetPtEtaPhiE( recolep_pt[i_lep] , _recolep_eta[i_lep] , _recolep_phi[i_lep] , _recolep_e[i_lep] );
+          float dR_lep_jet=lep.DeltaR(ak8jet);
+          if(dR_lep_jet<0.4 && _recolep_ismvasel[i_lep]){
+            dR_veto=true;
+            break;
+          }
+        }
+
+        for(unsigned int i_tauh=0; i_tauh<reco_taus.size(); i_tauh++){
+          TLorentzVector tauh=reco_taus[i_tauh].second;
+          float dR_tauh_jet=tauh.DeltaR(ak8jet);
+          if(dR_tauh_jet<0.4){
+            dR_veto=true;
+            break;
+          }
+        }
+
+        if(dR_veto)
+          continue;*/
+
+        reco_ak8jets.push_back(ak8jet_pair);
+
+      }
+
+    }
+
+    sort(reco_ak8jets.begin(), reco_ak8jets.end(), pT_comparison_pairs);
+
+    _n_recoPFak8Jet = reco_ak8jets.size();
+
 
 
     //////////////////////////////////////////////
@@ -7425,18 +7500,18 @@ void convert_tree(
 
 void test16(){
 
-  convert_tree("sync16",0,true,0,0,true,0,0,"presel",2016);
+  convert_tree("sync16",0,"byVLooseIsolationMVArun2v2017v2DBoldDMdR0p3wLT",true,0,0,true,0,0,"presel",2016);
 
 }
 
 void test17(){
 
-  convert_tree("sync17",0,true,0,0,true,0,0,"presel",2017);
+  convert_tree("sync17",0,"byVLooseIsolationMVArun2v2017v2DBoldDMdR0p3wLT",true,0,0,true,0,0,"presel",2017);
 
 }
 
 void test18(){
 
-  convert_tree("sync18",0,true,0,0,true,0,0,"presel",2018);
+  convert_tree("sync18",0,"byVLooseIsolationMVArun2v2017v2DBoldDMdR0p3wLT",true,0,0,true,0,0,"presel",2018);
 
 }

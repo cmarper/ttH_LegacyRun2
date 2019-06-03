@@ -416,21 +416,21 @@ void compareSyncNtuples()
 
   //TH1::AddDirectory(false);
 
-  std::string inputFilePath_ref = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_groups/objects/2017/";
-  std::string inputFileName_ref = "sync_Tallinn_2017_v9.root";
-  //std::string inputFilePath_ref = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_syncformat/2017";
-  //std::string inputFileName_ref = "sync_ntuple_objects_syncformat_ttHNonbb_2017_v5.root";
+  //std::string inputFilePath_ref = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_groups/objects/2016/";
+  //std::string inputFileName_ref = "sync_Tallinn_2016_v9.root";
+  std::string inputFilePath_ref = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_syncformat/objects/2016/";
+  std::string inputFileName_ref = "sync_ntuple_objects_syncformat_ttHNonbb_2016_v12.root";
   TFile* inputFile_ref = openFile(inputFilePath_ref, inputFileName_ref);
   std::string treeName_ref = "syncTree";
   TTree* tree_ref = loadTree(inputFile_ref, treeName_ref);
-  std::string legendEntry_ref = "Tallinn";
+  std::string legendEntry_ref = "LLR";
   //std::string legendEntry_ref = "Tallinn";
   std::string selection_ref = "n_presel_jet >= 1";
 
-  std::string inputFilePath_test = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_groups/objects/2017/";
-  std::string inputFileName_test = "synchTuples_2017_v5_CERN.root"; 
+  std::string inputFilePath_test = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_groups/objects/2016/";
+  std::string inputFileName_test = "sync_Tallinn_2016_v17.root"; 
   std::string legendEntry_test = "CERN";
-  //std::string inputFileName_test = "sync_Tallinn_2017_v3.root";
+  //std::string inputFileName_test = "sync_Tallinn_2016_v3.root";
   //std::string legendEntry_test = "Tallinn"; 
   //std::string inputFileName_test = "syncTree_TTH_Sergio.root";
   //std::string legendEntry_test = "CERN";
@@ -440,14 +440,14 @@ void compareSyncNtuples()
   TTree* tree_test = loadTree(inputFile_test, treeName_test);
   std::string selection_test = "n_presel_jet >= 1";
 
-  std::string outputFilePath = "../plots_sync/2017/plots2017/";
-  //std::string outputFilePath = "../plots_sync/2017/objects_LLRv3_Tallinnv3";
-  //std::string outputFilePath = "../plots_sync/2017/objects_IHEPv1_Tallinnv3";
+  std::string outputFilePath = "../plots_sync/2016/plots2016/";
+  //std::string outputFilePath = "../plots_sync/2016/objects_LLRv3_Tallinnv3";
+  //std::string outputFilePath = "../plots_sync/2016/objects_IHEPv1_Tallinnv3";
   //std::string outputFilePath = "../plots_sync/objects_LLRv4_CERNv1"; 
 
   std::vector<branchEntryType*> branchesToCompare;
 
-  branchesToCompare.push_back(new branchEntryType("n_presel_mu", "I", "", 20, -0.5, 19.5));
+  /*branchesToCompare.push_back(new branchEntryType("n_presel_mu", "I", "", 20, -0.5, 19.5));
   branchesToCompare.push_back(new branchEntryType("n_presel_ele", "I", "", 20, -0.5, 19.5));
   branchesToCompare.push_back(new branchEntryType("n_presel_tau", "I", "", 20, -0.5, 19.5));
   branchesToCompare.push_back(new branchEntryType("n_presel_jet", "I", "", 20, -0.5, 19.5));
@@ -545,48 +545,67 @@ void compareSyncNtuples()
   branchesToCompare.push_back(new branchEntryType("ele2_eta", "F", "n_presel_ele >= 2", 100, -3.0, +3.0));
   branchesToCompare.push_back(new branchEntryType("ele2_dz", "F", "n_presel_ele >= 2", 100, -0.4, +0.4));
   branchesToCompare.push_back(new branchEntryType("ele2_PFRelIso04", "F", "n_presel_mu >= 1", 100, -1., +1.));
-
+*/
   //branchesToCompare.push_back(new branchEntryType("tau1_againstElectronMediumMVA6", "I", "n_presel_tau >= 1", 2, -0.5, +1.5));
   //branchesToCompare.push_back(new branchEntryType("tau1_againstElectronLooseMVA6", "I", "n_presel_tau >= 1", 2, -0.5, +1.5));
   //branchesToCompare.push_back(new branchEntryType("tau1_againstElectronVLooseMVA6", "I", "n_presel_tau >= 1", 2, -0.5, +1.5));
   //branchesToCompare.push_back(new branchEntryType("tau1_againstMuonLoose3", "I", "n_presel_tau >= 1", 2, -0.5, +1.5));
-  branchesToCompare.push_back(new branchEntryType("tau1_byVTightIsolationMVArun2v1DBdR03oldDMwLT", "I", "n_presel_tau >= 1", 2, -0.5, +1.5));
-  branchesToCompare.push_back(new branchEntryType("tau1_byTightIsolationMVArun2v1DBdR03oldDMwLT", "I", "n_presel_tau >= 1", 2, -0.5, +1.5));
-  branchesToCompare.push_back(new branchEntryType("tau1_byMediumIsolationMVArun2v1DBdR03oldDMwLT", "I", "n_presel_tau >= 1", 2, -0.5, +1.5));
+  //branchesToCompare.push_back(new branchEntryType("tau1_byVTightIsolationMVArun2v1DBdR03oldDMwLT", "I", "n_presel_tau >= 1", 2, -0.5, +1.5));
+  //branchesToCompare.push_back(new branchEntryType("tau1_byTightIsolationMVArun2v1DBdR03oldDMwLT", "I", "n_presel_tau >= 1", 2, -0.5, +1.5));
+  //branchesToCompare.push_back(new branchEntryType("tau1_byMediumIsolationMVArun2v1DBdR03oldDMwLT", "I", "n_presel_tau >= 1", 2, -0.5, +1.5));
   //branchesToCompare.push_back(new branchEntryType("tau1_againstElectronTightMVA6", "I", "n_presel_tau >= 1", 2, -0.5, +1.5));
   //branchesToCompare.push_back(new branchEntryType("tau1_decayModeFindingOldDMS", "I", "n_presel_tau >= 1", 2, -0.5, +1.5));
   //branchesToCompare.push_back(new branchEntryType("tau1_againstMuonTight3", "I", "n_presel_tau >= 1", 2, -0.5, +1.5));
-  //branchesToCompare.push_back(new branchEntryType("tau1_decayModeFindingNewDMS", "I", "n_presel_tau >= 1", 2, -0.5, +1.5));
-  branchesToCompare.push_back(new branchEntryType("tau1_charge", "I", "n_presel_tau >= 1", 3, -1.5, +1.5));
-  branchesToCompare.push_back(new branchEntryType("tau1_byLooseIsolationMVArun2v1DBdR03oldDMwLT", "F", "n_presel_tau >= 1", 2, -0.5, +1.5));
-  branchesToCompare.push_back(new branchEntryType("tau1_dz", "F", "n_presel_tau >= 1", 100, -0.5, +0.5));
-  branchesToCompare.push_back(new branchEntryType("tau1_dxy", "F", "n_presel_tau >= 1", 100, -0.2, +0.2));
-  branchesToCompare.push_back(new branchEntryType("tau1_pt", "F", "n_presel_tau >= 1", 100, 0., 250.));
-  branchesToCompare.push_back(new branchEntryType("tau1_eta", "F", "n_presel_tau >= 1", 100, -3., +3.));
-  branchesToCompare.push_back(new branchEntryType("tau1_phi", "F", "n_presel_tau >= 1", 36, -TMath::Pi(), +TMath::Pi()));
-  branchesToCompare.push_back(new branchEntryType("tau1_E", "F", "n_presel_tau >= 1", 100, 0., 250.));
+  branchesToCompare.push_back(new branchEntryType("tau1_decayModeFindingNewDMS", "I", "n_presel_tau >= 1", 2, -0.5, +1.5));
+  branchesToCompare.push_back(new branchEntryType("tau1_byVVVLooseDeepTau2017v2VSjet","I","n_presel_tau >= 1", 2, -0.5, +1.5));
+  branchesToCompare.push_back(new branchEntryType("tau1_byVVLooseDeepTau2017v2VSjet","I","n_presel_tau >= 1", 2, -0.5, +1.5));
+  branchesToCompare.push_back(new branchEntryType("tau1_byVLooseDeepTau2017v2VSjet","I","n_presel_tau >= 1", 2, -0.5, +1.5));
+  branchesToCompare.push_back(new branchEntryType("tau1_byLooseDeepTau2017v2VSjet","I","n_presel_tau >= 1", 2, -0.5, +1.5));
+  branchesToCompare.push_back(new branchEntryType("tau1_byMediumDeepTau2017v2VSjet","I","n_presel_tau >= 1", 2, -0.5, +1.5));
+  branchesToCompare.push_back(new branchEntryType("tau1_byTightDeepTau2017v2VSjet","I","n_presel_tau >= 1", 2, -0.5, +1.5));
+  branchesToCompare.push_back(new branchEntryType("tau1_byVTightDeepTau2017v2VSjet","I","n_presel_tau >= 1", 2, -0.5, +1.5));
+  branchesToCompare.push_back(new branchEntryType("tau1_byVVTightDeepTau2017v2VSjet","I","n_presel_tau >= 1", 2, -0.5, +1.5));
+  branchesToCompare.push_back(new branchEntryType("tau1_byDeepTau2017v2VSjetraw","F","n_presel_tau >= 1", 100, -1.5, +1.5));
+  //branchesToCompare.push_back(new branchEntryType("tau1_charge", "I", "n_presel_tau >= 1", 3, -1.5, +1.5));
+  //branchesToCompare.push_back(new branchEntryType("tau1_byLooseIsolationMVArun2v1DBdR03oldDMwLT", "F", "n_presel_tau >= 1", 2, -0.5, +1.5));
+  //branchesToCompare.push_back(new branchEntryType("tau1_dz", "F", "n_presel_tau >= 1", 100, -0.5, +0.5));
+  //branchesToCompare.push_back(new branchEntryType("tau1_dxy", "F", "n_presel_tau >= 1", 100, -0.2, +0.2));
+  //branchesToCompare.push_back(new branchEntryType("tau1_pt", "F", "n_presel_tau >= 1", 100, 0., 250.));
+  //branchesToCompare.push_back(new branchEntryType("tau1_eta", "F", "n_presel_tau >= 1", 100, -3., +3.));
+  //branchesToCompare.push_back(new branchEntryType("tau1_phi", "F", "n_presel_tau >= 1", 36, -TMath::Pi(), +TMath::Pi()));
+  //branchesToCompare.push_back(new branchEntryType("tau1_E", "F", "n_presel_tau >= 1", 100, 0., 250.));
 
   //branchesToCompare.push_back(new branchEntryType("tau2_againstElectronMediumMVA6", "I", "n_presel_tau >= 2", 2, -0.5, +1.5));
   //branchesToCompare.push_back(new branchEntryType("tau2_againstElectronLooseMVA6", "I", "n_presel_tau >= 2", 2, -0.5, +1.5));
   //branchesToCompare.push_back(new branchEntryType("tau2_againstElectronVLooseMVA6", "I", "n_presel_tau >= 2", 2, -0.5, +1.5));
   //branchesToCompare.push_back(new branchEntryType("tau2_againstMuonLoose3", "I", "n_presel_tau >= 2", 2, -0.5, +1.5));
-  branchesToCompare.push_back(new branchEntryType("tau2_byVTightIsolationMVArun2v1DBdR03oldDMwLT", "I", "n_presel_tau >= 2", 2, -0.5, +1.5));
-  branchesToCompare.push_back(new branchEntryType("tau2_byTightIsolationMVArun2v1DBdR03oldDMwLT", "I", "n_presel_tau >= 2", 2, -0.5, +1.5));
-  branchesToCompare.push_back(new branchEntryType("tau2_byMediumIsolationMVArun2v1DBdR03oldDMwLT", "I", "n_presel_tau >= 2", 2, -0.5, +1.5));
+  //branchesToCompare.push_back(new branchEntryType("tau2_byVTightIsolationMVArun2v1DBdR03oldDMwLT", "I", "n_presel_tau >= 2", 2, -0.5, +1.5));
+  //branchesToCompare.push_back(new branchEntryType("tau2_byTightIsolationMVArun2v1DBdR03oldDMwLT", "I", "n_presel_tau >= 2", 2, -0.5, +1.5));
+  //branchesToCompare.push_back(new branchEntryType("tau2_byMediumIsolationMVArun2v1DBdR03oldDMwLT", "I", "n_presel_tau >= 2", 2, -0.5, +1.5));
   //branchesToCompare.push_back(new branchEntryType("tau2_againstElectronTightMVA6", "I", "n_presel_tau >= 2", 2, -0.5, +1.5));
   //branchesToCompare.push_back(new branchEntryType("tau2_decayModeFindingOldDMS", "I", "n_presel_tau >= 2", 2, -0.5, +1.5));
   //branchesToCompare.push_back(new branchEntryType("tau2_againstMuonTight3", "I", "n_presel_tau >= 2", 2, -0.5, +1.5));
-  //branchesToCompare.push_back(new branchEntryType("tau2_decayModeFindingNewDMS", "I", "n_presel_tau >= 2", 2, -0.5, +1.5));
-  branchesToCompare.push_back(new branchEntryType("tau2_charge", "I", "n_presel_tau >= 2", 3, -1.5, +1.5));
-  branchesToCompare.push_back(new branchEntryType("tau2_byLooseIsolationMVArun2v1DBdR03oldDMwLT", "F", "n_presel_tau >= 2", 2, -0.5, +1.5));
-  branchesToCompare.push_back(new branchEntryType("tau2_dz", "F", "n_presel_tau >= 2", 100, -0.5, +0.5));
-  branchesToCompare.push_back(new branchEntryType("tau2_dxy", "F", "n_presel_tau >= 2", 100, -0.2, +0.2));
-  branchesToCompare.push_back(new branchEntryType("tau2_pt", "F", "n_presel_tau >= 2", 100, 0., 250.));
-  branchesToCompare.push_back(new branchEntryType("tau2_eta", "F", "n_presel_tau >= 2", 100, -3., +3.));
-  branchesToCompare.push_back(new branchEntryType("tau2_phi", "F", "n_presel_tau >= 2", 36, -TMath::Pi(), +TMath::Pi()));
-  branchesToCompare.push_back(new branchEntryType("tau2_E", "F", "n_presel_tau >= 2", 100, 0., 250.));			      
+  branchesToCompare.push_back(new branchEntryType("tau2_decayModeFindingNewDMS", "I", "n_presel_tau >= 2", 2, -0.5, +1.5));
+  //branchesToCompare.push_back(new branchEntryType("tau2_charge", "I", "n_presel_tau >= 2", 3, -1.5, +1.5));
+  //branchesToCompare.push_back(new branchEntryType("tau2_byLooseIsolationMVArun2v1DBdR03oldDMwLT", "F", "n_presel_tau >= 2", 2, -0.5, +1.5));
+  //branchesToCompare.push_back(new branchEntryType("tau2_dz", "F", "n_presel_tau >= 2", 100, -0.5, +0.5));
+  //branchesToCompare.push_back(new branchEntryType("tau2_dxy", "F", "n_presel_tau >= 2", 100, -0.2, +0.2));
+  //branchesToCompare.push_back(new branchEntryType("tau2_pt", "F", "n_presel_tau >= 2", 100, 0., 250.));
+  //branchesToCompare.push_back(new branchEntryType("tau2_eta", "F", "n_presel_tau >= 2", 100, -3., +3.));
+  //branchesToCompare.push_back(new branchEntryType("tau2_phi", "F", "n_presel_tau >= 2", 36, -TMath::Pi(), +TMath::Pi()));
+  //branchesToCompare.push_back(new branchEntryType("tau2_E", "F", "n_presel_tau >= 2", 100, 0., 250.));			      
+  branchesToCompare.push_back(new branchEntryType("tau2_decayModeFindingNewDMS", "I", "n_presel_tau >= 1", 2, -0.5, +1.5));
+  branchesToCompare.push_back(new branchEntryType("tau2_byVVVLooseDeepTau2017v2VSjet","I","n_presel_tau >= 1", 2, -0.5, +1.5));
+  branchesToCompare.push_back(new branchEntryType("tau2_byVVLooseDeepTau2017v2VSjet","I","n_presel_tau >= 1", 2, -0.5, +1.5));
+  branchesToCompare.push_back(new branchEntryType("tau2_byVLooseDeepTau2017v2VSjet","I","n_presel_tau >= 1", 2, -0.5, +1.5));
+  branchesToCompare.push_back(new branchEntryType("tau2_byLooseDeepTau2017v2VSjet","I","n_presel_tau >= 1", 2, -0.5, +1.5));
+  branchesToCompare.push_back(new branchEntryType("tau2_byMediumDeepTau2017v2VSjet","I","n_presel_tau >= 1", 2, -0.5, +1.5));
+  branchesToCompare.push_back(new branchEntryType("tau2_byTightDeepTau2017v2VSjet","I","n_presel_tau >= 1", 2, -0.5, +1.5));
+  branchesToCompare.push_back(new branchEntryType("tau2_byVTightDeepTau2017v2VSjet","I","n_presel_tau >= 1", 2, -0.5, +1.5));
+  branchesToCompare.push_back(new branchEntryType("tau2_byVVTightDeepTau2017v2VSjet","I","n_presel_tau >= 1", 2, -0.5, +1.5));
+  branchesToCompare.push_back(new branchEntryType("tau2_byDeepTau2017v2VSjetraw","F","n_presel_tau >= 1", 100, -1.5, +1.5));
 
-  branchesToCompare.push_back(new branchEntryType("jet1_CSV", "F", "n_presel_jet >= 1", 100, -0.5, +1.5));
+  /*branchesToCompare.push_back(new branchEntryType("jet1_CSV", "F", "n_presel_jet >= 1", 100, -0.5, +1.5));
   branchesToCompare.push_back(new branchEntryType("jet1_DeepCSV", "F", "n_presel_jet >= 1", 100, -0.5, +1.5));
   branchesToCompare.push_back(new branchEntryType("jet1_DeepJet", "F", "n_presel_jet >= 1", 100, -0.5, +1.5));
   branchesToCompare.push_back(new branchEntryType("jet1_pt", "F", "n_presel_jet >= 1", 100, 0., 250.));
@@ -649,7 +668,7 @@ void compareSyncNtuples()
 
   branchesToCompare.push_back(new branchEntryType("mindr_lep1_jet","I","n_presel_jet >= 1",100,0,5));
   branchesToCompare.push_back(new branchEntryType("mindr_lep2_jet","I","n_presel_jet >= 1",100,0,5));
-
+*/
   for ( std::vector<branchEntryType*>::const_iterator branch = branchesToCompare.begin();
 	branch != branchesToCompare.end(); ++branch ) {
     std::cout << "plotting " << (*branch)->branchName_ << "..." << std::endl;
