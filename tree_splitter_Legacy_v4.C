@@ -28,8 +28,6 @@ void split_tree(TString filename_in, TString filename_out,
 		int i_split1=0, int i_split2=0,
 		bool isMC=true, int year=2016){
 
-  produce_triggerlist(year);
-
   vector<TString> list;
   list.push_back(filename_in);
 
@@ -106,12 +104,6 @@ void split_tree(TString filename_in, TString filename_out,
   vector<int>   *_recoele_genMatchInd;
   vector<bool>  *_recoele_isChargeConsistent;
 
-  float _ETmissLD;
-  int _n_recoPFJet;
-  int _n_recoPFFwdJet;
-  int _n_recoPFJet_btag_medium;
-  int _n_recoPFJet_btag_loose;
-
   int _n_recotauh;
   vector<float> *_recotauh_eta;
   vector<float> *_recotauh_phi;
@@ -139,10 +131,19 @@ void split_tree(TString filename_in, TString filename_out,
   vector<float> *_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT;
   vector<float> *_recotauh_fakerate_byTightIsolationMVArun2v2017v2DBdR03oldDMwLT;
 
+  float _ETmissLD;
+  float _PFMET;
+  float _PFMET_phi;
+  int _n_recoPFJet;
+  int _n_recoPFFwdJet;
+  int _n_recoPFJet_btag_medium;
+  int _n_recoPFJet_btag_loose;
+
   vector<float> *_recoPFJet_e;
   vector<float> *_recoPFJet_px;
   vector<float> *_recoPFJet_py;
   vector<float> *_recoPFJet_pz;
+  vector<float> *_recoPFJet_DeepJetscore;
 
   tree->SetBranchAddress("EventNumber",&_EventNumber);
   tree->SetBranchAddress("year",&_year);
@@ -204,12 +205,6 @@ void split_tree(TString filename_in, TString filename_out,
   tree->SetBranchAddress("recoele_genMatchInd",&_recoele_genMatchInd);
   tree->SetBranchAddress("recoele_isChargeConsistent",&_recoele_isChargeConsistent);
 
-  tree->SetBranchAddress("ETmissLD",&_ETmissLD);
-  tree->SetBranchAddress("n_recoPFJet",&_n_recoPFJet);
-  tree->SetBranchAddress("n_recoPFFwdJet",&_n_recoPFFwdJet);
-  tree->SetBranchAddress("n_recoPFJet_btag_medium",&_n_recoPFJet_btag_medium);
-  tree->SetBranchAddress("n_recoPFJet_btag_loose",&_n_recoPFJet_btag_loose);
-
   tree->SetBranchAddress("n_recotauh",&_n_recotauh);
   tree->SetBranchAddress("recotauh_eta",&_recotauh_eta);
   tree->SetBranchAddress("recotauh_phi",&_recotauh_phi);
@@ -237,10 +232,19 @@ void split_tree(TString filename_in, TString filename_out,
   tree->SetBranchAddress("recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT",&_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT);
   tree->SetBranchAddress("recotauh_fakerate_byTightIsolationMVArun2v2017v2DBdR03oldDMwLT",&_recotauh_fakerate_byTightIsolationMVArun2v2017v2DBdR03oldDMwLT);
 
+  tree->SetBranchAddress("ETmissLD",&_ETmissLD);
+  tree->SetBranchAddress("PFMET",&_PFMET);
+  tree->SetBranchAddress("PFMET_phi",&_PFMET_phi);
+  tree->SetBranchAddress("n_recoPFJet",&_n_recoPFJet);
+  tree->SetBranchAddress("n_recoPFFwdJet",&_n_recoPFFwdJet);
+  tree->SetBranchAddress("n_recoPFJet_btag_medium",&_n_recoPFJet_btag_medium);
+  tree->SetBranchAddress("n_recoPFJet_btag_loose",&_n_recoPFJet_btag_loose);
+
   tree->SetBranchAddress("recoPFJet_e", &_recoPFJet_e);
   tree->SetBranchAddress("recoPFJet_px",&_recoPFJet_px);
   tree->SetBranchAddress("recoPFJet_py",&_recoPFJet_py);
   tree->SetBranchAddress("recoPFJet_pz",&_recoPFJet_pz);
+  tree->SetBranchAddress("recoPFJet_DeepJetscore",&_recoPFJet_DeepJetscore);
   
   //Long64_t nentries=100;
   Long64_t nentries = tree->GetEntries();
@@ -577,7 +581,7 @@ void split_tree(TString filename_in, TString filename_out,
   vector<float> _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT; 
   vector<float> _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT;
 
-  int _n_light_jet;
+  int _n_recoPFLightJet;
 
   bool _isGenMatched;
 
@@ -701,7 +705,7 @@ void split_tree(TString filename_in, TString filename_out,
     tree_new[i]->Branch("recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT",&_recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT);
     tree_new[i]->Branch("recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT",&_recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT);
 
-    tree_new[i]->Branch("n_light_jet",&_n_light_jet);
+    tree_new[i]->Branch("n_recoPFLightJet",&_n_recoPFLightJet);
 
     tree_new[i]->Branch("isGenMatched",&_isGenMatched);
 
@@ -856,7 +860,7 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.clear();
     _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.clear();
 
-    _n_light_jet = 0;
+    _n_recoPFLightJet = 0;
 
     _isGenMatched = 0;
 
@@ -981,12 +985,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recoele_genMatchInd = 0;
     _recoele_isChargeConsistent = 0;
 
-    _ETmissLD = 0;
-    _n_recoPFJet = 0;
-    _n_recoPFFwdJet = 0;
-    _n_recoPFJet_btag_medium = 0;
-    _n_recoPFJet_btag_loose = 0;
-
     _n_recotauh = 0;
     _recotauh_eta = 0;
     _recotauh_phi = 0;
@@ -1021,10 +1019,19 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT = 0;
     _recotauh_fakerate_byTightIsolationMVArun2v2017v2DBdR03oldDMwLT = 0;
 
+    _ETmissLD = 0;
+    _PFMET = 0;
+    _PFMET_phi = 0;
+    _n_recoPFJet = 0;
+    _n_recoPFFwdJet = 0;
+    _n_recoPFJet_btag_medium = 0;
+    _n_recoPFJet_btag_loose = 0;
+
     _recoPFJet_e = 0;
     _recoPFJet_px = 0;
     _recoPFJet_py = 0;
     _recoPFJet_pz = 0;
+    _recoPFJet_DeepJetscore = 0;
 
     tree->GetEntry(i);
 
@@ -1291,7 +1298,7 @@ void split_tree(TString filename_in, TString filename_out,
     }
     
 
-    _n_light_jet = (_n_recoPFJet - _n_recoPFJet_btag_loose) + _n_recoPFFwdJet;
+    _n_recoPFLightJet = (_n_recoPFJet - _n_recoPFJet_btag_loose) + _n_recoPFFwdJet;
 
 
     ////////////////////////////////
@@ -1521,7 +1528,7 @@ void split_tree(TString filename_in, TString filename_out,
       ((_recolep_fakeable_charge[0]*_recolep_fakeable_charge[1])>0);
 
     bool pass_njet_2l_ttH = (_n_recoPFJet>=4 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) );
-    bool pass_njet_2l_tH = (_n_recoPFJet_btag_medium>=1 && _n_light_jet>=1);
+    bool pass_njet_2l_tH = (_n_recoPFJet_btag_medium>=1 && _n_recoPFLightJet>=1);
 
     bool is_2l_ttH_like = pass_njet_2l_ttH;
     bool is_2l_tH_like_and_not_ttH_like = pass_njet_2l_tH && !pass_njet_2l_ttH;
@@ -1707,7 +1714,7 @@ void split_tree(TString filename_in, TString filename_out,
       (_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1] && _recolep_fakeable_ismvasel[2]);
 
     bool pass_njet_3l_ttH = (_n_recoPFJet>=2 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) ) && metLD_f;
-    bool pass_njet_3l_tH = (_n_recoPFJet_btag_medium>=1 && _n_light_jet>=1);
+    bool pass_njet_3l_tH = (_n_recoPFJet_btag_medium>=1 && _n_recoPFLightJet>=1);
 
     bool is_3l_ttH_like = pass_njet_3l_ttH;
     bool is_3l_tH_like_and_not_ttH_like = pass_njet_3l_tH && !pass_njet_3l_ttH;
@@ -2073,7 +2080,7 @@ void split_tree(TString filename_in, TString filename_out,
 
     if(_n_recolep_sel>=1) _lep1_conePt = _recolep_sel_conept[0];
     if(_n_recolep_sel>=2) _lep2_conePt = _recolep_sel_conept[1];
-    if(_n_recolep_sel>=3) _lep3_conePt = (*_recolep_sel_conept)[2];
+    if(_n_recolep_sel>=3) _lep3_conePt = _recolep_sel_conept[2];
 
     if(_n_recolep_sel>=1) _lep1_charge = _recolep_sel_charge[0];
 
@@ -2100,7 +2107,7 @@ void split_tree(TString filename_in, TString filename_out,
     }
 
     if(_n_recolep_sel>=3) {
-      TLorentzVector lep3((*_recolep_sel_px)[2],(*_recolep_sel_py)[2],(*_recolep_sel_pz)[2],(*_recolep_sel_e)[2]);
+      TLorentzVector lep3(_recolep_sel_px[2],_recolep_sel_py[2],_recolep_sel_pz[2],_recolep_sel_e[2]);
       float minDR_l3_j = 9999;
       for(int i_jet = 0; i_jet<_n_recoPFJet; i_jet++){
         TLorentzVector jet((*_recoPFJet_px)[i_jet],(*_recoPFJet_py)[i_jet],(*_recoPFJet_pz)[i_jet],(*_recoPFJet_e)[i_jet]);
@@ -2109,7 +2116,6 @@ void split_tree(TString filename_in, TString filename_out,
       }
       _mindr_lep3_jet = minDR_l3_j;
     }
-
 
     if(_n_recotauh_sel>=1) {
       TLorentzVector tau1(_recotauh_sel_px[0],_recotauh_sel_py[0],_recotauh_sel_pz[0],_recotauh_sel_e[0]);
@@ -2134,6 +2140,7 @@ void split_tree(TString filename_in, TString filename_out,
     }
 
     if(_n_recoPFJet>=2){
+      _avg_dr_jet = 0;
       int n_pair_jets = 0;
       for(int i_jet1=0; i_jet1<_n_recoPFJet; i_jet1++){  
         TLorentzVector jet1((*_recoPFJet_px)[i_jet1],(*_recoPFJet_py)[i_jet1],(*_recoPFJet_pz)[i_jet1],(*_recoPFJet_e)[i_jet1]);
@@ -2147,6 +2154,7 @@ void split_tree(TString filename_in, TString filename_out,
     }
 
     if(_n_recolep_sel>=1 && _n_recotauh_sel>=1){
+      _avg_dr_lep_tau = 0;
       int n_pair_lep_tau = 0;
       float maxDR_l_t = 0;
       for(int i_lep=0; i_lep<_n_recolep_sel; i_lep++){  
@@ -2163,7 +2171,8 @@ void split_tree(TString filename_in, TString filename_out,
       _max_dr_lep_tau = maxDR_l_t;
     }
 
-    if(_n_recotauh_sel>=1 && _n_recoPFJet>0) {
+
+    if(_n_recotauh_sel>=1 && _n_recoPFJet>=1) {
       float minDR_t_j = 9999;
       for(int i_tau = 0; i_tau<_n_recotauh_sel; i_tau++){
         TLorentzVector tau(_recotauh_sel_px[i_tau],_recotauh_sel_py[i_tau],_recotauh_sel_pz[i_tau],_recotauh_sel_e[i_tau]);    
@@ -2186,7 +2195,7 @@ void split_tree(TString filename_in, TString filename_out,
           if(i_dR < minDR_l_t) minDR_l_t = i_dR;
         }
       }
-      _mindr_lep_tau = minDR_l_t;
+      _min_dr_lep_tau = minDR_l_t;
     }
 
 
@@ -2200,8 +2209,9 @@ void split_tree(TString filename_in, TString filename_out,
           if(i_dR < minDR_l_j) minDR_l_j = i_dR;
         }
       }
-      _mindr_lep_jet = minDR_l_j;
+      _min_dr_lep_jet = minDR_l_j;
     }
+
 
     if(_n_recolep_sel>=2) {
       TLorentzVector lep1(_recolep_sel_px[0],_recolep_sel_py[0],_recolep_sel_pz[0],_recolep_sel_e[0]); 
@@ -2219,12 +2229,12 @@ void split_tree(TString filename_in, TString filename_out,
       if(_n_recotauh_sel>=1 && (_recolep_sel_charge[0]*_recotauh_sel_charge[0])>0) {
         TLorentzVector lep1(_recolep_sel_px[0],_recolep_sel_py[0],_recolep_sel_pz[0],_recolep_sel_e[0]);
         TLorentzVector tau1(_recotauh_sel_px[0],_recotauh_sel_py[0],_recotauh_sel_pz[0],_recotauh_sel_e[0]);
-        _dr_lep_tau_ss = lep1.DeltaR(tau1);
+        _dR_lep_tau_ss = lep1.DeltaR(tau1);
       }
       else if(_n_recotauh_sel>=2 && (_recolep_sel_charge[0]*_recotauh_sel_charge[1])>0) {
         TLorentzVector lep1(_recolep_sel_px[0],_recolep_sel_py[0],_recolep_sel_pz[0],_recolep_sel_e[0]);
         TLorentzVector tau2(_recotauh_sel_px[1],_recotauh_sel_py[1],_recotauh_sel_pz[1],_recotauh_sel_e[1]);
-        _dr_lep_tau_ss = lep1.DeltaR(tau2);
+        _dR_lep_tau_ss = lep1.DeltaR(tau2);
       }
     }
 
@@ -2241,15 +2251,16 @@ void split_tree(TString filename_in, TString filename_out,
     }
 
     float _maxEta = -999.;
-    for(unsigned int i_lep=0;i_lep<_n_recolep_sel;i_lep++){
+    for(int i_lep=0;i_lep<_n_recolep_sel;i_lep++){
       float _eta_lep = abs(_recolep_sel_eta[i_lep]);
       if(_eta_lep > _maxEta){
         _maxEta = _eta_lep;
       }
     }
+    _max_lep_eta = fabs(_maxEta);
 
+    //FIXME reco or cone pt?
     if(_n_recolep_sel>=1) _mT_lep1 = sqrt(2*(_recolep_sel_pt[0])*_PFMET*(1-cos((_recolep_sel_phi[0])-_PFMET_phi)));
-
     if(_n_recolep_sel>=2) _mT_lep2 = sqrt(2*(_recolep_sel_pt[1])*_PFMET*(1-cos((_recolep_sel_phi[1])-_PFMET_phi)));
 
     if(_n_recotauh_sel>=2){
@@ -2278,18 +2289,49 @@ void split_tree(TString filename_in, TString filename_out,
       }
     }
 
-    if(_n_recoPFJet>=2 && _n_recoPFJet_btag_medium>=2){
-      //FIXME -> check they are the jets passing medium
-      TLorentzVector jet1((*_recoPFJet_px)[0],(*_recoPFJet_py)[0],(*_recoPFJet_pz)[0],(*_recoPFJet_e)[0]);
-      TLorentzVector jet2((*_recoPFJet_px)[1],(*_recoPFJet_py)[1],(*_recoPFJet_pz)[1],(*_recoPFJet_e)[1]);
+    float deepjet_loose = -999.;
+    float deepjet_medium = -999.;
+
+    if (_year == 2016){
+      deepjet_loose = 0.0614;
+      deepjet_medium = 0.3093;
+    }
+    else if (_year == 2017){
+      deepjet_loose = 0.0521;
+      deepjet_medium = 0.3033;
+    }
+    else if(_year == 2018){
+      deepjet_loose = 0.0494;
+      deepjet_medium = 0.2770;
+    }
+
+    vector<TLorentzVector> jets_loose;
+    vector<TLorentzVector> jets_medium;
+
+    jets_loose.clear();
+    jets_medium.clear();
+
+    for(int i_jet = 0; i_jet<_n_recoPFJet; i_jet++){
+      if((*_recoPFJet_DeepJetscore)[i_jet]>deepjet_loose){
+        TLorentzVector jet_loose((*_recoPFJet_px)[i_jet],(*_recoPFJet_py)[i_jet],(*_recoPFJet_pz)[i_jet],(*_recoPFJet_e)[i_jet]);
+        jets_loose.push_back(jet_loose);
+      }
+      if((*_recoPFJet_DeepJetscore)[i_jet]>deepjet_medium){
+        TLorentzVector jet_medium((*_recoPFJet_px)[i_jet],(*_recoPFJet_py)[i_jet],(*_recoPFJet_pz)[i_jet],(*_recoPFJet_e)[i_jet]);
+        jets_medium.push_back(jet_medium);
+      }
+    }
+
+    if(jets_medium.size()>=2){
+      TLorentzVector jet1 = jets_medium.at(0);
+      TLorentzVector jet2 = jets_medium.at(1);
       _mbb = (jet1+jet2).M();
     }
 
-    if(_n_recoPFJet>=2 && _n_recoPFJet_btag_loose>=2){
-      //FIXME -> check they are the jets passing loose
-      TLorentzVector jet1((*_recoPFJet_px)[0],(*_recoPFJet_py)[0],(*_recoPFJet_pz)[0],(*_recoPFJet_e)[0]);
-      TLorentzVector jet2((*_recoPFJet_px)[1],(*_recoPFJet_py)[1],(*_recoPFJet_pz)[1],(*_recoPFJet_e)[1]);
-      _mbb = (jet1+jet2).M();
+    if(jets_loose.size()>=2){
+      TLorentzVector jet1 = jets_loose.at(0);
+      TLorentzVector jet2 = jets_loose.at(1);
+      _mbb_loose = (jet1+jet2).M();
     }
 
     if(_n_recotauh_sel>=1){
@@ -2297,20 +2339,20 @@ void split_tree(TString filename_in, TString filename_out,
       _cosThetaS_hadTau = abs(tau1.CosTheta());
     }
 
-    _HTT = 0; //TO DO
-    _HadTop_pt = 0; //TO DO
-    _Hj_tagger = 0; //TO DO
+    //_HTT = 0; //TO DO
+    //_HadTop_pt = 0; //TO DO
+    //_Hj_tagger = 0; //TO DO
 
     _nBJetLoose = _n_recoPFJet_btag_loose;
-    _nLightJet = 0; //TO DO
+    _nLightJet = _n_recoPFLightJet;
     _nBJetMedium = _n_recoPFJet_btag_medium;
 
     if(_n_loose_lep>=2){
       TLorentzVector lep1((*_recolep_px)[0],(*_recolep_py)[0],(*_recolep_pz)[0],(*_recolep_e)[0]);
       TLorentzVector lep2((*_recolep_px)[1],(*_recolep_py)[1],(*_recolep_pz)[1],(*_recolep_e)[1]);
+      TLorentzVector dilep = lep1+lep2;
+      _massL = sqrt(2*(dilep.Pt())*_PFMET*(1-cos((dilep.Phi())-_PFMET_phi)));
     }
-
-    _massL = 0; //TO DO
 
 
     //////////////////////////
@@ -2706,6 +2748,7 @@ void split_tree(TString filename_in, TString filename_out,
   cout<<"WZ fake: "<<n_WZ_CR_fake<<endl;
   cout<<"ZZ SR: "<<n_ZZ_CR_SR<<endl;
   cout<<"ZZ fake: "<<n_ZZ_CR_fake<<endl;
+  cout<<" "<<endl;
 
   f_new->cd();
   
@@ -2724,7 +2767,7 @@ void split_tree(TString filename_in, TString filename_out,
 void test16(){
 
   TString fin = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2016/sync_ntuple_converted_ttHNonbb_2016_v15.root";
-  TString fout = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_splitted/2016/sync_ntuple_splitted_ttHNonbb_2016_v7.root";
+  TString fout = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_splitted/2016/sync_ntuple_splitted_ttHNonbb_2016_v8.root";
 
   split_tree(fin,fout,0,0,true,2016);
 
@@ -2733,7 +2776,7 @@ void test16(){
 void test17(){
 
   TString fin = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2017/sync_ntuple_converted_ttHNonbb_2017_v10.root";
-  TString fout = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_splitted/2017/sync_ntuple_splitted_ttHNonbb_2017_v6.root";
+  TString fout = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_splitted/2017/sync_ntuple_splitted_ttHNonbb_2017_v7.root";
 
   split_tree(fin,fout,0,0,true,2017);
 
@@ -2742,7 +2785,7 @@ void test17(){
 void test18(){
 
   TString fin = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2018/sync_ntuple_converted_ttHNonbb_2018_v9.root";
-  TString fout = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_splitted/2018/sync_ntuple_splitted_ttHNonbb_2018_v6.root";
+  TString fout = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_splitted/2018/sync_ntuple_splitted_ttHNonbb_2018_v7.root";
 
   split_tree(fin,fout,0,0,true,2018);
 
