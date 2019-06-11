@@ -135,7 +135,14 @@ void split_tree(TString filename_in, TString filename_out,
   vector<int>   *_recotauh_genMatchInd;
   vector<float> *_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT;
   vector<float> *_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT;
-  vector<float> *_recotauh_fakerate_byTightIsolationMVArun2v2017v2DBdR03oldDMwLT;
+  vector<float> *_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up;
+  vector<float> *_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down;
+  vector<float> *_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up;
+  vector<float> *_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down;
+  vector<float> *_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up;
+  vector<float> *_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down;
+  vector<float> *_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up;
+  vector<float> *_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down;
 
   float _ETmissLD;
   float _PFMET;
@@ -242,7 +249,14 @@ void split_tree(TString filename_in, TString filename_out,
   tree->SetBranchAddress("recotauh_genMatchInd",&_recotauh_genMatchInd);
   tree->SetBranchAddress("recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT",&_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT);
   tree->SetBranchAddress("recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT",&_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT);
-  tree->SetBranchAddress("recotauh_fakerate_byTightIsolationMVArun2v2017v2DBdR03oldDMwLT",&_recotauh_fakerate_byTightIsolationMVArun2v2017v2DBdR03oldDMwLT);
+  tree->SetBranchAddress("recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up",&_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up);
+  tree->SetBranchAddress("recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down",&_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down);
+  tree->SetBranchAddress("recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up",&_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up);
+  tree->SetBranchAddress("recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down",&_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down);
+  tree->SetBranchAddress("recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up",&_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up);
+  tree->SetBranchAddress("recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down",&_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down);
+  tree->SetBranchAddress("recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up",&_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up);
+  tree->SetBranchAddress("recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down",&_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down);
 
   tree->SetBranchAddress("ETmissLD",&_ETmissLD);
   tree->SetBranchAddress("PFMET",&_PFMET);
@@ -603,7 +617,14 @@ void split_tree(TString filename_in, TString filename_out,
   vector<int>   _recotauh_sel_genMatchInd;
   vector<float> _recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT; 
   vector<float> _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT; 
-  vector<float> _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT;
+  vector<float> _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up;
+  vector<float> _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down;
+  vector<float> _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up;
+  vector<float> _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down;
+  vector<float> _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up;
+  vector<float> _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down;
+  vector<float> _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up;
+  vector<float> _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down;
 
   int _n_recoPFLightJet;
 
@@ -641,6 +662,10 @@ void split_tree(TString filename_in, TString filename_out,
   float _leptonSF_ttH_weight;
 
   float _tauSF_weight;
+  float _tauSF_weight_tauNormUp;
+  float _tauSF_weight_tauNormDown;
+  float _tauSF_weight_tauShapeUp;
+  float _tauSF_weight_tauShapeDown;
 
 
   /*float _lep1_conePt;
@@ -747,7 +772,14 @@ void split_tree(TString filename_in, TString filename_out,
     tree_new[i]->Branch("recotauh_sel_againstElectronVTightMVA6",&_recotauh_sel_againstElectronVTightMVA6);
     tree_new[i]->Branch("recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT",&_recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT);
     tree_new[i]->Branch("recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT",&_recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT);
-    tree_new[i]->Branch("recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT",&_recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT);
+    tree_new[i]->Branch("recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up",&_recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up);
+    tree_new[i]->Branch("recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down",&_recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down);
+    tree_new[i]->Branch("recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up",&_recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up);
+    tree_new[i]->Branch("recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down",&_recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down);
+    tree_new[i]->Branch("recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up",&_recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up);
+    tree_new[i]->Branch("recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down",&_recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down);
+    tree_new[i]->Branch("recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up",&_recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up);
+    tree_new[i]->Branch("recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down",&_recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down);
 
     tree_new[i]->Branch("n_recoPFLightJet",&_n_recoPFLightJet);
 
@@ -781,8 +813,14 @@ void split_tree(TString filename_in, TString filename_out,
     tree_new[i]->Branch("triggerSF_weight",&_triggerSF_weight,"triggerSF_weight/F");
     tree_new[i]->Branch("triggerSF_weight_up",&_triggerSF_weight_up,"triggerSF_weight_up/F");
     tree_new[i]->Branch("triggerSF_weight_down",&_triggerSF_weight_down,"triggerSF_weight_down/F");
+
     tree_new[i]->Branch("leptonSF_ttH_weight",&_leptonSF_ttH_weight,"leptonSF_ttH_weight/F");
+
     tree_new[i]->Branch("tauSF_weight",&_tauSF_weight,"tauSF_weight/F");
+    tree_new[i]->Branch("tauSF_weight_tauNormUp",&_tauSF_weight_tauNormUp,"tauSF_weight_tauNormUp/F");
+    tree_new[i]->Branch("tauSF_weight_tauNormDown",&_tauSF_weight_tauNormDown,"tauSF_weight_tauNormDown/F");
+    tree_new[i]->Branch("tauSF_weight_tauShapeUp",&_tauSF_weight_tauShapeUp,"tauSF_weight_tauShapeUp/F");
+    tree_new[i]->Branch("tauSF_weight_tauShapeDown",&_tauSF_weight_tauShapeDown,"tauSF_weight_tauShapeDown/F"); 
 
     /*tree_new[i]->Branch("lep1_conePt",&_lep1_conePt);
     tree_new[i]->Branch("lep2_conePt",&_lep2_conePt);
@@ -932,7 +970,14 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_genMatchInd.clear();
     _recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT.clear();
     _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.clear();
-    _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();        
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();
 
     _n_recoPFLightJet = 0;
 
@@ -1110,7 +1155,14 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_genMatchInd = 0;
     _recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT = 0;
     _recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT = 0;
-    _recotauh_fakerate_byTightIsolationMVArun2v2017v2DBdR03oldDMwLT = 0;
+    _recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up = 0;
+    _recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down = 0;
+    _recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up = 0;
+    _recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down = 0;
+    _recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up = 0;
+    _recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down = 0;
+    _recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up = 0;
+    _recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down = 0;
 
     _ETmissLD = 0;
     _PFMET = 0;
@@ -1370,9 +1422,7 @@ void split_tree(TString filename_in, TString filename_out,
 
       }
 
-      if((*_recolep_ismvasel)[i_lep]){
-        _n_tight_lep += 1;
-      }
+      if((*_recolep_ismvasel)[i_lep]) _n_tight_lep += 1;
 
     }
 
@@ -1386,18 +1436,10 @@ void split_tree(TString filename_in, TString filename_out,
     _n_tight_WPM_tau = 0;
 
     for(int i_tau=0; i_tau<_n_fakeable_tau; i_tau++){
-
-      if((*_recotauh_byLooseIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]>0.5){
-        _n_tight_WPL_tau += 1;
-      }
-
-      if((*_recotauh_byMediumIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]>0.5){
-        _n_tight_WPM_tau += 1;
-      }
-
+      if((*_recotauh_byLooseIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]>0.5) _n_tight_WPL_tau += 1;
+      if((*_recotauh_byMediumIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]>0.5) _n_tight_WPM_tau += 1;
     }
     
-
     _n_recoPFLightJet = (_n_recoPFJet - _n_recoPFJet_btag_loose) + _n_recoPFFwdJet;
 
 
@@ -1559,7 +1601,17 @@ void split_tree(TString filename_in, TString filename_out,
 
     bool sig_1l1tau_fake = 
       sig_1l1tau_base &&
-      (!(_recolep_fakeable_ismvasel[0]) || !((*_recotauh_byMediumIsolationMVArun2v2017v2DBoldDMwLT)[0]>0.5));
+      ( ( !(_recolep_fakeable_ismvasel[0]) && (_n_tight_WPM_tau==1) ) || ( !((*_recotauh_byMediumIsolationMVArun2v2017v2DBoldDMwLT)[0]>0.5) && (_n_tight_lep==1) ) );
+
+    if(_EventNumber==3104507 || _EventNumber==750674 || _EventNumber==3268541 || _EventNumber==1390014) {
+      cout<<"Event "<<_EventNumber<<"," <<sig_1l1tau_base<<endl;
+      cout<<"_n_fakeable_lep"<<_n_fakeable_lep<<endl;
+      cout<<"_recolep_fakeable_conept[0] "<<_recolep_fakeable_conept[0]<<" "<<_recolep_fakeable_pdg[0]<<endl;
+      cout<<"eta "<<_recolep_fakeable_eta[0]<<endl;
+      cout<<"_n_recotauh "<<_n_recotauh<<endl;
+      cout<<"pt tau "<<(*_recotauh_pt)[0]<<endl;
+      cout<<"_n_recoPFJet "<<_n_recoPFJet<<" "<<_n_recoPFJet_btag_medium<<","<<_n_recoPFJet_btag_loose<<endl;
+    }
 
   
     ////////////////////////////////
@@ -2352,7 +2404,14 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_againstElectronVTightMVA6.clear();
     _recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT.clear();
     _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.clear();
-    _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();        
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();
 
     _event_weight_ttH = 1;
     _event_weight_ttH_FR_QCD_MC = 1;
@@ -2375,6 +2434,18 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_pt2 = 1;
     _event_weight_ttH_mu_be1 = 1;
     _event_weight_ttH_mu_be2 = 1;
+
+    _triggerSF_weight = 1;
+    _triggerSF_weight_up = 1;
+    _triggerSF_weight_down = 1;
+    
+    _leptonSF_ttH_weight = 1;
+
+    _tauSF_weight = 1;
+    _tauSF_weight_tauNormUp = 1;
+    _tauSF_weight_tauNormDown = 1;
+    _tauSF_weight_tauShapeUp = 1;
+    _tauSF_weight_tauShapeDown = 1;
 
     int n_fake = 0;
 
@@ -2409,7 +2480,30 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_againstElectronVTightMVA6.push_back((*_recotauh_againstElectronVTightMVA6)[i_tau]);
         _recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT)[i_tau]);
         _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT)[i_tau]);
-        _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.push_back((*_recotauh_fakerate_byTightIsolationMVArun2v2017v2DBdR03oldDMwLT)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down)[i_tau]);
+
+      }
+      
+      if(isMC) {
+
+        _tauSF_weight = (1-0.11*_recotauh_sel_isGenMatched[0])*(1-0.11*_recotauh_sel_isGenMatched[1]);
+
+        _tauSF_weight_tauNormUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up[0];
+        _tauSF_weight_tauNormDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down[0];
+        _tauSF_weight_tauShapeUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up[0];
+        _tauSF_weight_tauShapeDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down[0];
+
+        _tauSF_weight_tauNormUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up[1];
+        _tauSF_weight_tauNormDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down[1];
+        _tauSF_weight_tauShapeUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up[1];
+        _tauSF_weight_tauShapeDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down[1];
 
       }
 
@@ -2473,7 +2567,14 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_againstElectronVTightMVA6.clear();
     _recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT.clear();
     _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.clear();
-    _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();        
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();
 
     _event_weight_ttH = 1;
     _event_weight_ttH_FR_QCD_MC = 1;
@@ -2496,6 +2597,18 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_pt2 = 1;
     _event_weight_ttH_mu_be1 = 1;
     _event_weight_ttH_mu_be2 = 1;
+
+    _triggerSF_weight = 1;
+    _triggerSF_weight_up = 1;
+    _triggerSF_weight_down = 1;
+    
+    _leptonSF_ttH_weight = 1;
+
+    _tauSF_weight = 1;
+    _tauSF_weight_tauNormUp = 1;
+    _tauSF_weight_tauNormDown = 1;
+    _tauSF_weight_tauShapeUp = 1;
+    _tauSF_weight_tauShapeDown = 1;
 
     n_fake = 0;
 
@@ -2561,7 +2674,25 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_againstElectronVTightMVA6.push_back((*_recotauh_againstElectronVTightMVA6)[i_tau]);
         _recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT)[i_tau]);
         _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT)[i_tau]);
-        _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.push_back((*_recotauh_fakerate_byTightIsolationMVArun2v2017v2DBdR03oldDMwLT)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down)[i_tau]);
+
+      }
+      
+      if(isMC) {
+
+        _tauSF_weight = (1-0.11*_recotauh_sel_isGenMatched[0]);
+
+        _tauSF_weight_tauNormUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up[0];
+        _tauSF_weight_tauNormDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down[0];
+        _tauSF_weight_tauShapeUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up[0];
+        _tauSF_weight_tauShapeDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down[0];
 
       }
 
@@ -2625,7 +2756,14 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_againstElectronVTightMVA6.clear();
     _recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT.clear();
     _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.clear();
-    _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();        
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();
 
     _event_weight_ttH = 1;
     _event_weight_ttH_FR_QCD_MC = 1;
@@ -2648,6 +2786,18 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_pt2 = 1;
     _event_weight_ttH_mu_be1 = 1;
     _event_weight_ttH_mu_be2 = 1;
+
+    _triggerSF_weight = 1;
+    _triggerSF_weight_up = 1;
+    _triggerSF_weight_down = 1;
+    
+    _leptonSF_ttH_weight = 1;
+
+    _tauSF_weight = 1;
+    _tauSF_weight_tauNormUp = 1;
+    _tauSF_weight_tauNormDown = 1;
+    _tauSF_weight_tauShapeUp = 1;
+    _tauSF_weight_tauShapeDown = 1;
 
     n_fake = 0;
 
@@ -2713,9 +2863,32 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_againstElectronVTightMVA6.push_back((*_recotauh_againstElectronVTightMVA6)[i_tau]);
         _recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT)[i_tau]);
         _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT)[i_tau]);
-        _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.push_back((*_recotauh_fakerate_byTightIsolationMVArun2v2017v2DBdR03oldDMwLT)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down)[i_tau]);
 
-      }    
+      }
+      
+      if(isMC) {
+
+        _tauSF_weight = (1-0.11*_recotauh_sel_isGenMatched[0])*(1-0.11*_recotauh_sel_isGenMatched[1]);
+
+        _tauSF_weight_tauNormUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up[0];
+        _tauSF_weight_tauNormDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down[0];
+        _tauSF_weight_tauShapeUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up[0];
+        _tauSF_weight_tauShapeDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down[0];
+
+        _tauSF_weight_tauNormUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up[1];
+        _tauSF_weight_tauNormDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down[1];
+        _tauSF_weight_tauShapeUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up[1];
+        _tauSF_weight_tauShapeDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down[1];
+
+      }
 
       _is_ttH_like = true;
       _is_tH_like_and_not_ttH_like = false;
@@ -2777,7 +2950,14 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_againstElectronVTightMVA6.clear();
     _recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT.clear();
     _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.clear();
-    _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();        
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();
 
     _event_weight_ttH = 1;
     _event_weight_ttH_FR_QCD_MC = 1;
@@ -2800,6 +2980,18 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_pt2 = 1;
     _event_weight_ttH_mu_be1 = 1;
     _event_weight_ttH_mu_be2 = 1;
+
+    _triggerSF_weight = 1;
+    _triggerSF_weight_up = 1;
+    _triggerSF_weight_down = 1;
+    
+    _leptonSF_ttH_weight = 1;
+
+    _tauSF_weight = 1;
+    _tauSF_weight_tauNormUp = 1;
+    _tauSF_weight_tauNormDown = 1;
+    _tauSF_weight_tauShapeUp = 1;
+    _tauSF_weight_tauShapeDown = 1;
 
     n_fake = 0;
 
@@ -2901,7 +3093,14 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_againstElectronVTightMVA6.clear();
     _recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT.clear();
     _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.clear();
-    _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();        
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();
 
     _event_weight_ttH = 1;
     _event_weight_ttH_FR_QCD_MC = 1;
@@ -2924,6 +3123,18 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_pt2 = 1;
     _event_weight_ttH_mu_be1 = 1;
     _event_weight_ttH_mu_be2 = 1;
+
+    _triggerSF_weight = 1;
+    _triggerSF_weight_up = 1;
+    _triggerSF_weight_down = 1;
+    
+    _leptonSF_ttH_weight = 1;
+
+    _tauSF_weight = 1;
+    _tauSF_weight_tauNormUp = 1;
+    _tauSF_weight_tauNormDown = 1;
+    _tauSF_weight_tauShapeUp = 1;
+    _tauSF_weight_tauShapeDown = 1;
 
     n_fake = 0;
 
@@ -3023,7 +3234,14 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_againstElectronVTightMVA6.clear();
     _recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT.clear();
     _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.clear();
-    _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();
 
     _event_weight_ttH = 1;
     _event_weight_ttH_FR_QCD_MC = 1;
@@ -3046,6 +3264,18 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_pt2 = 1;
     _event_weight_ttH_mu_be1 = 1;
     _event_weight_ttH_mu_be2 = 1;
+
+    _triggerSF_weight = 1;
+    _triggerSF_weight_up = 1;
+    _triggerSF_weight_down = 1;
+    
+    _leptonSF_ttH_weight = 1;
+
+    _tauSF_weight = 1;
+    _tauSF_weight_tauNormUp = 1;
+    _tauSF_weight_tauNormDown = 1;
+    _tauSF_weight_tauShapeUp = 1;
+    _tauSF_weight_tauShapeDown = 1;
 
     n_fake = 0;
 
@@ -3111,9 +3341,27 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_againstElectronVTightMVA6.push_back((*_recotauh_againstElectronVTightMVA6)[i_tau]);
         _recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT)[i_tau]);
         _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT)[i_tau]);
-        _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.push_back((*_recotauh_fakerate_byTightIsolationMVArun2v2017v2DBdR03oldDMwLT)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down)[i_tau]);
 
       } 
+ 
+      if(isMC) {
+
+        _tauSF_weight = (1-0.11*_recotauh_sel_isGenMatched[0]);
+
+        _tauSF_weight_tauNormUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up[0];
+        _tauSF_weight_tauNormDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down[0];
+        _tauSF_weight_tauShapeUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up[0];
+        _tauSF_weight_tauShapeDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down[0];
+
+      }
 
       _is_ttH_like = true;
       _is_tH_like_and_not_ttH_like = false;
@@ -3175,7 +3423,14 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_againstElectronVTightMVA6.clear();
     _recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT.clear();
     _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.clear();
-    _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();        
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();
 
     _event_weight_ttH = 1;
     _event_weight_ttH_FR_QCD_MC = 1;
@@ -3198,6 +3453,18 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_pt2 = 1;
     _event_weight_ttH_mu_be1 = 1;
     _event_weight_ttH_mu_be2 = 1;
+
+    _triggerSF_weight = 1;
+    _triggerSF_weight_up = 1;
+    _triggerSF_weight_down = 1;
+    
+    _leptonSF_ttH_weight = 1;
+
+    _tauSF_weight = 1;
+    _tauSF_weight_tauNormUp = 1;
+    _tauSF_weight_tauNormDown = 1;
+    _tauSF_weight_tauShapeUp = 1;
+    _tauSF_weight_tauShapeDown = 1;
 
     n_fake = 0;
 
@@ -3263,9 +3530,27 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_againstElectronVTightMVA6.push_back((*_recotauh_againstElectronVTightMVA6)[i_tau]);
         _recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT)[i_tau]);
         _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT)[i_tau]);
-        _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.push_back((*_recotauh_fakerate_byTightIsolationMVArun2v2017v2DBdR03oldDMwLT)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down)[i_tau]);
 
-      }   
+      }
+
+      if(isMC) {
+
+        _tauSF_weight = (1-0.11*_recotauh_sel_isGenMatched[0]);
+
+        _tauSF_weight_tauNormUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up[0];
+        _tauSF_weight_tauNormDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down[0];
+        _tauSF_weight_tauShapeUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up[0];
+        _tauSF_weight_tauShapeDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down[0];
+
+      }
 
       _is_ttH_like = true;
       _is_tH_like_and_not_ttH_like = false;
@@ -3327,7 +3612,14 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_againstElectronVTightMVA6.clear();
     _recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT.clear();
     _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.clear();
-    _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();        
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();
 
     _event_weight_ttH = 1;
     _event_weight_ttH_FR_QCD_MC = 1;
@@ -3350,6 +3642,18 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_pt2 = 1;
     _event_weight_ttH_mu_be1 = 1;
     _event_weight_ttH_mu_be2 = 1;
+
+    _triggerSF_weight = 1;
+    _triggerSF_weight_up = 1;
+    _triggerSF_weight_down = 1;
+    
+    _leptonSF_ttH_weight = 1;
+
+    _tauSF_weight = 1;
+    _tauSF_weight_tauNormUp = 1;
+    _tauSF_weight_tauNormDown = 1;
+    _tauSF_weight_tauShapeUp = 1;
+    _tauSF_weight_tauShapeDown = 1;
 
     n_fake = 0;
 
@@ -3415,9 +3719,32 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_againstElectronVTightMVA6.push_back((*_recotauh_againstElectronVTightMVA6)[i_tau]);
         _recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT)[i_tau]);
         _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT)[i_tau]);
-        _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.push_back((*_recotauh_fakerate_byTightIsolationMVArun2v2017v2DBdR03oldDMwLT)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down)[i_tau]);
 
       } 
+      
+      if(isMC) {
+
+        _tauSF_weight = (1-0.11*_recotauh_sel_isGenMatched[0])*(1-0.11*_recotauh_sel_isGenMatched[1]);
+
+        _tauSF_weight_tauNormUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up[0];
+        _tauSF_weight_tauNormDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down[0];
+        _tauSF_weight_tauShapeUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up[0];
+        _tauSF_weight_tauShapeDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down[0];
+
+        _tauSF_weight_tauNormUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up[1];
+        _tauSF_weight_tauNormDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down[1];
+        _tauSF_weight_tauShapeUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up[1];
+        _tauSF_weight_tauShapeDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down[1];
+
+      }
 
       _is_ttH_like = true;
       _is_tH_like_and_not_ttH_like = false;
@@ -3479,7 +3806,14 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_againstElectronVTightMVA6.clear();
     _recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT.clear();
     _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.clear();
-    _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();        
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();
 
     _event_weight_ttH = 1;
     _event_weight_ttH_FR_QCD_MC = 1;
@@ -3502,6 +3836,18 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_pt2 = 1;
     _event_weight_ttH_mu_be1 = 1;
     _event_weight_ttH_mu_be2 = 1;
+
+    _triggerSF_weight = 1;
+    _triggerSF_weight_up = 1;
+    _triggerSF_weight_down = 1;
+    
+    _leptonSF_ttH_weight = 1;
+
+    _tauSF_weight = 1;
+    _tauSF_weight_tauNormUp = 1;
+    _tauSF_weight_tauNormDown = 1;
+    _tauSF_weight_tauShapeUp = 1;
+    _tauSF_weight_tauShapeDown = 1;
 
     n_fake = 0;
 
@@ -3603,7 +3949,14 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_againstElectronVTightMVA6.clear();
     _recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT.clear();
     _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.clear();
-    _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();        
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();
 
     _event_weight_ttH = 1;
     _event_weight_ttH_FR_QCD_MC = 1;
@@ -3626,6 +3979,18 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_pt2 = 1;
     _event_weight_ttH_mu_be1 = 1;
     _event_weight_ttH_mu_be2 = 1;
+
+    _triggerSF_weight = 1;
+    _triggerSF_weight_up = 1;
+    _triggerSF_weight_down = 1;
+    
+    _leptonSF_ttH_weight = 1;
+
+    _tauSF_weight = 1;
+    _tauSF_weight_tauNormUp = 1;
+    _tauSF_weight_tauNormDown = 1;
+    _tauSF_weight_tauShapeUp = 1;
+    _tauSF_weight_tauShapeDown = 1;
 
     n_fake = 0;
 
@@ -3725,7 +4090,14 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_againstElectronVTightMVA6.clear();
     _recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT.clear();
     _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.clear();
-    _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();        
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();
 
     _event_weight_ttH = 1;
     _event_weight_ttH_FR_QCD_MC = 1;
@@ -3748,6 +4120,18 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_pt2 = 1;
     _event_weight_ttH_mu_be1 = 1;
     _event_weight_ttH_mu_be2 = 1;
+
+    _triggerSF_weight = 1;
+    _triggerSF_weight_up = 1;
+    _triggerSF_weight_down = 1;
+    
+    _leptonSF_ttH_weight = 1;
+
+    _tauSF_weight = 1;
+    _tauSF_weight_tauNormUp = 1;
+    _tauSF_weight_tauNormDown = 1;
+    _tauSF_weight_tauShapeUp = 1;
+    _tauSF_weight_tauShapeDown = 1;
 
     n_fake = 0;
 
@@ -3847,7 +4231,14 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_againstElectronVTightMVA6.clear();
     _recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT.clear();
     _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.clear();
-    _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();        
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();
 
     _event_weight_ttH = 1;
     _event_weight_ttH_FR_QCD_MC = 1;
@@ -3870,6 +4261,18 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_pt2 = 1;
     _event_weight_ttH_mu_be1 = 1;
     _event_weight_ttH_mu_be2 = 1;
+
+    _triggerSF_weight = 1;
+    _triggerSF_weight_up = 1;
+    _triggerSF_weight_down = 1;
+    
+    _leptonSF_ttH_weight = 1;
+
+    _tauSF_weight = 1;
+    _tauSF_weight_tauNormUp = 1;
+    _tauSF_weight_tauNormDown = 1;
+    _tauSF_weight_tauShapeUp = 1;
+    _tauSF_weight_tauShapeDown = 1;
 
     n_fake = 0;
 
@@ -3935,9 +4338,27 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_againstElectronVTightMVA6.push_back((*_recotauh_againstElectronVTightMVA6)[i_tau]);
         _recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT)[i_tau]);
         _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT)[i_tau]);
-        _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.push_back((*_recotauh_fakerate_byTightIsolationMVArun2v2017v2DBdR03oldDMwLT)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down)[i_tau]);
 
       }   
+
+      if(isMC) {
+
+        _tauSF_weight = (1-0.11*_recotauh_sel_isGenMatched[0]);
+
+        _tauSF_weight_tauNormUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up[0];
+        _tauSF_weight_tauNormDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down[0];
+        _tauSF_weight_tauShapeUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up[0];
+        _tauSF_weight_tauShapeDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down[0];
+
+      }
 
       _is_ttH_like = true;
       _is_tH_like_and_not_ttH_like = false;
@@ -3999,7 +4420,14 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_againstElectronVTightMVA6.clear();
     _recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT.clear();
     _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.clear();
-    _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();        
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();
 
     _event_weight_ttH = 1;
     _event_weight_ttH_FR_QCD_MC = 1;
@@ -4022,6 +4450,18 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_pt2 = 1;
     _event_weight_ttH_mu_be1 = 1;
     _event_weight_ttH_mu_be2 = 1;
+
+    _triggerSF_weight = 1;
+    _triggerSF_weight_up = 1;
+    _triggerSF_weight_down = 1;
+    
+    _leptonSF_ttH_weight = 1;
+
+    _tauSF_weight = 1;
+    _tauSF_weight_tauNormUp = 1;
+    _tauSF_weight_tauNormDown = 1;
+    _tauSF_weight_tauShapeUp = 1;
+    _tauSF_weight_tauShapeDown = 1;
 
     n_fake = 0;
     
@@ -4121,7 +4561,14 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_againstElectronVTightMVA6.clear();
     _recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT.clear();
     _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.clear();
-    _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();        
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();
 
     _event_weight_ttH = 1;
     _event_weight_ttH_FR_QCD_MC = 1;
@@ -4144,6 +4591,18 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_pt2 = 1;
     _event_weight_ttH_mu_be1 = 1;
     _event_weight_ttH_mu_be2 = 1;
+
+    _triggerSF_weight = 1;
+    _triggerSF_weight_up = 1;
+    _triggerSF_weight_down = 1;
+    
+    _leptonSF_ttH_weight = 1;
+
+    _tauSF_weight = 1;
+    _tauSF_weight_tauNormUp = 1;
+    _tauSF_weight_tauNormDown = 1;
+    _tauSF_weight_tauShapeUp = 1;
+    _tauSF_weight_tauShapeDown = 1;
 
     n_fake = 0;
 
@@ -4248,7 +4707,14 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_againstElectronVTightMVA6.clear();
     _recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT.clear();
     _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.clear();
-    _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();        
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();
 
     _event_weight_ttH = 1;
     _event_weight_ttH_FR_QCD_MC = 1;
@@ -4271,6 +4737,18 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_pt2 = 1;
     _event_weight_ttH_mu_be1 = 1;
     _event_weight_ttH_mu_be2 = 1;
+
+    _triggerSF_weight = 1;
+    _triggerSF_weight_up = 1;
+    _triggerSF_weight_down = 1;
+    
+    _leptonSF_ttH_weight = 1;
+
+    _tauSF_weight = 1;
+    _tauSF_weight_tauNormUp = 1;
+    _tauSF_weight_tauNormDown = 1;
+    _tauSF_weight_tauShapeUp = 1;
+    _tauSF_weight_tauShapeDown = 1;
 
     n_fake = 0;
     
@@ -4305,7 +4783,14 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_againstElectronVTightMVA6.push_back((*_recotauh_againstElectronVTightMVA6)[i_tau]);
         _recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT)[i_tau]);
         _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT)[i_tau]);
-        _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.push_back((*_recotauh_fakerate_byTightIsolationMVArun2v2017v2DBdR03oldDMwLT)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down)[i_tau]);
 
       } 
 
@@ -4351,6 +4836,22 @@ void split_tree(TString filename_in, TString filename_out,
         _event_weight_ttH_mu_FR_TT_MC *= -1;
         _event_weight_ttH_mu_FR_TT_MC *= -1;
   
+      }
+
+      if(isMC) {
+
+        _tauSF_weight = (1-0.11*_recotauh_sel_isGenMatched[0])*(1-0.11*_recotauh_sel_isGenMatched[1]);
+
+        _tauSF_weight_tauNormUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up[0];
+        _tauSF_weight_tauNormDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down[0];
+        _tauSF_weight_tauShapeUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up[0];
+        _tauSF_weight_tauShapeDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down[0];
+
+        _tauSF_weight_tauNormUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up[1];
+        _tauSF_weight_tauNormDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down[1];
+        _tauSF_weight_tauShapeUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up[1];
+        _tauSF_weight_tauShapeDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down[1];
+
       }
 
       _is_ttH_like = true;
@@ -4413,7 +4914,14 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_againstElectronVTightMVA6.clear();
     _recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT.clear();
     _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.clear();
-    _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();        
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();
 
     _event_weight_ttH = 1;
     _event_weight_ttH_FR_QCD_MC = 1;
@@ -4436,6 +4944,18 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_pt2 = 1;
     _event_weight_ttH_mu_be1 = 1;
     _event_weight_ttH_mu_be2 = 1;
+
+    _triggerSF_weight = 1;
+    _triggerSF_weight_up = 1;
+    _triggerSF_weight_down = 1;
+    
+    _leptonSF_ttH_weight = 1;
+
+    _tauSF_weight = 1;
+    _tauSF_weight_tauNormUp = 1;
+    _tauSF_weight_tauNormDown = 1;
+    _tauSF_weight_tauShapeUp = 1;
+    _tauSF_weight_tauShapeDown = 1;
 
     n_fake = 0;
 
@@ -4501,7 +5021,14 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_againstElectronVTightMVA6.push_back((*_recotauh_againstElectronVTightMVA6)[i_tau]);
         _recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT)[i_tau]);
         _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT)[i_tau]);
-        _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.push_back((*_recotauh_fakerate_byTightIsolationMVArun2v2017v2DBdR03oldDMwLT)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down)[i_tau]);
 
       } 
 
@@ -4589,6 +5116,17 @@ void split_tree(TString filename_in, TString filename_out,
   
       }
 
+      if(isMC) {
+
+        _tauSF_weight = (1-0.11*_recotauh_sel_isGenMatched[0]);
+
+        _tauSF_weight_tauNormUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up[0];
+        _tauSF_weight_tauNormDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down[0];
+        _tauSF_weight_tauShapeUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up[0];
+        _tauSF_weight_tauShapeDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down[0];
+
+      }
+
       _is_ttH_like = true;
       _is_tH_like_and_not_ttH_like = false;
 
@@ -4649,7 +5187,14 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_againstElectronVTightMVA6.clear();
     _recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT.clear();
     _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.clear();
-    _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();        
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();
 
     _event_weight_ttH = 1;
     _event_weight_ttH_FR_QCD_MC = 1;
@@ -4672,6 +5217,18 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_pt2 = 1;
     _event_weight_ttH_mu_be1 = 1;
     _event_weight_ttH_mu_be2 = 1;
+
+    _triggerSF_weight = 1;
+    _triggerSF_weight_up = 1;
+    _triggerSF_weight_down = 1;
+    
+    _leptonSF_ttH_weight = 1;
+
+    _tauSF_weight = 1;
+    _tauSF_weight_tauNormUp = 1;
+    _tauSF_weight_tauNormDown = 1;
+    _tauSF_weight_tauShapeUp = 1;
+    _tauSF_weight_tauShapeDown = 1;
 
     n_fake = 0;
 
@@ -4737,7 +5294,14 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_againstElectronVTightMVA6.push_back((*_recotauh_againstElectronVTightMVA6)[i_tau]);
         _recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT)[i_tau]);
         _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT)[i_tau]);
-        _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.push_back((*_recotauh_fakerate_byTightIsolationMVArun2v2017v2DBdR03oldDMwLT)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down)[i_tau]);
 
       }  
 
@@ -4840,6 +5404,22 @@ void split_tree(TString filename_in, TString filename_out,
         _event_weight_ttH_mu_FR_TT_MC *= -1;
 
       }
+   
+      if(isMC) {
+
+        _tauSF_weight = (1-0.11*_recotauh_sel_isGenMatched[0])*(1-0.11*_recotauh_sel_isGenMatched[1]);
+
+        _tauSF_weight_tauNormUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up[0];
+        _tauSF_weight_tauNormDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down[0];
+        _tauSF_weight_tauShapeUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up[0];
+        _tauSF_weight_tauShapeDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down[0];
+
+        _tauSF_weight_tauNormUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up[1];
+        _tauSF_weight_tauNormDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down[1];
+        _tauSF_weight_tauShapeUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up[1];
+        _tauSF_weight_tauShapeDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down[1];
+
+      }
 
       _is_ttH_like = true;
       _is_tH_like_and_not_ttH_like = false;
@@ -4901,7 +5481,14 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_againstElectronVTightMVA6.clear();
     _recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT.clear();
     _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.clear();
-    _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();        
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();
 
     _event_weight_ttH = 1;
     _event_weight_ttH_FR_QCD_MC = 1;
@@ -4924,6 +5511,18 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_pt2 = 1;
     _event_weight_ttH_mu_be1 = 1;
     _event_weight_ttH_mu_be2 = 1;
+
+    _triggerSF_weight = 1;
+    _triggerSF_weight_up = 1;
+    _triggerSF_weight_down = 1;
+    
+    _leptonSF_ttH_weight = 1;
+
+    _tauSF_weight = 1;
+    _tauSF_weight_tauNormUp = 1;
+    _tauSF_weight_tauNormDown = 1;
+    _tauSF_weight_tauShapeUp = 1;
+    _tauSF_weight_tauShapeDown = 1;
 
     n_fake = 0;
 
@@ -5149,7 +5748,14 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_againstElectronVTightMVA6.clear();
     _recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT.clear();
     _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.clear();
-    _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();        
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();
 
     _event_weight_ttH = 1;
     _event_weight_ttH_FR_QCD_MC = 1;
@@ -5172,6 +5778,18 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_pt2 = 1;
     _event_weight_ttH_mu_be1 = 1;
     _event_weight_ttH_mu_be2 = 1;
+
+    _triggerSF_weight = 1;
+    _triggerSF_weight_up = 1;
+    _triggerSF_weight_down = 1;
+    
+    _leptonSF_ttH_weight = 1;
+
+    _tauSF_weight = 1;
+    _tauSF_weight_tauNormUp = 1;
+    _tauSF_weight_tauNormDown = 1;
+    _tauSF_weight_tauShapeUp = 1;
+    _tauSF_weight_tauShapeDown = 1;
 
     n_fake = 0;
 
@@ -5396,7 +6014,14 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_againstElectronVTightMVA6.clear();
     _recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT.clear();
     _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.clear();
-    _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();        
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();
 
     _event_weight_ttH = 1;
     _event_weight_ttH_FR_QCD_MC = 1;
@@ -5419,6 +6044,18 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_pt2 = 1;
     _event_weight_ttH_mu_be1 = 1;
     _event_weight_ttH_mu_be2 = 1;
+
+    _triggerSF_weight = 1;
+    _triggerSF_weight_up = 1;
+    _triggerSF_weight_down = 1;
+    
+    _leptonSF_ttH_weight = 1;
+
+    _tauSF_weight = 1;
+    _tauSF_weight_tauNormUp = 1;
+    _tauSF_weight_tauNormDown = 1;
+    _tauSF_weight_tauShapeUp = 1;
+    _tauSF_weight_tauShapeDown = 1;
 
     n_fake = 0;
 
@@ -5484,7 +6121,14 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_againstElectronVTightMVA6.push_back((*_recotauh_againstElectronVTightMVA6)[i_tau]);
         _recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT)[i_tau]);
         _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT)[i_tau]);
-        _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.push_back((*_recotauh_fakerate_byTightIsolationMVArun2v2017v2DBdR03oldDMwLT)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down)[i_tau]);
 
       } 
 
@@ -5628,6 +6272,17 @@ void split_tree(TString filename_in, TString filename_out,
 
       }
 
+      if(isMC) {
+
+        _tauSF_weight = (1-0.11*_recotauh_sel_isGenMatched[0]);
+
+        _tauSF_weight_tauNormUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up[0];
+        _tauSF_weight_tauNormDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down[0];
+        _tauSF_weight_tauShapeUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up[0];
+        _tauSF_weight_tauShapeDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down[0];
+
+      }
+
       _is_ttH_like = true;
       _is_tH_like_and_not_ttH_like = false;
 
@@ -5688,7 +6343,14 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_againstElectronVTightMVA6.clear();
     _recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT.clear();
     _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.clear();
-    _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();        
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();
 
     _event_weight_ttH = 1;
     _event_weight_ttH_FR_QCD_MC = 1;
@@ -5711,6 +6373,18 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_pt2 = 1;
     _event_weight_ttH_mu_be1 = 1;
     _event_weight_ttH_mu_be2 = 1;
+
+    _triggerSF_weight = 1;
+    _triggerSF_weight_up = 1;
+    _triggerSF_weight_down = 1;
+    
+    _leptonSF_ttH_weight = 1;
+
+    _tauSF_weight = 1;
+    _tauSF_weight_tauNormUp = 1;
+    _tauSF_weight_tauNormDown = 1;
+    _tauSF_weight_tauShapeUp = 1;
+    _tauSF_weight_tauShapeDown = 1;
 
     n_fake = 0;
 
@@ -5776,7 +6450,14 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_againstElectronVTightMVA6.push_back((*_recotauh_againstElectronVTightMVA6)[i_tau]);
         _recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT)[i_tau]);
         _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT)[i_tau]);
-        _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.push_back((*_recotauh_fakerate_byTightIsolationMVArun2v2017v2DBdR03oldDMwLT)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down)[i_tau]);
 
       }  
 
@@ -5919,6 +6600,17 @@ void split_tree(TString filename_in, TString filename_out,
 
       }
 
+      if(isMC) {
+
+        _tauSF_weight = (1-0.11*_recotauh_sel_isGenMatched[0]);
+
+        _tauSF_weight_tauNormUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up[0];
+        _tauSF_weight_tauNormDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down[0];
+        _tauSF_weight_tauShapeUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up[0];
+        _tauSF_weight_tauShapeDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down[0];
+
+      }
+
       _is_ttH_like = true;
       _is_tH_like_and_not_ttH_like = false;
 
@@ -5979,7 +6671,14 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_againstElectronVTightMVA6.clear();
     _recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT.clear();
     _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.clear();
-    _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();        
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();
 
     _event_weight_ttH = 1;
     _event_weight_ttH_FR_QCD_MC = 1;
@@ -6002,6 +6701,18 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_pt2 = 1;
     _event_weight_ttH_mu_be1 = 1;
     _event_weight_ttH_mu_be2 = 1;
+
+    _triggerSF_weight = 1;
+    _triggerSF_weight_up = 1;
+    _triggerSF_weight_down = 1;
+    
+    _leptonSF_ttH_weight = 1;
+
+    _tauSF_weight = 1;
+    _tauSF_weight_tauNormUp = 1;
+    _tauSF_weight_tauNormDown = 1;
+    _tauSF_weight_tauShapeUp = 1;
+    _tauSF_weight_tauShapeDown = 1;
 
     n_fake = 0;
 
@@ -6067,7 +6778,14 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_againstElectronVTightMVA6.push_back((*_recotauh_againstElectronVTightMVA6)[i_tau]);
         _recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT)[i_tau]);
         _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT)[i_tau]);
-        _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.push_back((*_recotauh_fakerate_byTightIsolationMVArun2v2017v2DBdR03oldDMwLT)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down)[i_tau]);
 
       }  
 
@@ -6227,6 +6945,22 @@ void split_tree(TString filename_in, TString filename_out,
 
       }
 
+      if(isMC) {
+
+        _tauSF_weight = (1-0.11*_recotauh_sel_isGenMatched[0])*(1-0.11*_recotauh_sel_isGenMatched[1]);
+
+        _tauSF_weight_tauNormUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up[0];
+        _tauSF_weight_tauNormDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down[0];
+        _tauSF_weight_tauShapeUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up[0];
+        _tauSF_weight_tauShapeDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down[0];
+
+        _tauSF_weight_tauNormUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up[1];
+        _tauSF_weight_tauNormDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down[1];
+        _tauSF_weight_tauShapeUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up[1];
+        _tauSF_weight_tauShapeDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down[1];
+
+      }
+
       _is_ttH_like = true;
       _is_tH_like_and_not_ttH_like = false;
 
@@ -6287,7 +7021,14 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_againstElectronVTightMVA6.clear();
     _recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT.clear();
     _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.clear();
-    _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();        
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();
 
     _event_weight_ttH = 1;
     _event_weight_ttH_FR_QCD_MC = 1;
@@ -6310,6 +7051,18 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_pt2 = 1;
     _event_weight_ttH_mu_be1 = 1;
     _event_weight_ttH_mu_be2 = 1;
+
+    _triggerSF_weight = 1;
+    _triggerSF_weight_up = 1;
+    _triggerSF_weight_down = 1;
+    
+    _leptonSF_ttH_weight = 1;
+
+    _tauSF_weight = 1;
+    _tauSF_weight_tauNormUp = 1;
+    _tauSF_weight_tauNormDown = 1;
+    _tauSF_weight_tauShapeUp = 1;
+    _tauSF_weight_tauShapeDown = 1;
 
     n_fake = 0;
 
@@ -6591,7 +7344,14 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_againstElectronVTightMVA6.clear();
     _recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT.clear();
     _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.clear();
-    _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();        
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();
 
     _event_weight_ttH = 1;
     _event_weight_ttH_FR_QCD_MC = 1;
@@ -6614,6 +7374,18 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_pt2 = 1;
     _event_weight_ttH_mu_be1 = 1;
     _event_weight_ttH_mu_be2 = 1;
+
+    _triggerSF_weight = 1;
+    _triggerSF_weight_up = 1;
+    _triggerSF_weight_down = 1;
+    
+    _leptonSF_ttH_weight = 1;
+
+    _tauSF_weight = 1;
+    _tauSF_weight_tauNormUp = 1;
+    _tauSF_weight_tauNormDown = 1;
+    _tauSF_weight_tauShapeUp = 1;
+    _tauSF_weight_tauShapeDown = 1;
 
     n_fake = 0;
 
@@ -6893,7 +7665,14 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_againstElectronVTightMVA6.clear();
     _recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT.clear();
     _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.clear();
-    _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();        
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();
 
     _event_weight_ttH = 1;
     _event_weight_ttH_FR_QCD_MC = 1;
@@ -6916,6 +7695,18 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_pt2 = 1;
     _event_weight_ttH_mu_be1 = 1;
     _event_weight_ttH_mu_be2 = 1;
+
+    _triggerSF_weight = 1;
+    _triggerSF_weight_up = 1;
+    _triggerSF_weight_down = 1;
+    
+    _leptonSF_ttH_weight = 1;
+
+    _tauSF_weight = 1;
+    _tauSF_weight_tauNormUp = 1;
+    _tauSF_weight_tauNormDown = 1;
+    _tauSF_weight_tauShapeUp = 1;
+    _tauSF_weight_tauShapeDown = 1;
 
     n_fake = 0;
 
@@ -7195,7 +7986,14 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_againstElectronVTightMVA6.clear();
     _recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT.clear();
     _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.clear();
-    _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();
 
     _event_weight_ttH = 1;
     _event_weight_ttH_FR_QCD_MC = 1;
@@ -7218,6 +8016,18 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_pt2 = 1;
     _event_weight_ttH_mu_be1 = 1;
     _event_weight_ttH_mu_be2 = 1;
+
+    _triggerSF_weight = 1;
+    _triggerSF_weight_up = 1;
+    _triggerSF_weight_down = 1;
+    
+    _leptonSF_ttH_weight = 1;
+
+    _tauSF_weight = 1;
+    _tauSF_weight_tauNormUp = 1;
+    _tauSF_weight_tauNormDown = 1;
+    _tauSF_weight_tauShapeUp = 1;
+    _tauSF_weight_tauShapeDown = 1;
 
     n_fake = 0;
 
@@ -7283,7 +8093,14 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_againstElectronVTightMVA6.push_back((*_recotauh_againstElectronVTightMVA6)[i_tau]);
         _recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT)[i_tau]);
         _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT)[i_tau]);
-        _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.push_back((*_recotauh_fakerate_byTightIsolationMVArun2v2017v2DBdR03oldDMwLT)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down)[i_tau]);
 
       } 
 
@@ -7483,6 +8300,17 @@ void split_tree(TString filename_in, TString filename_out,
 
       }
 
+      if(isMC) {
+
+        _tauSF_weight = (1-0.11*_recotauh_sel_isGenMatched[0]);
+
+        _tauSF_weight_tauNormUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up[0];
+        _tauSF_weight_tauNormDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down[0];
+        _tauSF_weight_tauShapeUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up[0];
+        _tauSF_weight_tauShapeDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down[0];
+
+      }
+
       _is_ttH_like = true;
       _is_tH_like_and_not_ttH_like = false;
 
@@ -7543,7 +8371,14 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_againstElectronVTightMVA6.clear();
     _recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT.clear();
     _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.clear();
-    _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();        
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();
 
     _event_weight_ttH = 1;
     _event_weight_ttH_FR_QCD_MC = 1;
@@ -7566,6 +8401,18 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_pt2 = 1;
     _event_weight_ttH_mu_be1 = 1;
     _event_weight_ttH_mu_be2 = 1;
+
+    _triggerSF_weight = 1;
+    _triggerSF_weight_up = 1;
+    _triggerSF_weight_down = 1;
+    
+    _leptonSF_ttH_weight = 1;
+
+    _tauSF_weight = 1;
+    _tauSF_weight_tauNormUp = 1;
+    _tauSF_weight_tauNormDown = 1;
+    _tauSF_weight_tauShapeUp = 1;
+    _tauSF_weight_tauShapeDown = 1;
 
     n_fake = 0;
 
@@ -7901,7 +8748,14 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_againstElectronVTightMVA6.clear();
     _recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT.clear();
     _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.clear();
-    _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();        
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();
 
     _event_weight_ttH = 1;
     _event_weight_ttH_FR_QCD_MC = 1;
@@ -7924,6 +8778,18 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_pt2 = 1;
     _event_weight_ttH_mu_be1 = 1;
     _event_weight_ttH_mu_be2 = 1;
+
+    _triggerSF_weight = 1;
+    _triggerSF_weight_up = 1;
+    _triggerSF_weight_down = 1;
+    
+    _leptonSF_ttH_weight = 1;
+
+    _tauSF_weight = 1;
+    _tauSF_weight_tauNormUp = 1;
+    _tauSF_weight_tauNormDown = 1;
+    _tauSF_weight_tauShapeUp = 1;
+    _tauSF_weight_tauShapeDown = 1;
 
     n_fake = 0;
 
@@ -8263,29 +9129,48 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_againstElectronVTightMVA6.clear();
     _recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT.clear();
     _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.clear();
-    _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();        
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();
 
-    _event_weight_ttH = 0;
-    _event_weight_ttH_FR_QCD_MC = 0;
-    _event_weight_ttH_FR_TT_MC = 0;
-    _event_weight_ttH_ele_FR_QCD_MC = 0;
-    _event_weight_ttH_ele_FR_TT_MC = 0;
-    _event_weight_ttH_mu_FR_QCD_MC = 0;
-    _event_weight_ttH_mu_FR_TT_MC = 0;
+    _event_weight_ttH = 1;
+    _event_weight_ttH_FR_QCD_MC = 1;
+    _event_weight_ttH_FR_TT_MC = 1;
+    _event_weight_ttH_ele_FR_QCD_MC = 1;
+    _event_weight_ttH_ele_FR_TT_MC = 1;
+    _event_weight_ttH_mu_FR_QCD_MC = 1;
+    _event_weight_ttH_mu_FR_TT_MC = 1;
 
-    _event_weight_ttH_ele_up = 0;
-    _event_weight_ttH_ele_down = 0;
-    _event_weight_ttH_ele_pt1 = 0;
-    _event_weight_ttH_ele_pt2 = 0;
-    _event_weight_ttH_ele_be1 = 0;
-    _event_weight_ttH_ele_be2 = 0;
+    _event_weight_ttH_ele_up = 1;
+    _event_weight_ttH_ele_down = 1;
+    _event_weight_ttH_ele_pt1 = 1;
+    _event_weight_ttH_ele_pt2 = 1;
+    _event_weight_ttH_ele_be1 = 1;
+    _event_weight_ttH_ele_be2 = 1;
 
-    _event_weight_ttH_mu_up = 0;
-    _event_weight_ttH_mu_down = 0;
-    _event_weight_ttH_mu_pt1 = 0;
-    _event_weight_ttH_mu_pt2 = 0;
-    _event_weight_ttH_mu_be1 = 0;
-    _event_weight_ttH_mu_be2 = 0;
+    _event_weight_ttH_mu_up = 1;
+    _event_weight_ttH_mu_down = 1;
+    _event_weight_ttH_mu_pt1 = 1;
+    _event_weight_ttH_mu_pt2 = 1;
+    _event_weight_ttH_mu_be1 = 1;
+    _event_weight_ttH_mu_be2 = 1;
+
+    _triggerSF_weight = 1;
+    _triggerSF_weight_up = 1;
+    _triggerSF_weight_down = 1;
+    
+    _leptonSF_ttH_weight = 1;
+
+    _tauSF_weight = 1;
+    _tauSF_weight_tauNormUp = 1;
+    _tauSF_weight_tauNormDown = 1;
+    _tauSF_weight_tauShapeUp = 1;
+    _tauSF_weight_tauShapeDown = 1;
 
     if (sig_2lss_flip_ttH || sig_2lss_flip_tH) {
 
@@ -8387,29 +9272,48 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_againstElectronVTightMVA6.clear();
     _recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT.clear();
     _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.clear();
-    _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();        
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();
 
-    _event_weight_ttH = 0;
-    _event_weight_ttH_FR_QCD_MC = 0;
-    _event_weight_ttH_FR_TT_MC = 0;
-    _event_weight_ttH_ele_FR_QCD_MC = 0;
-    _event_weight_ttH_ele_FR_TT_MC = 0;
-    _event_weight_ttH_mu_FR_QCD_MC = 0;
-    _event_weight_ttH_mu_FR_TT_MC = 0;
+    _event_weight_ttH = 1;
+    _event_weight_ttH_FR_QCD_MC = 1;
+    _event_weight_ttH_FR_TT_MC = 1;
+    _event_weight_ttH_ele_FR_QCD_MC = 1;
+    _event_weight_ttH_ele_FR_TT_MC = 1;
+    _event_weight_ttH_mu_FR_QCD_MC = 1;
+    _event_weight_ttH_mu_FR_TT_MC = 1;
 
-    _event_weight_ttH_ele_up = 0;
-    _event_weight_ttH_ele_down = 0;
-    _event_weight_ttH_ele_pt1 = 0;
-    _event_weight_ttH_ele_pt2 = 0;
-    _event_weight_ttH_ele_be1 = 0;
-    _event_weight_ttH_ele_be2 = 0;
+    _event_weight_ttH_ele_up = 1;
+    _event_weight_ttH_ele_down = 1;
+    _event_weight_ttH_ele_pt1 = 1;
+    _event_weight_ttH_ele_pt2 = 1;
+    _event_weight_ttH_ele_be1 = 1;
+    _event_weight_ttH_ele_be2 = 1;
 
-    _event_weight_ttH_mu_up = 0;
-    _event_weight_ttH_mu_down = 0;
-    _event_weight_ttH_mu_pt1 = 0;
-    _event_weight_ttH_mu_pt2 = 0;
-    _event_weight_ttH_mu_be1 = 0;
-    _event_weight_ttH_mu_be2 = 0;
+    _event_weight_ttH_mu_up = 1;
+    _event_weight_ttH_mu_down = 1;
+    _event_weight_ttH_mu_pt1 = 1;
+    _event_weight_ttH_mu_pt2 = 1;
+    _event_weight_ttH_mu_be1 = 1;
+    _event_weight_ttH_mu_be2 = 1;
+
+    _triggerSF_weight = 1;
+    _triggerSF_weight_up = 1;
+    _triggerSF_weight_down = 1;
+    
+    _leptonSF_ttH_weight = 1;
+
+    _tauSF_weight = 1;
+    _tauSF_weight_tauNormUp = 1;
+    _tauSF_weight_tauNormDown = 1;
+    _tauSF_weight_tauShapeUp = 1;
+    _tauSF_weight_tauShapeDown = 1;
 
     if (sig_ttW_CR_flip) {
 
@@ -8447,7 +9351,6 @@ void split_tree(TString filename_in, TString filename_out,
 
       } 
 
-      //FIXME! Is this correct?
       _event_weight_ttH = _recolep_sel_QFrate[0]+_recolep_sel_QFrate[1];
 
       _is_ttH_like = true;
@@ -8510,29 +9413,48 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_againstElectronVTightMVA6.clear();
     _recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT.clear();
     _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.clear();
-    _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();        
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.clear();
+    _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.clear();
 
-    _event_weight_ttH = 0;
-    _event_weight_ttH_FR_QCD_MC = 0;
-    _event_weight_ttH_FR_TT_MC = 0;
-    _event_weight_ttH_ele_FR_QCD_MC = 0;
-    _event_weight_ttH_ele_FR_TT_MC = 0;
-    _event_weight_ttH_mu_FR_QCD_MC = 0;
-    _event_weight_ttH_mu_FR_TT_MC = 0;
+    _event_weight_ttH = 1;
+    _event_weight_ttH_FR_QCD_MC = 1;
+    _event_weight_ttH_FR_TT_MC = 1;
+    _event_weight_ttH_ele_FR_QCD_MC = 1;
+    _event_weight_ttH_ele_FR_TT_MC = 1;
+    _event_weight_ttH_mu_FR_QCD_MC = 1;
+    _event_weight_ttH_mu_FR_TT_MC = 1;
 
-    _event_weight_ttH_ele_up = 0;
-    _event_weight_ttH_ele_down = 0;
-    _event_weight_ttH_ele_pt1 = 0;
-    _event_weight_ttH_ele_pt2 = 0;
-    _event_weight_ttH_ele_be1 = 0;
-    _event_weight_ttH_ele_be2 = 0;
+    _event_weight_ttH_ele_up = 1;
+    _event_weight_ttH_ele_down = 1;
+    _event_weight_ttH_ele_pt1 = 1;
+    _event_weight_ttH_ele_pt2 = 1;
+    _event_weight_ttH_ele_be1 = 1;
+    _event_weight_ttH_ele_be2 = 1;
 
-    _event_weight_ttH_mu_up = 0;
-    _event_weight_ttH_mu_down = 0;
-    _event_weight_ttH_mu_pt1 = 0;
-    _event_weight_ttH_mu_pt2 = 0;
-    _event_weight_ttH_mu_be1 = 0;
-    _event_weight_ttH_mu_be2 = 0;
+    _event_weight_ttH_mu_up = 1;
+    _event_weight_ttH_mu_down = 1;
+    _event_weight_ttH_mu_pt1 = 1;
+    _event_weight_ttH_mu_pt2 = 1;
+    _event_weight_ttH_mu_be1 = 1;
+    _event_weight_ttH_mu_be2 = 1;
+
+    _triggerSF_weight = 1;
+    _triggerSF_weight_up = 1;
+    _triggerSF_weight_down = 1;
+    
+    _leptonSF_ttH_weight = 1;
+
+    _tauSF_weight = 1;
+    _tauSF_weight_tauNormUp = 1;
+    _tauSF_weight_tauNormDown = 1;
+    _tauSF_weight_tauShapeUp = 1;
+    _tauSF_weight_tauShapeDown = 1;
 
     if (sig_2lss1tau_flip) {
 
@@ -8596,7 +9518,14 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_againstElectronVTightMVA6.push_back((*_recotauh_againstElectronVTightMVA6)[i_tau]);
         _recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT)[i_tau]);
         _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT)[i_tau]);
-        _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.push_back((*_recotauh_fakerate_byTightIsolationMVArun2v2017v2DBdR03oldDMwLT)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up)[i_tau]);
+        _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.push_back((*_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up)[i_tau]);
+        _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down.push_back((*_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down)[i_tau]);
 
       } 
 
@@ -8606,6 +9535,17 @@ void split_tree(TString filename_in, TString filename_out,
         _event_weight_ttH = _recolep_sel_QFrate[1];
       else
         _event_weight_ttH = 0;   
+
+      if(isMC) {
+
+        _tauSF_weight = (1-0.11*_recotauh_sel_isGenMatched[0]);
+
+        _tauSF_weight_tauNormUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up[0];
+        _tauSF_weight_tauNormDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down[0];
+        _tauSF_weight_tauShapeUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Up[0];
+        _tauSF_weight_tauShapeDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down[0];
+
+      }
 
       _is_ttH_like = true;
       _is_tH_like_and_not_ttH_like = false;
