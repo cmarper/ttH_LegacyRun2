@@ -613,7 +613,7 @@ void split_tree(TString filename_in, TString filename_out,
   vector<float> _recotauh_sel_px;
   vector<float> _recotauh_sel_py;
   vector<float> _recotauh_sel_pz;
-  vector<bool>  _recotauh_sel_isGenMatched;
+  vector<int>   _recotauh_sel_isGenMatched;
   vector<int>   _recotauh_sel_genMatchInd;
   vector<float> _recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT; 
   vector<float> _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT; 
@@ -666,7 +666,6 @@ void split_tree(TString filename_in, TString filename_out,
   float _tauSF_weight_tauNormDown;
   float _tauSF_weight_tauShapeUp;
   float _tauSF_weight_tauShapeDown;
-
 
   /*float _lep1_conePt;
   float _lep2_conePt;
@@ -820,7 +819,7 @@ void split_tree(TString filename_in, TString filename_out,
     tree_new[i]->Branch("tauSF_weight_tauNormUp",&_tauSF_weight_tauNormUp,"tauSF_weight_tauNormUp/F");
     tree_new[i]->Branch("tauSF_weight_tauNormDown",&_tauSF_weight_tauNormDown,"tauSF_weight_tauNormDown/F");
     tree_new[i]->Branch("tauSF_weight_tauShapeUp",&_tauSF_weight_tauShapeUp,"tauSF_weight_tauShapeUp/F");
-    tree_new[i]->Branch("tauSF_weight_tauShapeDown",&_tauSF_weight_tauShapeDown,"tauSF_weight_tauShapeDown/F"); 
+    tree_new[i]->Branch("tauSF_weight_tauShapeDown",&_tauSF_weight_tauShapeDown,"tauSF_weight_tauShapeDown/F");
 
     /*tree_new[i]->Branch("lep1_conePt",&_lep1_conePt);
     tree_new[i]->Branch("lep2_conePt",&_lep2_conePt);
@@ -1015,6 +1014,10 @@ void split_tree(TString filename_in, TString filename_out,
     _leptonSF_ttH_weight = 0;
 
     _tauSF_weight = 0;
+    _tauSF_weight_tauNormUp = 0;
+    _tauSF_weight_tauNormDown = 0;
+    _tauSF_weight_tauShapeUp = 0;
+    _tauSF_weight_tauShapeDown = 0;
 
     //MVA variables
 
@@ -1602,17 +1605,6 @@ void split_tree(TString filename_in, TString filename_out,
     bool sig_1l1tau_fake = 
       sig_1l1tau_base &&
       ( ( !(_recolep_fakeable_ismvasel[0]) && (_n_tight_WPM_tau==1) ) || ( !((*_recotauh_byMediumIsolationMVArun2v2017v2DBoldDMwLT)[0]>0.5) && (_n_tight_lep==1) ) );
-
-    if(_EventNumber==3104507 || _EventNumber==750674 || _EventNumber==3268541 || _EventNumber==1390014) {
-      cout<<"Event "<<_EventNumber<<"," <<sig_1l1tau_base<<endl;
-      cout<<"_n_fakeable_lep"<<_n_fakeable_lep<<endl;
-      cout<<"_recolep_fakeable_conept[0] "<<_recolep_fakeable_conept[0]<<" "<<_recolep_fakeable_pdg[0]<<endl;
-      cout<<"eta "<<_recolep_fakeable_eta[0]<<endl;
-      cout<<"_n_recotauh "<<_n_recotauh<<endl;
-      cout<<"pt tau "<<(*_recotauh_pt)[0]<<endl;
-      cout<<"_n_recoPFJet "<<_n_recoPFJet<<" "<<_n_recoPFJet_btag_medium<<","<<_n_recoPFJet_btag_loose<<endl;
-    }
-
   
     ////////////////////////////////
     /////////// 1l2tau  ////////////
