@@ -64,6 +64,12 @@ void split_tree(TString filename_in, TString filename_out,
   vector<float> *_recolep_fakerate;
   vector<float> *_recolep_fakerate_QCD_MC;
   vector<float> *_recolep_fakerate_ttbar_MC;
+  vector<float> *_recolep_fakerate_up;
+  vector<float> *_recolep_fakerate_down;
+  vector<float> *_recolep_fakerate_pt1;
+  vector<float> *_recolep_fakerate_pt2;
+  vector<float> *_recolep_fakerate_be1;
+  vector<float> *_recolep_fakerate_be2;
   vector<float> *_recolep_QFrate; 
   vector<bool>  *_recolep_isfakeable;
   vector<bool>  *_recolep_ismvasel;
@@ -165,6 +171,12 @@ void split_tree(TString filename_in, TString filename_out,
   tree->SetBranchAddress("recolep_fakerate",&_recolep_fakerate);
   tree->SetBranchAddress("recolep_fakerate_QCD_MC",&_recolep_fakerate_QCD_MC);
   tree->SetBranchAddress("recolep_fakerate_ttbar_MC",&_recolep_fakerate_ttbar_MC);
+  tree->SetBranchAddress("recolep_fakerate_up",&_recolep_fakerate_up);
+  tree->SetBranchAddress("recolep_fakerate_down",&_recolep_fakerate_down);
+  tree->SetBranchAddress("recolep_fakerate_pt1",&_recolep_fakerate_pt1);
+  tree->SetBranchAddress("recolep_fakerate_pt2",&_recolep_fakerate_pt2);
+  tree->SetBranchAddress("recolep_fakerate_be1",&_recolep_fakerate_be1);
+  tree->SetBranchAddress("recolep_fakerate_be2",&_recolep_fakerate_be2);
   tree->SetBranchAddress("recolep_QFrate",&_recolep_QFrate);
   tree->SetBranchAddress("recolep_isfakeable",&_recolep_isfakeable);
   tree->SetBranchAddress("recolep_ismvasel",&_recolep_ismvasel);
@@ -522,6 +534,12 @@ void split_tree(TString filename_in, TString filename_out,
   vector<float> _recolep_fakeable_fakerate;
   vector<float> _recolep_fakeable_fakerate_QCD_MC;
   vector<float> _recolep_fakeable_fakerate_ttbar_MC;
+  vector<float> _recolep_fakeable_fakerate_up;
+  vector<float> _recolep_fakeable_fakerate_down;
+  vector<float> _recolep_fakeable_fakerate_pt1;
+  vector<float> _recolep_fakeable_fakerate_pt2;
+  vector<float> _recolep_fakeable_fakerate_be1;
+  vector<float> _recolep_fakeable_fakerate_be2;
   vector<float> _recolep_fakeable_QFrate; 
   vector<bool>  _recolep_fakeable_isfakeable;
   vector<bool>  _recolep_fakeable_ismvasel;
@@ -543,6 +561,12 @@ void split_tree(TString filename_in, TString filename_out,
   vector<float> _recolep_sel_fakerate;
   vector<float> _recolep_sel_fakerate_QCD_MC;
   vector<float> _recolep_sel_fakerate_ttbar_MC;
+  vector<float> _recolep_sel_fakerate_up;
+  vector<float> _recolep_sel_fakerate_down;
+  vector<float> _recolep_sel_fakerate_pt1;
+  vector<float> _recolep_sel_fakerate_pt2;
+  vector<float> _recolep_sel_fakerate_be1;
+  vector<float> _recolep_sel_fakerate_be2;
   vector<float> _recolep_sel_QFrate; 
   vector<bool>  _recolep_sel_isfakeable;
   vector<bool>  _recolep_sel_ismvasel;
@@ -595,6 +619,20 @@ void split_tree(TString filename_in, TString filename_out,
   float _event_weight_ttH_ele_FR_TT_MC;
   float _event_weight_ttH_mu_FR_QCD_MC;
   float _event_weight_ttH_mu_FR_TT_MC;
+
+  float _event_weight_ttH_ele_up;
+  float _event_weight_ttH_ele_down;
+  float _event_weight_ttH_ele_pt1;
+  float _event_weight_ttH_ele_pt2;
+  float _event_weight_ttH_ele_be1;
+  float _event_weight_ttH_ele_be2;
+
+  float _event_weight_ttH_mu_up;
+  float _event_weight_ttH_mu_down;
+  float _event_weight_ttH_mu_pt1;
+  float _event_weight_ttH_mu_pt2;
+  float _event_weight_ttH_mu_be1;
+  float _event_weight_ttH_mu_be2;
 
   float _triggerSF_weight;
   float _triggerSF_weight_up;
@@ -667,6 +705,12 @@ void split_tree(TString filename_in, TString filename_out,
     tree_new[i]->Branch("recolep_sel_fakerate",&_recolep_sel_fakerate);
     tree_new[i]->Branch("recolep_sel_fakerate_QCD_MC",&_recolep_sel_fakerate_QCD_MC);
     tree_new[i]->Branch("recolep_sel_fakerate_ttbar_MC",&_recolep_sel_fakerate_ttbar_MC);
+    tree_new[i]->Branch("recolep_sel_fakerate_up",&_recolep_sel_fakerate_up);
+    tree_new[i]->Branch("recolep_sel_fakerate_down",&_recolep_sel_fakerate_down);
+    tree_new[i]->Branch("recolep_sel_fakerate_pt1",&_recolep_sel_fakerate_pt1);
+    tree_new[i]->Branch("recolep_sel_fakerate_pt2",&_recolep_sel_fakerate_pt2);
+    tree_new[i]->Branch("recolep_sel_fakerate_be1",&_recolep_sel_fakerate_be1);
+    tree_new[i]->Branch("recolep_sel_fakerate_be2",&_recolep_sel_fakerate_be2);
     tree_new[i]->Branch("recolep_sel_QFrate",&_recolep_sel_QFrate);
     tree_new[i]->Branch("recolep_sel_isfakeable",&_recolep_sel_isfakeable);
     tree_new[i]->Branch("recolep_sel_ismvasel",&_recolep_sel_ismvasel);
@@ -719,6 +763,20 @@ void split_tree(TString filename_in, TString filename_out,
     tree_new[i]->Branch("event_weight_ttH_ele_FR_TT_MC",&_event_weight_ttH_ele_FR_TT_MC,"event_weight_ttH_ele_FR_TT_MC/F");
     tree_new[i]->Branch("event_weight_ttH_mu_FR_QCD_MC",&_event_weight_ttH_mu_FR_QCD_MC,"event_weight_ttH_mu_FR_QCD_MC/F");
     tree_new[i]->Branch("event_weight_ttH_mu_FR_TT_MC",&_event_weight_ttH_mu_FR_TT_MC,"event_weight_ttH_mu_FR_TT_MC/F");
+
+    tree_new[i]->Branch("event_weight_ttH_ele_up",&_event_weight_ttH_ele_up,"event_weight_ttH_ele_up/F");
+    tree_new[i]->Branch("event_weight_ttH_ele_down",&_event_weight_ttH_ele_down,"event_weight_ttH_ele_down/F");
+    tree_new[i]->Branch("event_weight_ttH_ele_pt1",&_event_weight_ttH_ele_pt1,"event_weight_ttH_ele_pt1/F");
+    tree_new[i]->Branch("event_weight_ttH_ele_pt2",&_event_weight_ttH_ele_pt2,"event_weight_ttH_ele_pt2/F");
+    tree_new[i]->Branch("event_weight_ttH_ele_be1",&_event_weight_ttH_ele_be1,"event_weight_ttH_ele_be1/F");
+    tree_new[i]->Branch("event_weight_ttH_ele_be2",&_event_weight_ttH_ele_be2,"event_weight_ttH_ele_be2/F");
+
+    tree_new[i]->Branch("event_weight_ttH_mu_up",&_event_weight_ttH_mu_up,"event_weight_ttH_mu_up/F");
+    tree_new[i]->Branch("event_weight_ttH_mu_down",&_event_weight_ttH_mu_down,"event_weight_ttH_mu_down/F");
+    tree_new[i]->Branch("event_weight_ttH_mu_pt1",&_event_weight_ttH_mu_pt1,"event_weight_ttH_mu_pt1/F");
+    tree_new[i]->Branch("event_weight_ttH_mu_pt2",&_event_weight_ttH_mu_pt2,"event_weight_ttH_mu_pt2/F");
+    tree_new[i]->Branch("event_weight_ttH_mu_be1",&_event_weight_ttH_mu_be1,"event_weight_ttH_mu_be1/F");
+    tree_new[i]->Branch("event_weight_ttH_mu_be2",&_event_weight_ttH_mu_be2,"event_weight_ttH_mu_be2/F");
 
     tree_new[i]->Branch("triggerSF_weight",&_triggerSF_weight,"triggerSF_weight/F");
     tree_new[i]->Branch("triggerSF_weight_up",&_triggerSF_weight_up,"triggerSF_weight_up/F");
@@ -805,6 +863,12 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_fakeable_fakerate.clear();
     _recolep_fakeable_fakerate_QCD_MC.clear();
     _recolep_fakeable_fakerate_ttbar_MC.clear();
+    _recolep_fakeable_fakerate_up.clear();
+    _recolep_fakeable_fakerate_down.clear();
+    _recolep_fakeable_fakerate_pt1.clear();
+    _recolep_fakeable_fakerate_pt2.clear();
+    _recolep_fakeable_fakerate_be1.clear();
+    _recolep_fakeable_fakerate_be2.clear();
     _recolep_fakeable_QFrate.clear();
     _recolep_fakeable_isfakeable.clear();
     _recolep_fakeable_ismvasel.clear();
@@ -826,6 +890,12 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_fakerate.clear();
     _recolep_sel_fakerate_QCD_MC.clear();
     _recolep_sel_fakerate_ttbar_MC.clear();
+    _recolep_sel_fakerate_up.clear();
+    _recolep_sel_fakerate_down.clear();
+    _recolep_sel_fakerate_pt1.clear();
+    _recolep_sel_fakerate_pt2.clear();
+    _recolep_sel_fakerate_be1.clear();
+    _recolep_sel_fakerate_be2.clear();
     _recolep_sel_QFrate.clear(); 
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
@@ -878,6 +948,20 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_ele_FR_TT_MC = 0;
     _event_weight_ttH_mu_FR_QCD_MC = 0;
     _event_weight_ttH_mu_FR_TT_MC = 0;
+
+    _event_weight_ttH_ele_up = 0;
+    _event_weight_ttH_ele_down = 0;
+    _event_weight_ttH_ele_pt1 = 0;
+    _event_weight_ttH_ele_pt2 = 0;
+    _event_weight_ttH_ele_be1 = 0;
+    _event_weight_ttH_ele_be2 = 0;
+
+    _event_weight_ttH_mu_up = 0;
+    _event_weight_ttH_mu_down = 0;
+    _event_weight_ttH_mu_pt1 = 0;
+    _event_weight_ttH_mu_pt2 = 0;
+    _event_weight_ttH_mu_be1 = 0;
+    _event_weight_ttH_mu_be2 = 0;
 
     _triggerSF_weight = 0;
     _triggerSF_weight_up = 0;
@@ -948,6 +1032,12 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_fakerate = 0;
     _recolep_fakerate_QCD_MC = 0;
     _recolep_fakerate_ttbar_MC = 0;
+    _recolep_fakerate_up = 0;
+    _recolep_fakerate_down = 0;
+    _recolep_fakerate_pt1 = 0;
+    _recolep_fakerate_pt2 = 0;
+    _recolep_fakerate_be1 = 0;
+    _recolep_fakerate_be2 = 0;
     _recolep_QFrate = 0; 
     _recolep_isfakeable = 0;
     _recolep_ismvasel = 0;
@@ -1264,6 +1354,12 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_fakeable_fakerate.push_back((*_recolep_fakerate)[i_lep]);
         _recolep_fakeable_fakerate_QCD_MC.push_back((*_recolep_fakerate_QCD_MC)[i_lep]);
         _recolep_fakeable_fakerate_ttbar_MC.push_back((*_recolep_fakerate_ttbar_MC)[i_lep]);
+        _recolep_fakeable_fakerate_up.push_back((*_recolep_fakerate_up)[i_lep]);
+        _recolep_fakeable_fakerate_down.push_back((*_recolep_fakerate_down)[i_lep]);
+        _recolep_fakeable_fakerate_pt1.push_back((*_recolep_fakerate_pt1)[i_lep]);
+        _recolep_fakeable_fakerate_pt2.push_back((*_recolep_fakerate_pt2)[i_lep]);
+        _recolep_fakeable_fakerate_be1.push_back((*_recolep_fakerate_be1)[i_lep]);
+        _recolep_fakeable_fakerate_be2.push_back((*_recolep_fakerate_be2)[i_lep]);
         _recolep_fakeable_QFrate.push_back((*_recolep_QFrate)[i_lep]);
         _recolep_fakeable_isfakeable.push_back((*_recolep_isfakeable)[i_lep]);
         _recolep_fakeable_ismvasel.push_back((*_recolep_ismvasel)[i_lep]);
@@ -2218,6 +2314,12 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_fakerate.clear();
     _recolep_sel_fakerate_QCD_MC.clear();
     _recolep_sel_fakerate_ttbar_MC.clear();
+    _recolep_sel_fakerate_up.clear();
+    _recolep_sel_fakerate_down.clear();
+    _recolep_sel_fakerate_pt1.clear();
+    _recolep_sel_fakerate_pt2.clear();
+    _recolep_sel_fakerate_be1.clear();
+    _recolep_sel_fakerate_be2.clear();
     _recolep_sel_QFrate.clear();
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
@@ -2259,6 +2361,20 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_ele_FR_TT_MC = 1;
     _event_weight_ttH_mu_FR_QCD_MC = 1;
     _event_weight_ttH_mu_FR_TT_MC = 1;
+
+    _event_weight_ttH_ele_up = 1;
+    _event_weight_ttH_ele_down = 1;
+    _event_weight_ttH_ele_pt1 = 1;
+    _event_weight_ttH_ele_pt2 = 1;
+    _event_weight_ttH_ele_be1 = 1;
+    _event_weight_ttH_ele_be2 = 1;
+
+    _event_weight_ttH_mu_up = 1;
+    _event_weight_ttH_mu_down = 1;
+    _event_weight_ttH_mu_pt1 = 1;
+    _event_weight_ttH_mu_pt2 = 1;
+    _event_weight_ttH_mu_be1 = 1;
+    _event_weight_ttH_mu_be2 = 1;
 
     int n_fake = 0;
 
@@ -2319,6 +2435,12 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_fakerate.clear();
     _recolep_sel_fakerate_QCD_MC.clear();
     _recolep_sel_fakerate_ttbar_MC.clear();
+    _recolep_sel_fakerate_up.clear();
+    _recolep_sel_fakerate_down.clear();
+    _recolep_sel_fakerate_pt1.clear();
+    _recolep_sel_fakerate_pt2.clear();
+    _recolep_sel_fakerate_be1.clear();
+    _recolep_sel_fakerate_be2.clear();
     _recolep_sel_QFrate.clear();
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
@@ -2361,6 +2483,20 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_FR_QCD_MC = 1;
     _event_weight_ttH_mu_FR_TT_MC = 1;
 
+    _event_weight_ttH_ele_up = 1;
+    _event_weight_ttH_ele_down = 1;
+    _event_weight_ttH_ele_pt1 = 1;
+    _event_weight_ttH_ele_pt2 = 1;
+    _event_weight_ttH_ele_be1 = 1;
+    _event_weight_ttH_ele_be2 = 1;
+
+    _event_weight_ttH_mu_up = 1;
+    _event_weight_ttH_mu_down = 1;
+    _event_weight_ttH_mu_pt1 = 1;
+    _event_weight_ttH_mu_pt2 = 1;
+    _event_weight_ttH_mu_be1 = 1;
+    _event_weight_ttH_mu_be2 = 1;
+
     n_fake = 0;
 
     if(sig_1l1tau_SR){
@@ -2383,6 +2519,12 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_fakerate.push_back(_recolep_fakeable_fakerate[i_lep]);
         _recolep_sel_fakerate_QCD_MC.push_back(_recolep_fakeable_fakerate_QCD_MC[i_lep]);
         _recolep_sel_fakerate_ttbar_MC.push_back(_recolep_fakeable_fakerate_ttbar_MC[i_lep]);
+        _recolep_sel_fakerate_up.push_back(_recolep_fakeable_fakerate_up[i_lep]);
+        _recolep_sel_fakerate_down.push_back(_recolep_fakeable_fakerate_down[i_lep]);
+        _recolep_sel_fakerate_pt1.push_back(_recolep_fakeable_fakerate_pt1[i_lep]);
+        _recolep_sel_fakerate_pt2.push_back(_recolep_fakeable_fakerate_pt2[i_lep]);
+        _recolep_sel_fakerate_be1.push_back(_recolep_fakeable_fakerate_be1[i_lep]);
+        _recolep_sel_fakerate_be2.push_back(_recolep_fakeable_fakerate_be2[i_lep]);
         _recolep_sel_QFrate.push_back(_recolep_fakeable_QFrate[i_lep]);
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
@@ -2445,6 +2587,12 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_fakerate.clear();
     _recolep_sel_fakerate_QCD_MC.clear();
     _recolep_sel_fakerate_ttbar_MC.clear();
+    _recolep_sel_fakerate_up.clear();
+    _recolep_sel_fakerate_down.clear();
+    _recolep_sel_fakerate_pt1.clear();
+    _recolep_sel_fakerate_pt2.clear();
+    _recolep_sel_fakerate_be1.clear();
+    _recolep_sel_fakerate_be2.clear();
     _recolep_sel_QFrate.clear();
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
@@ -2487,6 +2635,20 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_FR_QCD_MC = 1;
     _event_weight_ttH_mu_FR_TT_MC = 1;
 
+    _event_weight_ttH_ele_up = 1;
+    _event_weight_ttH_ele_down = 1;
+    _event_weight_ttH_ele_pt1 = 1;
+    _event_weight_ttH_ele_pt2 = 1;
+    _event_weight_ttH_ele_be1 = 1;
+    _event_weight_ttH_ele_be2 = 1;
+
+    _event_weight_ttH_mu_up = 1;
+    _event_weight_ttH_mu_down = 1;
+    _event_weight_ttH_mu_pt1 = 1;
+    _event_weight_ttH_mu_pt2 = 1;
+    _event_weight_ttH_mu_be1 = 1;
+    _event_weight_ttH_mu_be2 = 1;
+
     n_fake = 0;
 
     if (sig_1l2tau_SR) {
@@ -2509,6 +2671,12 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_fakerate.push_back(_recolep_fakeable_fakerate[i_lep]);
         _recolep_sel_fakerate_QCD_MC.push_back(_recolep_fakeable_fakerate_QCD_MC[i_lep]);
         _recolep_sel_fakerate_ttbar_MC.push_back(_recolep_fakeable_fakerate_ttbar_MC[i_lep]);
+        _recolep_sel_fakerate_up.push_back(_recolep_fakeable_fakerate_up[i_lep]);
+        _recolep_sel_fakerate_down.push_back(_recolep_fakeable_fakerate_down[i_lep]);
+        _recolep_sel_fakerate_pt1.push_back(_recolep_fakeable_fakerate_pt1[i_lep]);
+        _recolep_sel_fakerate_pt2.push_back(_recolep_fakeable_fakerate_pt2[i_lep]);
+        _recolep_sel_fakerate_be1.push_back(_recolep_fakeable_fakerate_be1[i_lep]);
+        _recolep_sel_fakerate_be2.push_back(_recolep_fakeable_fakerate_be2[i_lep]);
         _recolep_sel_QFrate.push_back(_recolep_fakeable_QFrate[i_lep]);
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
@@ -2571,6 +2739,12 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_fakerate.clear();
     _recolep_sel_fakerate_QCD_MC.clear();
     _recolep_sel_fakerate_ttbar_MC.clear();
+    _recolep_sel_fakerate_up.clear();
+    _recolep_sel_fakerate_down.clear();
+    _recolep_sel_fakerate_pt1.clear();
+    _recolep_sel_fakerate_pt2.clear();
+    _recolep_sel_fakerate_be1.clear();
+    _recolep_sel_fakerate_be2.clear();
     _recolep_sel_QFrate.clear();
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
@@ -2613,6 +2787,20 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_FR_QCD_MC = 1;
     _event_weight_ttH_mu_FR_TT_MC = 1;
 
+    _event_weight_ttH_ele_up = 1;
+    _event_weight_ttH_ele_down = 1;
+    _event_weight_ttH_ele_pt1 = 1;
+    _event_weight_ttH_ele_pt2 = 1;
+    _event_weight_ttH_ele_be1 = 1;
+    _event_weight_ttH_ele_be2 = 1;
+
+    _event_weight_ttH_mu_up = 1;
+    _event_weight_ttH_mu_down = 1;
+    _event_weight_ttH_mu_pt1 = 1;
+    _event_weight_ttH_mu_pt2 = 1;
+    _event_weight_ttH_mu_be1 = 1;
+    _event_weight_ttH_mu_be2 = 1;
+
     n_fake = 0;
 
     if (sig_2lss_SR_ttH || sig_2lss_SR_tH) {
@@ -2635,6 +2823,12 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_fakerate.push_back(_recolep_fakeable_fakerate[i_lep]);
         _recolep_sel_fakerate_QCD_MC.push_back(_recolep_fakeable_fakerate_QCD_MC[i_lep]);
         _recolep_sel_fakerate_ttbar_MC.push_back(_recolep_fakeable_fakerate_ttbar_MC[i_lep]);
+        _recolep_sel_fakerate_up.push_back(_recolep_fakeable_fakerate_up[i_lep]);
+        _recolep_sel_fakerate_down.push_back(_recolep_fakeable_fakerate_down[i_lep]);
+        _recolep_sel_fakerate_pt1.push_back(_recolep_fakeable_fakerate_pt1[i_lep]);
+        _recolep_sel_fakerate_pt2.push_back(_recolep_fakeable_fakerate_pt2[i_lep]);
+        _recolep_sel_fakerate_be1.push_back(_recolep_fakeable_fakerate_be1[i_lep]);
+        _recolep_sel_fakerate_be2.push_back(_recolep_fakeable_fakerate_be2[i_lep]);
         _recolep_sel_QFrate.push_back(_recolep_fakeable_QFrate[i_lep]);
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
@@ -2670,6 +2864,12 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_fakerate_QCD_MC.clear();
     _recolep_sel_fakerate_ttbar_MC.clear();
     _recolep_sel_QFrate.clear();
+    _recolep_sel_fakerate_up.clear();
+    _recolep_sel_fakerate_down.clear();
+    _recolep_sel_fakerate_pt1.clear();
+    _recolep_sel_fakerate_pt2.clear();
+    _recolep_sel_fakerate_be1.clear();
+    _recolep_sel_fakerate_be2.clear();
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
     _recolep_sel_tightcharge.clear();
@@ -2703,6 +2903,30 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.clear();
     _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.clear();
 
+    _event_weight_ttH = 1;
+    _event_weight_ttH_FR_QCD_MC = 1;
+    _event_weight_ttH_FR_TT_MC = 1;
+    _event_weight_ttH_ele_FR_QCD_MC = 1;
+    _event_weight_ttH_ele_FR_TT_MC = 1;
+    _event_weight_ttH_mu_FR_QCD_MC = 1;
+    _event_weight_ttH_mu_FR_TT_MC = 1;
+
+    _event_weight_ttH_ele_up = 1;
+    _event_weight_ttH_ele_down = 1;
+    _event_weight_ttH_ele_pt1 = 1;
+    _event_weight_ttH_ele_pt2 = 1;
+    _event_weight_ttH_ele_be1 = 1;
+    _event_weight_ttH_ele_be2 = 1;
+
+    _event_weight_ttH_mu_up = 1;
+    _event_weight_ttH_mu_down = 1;
+    _event_weight_ttH_mu_pt1 = 1;
+    _event_weight_ttH_mu_pt2 = 1;
+    _event_weight_ttH_mu_be1 = 1;
+    _event_weight_ttH_mu_be2 = 1;
+
+    n_fake = 0;
+
     if (sig_ttW_CR_SR) {
 
       _n_recolep_sel = 2;
@@ -2723,6 +2947,12 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_fakerate.push_back(_recolep_fakeable_fakerate[i_lep]);
         _recolep_sel_fakerate_QCD_MC.push_back(_recolep_fakeable_fakerate_QCD_MC[i_lep]);
         _recolep_sel_fakerate_ttbar_MC.push_back(_recolep_fakeable_fakerate_ttbar_MC[i_lep]);
+        _recolep_sel_fakerate_up.push_back(_recolep_fakeable_fakerate_up[i_lep]);
+        _recolep_sel_fakerate_down.push_back(_recolep_fakeable_fakerate_down[i_lep]);
+        _recolep_sel_fakerate_pt1.push_back(_recolep_fakeable_fakerate_pt1[i_lep]);
+        _recolep_sel_fakerate_pt2.push_back(_recolep_fakeable_fakerate_pt2[i_lep]);
+        _recolep_sel_fakerate_be1.push_back(_recolep_fakeable_fakerate_be1[i_lep]);
+        _recolep_sel_fakerate_be2.push_back(_recolep_fakeable_fakerate_be2[i_lep]);
         _recolep_sel_QFrate.push_back(_recolep_fakeable_QFrate[i_lep]);
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
@@ -2755,6 +2985,12 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_fakerate.clear();
     _recolep_sel_fakerate_QCD_MC.clear();
     _recolep_sel_fakerate_ttbar_MC.clear();
+    _recolep_sel_fakerate_up.clear();
+    _recolep_sel_fakerate_down.clear();
+    _recolep_sel_fakerate_pt1.clear();
+    _recolep_sel_fakerate_pt2.clear();
+    _recolep_sel_fakerate_be1.clear();
+    _recolep_sel_fakerate_be2.clear();
     _recolep_sel_QFrate.clear();
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
@@ -2797,6 +3033,20 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_FR_QCD_MC = 1;
     _event_weight_ttH_mu_FR_TT_MC = 1;
 
+    _event_weight_ttH_ele_up = 1;
+    _event_weight_ttH_ele_down = 1;
+    _event_weight_ttH_ele_pt1 = 1;
+    _event_weight_ttH_ele_pt2 = 1;
+    _event_weight_ttH_ele_be1 = 1;
+    _event_weight_ttH_ele_be2 = 1;
+
+    _event_weight_ttH_mu_up = 1;
+    _event_weight_ttH_mu_down = 1;
+    _event_weight_ttH_mu_pt1 = 1;
+    _event_weight_ttH_mu_pt2 = 1;
+    _event_weight_ttH_mu_be1 = 1;
+    _event_weight_ttH_mu_be2 = 1;
+
     n_fake = 0;
 
     if (sig_2lss1tau_SR) {
@@ -2819,6 +3069,12 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_fakerate.push_back(_recolep_fakeable_fakerate[i_lep]);
         _recolep_sel_fakerate_QCD_MC.push_back(_recolep_fakeable_fakerate_QCD_MC[i_lep]);
         _recolep_sel_fakerate_ttbar_MC.push_back(_recolep_fakeable_fakerate_ttbar_MC[i_lep]);
+        _recolep_sel_fakerate_up.push_back(_recolep_fakeable_fakerate_up[i_lep]);
+        _recolep_sel_fakerate_down.push_back(_recolep_fakeable_fakerate_down[i_lep]);
+        _recolep_sel_fakerate_pt1.push_back(_recolep_fakeable_fakerate_pt1[i_lep]);
+        _recolep_sel_fakerate_pt2.push_back(_recolep_fakeable_fakerate_pt2[i_lep]);
+        _recolep_sel_fakerate_be1.push_back(_recolep_fakeable_fakerate_be1[i_lep]);
+        _recolep_sel_fakerate_be2.push_back(_recolep_fakeable_fakerate_be2[i_lep]);
         _recolep_sel_QFrate.push_back(_recolep_fakeable_QFrate[i_lep]);
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
@@ -2881,6 +3137,12 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_fakerate.clear();
     _recolep_sel_fakerate_QCD_MC.clear();
     _recolep_sel_fakerate_ttbar_MC.clear();
+    _recolep_sel_fakerate_up.clear();
+    _recolep_sel_fakerate_down.clear();
+    _recolep_sel_fakerate_pt1.clear();
+    _recolep_sel_fakerate_pt2.clear();
+    _recolep_sel_fakerate_be1.clear();
+    _recolep_sel_fakerate_be2.clear();
     _recolep_sel_QFrate.clear();
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
@@ -2923,6 +3185,20 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_FR_QCD_MC = 1;
     _event_weight_ttH_mu_FR_TT_MC = 1;
 
+    _event_weight_ttH_ele_up = 1;
+    _event_weight_ttH_ele_down = 1;
+    _event_weight_ttH_ele_pt1 = 1;
+    _event_weight_ttH_ele_pt2 = 1;
+    _event_weight_ttH_ele_be1 = 1;
+    _event_weight_ttH_ele_be2 = 1;
+
+    _event_weight_ttH_mu_up = 1;
+    _event_weight_ttH_mu_down = 1;
+    _event_weight_ttH_mu_pt1 = 1;
+    _event_weight_ttH_mu_pt2 = 1;
+    _event_weight_ttH_mu_be1 = 1;
+    _event_weight_ttH_mu_be2 = 1;
+
     n_fake = 0;
 
     if (sig_2los1tau_SR) {
@@ -2945,6 +3221,12 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_fakerate.push_back(_recolep_fakeable_fakerate[i_lep]);
         _recolep_sel_fakerate_QCD_MC.push_back(_recolep_fakeable_fakerate_QCD_MC[i_lep]);
         _recolep_sel_fakerate_ttbar_MC.push_back(_recolep_fakeable_fakerate_ttbar_MC[i_lep]);
+        _recolep_sel_fakerate_up.push_back(_recolep_fakeable_fakerate_up[i_lep]);
+        _recolep_sel_fakerate_down.push_back(_recolep_fakeable_fakerate_down[i_lep]);
+        _recolep_sel_fakerate_pt1.push_back(_recolep_fakeable_fakerate_pt1[i_lep]);
+        _recolep_sel_fakerate_pt2.push_back(_recolep_fakeable_fakerate_pt2[i_lep]);
+        _recolep_sel_fakerate_be1.push_back(_recolep_fakeable_fakerate_be1[i_lep]);
+        _recolep_sel_fakerate_be2.push_back(_recolep_fakeable_fakerate_be2[i_lep]);
         _recolep_sel_QFrate.push_back(_recolep_fakeable_QFrate[i_lep]);
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
@@ -3007,6 +3289,12 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_fakerate.clear();
     _recolep_sel_fakerate_QCD_MC.clear();
     _recolep_sel_fakerate_ttbar_MC.clear();
+    _recolep_sel_fakerate_up.clear();
+    _recolep_sel_fakerate_down.clear();
+    _recolep_sel_fakerate_pt1.clear();
+    _recolep_sel_fakerate_pt2.clear();
+    _recolep_sel_fakerate_be1.clear();
+    _recolep_sel_fakerate_be2.clear();
     _recolep_sel_QFrate.clear();
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
@@ -3049,6 +3337,20 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_FR_QCD_MC = 1;
     _event_weight_ttH_mu_FR_TT_MC = 1;
 
+    _event_weight_ttH_ele_up = 1;
+    _event_weight_ttH_ele_down = 1;
+    _event_weight_ttH_ele_pt1 = 1;
+    _event_weight_ttH_ele_pt2 = 1;
+    _event_weight_ttH_ele_be1 = 1;
+    _event_weight_ttH_ele_be2 = 1;
+
+    _event_weight_ttH_mu_up = 1;
+    _event_weight_ttH_mu_down = 1;
+    _event_weight_ttH_mu_pt1 = 1;
+    _event_weight_ttH_mu_pt2 = 1;
+    _event_weight_ttH_mu_be1 = 1;
+    _event_weight_ttH_mu_be2 = 1;
+
     n_fake = 0;
 
     if (sig_2l2tau_SR) {
@@ -3071,6 +3373,12 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_fakerate.push_back(_recolep_fakeable_fakerate[i_lep]);
         _recolep_sel_fakerate_QCD_MC.push_back(_recolep_fakeable_fakerate_QCD_MC[i_lep]);
         _recolep_sel_fakerate_ttbar_MC.push_back(_recolep_fakeable_fakerate_ttbar_MC[i_lep]);
+        _recolep_sel_fakerate_up.push_back(_recolep_fakeable_fakerate_up[i_lep]);
+        _recolep_sel_fakerate_down.push_back(_recolep_fakeable_fakerate_down[i_lep]);
+        _recolep_sel_fakerate_pt1.push_back(_recolep_fakeable_fakerate_pt1[i_lep]);
+        _recolep_sel_fakerate_pt2.push_back(_recolep_fakeable_fakerate_pt2[i_lep]);
+        _recolep_sel_fakerate_be1.push_back(_recolep_fakeable_fakerate_be1[i_lep]);
+        _recolep_sel_fakerate_be2.push_back(_recolep_fakeable_fakerate_be2[i_lep]);
         _recolep_sel_QFrate.push_back(_recolep_fakeable_QFrate[i_lep]);
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
@@ -3133,6 +3441,12 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_fakerate.clear();
     _recolep_sel_fakerate_QCD_MC.clear();
     _recolep_sel_fakerate_ttbar_MC.clear();
+    _recolep_sel_fakerate_up.clear();
+    _recolep_sel_fakerate_down.clear();
+    _recolep_sel_fakerate_pt1.clear();
+    _recolep_sel_fakerate_pt2.clear();
+    _recolep_sel_fakerate_be1.clear();
+    _recolep_sel_fakerate_be2.clear();
     _recolep_sel_QFrate.clear();
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
@@ -3175,6 +3489,20 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_FR_QCD_MC = 1;
     _event_weight_ttH_mu_FR_TT_MC = 1;
 
+    _event_weight_ttH_ele_up = 1;
+    _event_weight_ttH_ele_down = 1;
+    _event_weight_ttH_ele_pt1 = 1;
+    _event_weight_ttH_ele_pt2 = 1;
+    _event_weight_ttH_ele_be1 = 1;
+    _event_weight_ttH_ele_be2 = 1;
+
+    _event_weight_ttH_mu_up = 1;
+    _event_weight_ttH_mu_down = 1;
+    _event_weight_ttH_mu_pt1 = 1;
+    _event_weight_ttH_mu_pt2 = 1;
+    _event_weight_ttH_mu_be1 = 1;
+    _event_weight_ttH_mu_be2 = 1;
+
     n_fake = 0;
 
     if (sig_3l_SR_ttH || sig_3l_SR_tH) {
@@ -3197,6 +3525,12 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_fakerate.push_back(_recolep_fakeable_fakerate[i_lep]);
         _recolep_sel_fakerate_QCD_MC.push_back(_recolep_fakeable_fakerate_QCD_MC[i_lep]);
         _recolep_sel_fakerate_ttbar_MC.push_back(_recolep_fakeable_fakerate_ttbar_MC[i_lep]);
+        _recolep_sel_fakerate_up.push_back(_recolep_fakeable_fakerate_up[i_lep]);
+        _recolep_sel_fakerate_down.push_back(_recolep_fakeable_fakerate_down[i_lep]);
+        _recolep_sel_fakerate_pt1.push_back(_recolep_fakeable_fakerate_pt1[i_lep]);
+        _recolep_sel_fakerate_pt2.push_back(_recolep_fakeable_fakerate_pt2[i_lep]);
+        _recolep_sel_fakerate_be1.push_back(_recolep_fakeable_fakerate_be1[i_lep]);
+        _recolep_sel_fakerate_be2.push_back(_recolep_fakeable_fakerate_be2[i_lep]);
         _recolep_sel_QFrate.push_back(_recolep_fakeable_QFrate[i_lep]);
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
@@ -3231,6 +3565,12 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_fakerate.clear();
     _recolep_sel_fakerate_QCD_MC.clear();
     _recolep_sel_fakerate_ttbar_MC.clear();
+    _recolep_sel_fakerate_up.clear();
+    _recolep_sel_fakerate_down.clear();
+    _recolep_sel_fakerate_pt1.clear();
+    _recolep_sel_fakerate_pt2.clear();
+    _recolep_sel_fakerate_be1.clear();
+    _recolep_sel_fakerate_be2.clear();
     _recolep_sel_QFrate.clear();
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
@@ -3273,6 +3613,20 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_FR_QCD_MC = 1;
     _event_weight_ttH_mu_FR_TT_MC = 1;
 
+    _event_weight_ttH_ele_up = 1;
+    _event_weight_ttH_ele_down = 1;
+    _event_weight_ttH_ele_pt1 = 1;
+    _event_weight_ttH_ele_pt2 = 1;
+    _event_weight_ttH_ele_be1 = 1;
+    _event_weight_ttH_ele_be2 = 1;
+
+    _event_weight_ttH_mu_up = 1;
+    _event_weight_ttH_mu_down = 1;
+    _event_weight_ttH_mu_pt1 = 1;
+    _event_weight_ttH_mu_pt2 = 1;
+    _event_weight_ttH_mu_be1 = 1;
+    _event_weight_ttH_mu_be2 = 1;
+
     n_fake = 0;
 
     if (sig_ttZ_CR_SR) {
@@ -3295,6 +3649,12 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_fakerate.push_back(_recolep_fakeable_fakerate[i_lep]);
         _recolep_sel_fakerate_QCD_MC.push_back(_recolep_fakeable_fakerate_QCD_MC[i_lep]);
         _recolep_sel_fakerate_ttbar_MC.push_back(_recolep_fakeable_fakerate_ttbar_MC[i_lep]);
+        _recolep_sel_fakerate_up.push_back(_recolep_fakeable_fakerate_up[i_lep]);
+        _recolep_sel_fakerate_down.push_back(_recolep_fakeable_fakerate_down[i_lep]);
+        _recolep_sel_fakerate_pt1.push_back(_recolep_fakeable_fakerate_pt1[i_lep]);
+        _recolep_sel_fakerate_pt2.push_back(_recolep_fakeable_fakerate_pt2[i_lep]);
+        _recolep_sel_fakerate_be1.push_back(_recolep_fakeable_fakerate_be1[i_lep]);
+        _recolep_sel_fakerate_be2.push_back(_recolep_fakeable_fakerate_be2[i_lep]);
         _recolep_sel_QFrate.push_back(_recolep_fakeable_QFrate[i_lep]);
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
@@ -3327,6 +3687,12 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_fakerate.clear();
     _recolep_sel_fakerate_QCD_MC.clear();
     _recolep_sel_fakerate_ttbar_MC.clear();
+    _recolep_sel_fakerate_up.clear();
+    _recolep_sel_fakerate_down.clear();
+    _recolep_sel_fakerate_pt1.clear();
+    _recolep_sel_fakerate_pt2.clear();
+    _recolep_sel_fakerate_be1.clear();
+    _recolep_sel_fakerate_be2.clear();
     _recolep_sel_QFrate.clear();
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
@@ -3369,6 +3735,20 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_FR_QCD_MC = 1;
     _event_weight_ttH_mu_FR_TT_MC = 1;
 
+    _event_weight_ttH_ele_up = 1;
+    _event_weight_ttH_ele_down = 1;
+    _event_weight_ttH_ele_pt1 = 1;
+    _event_weight_ttH_ele_pt2 = 1;
+    _event_weight_ttH_ele_be1 = 1;
+    _event_weight_ttH_ele_be2 = 1;
+
+    _event_weight_ttH_mu_up = 1;
+    _event_weight_ttH_mu_down = 1;
+    _event_weight_ttH_mu_pt1 = 1;
+    _event_weight_ttH_mu_pt2 = 1;
+    _event_weight_ttH_mu_be1 = 1;
+    _event_weight_ttH_mu_be2 = 1;
+
     n_fake = 0;
 
     if (sig_WZ_CR_SR) {
@@ -3391,6 +3771,12 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_fakerate.push_back(_recolep_fakeable_fakerate[i_lep]);
         _recolep_sel_fakerate_QCD_MC.push_back(_recolep_fakeable_fakerate_QCD_MC[i_lep]);
         _recolep_sel_fakerate_ttbar_MC.push_back(_recolep_fakeable_fakerate_ttbar_MC[i_lep]);
+        _recolep_sel_fakerate_up.push_back(_recolep_fakeable_fakerate_up[i_lep]);
+        _recolep_sel_fakerate_down.push_back(_recolep_fakeable_fakerate_down[i_lep]);
+        _recolep_sel_fakerate_pt1.push_back(_recolep_fakeable_fakerate_pt1[i_lep]);
+        _recolep_sel_fakerate_pt2.push_back(_recolep_fakeable_fakerate_pt2[i_lep]);
+        _recolep_sel_fakerate_be1.push_back(_recolep_fakeable_fakerate_be1[i_lep]);
+        _recolep_sel_fakerate_be2.push_back(_recolep_fakeable_fakerate_be2[i_lep]);
         _recolep_sel_QFrate.push_back(_recolep_fakeable_QFrate[i_lep]);
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
@@ -3423,6 +3809,12 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_fakerate.clear();
     _recolep_sel_fakerate_QCD_MC.clear();
     _recolep_sel_fakerate_ttbar_MC.clear();
+    _recolep_sel_fakerate_up.clear();
+    _recolep_sel_fakerate_down.clear();
+    _recolep_sel_fakerate_pt1.clear();
+    _recolep_sel_fakerate_pt2.clear();
+    _recolep_sel_fakerate_be1.clear();
+    _recolep_sel_fakerate_be2.clear();
     _recolep_sel_QFrate.clear();
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
@@ -3465,6 +3857,20 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_FR_QCD_MC = 1;
     _event_weight_ttH_mu_FR_TT_MC = 1;
 
+    _event_weight_ttH_ele_up = 1;
+    _event_weight_ttH_ele_down = 1;
+    _event_weight_ttH_ele_pt1 = 1;
+    _event_weight_ttH_ele_pt2 = 1;
+    _event_weight_ttH_ele_be1 = 1;
+    _event_weight_ttH_ele_be2 = 1;
+
+    _event_weight_ttH_mu_up = 1;
+    _event_weight_ttH_mu_down = 1;
+    _event_weight_ttH_mu_pt1 = 1;
+    _event_weight_ttH_mu_pt2 = 1;
+    _event_weight_ttH_mu_be1 = 1;
+    _event_weight_ttH_mu_be2 = 1;
+
     n_fake = 0;
 
     if (sig_3l1tau_SR) {
@@ -3487,6 +3893,12 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_fakerate.push_back(_recolep_fakeable_fakerate[i_lep]);
         _recolep_sel_fakerate_QCD_MC.push_back(_recolep_fakeable_fakerate_QCD_MC[i_lep]);
         _recolep_sel_fakerate_ttbar_MC.push_back(_recolep_fakeable_fakerate_ttbar_MC[i_lep]);
+        _recolep_sel_fakerate_up.push_back(_recolep_fakeable_fakerate_up[i_lep]);
+        _recolep_sel_fakerate_down.push_back(_recolep_fakeable_fakerate_down[i_lep]);
+        _recolep_sel_fakerate_pt1.push_back(_recolep_fakeable_fakerate_pt1[i_lep]);
+        _recolep_sel_fakerate_pt2.push_back(_recolep_fakeable_fakerate_pt2[i_lep]);
+        _recolep_sel_fakerate_be1.push_back(_recolep_fakeable_fakerate_be1[i_lep]);
+        _recolep_sel_fakerate_be2.push_back(_recolep_fakeable_fakerate_be2[i_lep]);
         _recolep_sel_QFrate.push_back(_recolep_fakeable_QFrate[i_lep]);
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
@@ -3549,6 +3961,12 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_fakerate.clear();
     _recolep_sel_fakerate_QCD_MC.clear();
     _recolep_sel_fakerate_ttbar_MC.clear();
+    _recolep_sel_fakerate_up.clear();
+    _recolep_sel_fakerate_down.clear();
+    _recolep_sel_fakerate_pt1.clear();
+    _recolep_sel_fakerate_pt2.clear();
+    _recolep_sel_fakerate_be1.clear();
+    _recolep_sel_fakerate_be2.clear();
     _recolep_sel_QFrate.clear();
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
@@ -3591,6 +4009,20 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_FR_QCD_MC = 1;
     _event_weight_ttH_mu_FR_TT_MC = 1;
 
+    _event_weight_ttH_ele_up = 1;
+    _event_weight_ttH_ele_down = 1;
+    _event_weight_ttH_ele_pt1 = 1;
+    _event_weight_ttH_ele_pt2 = 1;
+    _event_weight_ttH_ele_be1 = 1;
+    _event_weight_ttH_ele_be2 = 1;
+
+    _event_weight_ttH_mu_up = 1;
+    _event_weight_ttH_mu_down = 1;
+    _event_weight_ttH_mu_pt1 = 1;
+    _event_weight_ttH_mu_pt2 = 1;
+    _event_weight_ttH_mu_be1 = 1;
+    _event_weight_ttH_mu_be2 = 1;
+
     n_fake = 0;
     
     if (sig_4l_SR) {
@@ -3613,6 +4045,12 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_fakerate.push_back(_recolep_fakeable_fakerate[i_lep]);
         _recolep_sel_fakerate_QCD_MC.push_back(_recolep_fakeable_fakerate_QCD_MC[i_lep]);
         _recolep_sel_fakerate_ttbar_MC.push_back(_recolep_fakeable_fakerate_ttbar_MC[i_lep]);
+        _recolep_sel_fakerate_up.push_back(_recolep_fakeable_fakerate_up[i_lep]);
+        _recolep_sel_fakerate_down.push_back(_recolep_fakeable_fakerate_down[i_lep]);
+        _recolep_sel_fakerate_pt1.push_back(_recolep_fakeable_fakerate_pt1[i_lep]);
+        _recolep_sel_fakerate_pt2.push_back(_recolep_fakeable_fakerate_pt2[i_lep]);
+        _recolep_sel_fakerate_be1.push_back(_recolep_fakeable_fakerate_be1[i_lep]);
+        _recolep_sel_fakerate_be2.push_back(_recolep_fakeable_fakerate_be2[i_lep]);
         _recolep_sel_QFrate.push_back(_recolep_fakeable_QFrate[i_lep]);
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
@@ -3645,6 +4083,12 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_fakerate.clear();
     _recolep_sel_fakerate_QCD_MC.clear();
     _recolep_sel_fakerate_ttbar_MC.clear();
+    _recolep_sel_fakerate_up.clear();
+    _recolep_sel_fakerate_down.clear();
+    _recolep_sel_fakerate_pt1.clear();
+    _recolep_sel_fakerate_pt2.clear();
+    _recolep_sel_fakerate_be1.clear();
+    _recolep_sel_fakerate_be2.clear();
     _recolep_sel_QFrate.clear();
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
@@ -3687,6 +4131,20 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_FR_QCD_MC = 1;
     _event_weight_ttH_mu_FR_TT_MC = 1;
 
+    _event_weight_ttH_ele_up = 1;
+    _event_weight_ttH_ele_down = 1;
+    _event_weight_ttH_ele_pt1 = 1;
+    _event_weight_ttH_ele_pt2 = 1;
+    _event_weight_ttH_ele_be1 = 1;
+    _event_weight_ttH_ele_be2 = 1;
+
+    _event_weight_ttH_mu_up = 1;
+    _event_weight_ttH_mu_down = 1;
+    _event_weight_ttH_mu_pt1 = 1;
+    _event_weight_ttH_mu_pt2 = 1;
+    _event_weight_ttH_mu_be1 = 1;
+    _event_weight_ttH_mu_be2 = 1;
+
     n_fake = 0;
 
     if (sig_ZZ_CR_SR) {
@@ -3709,6 +4167,12 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_fakerate.push_back(_recolep_fakeable_fakerate[i_lep]);
         _recolep_sel_fakerate_QCD_MC.push_back(_recolep_fakeable_fakerate_QCD_MC[i_lep]);
         _recolep_sel_fakerate_ttbar_MC.push_back(_recolep_fakeable_fakerate_ttbar_MC[i_lep]);
+        _recolep_sel_fakerate_up.push_back(_recolep_fakeable_fakerate_up[i_lep]);
+        _recolep_sel_fakerate_down.push_back(_recolep_fakeable_fakerate_down[i_lep]);
+        _recolep_sel_fakerate_pt1.push_back(_recolep_fakeable_fakerate_pt1[i_lep]);
+        _recolep_sel_fakerate_pt2.push_back(_recolep_fakeable_fakerate_pt2[i_lep]);
+        _recolep_sel_fakerate_be1.push_back(_recolep_fakeable_fakerate_be1[i_lep]);
+        _recolep_sel_fakerate_be2.push_back(_recolep_fakeable_fakerate_be2[i_lep]);
         _recolep_sel_QFrate.push_back(_recolep_fakeable_QFrate[i_lep]);
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
@@ -3746,6 +4210,12 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_fakerate.clear();
     _recolep_sel_fakerate_QCD_MC.clear();
     _recolep_sel_fakerate_ttbar_MC.clear();
+    _recolep_sel_fakerate_up.clear();
+    _recolep_sel_fakerate_down.clear();
+    _recolep_sel_fakerate_pt1.clear();
+    _recolep_sel_fakerate_pt2.clear();
+    _recolep_sel_fakerate_be1.clear();
+    _recolep_sel_fakerate_be2.clear();
     _recolep_sel_QFrate.clear();
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
@@ -3787,6 +4257,20 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_ele_FR_TT_MC = 1;
     _event_weight_ttH_mu_FR_QCD_MC = 1;
     _event_weight_ttH_mu_FR_TT_MC = 1;
+
+    _event_weight_ttH_ele_up = 1;
+    _event_weight_ttH_ele_down = 1;
+    _event_weight_ttH_ele_pt1 = 1;
+    _event_weight_ttH_ele_pt2 = 1;
+    _event_weight_ttH_ele_be1 = 1;
+    _event_weight_ttH_ele_be2 = 1;
+
+    _event_weight_ttH_mu_up = 1;
+    _event_weight_ttH_mu_down = 1;
+    _event_weight_ttH_mu_pt1 = 1;
+    _event_weight_ttH_mu_pt2 = 1;
+    _event_weight_ttH_mu_be1 = 1;
+    _event_weight_ttH_mu_be2 = 1;
 
     n_fake = 0;
     
@@ -3891,6 +4375,12 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_fakerate.clear();
     _recolep_sel_fakerate_QCD_MC.clear();
     _recolep_sel_fakerate_ttbar_MC.clear();
+    _recolep_sel_fakerate_up.clear();
+    _recolep_sel_fakerate_down.clear();
+    _recolep_sel_fakerate_pt1.clear();
+    _recolep_sel_fakerate_pt2.clear();
+    _recolep_sel_fakerate_be1.clear();
+    _recolep_sel_fakerate_be2.clear();
     _recolep_sel_QFrate.clear();
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
@@ -3933,6 +4423,20 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_FR_QCD_MC = 1;
     _event_weight_ttH_mu_FR_TT_MC = 1;
 
+    _event_weight_ttH_ele_up = 1;
+    _event_weight_ttH_ele_down = 1;
+    _event_weight_ttH_ele_pt1 = 1;
+    _event_weight_ttH_ele_pt2 = 1;
+    _event_weight_ttH_ele_be1 = 1;
+    _event_weight_ttH_ele_be2 = 1;
+
+    _event_weight_ttH_mu_up = 1;
+    _event_weight_ttH_mu_down = 1;
+    _event_weight_ttH_mu_pt1 = 1;
+    _event_weight_ttH_mu_pt2 = 1;
+    _event_weight_ttH_mu_be1 = 1;
+    _event_weight_ttH_mu_be2 = 1;
+
     n_fake = 0;
 
     if(sig_1l1tau_fake){
@@ -3955,6 +4459,12 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_fakerate.push_back(_recolep_fakeable_fakerate[i_lep]);
         _recolep_sel_fakerate_QCD_MC.push_back(_recolep_fakeable_fakerate_QCD_MC[i_lep]);
         _recolep_sel_fakerate_ttbar_MC.push_back(_recolep_fakeable_fakerate_ttbar_MC[i_lep]);
+        _recolep_sel_fakerate_up.push_back(_recolep_fakeable_fakerate_up[i_lep]);
+        _recolep_sel_fakerate_down.push_back(_recolep_fakeable_fakerate_down[i_lep]);
+        _recolep_sel_fakerate_pt1.push_back(_recolep_fakeable_fakerate_pt1[i_lep]);
+        _recolep_sel_fakerate_pt2.push_back(_recolep_fakeable_fakerate_pt2[i_lep]);
+        _recolep_sel_fakerate_be1.push_back(_recolep_fakeable_fakerate_be1[i_lep]);
+        _recolep_sel_fakerate_be2.push_back(_recolep_fakeable_fakerate_be2[i_lep]);
         _recolep_sel_QFrate.push_back(_recolep_fakeable_QFrate[i_lep]);
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
@@ -4005,17 +4515,45 @@ void split_tree(TString filename_in, TString filename_out,
 
           _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[0]/(1-_recolep_sel_fakerate_QCD_MC[0]);
           _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[0]/(1-_recolep_sel_fakerate_ttbar_MC[0]);
-          _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
-          _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
+          _event_weight_ttH_mu_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_mu_FR_TT_MC *= _event_weight_ttH;
+
+          _event_weight_ttH_ele_up *= _recolep_sel_fakerate_up[0]/(1-_recolep_sel_fakerate_up[0]);
+          _event_weight_ttH_ele_down *= _recolep_sel_fakerate_down[0]/(1-_recolep_sel_fakerate_down[0]);
+          _event_weight_ttH_ele_pt1 *= _recolep_sel_fakerate_pt1[0]/(1-_recolep_sel_fakerate_pt1[0]);
+          _event_weight_ttH_ele_pt2 *= _recolep_sel_fakerate_pt2[0]/(1-_recolep_sel_fakerate_pt2[0]);
+          _event_weight_ttH_ele_be1 *= _recolep_sel_fakerate_be1[0]/(1-_recolep_sel_fakerate_be1[0]);
+          _event_weight_ttH_ele_be2 *= _recolep_sel_fakerate_be2[0]/(1-_recolep_sel_fakerate_be2[0]);
+
+          _event_weight_ttH_mu_up *= _event_weight_ttH;
+          _event_weight_ttH_mu_down *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be2 *= _event_weight_ttH;
 
         }
 
         else if(abs(_recolep_sel_pdg[0])==13){
 
-          _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
-          _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
+          _event_weight_ttH_ele_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_ele_FR_TT_MC *= _event_weight_ttH;
           _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[0]/(1-_recolep_sel_fakerate_QCD_MC[0]);
           _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[0]/(1-_recolep_sel_fakerate_ttbar_MC[0]);
+
+          _event_weight_ttH_ele_up *= _event_weight_ttH;
+          _event_weight_ttH_ele_down *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be2 *= _event_weight_ttH;
+
+          _event_weight_ttH_mu_up *= _recolep_sel_fakerate_up[0]/(1-_recolep_sel_fakerate_up[0]);
+          _event_weight_ttH_mu_down *= _recolep_sel_fakerate_down[0]/(1-_recolep_sel_fakerate_down[0]);
+          _event_weight_ttH_mu_pt1 *= _recolep_sel_fakerate_pt1[0]/(1-_recolep_sel_fakerate_pt1[0]);
+          _event_weight_ttH_mu_pt2 *= _recolep_sel_fakerate_pt2[0]/(1-_recolep_sel_fakerate_pt2[0]);
+          _event_weight_ttH_mu_be1 *= _recolep_sel_fakerate_be1[0]/(1-_recolep_sel_fakerate_be1[0]);
+          _event_weight_ttH_mu_be2 *= _recolep_sel_fakerate_be2[0]/(1-_recolep_sel_fakerate_be2[0]);
 
         }
 
@@ -4073,6 +4611,12 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_fakerate.clear();
     _recolep_sel_fakerate_QCD_MC.clear();
     _recolep_sel_fakerate_ttbar_MC.clear();
+    _recolep_sel_fakerate_up.clear();
+    _recolep_sel_fakerate_down.clear();
+    _recolep_sel_fakerate_pt1.clear();
+    _recolep_sel_fakerate_pt2.clear();
+    _recolep_sel_fakerate_be1.clear();
+    _recolep_sel_fakerate_be2.clear();
     _recolep_sel_QFrate.clear();
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
@@ -4115,6 +4659,20 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_FR_QCD_MC = 1;
     _event_weight_ttH_mu_FR_TT_MC = 1;
 
+    _event_weight_ttH_ele_up = 1;
+    _event_weight_ttH_ele_down = 1;
+    _event_weight_ttH_ele_pt1 = 1;
+    _event_weight_ttH_ele_pt2 = 1;
+    _event_weight_ttH_ele_be1 = 1;
+    _event_weight_ttH_ele_be2 = 1;
+
+    _event_weight_ttH_mu_up = 1;
+    _event_weight_ttH_mu_down = 1;
+    _event_weight_ttH_mu_pt1 = 1;
+    _event_weight_ttH_mu_pt2 = 1;
+    _event_weight_ttH_mu_be1 = 1;
+    _event_weight_ttH_mu_be2 = 1;
+
     n_fake = 0;
 
     if(sig_1l2tau_fake){
@@ -4137,6 +4695,12 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_fakerate.push_back(_recolep_fakeable_fakerate[i_lep]);
         _recolep_sel_fakerate_QCD_MC.push_back(_recolep_fakeable_fakerate_QCD_MC[i_lep]);
         _recolep_sel_fakerate_ttbar_MC.push_back(_recolep_fakeable_fakerate_ttbar_MC[i_lep]);
+        _recolep_sel_fakerate_up.push_back(_recolep_fakeable_fakerate_up[i_lep]);
+        _recolep_sel_fakerate_down.push_back(_recolep_fakeable_fakerate_down[i_lep]);
+        _recolep_sel_fakerate_pt1.push_back(_recolep_fakeable_fakerate_pt1[i_lep]);
+        _recolep_sel_fakerate_pt2.push_back(_recolep_fakeable_fakerate_pt2[i_lep]);
+        _recolep_sel_fakerate_be1.push_back(_recolep_fakeable_fakerate_be1[i_lep]);
+        _recolep_sel_fakerate_be2.push_back(_recolep_fakeable_fakerate_be2[i_lep]);
         _recolep_sel_QFrate.push_back(_recolep_fakeable_QFrate[i_lep]);
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
@@ -4187,17 +4751,45 @@ void split_tree(TString filename_in, TString filename_out,
 
           _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[0]/(1-_recolep_sel_fakerate_QCD_MC[0]);
           _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[0]/(1-_recolep_sel_fakerate_ttbar_MC[0]);
-          _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
-          _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
+          _event_weight_ttH_mu_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_mu_FR_TT_MC *= _event_weight_ttH;
+
+          _event_weight_ttH_ele_up *= _recolep_sel_fakerate_up[0]/(1-_recolep_sel_fakerate_up[0]);
+          _event_weight_ttH_ele_down *= _recolep_sel_fakerate_down[0]/(1-_recolep_sel_fakerate_down[0]);
+          _event_weight_ttH_ele_pt1 *= _recolep_sel_fakerate_pt1[0]/(1-_recolep_sel_fakerate_pt1[0]);
+          _event_weight_ttH_ele_pt2 *= _recolep_sel_fakerate_pt2[0]/(1-_recolep_sel_fakerate_pt2[0]);
+          _event_weight_ttH_ele_be1 *= _recolep_sel_fakerate_be1[0]/(1-_recolep_sel_fakerate_be1[0]);
+          _event_weight_ttH_ele_be2 *= _recolep_sel_fakerate_be2[0]/(1-_recolep_sel_fakerate_be2[0]);
+
+          _event_weight_ttH_mu_up *= _event_weight_ttH;
+          _event_weight_ttH_mu_down *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be2 *= _event_weight_ttH;
 
         }
 
         else if(abs(_recolep_sel_pdg[0])==13){
 
-          _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
-          _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
+          _event_weight_ttH_ele_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_ele_FR_TT_MC *= _event_weight_ttH;
           _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[0]/(1-_recolep_sel_fakerate_QCD_MC[0]);
           _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[0]/(1-_recolep_sel_fakerate_ttbar_MC[0]);
+
+          _event_weight_ttH_ele_up *= _event_weight_ttH;
+          _event_weight_ttH_ele_down *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be2 *= _event_weight_ttH;
+
+          _event_weight_ttH_mu_up *= _recolep_sel_fakerate_up[0]/(1-_recolep_sel_fakerate_up[0]);
+          _event_weight_ttH_mu_down *= _recolep_sel_fakerate_down[0]/(1-_recolep_sel_fakerate_down[0]);
+          _event_weight_ttH_mu_pt1 *= _recolep_sel_fakerate_pt1[0]/(1-_recolep_sel_fakerate_pt1[0]);
+          _event_weight_ttH_mu_pt2 *= _recolep_sel_fakerate_pt2[0]/(1-_recolep_sel_fakerate_pt2[0]);
+          _event_weight_ttH_mu_be1 *= _recolep_sel_fakerate_be1[0]/(1-_recolep_sel_fakerate_be1[0]);
+          _event_weight_ttH_mu_be2 *= _recolep_sel_fakerate_be2[0]/(1-_recolep_sel_fakerate_be2[0]);
 
         }
 
@@ -4271,6 +4863,12 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_fakerate.clear();
     _recolep_sel_fakerate_QCD_MC.clear();
     _recolep_sel_fakerate_ttbar_MC.clear();
+    _recolep_sel_fakerate_up.clear();
+    _recolep_sel_fakerate_down.clear();
+    _recolep_sel_fakerate_pt1.clear();
+    _recolep_sel_fakerate_pt2.clear();
+    _recolep_sel_fakerate_be1.clear();
+    _recolep_sel_fakerate_be2.clear();
     _recolep_sel_QFrate.clear();
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
@@ -4313,6 +4911,20 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_FR_QCD_MC = 1;
     _event_weight_ttH_mu_FR_TT_MC = 1;
 
+    _event_weight_ttH_ele_up = 1;
+    _event_weight_ttH_ele_down = 1;
+    _event_weight_ttH_ele_pt1 = 1;
+    _event_weight_ttH_ele_pt2 = 1;
+    _event_weight_ttH_ele_be1 = 1;
+    _event_weight_ttH_ele_be2 = 1;
+
+    _event_weight_ttH_mu_up = 1;
+    _event_weight_ttH_mu_down = 1;
+    _event_weight_ttH_mu_pt1 = 1;
+    _event_weight_ttH_mu_pt2 = 1;
+    _event_weight_ttH_mu_be1 = 1;
+    _event_weight_ttH_mu_be2 = 1;
+
     n_fake = 0;
 
     if(sig_2lss_fake_ttH || sig_2lss_fake_tH){
@@ -4335,6 +4947,12 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_fakerate.push_back(_recolep_fakeable_fakerate[i_lep]);
         _recolep_sel_fakerate_QCD_MC.push_back(_recolep_fakeable_fakerate_QCD_MC[i_lep]);
         _recolep_sel_fakerate_ttbar_MC.push_back(_recolep_fakeable_fakerate_ttbar_MC[i_lep]);
+        _recolep_sel_fakerate_up.push_back(_recolep_fakeable_fakerate_up[i_lep]);
+        _recolep_sel_fakerate_down.push_back(_recolep_fakeable_fakerate_down[i_lep]);
+        _recolep_sel_fakerate_pt1.push_back(_recolep_fakeable_fakerate_pt1[i_lep]);
+        _recolep_sel_fakerate_pt2.push_back(_recolep_fakeable_fakerate_pt2[i_lep]);
+        _recolep_sel_fakerate_be1.push_back(_recolep_fakeable_fakerate_be1[i_lep]);
+        _recolep_sel_fakerate_be2.push_back(_recolep_fakeable_fakerate_be2[i_lep]);
         _recolep_sel_QFrate.push_back(_recolep_fakeable_QFrate[i_lep]);
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
@@ -4355,17 +4973,45 @@ void split_tree(TString filename_in, TString filename_out,
 
           _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[0]/(1-_recolep_sel_fakerate_QCD_MC[0]);
           _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[0]/(1-_recolep_sel_fakerate_ttbar_MC[0]);
-          _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
-          _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
+          _event_weight_ttH_mu_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_mu_FR_TT_MC *= _event_weight_ttH;
+
+          _event_weight_ttH_ele_up *= _recolep_sel_fakerate_up[0]/(1-_recolep_sel_fakerate_up[0]);
+          _event_weight_ttH_ele_down *= _recolep_sel_fakerate_down[0]/(1-_recolep_sel_fakerate_down[0]);
+          _event_weight_ttH_ele_pt1 *= _recolep_sel_fakerate_pt1[0]/(1-_recolep_sel_fakerate_pt1[0]);
+          _event_weight_ttH_ele_pt2 *= _recolep_sel_fakerate_pt2[0]/(1-_recolep_sel_fakerate_pt2[0]);
+          _event_weight_ttH_ele_be1 *= _recolep_sel_fakerate_be1[0]/(1-_recolep_sel_fakerate_be1[0]);
+          _event_weight_ttH_ele_be2 *= _recolep_sel_fakerate_be2[0]/(1-_recolep_sel_fakerate_be2[0]);
+
+          _event_weight_ttH_mu_up *= _event_weight_ttH;
+          _event_weight_ttH_mu_down *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be2 *= _event_weight_ttH;
 
         }
 
         else if(abs(_recolep_sel_pdg[0])==13){
 
-          _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
-          _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
+          _event_weight_ttH_ele_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_ele_FR_TT_MC *= _event_weight_ttH;
           _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[0]/(1-_recolep_sel_fakerate_QCD_MC[0]);
           _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[0]/(1-_recolep_sel_fakerate_ttbar_MC[0]);
+
+          _event_weight_ttH_ele_up *= _event_weight_ttH;
+          _event_weight_ttH_ele_down *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be2 *= _event_weight_ttH;
+
+          _event_weight_ttH_mu_up *= _recolep_sel_fakerate_up[0]/(1-_recolep_sel_fakerate_up[0]);
+          _event_weight_ttH_mu_down *= _recolep_sel_fakerate_down[0]/(1-_recolep_sel_fakerate_down[0]);
+          _event_weight_ttH_mu_pt1 *= _recolep_sel_fakerate_pt1[0]/(1-_recolep_sel_fakerate_pt1[0]);
+          _event_weight_ttH_mu_pt2 *= _recolep_sel_fakerate_pt2[0]/(1-_recolep_sel_fakerate_pt2[0]);
+          _event_weight_ttH_mu_be1 *= _recolep_sel_fakerate_be1[0]/(1-_recolep_sel_fakerate_be1[0]);
+          _event_weight_ttH_mu_be2 *= _recolep_sel_fakerate_be2[0]/(1-_recolep_sel_fakerate_be2[0]);
 
         }
 
@@ -4383,17 +5029,45 @@ void split_tree(TString filename_in, TString filename_out,
 
           _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[1]/(1-_recolep_sel_fakerate_QCD_MC[1]);
           _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[1]/(1-_recolep_sel_fakerate_ttbar_MC[1]);
-          _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate[1]/(1-_recolep_sel_fakerate[0]);
-          _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate[1]/(1-_recolep_sel_fakerate[0]);
+          _event_weight_ttH_mu_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_mu_FR_TT_MC *= _event_weight_ttH;
+
+          _event_weight_ttH_ele_up *= _recolep_sel_fakerate_up[1]/(1-_recolep_sel_fakerate_up[1]);
+          _event_weight_ttH_ele_down *= _recolep_sel_fakerate_down[1]/(1-_recolep_sel_fakerate_down[1]);
+          _event_weight_ttH_ele_pt1 *= _recolep_sel_fakerate_pt1[1]/(1-_recolep_sel_fakerate_pt1[1]);
+          _event_weight_ttH_ele_pt2 *= _recolep_sel_fakerate_pt2[1]/(1-_recolep_sel_fakerate_pt2[1]);
+          _event_weight_ttH_ele_be1 *= _recolep_sel_fakerate_be1[1]/(1-_recolep_sel_fakerate_be1[1]);
+          _event_weight_ttH_ele_be2 *= _recolep_sel_fakerate_be2[1]/(1-_recolep_sel_fakerate_be2[1]);
+
+          _event_weight_ttH_mu_up *= _event_weight_ttH;
+          _event_weight_ttH_mu_down *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be2 *= _event_weight_ttH;
 
         }
 
         else if(abs(_recolep_sel_pdg[1])==13){
 
-          _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate[1]/(1-_recolep_sel_fakerate[1]);
-          _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate[1]/(1-_recolep_sel_fakerate[1]);
+          _event_weight_ttH_ele_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_ele_FR_TT_MC *= _event_weight_ttH;
           _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[1]/(1-_recolep_sel_fakerate_QCD_MC[1]);
           _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[1]/(1-_recolep_sel_fakerate_ttbar_MC[1]);
+
+          _event_weight_ttH_ele_up *= _event_weight_ttH;
+          _event_weight_ttH_ele_down *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be2 *= _event_weight_ttH;
+
+          _event_weight_ttH_mu_up *= _recolep_sel_fakerate_up[1]/(1-_recolep_sel_fakerate_up[1]);
+          _event_weight_ttH_mu_down *= _recolep_sel_fakerate_down[1]/(1-_recolep_sel_fakerate_down[1]);
+          _event_weight_ttH_mu_pt1 *= _recolep_sel_fakerate_pt1[1]/(1-_recolep_sel_fakerate_pt1[1]);
+          _event_weight_ttH_mu_pt2 *= _recolep_sel_fakerate_pt2[1]/(1-_recolep_sel_fakerate_pt2[1]);
+          _event_weight_ttH_mu_be1 *= _recolep_sel_fakerate_be1[1]/(1-_recolep_sel_fakerate_be1[1]);
+          _event_weight_ttH_mu_be2 *= _recolep_sel_fakerate_be2[1]/(1-_recolep_sel_fakerate_be2[1]);
 
         }
 
@@ -4437,6 +5111,12 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_fakerate.clear();
     _recolep_sel_fakerate_QCD_MC.clear();
     _recolep_sel_fakerate_ttbar_MC.clear();
+    _recolep_sel_fakerate_up.clear();
+    _recolep_sel_fakerate_down.clear();
+    _recolep_sel_fakerate_pt1.clear();
+    _recolep_sel_fakerate_pt2.clear();
+    _recolep_sel_fakerate_be1.clear();
+    _recolep_sel_fakerate_be2.clear();
     _recolep_sel_QFrate.clear();
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
@@ -4479,6 +5159,20 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_FR_QCD_MC = 1;
     _event_weight_ttH_mu_FR_TT_MC = 1;
 
+    _event_weight_ttH_ele_up = 1;
+    _event_weight_ttH_ele_down = 1;
+    _event_weight_ttH_ele_pt1 = 1;
+    _event_weight_ttH_ele_pt2 = 1;
+    _event_weight_ttH_ele_be1 = 1;
+    _event_weight_ttH_ele_be2 = 1;
+
+    _event_weight_ttH_mu_up = 1;
+    _event_weight_ttH_mu_down = 1;
+    _event_weight_ttH_mu_pt1 = 1;
+    _event_weight_ttH_mu_pt2 = 1;
+    _event_weight_ttH_mu_be1 = 1;
+    _event_weight_ttH_mu_be2 = 1;
+
     n_fake = 0;
 
     if(sig_ttW_CR_fake){
@@ -4501,6 +5195,12 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_fakerate.push_back(_recolep_fakeable_fakerate[i_lep]);
         _recolep_sel_fakerate_QCD_MC.push_back(_recolep_fakeable_fakerate_QCD_MC[i_lep]);
         _recolep_sel_fakerate_ttbar_MC.push_back(_recolep_fakeable_fakerate_ttbar_MC[i_lep]);
+        _recolep_sel_fakerate_up.push_back(_recolep_fakeable_fakerate_up[i_lep]);
+        _recolep_sel_fakerate_down.push_back(_recolep_fakeable_fakerate_down[i_lep]);
+        _recolep_sel_fakerate_pt1.push_back(_recolep_fakeable_fakerate_pt1[i_lep]);
+        _recolep_sel_fakerate_pt2.push_back(_recolep_fakeable_fakerate_pt2[i_lep]);
+        _recolep_sel_fakerate_be1.push_back(_recolep_fakeable_fakerate_be1[i_lep]);
+        _recolep_sel_fakerate_be2.push_back(_recolep_fakeable_fakerate_be2[i_lep]);
         _recolep_sel_QFrate.push_back(_recolep_fakeable_QFrate[i_lep]);
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
@@ -4521,17 +5221,45 @@ void split_tree(TString filename_in, TString filename_out,
 
           _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[0]/(1-_recolep_sel_fakerate_QCD_MC[0]);
           _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[0]/(1-_recolep_sel_fakerate_ttbar_MC[0]);
-          _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
-          _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
+          _event_weight_ttH_mu_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_mu_FR_TT_MC *= _event_weight_ttH;
+
+          _event_weight_ttH_ele_up *= _recolep_sel_fakerate_up[0]/(1-_recolep_sel_fakerate_up[0]);
+          _event_weight_ttH_ele_down *= _recolep_sel_fakerate_down[0]/(1-_recolep_sel_fakerate_down[0]);
+          _event_weight_ttH_ele_pt1 *= _recolep_sel_fakerate_pt1[0]/(1-_recolep_sel_fakerate_pt1[0]);
+          _event_weight_ttH_ele_pt2 *= _recolep_sel_fakerate_pt2[0]/(1-_recolep_sel_fakerate_pt2[0]);
+          _event_weight_ttH_ele_be1 *= _recolep_sel_fakerate_be1[0]/(1-_recolep_sel_fakerate_be1[0]);
+          _event_weight_ttH_ele_be2 *= _recolep_sel_fakerate_be2[0]/(1-_recolep_sel_fakerate_be2[0]);
+
+          _event_weight_ttH_mu_up *= _event_weight_ttH;
+          _event_weight_ttH_mu_down *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be2 *= _event_weight_ttH;
 
         }
 
         else if(abs(_recolep_sel_pdg[0])==13){
 
-          _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
-          _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
+          _event_weight_ttH_ele_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_ele_FR_TT_MC *= _event_weight_ttH;
           _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[0]/(1-_recolep_sel_fakerate_QCD_MC[0]);
           _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[0]/(1-_recolep_sel_fakerate_ttbar_MC[0]);
+
+          _event_weight_ttH_ele_up *= _event_weight_ttH;
+          _event_weight_ttH_ele_down *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be2 *= _event_weight_ttH;
+
+          _event_weight_ttH_mu_up *= _recolep_sel_fakerate_up[0]/(1-_recolep_sel_fakerate_up[0]);
+          _event_weight_ttH_mu_down *= _recolep_sel_fakerate_down[0]/(1-_recolep_sel_fakerate_down[0]);
+          _event_weight_ttH_mu_pt1 *= _recolep_sel_fakerate_pt1[0]/(1-_recolep_sel_fakerate_pt1[0]);
+          _event_weight_ttH_mu_pt2 *= _recolep_sel_fakerate_pt2[0]/(1-_recolep_sel_fakerate_pt2[0]);
+          _event_weight_ttH_mu_be1 *= _recolep_sel_fakerate_be1[0]/(1-_recolep_sel_fakerate_be1[0]);
+          _event_weight_ttH_mu_be2 *= _recolep_sel_fakerate_be2[0]/(1-_recolep_sel_fakerate_be2[0]);
 
         }
 
@@ -4549,17 +5277,46 @@ void split_tree(TString filename_in, TString filename_out,
 
           _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[1]/(1-_recolep_sel_fakerate_QCD_MC[1]);
           _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[1]/(1-_recolep_sel_fakerate_ttbar_MC[1]);
-          _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate[1]/(1-_recolep_sel_fakerate[0]);
-          _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate[1]/(1-_recolep_sel_fakerate[0]);
+          _event_weight_ttH_mu_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_mu_FR_TT_MC *= _event_weight_ttH;
+
+          _event_weight_ttH_ele_up *= _recolep_sel_fakerate_up[1]/(1-_recolep_sel_fakerate_up[1]);
+          _event_weight_ttH_ele_down *= _recolep_sel_fakerate_down[1]/(1-_recolep_sel_fakerate_down[1]);
+          _event_weight_ttH_ele_pt1 *= _recolep_sel_fakerate_pt1[1]/(1-_recolep_sel_fakerate_pt1[1]);
+          _event_weight_ttH_ele_pt2 *= _recolep_sel_fakerate_pt2[1]/(1-_recolep_sel_fakerate_pt2[1]);
+          _event_weight_ttH_ele_be1 *= _recolep_sel_fakerate_be1[1]/(1-_recolep_sel_fakerate_be1[1]);
+          _event_weight_ttH_ele_be2 *= _recolep_sel_fakerate_be2[1]/(1-_recolep_sel_fakerate_be2[1]);
+
+          _event_weight_ttH_mu_up *= _event_weight_ttH;
+          _event_weight_ttH_mu_down *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be2 *= _event_weight_ttH;
+
 
         }
 
         else if(abs(_recolep_sel_pdg[1])==13){
 
-          _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate[1]/(1-_recolep_sel_fakerate[1]);
-          _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate[1]/(1-_recolep_sel_fakerate[1]);
+          _event_weight_ttH_ele_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_ele_FR_TT_MC *= _event_weight_ttH;
           _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[1]/(1-_recolep_sel_fakerate_QCD_MC[1]);
           _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[1]/(1-_recolep_sel_fakerate_ttbar_MC[1]);
+
+          _event_weight_ttH_ele_up *= _event_weight_ttH;
+          _event_weight_ttH_ele_down *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be2 *= _event_weight_ttH;
+
+          _event_weight_ttH_mu_up *= _recolep_sel_fakerate_up[1]/(1-_recolep_sel_fakerate_up[1]);
+          _event_weight_ttH_mu_down *= _recolep_sel_fakerate_down[1]/(1-_recolep_sel_fakerate_down[1]);
+          _event_weight_ttH_mu_pt1 *= _recolep_sel_fakerate_pt1[1]/(1-_recolep_sel_fakerate_pt1[1]);
+          _event_weight_ttH_mu_pt2 *= _recolep_sel_fakerate_pt2[1]/(1-_recolep_sel_fakerate_pt2[1]);
+          _event_weight_ttH_mu_be1 *= _recolep_sel_fakerate_be1[1]/(1-_recolep_sel_fakerate_be1[1]);
+          _event_weight_ttH_mu_be2 *= _recolep_sel_fakerate_be2[1]/(1-_recolep_sel_fakerate_be2[1]);
 
         }
 
@@ -4601,6 +5358,12 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_fakerate.clear();
     _recolep_sel_fakerate_QCD_MC.clear();
     _recolep_sel_fakerate_ttbar_MC.clear();
+    _recolep_sel_fakerate_up.clear();
+    _recolep_sel_fakerate_down.clear();
+    _recolep_sel_fakerate_pt1.clear();
+    _recolep_sel_fakerate_pt2.clear();
+    _recolep_sel_fakerate_be1.clear();
+    _recolep_sel_fakerate_be2.clear();
     _recolep_sel_QFrate.clear();
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
@@ -4643,6 +5406,20 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_FR_QCD_MC = 1;
     _event_weight_ttH_mu_FR_TT_MC = 1;
 
+    _event_weight_ttH_ele_up = 1;
+    _event_weight_ttH_ele_down = 1;
+    _event_weight_ttH_ele_pt1 = 1;
+    _event_weight_ttH_ele_pt2 = 1;
+    _event_weight_ttH_ele_be1 = 1;
+    _event_weight_ttH_ele_be2 = 1;
+
+    _event_weight_ttH_mu_up = 1;
+    _event_weight_ttH_mu_down = 1;
+    _event_weight_ttH_mu_pt1 = 1;
+    _event_weight_ttH_mu_pt2 = 1;
+    _event_weight_ttH_mu_be1 = 1;
+    _event_weight_ttH_mu_be2 = 1;
+
     n_fake = 0;
 
     if(sig_2lss1tau_fake){
@@ -4665,6 +5442,12 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_fakerate.push_back(_recolep_fakeable_fakerate[i_lep]);
         _recolep_sel_fakerate_QCD_MC.push_back(_recolep_fakeable_fakerate_QCD_MC[i_lep]);
         _recolep_sel_fakerate_ttbar_MC.push_back(_recolep_fakeable_fakerate_ttbar_MC[i_lep]);
+        _recolep_sel_fakerate_up.push_back(_recolep_fakeable_fakerate_up[i_lep]);
+        _recolep_sel_fakerate_down.push_back(_recolep_fakeable_fakerate_down[i_lep]);
+        _recolep_sel_fakerate_pt1.push_back(_recolep_fakeable_fakerate_pt1[i_lep]);
+        _recolep_sel_fakerate_pt2.push_back(_recolep_fakeable_fakerate_pt2[i_lep]);
+        _recolep_sel_fakerate_be1.push_back(_recolep_fakeable_fakerate_be1[i_lep]);
+        _recolep_sel_fakerate_be2.push_back(_recolep_fakeable_fakerate_be2[i_lep]);
         _recolep_sel_QFrate.push_back(_recolep_fakeable_QFrate[i_lep]);
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
@@ -4715,17 +5498,45 @@ void split_tree(TString filename_in, TString filename_out,
 
           _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[0]/(1-_recolep_sel_fakerate_QCD_MC[0]);
           _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[0]/(1-_recolep_sel_fakerate_ttbar_MC[0]);
-          _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
-          _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
+          _event_weight_ttH_mu_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_mu_FR_TT_MC *= _event_weight_ttH;
+
+          _event_weight_ttH_ele_up *= _recolep_sel_fakerate_up[0]/(1-_recolep_sel_fakerate_up[0]);
+          _event_weight_ttH_ele_down *= _recolep_sel_fakerate_down[0]/(1-_recolep_sel_fakerate_down[0]);
+          _event_weight_ttH_ele_pt1 *= _recolep_sel_fakerate_pt1[0]/(1-_recolep_sel_fakerate_pt1[0]);
+          _event_weight_ttH_ele_pt2 *= _recolep_sel_fakerate_pt2[0]/(1-_recolep_sel_fakerate_pt2[0]);
+          _event_weight_ttH_ele_be1 *= _recolep_sel_fakerate_be1[0]/(1-_recolep_sel_fakerate_be1[0]);
+          _event_weight_ttH_ele_be2 *= _recolep_sel_fakerate_be2[0]/(1-_recolep_sel_fakerate_be2[0]);
+
+          _event_weight_ttH_mu_up *= _event_weight_ttH;
+          _event_weight_ttH_mu_down *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be2 *= _event_weight_ttH;
 
         }
 
         else if(abs(_recolep_sel_pdg[0])==13){
 
-          _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
-          _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
+          _event_weight_ttH_ele_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_ele_FR_TT_MC *= _event_weight_ttH;
           _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[0]/(1-_recolep_sel_fakerate_QCD_MC[0]);
           _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[0]/(1-_recolep_sel_fakerate_ttbar_MC[0]);
+
+          _event_weight_ttH_ele_up *= _event_weight_ttH;
+          _event_weight_ttH_ele_down *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be2 *= _event_weight_ttH;
+
+          _event_weight_ttH_mu_up *= _recolep_sel_fakerate_up[0]/(1-_recolep_sel_fakerate_up[0]);
+          _event_weight_ttH_mu_down *= _recolep_sel_fakerate_down[0]/(1-_recolep_sel_fakerate_down[0]);
+          _event_weight_ttH_mu_pt1 *= _recolep_sel_fakerate_pt1[0]/(1-_recolep_sel_fakerate_pt1[0]);
+          _event_weight_ttH_mu_pt2 *= _recolep_sel_fakerate_pt2[0]/(1-_recolep_sel_fakerate_pt2[0]);
+          _event_weight_ttH_mu_be1 *= _recolep_sel_fakerate_be1[0]/(1-_recolep_sel_fakerate_be1[0]);
+          _event_weight_ttH_mu_be2 *= _recolep_sel_fakerate_be2[0]/(1-_recolep_sel_fakerate_be2[0]);
 
         }
 
@@ -4743,17 +5554,45 @@ void split_tree(TString filename_in, TString filename_out,
 
           _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[1]/(1-_recolep_sel_fakerate_QCD_MC[1]);
           _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[1]/(1-_recolep_sel_fakerate_ttbar_MC[1]);
-          _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate[1]/(1-_recolep_sel_fakerate[0]);
-          _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate[1]/(1-_recolep_sel_fakerate[0]);
+          _event_weight_ttH_mu_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_mu_FR_TT_MC *= _event_weight_ttH;
+
+          _event_weight_ttH_ele_up *= _recolep_sel_fakerate_up[1]/(1-_recolep_sel_fakerate_up[1]);
+          _event_weight_ttH_ele_down *= _recolep_sel_fakerate_down[1]/(1-_recolep_sel_fakerate_down[1]);
+          _event_weight_ttH_ele_pt1 *= _recolep_sel_fakerate_pt1[1]/(1-_recolep_sel_fakerate_pt1[1]);
+          _event_weight_ttH_ele_pt2 *= _recolep_sel_fakerate_pt2[1]/(1-_recolep_sel_fakerate_pt2[1]);
+          _event_weight_ttH_ele_be1 *= _recolep_sel_fakerate_be1[1]/(1-_recolep_sel_fakerate_be1[1]);
+          _event_weight_ttH_ele_be2 *= _recolep_sel_fakerate_be2[1]/(1-_recolep_sel_fakerate_be2[1]);
+
+          _event_weight_ttH_mu_up *= _event_weight_ttH;
+          _event_weight_ttH_mu_down *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be2 *= _event_weight_ttH;
 
         }
 
         else if(abs(_recolep_sel_pdg[1])==13){
 
-          _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate[1]/(1-_recolep_sel_fakerate[1]);
-          _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate[1]/(1-_recolep_sel_fakerate[1]);
+          _event_weight_ttH_ele_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_ele_FR_TT_MC *= _event_weight_ttH;
           _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[1]/(1-_recolep_sel_fakerate_QCD_MC[1]);
           _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[1]/(1-_recolep_sel_fakerate_ttbar_MC[1]);
+
+          _event_weight_ttH_ele_up *= _event_weight_ttH;
+          _event_weight_ttH_ele_down *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be2 *= _event_weight_ttH;
+
+          _event_weight_ttH_mu_up *= _recolep_sel_fakerate_up[1]/(1-_recolep_sel_fakerate_up[1]);
+          _event_weight_ttH_mu_down *= _recolep_sel_fakerate_down[1]/(1-_recolep_sel_fakerate_down[1]);
+          _event_weight_ttH_mu_pt1 *= _recolep_sel_fakerate_pt1[1]/(1-_recolep_sel_fakerate_pt1[1]);
+          _event_weight_ttH_mu_pt2 *= _recolep_sel_fakerate_pt2[1]/(1-_recolep_sel_fakerate_pt2[1]);
+          _event_weight_ttH_mu_be1 *= _recolep_sel_fakerate_be1[1]/(1-_recolep_sel_fakerate_be1[1]);
+          _event_weight_ttH_mu_be2 *= _recolep_sel_fakerate_be2[1]/(1-_recolep_sel_fakerate_be2[1]);
 
         }
 
@@ -4811,6 +5650,12 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_fakerate.clear();
     _recolep_sel_fakerate_QCD_MC.clear();
     _recolep_sel_fakerate_ttbar_MC.clear();
+    _recolep_sel_fakerate_up.clear();
+    _recolep_sel_fakerate_down.clear();
+    _recolep_sel_fakerate_pt1.clear();
+    _recolep_sel_fakerate_pt2.clear();
+    _recolep_sel_fakerate_be1.clear();
+    _recolep_sel_fakerate_be2.clear();
     _recolep_sel_QFrate.clear();
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
@@ -4853,6 +5698,20 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_FR_QCD_MC = 1;
     _event_weight_ttH_mu_FR_TT_MC = 1;
 
+    _event_weight_ttH_ele_up = 1;
+    _event_weight_ttH_ele_down = 1;
+    _event_weight_ttH_ele_pt1 = 1;
+    _event_weight_ttH_ele_pt2 = 1;
+    _event_weight_ttH_ele_be1 = 1;
+    _event_weight_ttH_ele_be2 = 1;
+
+    _event_weight_ttH_mu_up = 1;
+    _event_weight_ttH_mu_down = 1;
+    _event_weight_ttH_mu_pt1 = 1;
+    _event_weight_ttH_mu_pt2 = 1;
+    _event_weight_ttH_mu_be1 = 1;
+    _event_weight_ttH_mu_be2 = 1;
+
     n_fake = 0;
 
     if(sig_2los1tau_fake){
@@ -4875,6 +5734,12 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_fakerate.push_back(_recolep_fakeable_fakerate[i_lep]);
         _recolep_sel_fakerate_QCD_MC.push_back(_recolep_fakeable_fakerate_QCD_MC[i_lep]);
         _recolep_sel_fakerate_ttbar_MC.push_back(_recolep_fakeable_fakerate_ttbar_MC[i_lep]);
+        _recolep_sel_fakerate_up.push_back(_recolep_fakeable_fakerate_up[i_lep]);
+        _recolep_sel_fakerate_down.push_back(_recolep_fakeable_fakerate_down[i_lep]);
+        _recolep_sel_fakerate_pt1.push_back(_recolep_fakeable_fakerate_pt1[i_lep]);
+        _recolep_sel_fakerate_pt2.push_back(_recolep_fakeable_fakerate_pt2[i_lep]);
+        _recolep_sel_fakerate_be1.push_back(_recolep_fakeable_fakerate_be1[i_lep]);
+        _recolep_sel_fakerate_be2.push_back(_recolep_fakeable_fakerate_be2[i_lep]);
         _recolep_sel_QFrate.push_back(_recolep_fakeable_QFrate[i_lep]);
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
@@ -4925,17 +5790,45 @@ void split_tree(TString filename_in, TString filename_out,
 
           _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[0]/(1-_recolep_sel_fakerate_QCD_MC[0]);
           _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[0]/(1-_recolep_sel_fakerate_ttbar_MC[0]);
-          _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
-          _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
+          _event_weight_ttH_mu_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_mu_FR_TT_MC *= _event_weight_ttH;
+
+          _event_weight_ttH_ele_up *= _recolep_sel_fakerate_up[0]/(1-_recolep_sel_fakerate_up[0]);
+          _event_weight_ttH_ele_down *= _recolep_sel_fakerate_down[0]/(1-_recolep_sel_fakerate_down[0]);
+          _event_weight_ttH_ele_pt1 *= _recolep_sel_fakerate_pt1[0]/(1-_recolep_sel_fakerate_pt1[0]);
+          _event_weight_ttH_ele_pt2 *= _recolep_sel_fakerate_pt2[0]/(1-_recolep_sel_fakerate_pt2[0]);
+          _event_weight_ttH_ele_be1 *= _recolep_sel_fakerate_be1[0]/(1-_recolep_sel_fakerate_be1[0]);
+          _event_weight_ttH_ele_be2 *= _recolep_sel_fakerate_be2[0]/(1-_recolep_sel_fakerate_be2[0]);
+
+          _event_weight_ttH_mu_up *= _event_weight_ttH;
+          _event_weight_ttH_mu_down *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be2 *= _event_weight_ttH;
 
         }
 
         else if(abs(_recolep_sel_pdg[0])==13){
 
-          _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
-          _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
+          _event_weight_ttH_ele_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_ele_FR_TT_MC *= _event_weight_ttH;
           _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[0]/(1-_recolep_sel_fakerate_QCD_MC[0]);
           _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[0]/(1-_recolep_sel_fakerate_ttbar_MC[0]);
+
+          _event_weight_ttH_ele_up *= _event_weight_ttH;
+          _event_weight_ttH_ele_down *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be2 *= _event_weight_ttH;
+
+          _event_weight_ttH_mu_up *= _recolep_sel_fakerate_up[0]/(1-_recolep_sel_fakerate_up[0]);
+          _event_weight_ttH_mu_down *= _recolep_sel_fakerate_down[0]/(1-_recolep_sel_fakerate_down[0]);
+          _event_weight_ttH_mu_pt1 *= _recolep_sel_fakerate_pt1[0]/(1-_recolep_sel_fakerate_pt1[0]);
+          _event_weight_ttH_mu_pt2 *= _recolep_sel_fakerate_pt2[0]/(1-_recolep_sel_fakerate_pt2[0]);
+          _event_weight_ttH_mu_be1 *= _recolep_sel_fakerate_be1[0]/(1-_recolep_sel_fakerate_be1[0]);
+          _event_weight_ttH_mu_be2 *= _recolep_sel_fakerate_be2[0]/(1-_recolep_sel_fakerate_be2[0]);
 
         }
 
@@ -4952,17 +5845,45 @@ void split_tree(TString filename_in, TString filename_out,
 
           _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[1]/(1-_recolep_sel_fakerate_QCD_MC[1]);
           _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[1]/(1-_recolep_sel_fakerate_ttbar_MC[1]);
-          _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate[1]/(1-_recolep_sel_fakerate[0]);
-          _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate[1]/(1-_recolep_sel_fakerate[0]);
+          _event_weight_ttH_mu_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_mu_FR_TT_MC *= _event_weight_ttH;
+
+          _event_weight_ttH_ele_up *= _recolep_sel_fakerate_up[1]/(1-_recolep_sel_fakerate_up[1]);
+          _event_weight_ttH_ele_down *= _recolep_sel_fakerate_down[1]/(1-_recolep_sel_fakerate_down[1]);
+          _event_weight_ttH_ele_pt1 *= _recolep_sel_fakerate_pt1[1]/(1-_recolep_sel_fakerate_pt1[1]);
+          _event_weight_ttH_ele_pt2 *= _recolep_sel_fakerate_pt2[1]/(1-_recolep_sel_fakerate_pt2[1]);
+          _event_weight_ttH_ele_be1 *= _recolep_sel_fakerate_be1[1]/(1-_recolep_sel_fakerate_be1[1]);
+          _event_weight_ttH_ele_be2 *= _recolep_sel_fakerate_be2[1]/(1-_recolep_sel_fakerate_be2[1]);
+
+          _event_weight_ttH_mu_up *= _event_weight_ttH;
+          _event_weight_ttH_mu_down *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be2 *= _event_weight_ttH;
 
         }
 
         else if(abs(_recolep_sel_pdg[1])==13){
 
-          _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate[1]/(1-_recolep_sel_fakerate[1]);
-          _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate[1]/(1-_recolep_sel_fakerate[1]);
+          _event_weight_ttH_ele_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_ele_FR_TT_MC *= _event_weight_ttH;
           _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[1]/(1-_recolep_sel_fakerate_QCD_MC[1]);
           _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[1]/(1-_recolep_sel_fakerate_ttbar_MC[1]);
+
+          _event_weight_ttH_ele_up *= _event_weight_ttH;
+          _event_weight_ttH_ele_down *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be2 *= _event_weight_ttH;
+
+          _event_weight_ttH_mu_up *= _recolep_sel_fakerate_up[1]/(1-_recolep_sel_fakerate_up[1]);
+          _event_weight_ttH_mu_down *= _recolep_sel_fakerate_down[1]/(1-_recolep_sel_fakerate_down[1]);
+          _event_weight_ttH_mu_pt1 *= _recolep_sel_fakerate_pt1[1]/(1-_recolep_sel_fakerate_pt1[1]);
+          _event_weight_ttH_mu_pt2 *= _recolep_sel_fakerate_pt2[1]/(1-_recolep_sel_fakerate_pt2[1]);
+          _event_weight_ttH_mu_be1 *= _recolep_sel_fakerate_be1[1]/(1-_recolep_sel_fakerate_be1[1]);
+          _event_weight_ttH_mu_be2 *= _recolep_sel_fakerate_be2[1]/(1-_recolep_sel_fakerate_be2[1]);
 
         }
 
@@ -5020,6 +5941,12 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_fakerate.clear();
     _recolep_sel_fakerate_QCD_MC.clear();
     _recolep_sel_fakerate_ttbar_MC.clear();
+    _recolep_sel_fakerate_up.clear();
+    _recolep_sel_fakerate_down.clear();
+    _recolep_sel_fakerate_pt1.clear();
+    _recolep_sel_fakerate_pt2.clear();
+    _recolep_sel_fakerate_be1.clear();
+    _recolep_sel_fakerate_be2.clear();
     _recolep_sel_QFrate.clear();
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
@@ -5062,6 +5989,20 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_FR_QCD_MC = 1;
     _event_weight_ttH_mu_FR_TT_MC = 1;
 
+    _event_weight_ttH_ele_up = 1;
+    _event_weight_ttH_ele_down = 1;
+    _event_weight_ttH_ele_pt1 = 1;
+    _event_weight_ttH_ele_pt2 = 1;
+    _event_weight_ttH_ele_be1 = 1;
+    _event_weight_ttH_ele_be2 = 1;
+
+    _event_weight_ttH_mu_up = 1;
+    _event_weight_ttH_mu_down = 1;
+    _event_weight_ttH_mu_pt1 = 1;
+    _event_weight_ttH_mu_pt2 = 1;
+    _event_weight_ttH_mu_be1 = 1;
+    _event_weight_ttH_mu_be2 = 1;
+
     n_fake = 0;
 
     if(sig_2l2tau_fake){
@@ -5084,6 +6025,12 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_fakerate.push_back(_recolep_fakeable_fakerate[i_lep]);
         _recolep_sel_fakerate_QCD_MC.push_back(_recolep_fakeable_fakerate_QCD_MC[i_lep]);
         _recolep_sel_fakerate_ttbar_MC.push_back(_recolep_fakeable_fakerate_ttbar_MC[i_lep]);
+        _recolep_sel_fakerate_up.push_back(_recolep_fakeable_fakerate_up[i_lep]);
+        _recolep_sel_fakerate_down.push_back(_recolep_fakeable_fakerate_down[i_lep]);
+        _recolep_sel_fakerate_pt1.push_back(_recolep_fakeable_fakerate_pt1[i_lep]);
+        _recolep_sel_fakerate_pt2.push_back(_recolep_fakeable_fakerate_pt2[i_lep]);
+        _recolep_sel_fakerate_be1.push_back(_recolep_fakeable_fakerate_be1[i_lep]);
+        _recolep_sel_fakerate_be2.push_back(_recolep_fakeable_fakerate_be2[i_lep]);
         _recolep_sel_QFrate.push_back(_recolep_fakeable_QFrate[i_lep]);
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
@@ -5134,17 +6081,45 @@ void split_tree(TString filename_in, TString filename_out,
 
           _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[0]/(1-_recolep_sel_fakerate_QCD_MC[0]);
           _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[0]/(1-_recolep_sel_fakerate_ttbar_MC[0]);
-          _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
-          _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
+          _event_weight_ttH_mu_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_mu_FR_TT_MC *= _event_weight_ttH;
+
+          _event_weight_ttH_ele_up *= _recolep_sel_fakerate_up[0]/(1-_recolep_sel_fakerate_up[0]);
+          _event_weight_ttH_ele_down *= _recolep_sel_fakerate_down[0]/(1-_recolep_sel_fakerate_down[0]);
+          _event_weight_ttH_ele_pt1 *= _recolep_sel_fakerate_pt1[0]/(1-_recolep_sel_fakerate_pt1[0]);
+          _event_weight_ttH_ele_pt2 *= _recolep_sel_fakerate_pt2[0]/(1-_recolep_sel_fakerate_pt2[0]);
+          _event_weight_ttH_ele_be1 *= _recolep_sel_fakerate_be1[0]/(1-_recolep_sel_fakerate_be1[0]);
+          _event_weight_ttH_ele_be2 *= _recolep_sel_fakerate_be2[0]/(1-_recolep_sel_fakerate_be2[0]);
+
+          _event_weight_ttH_mu_up *= _event_weight_ttH;
+          _event_weight_ttH_mu_down *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be2 *= _event_weight_ttH;
 
         }
 
         else if(abs(_recolep_sel_pdg[0])==13){
 
-          _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
-          _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
+          _event_weight_ttH_ele_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_ele_FR_TT_MC *= _event_weight_ttH;
           _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[0]/(1-_recolep_sel_fakerate_QCD_MC[0]);
           _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[0]/(1-_recolep_sel_fakerate_ttbar_MC[0]);
+
+          _event_weight_ttH_ele_up *= _event_weight_ttH;
+          _event_weight_ttH_ele_down *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be2 *= _event_weight_ttH;
+
+          _event_weight_ttH_mu_up *= _recolep_sel_fakerate_up[0]/(1-_recolep_sel_fakerate_up[0]);
+          _event_weight_ttH_mu_down *= _recolep_sel_fakerate_down[0]/(1-_recolep_sel_fakerate_down[0]);
+          _event_weight_ttH_mu_pt1 *= _recolep_sel_fakerate_pt1[0]/(1-_recolep_sel_fakerate_pt1[0]);
+          _event_weight_ttH_mu_pt2 *= _recolep_sel_fakerate_pt2[0]/(1-_recolep_sel_fakerate_pt2[0]);
+          _event_weight_ttH_mu_be1 *= _recolep_sel_fakerate_be1[0]/(1-_recolep_sel_fakerate_be1[0]);
+          _event_weight_ttH_mu_be2 *= _recolep_sel_fakerate_be2[0]/(1-_recolep_sel_fakerate_be2[0]);
 
         }
 
@@ -5162,17 +6137,45 @@ void split_tree(TString filename_in, TString filename_out,
 
           _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[1]/(1-_recolep_sel_fakerate_QCD_MC[1]);
           _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[1]/(1-_recolep_sel_fakerate_ttbar_MC[1]);
-          _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate[1]/(1-_recolep_sel_fakerate[0]);
-          _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate[1]/(1-_recolep_sel_fakerate[0]);
+          _event_weight_ttH_mu_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_mu_FR_TT_MC *= _event_weight_ttH;
+
+          _event_weight_ttH_ele_up *= _recolep_sel_fakerate_up[1]/(1-_recolep_sel_fakerate_up[1]);
+          _event_weight_ttH_ele_down *= _recolep_sel_fakerate_down[1]/(1-_recolep_sel_fakerate_down[1]);
+          _event_weight_ttH_ele_pt1 *= _recolep_sel_fakerate_pt1[1]/(1-_recolep_sel_fakerate_pt1[1]);
+          _event_weight_ttH_ele_pt2 *= _recolep_sel_fakerate_pt2[1]/(1-_recolep_sel_fakerate_pt2[1]);
+          _event_weight_ttH_ele_be1 *= _recolep_sel_fakerate_be1[1]/(1-_recolep_sel_fakerate_be1[1]);
+          _event_weight_ttH_ele_be2 *= _recolep_sel_fakerate_be2[1]/(1-_recolep_sel_fakerate_be2[1]);
+
+          _event_weight_ttH_mu_up *= _event_weight_ttH;
+          _event_weight_ttH_mu_down *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be2 *= _event_weight_ttH;
 
         }
 
         else if(abs(_recolep_sel_pdg[1])==13){
 
-          _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate[1]/(1-_recolep_sel_fakerate[1]);
-          _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate[1]/(1-_recolep_sel_fakerate[1]);
+          _event_weight_ttH_ele_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_ele_FR_TT_MC *= _event_weight_ttH;
           _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[1]/(1-_recolep_sel_fakerate_QCD_MC[1]);
           _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[1]/(1-_recolep_sel_fakerate_ttbar_MC[1]);
+
+          _event_weight_ttH_ele_up *= _event_weight_ttH;
+          _event_weight_ttH_ele_down *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be2 *= _event_weight_ttH;
+
+          _event_weight_ttH_mu_up *= _recolep_sel_fakerate_up[1]/(1-_recolep_sel_fakerate_up[1]);
+          _event_weight_ttH_mu_down *= _recolep_sel_fakerate_down[1]/(1-_recolep_sel_fakerate_down[1]);
+          _event_weight_ttH_mu_pt1 *= _recolep_sel_fakerate_pt1[1]/(1-_recolep_sel_fakerate_pt1[1]);
+          _event_weight_ttH_mu_pt2 *= _recolep_sel_fakerate_pt2[1]/(1-_recolep_sel_fakerate_pt2[1]);
+          _event_weight_ttH_mu_be1 *= _recolep_sel_fakerate_be1[1]/(1-_recolep_sel_fakerate_be1[1]);
+          _event_weight_ttH_mu_be2 *= _recolep_sel_fakerate_be2[1]/(1-_recolep_sel_fakerate_be2[1]);
 
         }
 
@@ -5246,6 +6249,12 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_fakerate.clear();
     _recolep_sel_fakerate_QCD_MC.clear();
     _recolep_sel_fakerate_ttbar_MC.clear();
+    _recolep_sel_fakerate_up.clear();
+    _recolep_sel_fakerate_down.clear();
+    _recolep_sel_fakerate_pt1.clear();
+    _recolep_sel_fakerate_pt2.clear();
+    _recolep_sel_fakerate_be1.clear();
+    _recolep_sel_fakerate_be2.clear();
     _recolep_sel_QFrate.clear();
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
@@ -5288,6 +6297,20 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_FR_QCD_MC = 1;
     _event_weight_ttH_mu_FR_TT_MC = 1;
 
+    _event_weight_ttH_ele_up = 1;
+    _event_weight_ttH_ele_down = 1;
+    _event_weight_ttH_ele_pt1 = 1;
+    _event_weight_ttH_ele_pt2 = 1;
+    _event_weight_ttH_ele_be1 = 1;
+    _event_weight_ttH_ele_be2 = 1;
+
+    _event_weight_ttH_mu_up = 1;
+    _event_weight_ttH_mu_down = 1;
+    _event_weight_ttH_mu_pt1 = 1;
+    _event_weight_ttH_mu_pt2 = 1;
+    _event_weight_ttH_mu_be1 = 1;
+    _event_weight_ttH_mu_be2 = 1;
+
     n_fake = 0;
 
     if(sig_3l_fake_ttH || sig_3l_fake_tH){
@@ -5310,6 +6333,12 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_fakerate.push_back(_recolep_fakeable_fakerate[i_lep]);
         _recolep_sel_fakerate_QCD_MC.push_back(_recolep_fakeable_fakerate_QCD_MC[i_lep]);
         _recolep_sel_fakerate_ttbar_MC.push_back(_recolep_fakeable_fakerate_ttbar_MC[i_lep]);
+        _recolep_sel_fakerate_up.push_back(_recolep_fakeable_fakerate_up[i_lep]);
+        _recolep_sel_fakerate_down.push_back(_recolep_fakeable_fakerate_down[i_lep]);
+        _recolep_sel_fakerate_pt1.push_back(_recolep_fakeable_fakerate_pt1[i_lep]);
+        _recolep_sel_fakerate_pt2.push_back(_recolep_fakeable_fakerate_pt2[i_lep]);
+        _recolep_sel_fakerate_be1.push_back(_recolep_fakeable_fakerate_be1[i_lep]);
+        _recolep_sel_fakerate_be2.push_back(_recolep_fakeable_fakerate_be2[i_lep]);
         _recolep_sel_QFrate.push_back(_recolep_fakeable_QFrate[i_lep]);
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
@@ -5330,17 +6359,45 @@ void split_tree(TString filename_in, TString filename_out,
 
           _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[0]/(1-_recolep_sel_fakerate_QCD_MC[0]);
           _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[0]/(1-_recolep_sel_fakerate_ttbar_MC[0]);
-          _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
-          _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
+          _event_weight_ttH_mu_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_mu_FR_TT_MC *= _event_weight_ttH;
+
+          _event_weight_ttH_ele_up *= _recolep_sel_fakerate_up[0]/(1-_recolep_sel_fakerate_up[0]);
+          _event_weight_ttH_ele_down *= _recolep_sel_fakerate_down[0]/(1-_recolep_sel_fakerate_down[0]);
+          _event_weight_ttH_ele_pt1 *= _recolep_sel_fakerate_pt1[0]/(1-_recolep_sel_fakerate_pt1[0]);
+          _event_weight_ttH_ele_pt2 *= _recolep_sel_fakerate_pt2[0]/(1-_recolep_sel_fakerate_pt2[0]);
+          _event_weight_ttH_ele_be1 *= _recolep_sel_fakerate_be1[0]/(1-_recolep_sel_fakerate_be1[0]);
+          _event_weight_ttH_ele_be2 *= _recolep_sel_fakerate_be2[0]/(1-_recolep_sel_fakerate_be2[0]);
+
+          _event_weight_ttH_mu_up *= _event_weight_ttH;
+          _event_weight_ttH_mu_down *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be2 *= _event_weight_ttH;
 
         }
 
         else if(abs(_recolep_sel_pdg[0])==13){
 
-          _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
-          _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
+          _event_weight_ttH_ele_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_ele_FR_TT_MC *= _event_weight_ttH;
           _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[0]/(1-_recolep_sel_fakerate_QCD_MC[0]);
           _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[0]/(1-_recolep_sel_fakerate_ttbar_MC[0]);
+
+          _event_weight_ttH_ele_up *= _event_weight_ttH;
+          _event_weight_ttH_ele_down *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be2 *= _event_weight_ttH;
+
+          _event_weight_ttH_mu_up *= _recolep_sel_fakerate_up[0]/(1-_recolep_sel_fakerate_up[0]);
+          _event_weight_ttH_mu_down *= _recolep_sel_fakerate_down[0]/(1-_recolep_sel_fakerate_down[0]);
+          _event_weight_ttH_mu_pt1 *= _recolep_sel_fakerate_pt1[0]/(1-_recolep_sel_fakerate_pt1[0]);
+          _event_weight_ttH_mu_pt2 *= _recolep_sel_fakerate_pt2[0]/(1-_recolep_sel_fakerate_pt2[0]);
+          _event_weight_ttH_mu_be1 *= _recolep_sel_fakerate_be1[0]/(1-_recolep_sel_fakerate_be1[0]);
+          _event_weight_ttH_mu_be2 *= _recolep_sel_fakerate_be2[0]/(1-_recolep_sel_fakerate_be2[0]);
 
         }
 
@@ -5358,17 +6415,45 @@ void split_tree(TString filename_in, TString filename_out,
 
           _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[1]/(1-_recolep_sel_fakerate_QCD_MC[1]);
           _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[1]/(1-_recolep_sel_fakerate_ttbar_MC[1]);
-          _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate[1]/(1-_recolep_sel_fakerate[0]);
-          _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate[1]/(1-_recolep_sel_fakerate[0]);
+          _event_weight_ttH_mu_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_mu_FR_TT_MC *= _event_weight_ttH;
+
+          _event_weight_ttH_ele_up *= _recolep_sel_fakerate_up[1]/(1-_recolep_sel_fakerate_up[1]);
+          _event_weight_ttH_ele_down *= _recolep_sel_fakerate_down[1]/(1-_recolep_sel_fakerate_down[1]);
+          _event_weight_ttH_ele_pt1 *= _recolep_sel_fakerate_pt1[1]/(1-_recolep_sel_fakerate_pt1[1]);
+          _event_weight_ttH_ele_pt2 *= _recolep_sel_fakerate_pt2[1]/(1-_recolep_sel_fakerate_pt2[1]);
+          _event_weight_ttH_ele_be1 *= _recolep_sel_fakerate_be1[1]/(1-_recolep_sel_fakerate_be1[1]);
+          _event_weight_ttH_ele_be2 *= _recolep_sel_fakerate_be2[1]/(1-_recolep_sel_fakerate_be2[1]);
+
+          _event_weight_ttH_mu_up *= _event_weight_ttH;
+          _event_weight_ttH_mu_down *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be2 *= _event_weight_ttH;
 
         }
 
         else if(abs(_recolep_sel_pdg[1])==13){
 
-          _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate[1]/(1-_recolep_sel_fakerate[1]);
-          _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate[1]/(1-_recolep_sel_fakerate[1]);
+          _event_weight_ttH_ele_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_ele_FR_TT_MC *= _event_weight_ttH;
           _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[1]/(1-_recolep_sel_fakerate_QCD_MC[1]);
           _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[1]/(1-_recolep_sel_fakerate_ttbar_MC[1]);
+
+          _event_weight_ttH_ele_up *= _event_weight_ttH;
+          _event_weight_ttH_ele_down *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be2 *= _event_weight_ttH;
+
+          _event_weight_ttH_mu_up *= _recolep_sel_fakerate_up[1]/(1-_recolep_sel_fakerate_up[1]);
+          _event_weight_ttH_mu_down *= _recolep_sel_fakerate_down[1]/(1-_recolep_sel_fakerate_down[1]);
+          _event_weight_ttH_mu_pt1 *= _recolep_sel_fakerate_pt1[1]/(1-_recolep_sel_fakerate_pt1[1]);
+          _event_weight_ttH_mu_pt2 *= _recolep_sel_fakerate_pt2[1]/(1-_recolep_sel_fakerate_pt2[1]);
+          _event_weight_ttH_mu_be1 *= _recolep_sel_fakerate_be1[1]/(1-_recolep_sel_fakerate_be1[1]);
+          _event_weight_ttH_mu_be2 *= _recolep_sel_fakerate_be2[1]/(1-_recolep_sel_fakerate_be2[1]);
 
         }
 
@@ -5386,17 +6471,45 @@ void split_tree(TString filename_in, TString filename_out,
 
           _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[2]/(1-_recolep_sel_fakerate_QCD_MC[2]);
           _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[2]/(1-_recolep_sel_fakerate_ttbar_MC[2]);
-          _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate[2]/(1-_recolep_sel_fakerate[0]);
-          _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate[2]/(1-_recolep_sel_fakerate[0]);
+          _event_weight_ttH_mu_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_mu_FR_TT_MC *= _event_weight_ttH;
+
+          _event_weight_ttH_ele_up *= _recolep_sel_fakerate_up[2]/(1-_recolep_sel_fakerate_up[2]);
+          _event_weight_ttH_ele_down *= _recolep_sel_fakerate_down[2]/(1-_recolep_sel_fakerate_down[2]);
+          _event_weight_ttH_ele_pt1 *= _recolep_sel_fakerate_pt1[2]/(1-_recolep_sel_fakerate_pt1[2]);
+          _event_weight_ttH_ele_pt2 *= _recolep_sel_fakerate_pt2[2]/(1-_recolep_sel_fakerate_pt2[2]);
+          _event_weight_ttH_ele_be1 *= _recolep_sel_fakerate_be1[2]/(1-_recolep_sel_fakerate_be1[2]);
+          _event_weight_ttH_ele_be2 *= _recolep_sel_fakerate_be2[2]/(1-_recolep_sel_fakerate_be2[2]);
+
+          _event_weight_ttH_mu_up *= _event_weight_ttH;
+          _event_weight_ttH_mu_down *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be2 *= _event_weight_ttH;
 
         }
 
         else if(abs(_recolep_sel_pdg[2])==13){
 
-          _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate[2]/(1-_recolep_sel_fakerate[2]);
-          _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate[2]/(1-_recolep_sel_fakerate[2]);
+          _event_weight_ttH_ele_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_ele_FR_TT_MC *= _event_weight_ttH;
           _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[2]/(1-_recolep_sel_fakerate_QCD_MC[2]);
           _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[2]/(1-_recolep_sel_fakerate_ttbar_MC[2]);
+
+          _event_weight_ttH_ele_up *= _event_weight_ttH;
+          _event_weight_ttH_ele_down *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be2 *= _event_weight_ttH;
+
+          _event_weight_ttH_mu_up *= _recolep_sel_fakerate_up[2]/(1-_recolep_sel_fakerate_up[2]);
+          _event_weight_ttH_mu_down *= _recolep_sel_fakerate_down[2]/(1-_recolep_sel_fakerate_down[2]);
+          _event_weight_ttH_mu_pt1 *= _recolep_sel_fakerate_pt1[2]/(1-_recolep_sel_fakerate_pt1[2]);
+          _event_weight_ttH_mu_pt2 *= _recolep_sel_fakerate_pt2[2]/(1-_recolep_sel_fakerate_pt2[2]);
+          _event_weight_ttH_mu_be1 *= _recolep_sel_fakerate_be1[2]/(1-_recolep_sel_fakerate_be1[2]);
+          _event_weight_ttH_mu_be2 *= _recolep_sel_fakerate_be2[2]/(1-_recolep_sel_fakerate_be2[2]);
 
         }
 
@@ -5440,6 +6553,12 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_fakerate.clear();
     _recolep_sel_fakerate_QCD_MC.clear();
     _recolep_sel_fakerate_ttbar_MC.clear();
+    _recolep_sel_fakerate_up.clear();
+    _recolep_sel_fakerate_down.clear();
+    _recolep_sel_fakerate_pt1.clear();
+    _recolep_sel_fakerate_pt2.clear();
+    _recolep_sel_fakerate_be1.clear();
+    _recolep_sel_fakerate_be2.clear();
     _recolep_sel_QFrate.clear();
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
@@ -5482,6 +6601,20 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_FR_QCD_MC = 1;
     _event_weight_ttH_mu_FR_TT_MC = 1;
 
+    _event_weight_ttH_ele_up = 1;
+    _event_weight_ttH_ele_down = 1;
+    _event_weight_ttH_ele_pt1 = 1;
+    _event_weight_ttH_ele_pt2 = 1;
+    _event_weight_ttH_ele_be1 = 1;
+    _event_weight_ttH_ele_be2 = 1;
+
+    _event_weight_ttH_mu_up = 1;
+    _event_weight_ttH_mu_down = 1;
+    _event_weight_ttH_mu_pt1 = 1;
+    _event_weight_ttH_mu_pt2 = 1;
+    _event_weight_ttH_mu_be1 = 1;
+    _event_weight_ttH_mu_be2 = 1;
+
     n_fake = 0;
 
     if(sig_ttZ_CR_fake){
@@ -5504,6 +6637,12 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_fakerate.push_back(_recolep_fakeable_fakerate[i_lep]);
         _recolep_sel_fakerate_QCD_MC.push_back(_recolep_fakeable_fakerate_QCD_MC[i_lep]);
         _recolep_sel_fakerate_ttbar_MC.push_back(_recolep_fakeable_fakerate_ttbar_MC[i_lep]);
+        _recolep_sel_fakerate_up.push_back(_recolep_fakeable_fakerate_up[i_lep]);
+        _recolep_sel_fakerate_down.push_back(_recolep_fakeable_fakerate_down[i_lep]);
+        _recolep_sel_fakerate_pt1.push_back(_recolep_fakeable_fakerate_pt1[i_lep]);
+        _recolep_sel_fakerate_pt2.push_back(_recolep_fakeable_fakerate_pt2[i_lep]);
+        _recolep_sel_fakerate_be1.push_back(_recolep_fakeable_fakerate_be1[i_lep]);
+        _recolep_sel_fakerate_be2.push_back(_recolep_fakeable_fakerate_be2[i_lep]);
         _recolep_sel_QFrate.push_back(_recolep_fakeable_QFrate[i_lep]);
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
@@ -5524,17 +6663,45 @@ void split_tree(TString filename_in, TString filename_out,
 
           _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[0]/(1-_recolep_sel_fakerate_QCD_MC[0]);
           _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[0]/(1-_recolep_sel_fakerate_ttbar_MC[0]);
-          _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
-          _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
+          _event_weight_ttH_mu_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_mu_FR_TT_MC *= _event_weight_ttH;
+
+          _event_weight_ttH_ele_up *= _recolep_sel_fakerate_up[0]/(1-_recolep_sel_fakerate_up[0]);
+          _event_weight_ttH_ele_down *= _recolep_sel_fakerate_down[0]/(1-_recolep_sel_fakerate_down[0]);
+          _event_weight_ttH_ele_pt1 *= _recolep_sel_fakerate_pt1[0]/(1-_recolep_sel_fakerate_pt1[0]);
+          _event_weight_ttH_ele_pt2 *= _recolep_sel_fakerate_pt2[0]/(1-_recolep_sel_fakerate_pt2[0]);
+          _event_weight_ttH_ele_be1 *= _recolep_sel_fakerate_be1[0]/(1-_recolep_sel_fakerate_be1[0]);
+          _event_weight_ttH_ele_be2 *= _recolep_sel_fakerate_be2[0]/(1-_recolep_sel_fakerate_be2[0]);
+
+          _event_weight_ttH_mu_up *= _event_weight_ttH;
+          _event_weight_ttH_mu_down *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be2 *= _event_weight_ttH;
 
         }
 
         else if(abs(_recolep_sel_pdg[0])==13){
 
-          _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
-          _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
+          _event_weight_ttH_ele_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_ele_FR_TT_MC *= _event_weight_ttH;
           _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[0]/(1-_recolep_sel_fakerate_QCD_MC[0]);
           _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[0]/(1-_recolep_sel_fakerate_ttbar_MC[0]);
+
+          _event_weight_ttH_ele_up *= _event_weight_ttH;
+          _event_weight_ttH_ele_down *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be2 *= _event_weight_ttH;
+
+          _event_weight_ttH_mu_up *= _recolep_sel_fakerate_up[0]/(1-_recolep_sel_fakerate_up[0]);
+          _event_weight_ttH_mu_down *= _recolep_sel_fakerate_down[0]/(1-_recolep_sel_fakerate_down[0]);
+          _event_weight_ttH_mu_pt1 *= _recolep_sel_fakerate_pt1[0]/(1-_recolep_sel_fakerate_pt1[0]);
+          _event_weight_ttH_mu_pt2 *= _recolep_sel_fakerate_pt2[0]/(1-_recolep_sel_fakerate_pt2[0]);
+          _event_weight_ttH_mu_be1 *= _recolep_sel_fakerate_be1[0]/(1-_recolep_sel_fakerate_be1[0]);
+          _event_weight_ttH_mu_be2 *= _recolep_sel_fakerate_be2[0]/(1-_recolep_sel_fakerate_be2[0]);
 
         }
 
@@ -5552,17 +6719,45 @@ void split_tree(TString filename_in, TString filename_out,
 
           _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[1]/(1-_recolep_sel_fakerate_QCD_MC[1]);
           _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[1]/(1-_recolep_sel_fakerate_ttbar_MC[1]);
-          _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate[1]/(1-_recolep_sel_fakerate[0]);
-          _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate[1]/(1-_recolep_sel_fakerate[0]);
+          _event_weight_ttH_mu_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_mu_FR_TT_MC *= _event_weight_ttH;
+
+          _event_weight_ttH_ele_up *= _recolep_sel_fakerate_up[1]/(1-_recolep_sel_fakerate_up[1]);
+          _event_weight_ttH_ele_down *= _recolep_sel_fakerate_down[1]/(1-_recolep_sel_fakerate_down[1]);
+          _event_weight_ttH_ele_pt1 *= _recolep_sel_fakerate_pt1[1]/(1-_recolep_sel_fakerate_pt1[1]);
+          _event_weight_ttH_ele_pt2 *= _recolep_sel_fakerate_pt2[1]/(1-_recolep_sel_fakerate_pt2[1]);
+          _event_weight_ttH_ele_be1 *= _recolep_sel_fakerate_be1[1]/(1-_recolep_sel_fakerate_be1[1]);
+          _event_weight_ttH_ele_be2 *= _recolep_sel_fakerate_be2[1]/(1-_recolep_sel_fakerate_be2[1]);
+
+          _event_weight_ttH_mu_up *= _event_weight_ttH;
+          _event_weight_ttH_mu_down *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be2 *= _event_weight_ttH;
 
         }
 
         else if(abs(_recolep_sel_pdg[1])==13){
 
-          _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate[1]/(1-_recolep_sel_fakerate[1]);
-          _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate[1]/(1-_recolep_sel_fakerate[1]);
+          _event_weight_ttH_ele_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_ele_FR_TT_MC *= _event_weight_ttH;
           _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[1]/(1-_recolep_sel_fakerate_QCD_MC[1]);
           _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[1]/(1-_recolep_sel_fakerate_ttbar_MC[1]);
+
+          _event_weight_ttH_ele_up *= _event_weight_ttH;
+          _event_weight_ttH_ele_down *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be2 *= _event_weight_ttH;
+
+          _event_weight_ttH_mu_up *= _recolep_sel_fakerate_up[1]/(1-_recolep_sel_fakerate_up[1]);
+          _event_weight_ttH_mu_down *= _recolep_sel_fakerate_down[1]/(1-_recolep_sel_fakerate_down[1]);
+          _event_weight_ttH_mu_pt1 *= _recolep_sel_fakerate_pt1[1]/(1-_recolep_sel_fakerate_pt1[1]);
+          _event_weight_ttH_mu_pt2 *= _recolep_sel_fakerate_pt2[1]/(1-_recolep_sel_fakerate_pt2[1]);
+          _event_weight_ttH_mu_be1 *= _recolep_sel_fakerate_be1[1]/(1-_recolep_sel_fakerate_be1[1]);
+          _event_weight_ttH_mu_be2 *= _recolep_sel_fakerate_be2[1]/(1-_recolep_sel_fakerate_be2[1]);
 
         }
 
@@ -5580,17 +6775,45 @@ void split_tree(TString filename_in, TString filename_out,
 
           _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[2]/(1-_recolep_sel_fakerate_QCD_MC[2]);
           _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[2]/(1-_recolep_sel_fakerate_ttbar_MC[2]);
-          _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate[2]/(1-_recolep_sel_fakerate[0]);
-          _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate[2]/(1-_recolep_sel_fakerate[0]);
+          _event_weight_ttH_mu_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_mu_FR_TT_MC *= _event_weight_ttH;
+
+          _event_weight_ttH_ele_up *= _recolep_sel_fakerate_up[2]/(1-_recolep_sel_fakerate_up[2]);
+          _event_weight_ttH_ele_down *= _recolep_sel_fakerate_down[2]/(1-_recolep_sel_fakerate_down[2]);
+          _event_weight_ttH_ele_pt1 *= _recolep_sel_fakerate_pt1[2]/(1-_recolep_sel_fakerate_pt1[2]);
+          _event_weight_ttH_ele_pt2 *= _recolep_sel_fakerate_pt2[2]/(1-_recolep_sel_fakerate_pt2[2]);
+          _event_weight_ttH_ele_be1 *= _recolep_sel_fakerate_be1[2]/(1-_recolep_sel_fakerate_be1[2]);
+          _event_weight_ttH_ele_be2 *= _recolep_sel_fakerate_be2[2]/(1-_recolep_sel_fakerate_be2[2]);
+
+          _event_weight_ttH_mu_up *= _event_weight_ttH;
+          _event_weight_ttH_mu_down *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be2 *= _event_weight_ttH;
 
         }
 
         else if(abs(_recolep_sel_pdg[2])==13){
 
-          _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate[2]/(1-_recolep_sel_fakerate[2]);
-          _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate[2]/(1-_recolep_sel_fakerate[2]);
+          _event_weight_ttH_ele_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_ele_FR_TT_MC *= _event_weight_ttH;
           _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[2]/(1-_recolep_sel_fakerate_QCD_MC[2]);
           _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[2]/(1-_recolep_sel_fakerate_ttbar_MC[2]);
+
+          _event_weight_ttH_ele_up *= _event_weight_ttH;
+          _event_weight_ttH_ele_down *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be2 *= _event_weight_ttH;
+
+          _event_weight_ttH_mu_up *= _recolep_sel_fakerate_up[2]/(1-_recolep_sel_fakerate_up[2]);
+          _event_weight_ttH_mu_down *= _recolep_sel_fakerate_down[2]/(1-_recolep_sel_fakerate_down[2]);
+          _event_weight_ttH_mu_pt1 *= _recolep_sel_fakerate_pt1[2]/(1-_recolep_sel_fakerate_pt1[2]);
+          _event_weight_ttH_mu_pt2 *= _recolep_sel_fakerate_pt2[2]/(1-_recolep_sel_fakerate_pt2[2]);
+          _event_weight_ttH_mu_be1 *= _recolep_sel_fakerate_be1[2]/(1-_recolep_sel_fakerate_be1[2]);
+          _event_weight_ttH_mu_be2 *= _recolep_sel_fakerate_be2[2]/(1-_recolep_sel_fakerate_be2[2]);
 
         }
 
@@ -5632,6 +6855,12 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_fakerate.clear();
     _recolep_sel_fakerate_QCD_MC.clear();
     _recolep_sel_fakerate_ttbar_MC.clear();
+    _recolep_sel_fakerate_up.clear();
+    _recolep_sel_fakerate_down.clear();
+    _recolep_sel_fakerate_pt1.clear();
+    _recolep_sel_fakerate_pt2.clear();
+    _recolep_sel_fakerate_be1.clear();
+    _recolep_sel_fakerate_be2.clear();
     _recolep_sel_QFrate.clear();
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
@@ -5674,6 +6903,20 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_FR_QCD_MC = 1;
     _event_weight_ttH_mu_FR_TT_MC = 1;
 
+    _event_weight_ttH_ele_up = 1;
+    _event_weight_ttH_ele_down = 1;
+    _event_weight_ttH_ele_pt1 = 1;
+    _event_weight_ttH_ele_pt2 = 1;
+    _event_weight_ttH_ele_be1 = 1;
+    _event_weight_ttH_ele_be2 = 1;
+
+    _event_weight_ttH_mu_up = 1;
+    _event_weight_ttH_mu_down = 1;
+    _event_weight_ttH_mu_pt1 = 1;
+    _event_weight_ttH_mu_pt2 = 1;
+    _event_weight_ttH_mu_be1 = 1;
+    _event_weight_ttH_mu_be2 = 1;
+
     n_fake = 0;
 
     if(sig_WZ_CR_fake){
@@ -5696,6 +6939,12 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_fakerate.push_back(_recolep_fakeable_fakerate[i_lep]);
         _recolep_sel_fakerate_QCD_MC.push_back(_recolep_fakeable_fakerate_QCD_MC[i_lep]);
         _recolep_sel_fakerate_ttbar_MC.push_back(_recolep_fakeable_fakerate_ttbar_MC[i_lep]);
+        _recolep_sel_fakerate_up.push_back(_recolep_fakeable_fakerate_up[i_lep]);
+        _recolep_sel_fakerate_down.push_back(_recolep_fakeable_fakerate_down[i_lep]);
+        _recolep_sel_fakerate_pt1.push_back(_recolep_fakeable_fakerate_pt1[i_lep]);
+        _recolep_sel_fakerate_pt2.push_back(_recolep_fakeable_fakerate_pt2[i_lep]);
+        _recolep_sel_fakerate_be1.push_back(_recolep_fakeable_fakerate_be1[i_lep]);
+        _recolep_sel_fakerate_be2.push_back(_recolep_fakeable_fakerate_be2[i_lep]);
         _recolep_sel_QFrate.push_back(_recolep_fakeable_QFrate[i_lep]);
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
@@ -5716,17 +6965,45 @@ void split_tree(TString filename_in, TString filename_out,
 
           _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[0]/(1-_recolep_sel_fakerate_QCD_MC[0]);
           _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[0]/(1-_recolep_sel_fakerate_ttbar_MC[0]);
-          _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
-          _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
+          _event_weight_ttH_mu_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_mu_FR_TT_MC *= _event_weight_ttH;
+
+          _event_weight_ttH_ele_up *= _recolep_sel_fakerate_up[0]/(1-_recolep_sel_fakerate_up[0]);
+          _event_weight_ttH_ele_down *= _recolep_sel_fakerate_down[0]/(1-_recolep_sel_fakerate_down[0]);
+          _event_weight_ttH_ele_pt1 *= _recolep_sel_fakerate_pt1[0]/(1-_recolep_sel_fakerate_pt1[0]);
+          _event_weight_ttH_ele_pt2 *= _recolep_sel_fakerate_pt2[0]/(1-_recolep_sel_fakerate_pt2[0]);
+          _event_weight_ttH_ele_be1 *= _recolep_sel_fakerate_be1[0]/(1-_recolep_sel_fakerate_be1[0]);
+          _event_weight_ttH_ele_be2 *= _recolep_sel_fakerate_be2[0]/(1-_recolep_sel_fakerate_be2[0]);
+
+          _event_weight_ttH_mu_up *= _event_weight_ttH;
+          _event_weight_ttH_mu_down *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be2 *= _event_weight_ttH;
 
         }
 
         else if(abs(_recolep_sel_pdg[0])==13){
 
-          _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
-          _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
+          _event_weight_ttH_ele_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_ele_FR_TT_MC *= _event_weight_ttH;
           _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[0]/(1-_recolep_sel_fakerate_QCD_MC[0]);
           _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[0]/(1-_recolep_sel_fakerate_ttbar_MC[0]);
+
+          _event_weight_ttH_ele_up *= _event_weight_ttH;
+          _event_weight_ttH_ele_down *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be2 *= _event_weight_ttH;
+
+          _event_weight_ttH_mu_up *= _recolep_sel_fakerate_up[0]/(1-_recolep_sel_fakerate_up[0]);
+          _event_weight_ttH_mu_down *= _recolep_sel_fakerate_down[0]/(1-_recolep_sel_fakerate_down[0]);
+          _event_weight_ttH_mu_pt1 *= _recolep_sel_fakerate_pt1[0]/(1-_recolep_sel_fakerate_pt1[0]);
+          _event_weight_ttH_mu_pt2 *= _recolep_sel_fakerate_pt2[0]/(1-_recolep_sel_fakerate_pt2[0]);
+          _event_weight_ttH_mu_be1 *= _recolep_sel_fakerate_be1[0]/(1-_recolep_sel_fakerate_be1[0]);
+          _event_weight_ttH_mu_be2 *= _recolep_sel_fakerate_be2[0]/(1-_recolep_sel_fakerate_be2[0]);
 
         }
 
@@ -5744,17 +7021,45 @@ void split_tree(TString filename_in, TString filename_out,
 
           _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[1]/(1-_recolep_sel_fakerate_QCD_MC[1]);
           _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[1]/(1-_recolep_sel_fakerate_ttbar_MC[1]);
-          _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate[1]/(1-_recolep_sel_fakerate[0]);
-          _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate[1]/(1-_recolep_sel_fakerate[0]);
+          _event_weight_ttH_mu_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_mu_FR_TT_MC *= _event_weight_ttH;
+
+          _event_weight_ttH_ele_up *= _recolep_sel_fakerate_up[1]/(1-_recolep_sel_fakerate_up[1]);
+          _event_weight_ttH_ele_down *= _recolep_sel_fakerate_down[1]/(1-_recolep_sel_fakerate_down[1]);
+          _event_weight_ttH_ele_pt1 *= _recolep_sel_fakerate_pt1[1]/(1-_recolep_sel_fakerate_pt1[1]);
+          _event_weight_ttH_ele_pt2 *= _recolep_sel_fakerate_pt2[1]/(1-_recolep_sel_fakerate_pt2[1]);
+          _event_weight_ttH_ele_be1 *= _recolep_sel_fakerate_be1[1]/(1-_recolep_sel_fakerate_be1[1]);
+          _event_weight_ttH_ele_be2 *= _recolep_sel_fakerate_be2[1]/(1-_recolep_sel_fakerate_be2[1]);
+
+          _event_weight_ttH_mu_up *= _event_weight_ttH;
+          _event_weight_ttH_mu_down *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be2 *= _event_weight_ttH;
 
         }
 
         else if(abs(_recolep_sel_pdg[1])==13){
 
-          _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate[1]/(1-_recolep_sel_fakerate[1]);
-          _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate[1]/(1-_recolep_sel_fakerate[1]);
+          _event_weight_ttH_ele_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_ele_FR_TT_MC *= _event_weight_ttH;
           _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[1]/(1-_recolep_sel_fakerate_QCD_MC[1]);
           _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[1]/(1-_recolep_sel_fakerate_ttbar_MC[1]);
+
+          _event_weight_ttH_ele_up *= _event_weight_ttH;
+          _event_weight_ttH_ele_down *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be2 *= _event_weight_ttH;
+
+          _event_weight_ttH_mu_up *= _recolep_sel_fakerate_up[1]/(1-_recolep_sel_fakerate_up[1]);
+          _event_weight_ttH_mu_down *= _recolep_sel_fakerate_down[1]/(1-_recolep_sel_fakerate_down[1]);
+          _event_weight_ttH_mu_pt1 *= _recolep_sel_fakerate_pt1[1]/(1-_recolep_sel_fakerate_pt1[1]);
+          _event_weight_ttH_mu_pt2 *= _recolep_sel_fakerate_pt2[1]/(1-_recolep_sel_fakerate_pt2[1]);
+          _event_weight_ttH_mu_be1 *= _recolep_sel_fakerate_be1[1]/(1-_recolep_sel_fakerate_be1[1]);
+          _event_weight_ttH_mu_be2 *= _recolep_sel_fakerate_be2[1]/(1-_recolep_sel_fakerate_be2[1]);
 
         }
 
@@ -5772,17 +7077,45 @@ void split_tree(TString filename_in, TString filename_out,
 
           _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[2]/(1-_recolep_sel_fakerate_QCD_MC[2]);
           _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[2]/(1-_recolep_sel_fakerate_ttbar_MC[2]);
-          _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate[2]/(1-_recolep_sel_fakerate[0]);
-          _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate[2]/(1-_recolep_sel_fakerate[0]);
+          _event_weight_ttH_mu_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_mu_FR_TT_MC *= _event_weight_ttH;
+
+          _event_weight_ttH_ele_up *= _recolep_sel_fakerate_up[2]/(1-_recolep_sel_fakerate_up[2]);
+          _event_weight_ttH_ele_down *= _recolep_sel_fakerate_down[2]/(1-_recolep_sel_fakerate_down[2]);
+          _event_weight_ttH_ele_pt1 *= _recolep_sel_fakerate_pt1[2]/(1-_recolep_sel_fakerate_pt1[2]);
+          _event_weight_ttH_ele_pt2 *= _recolep_sel_fakerate_pt2[2]/(1-_recolep_sel_fakerate_pt2[2]);
+          _event_weight_ttH_ele_be1 *= _recolep_sel_fakerate_be1[2]/(1-_recolep_sel_fakerate_be1[2]);
+          _event_weight_ttH_ele_be2 *= _recolep_sel_fakerate_be2[2]/(1-_recolep_sel_fakerate_be2[2]);
+
+          _event_weight_ttH_mu_up *= _event_weight_ttH;
+          _event_weight_ttH_mu_down *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be2 *= _event_weight_ttH;
 
         }
 
         else if(abs(_recolep_sel_pdg[2])==13){
 
-          _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate[2]/(1-_recolep_sel_fakerate[2]);
-          _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate[2]/(1-_recolep_sel_fakerate[2]);
+          _event_weight_ttH_ele_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_ele_FR_TT_MC *= _event_weight_ttH;
           _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[2]/(1-_recolep_sel_fakerate_QCD_MC[2]);
           _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[2]/(1-_recolep_sel_fakerate_ttbar_MC[2]);
+
+          _event_weight_ttH_ele_up *= _event_weight_ttH;
+          _event_weight_ttH_ele_down *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be2 *= _event_weight_ttH;
+
+          _event_weight_ttH_mu_up *= _recolep_sel_fakerate_up[2]/(1-_recolep_sel_fakerate_up[2]);
+          _event_weight_ttH_mu_down *= _recolep_sel_fakerate_down[2]/(1-_recolep_sel_fakerate_down[2]);
+          _event_weight_ttH_mu_pt1 *= _recolep_sel_fakerate_pt1[2]/(1-_recolep_sel_fakerate_pt1[2]);
+          _event_weight_ttH_mu_pt2 *= _recolep_sel_fakerate_pt2[2]/(1-_recolep_sel_fakerate_pt2[2]);
+          _event_weight_ttH_mu_be1 *= _recolep_sel_fakerate_be1[2]/(1-_recolep_sel_fakerate_be1[2]);
+          _event_weight_ttH_mu_be2 *= _recolep_sel_fakerate_be2[2]/(1-_recolep_sel_fakerate_be2[2]);
 
         }
 
@@ -5824,6 +7157,12 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_fakerate.clear();
     _recolep_sel_fakerate_QCD_MC.clear();
     _recolep_sel_fakerate_ttbar_MC.clear();
+    _recolep_sel_fakerate_up.clear();
+    _recolep_sel_fakerate_down.clear();
+    _recolep_sel_fakerate_pt1.clear();
+    _recolep_sel_fakerate_pt2.clear();
+    _recolep_sel_fakerate_be1.clear();
+    _recolep_sel_fakerate_be2.clear();
     _recolep_sel_QFrate.clear();
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
@@ -5866,6 +7205,20 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_FR_QCD_MC = 1;
     _event_weight_ttH_mu_FR_TT_MC = 1;
 
+    _event_weight_ttH_ele_up = 1;
+    _event_weight_ttH_ele_down = 1;
+    _event_weight_ttH_ele_pt1 = 1;
+    _event_weight_ttH_ele_pt2 = 1;
+    _event_weight_ttH_ele_be1 = 1;
+    _event_weight_ttH_ele_be2 = 1;
+
+    _event_weight_ttH_mu_up = 1;
+    _event_weight_ttH_mu_down = 1;
+    _event_weight_ttH_mu_pt1 = 1;
+    _event_weight_ttH_mu_pt2 = 1;
+    _event_weight_ttH_mu_be1 = 1;
+    _event_weight_ttH_mu_be2 = 1;
+
     n_fake = 0;
 
     if(sig_3l1tau_fake){
@@ -5888,6 +7241,12 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_fakerate.push_back(_recolep_fakeable_fakerate[i_lep]);
         _recolep_sel_fakerate_QCD_MC.push_back(_recolep_fakeable_fakerate_QCD_MC[i_lep]);
         _recolep_sel_fakerate_ttbar_MC.push_back(_recolep_fakeable_fakerate_ttbar_MC[i_lep]);
+        _recolep_sel_fakerate_up.push_back(_recolep_fakeable_fakerate_up[i_lep]);
+        _recolep_sel_fakerate_down.push_back(_recolep_fakeable_fakerate_down[i_lep]);
+        _recolep_sel_fakerate_pt1.push_back(_recolep_fakeable_fakerate_pt1[i_lep]);
+        _recolep_sel_fakerate_pt2.push_back(_recolep_fakeable_fakerate_pt2[i_lep]);
+        _recolep_sel_fakerate_be1.push_back(_recolep_fakeable_fakerate_be1[i_lep]);
+        _recolep_sel_fakerate_be2.push_back(_recolep_fakeable_fakerate_be2[i_lep]);
         _recolep_sel_QFrate.push_back(_recolep_fakeable_QFrate[i_lep]);
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
@@ -5938,17 +7297,45 @@ void split_tree(TString filename_in, TString filename_out,
 
           _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[0]/(1-_recolep_sel_fakerate_QCD_MC[0]);
           _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[0]/(1-_recolep_sel_fakerate_ttbar_MC[0]);
-          _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
-          _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
+          _event_weight_ttH_mu_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_mu_FR_TT_MC *= _event_weight_ttH;
+
+          _event_weight_ttH_ele_up *= _recolep_sel_fakerate_up[0]/(1-_recolep_sel_fakerate_up[0]);
+          _event_weight_ttH_ele_down *= _recolep_sel_fakerate_down[0]/(1-_recolep_sel_fakerate_down[0]);
+          _event_weight_ttH_ele_pt1 *= _recolep_sel_fakerate_pt1[0]/(1-_recolep_sel_fakerate_pt1[0]);
+          _event_weight_ttH_ele_pt2 *= _recolep_sel_fakerate_pt2[0]/(1-_recolep_sel_fakerate_pt2[0]);
+          _event_weight_ttH_ele_be1 *= _recolep_sel_fakerate_be1[0]/(1-_recolep_sel_fakerate_be1[0]);
+          _event_weight_ttH_ele_be2 *= _recolep_sel_fakerate_be2[0]/(1-_recolep_sel_fakerate_be2[0]);
+
+          _event_weight_ttH_mu_up *= _event_weight_ttH;
+          _event_weight_ttH_mu_down *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be2 *= _event_weight_ttH;
 
         }
 
         else if(abs(_recolep_sel_pdg[0])==13){
 
-          _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
-          _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
+          _event_weight_ttH_ele_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_ele_FR_TT_MC *= _event_weight_ttH;
           _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[0]/(1-_recolep_sel_fakerate_QCD_MC[0]);
           _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[0]/(1-_recolep_sel_fakerate_ttbar_MC[0]);
+
+          _event_weight_ttH_ele_up *= _event_weight_ttH;
+          _event_weight_ttH_ele_down *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be2 *= _event_weight_ttH;
+
+          _event_weight_ttH_mu_up *= _recolep_sel_fakerate_up[0]/(1-_recolep_sel_fakerate_up[0]);
+          _event_weight_ttH_mu_down *= _recolep_sel_fakerate_down[0]/(1-_recolep_sel_fakerate_down[0]);
+          _event_weight_ttH_mu_pt1 *= _recolep_sel_fakerate_pt1[0]/(1-_recolep_sel_fakerate_pt1[0]);
+          _event_weight_ttH_mu_pt2 *= _recolep_sel_fakerate_pt2[0]/(1-_recolep_sel_fakerate_pt2[0]);
+          _event_weight_ttH_mu_be1 *= _recolep_sel_fakerate_be1[0]/(1-_recolep_sel_fakerate_be1[0]);
+          _event_weight_ttH_mu_be2 *= _recolep_sel_fakerate_be2[0]/(1-_recolep_sel_fakerate_be2[0]);
 
         }
 
@@ -5966,17 +7353,45 @@ void split_tree(TString filename_in, TString filename_out,
 
           _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[1]/(1-_recolep_sel_fakerate_QCD_MC[1]);
           _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[1]/(1-_recolep_sel_fakerate_ttbar_MC[1]);
-          _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate[1]/(1-_recolep_sel_fakerate[0]);
-          _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate[1]/(1-_recolep_sel_fakerate[0]);
+          _event_weight_ttH_mu_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_mu_FR_TT_MC *= _event_weight_ttH;
+
+          _event_weight_ttH_ele_up *= _recolep_sel_fakerate_up[1]/(1-_recolep_sel_fakerate_up[1]);
+          _event_weight_ttH_ele_down *= _recolep_sel_fakerate_down[1]/(1-_recolep_sel_fakerate_down[1]);
+          _event_weight_ttH_ele_pt1 *= _recolep_sel_fakerate_pt1[1]/(1-_recolep_sel_fakerate_pt1[1]);
+          _event_weight_ttH_ele_pt2 *= _recolep_sel_fakerate_pt2[1]/(1-_recolep_sel_fakerate_pt2[1]);
+          _event_weight_ttH_ele_be1 *= _recolep_sel_fakerate_be1[1]/(1-_recolep_sel_fakerate_be1[1]);
+          _event_weight_ttH_ele_be2 *= _recolep_sel_fakerate_be2[1]/(1-_recolep_sel_fakerate_be2[1]);
+
+          _event_weight_ttH_mu_up *= _event_weight_ttH;
+          _event_weight_ttH_mu_down *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be2 *= _event_weight_ttH;
 
         }
 
         else if(abs(_recolep_sel_pdg[1])==13){
 
-          _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate[1]/(1-_recolep_sel_fakerate[1]);
-          _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate[1]/(1-_recolep_sel_fakerate[1]);
+          _event_weight_ttH_ele_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_ele_FR_TT_MC *= _event_weight_ttH;
           _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[1]/(1-_recolep_sel_fakerate_QCD_MC[1]);
           _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[1]/(1-_recolep_sel_fakerate_ttbar_MC[1]);
+
+          _event_weight_ttH_ele_up *= _event_weight_ttH;
+          _event_weight_ttH_ele_down *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be2 *= _event_weight_ttH;
+
+          _event_weight_ttH_mu_up *= _recolep_sel_fakerate_up[1]/(1-_recolep_sel_fakerate_up[1]);
+          _event_weight_ttH_mu_down *= _recolep_sel_fakerate_down[1]/(1-_recolep_sel_fakerate_down[1]);
+          _event_weight_ttH_mu_pt1 *= _recolep_sel_fakerate_pt1[1]/(1-_recolep_sel_fakerate_pt1[1]);
+          _event_weight_ttH_mu_pt2 *= _recolep_sel_fakerate_pt2[1]/(1-_recolep_sel_fakerate_pt2[1]);
+          _event_weight_ttH_mu_be1 *= _recolep_sel_fakerate_be1[1]/(1-_recolep_sel_fakerate_be1[1]);
+          _event_weight_ttH_mu_be2 *= _recolep_sel_fakerate_be2[1]/(1-_recolep_sel_fakerate_be2[1]);
 
         }
 
@@ -5994,17 +7409,45 @@ void split_tree(TString filename_in, TString filename_out,
 
           _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[2]/(1-_recolep_sel_fakerate_QCD_MC[2]);
           _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[2]/(1-_recolep_sel_fakerate_ttbar_MC[2]);
-          _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate[2]/(1-_recolep_sel_fakerate[0]);
-          _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate[2]/(1-_recolep_sel_fakerate[0]);
+          _event_weight_ttH_mu_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_mu_FR_TT_MC *= _event_weight_ttH;
+
+          _event_weight_ttH_ele_up *= _recolep_sel_fakerate_up[2]/(1-_recolep_sel_fakerate_up[2]);
+          _event_weight_ttH_ele_down *= _recolep_sel_fakerate_down[2]/(1-_recolep_sel_fakerate_down[2]);
+          _event_weight_ttH_ele_pt1 *= _recolep_sel_fakerate_pt1[2]/(1-_recolep_sel_fakerate_pt1[2]);
+          _event_weight_ttH_ele_pt2 *= _recolep_sel_fakerate_pt2[2]/(1-_recolep_sel_fakerate_pt2[2]);
+          _event_weight_ttH_ele_be1 *= _recolep_sel_fakerate_be1[2]/(1-_recolep_sel_fakerate_be1[2]);
+          _event_weight_ttH_ele_be2 *= _recolep_sel_fakerate_be2[2]/(1-_recolep_sel_fakerate_be2[2]);
+
+          _event_weight_ttH_mu_up *= _event_weight_ttH;
+          _event_weight_ttH_mu_down *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be2 *= _event_weight_ttH;
 
         }
 
         else if(abs(_recolep_sel_pdg[2])==13){
 
-          _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate[2]/(1-_recolep_sel_fakerate[2]);
-          _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate[2]/(1-_recolep_sel_fakerate[2]);
+          _event_weight_ttH_ele_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_ele_FR_TT_MC *= _event_weight_ttH;
           _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[2]/(1-_recolep_sel_fakerate_QCD_MC[2]);
           _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[2]/(1-_recolep_sel_fakerate_ttbar_MC[2]);
+
+          _event_weight_ttH_ele_up *= _event_weight_ttH;
+          _event_weight_ttH_ele_down *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be2 *= _event_weight_ttH;
+
+          _event_weight_ttH_mu_up *= _recolep_sel_fakerate_up[2]/(1-_recolep_sel_fakerate_up[2]);
+          _event_weight_ttH_mu_down *= _recolep_sel_fakerate_down[2]/(1-_recolep_sel_fakerate_down[2]);
+          _event_weight_ttH_mu_pt1 *= _recolep_sel_fakerate_pt1[2]/(1-_recolep_sel_fakerate_pt1[2]);
+          _event_weight_ttH_mu_pt2 *= _recolep_sel_fakerate_pt2[2]/(1-_recolep_sel_fakerate_pt2[2]);
+          _event_weight_ttH_mu_be1 *= _recolep_sel_fakerate_be1[2]/(1-_recolep_sel_fakerate_be1[2]);
+          _event_weight_ttH_mu_be2 *= _recolep_sel_fakerate_be2[2]/(1-_recolep_sel_fakerate_be2[2]);
 
         }
 
@@ -6062,6 +7505,12 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_fakerate.clear();
     _recolep_sel_fakerate_QCD_MC.clear();
     _recolep_sel_fakerate_ttbar_MC.clear();
+    _recolep_sel_fakerate_up.clear();
+    _recolep_sel_fakerate_down.clear();
+    _recolep_sel_fakerate_pt1.clear();
+    _recolep_sel_fakerate_pt2.clear();
+    _recolep_sel_fakerate_be1.clear();
+    _recolep_sel_fakerate_be2.clear();
     _recolep_sel_QFrate.clear();
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
@@ -6104,6 +7553,20 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_FR_QCD_MC = 1;
     _event_weight_ttH_mu_FR_TT_MC = 1;
 
+    _event_weight_ttH_ele_up = 1;
+    _event_weight_ttH_ele_down = 1;
+    _event_weight_ttH_ele_pt1 = 1;
+    _event_weight_ttH_ele_pt2 = 1;
+    _event_weight_ttH_ele_be1 = 1;
+    _event_weight_ttH_ele_be2 = 1;
+
+    _event_weight_ttH_mu_up = 1;
+    _event_weight_ttH_mu_down = 1;
+    _event_weight_ttH_mu_pt1 = 1;
+    _event_weight_ttH_mu_pt2 = 1;
+    _event_weight_ttH_mu_be1 = 1;
+    _event_weight_ttH_mu_be2 = 1;
+
     n_fake = 0;
 
     if(sig_4l_fake){
@@ -6126,6 +7589,12 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_fakerate.push_back(_recolep_fakeable_fakerate[i_lep]);
         _recolep_sel_fakerate_QCD_MC.push_back(_recolep_fakeable_fakerate_QCD_MC[i_lep]);
         _recolep_sel_fakerate_ttbar_MC.push_back(_recolep_fakeable_fakerate_ttbar_MC[i_lep]);
+        _recolep_sel_fakerate_up.push_back(_recolep_fakeable_fakerate_up[i_lep]);
+        _recolep_sel_fakerate_down.push_back(_recolep_fakeable_fakerate_down[i_lep]);
+        _recolep_sel_fakerate_pt1.push_back(_recolep_fakeable_fakerate_pt1[i_lep]);
+        _recolep_sel_fakerate_pt2.push_back(_recolep_fakeable_fakerate_pt2[i_lep]);
+        _recolep_sel_fakerate_be1.push_back(_recolep_fakeable_fakerate_be1[i_lep]);
+        _recolep_sel_fakerate_be2.push_back(_recolep_fakeable_fakerate_be2[i_lep]);
         _recolep_sel_QFrate.push_back(_recolep_fakeable_QFrate[i_lep]);
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
@@ -6146,17 +7615,45 @@ void split_tree(TString filename_in, TString filename_out,
 
           _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[0]/(1-_recolep_sel_fakerate_QCD_MC[0]);
           _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[0]/(1-_recolep_sel_fakerate_ttbar_MC[0]);
-          _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
-          _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
+          _event_weight_ttH_mu_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_mu_FR_TT_MC *= _event_weight_ttH;
+
+          _event_weight_ttH_ele_up *= _recolep_sel_fakerate_up[0]/(1-_recolep_sel_fakerate_up[0]);
+          _event_weight_ttH_ele_down *= _recolep_sel_fakerate_down[0]/(1-_recolep_sel_fakerate_down[0]);
+          _event_weight_ttH_ele_pt1 *= _recolep_sel_fakerate_pt1[0]/(1-_recolep_sel_fakerate_pt1[0]);
+          _event_weight_ttH_ele_pt2 *= _recolep_sel_fakerate_pt2[0]/(1-_recolep_sel_fakerate_pt2[0]);
+          _event_weight_ttH_ele_be1 *= _recolep_sel_fakerate_be1[0]/(1-_recolep_sel_fakerate_be1[0]);
+          _event_weight_ttH_ele_be2 *= _recolep_sel_fakerate_be2[0]/(1-_recolep_sel_fakerate_be2[0]);
+
+          _event_weight_ttH_mu_up *= _event_weight_ttH;
+          _event_weight_ttH_mu_down *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be2 *= _event_weight_ttH;
 
         }
 
         else if(abs(_recolep_sel_pdg[0])==13){
 
-          _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
-          _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
+          _event_weight_ttH_ele_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_ele_FR_TT_MC *= _event_weight_ttH;
           _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[0]/(1-_recolep_sel_fakerate_QCD_MC[0]);
           _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[0]/(1-_recolep_sel_fakerate_ttbar_MC[0]);
+
+          _event_weight_ttH_ele_up *= _event_weight_ttH;
+          _event_weight_ttH_ele_down *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be2 *= _event_weight_ttH;
+
+          _event_weight_ttH_mu_up *= _recolep_sel_fakerate_up[0]/(1-_recolep_sel_fakerate_up[0]);
+          _event_weight_ttH_mu_down *= _recolep_sel_fakerate_down[0]/(1-_recolep_sel_fakerate_down[0]);
+          _event_weight_ttH_mu_pt1 *= _recolep_sel_fakerate_pt1[0]/(1-_recolep_sel_fakerate_pt1[0]);
+          _event_weight_ttH_mu_pt2 *= _recolep_sel_fakerate_pt2[0]/(1-_recolep_sel_fakerate_pt2[0]);
+          _event_weight_ttH_mu_be1 *= _recolep_sel_fakerate_be1[0]/(1-_recolep_sel_fakerate_be1[0]);
+          _event_weight_ttH_mu_be2 *= _recolep_sel_fakerate_be2[0]/(1-_recolep_sel_fakerate_be2[0]);
 
         }
 
@@ -6174,17 +7671,45 @@ void split_tree(TString filename_in, TString filename_out,
 
           _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[1]/(1-_recolep_sel_fakerate_QCD_MC[1]);
           _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[1]/(1-_recolep_sel_fakerate_ttbar_MC[1]);
-          _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate[1]/(1-_recolep_sel_fakerate[0]);
-          _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate[1]/(1-_recolep_sel_fakerate[0]);
+          _event_weight_ttH_mu_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_mu_FR_TT_MC *= _event_weight_ttH;
+
+          _event_weight_ttH_ele_up *= _recolep_sel_fakerate_up[1]/(1-_recolep_sel_fakerate_up[1]);
+          _event_weight_ttH_ele_down *= _recolep_sel_fakerate_down[1]/(1-_recolep_sel_fakerate_down[1]);
+          _event_weight_ttH_ele_pt1 *= _recolep_sel_fakerate_pt1[1]/(1-_recolep_sel_fakerate_pt1[1]);
+          _event_weight_ttH_ele_pt2 *= _recolep_sel_fakerate_pt2[1]/(1-_recolep_sel_fakerate_pt2[1]);
+          _event_weight_ttH_ele_be1 *= _recolep_sel_fakerate_be1[1]/(1-_recolep_sel_fakerate_be1[1]);
+          _event_weight_ttH_ele_be2 *= _recolep_sel_fakerate_be2[1]/(1-_recolep_sel_fakerate_be2[1]);
+
+          _event_weight_ttH_mu_up *= _event_weight_ttH;
+          _event_weight_ttH_mu_down *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be2 *= _event_weight_ttH;
 
         }
 
         else if(abs(_recolep_sel_pdg[1])==13){
 
-          _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate[1]/(1-_recolep_sel_fakerate[1]);
-          _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate[1]/(1-_recolep_sel_fakerate[1]);
+          _event_weight_ttH_ele_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_ele_FR_TT_MC *= _event_weight_ttH;
           _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[1]/(1-_recolep_sel_fakerate_QCD_MC[1]);
           _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[1]/(1-_recolep_sel_fakerate_ttbar_MC[1]);
+
+          _event_weight_ttH_ele_up *= _event_weight_ttH;
+          _event_weight_ttH_ele_down *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be2 *= _event_weight_ttH;
+
+          _event_weight_ttH_mu_up *= _recolep_sel_fakerate_up[1]/(1-_recolep_sel_fakerate_up[1]);
+          _event_weight_ttH_mu_down *= _recolep_sel_fakerate_down[1]/(1-_recolep_sel_fakerate_down[1]);
+          _event_weight_ttH_mu_pt1 *= _recolep_sel_fakerate_pt1[1]/(1-_recolep_sel_fakerate_pt1[1]);
+          _event_weight_ttH_mu_pt2 *= _recolep_sel_fakerate_pt2[1]/(1-_recolep_sel_fakerate_pt2[1]);
+          _event_weight_ttH_mu_be1 *= _recolep_sel_fakerate_be1[1]/(1-_recolep_sel_fakerate_be1[1]);
+          _event_weight_ttH_mu_be2 *= _recolep_sel_fakerate_be2[1]/(1-_recolep_sel_fakerate_be2[1]);
 
         }
 
@@ -6202,17 +7727,45 @@ void split_tree(TString filename_in, TString filename_out,
 
           _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[2]/(1-_recolep_sel_fakerate_QCD_MC[2]);
           _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[2]/(1-_recolep_sel_fakerate_ttbar_MC[2]);
-          _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate[2]/(1-_recolep_sel_fakerate[0]);
-          _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate[2]/(1-_recolep_sel_fakerate[0]);
+          _event_weight_ttH_mu_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_mu_FR_TT_MC *= _event_weight_ttH;
+
+          _event_weight_ttH_ele_up *= _recolep_sel_fakerate_up[2]/(1-_recolep_sel_fakerate_up[2]);
+          _event_weight_ttH_ele_down *= _recolep_sel_fakerate_down[2]/(1-_recolep_sel_fakerate_down[2]);
+          _event_weight_ttH_ele_pt1 *= _recolep_sel_fakerate_pt1[2]/(1-_recolep_sel_fakerate_pt1[2]);
+          _event_weight_ttH_ele_pt2 *= _recolep_sel_fakerate_pt2[2]/(1-_recolep_sel_fakerate_pt2[2]);
+          _event_weight_ttH_ele_be1 *= _recolep_sel_fakerate_be1[2]/(1-_recolep_sel_fakerate_be1[2]);
+          _event_weight_ttH_ele_be2 *= _recolep_sel_fakerate_be2[2]/(1-_recolep_sel_fakerate_be2[2]);
+
+          _event_weight_ttH_mu_up *= _event_weight_ttH;
+          _event_weight_ttH_mu_down *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be2 *= _event_weight_ttH;
 
         }
 
         else if(abs(_recolep_sel_pdg[2])==13){
 
-          _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate[2]/(1-_recolep_sel_fakerate[2]);
-          _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate[2]/(1-_recolep_sel_fakerate[2]);
+          _event_weight_ttH_ele_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_ele_FR_TT_MC *= _event_weight_ttH;
           _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[2]/(1-_recolep_sel_fakerate_QCD_MC[2]);
           _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[2]/(1-_recolep_sel_fakerate_ttbar_MC[2]);
+
+          _event_weight_ttH_ele_up *= _event_weight_ttH;
+          _event_weight_ttH_ele_down *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be2 *= _event_weight_ttH;
+
+          _event_weight_ttH_mu_up *= _recolep_sel_fakerate_up[2]/(1-_recolep_sel_fakerate_up[2]);
+          _event_weight_ttH_mu_down *= _recolep_sel_fakerate_down[2]/(1-_recolep_sel_fakerate_down[2]);
+          _event_weight_ttH_mu_pt1 *= _recolep_sel_fakerate_pt1[2]/(1-_recolep_sel_fakerate_pt1[2]);
+          _event_weight_ttH_mu_pt2 *= _recolep_sel_fakerate_pt2[2]/(1-_recolep_sel_fakerate_pt2[2]);
+          _event_weight_ttH_mu_be1 *= _recolep_sel_fakerate_be1[2]/(1-_recolep_sel_fakerate_be1[2]);
+          _event_weight_ttH_mu_be2 *= _recolep_sel_fakerate_be2[2]/(1-_recolep_sel_fakerate_be2[2]);
 
         }
 
@@ -6230,17 +7783,45 @@ void split_tree(TString filename_in, TString filename_out,
 
           _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[3]/(1-_recolep_sel_fakerate_QCD_MC[3]);
           _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[3]/(1-_recolep_sel_fakerate_ttbar_MC[3]);
-          _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate[3]/(1-_recolep_sel_fakerate[0]);
-          _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate[3]/(1-_recolep_sel_fakerate[0]);
+          _event_weight_ttH_mu_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_mu_FR_TT_MC *= _event_weight_ttH;
+
+          _event_weight_ttH_ele_up *= _recolep_sel_fakerate_up[3]/(1-_recolep_sel_fakerate_up[3]);
+          _event_weight_ttH_ele_down *= _recolep_sel_fakerate_down[3]/(1-_recolep_sel_fakerate_down[3]);
+          _event_weight_ttH_ele_pt1 *= _recolep_sel_fakerate_pt1[3]/(1-_recolep_sel_fakerate_pt1[3]);
+          _event_weight_ttH_ele_pt2 *= _recolep_sel_fakerate_pt2[3]/(1-_recolep_sel_fakerate_pt2[3]);
+          _event_weight_ttH_ele_be1 *= _recolep_sel_fakerate_be1[3]/(1-_recolep_sel_fakerate_be1[3]);
+          _event_weight_ttH_ele_be2 *= _recolep_sel_fakerate_be2[3]/(1-_recolep_sel_fakerate_be2[3]);
+
+          _event_weight_ttH_mu_up *= _event_weight_ttH;
+          _event_weight_ttH_mu_down *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be2 *= _event_weight_ttH;
 
         }
 
         else if(abs(_recolep_sel_pdg[3])==13){
 
-          _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate[3]/(1-_recolep_sel_fakerate[3]);
-          _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate[3]/(1-_recolep_sel_fakerate[3]);
+          _event_weight_ttH_ele_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_ele_FR_TT_MC *= _event_weight_ttH;
           _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[3]/(1-_recolep_sel_fakerate_QCD_MC[3]);
           _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[3]/(1-_recolep_sel_fakerate_ttbar_MC[3]);
+
+          _event_weight_ttH_ele_up *= _event_weight_ttH;
+          _event_weight_ttH_ele_down *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be2 *= _event_weight_ttH;
+
+          _event_weight_ttH_mu_up *= _recolep_sel_fakerate_up[3]/(1-_recolep_sel_fakerate_up[3]);
+          _event_weight_ttH_mu_down *= _recolep_sel_fakerate_down[3]/(1-_recolep_sel_fakerate_down[3]);
+          _event_weight_ttH_mu_pt1 *= _recolep_sel_fakerate_pt1[3]/(1-_recolep_sel_fakerate_pt1[3]);
+          _event_weight_ttH_mu_pt2 *= _recolep_sel_fakerate_pt2[3]/(1-_recolep_sel_fakerate_pt2[3]);
+          _event_weight_ttH_mu_be1 *= _recolep_sel_fakerate_be1[3]/(1-_recolep_sel_fakerate_be1[3]);
+          _event_weight_ttH_mu_be2 *= _recolep_sel_fakerate_be2[3]/(1-_recolep_sel_fakerate_be2[3]);
 
         }
 
@@ -6282,6 +7863,12 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_fakerate.clear();
     _recolep_sel_fakerate_QCD_MC.clear();
     _recolep_sel_fakerate_ttbar_MC.clear();
+    _recolep_sel_fakerate_up.clear();
+    _recolep_sel_fakerate_down.clear();
+    _recolep_sel_fakerate_pt1.clear();
+    _recolep_sel_fakerate_pt2.clear();
+    _recolep_sel_fakerate_be1.clear();
+    _recolep_sel_fakerate_be2.clear();
     _recolep_sel_QFrate.clear();
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
@@ -6324,6 +7911,20 @@ void split_tree(TString filename_in, TString filename_out,
     _event_weight_ttH_mu_FR_QCD_MC = 1;
     _event_weight_ttH_mu_FR_TT_MC = 1;
 
+    _event_weight_ttH_ele_up = 1;
+    _event_weight_ttH_ele_down = 1;
+    _event_weight_ttH_ele_pt1 = 1;
+    _event_weight_ttH_ele_pt2 = 1;
+    _event_weight_ttH_ele_be1 = 1;
+    _event_weight_ttH_ele_be2 = 1;
+
+    _event_weight_ttH_mu_up = 1;
+    _event_weight_ttH_mu_down = 1;
+    _event_weight_ttH_mu_pt1 = 1;
+    _event_weight_ttH_mu_pt2 = 1;
+    _event_weight_ttH_mu_be1 = 1;
+    _event_weight_ttH_mu_be2 = 1;
+
     n_fake = 0;
 
     if(sig_ZZ_CR_fake){
@@ -6346,6 +7947,12 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_fakerate.push_back(_recolep_fakeable_fakerate[i_lep]);
         _recolep_sel_fakerate_QCD_MC.push_back(_recolep_fakeable_fakerate_QCD_MC[i_lep]);
         _recolep_sel_fakerate_ttbar_MC.push_back(_recolep_fakeable_fakerate_ttbar_MC[i_lep]);
+        _recolep_sel_fakerate_up.push_back(_recolep_fakeable_fakerate_up[i_lep]);
+        _recolep_sel_fakerate_down.push_back(_recolep_fakeable_fakerate_down[i_lep]);
+        _recolep_sel_fakerate_pt1.push_back(_recolep_fakeable_fakerate_pt1[i_lep]);
+        _recolep_sel_fakerate_pt2.push_back(_recolep_fakeable_fakerate_pt2[i_lep]);
+        _recolep_sel_fakerate_be1.push_back(_recolep_fakeable_fakerate_be1[i_lep]);
+        _recolep_sel_fakerate_be2.push_back(_recolep_fakeable_fakerate_be2[i_lep]);
         _recolep_sel_QFrate.push_back(_recolep_fakeable_QFrate[i_lep]);
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
@@ -6366,17 +7973,45 @@ void split_tree(TString filename_in, TString filename_out,
 
           _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[0]/(1-_recolep_sel_fakerate_QCD_MC[0]);
           _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[0]/(1-_recolep_sel_fakerate_ttbar_MC[0]);
-          _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
-          _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
+          _event_weight_ttH_mu_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_mu_FR_TT_MC *= _event_weight_ttH;
+
+          _event_weight_ttH_ele_up *= _recolep_sel_fakerate_up[0]/(1-_recolep_sel_fakerate_up[0]);
+          _event_weight_ttH_ele_down *= _recolep_sel_fakerate_down[0]/(1-_recolep_sel_fakerate_down[0]);
+          _event_weight_ttH_ele_pt1 *= _recolep_sel_fakerate_pt1[0]/(1-_recolep_sel_fakerate_pt1[0]);
+          _event_weight_ttH_ele_pt2 *= _recolep_sel_fakerate_pt2[0]/(1-_recolep_sel_fakerate_pt2[0]);
+          _event_weight_ttH_ele_be1 *= _recolep_sel_fakerate_be1[0]/(1-_recolep_sel_fakerate_be1[0]);
+          _event_weight_ttH_ele_be2 *= _recolep_sel_fakerate_be2[0]/(1-_recolep_sel_fakerate_be2[0]);
+
+          _event_weight_ttH_mu_up *= _event_weight_ttH;
+          _event_weight_ttH_mu_down *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be2 *= _event_weight_ttH;
 
         }
 
         else if(abs(_recolep_sel_pdg[0])==13){
 
-          _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
-          _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate[0]/(1-_recolep_sel_fakerate[0]);
+          _event_weight_ttH_ele_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_ele_FR_TT_MC *= _event_weight_ttH;
           _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[0]/(1-_recolep_sel_fakerate_QCD_MC[0]);
           _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[0]/(1-_recolep_sel_fakerate_ttbar_MC[0]);
+
+          _event_weight_ttH_ele_up *= _event_weight_ttH;
+          _event_weight_ttH_ele_down *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be2 *= _event_weight_ttH;
+
+          _event_weight_ttH_mu_up *= _recolep_sel_fakerate_up[0]/(1-_recolep_sel_fakerate_up[0]);
+          _event_weight_ttH_mu_down *= _recolep_sel_fakerate_down[0]/(1-_recolep_sel_fakerate_down[0]);
+          _event_weight_ttH_mu_pt1 *= _recolep_sel_fakerate_pt1[0]/(1-_recolep_sel_fakerate_pt1[0]);
+          _event_weight_ttH_mu_pt2 *= _recolep_sel_fakerate_pt2[0]/(1-_recolep_sel_fakerate_pt2[0]);
+          _event_weight_ttH_mu_be1 *= _recolep_sel_fakerate_be1[0]/(1-_recolep_sel_fakerate_be1[0]);
+          _event_weight_ttH_mu_be2 *= _recolep_sel_fakerate_be2[0]/(1-_recolep_sel_fakerate_be2[0]);
 
         }
 
@@ -6394,17 +8029,45 @@ void split_tree(TString filename_in, TString filename_out,
 
           _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[1]/(1-_recolep_sel_fakerate_QCD_MC[1]);
           _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[1]/(1-_recolep_sel_fakerate_ttbar_MC[1]);
-          _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate[1]/(1-_recolep_sel_fakerate[0]);
-          _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate[1]/(1-_recolep_sel_fakerate[0]);
+          _event_weight_ttH_mu_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_mu_FR_TT_MC *= _event_weight_ttH;
+
+          _event_weight_ttH_ele_up *= _recolep_sel_fakerate_up[1]/(1-_recolep_sel_fakerate_up[1]);
+          _event_weight_ttH_ele_down *= _recolep_sel_fakerate_down[1]/(1-_recolep_sel_fakerate_down[1]);
+          _event_weight_ttH_ele_pt1 *= _recolep_sel_fakerate_pt1[1]/(1-_recolep_sel_fakerate_pt1[1]);
+          _event_weight_ttH_ele_pt2 *= _recolep_sel_fakerate_pt2[1]/(1-_recolep_sel_fakerate_pt2[1]);
+          _event_weight_ttH_ele_be1 *= _recolep_sel_fakerate_be1[1]/(1-_recolep_sel_fakerate_be1[1]);
+          _event_weight_ttH_ele_be2 *= _recolep_sel_fakerate_be2[1]/(1-_recolep_sel_fakerate_be2[1]);
+
+          _event_weight_ttH_mu_up *= _event_weight_ttH;
+          _event_weight_ttH_mu_down *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be2 *= _event_weight_ttH;
 
         }
 
         else if(abs(_recolep_sel_pdg[1])==13){
 
-          _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate[1]/(1-_recolep_sel_fakerate[1]);
-          _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate[1]/(1-_recolep_sel_fakerate[1]);
+          _event_weight_ttH_ele_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_ele_FR_TT_MC *= _event_weight_ttH;
           _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[1]/(1-_recolep_sel_fakerate_QCD_MC[1]);
           _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[1]/(1-_recolep_sel_fakerate_ttbar_MC[1]);
+
+          _event_weight_ttH_ele_up *= _event_weight_ttH;
+          _event_weight_ttH_ele_down *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be2 *= _event_weight_ttH;
+
+          _event_weight_ttH_mu_up *= _recolep_sel_fakerate_up[1]/(1-_recolep_sel_fakerate_up[1]);
+          _event_weight_ttH_mu_down *= _recolep_sel_fakerate_down[1]/(1-_recolep_sel_fakerate_down[1]);
+          _event_weight_ttH_mu_pt1 *= _recolep_sel_fakerate_pt1[1]/(1-_recolep_sel_fakerate_pt1[1]);
+          _event_weight_ttH_mu_pt2 *= _recolep_sel_fakerate_pt2[1]/(1-_recolep_sel_fakerate_pt2[1]);
+          _event_weight_ttH_mu_be1 *= _recolep_sel_fakerate_be1[1]/(1-_recolep_sel_fakerate_be1[1]);
+          _event_weight_ttH_mu_be2 *= _recolep_sel_fakerate_be2[1]/(1-_recolep_sel_fakerate_be2[1]);
 
         }
 
@@ -6422,17 +8085,45 @@ void split_tree(TString filename_in, TString filename_out,
 
           _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[2]/(1-_recolep_sel_fakerate_QCD_MC[2]);
           _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[2]/(1-_recolep_sel_fakerate_ttbar_MC[2]);
-          _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate[2]/(1-_recolep_sel_fakerate[0]);
-          _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate[2]/(1-_recolep_sel_fakerate[0]);
+          _event_weight_ttH_mu_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_mu_FR_TT_MC *= _event_weight_ttH;
+
+          _event_weight_ttH_ele_up *= _recolep_sel_fakerate_up[2]/(1-_recolep_sel_fakerate_up[2]);
+          _event_weight_ttH_ele_down *= _recolep_sel_fakerate_down[2]/(1-_recolep_sel_fakerate_down[2]);
+          _event_weight_ttH_ele_pt1 *= _recolep_sel_fakerate_pt1[2]/(1-_recolep_sel_fakerate_pt1[2]);
+          _event_weight_ttH_ele_pt2 *= _recolep_sel_fakerate_pt2[2]/(1-_recolep_sel_fakerate_pt2[2]);
+          _event_weight_ttH_ele_be1 *= _recolep_sel_fakerate_be1[2]/(1-_recolep_sel_fakerate_be1[2]);
+          _event_weight_ttH_ele_be2 *= _recolep_sel_fakerate_be2[2]/(1-_recolep_sel_fakerate_be2[2]);
+
+          _event_weight_ttH_mu_up *= _event_weight_ttH;
+          _event_weight_ttH_mu_down *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be2 *= _event_weight_ttH;
 
         }
 
         else if(abs(_recolep_sel_pdg[2])==13){
 
-          _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate[2]/(1-_recolep_sel_fakerate[2]);
-          _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate[2]/(1-_recolep_sel_fakerate[2]);
+          _event_weight_ttH_ele_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_ele_FR_TT_MC *= _event_weight_ttH;
           _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[2]/(1-_recolep_sel_fakerate_QCD_MC[2]);
           _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[2]/(1-_recolep_sel_fakerate_ttbar_MC[2]);
+
+          _event_weight_ttH_ele_up *= _event_weight_ttH;
+          _event_weight_ttH_ele_down *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be2 *= _event_weight_ttH;
+
+          _event_weight_ttH_mu_up *= _recolep_sel_fakerate_up[2]/(1-_recolep_sel_fakerate_up[2]);
+          _event_weight_ttH_mu_down *= _recolep_sel_fakerate_down[2]/(1-_recolep_sel_fakerate_down[2]);
+          _event_weight_ttH_mu_pt1 *= _recolep_sel_fakerate_pt1[2]/(1-_recolep_sel_fakerate_pt1[2]);
+          _event_weight_ttH_mu_pt2 *= _recolep_sel_fakerate_pt2[2]/(1-_recolep_sel_fakerate_pt2[2]);
+          _event_weight_ttH_mu_be1 *= _recolep_sel_fakerate_be1[2]/(1-_recolep_sel_fakerate_be1[2]);
+          _event_weight_ttH_mu_be2 *= _recolep_sel_fakerate_be2[2]/(1-_recolep_sel_fakerate_be2[2]);
 
         }
 
@@ -6450,17 +8141,45 @@ void split_tree(TString filename_in, TString filename_out,
 
           _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[3]/(1-_recolep_sel_fakerate_QCD_MC[3]);
           _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[3]/(1-_recolep_sel_fakerate_ttbar_MC[3]);
-          _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate[3]/(1-_recolep_sel_fakerate[0]);
-          _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate[3]/(1-_recolep_sel_fakerate[0]);
+          _event_weight_ttH_mu_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_mu_FR_TT_MC *= _event_weight_ttH;
+
+          _event_weight_ttH_ele_up *= _recolep_sel_fakerate_up[3]/(1-_recolep_sel_fakerate_up[3]);
+          _event_weight_ttH_ele_down *= _recolep_sel_fakerate_down[3]/(1-_recolep_sel_fakerate_down[3]);
+          _event_weight_ttH_ele_pt1 *= _recolep_sel_fakerate_pt1[3]/(1-_recolep_sel_fakerate_pt1[3]);
+          _event_weight_ttH_ele_pt2 *= _recolep_sel_fakerate_pt2[3]/(1-_recolep_sel_fakerate_pt2[3]);
+          _event_weight_ttH_ele_be1 *= _recolep_sel_fakerate_be1[3]/(1-_recolep_sel_fakerate_be1[3]);
+          _event_weight_ttH_ele_be2 *= _recolep_sel_fakerate_be2[3]/(1-_recolep_sel_fakerate_be2[3]);
+
+          _event_weight_ttH_mu_up *= _event_weight_ttH;
+          _event_weight_ttH_mu_down *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be1 *= _event_weight_ttH;
+          _event_weight_ttH_mu_be2 *= _event_weight_ttH;
 
         }
 
         else if(abs(_recolep_sel_pdg[3])==13){
 
-          _event_weight_ttH_ele_FR_QCD_MC *= _recolep_sel_fakerate[3]/(1-_recolep_sel_fakerate[3]);
-          _event_weight_ttH_ele_FR_TT_MC *= _recolep_sel_fakerate[3]/(1-_recolep_sel_fakerate[3]);
+          _event_weight_ttH_ele_FR_QCD_MC *= _event_weight_ttH;
+          _event_weight_ttH_ele_FR_TT_MC *= _event_weight_ttH;
           _event_weight_ttH_mu_FR_QCD_MC *= _recolep_sel_fakerate_QCD_MC[3]/(1-_recolep_sel_fakerate_QCD_MC[3]);
           _event_weight_ttH_mu_FR_TT_MC *= _recolep_sel_fakerate_ttbar_MC[3]/(1-_recolep_sel_fakerate_ttbar_MC[3]);
+
+          _event_weight_ttH_ele_up *= _event_weight_ttH;
+          _event_weight_ttH_ele_down *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_pt2 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be1 *= _event_weight_ttH;
+          _event_weight_ttH_ele_be2 *= _event_weight_ttH;
+
+          _event_weight_ttH_mu_up *= _recolep_sel_fakerate_up[3]/(1-_recolep_sel_fakerate_up[3]);
+          _event_weight_ttH_mu_down *= _recolep_sel_fakerate_down[3]/(1-_recolep_sel_fakerate_down[3]);
+          _event_weight_ttH_mu_pt1 *= _recolep_sel_fakerate_pt1[3]/(1-_recolep_sel_fakerate_pt1[3]);
+          _event_weight_ttH_mu_pt2 *= _recolep_sel_fakerate_pt2[3]/(1-_recolep_sel_fakerate_pt2[3]);
+          _event_weight_ttH_mu_be1 *= _recolep_sel_fakerate_be1[3]/(1-_recolep_sel_fakerate_be1[3]);
+          _event_weight_ttH_mu_be2 *= _recolep_sel_fakerate_be2[3]/(1-_recolep_sel_fakerate_be2[3]);
 
         }
 
@@ -6506,6 +8225,12 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_fakerate.clear();
     _recolep_sel_fakerate_QCD_MC.clear();
     _recolep_sel_fakerate_ttbar_MC.clear();
+    _recolep_sel_fakerate_up.clear();
+    _recolep_sel_fakerate_down.clear();
+    _recolep_sel_fakerate_pt1.clear();
+    _recolep_sel_fakerate_pt2.clear();
+    _recolep_sel_fakerate_be1.clear();
+    _recolep_sel_fakerate_be2.clear();
     _recolep_sel_QFrate.clear();
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
@@ -6540,6 +8265,28 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.clear();
     _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.clear();
 
+    _event_weight_ttH = 0;
+    _event_weight_ttH_FR_QCD_MC = 0;
+    _event_weight_ttH_FR_TT_MC = 0;
+    _event_weight_ttH_ele_FR_QCD_MC = 0;
+    _event_weight_ttH_ele_FR_TT_MC = 0;
+    _event_weight_ttH_mu_FR_QCD_MC = 0;
+    _event_weight_ttH_mu_FR_TT_MC = 0;
+
+    _event_weight_ttH_ele_up = 0;
+    _event_weight_ttH_ele_down = 0;
+    _event_weight_ttH_ele_pt1 = 0;
+    _event_weight_ttH_ele_pt2 = 0;
+    _event_weight_ttH_ele_be1 = 0;
+    _event_weight_ttH_ele_be2 = 0;
+
+    _event_weight_ttH_mu_up = 0;
+    _event_weight_ttH_mu_down = 0;
+    _event_weight_ttH_mu_pt1 = 0;
+    _event_weight_ttH_mu_pt2 = 0;
+    _event_weight_ttH_mu_be1 = 0;
+    _event_weight_ttH_mu_be2 = 0;
+
     if (sig_2lss_flip_ttH || sig_2lss_flip_tH) {
 
       _n_recolep_sel = 2;
@@ -6560,6 +8307,12 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_fakerate.push_back(_recolep_fakeable_fakerate[i_lep]);
         _recolep_sel_fakerate_QCD_MC.push_back(_recolep_fakeable_fakerate_QCD_MC[i_lep]);
         _recolep_sel_fakerate_ttbar_MC.push_back(_recolep_fakeable_fakerate_ttbar_MC[i_lep]);
+        _recolep_sel_fakerate_up.push_back(_recolep_fakeable_fakerate_up[i_lep]);
+        _recolep_sel_fakerate_down.push_back(_recolep_fakeable_fakerate_down[i_lep]);
+        _recolep_sel_fakerate_pt1.push_back(_recolep_fakeable_fakerate_pt1[i_lep]);
+        _recolep_sel_fakerate_pt2.push_back(_recolep_fakeable_fakerate_pt2[i_lep]);
+        _recolep_sel_fakerate_be1.push_back(_recolep_fakeable_fakerate_be1[i_lep]);
+        _recolep_sel_fakerate_be2.push_back(_recolep_fakeable_fakerate_be2[i_lep]);
         _recolep_sel_QFrate.push_back(_recolep_fakeable_QFrate[i_lep]);
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
@@ -6596,6 +8349,12 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_fakerate.clear();
     _recolep_sel_fakerate_QCD_MC.clear();
     _recolep_sel_fakerate_ttbar_MC.clear();
+    _recolep_sel_fakerate_up.clear();
+    _recolep_sel_fakerate_down.clear();
+    _recolep_sel_fakerate_pt1.clear();
+    _recolep_sel_fakerate_pt2.clear();
+    _recolep_sel_fakerate_be1.clear();
+    _recolep_sel_fakerate_be2.clear();
     _recolep_sel_QFrate.clear();
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
@@ -6630,6 +8389,28 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.clear();
     _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.clear();
 
+    _event_weight_ttH = 0;
+    _event_weight_ttH_FR_QCD_MC = 0;
+    _event_weight_ttH_FR_TT_MC = 0;
+    _event_weight_ttH_ele_FR_QCD_MC = 0;
+    _event_weight_ttH_ele_FR_TT_MC = 0;
+    _event_weight_ttH_mu_FR_QCD_MC = 0;
+    _event_weight_ttH_mu_FR_TT_MC = 0;
+
+    _event_weight_ttH_ele_up = 0;
+    _event_weight_ttH_ele_down = 0;
+    _event_weight_ttH_ele_pt1 = 0;
+    _event_weight_ttH_ele_pt2 = 0;
+    _event_weight_ttH_ele_be1 = 0;
+    _event_weight_ttH_ele_be2 = 0;
+
+    _event_weight_ttH_mu_up = 0;
+    _event_weight_ttH_mu_down = 0;
+    _event_weight_ttH_mu_pt1 = 0;
+    _event_weight_ttH_mu_pt2 = 0;
+    _event_weight_ttH_mu_be1 = 0;
+    _event_weight_ttH_mu_be2 = 0;
+
     if (sig_ttW_CR_flip) {
 
       _n_recolep_sel = 2;
@@ -6650,6 +8431,12 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_fakerate.push_back(_recolep_fakeable_fakerate[i_lep]);
         _recolep_sel_fakerate_QCD_MC.push_back(_recolep_fakeable_fakerate_QCD_MC[i_lep]);
         _recolep_sel_fakerate_ttbar_MC.push_back(_recolep_fakeable_fakerate_ttbar_MC[i_lep]);
+        _recolep_sel_fakerate_up.push_back(_recolep_fakeable_fakerate_up[i_lep]);
+        _recolep_sel_fakerate_down.push_back(_recolep_fakeable_fakerate_down[i_lep]);
+        _recolep_sel_fakerate_pt1.push_back(_recolep_fakeable_fakerate_pt1[i_lep]);
+        _recolep_sel_fakerate_pt2.push_back(_recolep_fakeable_fakerate_pt2[i_lep]);
+        _recolep_sel_fakerate_be1.push_back(_recolep_fakeable_fakerate_be1[i_lep]);
+        _recolep_sel_fakerate_be2.push_back(_recolep_fakeable_fakerate_be2[i_lep]);
         _recolep_sel_QFrate.push_back(_recolep_fakeable_QFrate[i_lep]);
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
@@ -6685,6 +8472,12 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_fakerate.clear();
     _recolep_sel_fakerate_QCD_MC.clear();
     _recolep_sel_fakerate_ttbar_MC.clear();
+    _recolep_sel_fakerate_up.clear();
+    _recolep_sel_fakerate_down.clear();
+    _recolep_sel_fakerate_pt1.clear();
+    _recolep_sel_fakerate_pt2.clear();
+    _recolep_sel_fakerate_be1.clear();
+    _recolep_sel_fakerate_be2.clear();
     _recolep_sel_QFrate.clear();
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
@@ -6719,6 +8512,28 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.clear();
     _recotauh_sel_fakerate_byTightIsolationMVArun2v1DBdR03oldDMwLT.clear();
 
+    _event_weight_ttH = 0;
+    _event_weight_ttH_FR_QCD_MC = 0;
+    _event_weight_ttH_FR_TT_MC = 0;
+    _event_weight_ttH_ele_FR_QCD_MC = 0;
+    _event_weight_ttH_ele_FR_TT_MC = 0;
+    _event_weight_ttH_mu_FR_QCD_MC = 0;
+    _event_weight_ttH_mu_FR_TT_MC = 0;
+
+    _event_weight_ttH_ele_up = 0;
+    _event_weight_ttH_ele_down = 0;
+    _event_weight_ttH_ele_pt1 = 0;
+    _event_weight_ttH_ele_pt2 = 0;
+    _event_weight_ttH_ele_be1 = 0;
+    _event_weight_ttH_ele_be2 = 0;
+
+    _event_weight_ttH_mu_up = 0;
+    _event_weight_ttH_mu_down = 0;
+    _event_weight_ttH_mu_pt1 = 0;
+    _event_weight_ttH_mu_pt2 = 0;
+    _event_weight_ttH_mu_be1 = 0;
+    _event_weight_ttH_mu_be2 = 0;
+
     if (sig_2lss1tau_flip) {
 
       _n_recolep_sel = 2;
@@ -6739,6 +8554,12 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_fakerate.push_back(_recolep_fakeable_fakerate[i_lep]);
         _recolep_sel_fakerate_QCD_MC.push_back(_recolep_fakeable_fakerate_QCD_MC[i_lep]);
         _recolep_sel_fakerate_ttbar_MC.push_back(_recolep_fakeable_fakerate_ttbar_MC[i_lep]);
+        _recolep_sel_fakerate_up.push_back(_recolep_fakeable_fakerate_up[i_lep]);
+        _recolep_sel_fakerate_down.push_back(_recolep_fakeable_fakerate_down[i_lep]);
+        _recolep_sel_fakerate_pt1.push_back(_recolep_fakeable_fakerate_pt1[i_lep]);
+        _recolep_sel_fakerate_pt2.push_back(_recolep_fakeable_fakerate_pt2[i_lep]);
+        _recolep_sel_fakerate_be1.push_back(_recolep_fakeable_fakerate_be1[i_lep]);
+        _recolep_sel_fakerate_be2.push_back(_recolep_fakeable_fakerate_be2[i_lep]);
         _recolep_sel_QFrate.push_back(_recolep_fakeable_QFrate[i_lep]);
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
