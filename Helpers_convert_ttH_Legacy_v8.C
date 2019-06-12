@@ -223,7 +223,7 @@ void convert_tree(
 
   if(sample=="sync16"){
 
-    file="sync_ntuple_converted_ttHNonbb_2016_v15";
+    file="sync_ntuple_converted_ttHNonbb_2016_v16";
     dir_out="/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2016/";
     list.push_back("/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_LLRHtautau/2016/sync_ntuple_LLRHtautau_ttHNonbb_2016_v10.root");
 
@@ -231,7 +231,7 @@ void convert_tree(
 
   else if(sample=="sync17"){
 
-    file="sync_ntuple_converted_ttHNonbb_2017_v10";
+    file="sync_ntuple_converted_ttHNonbb_2017_v11";
     dir_out="/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2017/";
     list.push_back("/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_LLRHtautau/2017/sync_ntuple_LLRHtautau_ttHNonbb_2017_v6.root");
 
@@ -239,7 +239,7 @@ void convert_tree(
 
   else if(sample=="sync18"){
 
-    file="sync_ntuple_converted_ttHNonbb_2018_v9";
+    file="sync_ntuple_converted_ttHNonbb_2018_v10";
     dir_out="/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2018/";
     list.push_back("/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_LLRHtautau/2018/sync_ntuple_LLRHtautau_ttHNonbb_2018_v5.root");
 
@@ -2482,12 +2482,6 @@ void convert_tree(
   float _bTagSF_CSVshape_weight_CFErr2Up;
   float _bTagSF_CSVshape_weight_CFErr2Down;
 
-  float _tauSF_weight;
-  float _tauSF_weight_tauNormUp;
-  float _tauSF_weight_tauNormDown;
-  float _tauSF_weight_tauShapeUp;
-  float _tauSF_weight_tauShapeDown;
- 
   //Gen information
   vector<float> _genpart_pt;
   vector<float> _genpart_eta;
@@ -3074,12 +3068,6 @@ void convert_tree(
   tree_new->Branch("ETmissLD",&_ETmissLD,"ETmissLD/F");
   
   tree_new->Branch("PU_weight",&_PU_weight,"PU_weight/F");
-
-  tree_new->Branch("tauSF_weight",&_tauSF_weight_tauNormUp,"tauSF_weight/F");
-  tree_new->Branch("tauSF_weight_tauNormUp",&_tauSF_weight_tauNormUp,"tauSF_weight_tauNormUp/F");
-  tree_new->Branch("tauSF_weight_tauNormDown",&_tauSF_weight_tauNormDown,"tauSF_weight_tauNormDown/F");
-  tree_new->Branch("tauSF_weight_tauShapeUp",&_tauSF_weight_tauShapeUp,"tauSF_weight_tauShapeUp/F");
-  tree_new->Branch("tauSF_weight_tauShapeDown",&_tauSF_weight_tauShapeDown,"tauSF_weight_tauShapeDown/F"); 
 
   tree_new->Branch("bTagSF_CSVshape_weight",&_bTagSF_CSVshape_weight);
   tree_new->Branch("bTagSF_CSVshape_weight_JESUp",&_bTagSF_CSVshape_weight_JESUp);
@@ -3985,12 +3973,6 @@ void convert_tree(
     //scale factors and systematics
 
     _PU_weight = 0;
-
-    _tauSF_weight = 0;
-    _tauSF_weight_tauNormUp = 0;
-    _tauSF_weight_tauNormDown = 0;
-    _tauSF_weight_tauShapeUp = 0;
-    _tauSF_weight_tauShapeDown = 0;
 
     _bTagSF_CSVshape_weight = 0;
     _bTagSF_CSVshape_weight_JESUp = 0;
@@ -6426,7 +6408,7 @@ void convert_tree(
           if( !(hasHmother || hasWmother || hasZmother) ) continue;
     
           // check delta_pT
-          float delta_pt = (fabs(pt - gen.Pt()) / gen.Pt());
+          float delta_pt = (fabs(pt - gen.Pt()) / pt);
           if(delta_pt > 0.5) continue;
 
           // check charge match
@@ -6489,7 +6471,7 @@ void convert_tree(
           if( !(hasHmother || hasWmother || hasZmother) ) continue;
 
 	  //check delta_pT
-	  float delta_pt = (fabs(pt - gen.Pt()) / gen.Pt());
+	  float delta_pt = (fabs(pt - gen.Pt()) / pt);
           if(delta_pt > 0.5) continue;
 
           //check charge match
@@ -6557,7 +6539,7 @@ void convert_tree(
           if( !(hasHmother || hasWmother || hasZmother) ) continue;
 
 	  //check delta_pT
-          float delta_pt = (fabs(pt - gen.Pt()) / gen.Pt());
+          float delta_pt = (fabs(pt - gen.Pt()) / pt);
           if(delta_pt > 0.5) continue;
           
 	  //check charge match
@@ -6625,7 +6607,7 @@ void convert_tree(
           TLorentzVector gen((*_genpart_px)[i_gen],(*_genpart_py)[i_gen],(*_genpart_pz)[i_gen],(*_genpart_e)[i_gen]);
 
           // require delta_pt<0.5/1.0
-          float delta_pt = (fabs(tauh.Pt() - gen.Pt()) / gen.Pt());
+          float delta_pt = (fabs(tauh.Pt() - gen.Pt()) / tauh.Pt());
           if( apdg==11 || apdg==13 ) {
 	     if (delta_pt>0.5) continue;
           }
@@ -6633,7 +6615,7 @@ void convert_tree(
 	     if (delta_pt>1.0) continue;
           }
 
-	        // require dR<0.3
+	  // require dR<0.3
           float dR = tauh.DeltaR(gen);
           if(dR<dRmin){
             dRmin = dR;
@@ -6649,8 +6631,16 @@ void convert_tree(
               genMatchInd = 5;
           }
 
-        }
+          /*if(_EventNumber==1594062 || _EventNumber==3910171 || _EventNumber==3386056){
+            cout<<"Event "<<_EventNumber<<endl;
+            cout<<"Gen Pt "<<gen.Pt()<<",eta "<<gen.Eta()<<",pdg "<<apdg<<endl;
+            cout<<"Reco Pt "<<tauh.Pt()<<",eta "<<tauh.Eta()<<endl;
+            cout<<"delta_pt "<<delta_pt<<endl;
+            cout<<"dR "<<dR<<endl;
+          }*/
 
+        }
+        //if(_EventNumber==1594062 || _EventNumber==3910171 || _EventNumber==3386056) cout<<"Event "<<_EventNumber<<",out dR min "<<dRmin<<endl;
         _recotauh_isGenMatched.push_back(dRmin<0.3);
         _recotauh_genMatchInd.push_back(genMatchInd);
 
