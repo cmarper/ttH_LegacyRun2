@@ -17,6 +17,7 @@
 #include <TVector3.h>
 
 #include "headers/triggerSF.cc"
+#include "headers/leptonSF.cc"
 
 using namespace std;
 
@@ -1739,7 +1740,6 @@ void split_tree(TString filename_in, TString filename_out,
       sig_2los1tau_base &&
       ( !(_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1]) || !((*_recotauh_byLooseIsolationMVArun2v2017v2DBoldDMwLT)[0]>0.5) );
 
-
     ////////////////////////////////
     /////////// 2l2tau  ////////////
     ////////////////////////////////
@@ -2430,10 +2430,7 @@ void split_tree(TString filename_in, TString filename_out,
 
       }
 
-      //FIXME! 1l1tau SF
-      /*_triggerSF_weight;
-      _triggerSF_weight_up;
-      _triggerSF_weight_down;*/
+      //triggerSF ???
       
       if(isMC) {
 
@@ -2629,10 +2626,22 @@ void split_tree(TString filename_in, TString filename_out,
 
       }
 
-      //FIXME! 1l1tau SF
-      /*_triggerSF_weight;
-      _triggerSF_weight_up;
-      _triggerSF_weight_down;*/
+      bool passHLT1l = (pass_m || pass_e);
+      bool passHLT1l1tau = (pass_et || pass_mt);
+
+      _triggerSF_weight = triggerSF_ttH_1l(_recolep_sel_pt[0],_recolep_sel_eta[0],_recolep_sel_pdg[0],
+                                           _recotauh_sel_pt[0],_recotauh_sel_eta[0],_recotauh_sel_phi[0],
+                                           _recotauh_sel_pt[1],_recotauh_sel_eta[1],_recotauh_sel_phi[1],
+                                           passHLT1l, passHLT1l1tau );
+
+      close_triggerSF_ttH_1l();
+
+
+      /*if(_recolep_sel_ismvasel[0])
+        _leptonSF_ttH_weight = leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],3); //nlep==3 no tight charge requirement     
+      else
+        _leptonSF_ttH_weight = _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],3,0);*/
+
       
       if(isMC) {
 
@@ -2823,10 +2832,22 @@ void split_tree(TString filename_in, TString filename_out,
 
       }
 
-      //FIXME! 1l1tau SF
-      /*_triggerSF_weight;
-      _triggerSF_weight_up;
-      _triggerSF_weight_down;*/
+      bool passHLT1l = (pass_m || pass_e);
+      bool passHLT1l1tau = (pass_et || pass_mt);
+
+      _triggerSF_weight = triggerSF_ttH_1l(_recolep_sel_pt[0],_recolep_sel_eta[0],_recolep_sel_pdg[0],
+                                           _recotauh_sel_pt[0],_recotauh_sel_eta[0],_recotauh_sel_phi[0],
+                                           _recotauh_sel_pt[1],_recotauh_sel_eta[1],_recotauh_sel_phi[1],
+                                           passHLT1l, passHLT1l1tau );
+
+      close_triggerSF_ttH_1l();
+
+
+      /*if(_recolep_sel_ismvasel[0])
+        _leptonSF_ttH_weight = leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],3); //nlep==3 no tight charge requirement     
+      else
+        _leptonSF_ttH_weight = _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],3,0);*/
+
       
       if(isMC) {
 
@@ -2989,6 +3010,18 @@ void split_tree(TString filename_in, TString filename_out,
       _triggerSF_weight_up = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],2,+1);
       _triggerSF_weight_down = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],2,-1);
 
+
+      /*if(_recolep_sel_ismvasel[0])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],2); //nlep==2 tight charge requirement
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],2,0);
+
+      if(_recolep_sel_ismvasel[1])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[1],_recolep_sel_pt[1],_recolep_sel_eta[1],2);
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[1],_recolep_sel_pt[1],_recolep_sel_eta[1],2,0);*/
+
+
       if (sig_2lss_SR_ttH) n_2lss_SR_ttH += 1;
       if (sig_2lss_SR_tH)  n_2lss_SR_tH += 1;
 
@@ -3135,6 +3168,18 @@ void split_tree(TString filename_in, TString filename_out,
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],2);
       _triggerSF_weight_up = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],2,+1);
       _triggerSF_weight_down = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],2,-1);  
+
+
+      /*if(_recolep_sel_ismvasel[0])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],2); //nlep==2 tight charge requirement
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],2,0);
+
+      if(_recolep_sel_ismvasel[1])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[1],_recolep_sel_pt[1],_recolep_sel_eta[1],2);
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[1],_recolep_sel_pt[1],_recolep_sel_eta[1],2,0);*/
+
 
       _is_ttH_like = true;
       _is_tH_like_and_not_ttH_like = false;
@@ -3316,7 +3361,19 @@ void split_tree(TString filename_in, TString filename_out,
 
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],2);
       _triggerSF_weight_up = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],2,+1);
-      _triggerSF_weight_down = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],2,-1);  
+      _triggerSF_weight_down = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],2,-1); 
+
+
+      /*if(_recolep_sel_ismvasel[0])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],2); //nlep==2 tight charge requirement
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],2,0);
+
+      if(_recolep_sel_ismvasel[1])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[1],_recolep_sel_pt[1],_recolep_sel_eta[1],2);
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[1],_recolep_sel_pt[1],_recolep_sel_eta[1],2,0);*/
+
  
       if(isMC) {
 
@@ -3509,7 +3566,19 @@ void split_tree(TString filename_in, TString filename_out,
 
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],2);
       _triggerSF_weight_up = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],2,+1);
-      _triggerSF_weight_down = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],2,-1);  
+      _triggerSF_weight_down = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],2,-1);
+
+
+      /*if(_recolep_sel_ismvasel[0])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],3); //no tight charge requirement
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],3,0);
+
+      if(_recolep_sel_ismvasel[1])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[1],_recolep_sel_pt[1],_recolep_sel_eta[1],3);
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[1],_recolep_sel_pt[1],_recolep_sel_eta[1],3,0);  */
+
 
       if(isMC) {
 
@@ -3720,6 +3789,18 @@ void split_tree(TString filename_in, TString filename_out,
       _triggerSF_weight_up = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],2,+1);
       _triggerSF_weight_down = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],2,-1);
 
+
+      /*if(_recolep_sel_ismvasel[0])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],3); //no tight charge requirement
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],3,0);
+
+      if(_recolep_sel_ismvasel[1])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[1],_recolep_sel_pt[1],_recolep_sel_eta[1],3);
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[1],_recolep_sel_pt[1],_recolep_sel_eta[1],3,0);*/
+
+
       _is_ttH_like = true;
       _is_tH_like_and_not_ttH_like = false;
 
@@ -3864,6 +3945,23 @@ void split_tree(TString filename_in, TString filename_out,
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],3);
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],3,+1);
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],3,-1);
+
+
+      /*if(_recolep_sel_ismvasel[0])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],3); //nlep==3 no tight charge requirement
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],3,0); 
+
+      if(_recolep_sel_ismvasel[1])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[1],_recolep_sel_pt[1],_recolep_sel_eta[1],3); 
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[1],_recolep_sel_pt[1],_recolep_sel_eta[1],3,0); 
+
+      if(_recolep_sel_ismvasel[2])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[2],_recolep_sel_pt[2],_recolep_sel_eta[2],3);
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[2],_recolep_sel_pt[2],_recolep_sel_eta[2],3,0);*/
+
 
       if (sig_3l_SR_ttH) n_3l_SR_ttH += 1;
       if (sig_3l_SR_tH)  n_3l_SR_tH += 1;
@@ -4012,6 +4110,23 @@ void split_tree(TString filename_in, TString filename_out,
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],3,+1);
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],3,-1);
 
+
+      /*if(_recolep_sel_ismvasel[0])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],3); //nlep==3 no tight charge requirement
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],3,0); 
+
+      if(_recolep_sel_ismvasel[1])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[1],_recolep_sel_pt[1],_recolep_sel_eta[1],3); 
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[1],_recolep_sel_pt[1],_recolep_sel_eta[1],3,0); 
+
+      if(_recolep_sel_ismvasel[2])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[2],_recolep_sel_pt[2],_recolep_sel_eta[2],3);
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[2],_recolep_sel_pt[2],_recolep_sel_eta[2],3,0);*/
+
+
       _is_ttH_like = true;
       _is_tH_like_and_not_ttH_like = false;
 
@@ -4156,6 +4271,23 @@ void split_tree(TString filename_in, TString filename_out,
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],3);
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],3,+1);
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],3,-1);
+
+
+      /*if(_recolep_sel_ismvasel[0])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],3); //nlep==3 no tight charge requirement
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],3,0); 
+
+      if(_recolep_sel_ismvasel[1])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[1],_recolep_sel_pt[1],_recolep_sel_eta[1],3); 
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[1],_recolep_sel_pt[1],_recolep_sel_eta[1],3,0); 
+
+      if(_recolep_sel_ismvasel[2])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[2],_recolep_sel_pt[2],_recolep_sel_eta[2],3);
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[2],_recolep_sel_pt[2],_recolep_sel_eta[2],3,0);*/
+
 
       _is_ttH_like = true;
       _is_tH_like_and_not_ttH_like = false;
@@ -4339,6 +4471,23 @@ void split_tree(TString filename_in, TString filename_out,
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],3,+1);
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],3,-1);
 
+
+      /*if(_recolep_sel_ismvasel[0])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],3); //nlep==3 no tight charge requirement
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],3,0); 
+
+      if(_recolep_sel_ismvasel[1])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[1],_recolep_sel_pt[1],_recolep_sel_eta[1],3); 
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[1],_recolep_sel_pt[1],_recolep_sel_eta[1],3,0); 
+
+      if(_recolep_sel_ismvasel[2])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[2],_recolep_sel_pt[2],_recolep_sel_eta[2],3);
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[2],_recolep_sel_pt[2],_recolep_sel_eta[2],3,0);*/
+
+
       if(isMC) {
 
         _tauSF_weight = (1-0.11*_recotauh_sel_isGenMatched[0]);
@@ -4493,7 +4642,29 @@ void split_tree(TString filename_in, TString filename_out,
 
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],4);
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],4,+1);
-      _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],4,-1);   
+      _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],4,-1); 
+
+
+      /*if(_recolep_sel_ismvasel[0])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],3); //nlep==3 no tight charge requirement
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],3,0); 
+
+      if(_recolep_sel_ismvasel[1])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[1],_recolep_sel_pt[1],_recolep_sel_eta[1],3); 
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[1],_recolep_sel_pt[1],_recolep_sel_eta[1],3,0); 
+
+      if(_recolep_sel_ismvasel[2])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[2],_recolep_sel_pt[2],_recolep_sel_eta[2],3);
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[2],_recolep_sel_pt[2],_recolep_sel_eta[2],3,0);
+
+      if(_recolep_sel_ismvasel[3])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[3],_recolep_sel_pt[3],_recolep_sel_eta[3],3);
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[3],_recolep_sel_pt[3],_recolep_sel_eta[3],3,0);*/
+
 
       _is_ttH_like = true;
       _is_tH_like_and_not_ttH_like = false;
@@ -4639,6 +4810,28 @@ void split_tree(TString filename_in, TString filename_out,
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],4);
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],4,+1);
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],4,-1);   
+
+
+      /*if(_recolep_sel_ismvasel[0])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],3); //nlep==3 no tight charge requirement
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],3,0); 
+
+      if(_recolep_sel_ismvasel[1])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[1],_recolep_sel_pt[1],_recolep_sel_eta[1],3); 
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[1],_recolep_sel_pt[1],_recolep_sel_eta[1],3,0); 
+
+      if(_recolep_sel_ismvasel[2])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[2],_recolep_sel_pt[2],_recolep_sel_eta[2],3);
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[2],_recolep_sel_pt[2],_recolep_sel_eta[2],3,0);
+
+      if(_recolep_sel_ismvasel[3])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[3],_recolep_sel_pt[3],_recolep_sel_eta[3],3);
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[3],_recolep_sel_pt[3],_recolep_sel_eta[3],3,0);*/
+
 
       _is_ttH_like = true;
       _is_tH_like_and_not_ttH_like = false;
@@ -4852,7 +5045,7 @@ void split_tree(TString filename_in, TString filename_out,
 
       }
 
-      //FIXME: triggerSF
+      //triggerSF ??
 
       _is_ttH_like = true;
       _is_tH_like_and_not_ttH_like = false;
@@ -5116,6 +5309,23 @@ void split_tree(TString filename_in, TString filename_out,
   
       }
 
+      bool passHLT1l = (pass_m || pass_e);
+      bool passHLT1l1tau = (pass_et || pass_mt);
+
+      _triggerSF_weight = triggerSF_ttH_1l(_recolep_sel_pt[0],_recolep_sel_eta[0],_recolep_sel_pdg[0],
+                                           _recotauh_sel_pt[0],_recotauh_sel_eta[0],_recotauh_sel_phi[0],
+                                           _recotauh_sel_pt[1],_recotauh_sel_eta[1],_recotauh_sel_phi[1],
+                                           passHLT1l, passHLT1l1tau );
+
+      close_triggerSF_ttH_1l();
+
+
+      /*if(_recolep_sel_ismvasel[0])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],3); //nlep==3 no tight charge requirement
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],3,0); */
+
+
       if(isMC) {
 
         _tauSF_weight = (1-0.11*_recotauh_sel_isGenMatched[0]);
@@ -5126,8 +5336,6 @@ void split_tree(TString filename_in, TString filename_out,
         _tauSF_weight_tauShapeDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par2Down[0];
 
       }
-
-      //FIXME triggerSF
 
       _is_ttH_like = true;
       _is_tH_like_and_not_ttH_like = false;
@@ -5406,7 +5614,24 @@ void split_tree(TString filename_in, TString filename_out,
         _event_weight_ttH_mu_FR_TT_MC *= -1;
 
       }
-   
+
+      bool passHLT1l = (pass_m || pass_e);
+      bool passHLT1l1tau = (pass_et || pass_mt);
+
+      _triggerSF_weight = triggerSF_ttH_1l(_recolep_sel_pt[0],_recolep_sel_eta[0],_recolep_sel_pdg[0],
+                                           _recotauh_sel_pt[0],_recotauh_sel_eta[0],_recotauh_sel_phi[0],
+                                           _recotauh_sel_pt[1],_recotauh_sel_eta[1],_recotauh_sel_phi[1],
+                                           passHLT1l, passHLT1l1tau );
+
+      close_triggerSF_ttH_1l();
+
+
+      /*if(_recolep_sel_ismvasel[0])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],3); //nlep==3 no tight charge requirement
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],3,0); */
+
+
       if(isMC) {
 
         _tauSF_weight = (1-0.11*_recotauh_sel_isGenMatched[0])*(1-0.11*_recotauh_sel_isGenMatched[1]);
@@ -5423,7 +5648,6 @@ void split_tree(TString filename_in, TString filename_out,
 
       }
 
-      //FIXME triggerSF
 
       _is_ttH_like = true;
       _is_tH_like_and_not_ttH_like = false;
@@ -5693,6 +5917,18 @@ void split_tree(TString filename_in, TString filename_out,
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],2);
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],2,+1);
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],2,-1);  
+
+
+      /*if(_recolep_sel_ismvasel[0])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],2); //nlep==3 no tight charge requirement
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],2,0); 
+
+      if(_recolep_sel_ismvasel[1])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[1],_recolep_sel_pt[1],_recolep_sel_eta[1],2); 
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[1],_recolep_sel_pt[1],_recolep_sel_eta[1],2,0); */
+
 
       if (sig_2lss_fake_ttH) n_2lss_fake_ttH += 1;
       if (sig_2lss_fake_tH)  n_2lss_fake_tH += 1;
@@ -5964,7 +6200,19 @@ void split_tree(TString filename_in, TString filename_out,
 
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],2);
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],2,+1);
-      _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],2,-1);  
+      _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],2,-1); 
+
+
+      /*if(_recolep_sel_ismvasel[0])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],2); //nlep==3 no tight charge requirement
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],2,0); 
+
+      if(_recolep_sel_ismvasel[1])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[1],_recolep_sel_pt[1],_recolep_sel_eta[1],2); 
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[1],_recolep_sel_pt[1],_recolep_sel_eta[1],2,0); */
+
 
       _is_ttH_like = true;
       _is_tH_like_and_not_ttH_like = false;
@@ -6287,6 +6535,17 @@ void split_tree(TString filename_in, TString filename_out,
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],2);
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],2,+1);
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],2,-1);  
+
+      /*if(_recolep_sel_ismvasel[0])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],2); //nlep==3 no tight charge requirement
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],2,0); 
+
+      if(_recolep_sel_ismvasel[1])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[1],_recolep_sel_pt[1],_recolep_sel_eta[1],2); 
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[1],_recolep_sel_pt[1],_recolep_sel_eta[1],2,0); */
+
 
       if(isMC) {
 
@@ -6618,7 +6877,19 @@ void split_tree(TString filename_in, TString filename_out,
 
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],2);
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],2,+1);
-      _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],2,-1);  
+      _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],2,-1); 
+
+
+      /*if(_recolep_sel_ismvasel[0])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],3); //nlep==3 no tight charge requirement
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],3,0); 
+
+      if(_recolep_sel_ismvasel[1])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[1],_recolep_sel_pt[1],_recolep_sel_eta[1],3); 
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[1],_recolep_sel_pt[1],_recolep_sel_eta[1],3,0); */
+
 
       if(isMC) {
 
@@ -6969,6 +7240,18 @@ void split_tree(TString filename_in, TString filename_out,
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],2,+1);
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],2,-1);
 
+
+      /*if(_recolep_sel_ismvasel[0])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],3); //nlep==3 no tight charge requirement
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],3,0); 
+
+      if(_recolep_sel_ismvasel[1])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[1],_recolep_sel_pt[1],_recolep_sel_eta[1],3); 
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[1],_recolep_sel_pt[1],_recolep_sel_eta[1],3,0); */
+
+
       if(isMC) {
 
         _tauSF_weight = (1-0.11*_recotauh_sel_isGenMatched[0])*(1-0.11*_recotauh_sel_isGenMatched[1]);
@@ -7310,6 +7593,23 @@ void split_tree(TString filename_in, TString filename_out,
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],3,+1);
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],3,-1);  
 
+
+      /*if(_recolep_sel_ismvasel[0])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],3); //nlep==3 no tight charge requirement
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],3,0); 
+
+      if(_recolep_sel_ismvasel[1])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[1],_recolep_sel_pt[1],_recolep_sel_eta[1],3); 
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[1],_recolep_sel_pt[1],_recolep_sel_eta[1],3,0); 
+
+      if(_recolep_sel_ismvasel[2])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[2],_recolep_sel_pt[2],_recolep_sel_eta[2],3);
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[2],_recolep_sel_pt[2],_recolep_sel_eta[2],3,0);*/
+
+
       if (sig_3l_fake_ttH) n_3l_fake_ttH += 1;
       if (sig_3l_fake_tH)  n_3l_fake_tH += 1;
 
@@ -7635,7 +7935,24 @@ void split_tree(TString filename_in, TString filename_out,
 
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],3);
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],3,+1);
-      _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],3,-1);  
+      _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],3,-1); 
+
+
+      /*if(_recolep_sel_ismvasel[0])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],3); //nlep==3 no tight charge requirement
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],3,0); 
+
+      if(_recolep_sel_ismvasel[1])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[1],_recolep_sel_pt[1],_recolep_sel_eta[1],3); 
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[1],_recolep_sel_pt[1],_recolep_sel_eta[1],3,0); 
+
+      if(_recolep_sel_ismvasel[2])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[2],_recolep_sel_pt[2],_recolep_sel_eta[2],3);
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[2],_recolep_sel_pt[2],_recolep_sel_eta[2],3,0);*/
+
 
       _is_ttH_like = true;
       _is_tH_like_and_not_ttH_like = false;
@@ -7961,6 +8278,23 @@ void split_tree(TString filename_in, TString filename_out,
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],3);
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],3,+1);
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],3,-1);  
+
+
+      /*if(_recolep_sel_ismvasel[0])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],3); //nlep==3 no tight charge requirement
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],3,0); 
+
+      if(_recolep_sel_ismvasel[1])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[1],_recolep_sel_pt[1],_recolep_sel_eta[1],3); 
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[1],_recolep_sel_pt[1],_recolep_sel_eta[1],3,0); 
+
+      if(_recolep_sel_ismvasel[2])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[2],_recolep_sel_pt[2],_recolep_sel_eta[2],3);
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[2],_recolep_sel_pt[2],_recolep_sel_eta[2],3,0);*/
+
 
       _is_ttH_like = true;
       _is_tH_like_and_not_ttH_like = false;
@@ -8339,6 +8673,23 @@ void split_tree(TString filename_in, TString filename_out,
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],3);
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],3,+1);
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],3,-1);  
+
+
+      /*if(_recolep_sel_ismvasel[0])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],3); //nlep==3 no tight charge requirement
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],3,0); 
+
+      if(_recolep_sel_ismvasel[1])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[1],_recolep_sel_pt[1],_recolep_sel_eta[1],3); 
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[1],_recolep_sel_pt[1],_recolep_sel_eta[1],3,0); 
+
+      if(_recolep_sel_ismvasel[2])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[2],_recolep_sel_pt[2],_recolep_sel_eta[2],3);
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[2],_recolep_sel_pt[2],_recolep_sel_eta[2],3,0);*/
+
 
       if(isMC) {
 
@@ -8732,6 +9083,28 @@ void split_tree(TString filename_in, TString filename_out,
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],4,+1);
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],4,-1);  
 
+
+      /*if(_recolep_sel_ismvasel[0])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],3); //nlep==3 no tight charge requirement
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],3,0); 
+
+      if(_recolep_sel_ismvasel[1])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[1],_recolep_sel_pt[1],_recolep_sel_eta[1],3); 
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[1],_recolep_sel_pt[1],_recolep_sel_eta[1],3,0); 
+
+      if(_recolep_sel_ismvasel[2])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[2],_recolep_sel_pt[2],_recolep_sel_eta[2],3);
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[2],_recolep_sel_pt[2],_recolep_sel_eta[2],3,0);
+
+      if(_recolep_sel_ismvasel[3])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[3],_recolep_sel_pt[3],_recolep_sel_eta[3],3);
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[3],_recolep_sel_pt[3],_recolep_sel_eta[3],3,0);*/
+
+
       _is_ttH_like = true;
       _is_tH_like_and_not_ttH_like = false;
 
@@ -9113,6 +9486,28 @@ void split_tree(TString filename_in, TString filename_out,
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],4,+1);
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],4,-1);  
 
+
+      /*if(_recolep_sel_ismvasel[0])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],3); //nlep==3 no tight charge requirement
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],3,0); 
+
+      if(_recolep_sel_ismvasel[1])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[1],_recolep_sel_pt[1],_recolep_sel_eta[1],3); 
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[1],_recolep_sel_pt[1],_recolep_sel_eta[1],3,0); 
+
+      if(_recolep_sel_ismvasel[2])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[2],_recolep_sel_pt[2],_recolep_sel_eta[2],3);
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[2],_recolep_sel_pt[2],_recolep_sel_eta[2],3,0);
+
+      if(_recolep_sel_ismvasel[3])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[3],_recolep_sel_pt[3],_recolep_sel_eta[3],3);
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[3],_recolep_sel_pt[3],_recolep_sel_eta[3],3,0);*/
+
+
       _is_ttH_like = true;
       _is_tH_like_and_not_ttH_like = false;
 
@@ -9260,7 +9655,19 @@ void split_tree(TString filename_in, TString filename_out,
 
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],2);
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],2,+1);
-      _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],2,-1);  
+      _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],2,-1); 
+
+
+      /*if(_recolep_sel_ismvasel[0])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],2); //nlep==3 no tight charge requirement
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],2,0); 
+
+      if(_recolep_sel_ismvasel[1])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[1],_recolep_sel_pt[1],_recolep_sel_eta[1],2); 
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[1],_recolep_sel_pt[1],_recolep_sel_eta[1],2,0); */
+ 
 
       if (sig_2lss_flip_ttH) n_2lss_flip_ttH += 1;
       if (sig_2lss_flip_tH)  n_2lss_flip_tH += 1;
@@ -9408,6 +9815,18 @@ void split_tree(TString filename_in, TString filename_out,
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],2);
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],2,+1);
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],2,-1); 
+
+
+      /*if(_recolep_sel_ismvasel[0])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],2); //nlep==3 no tight charge requirement
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],2,0); 
+
+      if(_recolep_sel_ismvasel[1])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[1],_recolep_sel_pt[1],_recolep_sel_eta[1],2); 
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[1],_recolep_sel_pt[1],_recolep_sel_eta[1],2,0); */
+
 
       _is_ttH_like = true;
       _is_tH_like_and_not_ttH_like = false;
@@ -9595,6 +10014,18 @@ void split_tree(TString filename_in, TString filename_out,
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],2);
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],2,+1);
       _triggerSF_weight = triggerSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_pdg[1],_recolep_sel_pt[1],2,-1); 
+
+
+      /*if(_recolep_sel_ismvasel[0])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],2); //nlep==3 no tight charge requirement
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[0],_recolep_sel_pt[0],_recolep_sel_eta[0],2,0); 
+
+      if(_recolep_sel_ismvasel[1])
+        _leptonSF_ttH_weight *= leptonSF_ttH(_recolep_sel_pdg[1],_recolep_sel_pt[1],_recolep_sel_eta[1],2); 
+      else
+        _leptonSF_ttH_weight *= _get_recoToLoose_leptonSF_ttH(_recolep_sel_pdg[1],_recolep_sel_pt[1],_recolep_sel_eta[1],2,0); */
+
 
       if(isMC) {
 
