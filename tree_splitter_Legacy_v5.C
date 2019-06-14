@@ -51,6 +51,9 @@ void split_tree(TString filename_in, TString filename_out,
   Long64_t _triggerbit; 
   Int_t _metfilterbit;
   bool _passecalBadCalibFilterUpdate;
+  Float_t _prefiringweight;
+  Float_t _prefiringweightup;
+  Float_t _prefiringweightdown;
 
   vector<int>   *_recolep_charge;
   vector<int>   *_recolep_pdg;
@@ -165,6 +168,10 @@ void split_tree(TString filename_in, TString filename_out,
   tree->SetBranchAddress("triggerbit",&_triggerbit);
   tree->SetBranchAddress("metfilterbit",&_metfilterbit);
   tree->SetBranchAddress("passecalBadCalibFilterUpdate",&_passecalBadCalibFilterUpdate);
+
+  tree->SetBranchAddress("prefiringweight",&_prefiringweight);
+  tree->SetBranchAddress("prefiringweightup",&_prefiringweightup);
+  tree->SetBranchAddress("prefiringweightdown",&_prefiringweightdown);
 
   tree->SetBranchAddress("recolep_charge",&_recolep_charge);
   tree->SetBranchAddress("recolep_pdg",&_recolep_pdg);
@@ -615,6 +622,10 @@ void split_tree(TString filename_in, TString filename_out,
   float _tauSF_weight_tauShapeUp;
   float _tauSF_weight_tauShapeDown;
 
+  float _prefire_weight;
+  float _prefire_weight_up;
+  float _prefire_weight_down;
+
   /*float _lep1_conePt;
   float _lep2_conePt;
   float _lep3_conePt;
@@ -767,6 +778,10 @@ void split_tree(TString filename_in, TString filename_out,
     tree_new[i]->Branch("tauSF_weight_tauNormDown",&_tauSF_weight_tauNormDown,"tauSF_weight_tauNormDown/F");
     tree_new[i]->Branch("tauSF_weight_tauShapeUp",&_tauSF_weight_tauShapeUp,"tauSF_weight_tauShapeUp/F");
     tree_new[i]->Branch("tauSF_weight_tauShapeDown",&_tauSF_weight_tauShapeDown,"tauSF_weight_tauShapeDown/F");
+
+    tree_new[i]->Branch("prefire_weight",&_prefire_weight,"prefire_weight/F");
+    tree_new[i]->Branch("prefire_weight_up",&_prefire_weight_up,"prefire_weight_up/F");
+    tree_new[i]->Branch("prefire_weight_down",&_prefire_weight_down,"prefire_weight_down/F");
 
     /*tree_new[i]->Branch("lep1_conePt",&_lep1_conePt);
     tree_new[i]->Branch("lep2_conePt",&_lep2_conePt);
@@ -966,6 +981,10 @@ void split_tree(TString filename_in, TString filename_out,
     _tauSF_weight_tauShapeUp = 0;
     _tauSF_weight_tauShapeDown = 0;
 
+    _prefire_weight = 0;
+    _prefire_weight_up = 0;
+    _prefire_weight_down = 0;
+
     //MVA variables
 
     /*_lep1_conePt = -999.;
@@ -1013,6 +1032,9 @@ void split_tree(TString filename_in, TString filename_out,
     _triggerbit = 0;  
     _metfilterbit = 0;  
     _passecalBadCalibFilterUpdate = 0;
+    _prefiringweight = 0;
+    _prefiringweightup = 0;
+    _prefiringweightdown = 0;
 
     _recolep_charge = 0;
     _recolep_pdg = 0;
@@ -1130,6 +1152,21 @@ void split_tree(TString filename_in, TString filename_out,
 
     tree->GetEntry(i);
 
+    /////////////////////////////////
+    ////////// Prefiring ////////////
+    /////////////////////////////////
+
+    if(_year==2016 || _year==2017){
+      _prefire_weight = _prefiringweight;
+      _prefire_weight_up = _prefiringweightup;
+      _prefire_weight_down = _prefiringweightdown;
+    }
+ 
+    else if(_year==2018){
+      _prefire_weight = 1.;
+      _prefire_weight_up = 1.;
+      _prefire_weight_down = 1.;
+    }
 
     /////////////////////////////////
     ////////// MET filters //////////
@@ -10100,8 +10137,8 @@ void split_tree(TString filename_in, TString filename_out,
 
 void test16(){
 
-  TString fin = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2016/sync_ntuple_converted_ttHNonbb_2016_v16.root";
-  TString fout = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_splitted/2016/sync_ntuple_splitted_ttHNonbb_2016_v9.root";
+  TString fin = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2016/sync_ntuple_converted_ttHNonbb_2016_v17_7k.root";
+  TString fout = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_splitted/2016/sync_ntuple_splitted_ttHNonbb_2016_v10_7k.root";
 
   split_tree(fin,fout,0,0,true,2016);
 

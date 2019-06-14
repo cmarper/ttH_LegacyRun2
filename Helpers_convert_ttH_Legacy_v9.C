@@ -223,9 +223,9 @@ void convert_tree(
 
   if(sample=="sync16"){
 
-    file="sync_ntuple_converted_ttHNonbb_2016_v17_100events";
+    file="sync_ntuple_converted_ttHNonbb_2016_v17_7k";
     dir_out="/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2016/";
-    list.push_back("/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_LLRHtautau/2016/sync_ntuple_LLRHtautau_ttHNonbb_2016_v11_100events.root");
+    list.push_back("/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_LLRHtautau/2016/sync_ntuple_LLRHtautau_ttHNonbb_2016_v11_7k.root");
 
   }
 
@@ -1774,9 +1774,6 @@ void convert_tree(
   vector<float> *_ak8jets_pz;
   vector<float> *_ak8jets_e;
   vector<float> *_ak8jets_SoftDropMass;
-  vector<float> *_ak8jets_PrunedMass;
-  vector<float> *_ak8jets_TrimmedMass;
-  vector<float> *_ak8jets_FilteredMass;
   vector<float> *_ak8jets_tau1; // subjettiness
   vector<float> *_ak8jets_tau2; // subjettiness
   vector<float> *_ak8jets_tau3; // subjettiness
@@ -1850,6 +1847,9 @@ void convert_tree(
   Long64_t _triggerbit;
   Int_t _metfilterbit;
   bool _passecalBadCalibFilterUpdate;
+  float _prefiringweight;
+  float _prefiringweightup;
+  float _prefiringweightdown;
 
   vector<int>   *_daughters_jetNDauChargedMVASel;
   vector<float> *_daughters_miniRelIsoCharged;
@@ -1919,9 +1919,6 @@ void convert_tree(
   tree->SetBranchAddress("ak8jets_pz", &_ak8jets_pz);
   tree->SetBranchAddress("ak8jets_e", &_ak8jets_e);
   tree->SetBranchAddress("ak8jets_SoftDropMass", &_ak8jets_SoftDropMass);
-  tree->SetBranchAddress("ak8jets_PrunedMass", &_ak8jets_PrunedMass);
-  tree->SetBranchAddress("ak8jets_TrimmedMass", &_ak8jets_TrimmedMass);
-  tree->SetBranchAddress("ak8jets_FilteredMass", &_ak8jets_FilteredMass);
   tree->SetBranchAddress("ak8jets_tau1", &_ak8jets_tau1);
   tree->SetBranchAddress("ak8jets_tau2", &_ak8jets_tau2);
   tree->SetBranchAddress("ak8jets_tau3", &_ak8jets_tau3);
@@ -1979,10 +1976,12 @@ void convert_tree(
   tree->SetBranchAddress("triggerbit",&_triggerbit);
   tree->SetBranchAddress("metfilterbit",&_metfilterbit);
   tree->SetBranchAddress("passecalBadCalibFilterUpdate",&_passecalBadCalibFilterUpdate);
+  tree->SetBranchAddress("prefiringweight",&_prefiringweight);
+  tree->SetBranchAddress("prefiringweightup",&_prefiringweightup);
+  tree->SetBranchAddress("prefiringweightdown",&_prefiringweightdown);
 
   tree->SetBranchAddress("daughters_byIsolationMVArun2017v2DBoldDMwLTraw2017",&_daughters_byIsolationMVArun2017v2DBoldDMwLTraw2017);
   tree->SetBranchAddress("daughters_byDeepTau2017v2VSjetraw",&_daughters_byDeepTau2017v2VSjetraw);
-
   tree->SetBranchAddress("daughters_jetNDauChargedMVASel",&_daughters_jetNDauChargedMVASel);
   tree->SetBranchAddress("daughters_miniRelIsoCharged",&_daughters_miniRelIsoCharged);
   tree->SetBranchAddress("daughters_miniRelIsoNeutral",&_daughters_miniRelIsoNeutral);
@@ -3429,6 +3428,10 @@ void convert_tree(
     tree->SetBranchAddress("metfilterbit",&_metfilterbit);
     tree->SetBranchAddress("passecalBadCalibFilterUpdate",&_passecalBadCalibFilterUpdate);
 
+    tree->SetBranchAddress("prefiringweight",&_prefiringweight);
+    tree->SetBranchAddress("prefiringweightup",&_prefiringweightup);
+    tree->SetBranchAddress("prefiringweightdown",&_prefiringweightdown);
+
     tree->SetBranchAddress("PFMETCov00",&_PFMETCov00);
     tree->SetBranchAddress("PFMETCov01",&_PFMETCov01);
     tree->SetBranchAddress("PFMETCov10",&_PFMETCov10);
@@ -3450,6 +3453,11 @@ void convert_tree(
     tree_new->Branch("triggerbit",&_triggerbit,"triggerbit/L");
     tree_new->Branch("metfilterbit",&_metfilterbit,"metfilterbit/L");
     tree_new->Branch("passecalBadCalibFilterUpdate",&_passecalBadCalibFilterUpdate,"passecalBadCalibFilterUpdate/O");
+   
+    tree_new->Branch("prefiringweight",&_prefiringweight,"prefiringweight/F");
+    tree_new->Branch("prefiringweightup",&_prefiringweightup,"prefiringweightup/F");
+    tree_new->Branch("prefiringweightdown",&_prefiringweightdown,"prefiringweightdown/F");
+
     tree_new->Branch("PFMETCov00",&_PFMETCov00,"PFMETCov00/F");
     tree_new->Branch("PFMETCov01",&_PFMETCov01,"PFMETCov01/F");
     tree_new->Branch("PFMETCov10",&_PFMETCov10,"PFMETCov10/F");
@@ -4246,9 +4254,9 @@ void convert_tree(
     _ak8jets_pz = 0;
     _ak8jets_e = 0;
     _ak8jets_SoftDropMass = 0;
-    _ak8jets_PrunedMass = 0;
-    _ak8jets_TrimmedMass = 0;
-    _ak8jets_FilteredMass = 0;
+    //_ak8jets_PrunedMass = 0;
+    //_ak8jets_TrimmedMass = 0;
+    //_ak8jets_FilteredMass = 0;
     _ak8jets_tau1 = 0;
     _ak8jets_tau2 = 0;
     _ak8jets_tau3 = 0;
@@ -4320,6 +4328,9 @@ void convert_tree(
     _triggerbit = 0;
     _metfilterbit = 0;
     _passecalBadCalibFilterUpdate = 0;
+    _prefiringweight = 0;
+    _prefiringweightup = 0;
+    _prefiringweightdown = 0;
 
     _daughters_jetNDauChargedMVASel = 0;
     _daughters_jetNDauChargedMVASel_nanoAOD = 0;
@@ -4574,9 +4585,9 @@ void convert_tree(
       //Fakeable
       bool isfakeable=false;
 
-      if(conept>10 && _recomu_leptonMVA[i_mu]>=0.90 && _recomu_jetDeepCSV[i_mu]<0.4941) 
+      if(conept>10 && _recomu_leptonMVA[i_mu]>=0.85 && _recomu_jetDeepCSV[i_mu]<0.4941) 
 	      isfakeable=true;	
-      else if(conept>10 && _recomu_leptonMVA[i_mu]<0.90 && _recomu_jetDeepCSV[i_mu]<0.07 && lepMVA_jetPtRatio>0.6 && segm_comp>0.3)
+      else if(conept>10 && _recomu_leptonMVA[i_mu]<0.85 && _recomu_jetDeepCSV[i_mu]<0.07 && lepMVA_jetPtRatio>0.6 && segm_comp>0.3)
 	      isfakeable=true;	
 
       _recomu_isfakeable.push_back(isfakeable);
@@ -4608,7 +4619,7 @@ void convert_tree(
       //MVA-based selection 
       bool ismvasel=false;
 
-      if(conept>10 && _recomu_leptonMVA[i_mu]>=0.9 && _recomu_jetDeepCSV[i_mu]<0.4941 && mediumID) 
+      if(conept>10 && _recomu_leptonMVA[i_mu]>=0.85 && _recomu_jetDeepCSV[i_mu]<0.4941 && mediumID) 
 	      ismvasel=true;
 	
       _recomu_ismvasel.push_back(ismvasel);
@@ -4899,9 +4910,9 @@ void convert_tree(
       // fakeable selection
       bool isfakeable=false;
       if(conept>10 && eleIDcut && eleMissingLostHits==0 && passConversionVeto){
-        if(_recoele_leptonMVA[i_ele]>0.9 && _recoele_jetDeepCSV[i_ele]<0.4941)
+        if(_recoele_leptonMVA[i_ele]>0.8 && _recoele_jetDeepCSV[i_ele]<0.4941)
 	        isfakeable=true;	
-	    else if(_recoele_leptonMVA[i_ele]<=0.9 && _recoele_jetDeepCSV[i_ele]<0.07 && lepMVA_jetPtRatio>0.6 && lepMVA_Id>0.5)
+	    else if(_recoele_leptonMVA[i_ele]<=0.8 && _recoele_jetDeepCSV[i_ele]<0.07 && lepMVA_jetPtRatio>0.6 && lepMVA_Id>0.5)
 	      isfakeable=true;
       }	
 
@@ -4938,7 +4949,7 @@ void convert_tree(
       	
       //MVA-based selection
       bool ismvasel=false;
-      if(conept>10 && eleIDcut && eleMissingLostHits==0 && _recoele_leptonMVA[i_ele]>0.9 && _recoele_jetDeepCSV[i_ele]<0.4941 && passConversionVeto) 
+      if(conept>10 && eleIDcut && eleMissingLostHits==0 && _recoele_leptonMVA[i_ele]>0.8 && _recoele_jetDeepCSV[i_ele]<0.4941 && passConversionVeto) 
 	   ismvasel=true;
      
       _recoele_ismvasel.push_back(ismvasel);
