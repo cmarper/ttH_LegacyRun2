@@ -223,25 +223,25 @@ void convert_tree(
 
   if(sample=="sync16"){
 
-    file="sync_ntuple_converted_ttHNonbb_2016_v17_7k";
+    file="sync_ntuple_converted_ttHNonbb_2016_v17";
     dir_out="/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2016/";
-    list.push_back("/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_LLRHtautau/2016/sync_ntuple_LLRHtautau_ttHNonbb_2016_v11_7k.root");
+    list.push_back("/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_LLRHtautau/2016/sync_ntuple_LLRHtautau_ttHNonbb_2016_v11.root");
 
   }
 
   else if(sample=="sync17"){
 
-    file="sync_ntuple_converted_ttHNonbb_2017_v12_100events";
+    file="sync_ntuple_converted_ttHNonbb_2017_v12";
     dir_out="/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2017/";
-    list.push_back("/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_LLRHtautau/2017/sync_ntuple_LLRHtautau_ttHNonbb_2017_v7_100events.root");
+    list.push_back("/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_LLRHtautau/2017/sync_ntuple_LLRHtautau_ttHNonbb_2017_v7.root");
 
   }
 
   else if(sample=="sync18"){
 
-    file="sync_ntuple_converted_ttHNonbb_2018_v11_100events";
+    file="sync_ntuple_converted_ttHNonbb_2018_v11";
     dir_out="/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2018/";
-    list.push_back("/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_LLRHtautau/2018/sync_ntuple_LLRHtautau_ttHNonbb_2018_v6_100events.root");
+    list.push_back("/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_LLRHtautau/2018/sync_ntuple_LLRHtautau_ttHNonbb_2018_v6.root");
 
   }
 
@@ -6622,6 +6622,7 @@ void convert_tree(
 
         TLorentzVector ele = reco_eles[i_ele].second;
         float pt = (_recoele_pt)[i_ele];
+        float corr_pt = (_recoele_corr_pt)[i_ele];
         float conept = (_recoele_conept)[i_ele];
         int charge = (_recoele_charge)[i_ele];
 
@@ -6653,7 +6654,7 @@ void convert_tree(
           if( !(hasHmother || hasWmother || hasZmother) ) continue;
 
 	  //check delta_pT
-	  float delta_pt = (fabs(pt - gen.Pt()) / pt);
+	  float delta_pt = (fabs(pt - gen.Pt()) / pt); //FIXME using pt or corr_pt??
           if(delta_pt > 0.5) continue;
 
           //check charge match

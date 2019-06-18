@@ -1946,6 +1946,18 @@ void split_tree(TString filename_in, TString filename_out,
       ((_recolep_fakeable_charge[0]*_recolep_fakeable_charge[1])>0) &&
       (_n_recoPFJet==3 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) );
 
+    if(_EventNumber==2445645){
+      cout<<"trigger "<<passTriggers_2lep0tau<<endl;
+      cout<<"inv_mass_lep_pairs "<<inv_mass_lep_pairs<<endl;
+      cout<<"inv_mass_Z_SFOS "<<inv_mass_Z_SFOS<<endl;
+      cout<<"metLD_e "<<metLD_e<<endl;
+      cout<<"genmatch_2l "<<genmatch_2l<<endl;
+      cout<<"sig_ttW_CR_base "<<sig_ttW_CR_base<<endl;
+      cout<<"mva sel "<<_recolep_fakeable_ismvasel[0]<<","<<_recolep_fakeable_ismvasel[1]<<endl;
+      cout<<"charge "<<_recolep_fakeable_charge[0]<<","<<_recolep_fakeable_charge[1]<<endl;
+      cout<<"jets "<<_n_recoPFJet<<", M "<<_n_recoPFJet_btag_medium<<", L "<<_n_recoPFJet_btag_loose<<endl;
+    }
+
     bool sig_ttW_CR_fake =
       sig_ttW_CR_base &&
       ((_recolep_fakeable_charge[0]*_recolep_fakeable_charge[1])>0) &&
@@ -10137,8 +10149,8 @@ void split_tree(TString filename_in, TString filename_out,
 
 void test16(){
 
-  TString fin = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2016/sync_ntuple_converted_ttHNonbb_2016_v17_7k.root";
-  TString fout = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_splitted/2016/sync_ntuple_splitted_ttHNonbb_2016_v10_7k.root";
+  TString fin = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2016/sync_ntuple_converted_ttHNonbb_2016_v17.root";
+  TString fout = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_splitted/2016/sync_ntuple_splitted_ttHNonbb_2016_v10.root";
 
   split_tree(fin,fout,0,0,true,2016);
 
@@ -10146,8 +10158,8 @@ void test16(){
 
 void test17(){
 
-  TString fin = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2017/sync_ntuple_converted_ttHNonbb_2017_v11.root";
-  TString fout = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_splitted/2017/sync_ntuple_splitted_ttHNonbb_2017_v8.root";
+  TString fin = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2017/sync_ntuple_converted_ttHNonbb_2017_v12.root";
+  TString fout = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_splitted/2017/sync_ntuple_splitted_ttHNonbb_2017_v9.root";
 
   split_tree(fin,fout,0,0,true,2017);
 
@@ -10155,8 +10167,8 @@ void test17(){
 
 void test18(){
 
-  TString fin = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2018/sync_ntuple_converted_ttHNonbb_2018_v10.root";
-  TString fout = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_splitted/2018/sync_ntuple_splitted_ttHNonbb_2018_v8.root";
+  TString fin = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2018/sync_ntuple_converted_ttHNonbb_2018_v11.root";
+  TString fout = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_splitted/2018/sync_ntuple_splitted_ttHNonbb_2018_v9.root";
 
   split_tree(fin,fout,0,0,true,2018);
 
