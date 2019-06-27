@@ -234,7 +234,7 @@ void convert_tree(
 
   if(sample=="sync16"){
 
-    file="sync_ntuple_converted_ttHNonbb_2016_v21";
+    file="sync_ntuple_converted_ttHNonbb_2016_v22";
     dir_out="/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2016/";
     list.push_back("/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_LLRHtautau/2016/sync_ntuple_LLRHtautau_ttHNonbb_2016_v13.root");
 
@@ -242,7 +242,7 @@ void convert_tree(
 
   else if(sample=="sync17"){
 
-    file="sync_ntuple_converted_ttHNonbb_2017_v16";
+    file="sync_ntuple_converted_ttHNonbb_2017_v17";
     dir_out="/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2017/";
     list.push_back("/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_LLRHtautau/2017/sync_ntuple_LLRHtautau_ttHNonbb_2017_v9.root");
 
@@ -250,7 +250,7 @@ void convert_tree(
 
   else if(sample=="sync18"){
 
-    file="sync_ntuple_converted_ttHNonbb_2018_v15";
+    file="sync_ntuple_converted_ttHNonbb_2018_v16";
     dir_out="/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2018/";
     list.push_back("/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_LLRHtautau/2018/sync_ntuple_LLRHtautau_ttHNonbb_2018_v8.root");
 
@@ -4332,12 +4332,12 @@ void convert_tree(
 
         float ptforcut = pt_corr;
         //float ptforcut = daughter.Pt();
-	
+
 	      if(ptforcut>7 && fabs(daughter.Eta())<2.5 && fabs(dxy)<=0.05 && fabs(dz)<0.1 && miniRelIso_nanoAOD<0.4 && sip < 8 && LooseIdWP && eleMissingLostHits<=1){
-	  
+	 
           //muon-electron cleaning
           bool dR_veto=false;
-	  
+
           for(unsigned int i_mu=0; i_mu<reco_mus.size(); i_mu++){
 	          TLorentzVector mu=reco_mus[i_mu].second;
 	          float dR_ele_mu=mu.DeltaR(daughter);
@@ -6284,7 +6284,7 @@ void convert_tree(
           
           //for ele, also try to match to photons (for conversion bkg)
 	  if( !( abs((*_genpart_pdg)[i_gen])==11 || abs((*_genpart_pdg)[i_gen])==22 )) continue;
-
+ 
 	  TLorentzVector gen((*_genpart_px)[i_gen],(*_genpart_py)[i_gen],(*_genpart_pz)[i_gen],(*_genpart_e)[i_gen]);
 
 	  //check the generator flags
@@ -6335,7 +6335,7 @@ void convert_tree(
       for(unsigned int i_lep=0; i_lep<reco_leptons.size(); i_lep++){
 
         TLorentzVector lep = reco_leptons[i_lep].second;
-	      float pt = (_recolep_uncorr_pt)[i_lep];
+	float pt = (_recolep_uncorr_pt)[i_lep];
         float conept = (_recolep_conept)[i_lep];
         int charge = (_recolep_charge)[i_lep];
 
@@ -6346,21 +6346,21 @@ void convert_tree(
         for(unsigned int i_gen=0; i_gen<(*_genpart_pdg).size();i_gen++){
 
 	  if( !( abs((*_genpart_pdg)[i_gen])==abs(_recolep_pdg[i_lep]) || abs((*_genpart_pdg)[i_gen])==22 )) continue;
-   
+         
+          TLorentzVector gen((*_genpart_px)[i_gen],(*_genpart_py)[i_gen],(*_genpart_pz)[i_gen],(*_genpart_e)[i_gen]);
+
           //check charge
-          if ( abs((*_genpart_pdg)[i_gen])==11 || abs((*_genpart_pdg)[i_gen])==13 ){
+          /*if ( abs((*_genpart_pdg)[i_gen])==11 || abs((*_genpart_pdg)[i_gen])==13 ){
             int charge_gen = (*_genpart_pdg)[i_gen] > 0 ? -1 : 1;
             if (charge_gen != charge) continue;
-          }          
-
-          TLorentzVector gen((*_genpart_px)[i_gen],(*_genpart_py)[i_gen],(*_genpart_pz)[i_gen],(*_genpart_e)[i_gen]);
+          }*/         
 
 	  //check the generator flags
 	  int flags = (*_genpart_flags)[i_gen];
           bool isprompt = flags&1;
           bool isdirectprompttau = (flags>>5)&1;
           if( !(isprompt || isdirectprompttau) ) continue;
-          
+
 	  //check if particle is stable
 	  bool isstable = (*_genpart_status)[i_gen]==1;
           if( !isstable) continue;
