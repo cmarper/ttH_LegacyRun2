@@ -718,7 +718,9 @@ void add_BDT(TString filein, TString fileout, vector<TString> treename){
 
       if(_category==3210 || _category==3220 || _category==1010 || _category==1020 ){
 
+
         //cleaned jets from ak8 jets
+
         vector<TLorentzVector> cleaned_jets;
         vector<float> DeepCSV_cleaned_jets;
 
@@ -731,6 +733,7 @@ void add_BDT(TString filein, TString fileout, vector<TString> treename){
           for (int i_ak8jet = 0; i_ak8jet<_n_recoPFak8Jet; i_ak8jet++) {
             TLorentzVector ak8jet((*_recoPFak8Jet_px)[i_ak8jet],(*_recoPFak8Jet_py)[i_ak8jet],(*_recoPFak8Jet_pz)[i_ak8jet],(*_recoPFak8Jet_e)[i_ak8jet]);
             float dR=ak8jet.DeltaR(jet);
+            cout<<"dR"<<dR<<endl;
             if(dR<0.8) {
               dR_veto=true;
               break; 
@@ -750,13 +753,17 @@ void add_BDT(TString filein, TString fileout, vector<TString> treename){
         for ( int i_bjet = 0; i_bjet<n_cleaned_jets; i_bjet++) {
 
           TLorentzVector bjet = cleaned_jets.at(i_bjet);
+          cout<<"bjet pt "<<bjet.Pt()<<endl;
 
           for ( int i_ak8jet = 0; i_ak8jet<_n_recoPFak8Jet; i_ak8jet++) {
 
             TLorentzVector ak8jet((*_recoPFak8Jet_px)[i_ak8jet],(*_recoPFak8Jet_py)[i_ak8jet],(*_recoPFak8Jet_pz)[i_ak8jet],(*_recoPFak8Jet_e)[i_ak8jet]);
+            cout<<"ak8jet pt "<<ak8jet.Pt()<<endl;
 
             TLorentzVector Wjet1((*_recoPFak8Jet_subjet1_px)[i_ak8jet],(*_recoPFak8Jet_subjet1_py)[i_ak8jet],(*_recoPFak8Jet_subjet1_pz)[i_ak8jet],(*_recoPFak8Jet_subjet1_e)[i_ak8jet]);
             TLorentzVector Wjet2((*_recoPFak8Jet_subjet2_px)[i_ak8jet],(*_recoPFak8Jet_subjet2_py)[i_ak8jet],(*_recoPFak8Jet_subjet2_pz)[i_ak8jet],(*_recoPFak8Jet_subjet2_e)[i_ak8jet]);
+            cout<<"wjet1 pt "<<Wjet1.Pt()<<endl;
+            cout<<"wjet2 pt "<<Wjet2.Pt()<<endl;
 
             _massW_SD = (*_recoPFak8Jet_SoftDropMass)[i_ak8jet];
             _tau21W = (*_recoPFak8Jet_tau2)[i_ak8jet] / (*_recoPFak8Jet_tau1)[i_ak8jet];
@@ -802,7 +809,6 @@ void add_BDT(TString filein, TString fileout, vector<TString> treename){
       }
 
       _BDTscore_HTTsemiboosted = _HTTsemiboosted;
-      
 
       ////////////////////////
       //////// 1l2tau ////////

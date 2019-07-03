@@ -41,14 +41,14 @@ void create_syncNtuple_objectbased(int year=2016){
   else if(year==2018) dir_out+="objects/2018/";
 
   TString file;
-  if(year==2016) file="sync_ntuple_objects_syncformat_ttHNonbb_2016_v13.root";
-  else if(year==2017) file="sync_ntuple_objects_syncformat_ttHNonbb_2017_v7.root";
-  else if(year==2018) file="sync_ntuple_objects_syncformat_ttHNonbb_2018_v6.root";
+  if(year==2016) file="sync_ntuple_objects_syncformat_ttHNonbb_2016_v17.root";
+  else if(year==2017) file="sync_ntuple_objects_syncformat_ttHNonbb_2017_v10.root";
+  else if(year==2018) file="sync_ntuple_objects_syncformat_ttHNonbb_2018_v9.root";
 
   vector<TString> list;
-  if(year==2016) list.push_back(dir_in+"sync_ntuple_converted_ttHNonbb_2016_v17.root");
-  else if(year==2017) list.push_back(dir_in+"sync_ntuple_converted_ttHNonbb_2017_v12.root");
-  else if(year==2018) list.push_back(dir_in+"sync_ntuple_converted_ttHNonbb_2018_v11.root");
+  if(year==2016) list.push_back(dir_in+"sync_ntuple_converted_ttHNonbb_2016_v23.root");
+  else if(year==2017) list.push_back(dir_in+"sync_ntuple_converted_ttHNonbb_2017_v16.root");
+  else if(year==2018) list.push_back(dir_in+"sync_ntuple_converted_ttHNonbb_2018_v15.root");
 
   TChain * tree = new TChain("HTauTauTree");
   int nFiles = list.size();
@@ -1930,19 +1930,20 @@ void create_syncNtuple_eventbased(int year=2016){
   else if(year==2018) dir_out+="events/2018/";
 
   TString file;
-  if(year==2016) file="sync_ntuple_events_syncformat_ttHNonbb_2016_v10.root";
-  else if(year==2017) file="sync_ntuple_events_syncformat_ttHNonbb_2017_v9.root";
-  else if(year==2018) file="sync_ntuple_events_syncformat_ttHNonbb_2018_v9.root";
+  if(year==2016) file="sync_ntuple_events_syncformat_ttHNonbb_2016_v15.root";
+  else if(year==2017) file="sync_ntuple_events_syncformat_ttHNonbb_2017_v14.root";
+  else if(year==2018) file="sync_ntuple_events_syncformat_ttHNonbb_2018_v14.root";
 
   vector<TString> list;
-  if(year==2016) list.push_back(dir_in+"sync_ntuple_splitted_ttHNonbb_2016_v10.root");
-  else if(year==2017) list.push_back(dir_in+"sync_ntuple_splitted_ttHNonbb_2017_v9.root");
-  else if(year==2018) list.push_back(dir_in+"sync_ntuple_splitted_ttHNonbb_2018_v9.root");
+  if(year==2016) list.push_back(dir_in+"sync_ntuple_splitted_ttHNonbb_2016_v15.root");
+  else if(year==2017) list.push_back(dir_in+"sync_ntuple_splitted_ttHNonbb_2017_v14.root");
+  else if(year==2018) list.push_back(dir_in+"sync_ntuple_splitted_ttHNonbb_2018_v14.root");
 
   TChain * tree_2tau_SR = new TChain ("HTauTauTree_2tau_SR");
   TChain * tree_2tau_fake = new TChain ("HTauTauTree_2tau_fake");
   TChain * tree_1l1tau_SR = new TChain ("HTauTauTree_1l1tau_SR");
   TChain * tree_1l1tau_fake = new TChain ("HTauTauTree_1l1tau_fake");
+  TChain * tree_1l1tau_flip = new TChain ("HTauTauTree_1l1tau_flip");
   TChain * tree_1l2tau_SR = new TChain ("HTauTauTree_1l2tau_SR");
   TChain * tree_1l2tau_fake = new TChain ("HTauTauTree_1l2tau_fake");
   TChain * tree_2lss_SR = new TChain ("HTauTauTree_2lss_SR");
@@ -1976,6 +1977,7 @@ void create_syncNtuple_eventbased(int year=2016){
   tree.push_back(tree_2tau_fake);
   tree.push_back(tree_1l1tau_SR);
   tree.push_back(tree_1l1tau_fake);
+  tree.push_back(tree_1l1tau_flip);
   tree.push_back(tree_1l2tau_SR);
   tree.push_back(tree_1l2tau_fake);
   tree.push_back(tree_2lss_SR);
@@ -2012,6 +2014,7 @@ void create_syncNtuple_eventbased(int year=2016){
     tree_2tau_fake->Add(list[i]);
     tree_1l1tau_SR->Add(list[i]);
     tree_1l1tau_fake->Add(list[i]);
+    tree_1l1tau_flip->Add(list[i]);
     tree_1l2tau_SR->Add(list[i]);
     tree_1l2tau_fake->Add(list[i]);
     tree_2lss_SR->Add(list[i]);
@@ -2053,6 +2056,7 @@ void create_syncNtuple_eventbased(int year=2016){
   TTree* tree_new_2tau_fake = new TTree("syncTree_0l2tau_Fake","syncTree_0l2tau_Fake");
   TTree* tree_new_1l1tau_SR = new TTree("syncTree_1l1tau_SR","syncTree_1l1tau_SR");
   TTree* tree_new_1l1tau_fake = new TTree("syncTree_1l1tau_Fake","syncTree_1l1tau_Fake");
+  TTree* tree_new_1l1tau_flip = new TTree("syncTree_1l1tau_Flip","syncTree_1l1tau_Flip");
   TTree* tree_new_1l2tau_SR = new TTree("syncTree_1l2tau_SR","syncTree_1l2tau_SR");
   TTree* tree_new_1l2tau_fake = new TTree("syncTree_1l2tau_Fake","syncTree_1l2tau_Fake");
   TTree* tree_new_2lss_SR = new TTree("syncTree_2lSS_SR","syncTree_2lSS_SR");
@@ -2086,6 +2090,7 @@ void create_syncNtuple_eventbased(int year=2016){
   tree_new.push_back(tree_new_2tau_fake);
   tree_new.push_back(tree_new_1l1tau_SR);
   tree_new.push_back(tree_new_1l1tau_fake);
+  tree_new.push_back(tree_new_1l1tau_flip);
   tree_new.push_back(tree_new_1l2tau_SR);
   tree_new.push_back(tree_new_1l2tau_fake);
   tree_new.push_back(tree_new_2lss_SR);
@@ -3976,6 +3981,7 @@ void create_syncNtuple_eventbased(int year=2016){
 
     if(_category==2010) tree_new_1l1tau_SR->Fill();
     if(_category==2020) tree_new_1l1tau_fake->Fill();
+    if(_category==2030) tree_new_1l1tau_flip->Fill();
 
     if(_category==2110) tree_new_1l2tau_SR->Fill();
     if(_category==2120) tree_new_1l2tau_fake->Fill();

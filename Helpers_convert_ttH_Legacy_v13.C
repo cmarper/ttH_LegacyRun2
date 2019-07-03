@@ -234,7 +234,7 @@ void convert_tree(
 
   if(sample=="sync16"){
 
-    file="sync_ntuple_converted_ttHNonbb_2016_v22";
+    file="sync_ntuple_converted_ttHNonbb_2016_v23";
     dir_out="/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2016/";
     list.push_back("/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_LLRHtautau/2016/sync_ntuple_LLRHtautau_ttHNonbb_2016_v13.root");
 
@@ -242,7 +242,7 @@ void convert_tree(
 
   else if(sample=="sync17"){
 
-    file="sync_ntuple_converted_ttHNonbb_2017_v17";
+    file="sync_ntuple_converted_ttHNonbb_2017_v18";
     dir_out="/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2017/";
     list.push_back("/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_LLRHtautau/2017/sync_ntuple_LLRHtautau_ttHNonbb_2017_v9.root");
 
@@ -250,7 +250,7 @@ void convert_tree(
 
   else if(sample=="sync18"){
 
-    file="sync_ntuple_converted_ttHNonbb_2018_v16";
+    file="sync_ntuple_converted_ttHNonbb_2018_v17";
     dir_out="/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2018/";
     list.push_back("/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_LLRHtautau/2018/sync_ntuple_LLRHtautau_ttHNonbb_2018_v8.root");
 
@@ -1825,6 +1825,7 @@ void convert_tree(
   vector<float> _recotauh_dz;
   vector<float> _recotauh_iso;
   vector<bool>  _recotauh_isGenMatched;
+  vector<bool>  _recotauh_isGenChargeMatched;
   vector<int>   _recotauh_matchedGenPartIdx;
   vector<int>   _recotauh_genMatchInd;
   vector<int>   _recotauh_matchedJetIndex;
@@ -2465,6 +2466,7 @@ void convert_tree(
   tree_new->Branch("recotauh_dz",&_recotauh_dz);
   tree_new->Branch("recotauh_iso",&_recotauh_iso);
   tree_new->Branch("recotauh_isGenMatched",&_recotauh_isGenMatched);
+  tree_new->Branch("recotauh_isGenChargeMatched",&_recotauh_isGenChargeMatched);
   tree_new->Branch("recotauh_matchedGenPartIdx",&_recotauh_matchedGenPartIdx);
   tree_new->Branch("recotauh_genMatchInd",&_recotauh_genMatchInd);
   tree_new->Branch("recotauh_matchedJetIndex",&_recotauh_matchedJetIndex);  
@@ -3192,8 +3194,8 @@ void convert_tree(
   // b-Tag DeepJet SFs
   cout<<"Getting btag SFs"<<endl;
   bTagSF_CSVshape* bTagSF_CSVshape_DeepJet = new bTagSF_CSVshape("bTagSF_weights/DeepJet_2016LegacySF_V1.csv"); //2016
-  //if (year==2017) bTagSF_CSVshape_DeepJet = new bTagSF_CSVshape("bTagSF_weights/DeepFlavour_94XSF_V2_B_F.csv"); //2017
-  //else if (year==2018) bTagSF_CSVshape_DeepJet = new bTagSF_CSVshape("bTagSF_weights/DeepJet_102XSF_V1.csv"); //2018
+  if (year==2017) bTagSF_CSVshape_DeepJet = new bTagSF_CSVshape("bTagSF_weights/DeepFlavour_94XSF_V2_B_F.csv"); //2017
+  else if (year==2018) bTagSF_CSVshape_DeepJet = new bTagSF_CSVshape("bTagSF_weights/DeepJet_102XSF_V1.csv"); //2018
 
   int skip_entries = 0;
 
@@ -3396,6 +3398,7 @@ void convert_tree(
     _recotauh_dz.clear();
     _recotauh_iso.clear();
     _recotauh_isGenMatched.clear();
+    _recotauh_isGenChargeMatched.clear();
     _recotauh_matchedGenPartIdx.clear();
     _recotauh_genMatchInd.clear();
     _recotauh_matchedJetIndex.clear();
@@ -6421,6 +6424,7 @@ void convert_tree(
  
           if(isprompt) genMatchInd = 2;
           else if(isdirectprompttau) genMatchInd = 4;
+
           genchargematch = chargematch;
           genmatch = true;
           matched_genpart_idx = i_gen;
@@ -6441,12 +6445,16 @@ void convert_tree(
       for(unsigned int i_tauh=0; i_tauh<reco_taus.size(); i_tauh++){
 
         TLorentzVector tauh = reco_taus[i_tauh].second;
+        int charge = (_recotauh_charge)[i_tauh];
   
         int genMatchInd = -1;
+        bool genchargematch = false;
         bool genmatch = false;
         int matched_genpart_idx = -1;
 
         for(unsigned int i_gen=0; i_gen<(*_genpart_pdg).size();i_gen++){
+
+          TLorentzVector gen((*_genpart_px)[i_gen],(*_genpart_py)[i_gen],(*_genpart_pz)[i_gen],(*_genpart_e)[i_gen]);
 
           // require tau matched to electron, muon or tauh
           int apdg = abs((*_genpart_pdg)[i_gen]);
@@ -6476,8 +6484,6 @@ void convert_tree(
             if( !(hasHmother || hasWmother || hasZmother) ) continue;
           }
 
-          TLorentzVector gen((*_genpart_px)[i_gen],(*_genpart_py)[i_gen],(*_genpart_pz)[i_gen],(*_genpart_e)[i_gen]);
-
           // require delta_pt<0.5/1.0
           float delta_pt = (fabs(tauh.Pt() - gen.Pt()) / gen.Pt());
           if( apdg==11 || apdg==13 ) {
@@ -6485,6 +6491,13 @@ void convert_tree(
           }
           else if(apdg==66615){
 	      if (delta_pt>1.0) continue;
+          }
+
+          //check charge match
+          bool chargematch = false;
+          if ( abs((*_genpart_pdg)[i_gen])==11 || abs((*_genpart_pdg)[i_gen])==13 || abs((*_genpart_pdg)[i_gen])==66615 ){
+             int charge_gen = (*_genpart_pdg)[i_gen] > 0 ? -1 : 1;
+             if (charge_gen == charge) chargematch = true;
           }
 
           // require dR<0.3
@@ -6504,7 +6517,8 @@ void convert_tree(
           }
           else if(apdg==66615)
             genMatchInd = 5;
-         
+          
+          genchargematch = chargematch; 
           genmatch = true;
           matched_genpart_idx = i_gen;
      
@@ -6515,6 +6529,7 @@ void convert_tree(
         _recotauh_isGenMatched.push_back(genmatch);
         _recotauh_matchedGenPartIdx.push_back(matched_genpart_idx);
         _recopart_matchedGenPartIdx.push_back(matched_genpart_idx);
+        _recotauh_isGenChargeMatched.push_back(genchargematch);
         _recotauh_genMatchInd.push_back(genMatchInd);
 
       }
