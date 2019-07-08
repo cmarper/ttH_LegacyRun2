@@ -1930,14 +1930,14 @@ void create_syncNtuple_eventbased(int year=2016){
   else if(year==2018) dir_out+="events/2018/";
 
   TString file;
-  if(year==2016) file="sync_ntuple_events_syncformat_ttHNonbb_2016_v15.root";
-  else if(year==2017) file="sync_ntuple_events_syncformat_ttHNonbb_2017_v14.root";
-  else if(year==2018) file="sync_ntuple_events_syncformat_ttHNonbb_2018_v14.root";
+  if(year==2016) file="sync_ntuple_events_syncformat_ttHNonbb_2016_v18.root";
+  else if(year==2017) file="sync_ntuple_events_syncformat_ttHNonbb_2017_v17.root";
+  else if(year==2018) file="sync_ntuple_events_syncformat_ttHNonbb_2018_v17.root";
 
   vector<TString> list;
-  if(year==2016) list.push_back(dir_in+"sync_ntuple_splitted_ttHNonbb_2016_v15.root");
-  else if(year==2017) list.push_back(dir_in+"sync_ntuple_splitted_ttHNonbb_2017_v14.root");
-  else if(year==2018) list.push_back(dir_in+"sync_ntuple_splitted_ttHNonbb_2018_v14.root");
+  if(year==2016) list.push_back(dir_in+"sync_ntuple_splitted_ttHNonbb_2016_v17.root");
+  else if(year==2017) list.push_back(dir_in+"sync_ntuple_splitted_ttHNonbb_2017_v16.root");
+  else if(year==2018) list.push_back(dir_in+"sync_ntuple_splitted_ttHNonbb_2018_v16.root");
 
   TChain * tree_2tau_SR = new TChain ("HTauTauTree_2tau_SR");
   TChain * tree_2tau_fake = new TChain ("HTauTauTree_2tau_fake");

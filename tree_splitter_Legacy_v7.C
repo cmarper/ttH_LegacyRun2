@@ -1195,7 +1195,7 @@ void split_tree(TString filename_in, TString filename_out,
     bool Flag_ecalBadCalibReducedMINIAODFilter = _passecalBadCalibFilterUpdate;
 
     bool metcut_base = Flag_goodVertices && Flag_globalSuperTightHalo2016Filter && Flag_HBHENoiseFilter && Flag_HBHENoiseIsoFilter && Flag_EcalDeadCellTriggerPrimitiveFilter && Flag_BadPFMuonFilter;
-    
+   
     if (_year == 2017 || _year == 2018) metcut_base = metcut_base && Flag_ecalBadCalibReducedMINIAODFilter;
     if (!isMC) metcut_base = metcut_base && Flag_eeBadScFilter;
 
@@ -1377,8 +1377,7 @@ void split_tree(TString filename_in, TString filename_out,
     if(_year==2016) pass_2me = pass_HLT_DiMu9_Ele9_CaloIdL_TrackIdL_v;
     else if(_year==2017) pass_2me = pass_HLT_DiMu9_Ele9_CaloIdL_TrackIdL_DZ_v;
     else if(_year==2018) pass_2me = pass_HLT_DiMu9_Ele9_CaloIdL_TrackIdL_DZ_v;
-
-   
+ 
     /////////////////////////////////
     //////////// Leptons ////////////
     /////////////////////////////////
@@ -1580,9 +1579,9 @@ void split_tree(TString filename_in, TString filename_out,
 
     bool passTriggers_1lep1tau = (pass_e || pass_m || pass_et || pass_mt);
 
-    bool genmatch_1l1tau = true;
+    bool genchargematch_1l1tau = true;
     if(isMC && _n_fakeable_lep>=1 && _n_recotauh>=1) 
-      genmatch_1l1tau = ( _recolep_fakeable_isGenMatched[0] && (*_recotauh_isGenMatched)[0] && _recolep_fakeable_isGenChargeMatched[0] && (*_recotauh_isGenChargeMatched)[0] );
+      genchargematch_1l1tau = ( _recolep_fakeable_isGenMatched[0] && (*_recotauh_isGenMatched)[0] && _recolep_fakeable_isGenChargeMatched[0] && (*_recotauh_isGenChargeMatched)[0] );
 
     bool sig_1l1tau_base = passTriggers_1lep1tau &&
       (_n_fakeable_lep>=1) &&
@@ -1591,18 +1590,20 @@ void split_tree(TString filename_in, TString filename_out,
       (_n_recotauh>=1) &&
       ((*_recotauh_pt)[0]>30) &&
       inv_mass_lep_pairs &&
-      (_n_recoPFJet>=4 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2));
-
+      (_n_recoPFJet>=4 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2)) &&
+      (_n_tight_lep<=1) &&
+      (_n_tight_WPM_tau<=1);
+     
     bool sig_1l1tau_SR = 
       sig_1l1tau_base &&
       (_n_tight_lep==1) && (_recolep_fakeable_ismvasel[0]) &&
       (_n_tight_WPM_tau==1) && ((*_recotauh_byMediumIsolationMVArun2v2017v2DBoldDMwLT)[0]>0.5) &&
-      genmatch_1l1tau; 
+      genchargematch_1l1tau; 
 
     bool sig_1l1tau_fake = 
       sig_1l1tau_base &&
       ( !(_recolep_fakeable_ismvasel[0]) || !((*_recotauh_byMediumIsolationMVArun2v2017v2DBoldDMwLT)[0]>0.5) ) &&
-      genmatch_1l1tau;
+      genchargematch_1l1tau;
 
     bool sig_1l1tau_flip = 
       sig_1l1tau_base &&
@@ -1611,7 +1612,6 @@ void split_tree(TString filename_in, TString filename_out,
       ( _recolep_fakeable_isGenMatched[0] && (*_recotauh_isGenMatched)[0]) && 
       (!(_recolep_fakeable_isGenChargeMatched[0]) || !((*_recotauh_isGenChargeMatched)[0]) );
 
-  
     ////////////////////////////////
     /////////// 1l2tau  ////////////
     ////////////////////////////////
@@ -1657,11 +1657,10 @@ void split_tree(TString filename_in, TString filename_out,
       genmatch_2l = (_recolep_fakeable_isGenMatched[0] && _recolep_fakeable_isGenMatched[1]) &&
                     (_recolep_fakeable_isGenChargeMatched[0] && _recolep_fakeable_isGenChargeMatched[1]);
    
-    bool metLD_e = true;
+    bool metLD_2lss = true;
     if(_n_fakeable_lep>=2 && abs(_recolep_fakeable_pdg[0])==11 && abs(_recolep_fakeable_pdg[1])==11) //_n_fakeable_lep>=2 
-      metLD_e = (_ETmissLD>30); 
+      metLD_2lss = (_ETmissLD>30); 
      
-
     bool sig_2lss_base = passTriggers_2lep0tau &&
       (_n_fakeable_lep>=2) &&
       (_recolep_fakeable_conept[0]>25 && _recolep_fakeable_conept[1]>15) &&
@@ -1670,7 +1669,7 @@ void split_tree(TString filename_in, TString filename_out,
       (_recolep_fakeable_tightcharge[0]==1 && _recolep_fakeable_tightcharge[1]==1) &&
       (_n_tight_WPL_tau==0) &&
       inv_mass_Z_SFOS && 
-      metLD_e &&
+      metLD_2lss &&
       genmatch_2l;
   
     bool sig_2lss_SR =
@@ -1696,7 +1695,7 @@ void split_tree(TString filename_in, TString filename_out,
       sig_2lss_base &&
       ((_recolep_fakeable_charge[0]*_recolep_fakeable_charge[1])>0) &&
       !(_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1]);
-
+ 
     bool sig_2lss_fake_ttH =
       sig_2lss_fake &&
       pass_njet_2l_ttH;
@@ -1723,7 +1722,7 @@ void split_tree(TString filename_in, TString filename_out,
     ////////// 2lss1tau  ///////////
     ////////////////////////////////
     
-    bool passTriggers_2lep1tau = (pass_e || pass_m || pass_2e || pass_2m || pass_em || pass_et || pass_mt);
+    bool passTriggers_2lep1tau = (pass_e || pass_m || pass_2e || pass_2m || pass_em); //pass_et || pass_mt
 
     bool sig_2lss1tau_base =  passTriggers_2lep1tau &&
       (_n_fakeable_lep>=2) &&
@@ -1734,7 +1733,7 @@ void split_tree(TString filename_in, TString filename_out,
       (_n_recotauh>=1) &&
       (_n_tight_WPM_tau<=1) &&
       inv_mass_Z_SFOS && 
-      metLD_e &&
+      metLD_2lss &&
       genmatch_2l;
 
     bool sig_2lss1tau_SR =
@@ -1766,6 +1765,10 @@ void split_tree(TString filename_in, TString filename_out,
     ////////////////////////////////
     ////////// 2los1tau  ///////////
     ////////////////////////////////
+
+    bool metLD_flavor = true;
+    if(_n_fakeable_lep>=2 && abs(_recolep_fakeable_pdg[0]) == abs(_recolep_fakeable_pdg[1])) //_n_fakeable_lep>=2 
+      metLD_flavor = (_ETmissLD>30);
  
     bool genmatch_2l1tau = true;
     if(isMC && _n_fakeable_lep>=2 && _n_recotauh>=1 )
@@ -1778,20 +1781,19 @@ void split_tree(TString filename_in, TString filename_out,
       ((_recolep_fakeable_charge[0]*_recolep_fakeable_charge[1])<0) &&
       (_recolep_fakeable_conept[0]>25) && ( (_recolep_fakeable_conept[1]>10 && abs(_recolep_fakeable_pdg[1])==13) || (_recolep_fakeable_conept[1]>15 && abs(_recolep_fakeable_pdg[1])==11) ) &&
       (_n_recotauh>=1) &&
+      (_n_tight_lep<=2) && 
       (_n_tight_WPM_tau<=1) &&
       inv_mass_lep_pairs &&
       inv_mass_Z_SFOS &&
-      (_ETmissLD>30) &&
+      (metLD_flavor) &&
       (_n_recoPFJet>=3 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) ) &&
       genmatch_2l1tau;
 
     bool sig_2los1tau_SR =
       sig_2los1tau_base &&
-      (_n_tight_lep==2) &&
       ((_recolep_fakeable_charge[0]*_recolep_fakeable_charge[1])<0) &&
-      ( _recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1]) &&
-      (_n_tight_WPL_tau==1) &&
-      ((*_recotauh_byLooseIsolationMVArun2v2017v2DBoldDMwLT)[0]>0.5);
+      (_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1]) &&
+      (_n_tight_WPL_tau>=1) && ((*_recotauh_byLooseIsolationMVArun2v2017v2DBoldDMwLT)[0]>0.5);
 
     bool sig_2los1tau_fake =
       sig_2los1tau_base &&
@@ -1801,17 +1803,17 @@ void split_tree(TString filename_in, TString filename_out,
     /////////// 2l2tau  ////////////
     ////////////////////////////////
  
-    bool passTriggers_2lep2tau = (pass_e || pass_m || pass_2e || pass_2m || pass_em || pass_et || pass_mt || pass_2t);
+    bool passTriggers_2lep2tau = (pass_e || pass_m || pass_2e || pass_2m || pass_em);
 
     bool genmatch_2l2tau = true;
     if(isMC && _n_fakeable_lep>=2 && _n_recotauh>=2 )
       genmatch_2l2tau = (_recolep_fakeable_isGenMatched[0] && _recolep_fakeable_isGenMatched[1]) &&
                         (*_recotauh_isGenMatched)[0] && (*_recotauh_isGenMatched)[1];
 
-    bool metLD_f = true;
+    bool metLD_fakepair = true;
     if (_n_recoPFJet<=3){
-      if(SFOS_fakeable_pair) metLD_f = _ETmissLD>45;
-      else if (!SFOS_fakeable_pair) metLD_f = _ETmissLD>30;
+      if(SFOS_fakeable_pair) metLD_fakepair = _ETmissLD>45;
+      else if (!SFOS_fakeable_pair) metLD_fakepair = _ETmissLD>30;
     }
 
     bool sig_2l2tau_base = passTriggers_2lep2tau &&
@@ -1821,7 +1823,7 @@ void split_tree(TString filename_in, TString filename_out,
       inv_mass_lep_pairs &&
       inv_mass_Z_SFOS &&
       (_n_fakeable_tau>=2) &&
-      metLD_f &&
+      metLD_fakepair &&
       ( ((*_recotauh_charge)[0]+(*_recotauh_charge)[1]+_recolep_fakeable_charge[0]+_recolep_fakeable_charge[1]) == 0) &&
       (_n_recoPFJet>=2 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) ) &&
       genmatch_2l2tau;
@@ -1856,12 +1858,12 @@ void split_tree(TString filename_in, TString filename_out,
       inv_mass_4l &&
       (_n_tight_lep<=3) &&
       genmatch_3l;
-   
+  
     bool sig_3l_SR =
       sig_3l_base &&
       (_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1] && _recolep_fakeable_ismvasel[2]);
 
-    bool pass_njet_3l_ttH = (_n_recoPFJet>=2 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) ) && metLD_f;
+    bool pass_njet_3l_ttH = (_n_recoPFJet>=2 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) ) && metLD_fakepair;
     bool pass_njet_3l_tH = (_n_recoPFJet_btag_medium>=1 && _n_recoPFLightJet>=1);
 
     bool is_3l_ttH_like = pass_njet_3l_ttH;
@@ -1892,7 +1894,7 @@ void split_tree(TString filename_in, TString filename_out,
     ////////// 3l1tau /////////////
     ///////////////////////////////
 
-    bool passTriggers_3lep1tau = (pass_e || pass_m || pass_2e || pass_2m || pass_em || pass_et || pass_mt || pass_3e || pass_3m || pass_2me || pass_m2e);
+    bool passTriggers_3lep1tau = (pass_e || pass_m || pass_2e || pass_2m || pass_em || pass_3e || pass_3m || pass_2me || pass_m2e); //pass_et || pass_mt
 
     bool sig_3l1tau_base = passTriggers_3lep1tau &&
       (_n_fakeable_lep>=3) &&
@@ -1900,9 +1902,10 @@ void split_tree(TString filename_in, TString filename_out,
       inv_mass_lep_pairs &&
       inv_mass_Z_SFOS &&
       (_n_recotauh>=1) &&
-      metLD_f &&
+      metLD_fakepair &&
       ( ((*_recotauh_charge)[0]+_recolep_fakeable_charge[0]+_recolep_fakeable_charge[1]+_recolep_fakeable_charge[2]) == 0) &&
       ( _n_recoPFJet>=2 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) ) &&
+      (_n_tight_lep<=3) &&
       genmatch_3l;
 
     bool sig_3l1tau_SR =
@@ -1929,7 +1932,7 @@ void split_tree(TString filename_in, TString filename_out,
       (_recolep_fakeable_conept[0]>25 && _recolep_fakeable_conept[1]>15 && _recolep_fakeable_conept[2]>15 && _recolep_fakeable_conept[3]>10) &&
       inv_mass_lep_pairs &&
       inv_mass_Z_SFOS &&
-      metLD_f &&
+      metLD_fakepair &&
       ( (_recolep_fakeable_charge[0]+_recolep_fakeable_charge[1]+_recolep_fakeable_charge[2]+_recolep_fakeable_charge[3]) == 0) &&
       ( _n_recoPFJet>=2 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) ) && 
       inv_mass_4l &&
@@ -1957,7 +1960,7 @@ void split_tree(TString filename_in, TString filename_out,
       (_recolep_fakeable_tightcharge[0]==1 && _recolep_fakeable_tightcharge[1]==1) &&
       (_n_tight_WPL_tau==0) &&
       inv_mass_Z_SFOS && 
-      metLD_e &&
+      metLD_2lss &&
       genmatch_2l;
 
     bool sig_ttW_CR_SR =
@@ -2000,12 +2003,12 @@ void split_tree(TString filename_in, TString filename_out,
     bool sig_ttZ_CR_SR =
       sig_ttZ_CR_base &&
       (_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1] && _recolep_fakeable_ismvasel[2]) &&
-      (_n_recoPFJet>=2 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) ) && metLD_f;
+      (_n_recoPFJet>=2 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) ) && metLD_fakepair;
  
     bool sig_ttZ_CR_fake =
       sig_ttZ_CR_base &&
       !(_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1] && _recolep_fakeable_ismvasel[2]) &&
-      (_n_recoPFJet>=2 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) ) && metLD_f;
+      (_n_recoPFJet>=2 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) ) && metLD_fakepair;
 
 
     ////////////////////////////////
@@ -2029,12 +2032,12 @@ void split_tree(TString filename_in, TString filename_out,
     bool sig_WZ_CR_SR =
       sig_WZ_CR_base &&
       (_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1] && _recolep_fakeable_ismvasel[2]) &&
-      (_n_recoPFJet>=2 && (_n_recoPFJet_btag_medium==0 && _n_recoPFJet_btag_loose<2) ) && metLD_f;
+      (_n_recoPFJet>=2 && (_n_recoPFJet_btag_medium==0 && _n_recoPFJet_btag_loose<2) ) && metLD_fakepair;
 
     bool sig_WZ_CR_fake =
       sig_WZ_CR_base &&
       !(_recolep_fakeable_ismvasel[0] && _recolep_fakeable_ismvasel[1] && _recolep_fakeable_ismvasel[2]) &&
-      (_n_recoPFJet>=2 && (_n_recoPFJet_btag_medium==0 && _n_recoPFJet_btag_loose<2) ) && metLD_f;
+      (_n_recoPFJet>=2 && (_n_recoPFJet_btag_medium==0 && _n_recoPFJet_btag_loose<2) ) && metLD_fakepair;
 
 
     //////////////////////////////
@@ -2049,7 +2052,7 @@ void split_tree(TString filename_in, TString filename_out,
       (_recolep_fakeable_conept[0]>25 && _recolep_fakeable_conept[1]>15 && _recolep_fakeable_conept[2]>15 && _recolep_fakeable_conept[3]>10) &&
       inv_mass_lep_pairs &&
       !inv_mass_Z_SFOS &&
-      metLD_f &&
+      metLD_fakepair &&
       ( (_recolep_fakeable_charge[0]+_recolep_fakeable_charge[1]+_recolep_fakeable_charge[2]+_recolep_fakeable_charge[3]) == 0) &&
       (_n_recoPFJet>=2 && (_n_recoPFJet_btag_medium==0 && _n_recoPFJet_btag_loose<2)) && 
       inv_mass_4l &&
@@ -10186,7 +10189,7 @@ void split_tree(TString filename_in, TString filename_out,
 void test16(){
 
   TString fin = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2016/sync_ntuple_converted_ttHNonbb_2016_v23.root";
-  TString fout = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_splitted/2016/sync_ntuple_splitted_ttHNonbb_2016_v15.root";
+  TString fout = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_splitted/2016/sync_ntuple_splitted_ttHNonbb_2016_v17.root";
 
   split_tree(fin,fout,0,0,true,2016);
 
@@ -10195,7 +10198,7 @@ void test16(){
 void test17(){
 
   TString fin = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2017/sync_ntuple_converted_ttHNonbb_2017_v18.root";
-  TString fout = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_splitted/2017/sync_ntuple_splitted_ttHNonbb_2017_v14.root";
+  TString fout = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_splitted/2017/sync_ntuple_splitted_ttHNonbb_2017_v16.root";
 
   split_tree(fin,fout,0,0,true,2017);
 
@@ -10204,7 +10207,7 @@ void test17(){
 void test18(){
 
   TString fin = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2018/sync_ntuple_converted_ttHNonbb_2018_v17.root";
-  TString fout = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_splitted/2018/sync_ntuple_splitted_ttHNonbb_2018_v14.root";
+  TString fout = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_splitted/2018/sync_ntuple_splitted_ttHNonbb_2018_v16.root";
 
   split_tree(fin,fout,0,0,true,2018);
 
