@@ -103,7 +103,7 @@ std::tuple< TString, TString, TString, vector<TString> > setup_files(TString sam
     int i_min=i_split*100;
     if(i_split==0) i_min++;
     int i_max=(i_split+1)*100;
-    if(i_split==0) i_max=1+1; //95+1
+    if(i_split==0) i_max=95+1; 
     for(int i=i_min;i<i_max;i++){
       cout<<dir_in+Form("HTauTauAnalysis_%i.root",i)<<endl;
       list.push_back(dir_in+Form("HTauTauAnalysis_%i.root",i));
@@ -3932,6 +3932,600 @@ std::tuple< TString, TString, TString, vector<TString> > setup_files(TString sam
     }
   }
 
+
+  //////////////////////////
+  //// Background 2018 /////
+  //////////////////////////
+
+  //ttV datacard production
+
+  if(sample=="MC_2018_v1_TTZ_M10"){ 
+    file="ntuple_"+sample;
+    dir_out="/data_CMS/cms/mperez/ttH_Legacy/ntuples_converted/";
+    dir_out+="2018/";
+    if(JEC>0)
+      dir_out+="JECup/";
+    else if(JEC<0)
+      dir_out+="JECdown/";
+    else if(TES>0)
+      dir_out+="TESup/";
+    else if(TES<0)
+      dir_out+="TESdown/";
+    else
+      dir_out+="nominal/";
+    dir_out+="ttV/";
+    dir_in="root://polgrid4.in2p3.fr//store/user/cmartinp/ttH_Legacy/MC_2018_v1/TTZToLLNuNu_M-10_TuneCP5_13TeV-amcatnlo-pythia8/MC_2018_v1_TTZ_M10/190704_131457/";
+    int i_dir=i_split/10;
+    dir_in+=Form("000%i/",i_dir);
+    int i_min=i_split*100;
+    if(i_split==0) i_min++;
+    int i_max=(i_split+1)*100;
+    if(i_split==3) i_max=340+1;
+    for(int i=i_min;i<i_max;i++){
+      cout<<dir_in+Form("HTauTauAnalysis_%i.root",i)<<endl;
+      list.push_back(dir_in+Form("HTauTauAnalysis_%i.root",i));
+    }
+  }
+
+  if(sample=="MC_2018_v1_TTZ_M1to10"){ 
+    file="ntuple_"+sample;
+    dir_out="/data_CMS/cms/mperez/ttH_Legacy/ntuples_converted/";
+    dir_out+="2018/";
+    if(JEC>0)
+      dir_out+="JECup/";
+    else if(JEC<0)
+      dir_out+="JECdown/";
+    else if(TES>0)
+      dir_out+="TESup/";
+    else if(TES<0)
+      dir_out+="TESdown/";
+    else
+      dir_out+="nominal/";
+    dir_out+="ttV/";
+    dir_in="root://polgrid4.in2p3.fr//store/user/cmartinp/ttH_Legacy/MC_2018_v1/TTZToLL_M-1to10_TuneCP5_13TeV-amcatnlo-pythia8/MC_2018_v1_TTZ_M1to10/190704_131534/";
+    int i_dir=i_split/10;
+    dir_in+=Form("000%i/",i_dir);
+    int i_min=i_split*100;
+    if(i_split==0) i_min++;
+    int i_max=(i_split+1)*100;
+    if(i_split==0) i_max=19+1;
+    for(int i=i_min;i<i_max;i++){
+      cout<<dir_in+Form("HTauTauAnalysis_%i.root",i)<<endl;
+      list.push_back(dir_in+Form("HTauTauAnalysis_%i.root",i));
+    }
+  }
+
+  if(sample=="MC_2018_v1_TTWJets"){ 
+    file="ntuple_"+sample;
+    dir_out="/data_CMS/cms/mperez/ttH_Legacy/ntuples_converted/";
+    dir_out+="2018/";
+    if(JEC>0)
+      dir_out+="JECup/";
+    else if(JEC<0)
+      dir_out+="JECdown/";
+    else if(TES>0)
+      dir_out+="TESup/";
+    else if(TES<0)
+      dir_out+="TESdown/";
+    else
+      dir_out+="nominal/";
+    dir_out+="ttV/";
+    dir_in="root://polgrid4.in2p3.fr//store/user/cmartinp/ttH_Legacy/MC_2018_v1/TTWJetsToLNu_TuneCP5_13TeV-amcatnloFXFX-madspin-pythia8/MC_2018_v1_TTWJets/190704_131608/";
+    int i_dir=i_split/10;
+    dir_in+=Form("000%i/",i_dir);
+    int i_min=i_split*100;
+    if(i_split==0) i_min++;
+    int i_max=(i_split+1)*100;
+    if(i_split==1) i_max=149+1;
+    for(int i=i_min;i<i_max;i++){
+      cout<<dir_in+Form("HTauTauAnalysis_%i.root",i)<<endl;
+      list.push_back(dir_in+Form("HTauTauAnalysis_%i.root",i));
+    }
+  }
+
+  if(sample=="MC_2018_v1_TTWW"){ 
+    file="ntuple_"+sample;
+    dir_out="/data_CMS/cms/mperez/ttH_Legacy/ntuples_converted/";
+    dir_out+="2018/";
+    if(JEC>0)
+      dir_out+="JECup/";
+    else if(JEC<0)
+      dir_out+="JECdown/";
+    else if(TES>0)
+      dir_out+="TESup/";
+    else if(TES<0)
+      dir_out+="TESdown/";
+    else
+      dir_out+="nominal/";
+    dir_out+="ttV/";
+    dir_in="root://polgrid4.in2p3.fr//store/user/cmartinp/ttH_Legacy/MC_2018_v1/TTWW_TuneCP5_13TeV-madgraph-pythia8/MC_2018_v1_TTWW/190704_131644/";
+    int i_dir=i_split/10;
+    dir_in+=Form("000%i/",i_dir);
+    int i_min=i_split*100;
+    if(i_split==0) i_min++;
+    int i_max=(i_split+1)*100;
+    if(i_split==0) i_max=27+1;
+    for(int i=i_min;i<i_max;i++){
+      cout<<dir_in+Form("HTauTauAnalysis_%i.root",i)<<endl;
+      list.push_back(dir_in+Form("HTauTauAnalysis_%i.root",i));
+    }
+  }
+
+  //ttV training
+
+  if(sample=="MC_2018_v1_ttZ"){ 
+    file="ntuple_"+sample;
+    dir_out="/data_CMS/cms/mperez/ttH_Legacy/ntuples_converted/";
+    dir_out+="2018/";
+    if(JEC>0)
+      dir_out+="JECup/";
+    else if(JEC<0)
+      dir_out+="JECdown/";
+    else if(TES>0)
+      dir_out+="TESup/";
+    else if(TES<0)
+      dir_out+="TESdown/";
+    else
+      dir_out+="nominal/";
+    dir_out+="ttV/";
+    dir_in="root://polgrid4.in2p3.fr//store/user/cmartinp/ttH_Legacy/MC_2018_v1/ttZJets_TuneCP5_13TeV_madgraphMLM_pythia8/MC_2018_v1_ttZ/190704_134154/";
+    int i_dir=i_split/10;
+    dir_in+=Form("000%i/",i_dir);
+    int i_min=i_split*100;
+    if(i_split==0) i_min++;
+    int i_max=(i_split+1)*100;
+    if(i_split==6) i_max=632+1;
+    for(int i=i_min;i<i_max;i++){
+      cout<<dir_in+Form("HTauTauAnalysis_%i.root",i)<<endl;
+      list.push_back(dir_in+Form("HTauTauAnalysis_%i.root",i));
+    }
+  }
+
+  if(sample=="MC_2018_v1_ttW"){ 
+    file="ntuple_"+sample;
+    dir_out="/data_CMS/cms/mperez/ttH_Legacy/ntuples_converted/";
+    dir_out+="2018/";
+    if(JEC>0)
+      dir_out+="JECup/";
+    else if(JEC<0)
+      dir_out+="JECdown/";
+    else if(TES>0)
+      dir_out+="TESup/";
+    else if(TES<0)
+      dir_out+="TESdown/";
+    else
+      dir_out+="nominal/";
+    dir_out+="ttV/";
+    dir_in="root://polgrid4.in2p3.fr//store/user/cmartinp/ttH_Legacy/MC_2018_v1/ttWJets_TuneCP5_13TeV_madgraphMLM_pythia8/MC_2018_v1_ttW/190704_134231/";
+    int i_dir=i_split/10;
+    dir_in+=Form("000%i/",i_dir);
+    int i_min=i_split*100;
+    if(i_split==0) i_min++;
+    int i_max=(i_split+1)*100;
+    if(i_split==3) i_max=374+1;
+    for(int i=i_min;i<i_max;i++){
+      cout<<dir_in+Form("HTauTauAnalysis_%i.root",i)<<endl;
+      list.push_back(dir_in+Form("HTauTauAnalysis_%i.root",i));
+    }
+  }
+
+  //TT
+
+  if(sample=="MC_2018_v1_ST_sCh_lepDecay"){ 
+    file="ntuple_"+sample;
+    dir_out="/data_CMS/cms/mperez/ttH_Legacy/ntuples_converted/";
+    dir_out+="2018/";
+    if(JEC>0)
+      dir_out+="JECup/";
+    else if(JEC<0)
+      dir_out+="JECdown/";
+    else if(TES>0)
+      dir_out+="TESup/";
+    else if(TES<0)
+      dir_out+="TESdown/";
+    else
+      dir_out+="nominal/";
+    dir_out+="TT/";
+    dir_in="root://polgrid4.in2p3.fr//store/user/cmartinp/ttH_Legacy/MC_2018_v1/ST_s-channel_4f_leptonDecays_TuneCP5_13TeV-madgraph-pythia8/MC_2018_v1_ST_sCh_lepDecay/190704_131719/";
+    int i_dir=i_split/10;
+    dir_in+=Form("000%i/",i_dir);
+    int i_min=i_split*100;
+    if(i_split==0) i_min++;
+    int i_max=(i_split+1)*100;
+    if(i_split==3) i_max=353+1;
+    for(int i=i_min;i<i_max;i++){
+      cout<<dir_in+Form("HTauTauAnalysis_%i.root",i)<<endl;
+      list.push_back(dir_in+Form("HTauTauAnalysis_%i.root",i));
+    }
+  }
+
+  if(sample=="MC_2018_v1_ST_tCh_top"){ 
+    file="ntuple_"+sample;
+    dir_out="/data_CMS/cms/mperez/ttH_Legacy/ntuples_converted/";
+    dir_out+="2018/";
+    if(JEC>0)
+      dir_out+="JECup/";
+    else if(JEC<0)
+      dir_out+="JECdown/";
+    else if(TES>0)
+      dir_out+="TESup/";
+    else if(TES<0)
+      dir_out+="TESdown/";
+    else
+      dir_out+="nominal/";
+    dir_out+="TT/";
+    dir_in="root://polgrid4.in2p3.fr//store/user/cmartinp/ttH_Legacy/MC_2018_v1/ST_t-channel_top_4f_InclusiveDecays_TuneCP5_13TeV-powheg-madspin-pythia8/MC_2018_v1_ST_tCh_top/190704_131757/";
+    int i_dir=i_split/10;
+    dir_in+=Form("000%i/",i_dir);
+    int i_min=i_split*100;
+    if(i_split==0) i_min++;
+    int i_max=(i_split+1)*100;
+    if(i_split==23) i_max=2395+1;
+    for(int i=i_min;i<i_max;i++){
+      cout<<dir_in+Form("HTauTauAnalysis_%i.root",i)<<endl;
+      list.push_back(dir_in+Form("HTauTauAnalysis_%i.root",i));
+    }
+  }
+
+  if(sample=="MC_2018_v1_ST_tCh_antitop"){ 
+    file="ntuple_"+sample;
+    dir_out="/data_CMS/cms/mperez/ttH_Legacy/ntuples_converted/";
+    dir_out+="2018/";
+    if(JEC>0)
+      dir_out+="JECup/";
+    else if(JEC<0)
+      dir_out+="JECdown/";
+    else if(TES>0)
+      dir_out+="TESup/";
+    else if(TES<0)
+      dir_out+="TESdown/";
+    else
+      dir_out+="nominal/";
+    dir_out+="TT/";
+    dir_in="root://polgrid4.in2p3.fr//store/user/cmartinp/ttH_Legacy/MC_2018_v1/ST_t-channel_antitop_4f_InclusiveDecays_TuneCP5_13TeV-powheg-madspin-pythia8/MC_2018_v1_ST_tCh_antitop/190704_131832/";
+    int i_dir=i_split/10;
+    dir_in+=Form("000%i/",i_dir);
+    int i_min=i_split*100;
+    if(i_split==0) i_min++;
+    int i_max=(i_split+1)*100;
+    if(i_split==13) i_max=1319+1;
+    for(int i=i_min;i<i_max;i++){
+      cout<<dir_in+Form("HTauTauAnalysis_%i.root",i)<<endl;
+      list.push_back(dir_in+Form("HTauTauAnalysis_%i.root",i));
+    }
+  }
+
+  if(sample=="MC_2018_v1_ST_tW_top"){ 
+    file="ntuple_"+sample;
+    dir_out="/data_CMS/cms/mperez/ttH_Legacy/ntuples_converted/";
+    dir_out+="2018/";
+    if(JEC>0)
+      dir_out+="JECup/";
+    else if(JEC<0)
+      dir_out+="JECdown/";
+    else if(TES>0)
+      dir_out+="TESup/";
+    else if(TES<0)
+      dir_out+="TESdown/";
+    else
+      dir_out+="nominal/";
+    dir_out+="TT/";
+    dir_in="root://polgrid4.in2p3.fr//store/user/cmartinp/ttH_Legacy/MC_2018_v1/ST_tW_top_5f_inclusiveDecays_TuneCP5_13TeV-powheg-pythia8/MC_2018_v1_ST_tW_top/190704_131911/";
+    int i_dir=i_split/10;
+    dir_in+=Form("000%i/",i_dir);
+    int i_min=i_split*100;
+    if(i_split==0) i_min++;
+    int i_max=(i_split+1)*100;
+    if(i_split==1) i_max=173+1;
+    for(int i=i_min;i<i_max;i++){
+      cout<<dir_in+Form("HTauTauAnalysis_%i.root",i)<<endl;
+      list.push_back(dir_in+Form("HTauTauAnalysis_%i.root",i));
+    }
+  }
+
+  if(sample=="MC_2018_v1_ST_tW_antitop"){ 
+    file="ntuple_"+sample;
+    dir_out="/data_CMS/cms/mperez/ttH_Legacy/ntuples_converted/";
+    dir_out+="2018/";
+    if(JEC>0)
+      dir_out+="JECup/";
+    else if(JEC<0)
+      dir_out+="JECdown/";
+    else if(TES>0)
+      dir_out+="TESup/";
+    else if(TES<0)
+      dir_out+="TESdown/";
+    else
+      dir_out+="nominal/";
+    dir_out+="TT/";
+    dir_in="root://polgrid4.in2p3.fr//store/user/cmartinp/ttH_Legacy/MC_2018_v1/ST_tW_antitop_5f_inclusiveDecays_TuneCP5_13TeV-powheg-pythia8/MC_2018_v1_ST_tW_antitop/190704_131946/";
+    int i_dir=i_split/10;
+    dir_in+=Form("000%i/",i_dir);
+    int i_min=i_split*100;
+    if(i_split==0) i_min++;
+    int i_max=(i_split+1)*100;
+    if(i_split==1) i_max=160+1;
+    for(int i=i_min;i<i_max;i++){
+      cout<<dir_in+Form("HTauTauAnalysis_%i.root",i)<<endl;
+      list.push_back(dir_in+Form("HTauTauAnalysis_%i.root",i));
+    }
+  }
+
+  if(sample=="MC_2018_v1_tWll"){ 
+    file="ntuple_"+sample;
+    dir_out="/data_CMS/cms/mperez/ttH_Legacy/ntuples_converted/";
+    dir_out+="2018/";
+    if(JEC>0)
+      dir_out+="JECup/";
+    else if(JEC<0)
+      dir_out+="JECdown/";
+    else if(TES>0)
+      dir_out+="TESup/";
+    else if(TES<0)
+      dir_out+="TESdown/";
+    else
+      dir_out+="nominal/";
+    dir_out+="TT/";
+    dir_in="root://polgrid4.in2p3.fr//store/user/cmartinp/ttH_Legacy/MC_2018_v1/ST_tWll_5f_LO_TuneCP5_PSweights_13TeV-madgraph-pythia8/MC_2018_v1_tWll/190704_132024/";
+    int i_dir=i_split/10;
+    dir_in+=Form("000%i/",i_dir);
+    int i_min=i_split*100;
+    if(i_split==0) i_min++;
+    int i_max=(i_split+1)*100;
+    if(i_split==0) i_max=21+1;
+    for(int i=i_min;i<i_max;i++){
+      cout<<dir_in+Form("HTauTauAnalysis_%i.root",i)<<endl;
+      list.push_back(dir_in+Form("HTauTauAnalysis_%i.root",i));
+    }
+  }
+
+  if(sample=="MC_2018_v1_TTTo2L"){ 
+    file="ntuple_"+sample;
+    dir_out="/data_CMS/cms/mperez/ttH_Legacy/ntuples_converted/";
+    dir_out+="2018/";
+    if(JEC>0)
+      dir_out+="JECup/";
+    else if(JEC<0)
+      dir_out+="JECdown/";
+    else if(TES>0)
+      dir_out+="TESup/";
+    else if(TES<0)
+      dir_out+="TESdown/";
+    else
+      dir_out+="nominal/";
+    dir_out+="TT/";
+    dir_in="root://polgrid4.in2p3.fr//store/user/cmartinp/ttH_Legacy/MC_2018_v1/TTTo2L2Nu_TuneCP5_13TeV-powheg-pythia8/MC_2018_v1_TTTo2L/190704_132105/";
+    int i_dir=i_split/10;
+    dir_in+=Form("000%i/",i_dir);
+    int i_min=i_split*100;
+    if(i_split==0) i_min++;
+    int i_max=(i_split+1)*100;
+    if(i_split==9) i_max=968+1;
+    for(int i=i_min;i<i_max;i++){
+      cout<<dir_in+Form("HTauTauAnalysis_%i.root",i)<<endl;
+      list.push_back(dir_in+Form("HTauTauAnalysis_%i.root",i));
+    }
+  }
+
+  if(sample=="MC_2018_v2_TTToSemiLep"){ 
+    file="ntuple_"+sample;
+    dir_out="/data_CMS/cms/mperez/ttH_Legacy/ntuples_converted/";
+    dir_out+="2018/";
+    if(JEC>0)
+      dir_out+="JECup/";
+    else if(JEC<0)
+      dir_out+="JECdown/";
+    else if(TES>0)
+      dir_out+="TESup/";
+    else if(TES<0)
+      dir_out+="TESdown/";
+    else
+      dir_out+="nominal/";
+    dir_out+="TT/";
+    dir_in="root://polgrid4.in2p3.fr//store/user/cmartinp/ttH_Legacy/MC_2018_v1/TTToSemiLeptonic_TuneCP5_13TeV-powheg-pythia8/MC_2018_v2_TTToSemiLep/190812_101421/";
+    int i_dir=i_split/10;
+    dir_in+=Form("000%i/",i_dir);
+    int i_min=i_split*100;
+    if(i_split==0) i_min++;
+    int i_max=(i_split+1)*100;
+    if(i_split==15) i_max=1523+1;
+    for(int i=i_min;i<i_max;i++){
+      cout<<dir_in+Form("HTauTauAnalysis_%i.root",i)<<endl;
+      list.push_back(dir_in+Form("HTauTauAnalysis_%i.root",i));
+    }
+  }
+
+  if(sample=="MC_2018_v2_TTToHad"){ 
+    file="ntuple_"+sample;
+    dir_out="/data_CMS/cms/mperez/ttH_Legacy/ntuples_converted/";
+    dir_out+="2018/";
+    if(JEC>0)
+      dir_out+="JECup/";
+    else if(JEC<0)
+      dir_out+="JECdown/";
+    else if(TES>0)
+      dir_out+="TESup/";
+    else if(TES<0)
+      dir_out+="TESdown/";
+    else
+      dir_out+="nominal/";
+    dir_out+="TT/";
+    dir_in="root://polgrid4.in2p3.fr//store/user/cmartinp/ttH_Legacy/MC_2018_v1/TTToHadronic_TuneCP5_13TeV-powheg-pythia8/MC_2018_v2_TTToHad/190812_101457/";
+    int i_dir=i_split/10;
+    dir_in+=Form("000%i/",i_dir);
+    int i_min=i_split*100;
+    if(i_split==0) i_min++;
+    int i_max=(i_split+1)*100;
+    if(i_split==33) i_max=3313+1;
+    for(int i=i_min;i<i_max;i++){
+      cout<<dir_in+Form("HTauTauAnalysis_%i.root",i)<<endl;
+      list.push_back(dir_in+Form("HTauTauAnalysis_%i.root",i));
+    }
+  }
+
+  if(sample=="MC_2018_v1_TTJets_DiLep"){ 
+    file="ntuple_"+sample;
+    dir_out="/data_CMS/cms/mperez/ttH_Legacy/ntuples_converted/";
+    dir_out+="2018/";
+    if(JEC>0)
+      dir_out+="JECup/";
+    else if(JEC<0)
+      dir_out+="JECdown/";
+    else if(TES>0)
+      dir_out+="TESup/";
+    else if(TES<0)
+      dir_out+="TESdown/";
+    else
+      dir_out+="nominal/";
+    dir_out+="TT/";
+    dir_in="root://polgrid4.in2p3.fr//store/user/cmartinp/ttH_Legacy/MC_2018_v1/TTJets_DiLept_TuneCP5_13TeV-madgraphMLM-pythia8/MC_2018_v1_TTJets_DiLep/190704_132253/";
+    int i_dir=i_split/10;
+    dir_in+=Form("000%i/",i_dir);
+    int i_min=i_split*100;
+    if(i_split==0) i_min++;
+    int i_max=(i_split+1)*100;
+    if(i_split==8) i_max=841+1;
+    for(int i=i_min;i<i_max;i++){
+      cout<<dir_in+Form("HTauTauAnalysis_%i.root",i)<<endl;
+      list.push_back(dir_in+Form("HTauTauAnalysis_%i.root",i));
+    }
+  }
+
+  if(sample=="MC_2018_v1_TTJets_TToSingleLep"){ 
+    file="ntuple_"+sample;
+    dir_out="/data_CMS/cms/mperez/ttH_Legacy/ntuples_converted/";
+    dir_out+="2018/";
+    if(JEC>0)
+      dir_out+="JECup/";
+    else if(JEC<0)
+      dir_out+="JECdown/";
+    else if(TES>0)
+      dir_out+="TESup/";
+    else if(TES<0)
+      dir_out+="TESdown/";
+    else
+      dir_out+="nominal/";
+    dir_out+="TT/";
+    dir_in="root://polgrid4.in2p3.fr//store/user/cmartinp/ttH_Legacy/MC_2018_v1/TTJets_SingleLeptFromT_TuneCP5_13TeV-madgraphMLM-pythia8/MC_2018_v1_TTJets_TToSingleLep/190704_132331/";
+    int i_dir=i_split/10;
+    dir_in+=Form("000%i/",i_dir);
+    int i_min=i_split*100;
+    if(i_split==0) i_min++;
+    int i_max=(i_split+1)*100;
+    if(i_split==15) i_max=1505+1;
+    for(int i=i_min;i<i_max;i++){
+      cout<<dir_in+Form("HTauTauAnalysis_%i.root",i)<<endl;
+      list.push_back(dir_in+Form("HTauTauAnalysis_%i.root",i));
+    }
+  }
+
+  if(sample=="MC_2018_v1_TTJets_TbarToSingleLep"){ 
+    file="ntuple_"+sample;
+    dir_out="/data_CMS/cms/mperez/ttH_Legacy/ntuples_converted/";
+    dir_out+="2018/";
+    if(JEC>0)
+      dir_out+="JECup/";
+    else if(JEC<0)
+      dir_out+="JECdown/";
+    else if(TES>0)
+      dir_out+="TESup/";
+    else if(TES<0)
+      dir_out+="TESdown/";
+    else
+      dir_out+="nominal/";
+    dir_out+="TT/";
+    dir_in="root://polgrid4.in2p3.fr//store/user/cmartinp/ttH_Legacy/MC_2018_v1/TTJets_SingleLeptFromTbar_TuneCP5_13TeV-madgraphMLM-pythia8/MC_2018_v1_TTJets_TbarToSingleLep/190704_132409/";
+    int i_dir=i_split/10;
+    dir_in+=Form("000%i/",i_dir);
+    int i_min=i_split*100;
+    if(i_split==0) i_min++;
+    int i_max=(i_split+1)*100;
+    if(i_split==15) i_max=1538+1;
+    for(int i=i_min;i<i_max;i++){
+      cout<<dir_in+Form("HTauTauAnalysis_%i.root",i)<<endl;
+      list.push_back(dir_in+Form("HTauTauAnalysis_%i.root",i));
+    }
+  }
+
+  //ggH
+
+  if(sample=="MC_2018_v1_GGHToTauTau"){ 
+    file="ntuple_"+sample;
+    dir_out="/data_CMS/cms/mperez/ttH_Legacy/ntuples_converted/";
+    dir_out+="2018/";
+    if(JEC>0)
+      dir_out+="JECup/";
+    else if(JEC<0)
+      dir_out+="JECdown/";
+    else if(TES>0)
+      dir_out+="TESup/";
+    else if(TES<0)
+      dir_out+="TESdown/";
+    else
+      dir_out+="nominal/";
+    dir_out+="ggH/";
+    dir_in="root://polgrid4.in2p3.fr//store/user/cmartinp/ttH_Legacy/MC_2018_v1/GluGluHToTauTau_M125_13TeV_powheg_pythia8/MC_2018_v1_GGHToTauTau/190704_133025/";
+    int i_dir=i_split/10;
+    dir_in+=Form("000%i/",i_dir);
+    int i_min=i_split*100;
+    if(i_split==0) i_min++;
+    int i_max=(i_split+1)*100;
+    if(i_split==1) i_max=188+1;
+    for(int i=i_min;i<i_max;i++){
+      cout<<dir_in+Form("HTauTauAnalysis_%i.root",i)<<endl;
+      list.push_back(dir_in+Form("HTauTauAnalysis_%i.root",i));
+    }
+  }
+
+  //MISSING
+  //GluGluHToZZTo4L_M125_13TeV_powheg2_JHUGenV7011_pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v2/MINIAODSIM
+  //GluGluHToZZTo2L2Q_M125_13TeV_powheg2_JHUGenV7011_pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM
+  //GluGluHToWWToLNuQQ_M125_13TeV_powheg2_JHUGenV714_pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM
+  //GluGluHToWWTo2L2Nu_M125_13TeV_powheg2_JHUGenV714_pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM
+  //GluGluHToMuMu_M-125_TuneCP5_PSweights_13TeV_powheg_pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v2/MINIAODSIM
+  //GluGluHToBB_M125_13TeV_amcatnloFXFX_pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM
+  //GluGluHToGG_M125_TuneCP5_13TeV-amcatnloFXFX-pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM
+
+  //qqH
+
+  if(sample=="MC_2018_v1_VBFHToTauTau"){ 
+    file="ntuple_"+sample;
+    dir_out="/data_CMS/cms/mperez/ttH_Legacy/ntuples_converted/";
+    dir_out+="2018/";
+    if(JEC>0)
+      dir_out+="JECup/";
+    else if(JEC<0)
+      dir_out+="JECdown/";
+    else if(TES>0)
+      dir_out+="TESup/";
+    else if(TES<0)
+      dir_out+="TESdown/";
+    else
+      dir_out+="nominal/";
+    dir_out+="qqH/";
+    dir_in="root://polgrid4.in2p3.fr//store/user/cmartinp/ttH_Legacy/MC_2018_v1/VBFHToTauTau_M125_13TeV_powheg_pythia8/MC_2018_v1_VBFHToTauTau/190704_133103/";
+    int i_dir=i_split/10;
+    dir_in+=Form("000%i/",i_dir);
+    int i_min=i_split*100;
+    if(i_split==0) i_min++;
+    int i_max=(i_split+1)*100;
+    if(i_split==0) i_max=72+1;
+    for(int i=i_min;i<i_max;i++){
+      cout<<dir_in+Form("HTauTauAnalysis_%i.root",i)<<endl;
+      list.push_back(dir_in+Form("HTauTauAnalysis_%i.root",i));
+    }
+  }
+ 
+  //MISSING
+  //VBF_HToZZTo4L_M125_13TeV_powheg2_JHUGenV7011_pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v2/MINIAODSIM
+  //VBFHToWWToLNuQQ_M125_13TeV_powheg_JHUGen_pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM
+  //VBFHToWWTo2L2Nu_M125_13TeV_powheg2_JHUGenV714_pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM
+  //VBFHToMuMu_M-125_TuneCP5_PSweights_13TeV_powheg_pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM
+  //VBFHToBB_M-125_13TeV_powheg_pythia8_weightfix/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM
+  //VBFHToGG_M125_13TeV_amcatnlo_pythia8/RunIIAutumn18MiniAOD-102X_upgrade2018_realistic_v15-v1/MINIAODSIM
+
+  //Rares
+  
 
 
   return std::make_tuple(dir_in, dir_out, file, list);
