@@ -2210,7 +2210,7 @@ std::tuple< TString, TString, TString, vector<TString> > setup_files(TString sam
     int i_min=i_split*100;
     if(i_split==0) i_min++;
     int i_max=(i_split+1)*100;
-    if(i_split==1) i_max=300+1;
+    if(i_split==3) i_max=300+1;
     for(int i=i_min;i<i_max;i++){
       cout<<dir_in+Form("HTauTauAnalysis_%i.root",i)<<endl;
       list.push_back(dir_in+Form("HTauTauAnalysis_%i.root",i));
