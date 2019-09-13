@@ -234,7 +234,7 @@ void convert_tree(
 
   if(sample=="sync16"){
 
-    file="sync_ntuple_converted_ttHNonbb_2016_v24";
+    file="sync_ntuple_converted_ttHNonbb_2016_v25";
     dir_out="/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2016/";
     list.push_back("/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_LLRHtautau/2016/sync_ntuple_LLRHtautau_ttHNonbb_2016_v13.root");
 
@@ -242,7 +242,7 @@ void convert_tree(
 
   else if(sample=="sync17"){
 
-    file="sync_ntuple_converted_ttHNonbb_2017_v19";
+    file="sync_ntuple_converted_ttHNonbb_2017_v20";
     dir_out="/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2017/";
     list.push_back("/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_LLRHtautau/2017/sync_ntuple_LLRHtautau_ttHNonbb_2017_v9.root");
 
@@ -250,7 +250,7 @@ void convert_tree(
 
   else if(sample=="sync18"){
 
-    file="sync_ntuple_converted_ttHNonbb_2018_v18";
+    file="sync_ntuple_converted_ttHNonbb_2018_v19";
     dir_out="/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2018/";
     list.push_back("/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_LLRHtautau/2018/sync_ntuple_LLRHtautau_ttHNonbb_2018_v8.root");
 
@@ -1634,6 +1634,8 @@ void convert_tree(
 
   //New branches
 
+  float _min_mll;
+
   vector<float> _daughters_pt;
   vector<float> _daughters_eta;
   vector<float> _daughters_phi;
@@ -2278,7 +2280,6 @@ void convert_tree(
   vector<int>   _gennu_TopMothInd; //-1 if not from top
   vector<int>   _gennu_WMothInd; //-1 if not from W
 
-
   tree_new->Branch("daughters_pt",&_daughters_pt);
   tree_new->Branch("daughters_eta",&_daughters_eta);
   tree_new->Branch("daughters_phi",&_daughters_phi);
@@ -2709,6 +2710,7 @@ void convert_tree(
   tree_new->Branch("ETmissLD",&_ETmissLD,"ETmissLD/F");
   
   tree_new->Branch("PU_weight",&_PU_weight,"PU_weight/F");
+  tree_new->Branch("min_mll",&_min_mll,"min_mll/F");
 
   tree_new->Branch("bTagSF_CSVshape_weight",&_bTagSF_CSVshape_weight);
   tree_new->Branch("bTagSF_CSVshape_weight_JESUp",&_bTagSF_CSVshape_weight_JESUp);
@@ -2941,6 +2943,7 @@ void convert_tree(
     tree_new->Branch("MC_weight_scale_muR0p5",&_MC_weight_scale_muR0p5,"MC_weight_scale_muR0p5/F");
     tree_new->Branch("MC_weight_scale_muR2",&_MC_weight_scale_muR2,"MC_weight_scale_muR2/F");
     tree_new->Branch("PU_weight",&_PU_weight,"PU_weight/F");
+    tree_new->Branch("min_mll",&_min_mll,"min_mll/F");
 
     tree_new->Branch("lheHt",&_lheHt,"lheHt/F");
     tree_new->Branch("lheNOutPartons",&_lheNOutPartons,"lheNOutPartons/I");
@@ -3066,6 +3069,7 @@ void convert_tree(
     tree_new->Branch("MC_weight_tHW",&_MC_weight_tHW,"MC_weight_tHW/F");
 
     tree_new->Branch("PU_weight",&_PU_weight,"PU_weight/F");
+    tree_new->Branch("min_mll",&_min_mll,"min_mll/F");
 
   }
 
@@ -3642,6 +3646,8 @@ void convert_tree(
     _HTmiss = 0;
     _ETmissLD = 0;
 
+    _min_mll = 0;
+
     //scale factors and systematics
 
     _PU_weight = 0;
@@ -3994,7 +4000,16 @@ void convert_tree(
     if(entry_ok<0) continue;
 
     _PU_weight = get_pu_weight(_npu,isMC,sample);
-    
+   
+
+    /////////////////////////////////////////////
+    ///                mll                    ///
+    /////////////////////////////////////////////
+
+    vector<TLorentzVector> _recolep_mll;
+    _recolep_mll.clear();
+
+
     //////////////////////////////////////////////
     ///                 Muons                  ///
     //////////////////////////////////////////////
@@ -4042,6 +4057,8 @@ void convert_tree(
         float DeepJet_matchedjetidx = (*_bDeepFlavor_probb)[matchedjetidx] + (*_bDeepFlavor_probbb)[matchedjetidx] + (*_bDeepFlavor_problepb)[matchedjetidx];
  
         if(daughter.Pt()>5 && fabs(daughter.Eta())<2.4 && fabs(dxy)<=0.05 && fabs(dz)<0.1 && miniRelIso_nanoAOD<0.4 && sip < 8 && looseID){
+
+          _recolep_mll.push_back(daughter);
 
           ////////////////
           // Lepton MVA //
@@ -4309,9 +4326,12 @@ void convert_tree(
     //////////////////////////////////////////////
     ///              Electrons                 ///
     //////////////////////////////////////////////
-	  
+
     vector< pair<int,TLorentzVector> > reco_eles;
     vector< pair<int,TLorentzVector> > reco_eles_corr;
+
+    vector<TLorentzVector> reco_eles_uncleaned;
+    reco_eles_uncleaned.clear();
 
     for(unsigned int i_daughter=0; i_daughter<(*_daughters_e).size(); i_daughter++){
 
@@ -4348,7 +4368,9 @@ void convert_tree(
         //float ptforcut = daughter.Pt();
 
 	      if(ptforcut>7 && fabs(daughter.Eta())<2.5 && fabs(dxy)<=0.05 && fabs(dz)<0.1 && miniRelIso_nanoAOD<0.4 && sip < 8 && LooseIdWP && eleMissingLostHits<=1){
-	 
+ 
+               _recolep_mll.push_back(daughter_corr);
+
           //muon-electron cleaning
           bool dR_veto=false;
 
@@ -4777,8 +4799,32 @@ void convert_tree(
       }
 
     }
- 
-    
+
+
+    // mll
+
+    float min_mll = 999.;
+
+    for(unsigned int i_lep1=0; i_lep1<_recolep_mll.size(); i_lep1++){
+     
+       TLorentzVector lep1 = _recolep_mll.at(i_lep1);
+
+       for(unsigned int i_lep2=i_lep1+1; i_lep2<_recolep_mll.size(); i_lep2++){
+
+          TLorentzVector lep2 = _recolep_mll.at(i_lep2);
+          
+          /*if(_EventNumber==721042 || _EventNumber==2529185 || _EventNumber==2481046 || _EventNumber==608990){
+             cout<<"-- Event "<<_EventNumber<<endl;
+             cout<<"lep1 "<<lep1.Pt()<<","<<lep1.Eta()<<","<<lep1.Phi()<<endl;
+             cout<<"lep2 "<<lep2.Pt()<<","<<lep2.Eta()<<","<<lep2.Phi()<<endl;
+          }*/
+          float m_ll = (lep1 + lep2).M();
+          if(m_ll<min_mll) min_mll = m_ll;
+       }  
+    } 
+
+    _min_mll = min_mll;    
+    //if(_EventNumber==721042 || _EventNumber==2529185 || _EventNumber==2481046 || _EventNumber==608990) cout<<"mll "<<_min_mll<<endl;
 
     //////////////////////////////////////////////
     ///                Taus                    ///
