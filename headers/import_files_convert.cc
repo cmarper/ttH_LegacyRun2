@@ -25,25 +25,28 @@ std::tuple< TString, TString, TString, vector<TString> > setup_files(TString sam
 
   if(sample=="sync16"){
 
-    file="sync_ntuple_converted_ttHNonbb_2016_v24";
+    file="sync_ntuple_converted_ttHNonbb_2016_v25";
     dir_out="/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2016/";
-    list.push_back("/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_LLRHtautau/2016/sync_ntuple_LLRHtautau_ttHNonbb_2016_v13.root");
+    dir_in="/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_LLRHtautau/2016/sync_ntuple_LLRHtautau_ttHNonbb_2016_v13.root";
+    list.push_back(dir_in);
 
   }
 
   else if(sample=="sync17"){
 
-    file="sync_ntuple_converted_ttHNonbb_2017_v19";
+    file="sync_ntuple_converted_ttHNonbb_2017_v20";
     dir_out="/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2017/";
-    list.push_back("/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_LLRHtautau/2017/sync_ntuple_LLRHtautau_ttHNonbb_2017_v9.root");
+    dir_in="/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_LLRHtautau/2017/sync_ntuple_LLRHtautau_ttHNonbb_2017_v9.root";
+    list.push_back(dir_in);
 
   }
 
   else if(sample=="sync18"){
 
-    file="sync_ntuple_converted_ttHNonbb_2018_v18";
+    file="sync_ntuple_converted_ttHNonbb_2018_v19";
     dir_out="/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2018/";
-    list.push_back("/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_LLRHtautau/2018/sync_ntuple_LLRHtautau_ttHNonbb_2018_v8.root");
+    dir_in="/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_LLRHtautau/2018/sync_ntuple_LLRHtautau_ttHNonbb_2018_v8.root";
+    list.push_back(dir_in);
 
   }
 
@@ -420,7 +423,7 @@ std::tuple< TString, TString, TString, vector<TString> > setup_files(TString sam
     int i_min=i_split*100;
     if(i_split==0) i_min++;
     int i_max=(i_split+1)*100;
-    if(i_split==2) i_max=258+1;
+    if(i_split==2) i_max=257+1;
     for(int i=i_min;i<i_max;i++){
       cout<<dir_in+Form("HTauTauAnalysis_%i.root",i)<<endl;
       list.push_back(dir_in+Form("HTauTauAnalysis_%i.root",i));
@@ -599,7 +602,7 @@ std::tuple< TString, TString, TString, vector<TString> > setup_files(TString sam
     int i_min=i_split*100;
     if(i_split==0) i_min++;
     int i_max=(i_split+1)*100;
-    if(i_split==4) i_max=463+1;
+    if(i_split==4) i_max=436+1;
     for(int i=i_min;i<i_max;i++){
       cout<<dir_in+Form("HTauTauAnalysis_%i.root",i)<<endl;
       list.push_back(dir_in+Form("HTauTauAnalysis_%i.root",i));
