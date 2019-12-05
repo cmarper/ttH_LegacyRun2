@@ -137,7 +137,6 @@ void split_tree(TString filename_in, TString filename_out,
   vector<int>   *_recotauh_byLooseIsolationMVArun2v2017v2DBoldDMwLT;
   vector<int>   *_recotauh_byMediumIsolationMVArun2v2017v2DBoldDMwLT;
   vector<int>   *_recotauh_byTightIsolationMVArun2v2017v2DBoldDMwLT;
-  vector<int>   *_recotauh_byVVVLooseDeepTau2017v2p1VSjet;
   vector<int>   *_recotauh_byVVLooseDeepTau2017v2p1VSjet;
   vector<int>   *_recotauh_byVLooseDeepTau2017v2p1VSjet;
   vector<int>   *_recotauh_byLooseDeepTau2017v2p1VSjet;
@@ -145,21 +144,6 @@ void split_tree(TString filename_in, TString filename_out,
   vector<int>   *_recotauh_byTightDeepTau2017v2p1VSjet;
   vector<int>   *_recotauh_byVTightDeepTau2017v2p1VSjet;
   vector<int>   *_recotauh_byVVTightDeepTau2017v2p1VSjet;
-  vector<int>   *_recotauh_byVVVLooseDeepTau2017v2p1VSe;
-  vector<int>   *_recotauh_byVVLooseDeepTau2017v2p1VSe;
-  vector<int>   *_recotauh_byVLooseDeepTau2017v2p1VSe;
-  vector<int>   *_recotauh_byLooseDeepTau2017v2p1VSe;
-  vector<int>   *_recotauh_byMediumDeepTau2017v2p1VSe;
-  vector<int>   *_recotauh_byTightDeepTau2017v2p1VSe;
-  vector<int>   *_recotauh_byVTightDeepTau2017v2p1VSe;
-  vector<int>   *_recotauh_byVVTightDeepTau2017v2p1VSe;
-  vector<int>   *_recotauh_byVLooseDeepTau2017v2p1VSmu;
-  vector<int>   *_recotauh_byLooseDeepTau2017v2p1VSmu;
-  vector<int>   *_recotauh_byMediumDeepTau2017v2p1VSmu;
-  vector<int>   *_recotauh_byTightDeepTau2017v2p1VSmu;
-  vector<float> *_recotauh_byDeepTau2017v2p1VSjetraw;
-  vector<float> *_recotauh_byDeepTau2017v2p1VSeraw;
-  vector<float> *_recotauh_byDeepTau2017v2p1VSmuraw;
   vector<int>   *_recotauh_againstMuonLoose3;
   vector<int>   *_recotauh_againstMuonTight3;
   vector<int>   *_recotauh_againstElectronVLooseMVA6;
@@ -284,7 +268,6 @@ void split_tree(TString filename_in, TString filename_out,
   tree->SetBranchAddress("recotauh_byLooseIsolationMVArun2v2017v2DBoldDMwLT",&_recotauh_byLooseIsolationMVArun2v2017v2DBoldDMwLT);
   tree->SetBranchAddress("recotauh_byMediumIsolationMVArun2v2017v2DBoldDMwLT",&_recotauh_byMediumIsolationMVArun2v2017v2DBoldDMwLT);
   tree->SetBranchAddress("recotauh_byTightIsolationMVArun2v2017v2DBoldDMwLT",&_recotauh_byTightIsolationMVArun2v2017v2DBoldDMwLT);
-  tree->SetBranchAddress("recotauh_byVVVLooseDeepTau2017v2p1VSjet",&_recotauh_byVVVLooseDeepTau2017v2p1VSjet);
   tree->SetBranchAddress("recotauh_byVVLooseDeepTau2017v2p1VSjet",&_recotauh_byVVLooseDeepTau2017v2p1VSjet);
   tree->SetBranchAddress("recotauh_byVLooseDeepTau2017v2p1VSjet",&_recotauh_byVLooseDeepTau2017v2p1VSjet);
   tree->SetBranchAddress("recotauh_byLooseDeepTau2017v2p1VSjet",&_recotauh_byLooseDeepTau2017v2p1VSjet);
@@ -292,21 +275,6 @@ void split_tree(TString filename_in, TString filename_out,
   tree->SetBranchAddress("recotauh_byTightDeepTau2017v2p1VSjet",&_recotauh_byTightDeepTau2017v2p1VSjet);
   tree->SetBranchAddress("recotauh_byVTightDeepTau2017v2p1VSjet",&_recotauh_byVTightDeepTau2017v2p1VSjet);
   tree->SetBranchAddress("recotauh_byVVTightDeepTau2017v2p1VSjet",&_recotauh_byVVTightDeepTau2017v2p1VSjet);
-  tree->SetBranchAddress("recotauh_byVVVLooseDeepTau2017v2p1VSe",&_recotauh_byVVVLooseDeepTau2017v2p1VSe);
-  tree->SetBranchAddress("recotauh_byVVLooseDeepTau2017v2p1VSe",&_recotauh_byVVLooseDeepTau2017v2p1VSe);
-  tree->SetBranchAddress("recotauh_byVLooseDeepTau2017v2p1VSe",&_recotauh_byVLooseDeepTau2017v2p1VSe);
-  tree->SetBranchAddress("recotauh_byLooseDeepTau2017v2p1VSe",&_recotauh_byLooseDeepTau2017v2p1VSe);
-  tree->SetBranchAddress("recotauh_byMediumDeepTau2017v2p1VSe",&_recotauh_byMediumDeepTau2017v2p1VSe);
-  tree->SetBranchAddress("recotauh_byTightDeepTau2017v2p1VSe",&_recotauh_byTightDeepTau2017v2p1VSe);
-  tree->SetBranchAddress("recotauh_byVTightDeepTau2017v2p1VSe",&_recotauh_byVTightDeepTau2017v2p1VSe);
-  tree->SetBranchAddress("recotauh_byVVTightDeepTau2017v2p1VSe",&_recotauh_byVVTightDeepTau2017v2p1VSe);
-  tree->SetBranchAddress("recotauh_byVLooseDeepTau2017v2p1VSmu",&_recotauh_byVLooseDeepTau2017v2p1VSmu);
-  tree->SetBranchAddress("recotauh_byLooseDeepTau2017v2p1VSmu",&_recotauh_byLooseDeepTau2017v2p1VSmu);
-  tree->SetBranchAddress("recotauh_byMediumDeepTau2017v2p1VSmu",&_recotauh_byMediumDeepTau2017v2p1VSmu);
-  tree->SetBranchAddress("recotauh_byTightDeepTau2017v2p1VSmu",&_recotauh_byTightDeepTau2017v2p1VSmu);
-  tree->SetBranchAddress("recotauh_byDeepTau2017v2p1VSjetraw",&_recotauh_byDeepTau2017v2p1VSjetraw);
-  tree->SetBranchAddress("recotauh_byDeepTau2017v2p1VSeraw",&_recotauh_byDeepTau2017v2p1VSeraw);
-  tree->SetBranchAddress("recotauh_byDeepTau2017v2p1VSmuraw",&_recotauh_byDeepTau2017v2p1VSmuraw);
   tree->SetBranchAddress("recotauh_againstMuonLoose3",&_recotauh_againstMuonLoose3);
   tree->SetBranchAddress("recotauh_againstMuonTight3",&_recotauh_againstMuonTight3);
   tree->SetBranchAddress("recotauh_againstElectronVLooseMVA6",&_recotauh_againstElectronVLooseMVA6);
@@ -666,7 +634,6 @@ void split_tree(TString filename_in, TString filename_out,
   vector<int>   _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT;
   vector<int>   _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT;
   vector<int>   _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT;
-  vector<int>   _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet;
   vector<int>   _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet;
   vector<int>   _recotauh_sel_byVLooseDeepTau2017v2p1VSjet;
   vector<int>   _recotauh_sel_byLooseDeepTau2017v2p1VSjet;
@@ -674,21 +641,6 @@ void split_tree(TString filename_in, TString filename_out,
   vector<int>   _recotauh_sel_byTightDeepTau2017v2p1VSjet;
   vector<int>   _recotauh_sel_byVTightDeepTau2017v2p1VSjet;
   vector<int>   _recotauh_sel_byVVTightDeepTau2017v2p1VSjet;
-  vector<int>   _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe;
-  vector<int>   _recotauh_sel_byVVLooseDeepTau2017v2p1VSe;
-  vector<int>   _recotauh_sel_byVLooseDeepTau2017v2p1VSe;
-  vector<int>   _recotauh_sel_byLooseDeepTau2017v2p1VSe;
-  vector<int>   _recotauh_sel_byMediumDeepTau2017v2p1VSe;
-  vector<int>   _recotauh_sel_byTightDeepTau2017v2p1VSe;
-  vector<int>   _recotauh_sel_byVTightDeepTau2017v2p1VSe;
-  vector<int>   _recotauh_sel_byVVTightDeepTau2017v2p1VSe;
-  vector<int>   _recotauh_sel_byVLooseDeepTau2017v2p1VSmu;
-  vector<int>   _recotauh_sel_byLooseDeepTau2017v2p1VSmu;
-  vector<int>   _recotauh_sel_byMediumDeepTau2017v2p1VSmu;
-  vector<int>   _recotauh_sel_byTightDeepTau2017v2p1VSmu;
-  vector<float> _recotauh_sel_byDeepTau2017v2p1VSjetraw;
-  vector<float> _recotauh_sel_byDeepTau2017v2p1VSeraw;
-  vector<float> _recotauh_sel_byDeepTau2017v2p1VSmuraw;
   vector<int>   _recotauh_sel_againstMuonLoose3;
   vector<int>   _recotauh_sel_againstMuonTight3;
   vector<int>   _recotauh_sel_againstElectronVLooseMVA6;
@@ -1000,7 +952,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byLooseDeepTau2017v2p1VSjet.clear();
@@ -1008,21 +959,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSjetraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSeraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSmuraw.clear();
     _recotauh_sel_againstMuonLoose3.clear();
     _recotauh_sel_againstMuonTight3.clear();
     _recotauh_sel_againstElectronVLooseMVA6.clear();
@@ -1181,7 +1117,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_byLooseIsolationMVArun2v2017v2DBoldDMwLT = 0;
     _recotauh_byMediumIsolationMVArun2v2017v2DBoldDMwLT = 0;
     _recotauh_byTightIsolationMVArun2v2017v2DBoldDMwLT = 0;
-    _recotauh_byVVVLooseDeepTau2017v2p1VSjet = 0;
     _recotauh_byVVLooseDeepTau2017v2p1VSjet = 0;
     _recotauh_byVLooseDeepTau2017v2p1VSjet = 0;
     _recotauh_byLooseDeepTau2017v2p1VSjet = 0;
@@ -1189,21 +1124,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_byTightDeepTau2017v2p1VSjet = 0;
     _recotauh_byVTightDeepTau2017v2p1VSjet = 0;
     _recotauh_byVVTightDeepTau2017v2p1VSjet = 0;
-    _recotauh_byVVVLooseDeepTau2017v2p1VSe = 0;
-    _recotauh_byVVLooseDeepTau2017v2p1VSe = 0;
-    _recotauh_byVLooseDeepTau2017v2p1VSe = 0;
-    _recotauh_byLooseDeepTau2017v2p1VSe = 0;
-    _recotauh_byMediumDeepTau2017v2p1VSe = 0;
-    _recotauh_byTightDeepTau2017v2p1VSe = 0;
-    _recotauh_byVTightDeepTau2017v2p1VSe = 0;
-    _recotauh_byVVTightDeepTau2017v2p1VSe = 0;
-    _recotauh_byVLooseDeepTau2017v2p1VSmu = 0;
-    _recotauh_byLooseDeepTau2017v2p1VSmu = 0;
-    _recotauh_byMediumDeepTau2017v2p1VSmu = 0;
-    _recotauh_byTightDeepTau2017v2p1VSmu = 0;
-    _recotauh_byDeepTau2017v2p1VSjetraw = 0;
-    _recotauh_byDeepTau2017v2p1VSeraw = 0;
-    _recotauh_byDeepTau2017v2p1VSmuraw = 0;
     _recotauh_againstMuonLoose3 = 0;
     _recotauh_againstMuonTight3 = 0;
     _recotauh_againstElectronVLooseMVA6 = 0;
@@ -1669,8 +1589,9 @@ void split_tree(TString filename_in, TString filename_out,
     bool passTriggers_0lep2tau = pass_2t;
 
     bool genmatch_2tau = true;
-    //if(isMC && _n_recotauh>=2) 
-    //  genmatch_2tau = ( (*_recotauh_isGenMatched)[0] && (*_recotauh_isGenMatched)[1] );
+    
+    if(isMC && _n_recotauh>=2) 
+      genmatch_2tau = ( (*_recotauh_isGenMatched)[0] && (*_recotauh_isGenMatched)[1] );
 
     bool sig_2tau_base = passTriggers_0lep2tau &&
       (_n_recotauh>=2) &&
@@ -1679,8 +1600,8 @@ void split_tree(TString filename_in, TString filename_out,
       (abs((*_recotauh_eta)[0])<2.1) && (abs((*_recotauh_eta)[1])<2.1) &&
       inv_mass_lep_pairs &&
       (_n_tight_lep==0) &&
-      (_n_recoPFJet>=4 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) ) && 
-      genmatch_2tau;
+      (_n_recoPFJet>=4 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) )
+      && genmatch_2tau;
 
     bool sig_2tau_SR = 
       sig_2tau_base &&
@@ -1698,8 +1619,8 @@ void split_tree(TString filename_in, TString filename_out,
     bool passTriggers_1lep1tau = (pass_e || pass_m || pass_et || pass_mt);
 
     bool genchargematch_1l1tau = true;
-    //if(isMC && _n_fakeable_lep>=1 && _n_recotauh>=1) 
-    //  genchargematch_1l1tau = ( _recolep_fakeable_isGenMatched[0] && (*_recotauh_isGenMatched)[0] && _recolep_fakeable_isGenChargeMatched[0] && (*_recotauh_isGenChargeMatched)[0] );
+    if(isMC && _n_fakeable_lep>=1 && _n_recotauh>=1) 
+      genchargematch_1l1tau = ( _recolep_fakeable_isGenMatched[0] && (*_recotauh_isGenMatched)[0] && _recolep_fakeable_isGenChargeMatched[0] && (*_recotauh_isGenChargeMatched)[0] );
 
     bool sig_1l1tau_base = passTriggers_1lep1tau &&
       (_n_fakeable_lep>=1) &&
@@ -1738,8 +1659,8 @@ void split_tree(TString filename_in, TString filename_out,
     bool passTriggers_1lep2tau = (pass_e || pass_m || pass_et || pass_mt); //pass_2t not used: additional statistics negligible
 
     bool genmatch_1l2tau = true;
-    //if(isMC && _n_fakeable_lep>=1 && _n_recotauh>=2) 
-    //  genmatch_1l2tau = (_recolep_fakeable_isGenMatched[0] && (*_recotauh_isGenMatched)[0] && (*_recotauh_isGenMatched)[1]);
+    if(isMC && _n_fakeable_lep>=1 && _n_recotauh>=2) 
+      genmatch_1l2tau = (_recolep_fakeable_isGenMatched[0] && (*_recotauh_isGenMatched)[0] && (*_recotauh_isGenMatched)[1]);
 
     bool sig_1l2tau_base = passTriggers_1lep2tau &&
       (_n_fakeable_lep>=1) &&
@@ -1772,9 +1693,9 @@ void split_tree(TString filename_in, TString filename_out,
     bool passTriggers_2lep0tau = (pass_e || pass_m || pass_2e || pass_2m || pass_em);
  
     bool genmatch_2l = true;
-    //if(isMC && _n_fakeable_lep>=2)
-    //  genmatch_2l = (_recolep_fakeable_isGenMatched[0] && _recolep_fakeable_isGenMatched[1]) &&
-    //                (_recolep_fakeable_isGenChargeMatched[0] && _recolep_fakeable_isGenChargeMatched[1]);
+    if(isMC && _n_fakeable_lep>=2)
+      genmatch_2l = (_recolep_fakeable_isGenMatched[0] && _recolep_fakeable_isGenMatched[1]) &&
+                    (_recolep_fakeable_isGenChargeMatched[0] && _recolep_fakeable_isGenChargeMatched[1]);
   
     bool met_mll_2lss = true;
     if(_n_fakeable_lep>=2 && abs(_recolep_fakeable_pdg[0])==11 && abs(_recolep_fakeable_pdg[1])==11){ //_n_fakeable_lep>=2 
@@ -1926,10 +1847,10 @@ void split_tree(TString filename_in, TString filename_out,
       metLD_flavor = (_ETmissLD>30);
  
     bool genmatch_2l1tau = true;
-    //if(isMC && _n_fakeable_lep>=2 && _n_recotauh>=1 )
-    //  genmatch_2l1tau = (_recolep_fakeable_isGenMatched[0] && _recolep_fakeable_isGenMatched[1]) &&
-    //                    (_recolep_fakeable_isGenChargeMatched[0] && _recolep_fakeable_isGenChargeMatched[1]) &&
-    //                    (*_recotauh_isGenMatched)[0];
+    if(isMC && _n_fakeable_lep>=2 && _n_recotauh>=1 )
+      genmatch_2l1tau = (_recolep_fakeable_isGenMatched[0] && _recolep_fakeable_isGenMatched[1]) &&
+                        (_recolep_fakeable_isGenChargeMatched[0] && _recolep_fakeable_isGenChargeMatched[1]) &&
+                        (*_recotauh_isGenMatched)[0];
 
     bool sig_2los1tau_base = passTriggers_2lep1tau &&
       (_n_fakeable_lep>=2) &&
@@ -1962,9 +1883,9 @@ void split_tree(TString filename_in, TString filename_out,
     bool passTriggers_2lep2tau = (pass_e || pass_m || pass_2e || pass_2m || pass_em);
 
     bool genmatch_2l2tau = true;
-    //if(isMC && _n_fakeable_lep>=2 && _n_recotauh>=2 )
-    //  genmatch_2l2tau = (_recolep_fakeable_isGenMatched[0] && _recolep_fakeable_isGenMatched[1]) &&
-    //                    (*_recotauh_isGenMatched)[0] && (*_recotauh_isGenMatched)[1];
+    if(isMC && _n_fakeable_lep>=2 && _n_recotauh>=2 )
+      genmatch_2l2tau = (_recolep_fakeable_isGenMatched[0] && _recolep_fakeable_isGenMatched[1]) &&
+                        (*_recotauh_isGenMatched)[0] && (*_recotauh_isGenMatched)[1];
 
     bool metLD_fakepair = true;
     if (_n_recoPFJet<=3){
@@ -2001,8 +1922,8 @@ void split_tree(TString filename_in, TString filename_out,
     bool passTriggers_3lep0tau = (pass_e || pass_m || pass_2e || pass_2m || pass_em || pass_3e || pass_3m || pass_2me || pass_m2e);
 
     bool genmatch_3l = true;
-    //if(isMC && _n_fakeable_lep>=3)
-    //  genmatch_3l = (_recolep_fakeable_isGenMatched[0] && _recolep_fakeable_isGenMatched[1] && _recolep_fakeable_isGenMatched[2] );
+    if(isMC && _n_fakeable_lep>=3)
+      genmatch_3l = (_recolep_fakeable_isGenMatched[0] && _recolep_fakeable_isGenMatched[1] && _recolep_fakeable_isGenMatched[2] );
 
     bool sig_3l_base = passTriggers_3lep0tau &&
       (_n_fakeable_lep>=3) &&
@@ -2080,8 +2001,8 @@ void split_tree(TString filename_in, TString filename_out,
     //////////////////////////////
 
     bool genmatch_4l = true;
-    //if(isMC && _n_fakeable_lep>=4)
-    //  genmatch_4l = (_recolep_fakeable_isGenMatched[0] && _recolep_fakeable_isGenMatched[1] && _recolep_fakeable_isGenMatched[2] && _recolep_fakeable_isGenMatched[3] );
+    if(isMC && _n_fakeable_lep>=4)
+      genmatch_4l = (_recolep_fakeable_isGenMatched[0] && _recolep_fakeable_isGenMatched[1] && _recolep_fakeable_isGenMatched[2] && _recolep_fakeable_isGenMatched[3] );
 
     bool sig_4l_base = passTriggers_3lep0tau &&
       (_n_fakeable_lep>=4) &&
@@ -2312,7 +2233,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byLooseDeepTau2017v2p1VSjet.clear();
@@ -2320,21 +2240,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSjetraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSeraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSmuraw.clear();
     _recotauh_sel_decayMode.clear();
     _recotauh_sel_decayModeFindingOldDMs.clear();
     _recotauh_sel_decayModeFindingNewDMs.clear();
@@ -2415,7 +2320,6 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byLooseIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
         _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byMediumIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
         _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byTightIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
-        _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byVVVLooseDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byVVLooseDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byVLooseDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byLooseDeepTau2017v2p1VSjet)[i_tau]);
@@ -2423,21 +2327,6 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_byTightDeepTau2017v2p1VSjet.push_back((*_recotauh_byTightDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVTightDeepTau2017v2p1VSjet.push_back((*_recotauh_byVTightDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.push_back((*_recotauh_byVVTightDeepTau2017v2p1VSjet)[i_tau]);
-        _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byVVVLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byVVLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byVLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byMediumDeepTau2017v2p1VSe.push_back((*_recotauh_byMediumDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byTightDeepTau2017v2p1VSe.push_back((*_recotauh_byTightDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVTightDeepTau2017v2p1VSe.push_back((*_recotauh_byVTightDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVVTightDeepTau2017v2p1VSe.push_back((*_recotauh_byVVTightDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.push_back((*_recotauh_byVLooseDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byLooseDeepTau2017v2p1VSmu.push_back((*_recotauh_byLooseDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byMediumDeepTau2017v2p1VSmu.push_back((*_recotauh_byMediumDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byTightDeepTau2017v2p1VSmu.push_back((*_recotauh_byTightDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byDeepTau2017v2p1VSjetraw.push_back((*_recotauh_byDeepTau2017v2p1VSjetraw)[i_tau]);
-        _recotauh_sel_byDeepTau2017v2p1VSeraw.push_back((*_recotauh_byDeepTau2017v2p1VSeraw)[i_tau]);
-        _recotauh_sel_byDeepTau2017v2p1VSmuraw.push_back((*_recotauh_byDeepTau2017v2p1VSmuraw)[i_tau]);
         _recotauh_sel_decayMode.push_back((*_recotauh_decayMode)[i_tau]);
         _recotauh_sel_decayModeFindingOldDMs.push_back((*_recotauh_decayModeFindingOldDMs)[i_tau]);
         _recotauh_sel_decayModeFindingNewDMs.push_back((*_recotauh_decayModeFindingNewDMs)[i_tau]);
@@ -2547,7 +2436,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byLooseDeepTau2017v2p1VSjet.clear();
@@ -2555,21 +2443,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSjetraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSeraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSmuraw.clear();
     _recotauh_sel_decayMode.clear();
     _recotauh_sel_decayModeFindingOldDMs.clear();
     _recotauh_sel_decayModeFindingNewDMs.clear();
@@ -2680,7 +2553,6 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byLooseIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
         _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byMediumIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
         _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byTightIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
-        _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byVVVLooseDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byVVLooseDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byVLooseDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byLooseDeepTau2017v2p1VSjet)[i_tau]);
@@ -2688,21 +2560,6 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_byTightDeepTau2017v2p1VSjet.push_back((*_recotauh_byTightDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVTightDeepTau2017v2p1VSjet.push_back((*_recotauh_byVTightDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.push_back((*_recotauh_byVVTightDeepTau2017v2p1VSjet)[i_tau]);
-        _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byVVVLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byVVLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byVLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byMediumDeepTau2017v2p1VSe.push_back((*_recotauh_byMediumDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byTightDeepTau2017v2p1VSe.push_back((*_recotauh_byTightDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVTightDeepTau2017v2p1VSe.push_back((*_recotauh_byVTightDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVVTightDeepTau2017v2p1VSe.push_back((*_recotauh_byVVTightDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.push_back((*_recotauh_byVLooseDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byLooseDeepTau2017v2p1VSmu.push_back((*_recotauh_byLooseDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byMediumDeepTau2017v2p1VSmu.push_back((*_recotauh_byMediumDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byTightDeepTau2017v2p1VSmu.push_back((*_recotauh_byTightDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byDeepTau2017v2p1VSjetraw.push_back((*_recotauh_byDeepTau2017v2p1VSjetraw)[i_tau]);
-        _recotauh_sel_byDeepTau2017v2p1VSeraw.push_back((*_recotauh_byDeepTau2017v2p1VSeraw)[i_tau]);
-        _recotauh_sel_byDeepTau2017v2p1VSmuraw.push_back((*_recotauh_byDeepTau2017v2p1VSmuraw)[i_tau]);
         _recotauh_sel_decayMode.push_back((*_recotauh_decayMode)[i_tau]);
         _recotauh_sel_decayModeFindingOldDMs.push_back((*_recotauh_decayModeFindingOldDMs)[i_tau]);
         _recotauh_sel_decayModeFindingNewDMs.push_back((*_recotauh_decayModeFindingNewDMs)[i_tau]);
@@ -2818,7 +2675,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byLooseDeepTau2017v2p1VSjet.clear();
@@ -2826,21 +2682,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSjetraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSeraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSmuraw.clear();
     _recotauh_sel_decayMode.clear();
     _recotauh_sel_decayModeFindingOldDMs.clear();
     _recotauh_sel_decayModeFindingNewDMs.clear();
@@ -2951,7 +2792,6 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byLooseIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
         _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byMediumIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
         _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byTightIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
-        _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byVVVLooseDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byVVLooseDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byVLooseDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byLooseDeepTau2017v2p1VSjet)[i_tau]);
@@ -2959,21 +2799,6 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_byTightDeepTau2017v2p1VSjet.push_back((*_recotauh_byTightDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVTightDeepTau2017v2p1VSjet.push_back((*_recotauh_byVTightDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.push_back((*_recotauh_byVVTightDeepTau2017v2p1VSjet)[i_tau]);
-        _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byVVVLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byVVLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byVLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byMediumDeepTau2017v2p1VSe.push_back((*_recotauh_byMediumDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byTightDeepTau2017v2p1VSe.push_back((*_recotauh_byTightDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVTightDeepTau2017v2p1VSe.push_back((*_recotauh_byVTightDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVVTightDeepTau2017v2p1VSe.push_back((*_recotauh_byVVTightDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.push_back((*_recotauh_byVLooseDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byLooseDeepTau2017v2p1VSmu.push_back((*_recotauh_byLooseDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byMediumDeepTau2017v2p1VSmu.push_back((*_recotauh_byMediumDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byTightDeepTau2017v2p1VSmu.push_back((*_recotauh_byTightDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byDeepTau2017v2p1VSjetraw.push_back((*_recotauh_byDeepTau2017v2p1VSjetraw)[i_tau]);
-        _recotauh_sel_byDeepTau2017v2p1VSeraw.push_back((*_recotauh_byDeepTau2017v2p1VSeraw)[i_tau]);
-        _recotauh_sel_byDeepTau2017v2p1VSmuraw.push_back((*_recotauh_byDeepTau2017v2p1VSmuraw)[i_tau]);
         _recotauh_sel_decayMode.push_back((*_recotauh_decayMode)[i_tau]);
         _recotauh_sel_decayModeFindingOldDMs.push_back((*_recotauh_decayModeFindingOldDMs)[i_tau]);
         _recotauh_sel_decayModeFindingNewDMs.push_back((*_recotauh_decayModeFindingNewDMs)[i_tau]);
@@ -3094,7 +2919,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byLooseDeepTau2017v2p1VSjet.clear();
@@ -3102,21 +2926,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSjetraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSeraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSmuraw.clear();
     _recotauh_sel_decayMode.clear();
     _recotauh_sel_decayModeFindingOldDMs.clear();
     _recotauh_sel_decayModeFindingNewDMs.clear();
@@ -3278,7 +3087,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byLooseDeepTau2017v2p1VSjet.clear();
@@ -3286,21 +3094,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSjetraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSeraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSmuraw.clear();
     _recotauh_sel_decayMode.clear();
     _recotauh_sel_decayModeFindingOldDMs.clear();
     _recotauh_sel_decayModeFindingNewDMs.clear();
@@ -3460,7 +3253,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byLooseDeepTau2017v2p1VSjet.clear();
@@ -3468,21 +3260,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSjetraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSeraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSmuraw.clear();
     _recotauh_sel_decayMode.clear();
     _recotauh_sel_decayModeFindingOldDMs.clear();
     _recotauh_sel_decayModeFindingNewDMs.clear();
@@ -3593,7 +3370,6 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byLooseIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
         _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byMediumIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
         _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byTightIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
-        _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byVVVLooseDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byVVLooseDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byVLooseDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byLooseDeepTau2017v2p1VSjet)[i_tau]);
@@ -3601,21 +3377,6 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_byTightDeepTau2017v2p1VSjet.push_back((*_recotauh_byTightDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVTightDeepTau2017v2p1VSjet.push_back((*_recotauh_byVTightDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.push_back((*_recotauh_byVVTightDeepTau2017v2p1VSjet)[i_tau]);
-        _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byVVVLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byVVLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byVLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byMediumDeepTau2017v2p1VSe.push_back((*_recotauh_byMediumDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byTightDeepTau2017v2p1VSe.push_back((*_recotauh_byTightDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVTightDeepTau2017v2p1VSe.push_back((*_recotauh_byVTightDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVVTightDeepTau2017v2p1VSe.push_back((*_recotauh_byVVTightDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.push_back((*_recotauh_byVLooseDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byLooseDeepTau2017v2p1VSmu.push_back((*_recotauh_byLooseDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byMediumDeepTau2017v2p1VSmu.push_back((*_recotauh_byMediumDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byTightDeepTau2017v2p1VSmu.push_back((*_recotauh_byTightDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byDeepTau2017v2p1VSjetraw.push_back((*_recotauh_byDeepTau2017v2p1VSjetraw)[i_tau]);
-        _recotauh_sel_byDeepTau2017v2p1VSeraw.push_back((*_recotauh_byDeepTau2017v2p1VSeraw)[i_tau]);
-        _recotauh_sel_byDeepTau2017v2p1VSmuraw.push_back((*_recotauh_byDeepTau2017v2p1VSmuraw)[i_tau]);
         _recotauh_sel_decayMode.push_back((*_recotauh_decayMode)[i_tau]);
         _recotauh_sel_decayModeFindingOldDMs.push_back((*_recotauh_decayModeFindingOldDMs)[i_tau]);
         _recotauh_sel_decayModeFindingNewDMs.push_back((*_recotauh_decayModeFindingNewDMs)[i_tau]);
@@ -3718,7 +3479,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byLooseDeepTau2017v2p1VSjet.clear();
@@ -3726,21 +3486,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSjetraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSeraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSmuraw.clear();
     _recotauh_sel_decayMode.clear();
     _recotauh_sel_decayModeFindingOldDMs.clear();
     _recotauh_sel_decayModeFindingNewDMs.clear();
@@ -3851,7 +3596,6 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byLooseIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
         _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byMediumIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
         _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byTightIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
-        _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byVVVLooseDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byVVLooseDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byVLooseDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byLooseDeepTau2017v2p1VSjet)[i_tau]);
@@ -3859,21 +3603,6 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_byTightDeepTau2017v2p1VSjet.push_back((*_recotauh_byTightDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVTightDeepTau2017v2p1VSjet.push_back((*_recotauh_byVTightDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.push_back((*_recotauh_byVVTightDeepTau2017v2p1VSjet)[i_tau]);
-        _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byVVVLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byVVLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byVLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byMediumDeepTau2017v2p1VSe.push_back((*_recotauh_byMediumDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byTightDeepTau2017v2p1VSe.push_back((*_recotauh_byTightDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVTightDeepTau2017v2p1VSe.push_back((*_recotauh_byVTightDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVVTightDeepTau2017v2p1VSe.push_back((*_recotauh_byVVTightDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.push_back((*_recotauh_byVLooseDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byLooseDeepTau2017v2p1VSmu.push_back((*_recotauh_byLooseDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byMediumDeepTau2017v2p1VSmu.push_back((*_recotauh_byMediumDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byTightDeepTau2017v2p1VSmu.push_back((*_recotauh_byTightDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byDeepTau2017v2p1VSjetraw.push_back((*_recotauh_byDeepTau2017v2p1VSjetraw)[i_tau]);
-        _recotauh_sel_byDeepTau2017v2p1VSeraw.push_back((*_recotauh_byDeepTau2017v2p1VSeraw)[i_tau]);
-        _recotauh_sel_byDeepTau2017v2p1VSmuraw.push_back((*_recotauh_byDeepTau2017v2p1VSmuraw)[i_tau]);
         _recotauh_sel_decayMode.push_back((*_recotauh_decayMode)[i_tau]);
         _recotauh_sel_decayModeFindingOldDMs.push_back((*_recotauh_decayModeFindingOldDMs)[i_tau]);
         _recotauh_sel_decayModeFindingNewDMs.push_back((*_recotauh_decayModeFindingNewDMs)[i_tau]);
@@ -3974,7 +3703,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byLooseDeepTau2017v2p1VSjet.clear();
@@ -3982,21 +3710,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSjetraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSeraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSmuraw.clear();
     _recotauh_sel_decayMode.clear();
     _recotauh_sel_decayModeFindingOldDMs.clear();
     _recotauh_sel_decayModeFindingNewDMs.clear();
@@ -4107,7 +3820,6 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byLooseIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
         _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byMediumIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
         _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byTightIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
-        _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byVVVLooseDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byVVLooseDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byVLooseDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byLooseDeepTau2017v2p1VSjet)[i_tau]);
@@ -4115,21 +3827,6 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_byTightDeepTau2017v2p1VSjet.push_back((*_recotauh_byTightDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVTightDeepTau2017v2p1VSjet.push_back((*_recotauh_byVTightDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.push_back((*_recotauh_byVVTightDeepTau2017v2p1VSjet)[i_tau]);
-        _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byVVVLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byVVLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byVLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byMediumDeepTau2017v2p1VSe.push_back((*_recotauh_byMediumDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byTightDeepTau2017v2p1VSe.push_back((*_recotauh_byTightDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVTightDeepTau2017v2p1VSe.push_back((*_recotauh_byVTightDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVVTightDeepTau2017v2p1VSe.push_back((*_recotauh_byVVTightDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.push_back((*_recotauh_byVLooseDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byLooseDeepTau2017v2p1VSmu.push_back((*_recotauh_byLooseDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byMediumDeepTau2017v2p1VSmu.push_back((*_recotauh_byMediumDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byTightDeepTau2017v2p1VSmu.push_back((*_recotauh_byTightDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byDeepTau2017v2p1VSjetraw.push_back((*_recotauh_byDeepTau2017v2p1VSjetraw)[i_tau]);
-        _recotauh_sel_byDeepTau2017v2p1VSeraw.push_back((*_recotauh_byDeepTau2017v2p1VSeraw)[i_tau]);
-        _recotauh_sel_byDeepTau2017v2p1VSmuraw.push_back((*_recotauh_byDeepTau2017v2p1VSmuraw)[i_tau]);
         _recotauh_sel_decayMode.push_back((*_recotauh_decayMode)[i_tau]);
         _recotauh_sel_decayModeFindingOldDMs.push_back((*_recotauh_decayModeFindingOldDMs)[i_tau]);
         _recotauh_sel_decayModeFindingNewDMs.push_back((*_recotauh_decayModeFindingNewDMs)[i_tau]);
@@ -4235,7 +3932,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byLooseDeepTau2017v2p1VSjet.clear();
@@ -4243,21 +3939,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSjetraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSeraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSmuraw.clear();
     _recotauh_sel_decayMode.clear();
     _recotauh_sel_decayModeFindingOldDMs.clear();
     _recotauh_sel_decayModeFindingNewDMs.clear();
@@ -4425,7 +4106,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byLooseDeepTau2017v2p1VSjet.clear();
@@ -4433,21 +4113,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSjetraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSeraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSmuraw.clear();
     _recotauh_sel_decayMode.clear();
     _recotauh_sel_decayModeFindingOldDMs.clear();
     _recotauh_sel_decayModeFindingNewDMs.clear();
@@ -4613,7 +4278,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byLooseDeepTau2017v2p1VSjet.clear();
@@ -4621,21 +4285,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSjetraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSeraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSmuraw.clear();
     _recotauh_sel_decayMode.clear();
     _recotauh_sel_decayModeFindingOldDMs.clear();
     _recotauh_sel_decayModeFindingNewDMs.clear();
@@ -4802,7 +4451,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byLooseDeepTau2017v2p1VSjet.clear();
@@ -4810,21 +4458,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSjetraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSeraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSmuraw.clear();
     _recotauh_sel_decayMode.clear();
     _recotauh_sel_decayModeFindingOldDMs.clear();
     _recotauh_sel_decayModeFindingNewDMs.clear();
@@ -4990,7 +4623,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byLooseDeepTau2017v2p1VSjet.clear();
@@ -4998,21 +4630,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSjetraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSeraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSmuraw.clear();
     _recotauh_sel_decayMode.clear();
     _recotauh_sel_decayModeFindingOldDMs.clear();
     _recotauh_sel_decayModeFindingNewDMs.clear();
@@ -5123,7 +4740,6 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byLooseIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
         _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byMediumIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
         _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byTightIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
-        _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byVVVLooseDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byVVLooseDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byVLooseDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byLooseDeepTau2017v2p1VSjet)[i_tau]);
@@ -5131,21 +4747,6 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_byTightDeepTau2017v2p1VSjet.push_back((*_recotauh_byTightDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVTightDeepTau2017v2p1VSjet.push_back((*_recotauh_byVTightDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.push_back((*_recotauh_byVVTightDeepTau2017v2p1VSjet)[i_tau]);
-        _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byVVVLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byVVLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byVLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byMediumDeepTau2017v2p1VSe.push_back((*_recotauh_byMediumDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byTightDeepTau2017v2p1VSe.push_back((*_recotauh_byTightDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVTightDeepTau2017v2p1VSe.push_back((*_recotauh_byVTightDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVVTightDeepTau2017v2p1VSe.push_back((*_recotauh_byVVTightDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.push_back((*_recotauh_byVLooseDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byLooseDeepTau2017v2p1VSmu.push_back((*_recotauh_byLooseDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byMediumDeepTau2017v2p1VSmu.push_back((*_recotauh_byMediumDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byTightDeepTau2017v2p1VSmu.push_back((*_recotauh_byTightDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byDeepTau2017v2p1VSjetraw.push_back((*_recotauh_byDeepTau2017v2p1VSjetraw)[i_tau]);
-        _recotauh_sel_byDeepTau2017v2p1VSeraw.push_back((*_recotauh_byDeepTau2017v2p1VSeraw)[i_tau]);
-        _recotauh_sel_byDeepTau2017v2p1VSmuraw.push_back((*_recotauh_byDeepTau2017v2p1VSmuraw)[i_tau]);
         _recotauh_sel_decayMode.push_back((*_recotauh_decayMode)[i_tau]);
         _recotauh_sel_decayModeFindingOldDMs.push_back((*_recotauh_decayModeFindingOldDMs)[i_tau]);
         _recotauh_sel_decayModeFindingNewDMs.push_back((*_recotauh_decayModeFindingNewDMs)[i_tau]);
@@ -5252,7 +4853,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byLooseDeepTau2017v2p1VSjet.clear();
@@ -5260,21 +4860,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSjetraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSeraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSmuraw.clear();
     _recotauh_sel_decayMode.clear();
     _recotauh_sel_decayModeFindingOldDMs.clear();
     _recotauh_sel_decayModeFindingNewDMs.clear();
@@ -5445,7 +5030,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byLooseDeepTau2017v2p1VSjet.clear();
@@ -5453,21 +5037,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSjetraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSeraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSmuraw.clear();
     _recotauh_sel_decayMode.clear();
     _recotauh_sel_decayModeFindingOldDMs.clear();
     _recotauh_sel_decayModeFindingNewDMs.clear();
@@ -5638,7 +5207,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byLooseDeepTau2017v2p1VSjet.clear();
@@ -5646,21 +5214,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSjetraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSeraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSmuraw.clear();
     _recotauh_sel_decayMode.clear();
     _recotauh_sel_decayModeFindingOldDMs.clear();
     _recotauh_sel_decayModeFindingNewDMs.clear();
@@ -5836,7 +5389,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byLooseDeepTau2017v2p1VSjet.clear();
@@ -5844,21 +5396,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSjetraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSeraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSmuraw.clear();
     _recotauh_sel_decayMode.clear();
     _recotauh_sel_decayModeFindingOldDMs.clear();
     _recotauh_sel_decayModeFindingNewDMs.clear();
@@ -5938,7 +5475,6 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byLooseIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
         _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byMediumIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
         _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byTightIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
-        _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byVVVLooseDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byVVLooseDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byVLooseDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byLooseDeepTau2017v2p1VSjet)[i_tau]);
@@ -5946,21 +5482,6 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_byTightDeepTau2017v2p1VSjet.push_back((*_recotauh_byTightDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVTightDeepTau2017v2p1VSjet.push_back((*_recotauh_byVTightDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.push_back((*_recotauh_byVVTightDeepTau2017v2p1VSjet)[i_tau]);
-        _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byVVVLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byVVLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byVLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byMediumDeepTau2017v2p1VSe.push_back((*_recotauh_byMediumDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byTightDeepTau2017v2p1VSe.push_back((*_recotauh_byTightDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVTightDeepTau2017v2p1VSe.push_back((*_recotauh_byVTightDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVVTightDeepTau2017v2p1VSe.push_back((*_recotauh_byVVTightDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.push_back((*_recotauh_byVLooseDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byLooseDeepTau2017v2p1VSmu.push_back((*_recotauh_byLooseDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byMediumDeepTau2017v2p1VSmu.push_back((*_recotauh_byMediumDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byTightDeepTau2017v2p1VSmu.push_back((*_recotauh_byTightDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byDeepTau2017v2p1VSjetraw.push_back((*_recotauh_byDeepTau2017v2p1VSjetraw)[i_tau]);
-        _recotauh_sel_byDeepTau2017v2p1VSeraw.push_back((*_recotauh_byDeepTau2017v2p1VSeraw)[i_tau]);
-        _recotauh_sel_byDeepTau2017v2p1VSmuraw.push_back((*_recotauh_byDeepTau2017v2p1VSmuraw)[i_tau]);
         _recotauh_sel_decayMode.push_back((*_recotauh_decayMode)[i_tau]);
         _recotauh_sel_decayModeFindingOldDMs.push_back((*_recotauh_decayModeFindingOldDMs)[i_tau]);
         _recotauh_sel_decayModeFindingNewDMs.push_back((*_recotauh_decayModeFindingNewDMs)[i_tau]);
@@ -6116,7 +5637,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byLooseDeepTau2017v2p1VSjet.clear();
@@ -6124,21 +5644,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSjetraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSeraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSmuraw.clear();
     _recotauh_sel_decayMode.clear();
     _recotauh_sel_decayModeFindingOldDMs.clear();
     _recotauh_sel_decayModeFindingNewDMs.clear();
@@ -6249,7 +5754,6 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byLooseIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
         _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byMediumIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
         _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byTightIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
-        _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byVVVLooseDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byVVLooseDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byVLooseDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byLooseDeepTau2017v2p1VSjet)[i_tau]);
@@ -6257,21 +5761,6 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_byTightDeepTau2017v2p1VSjet.push_back((*_recotauh_byTightDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVTightDeepTau2017v2p1VSjet.push_back((*_recotauh_byVTightDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.push_back((*_recotauh_byVVTightDeepTau2017v2p1VSjet)[i_tau]);
-        _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byVVVLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byVVLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byVLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byMediumDeepTau2017v2p1VSe.push_back((*_recotauh_byMediumDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byTightDeepTau2017v2p1VSe.push_back((*_recotauh_byTightDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVTightDeepTau2017v2p1VSe.push_back((*_recotauh_byVTightDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVVTightDeepTau2017v2p1VSe.push_back((*_recotauh_byVVTightDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.push_back((*_recotauh_byVLooseDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byLooseDeepTau2017v2p1VSmu.push_back((*_recotauh_byLooseDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byMediumDeepTau2017v2p1VSmu.push_back((*_recotauh_byMediumDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byTightDeepTau2017v2p1VSmu.push_back((*_recotauh_byTightDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byDeepTau2017v2p1VSjetraw.push_back((*_recotauh_byDeepTau2017v2p1VSjetraw)[i_tau]);
-        _recotauh_sel_byDeepTau2017v2p1VSeraw.push_back((*_recotauh_byDeepTau2017v2p1VSeraw)[i_tau]);
-        _recotauh_sel_byDeepTau2017v2p1VSmuraw.push_back((*_recotauh_byDeepTau2017v2p1VSmuraw)[i_tau]);
         _recotauh_sel_decayMode.push_back((*_recotauh_decayMode)[i_tau]);
         _recotauh_sel_decayModeFindingOldDMs.push_back((*_recotauh_decayModeFindingOldDMs)[i_tau]);
         _recotauh_sel_decayModeFindingNewDMs.push_back((*_recotauh_decayModeFindingNewDMs)[i_tau]);
@@ -6472,7 +5961,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byLooseDeepTau2017v2p1VSjet.clear();
@@ -6480,21 +5968,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSjetraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSeraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSmuraw.clear();
     _recotauh_sel_decayMode.clear();
     _recotauh_sel_decayModeFindingOldDMs.clear();
     _recotauh_sel_decayModeFindingNewDMs.clear();
@@ -6605,7 +6078,6 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byLooseIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
         _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byMediumIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
         _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byTightIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
-        _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byVVVLooseDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byVVLooseDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byVLooseDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byLooseDeepTau2017v2p1VSjet)[i_tau]);
@@ -6613,21 +6085,6 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_byTightDeepTau2017v2p1VSjet.push_back((*_recotauh_byTightDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVTightDeepTau2017v2p1VSjet.push_back((*_recotauh_byVTightDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.push_back((*_recotauh_byVVTightDeepTau2017v2p1VSjet)[i_tau]);
-        _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byVVVLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byVVLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byVLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byMediumDeepTau2017v2p1VSe.push_back((*_recotauh_byMediumDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byTightDeepTau2017v2p1VSe.push_back((*_recotauh_byTightDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVTightDeepTau2017v2p1VSe.push_back((*_recotauh_byVTightDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVVTightDeepTau2017v2p1VSe.push_back((*_recotauh_byVVTightDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.push_back((*_recotauh_byVLooseDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byLooseDeepTau2017v2p1VSmu.push_back((*_recotauh_byLooseDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byMediumDeepTau2017v2p1VSmu.push_back((*_recotauh_byMediumDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byTightDeepTau2017v2p1VSmu.push_back((*_recotauh_byTightDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byDeepTau2017v2p1VSjetraw.push_back((*_recotauh_byDeepTau2017v2p1VSjetraw)[i_tau]);
-        _recotauh_sel_byDeepTau2017v2p1VSeraw.push_back((*_recotauh_byDeepTau2017v2p1VSeraw)[i_tau]);
-        _recotauh_sel_byDeepTau2017v2p1VSmuraw.push_back((*_recotauh_byDeepTau2017v2p1VSmuraw)[i_tau]);
         _recotauh_sel_decayMode.push_back((*_recotauh_decayMode)[i_tau]);
         _recotauh_sel_decayModeFindingOldDMs.push_back((*_recotauh_decayModeFindingOldDMs)[i_tau]);
         _recotauh_sel_decayModeFindingNewDMs.push_back((*_recotauh_decayModeFindingNewDMs)[i_tau]);
@@ -6850,7 +6307,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byLooseDeepTau2017v2p1VSjet.clear();
@@ -6858,21 +6314,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSjetraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSeraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSmuraw.clear();
     _recotauh_sel_decayMode.clear();
     _recotauh_sel_decayModeFindingOldDMs.clear();
     _recotauh_sel_decayModeFindingNewDMs.clear();
@@ -7159,7 +6600,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byLooseDeepTau2017v2p1VSjet.clear();
@@ -7167,21 +6607,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSjetraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSeraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSmuraw.clear();
     _recotauh_sel_decayMode.clear();
     _recotauh_sel_decayModeFindingOldDMs.clear();
     _recotauh_sel_decayModeFindingNewDMs.clear();
@@ -7467,7 +6892,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byLooseDeepTau2017v2p1VSjet.clear();
@@ -7475,21 +6899,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSjetraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSeraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSmuraw.clear();
     _recotauh_sel_decayMode.clear();
     _recotauh_sel_decayModeFindingOldDMs.clear();
     _recotauh_sel_decayModeFindingNewDMs.clear();
@@ -7600,7 +7009,6 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byLooseIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
         _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byMediumIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
         _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byTightIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
-        _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byVVVLooseDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byVVLooseDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byVLooseDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byLooseDeepTau2017v2p1VSjet)[i_tau]);
@@ -7608,21 +7016,6 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_byTightDeepTau2017v2p1VSjet.push_back((*_recotauh_byTightDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVTightDeepTau2017v2p1VSjet.push_back((*_recotauh_byVTightDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.push_back((*_recotauh_byVVTightDeepTau2017v2p1VSjet)[i_tau]);
-        _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byVVVLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byVVLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byVLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byMediumDeepTau2017v2p1VSe.push_back((*_recotauh_byMediumDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byTightDeepTau2017v2p1VSe.push_back((*_recotauh_byTightDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVTightDeepTau2017v2p1VSe.push_back((*_recotauh_byVTightDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVVTightDeepTau2017v2p1VSe.push_back((*_recotauh_byVVTightDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.push_back((*_recotauh_byVLooseDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byLooseDeepTau2017v2p1VSmu.push_back((*_recotauh_byLooseDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byMediumDeepTau2017v2p1VSmu.push_back((*_recotauh_byMediumDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byTightDeepTau2017v2p1VSmu.push_back((*_recotauh_byTightDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byDeepTau2017v2p1VSjetraw.push_back((*_recotauh_byDeepTau2017v2p1VSjetraw)[i_tau]);
-        _recotauh_sel_byDeepTau2017v2p1VSeraw.push_back((*_recotauh_byDeepTau2017v2p1VSeraw)[i_tau]);
-        _recotauh_sel_byDeepTau2017v2p1VSmuraw.push_back((*_recotauh_byDeepTau2017v2p1VSmuraw)[i_tau]);
         _recotauh_sel_decayMode.push_back((*_recotauh_decayMode)[i_tau]);
         _recotauh_sel_decayModeFindingOldDMs.push_back((*_recotauh_decayModeFindingOldDMs)[i_tau]);
         _recotauh_sel_decayModeFindingNewDMs.push_back((*_recotauh_decayModeFindingNewDMs)[i_tau]);
@@ -7920,7 +7313,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byLooseDeepTau2017v2p1VSjet.clear();
@@ -7928,21 +7320,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSjetraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSeraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSmuraw.clear();
     _recotauh_sel_decayMode.clear();
     _recotauh_sel_decayModeFindingOldDMs.clear();
     _recotauh_sel_decayModeFindingNewDMs.clear();
@@ -8053,7 +7430,6 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byLooseIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
         _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byMediumIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
         _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byTightIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
-        _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byVVVLooseDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byVVLooseDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byVLooseDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byLooseDeepTau2017v2p1VSjet)[i_tau]);
@@ -8061,21 +7437,6 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_byTightDeepTau2017v2p1VSjet.push_back((*_recotauh_byTightDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVTightDeepTau2017v2p1VSjet.push_back((*_recotauh_byVTightDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.push_back((*_recotauh_byVVTightDeepTau2017v2p1VSjet)[i_tau]);
-        _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byVVVLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byVVLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byVLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byMediumDeepTau2017v2p1VSe.push_back((*_recotauh_byMediumDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byTightDeepTau2017v2p1VSe.push_back((*_recotauh_byTightDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVTightDeepTau2017v2p1VSe.push_back((*_recotauh_byVTightDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVVTightDeepTau2017v2p1VSe.push_back((*_recotauh_byVVTightDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.push_back((*_recotauh_byVLooseDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byLooseDeepTau2017v2p1VSmu.push_back((*_recotauh_byLooseDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byMediumDeepTau2017v2p1VSmu.push_back((*_recotauh_byMediumDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byTightDeepTau2017v2p1VSmu.push_back((*_recotauh_byTightDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byDeepTau2017v2p1VSjetraw.push_back((*_recotauh_byDeepTau2017v2p1VSjetraw)[i_tau]);
-        _recotauh_sel_byDeepTau2017v2p1VSeraw.push_back((*_recotauh_byDeepTau2017v2p1VSeraw)[i_tau]);
-        _recotauh_sel_byDeepTau2017v2p1VSmuraw.push_back((*_recotauh_byDeepTau2017v2p1VSmuraw)[i_tau]);
         _recotauh_sel_decayMode.push_back((*_recotauh_decayMode)[i_tau]);
         _recotauh_sel_decayModeFindingOldDMs.push_back((*_recotauh_decayModeFindingOldDMs)[i_tau]);
         _recotauh_sel_decayModeFindingNewDMs.push_back((*_recotauh_decayModeFindingNewDMs)[i_tau]);
@@ -8316,7 +7677,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byLooseDeepTau2017v2p1VSjet.clear();
@@ -8324,21 +7684,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSjetraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSeraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSmuraw.clear();
     _recotauh_sel_decayMode.clear();
     _recotauh_sel_decayModeFindingOldDMs.clear();
     _recotauh_sel_decayModeFindingNewDMs.clear();
@@ -8449,7 +7794,6 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byLooseIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
         _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byMediumIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
         _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byTightIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
-        _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byVVVLooseDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byVVLooseDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byVLooseDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byLooseDeepTau2017v2p1VSjet)[i_tau]);
@@ -8457,21 +7801,6 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_byTightDeepTau2017v2p1VSjet.push_back((*_recotauh_byTightDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVTightDeepTau2017v2p1VSjet.push_back((*_recotauh_byVTightDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.push_back((*_recotauh_byVVTightDeepTau2017v2p1VSjet)[i_tau]);
-        _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byVVVLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byVVLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byVLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byMediumDeepTau2017v2p1VSe.push_back((*_recotauh_byMediumDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byTightDeepTau2017v2p1VSe.push_back((*_recotauh_byTightDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVTightDeepTau2017v2p1VSe.push_back((*_recotauh_byVTightDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVVTightDeepTau2017v2p1VSe.push_back((*_recotauh_byVVTightDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.push_back((*_recotauh_byVLooseDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byLooseDeepTau2017v2p1VSmu.push_back((*_recotauh_byLooseDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byMediumDeepTau2017v2p1VSmu.push_back((*_recotauh_byMediumDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byTightDeepTau2017v2p1VSmu.push_back((*_recotauh_byTightDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byDeepTau2017v2p1VSjetraw.push_back((*_recotauh_byDeepTau2017v2p1VSjetraw)[i_tau]);
-        _recotauh_sel_byDeepTau2017v2p1VSeraw.push_back((*_recotauh_byDeepTau2017v2p1VSeraw)[i_tau]);
-        _recotauh_sel_byDeepTau2017v2p1VSmuraw.push_back((*_recotauh_byDeepTau2017v2p1VSmuraw)[i_tau]);
         _recotauh_sel_decayMode.push_back((*_recotauh_decayMode)[i_tau]);
         _recotauh_sel_decayModeFindingOldDMs.push_back((*_recotauh_decayModeFindingOldDMs)[i_tau]);
         _recotauh_sel_decayModeFindingNewDMs.push_back((*_recotauh_decayModeFindingNewDMs)[i_tau]);
@@ -8734,7 +8063,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byLooseDeepTau2017v2p1VSjet.clear();
@@ -8742,21 +8070,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSjetraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSeraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSmuraw.clear();
     _recotauh_sel_decayMode.clear();
     _recotauh_sel_decayModeFindingOldDMs.clear();
     _recotauh_sel_decayModeFindingNewDMs.clear();
@@ -9104,7 +8417,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byLooseDeepTau2017v2p1VSjet.clear();
@@ -9112,21 +8424,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSjetraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSeraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSmuraw.clear();
     _recotauh_sel_decayMode.clear();
     _recotauh_sel_decayModeFindingOldDMs.clear();
     _recotauh_sel_decayModeFindingNewDMs.clear();
@@ -9472,7 +8769,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byLooseDeepTau2017v2p1VSjet.clear();
@@ -9480,21 +8776,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSjetraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSeraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSmuraw.clear();
     _recotauh_sel_decayMode.clear();
     _recotauh_sel_decayModeFindingOldDMs.clear();
     _recotauh_sel_decayModeFindingNewDMs.clear();
@@ -9840,7 +9121,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byLooseDeepTau2017v2p1VSjet.clear();
@@ -9848,21 +9128,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSjetraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSeraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSmuraw.clear();
     _recotauh_sel_decayMode.clear();
     _recotauh_sel_decayModeFindingOldDMs.clear();
     _recotauh_sel_decayModeFindingNewDMs.clear();
@@ -10207,7 +9472,7 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byVLooseIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.clear();
+    _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byLooseDeepTau2017v2p1VSjet.clear();
@@ -10215,21 +9480,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSjetraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSeraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSmuraw.clear();
     _recotauh_sel_decayMode.clear();
     _recotauh_sel_decayModeFindingOldDMs.clear();
     _recotauh_sel_decayModeFindingNewDMs.clear();
@@ -10340,7 +9590,6 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byLooseIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
         _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byMediumIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
         _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byTightIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
-        _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byVVVLooseDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byVVLooseDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byVLooseDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byLooseDeepTau2017v2p1VSjet)[i_tau]);
@@ -10348,21 +9597,6 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_byTightDeepTau2017v2p1VSjet.push_back((*_recotauh_byTightDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVTightDeepTau2017v2p1VSjet.push_back((*_recotauh_byVTightDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.push_back((*_recotauh_byVVTightDeepTau2017v2p1VSjet)[i_tau]);
-        _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byVVVLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byVVLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byVLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byMediumDeepTau2017v2p1VSe.push_back((*_recotauh_byMediumDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byTightDeepTau2017v2p1VSe.push_back((*_recotauh_byTightDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVTightDeepTau2017v2p1VSe.push_back((*_recotauh_byVTightDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVVTightDeepTau2017v2p1VSe.push_back((*_recotauh_byVVTightDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.push_back((*_recotauh_byVLooseDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byLooseDeepTau2017v2p1VSmu.push_back((*_recotauh_byLooseDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byMediumDeepTau2017v2p1VSmu.push_back((*_recotauh_byMediumDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byTightDeepTau2017v2p1VSmu.push_back((*_recotauh_byTightDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byDeepTau2017v2p1VSjetraw.push_back((*_recotauh_byDeepTau2017v2p1VSjetraw)[i_tau]);
-        _recotauh_sel_byDeepTau2017v2p1VSeraw.push_back((*_recotauh_byDeepTau2017v2p1VSeraw)[i_tau]);
-        _recotauh_sel_byDeepTau2017v2p1VSmuraw.push_back((*_recotauh_byDeepTau2017v2p1VSmuraw)[i_tau]);
         _recotauh_sel_decayMode.push_back((*_recotauh_decayMode)[i_tau]);
         _recotauh_sel_decayModeFindingOldDMs.push_back((*_recotauh_decayModeFindingOldDMs)[i_tau]);
         _recotauh_sel_decayModeFindingNewDMs.push_back((*_recotauh_decayModeFindingNewDMs)[i_tau]);
@@ -10665,7 +9899,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byLooseDeepTau2017v2p1VSjet.clear();
@@ -10673,21 +9906,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSjetraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSeraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSmuraw.clear();
     _recotauh_sel_decayMode.clear();
     _recotauh_sel_decayModeFindingOldDMs.clear();
     _recotauh_sel_decayModeFindingNewDMs.clear();
@@ -11094,7 +10312,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byLooseDeepTau2017v2p1VSjet.clear();
@@ -11102,21 +10319,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSjetraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSeraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSmuraw.clear();
     _recotauh_sel_decayMode.clear();
     _recotauh_sel_decayModeFindingOldDMs.clear();
     _recotauh_sel_decayModeFindingNewDMs.clear();
@@ -11523,7 +10725,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byLooseDeepTau2017v2p1VSjet.clear();
@@ -11531,21 +10732,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSjetraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSeraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSmuraw.clear();
     _recotauh_sel_decayMode.clear();
     _recotauh_sel_decayModeFindingOldDMs.clear();
     _recotauh_sel_decayModeFindingNewDMs.clear();
@@ -11956,7 +11142,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byLooseDeepTau2017v2p1VSjet.clear();
@@ -11964,21 +11149,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSjetraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSeraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSmuraw.clear();
     _recotauh_sel_decayMode.clear();
     _recotauh_sel_decayModeFindingOldDMs.clear();
     _recotauh_sel_decayModeFindingNewDMs.clear();
@@ -12087,7 +11257,6 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byLooseIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
         _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byMediumIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
         _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byTightIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
-        _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byVVVLooseDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byVVLooseDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byVLooseDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byLooseDeepTau2017v2p1VSjet)[i_tau]);
@@ -12095,21 +11264,6 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_byTightDeepTau2017v2p1VSjet.push_back((*_recotauh_byTightDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVTightDeepTau2017v2p1VSjet.push_back((*_recotauh_byVTightDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.push_back((*_recotauh_byVVTightDeepTau2017v2p1VSjet)[i_tau]);
-        _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byVVVLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byVVLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byVLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byMediumDeepTau2017v2p1VSe.push_back((*_recotauh_byMediumDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byTightDeepTau2017v2p1VSe.push_back((*_recotauh_byTightDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVTightDeepTau2017v2p1VSe.push_back((*_recotauh_byVTightDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVVTightDeepTau2017v2p1VSe.push_back((*_recotauh_byVVTightDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.push_back((*_recotauh_byVLooseDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byLooseDeepTau2017v2p1VSmu.push_back((*_recotauh_byLooseDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byMediumDeepTau2017v2p1VSmu.push_back((*_recotauh_byMediumDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byTightDeepTau2017v2p1VSmu.push_back((*_recotauh_byTightDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byDeepTau2017v2p1VSjetraw.push_back((*_recotauh_byDeepTau2017v2p1VSjetraw)[i_tau]);
-        _recotauh_sel_byDeepTau2017v2p1VSeraw.push_back((*_recotauh_byDeepTau2017v2p1VSeraw)[i_tau]);
-        _recotauh_sel_byDeepTau2017v2p1VSmuraw.push_back((*_recotauh_byDeepTau2017v2p1VSmuraw)[i_tau]);
         _recotauh_sel_decayMode.push_back((*_recotauh_decayMode)[i_tau]);
         _recotauh_sel_decayModeFindingOldDMs.push_back((*_recotauh_decayModeFindingOldDMs)[i_tau]);
         _recotauh_sel_decayModeFindingNewDMs.push_back((*_recotauh_decayModeFindingNewDMs)[i_tau]);
@@ -12225,7 +11379,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byLooseDeepTau2017v2p1VSjet.clear();
@@ -12233,21 +11386,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSjetraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSeraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSmuraw.clear();
     _recotauh_sel_decayMode.clear();
     _recotauh_sel_decayModeFindingOldDMs.clear();
     _recotauh_sel_decayModeFindingNewDMs.clear();
@@ -12410,7 +11548,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byLooseDeepTau2017v2p1VSjet.clear();
@@ -12418,21 +11555,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSjetraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSeraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSmuraw.clear();
     _recotauh_sel_decayMode.clear();
     _recotauh_sel_decayModeFindingOldDMs.clear();
     _recotauh_sel_decayModeFindingNewDMs.clear();
@@ -12593,7 +11715,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.clear();
     _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byLooseDeepTau2017v2p1VSjet.clear();
@@ -12601,21 +11722,6 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_byTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVTightDeepTau2017v2p1VSjet.clear();
     _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.clear();
-    _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVVTightDeepTau2017v2p1VSe.clear();
-    _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byLooseDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byMediumDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byTightDeepTau2017v2p1VSmu.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSjetraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSeraw.clear();
-    _recotauh_sel_byDeepTau2017v2p1VSmuraw.clear();
     _recotauh_sel_decayMode.clear();
     _recotauh_sel_decayModeFindingOldDMs.clear();
     _recotauh_sel_decayModeFindingNewDMs.clear();
@@ -12724,7 +11830,6 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_byLooseIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byLooseIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
         _recotauh_sel_byMediumIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byMediumIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
         _recotauh_sel_byTightIsolationMVArun2v2017v2DBoldDMwLT.push_back((*_recotauh_byTightIsolationMVArun2v2017v2DBoldDMwLT)[i_tau]);
-        _recotauh_sel_byVVVLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byVVVLooseDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byVVLooseDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byVLooseDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byLooseDeepTau2017v2p1VSjet.push_back((*_recotauh_byLooseDeepTau2017v2p1VSjet)[i_tau]);
@@ -12732,21 +11837,6 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_byTightDeepTau2017v2p1VSjet.push_back((*_recotauh_byTightDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVTightDeepTau2017v2p1VSjet.push_back((*_recotauh_byVTightDeepTau2017v2p1VSjet)[i_tau]);
         _recotauh_sel_byVVTightDeepTau2017v2p1VSjet.push_back((*_recotauh_byVVTightDeepTau2017v2p1VSjet)[i_tau]);
-        _recotauh_sel_byVVVLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byVVVLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVVLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byVVLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byVLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byLooseDeepTau2017v2p1VSe.push_back((*_recotauh_byLooseDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byMediumDeepTau2017v2p1VSe.push_back((*_recotauh_byMediumDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byTightDeepTau2017v2p1VSe.push_back((*_recotauh_byTightDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVTightDeepTau2017v2p1VSe.push_back((*_recotauh_byVTightDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVVTightDeepTau2017v2p1VSe.push_back((*_recotauh_byVVTightDeepTau2017v2p1VSe)[i_tau]);
-        _recotauh_sel_byVLooseDeepTau2017v2p1VSmu.push_back((*_recotauh_byVLooseDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byLooseDeepTau2017v2p1VSmu.push_back((*_recotauh_byLooseDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byMediumDeepTau2017v2p1VSmu.push_back((*_recotauh_byMediumDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byTightDeepTau2017v2p1VSmu.push_back((*_recotauh_byTightDeepTau2017v2p1VSmu)[i_tau]);
-        _recotauh_sel_byDeepTau2017v2p1VSjetraw.push_back((*_recotauh_byDeepTau2017v2p1VSjetraw)[i_tau]);
-        _recotauh_sel_byDeepTau2017v2p1VSeraw.push_back((*_recotauh_byDeepTau2017v2p1VSeraw)[i_tau]);
-        _recotauh_sel_byDeepTau2017v2p1VSmuraw.push_back((*_recotauh_byDeepTau2017v2p1VSmuraw)[i_tau]);
         _recotauh_sel_decayMode.push_back((*_recotauh_decayMode)[i_tau]);
         _recotauh_sel_decayModeFindingOldDMs.push_back((*_recotauh_decayModeFindingOldDMs)[i_tau]);
         _recotauh_sel_decayModeFindingNewDMs.push_back((*_recotauh_decayModeFindingNewDMs)[i_tau]);
