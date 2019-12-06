@@ -572,7 +572,7 @@ void add_BDT(TString filein, TString fileout, vector<TString> treename){
 
     float _BDTscore_res_HTT;
     float _BDTscore_res_HTT_2;
-    float _BDTscore_semiboosted_HTT;
+    //float _BDTscore_semiboosted_HTT;
 
     TTree* tree_new=tree->GetTree()->CloneTree(0);
 
@@ -586,7 +586,7 @@ void add_BDT(TString filein, TString fileout, vector<TString> treename){
 
     tree_new->Branch("BDTscore_res_HTT",&_BDTscore_res_HTT);
     tree_new->Branch("BDTscore_res_HTT_2",&_BDTscore_res_HTT_2);
-    tree_new->Branch("BDTscore_semiboosted_HTT",&_BDTscore_semiboosted_HTT);
+    //tree_new->Branch("BDTscore_semiboosted_HTT",&_BDTscore_semiboosted_HTT);
 
     float _lep_conePt;
     float _lep1_conePt;
@@ -853,7 +853,7 @@ void add_BDT(TString filein, TString fileout, vector<TString> treename){
 
       _BDTscore_res_HTT = -999.;
       _BDTscore_res_HTT_2 = -999.;
-      _BDTscore_semiboosted_HTT = -999.;
+      //_BDTscore_semiboosted_HTT = -999.;
 
       tree->GetEntry(i);
 

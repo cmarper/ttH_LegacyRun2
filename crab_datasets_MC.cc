@@ -567,13 +567,13 @@ std::tuple<TString, int, int, int, TString, bool> get_parameters_MC( TString sam
 	    type = "HH";
 	    isMC = true;
     }
-    /*if( sample == "Oct19v3_MC_2016_GluGluToHHTo2B2VTo2L2Nu_node_4" ) {  //74
-	    dir_in = // ---> CHECK!
-  	    nfiles = // ---> CHECK!
+    if( sample == "Oct19v4_MC_2016_GluGluToHHTo2B2VTo2L2Nu_node_4" ) {  //74
+	    dir_in = "MC_2016_Oct19/GluGluToHHTo2B2VTo2L2Nu_node_4_13TeV-madgraph-v2/Oct19v4_MC_2016_GluGluToHHTo2B2VTo2L2Nu_node_4/191202_141909/";
+  	    nfiles = 3;
 	    year = 2016; 
 	    type = "HH";
 	    isMC = true;
-    }*/
+    }
     if( sample == "Oct19v2_MC_2016_GluGluToHHTo2B2VTo2L2Nu_node_5" ) {  //75
 	    dir_in = "MC_2016_Oct19/GluGluToHHTo2B2VTo2L2Nu_node_5_13TeV-madgraph-v2/Oct19v2_MC_2016_GluGluToHHTo2B2VTo2L2Nu_node_5/191103_124506/";
   	    nfiles = 4;
@@ -2083,13 +2083,13 @@ std::tuple<TString, int, int, int, TString, bool> get_parameters_MC( TString sam
 	    type = "EWK";
 	    isMC = true;
     }
-    /*if( sample == "Oct19v3_MC_2018_ZZTo4L_ext2" ) {  //59
-	    dir_in = // --> CHECK!
-  	    nfiles = // --> CHECK!
+    if( sample == "Oct19v4_MC_2018_ZZTo4L_ext2" ) {  //59
+	    dir_in = "MC_2018_Oct19/ZZTo4L_TuneCP5_13TeV_powheg_pythia8/Oct19v4_MC_2018_ZZTo4L_ext2/191202_142752/";
+  	    nfiles = 1473;
 	    year = 2018; 
 	    type = "EWK";
 	    isMC = true;
-    }*/
+    }
 
     // TTVH
     if( sample == "Oct19v1_MC_2018_TTWH" ) {  //60 - GOOD
