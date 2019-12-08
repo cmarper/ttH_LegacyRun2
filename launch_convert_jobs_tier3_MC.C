@@ -87,7 +87,7 @@ void create_scripts_all(){
 
     create_scripts("Oct19v1_MC_2017_ttHJetToNonbb", 2, "2017", "MC");  // DONE
     create_scripts("Oct19v1_MC_2017_THQ_ctcvcp", 2, "2017", "MC");     // DONE
-    // ---> missing Oct19v3_MC_2017_THW_ctcvcp (CONVERT)
+    create_scripts("Oct19v3_MC_2017_THW_ctcvcp",1,"2017","MC");        // DONE
     create_scripts("Oct19v1_MC_2017_TTH_ctcvcp", 2, "2017", "MC");     // DONE
 
     create_scripts("Oct19v2_MC_2018_ttHJetToNonbb",2,"2018","MC");     // DONE
@@ -203,7 +203,7 @@ void create_scripts_all(){
     create_scripts("Oct19v1_MC_2018_WZTo3LNu", 2, "2018", "MC");                // DONE
     create_scripts("Oct19v2_MC_2018_WZTo3LNu_ext1",2,"2018","MC");              // DONE
     create_scripts("Oct19v2_MC_2018_ZZTo4L", 1, "2018", "MC");                  // DONE
-    // ---> missing Oct19v4_MC_2018_ZZTo4L_ext2 (CRAB)
+    create_scripts("Oct19v4_MC_2018_ZZTo4L_ext2",14,"2018","MC");               // DONE
     */
 
     // ggH 
@@ -313,7 +313,7 @@ void create_scripts_all(){
     create_scripts("Oct19v3_MC_2016_GluGluToHHTo2B2VTo2L2Nu_node_1",0,"2016", "MC");        // DONE
     create_scripts("Oct19v1_MC_2016_GluGluToHHTo2B2VTo2L2Nu_node_2",0,"2016", "MC");        // DONE
     create_scripts("Oct19v1_MC_2016_GluGluToHHTo2B2VTo2L2Nu_node_3",0,"2016", "MC");        // DONE
-    // ---> missing Oct19v4_MC_2016_GluGluToHHTo2B2VTo2L2Nu_node_4 (CRAB)
+    create_scripts("Oct19v4_MC_2016_GluGluToHHTo2B2VTo2L2Nu_node_4",0,"2016","MC");         // DONE
     create_scripts("Oct19v2_MC_2016_GluGluToHHTo2B2VTo2L2Nu_node_5",0,"2016", "MC");        // DONE
     create_scripts("Oct19v2_MC_2016_GluGluToHHTo2B2VTo2L2Nu_node_6",0,"2016", "MC");        // DONE
     create_scripts("Oct19v2_MC_2016_GluGluToHHTo2B2VTo2L2Nu_node_7",0,"2016","MC");         // DONE
@@ -446,23 +446,13 @@ void create_scripts_all(){
     create_scripts("Oct19v1_MC_2018_ST_s-channel",3,"2018", "MC");                      // DONE
     create_scripts("Oct19v2_MC_2018_ST_t-channel_top",23,"2018","MC");                  // DONE (2-4,6,7-12,15-17,19-23 crash)
     create_scripts("Oct19v3_MC_2018_ST_t-channel_antitop",13,"2018","MC");              // DONE
-    // ---> missing Oct19v3_MC_2018_ST_tW_top (CRAB)
+    create_scripts("Oct19v3_MC_2018_ST_tW_top",1,"2018","MC");                          // DONE
     create_scripts("Oct19v1_MC_2018_ST_tW_antitop",1,"2018", "MC");                     // DONE
     create_scripts("Oct19v1_MC_2018_ST_tWll",0,"2018", "MC");                           // DONE
     create_scripts("Oct19v1_MC_2018_TTJets_DiLept",8,"2018","MC");                      // DONE
     create_scripts("Oct19v1_MC_2018_TTJets_SingleLeptFromT",15,"2018","MC");            // DONE
     create_scripts("Oct19v2_MC_2018_TTJets_SingleLeptFromTbar",9,"2018","MC");          // DONE
     */
-
-    // PENDING
-    //create_scripts("Oct19v3_MC_2017_THW_ctcvcp",1,"2017","MC"); //0->done, 1->repeat
-    //create_scripts("Oct19v3_MC_2018_ST_tW_top",1,"2018","MC"); //0->repeat, 1->done
-    //Oct19v1_MC_2016_DYJetsToLL_M-10to50 -> 2->repeat
-    //Oct19v1_MC_2017_ST_tW_antitop -> 0->repeat
-    //Oct19v3_MC_2017_GluGluHToTauTau_ext1
-
-    create_scripts("Oct19v4_MC_2016_GluGluToHHTo2B2VTo2L2Nu_node_4",0,"2016","MC");
-    create_scripts("Oct19v4_MC_2018_ZZTo4L_ext2",14,"2018","MC");
     
 }
 
