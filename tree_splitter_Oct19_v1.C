@@ -360,10 +360,10 @@ void split_tree(TString filename_in, TString filename_out,
 
   TFile* f_new = TFile::Open(filename_out);
   
-  if(f_new!=0){
+  /*if(f_new!=0){
     cout<<filename_out<<" already exists, please delete it before converting again"<<endl;
     return;
-  }
+  }*/
   
   f_new = TFile::Open(filename_out,"RECREATE");
 
@@ -825,6 +825,21 @@ void split_tree(TString filename_in, TString filename_out,
     tree_new[i]->Branch("recotauh_sel_byTightDeepTau2017v2p1VSjet",&_recotauh_sel_byTightDeepTau2017v2p1VSjet);
     tree_new[i]->Branch("recotauh_sel_byVTightDeepTau2017v2p1VSjet",&_recotauh_sel_byVTightDeepTau2017v2p1VSjet);
     tree_new[i]->Branch("recotauh_sel_byVVTightDeepTau2017v2p1VSjet",&_recotauh_sel_byVVTightDeepTau2017v2p1VSjet);
+    tree_new[i]->Branch("recotauh_sel_byVVVLooseDeepTau2017v2p1VSe",&_recotauh_sel_byVVVLooseDeepTau2017v2p1VSe);
+    tree_new[i]->Branch("recotauh_sel_byVVLooseDeepTau2017v2p1VSe",&_recotauh_sel_byVVLooseDeepTau2017v2p1VSe);
+    tree_new[i]->Branch("recotauh_sel_byVLooseDeepTau2017v2p1VSe",&_recotauh_sel_byVLooseDeepTau2017v2p1VSe);
+    tree_new[i]->Branch("recotauh_sel_byLooseDeepTau2017v2p1VSe",&_recotauh_sel_byLooseDeepTau2017v2p1VSe);
+    tree_new[i]->Branch("recotauh_sel_byMediumDeepTau2017v2p1VSe",&_recotauh_sel_byMediumDeepTau2017v2p1VSe);
+    tree_new[i]->Branch("recotauh_sel_byTightDeepTau2017v2p1VSe",&_recotauh_sel_byTightDeepTau2017v2p1VSe);
+    tree_new[i]->Branch("recotauh_sel_byVTightDeepTau2017v2p1VSe",&_recotauh_sel_byVTightDeepTau2017v2p1VSe);
+    tree_new[i]->Branch("recotauh_sel_byVVTightDeepTau2017v2p1VSe",&_recotauh_sel_byVVTightDeepTau2017v2p1VSe);
+    tree_new[i]->Branch("recotauh_sel_byVLooseDeepTau2017v2p1VSmu",&_recotauh_sel_byVLooseDeepTau2017v2p1VSmu);
+    tree_new[i]->Branch("recotauh_sel_byLooseDeepTau2017v2p1VSmu",&_recotauh_sel_byLooseDeepTau2017v2p1VSmu);
+    tree_new[i]->Branch("recotauh_sel_byMediumDeepTau2017v2p1VSmu",&_recotauh_sel_byMediumDeepTau2017v2p1VSmu);
+    tree_new[i]->Branch("recotauh_sel_byTightDeepTau2017v2p1VSmu",&_recotauh_sel_byTightDeepTau2017v2p1VSmu);
+    tree_new[i]->Branch("recotauh_sel_byDeepTau2017v2p1VSjetraw",&_recotauh_sel_byDeepTau2017v2p1VSjetraw);
+    tree_new[i]->Branch("recotauh_sel_byDeepTau2017v2p1VSeraw",&_recotauh_sel_byDeepTau2017v2p1VSeraw);
+    tree_new[i]->Branch("recotauh_sel_byDeepTau2017v2p1VSmuraw",&_recotauh_sel_byDeepTau2017v2p1VSmuraw);
     tree_new[i]->Branch("recotauh_sel_decayMode",&_recotauh_sel_decayMode);
     tree_new[i]->Branch("recotauh_sel_decayModeFindingOldDMs",&_recotauh_sel_decayModeFindingOldDMs);
     tree_new[i]->Branch("recotauh_sel_decayModeFindingNewDMs",&_recotauh_sel_decayModeFindingNewDMs);

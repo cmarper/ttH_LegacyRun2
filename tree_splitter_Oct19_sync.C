@@ -144,6 +144,8 @@ void split_tree(TString filename_in, TString filename_out,
   vector<int>   *_recotauh_byTightDeepTau2017v2p1VSjet;
   vector<int>   *_recotauh_byVTightDeepTau2017v2p1VSjet;
   vector<int>   *_recotauh_byVVTightDeepTau2017v2p1VSjet;
+  vector<int>   *_recotauh_byVVVLooseDeepTau2017v2p1VSe;
+  vector<int>   *_recotauh_byVLooseDeepTau2017v2p1VSmu;
   vector<int>   *_recotauh_againstMuonLoose3;
   vector<int>   *_recotauh_againstMuonTight3;
   vector<int>   *_recotauh_againstElectronVLooseMVA6;
@@ -275,6 +277,8 @@ void split_tree(TString filename_in, TString filename_out,
   tree->SetBranchAddress("recotauh_byTightDeepTau2017v2p1VSjet",&_recotauh_byTightDeepTau2017v2p1VSjet);
   tree->SetBranchAddress("recotauh_byVTightDeepTau2017v2p1VSjet",&_recotauh_byVTightDeepTau2017v2p1VSjet);
   tree->SetBranchAddress("recotauh_byVVTightDeepTau2017v2p1VSjet",&_recotauh_byVVTightDeepTau2017v2p1VSjet);
+  tree->SetBranchAddress("recotauh_byVVVLooseDeepTau2017v2p1VSe",&_recotauh_byVVVLooseDeepTau2017v2p1VSe);
+  tree->SetBranchAddress("recotauh_byVLooseDeepTau2017v2p1VSmu",&_recotauh_byVLooseDeepTau2017v2p1VSmu);
   tree->SetBranchAddress("recotauh_againstMuonLoose3",&_recotauh_againstMuonLoose3);
   tree->SetBranchAddress("recotauh_againstMuonTight3",&_recotauh_againstMuonTight3);
   tree->SetBranchAddress("recotauh_againstElectronVLooseMVA6",&_recotauh_againstElectronVLooseMVA6);
@@ -1124,6 +1128,8 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_byTightDeepTau2017v2p1VSjet = 0;
     _recotauh_byVTightDeepTau2017v2p1VSjet = 0;
     _recotauh_byVVTightDeepTau2017v2p1VSjet = 0;
+    _recotauh_byVVVLooseDeepTau2017v2p1VSe = 0;
+    _recotauh_byVLooseDeepTau2017v2p1VSmu = 0;
     _recotauh_againstMuonLoose3 = 0;
     _recotauh_againstMuonTight3 = 0;
     _recotauh_againstElectronVLooseMVA6 = 0;
@@ -1601,7 +1607,11 @@ void split_tree(TString filename_in, TString filename_out,
       inv_mass_lep_pairs &&
       (_n_tight_lep==0) &&
       (_n_recoPFJet>=4 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) )
-      && genmatch_2tau;
+      && genmatch_2tau
+      && ((*_recotauh_decayMode)[0] != 5) && ((*_recotauh_decayMode)[1] != 5)
+      && ((*_recotauh_decayMode)[0] != 6) && ((*_recotauh_decayMode)[1] != 6) 
+      && ((*_recotauh_byVVVLooseDeepTau2017v2p1VSe)[0]) && ((*_recotauh_byVVVLooseDeepTau2017v2p1VSe)[1])
+      && ((*_recotauh_byVLooseDeepTau2017v2p1VSmu)[0])  && ((*_recotauh_byVLooseDeepTau2017v2p1VSmu)[1]);
 
     bool sig_2tau_SR = 
       sig_2tau_base &&
@@ -1631,7 +1641,11 @@ void split_tree(TString filename_in, TString filename_out,
       inv_mass_lep_pairs &&
       (_n_recoPFJet>=4 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2)) &&
       (_n_tight_lep<=1) &&
-      (_n_tight_WPM_tau<=1);
+      (_n_tight_WPM_tau<=1)
+      && ((*_recotauh_decayMode)[0] != 5)
+      && ((*_recotauh_decayMode)[0] != 6)
+      && ((*_recotauh_byVVVLooseDeepTau2017v2p1VSe)[0])
+      && ((*_recotauh_byVLooseDeepTau2017v2p1VSmu)[0]);
      
     bool sig_1l1tau_SR = 
       sig_1l1tau_base &&
@@ -1670,7 +1684,11 @@ void split_tree(TString filename_in, TString filename_out,
       (_n_fakeable_tau>=2) &&
       ( (*_recotauh_pt)[0]>30 && (*_recotauh_pt)[1]>20 )  &&
       inv_mass_lep_pairs &&
-      genmatch_1l2tau;
+      genmatch_1l2tau
+      && ((*_recotauh_decayMode)[0] != 5) && ((*_recotauh_decayMode)[1] != 5)
+      && ((*_recotauh_decayMode)[0] != 6) && ((*_recotauh_decayMode)[1] != 6) 
+      && ((*_recotauh_byVVVLooseDeepTau2017v2p1VSe)[0]) && ((*_recotauh_byVVVLooseDeepTau2017v2p1VSe)[1])
+      && ((*_recotauh_byVLooseDeepTau2017v2p1VSmu)[0])  && ((*_recotauh_byVLooseDeepTau2017v2p1VSmu)[1]);
 
     bool sig_1l2tau_SR = 
       sig_1l2tau_base &&
@@ -1783,7 +1801,11 @@ void split_tree(TString filename_in, TString filename_out,
       (_n_tight_WPM_tau<=1) &&
       inv_mass_Z_SFOS && 
       met_mll_2lss &&
-      genmatch_2l;
+      genmatch_2l
+      && ((*_recotauh_decayMode)[0] != 5)
+      && ((*_recotauh_decayMode)[0] != 6)
+      && ((*_recotauh_byVVVLooseDeepTau2017v2p1VSe)[0])
+      && ((*_recotauh_byVLooseDeepTau2017v2p1VSmu)[0]);
 
     bool pass_njet_2l1tau_ttH = (_n_recoPFJet>=3 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) );
     bool pass_njet_2l1tau_tH = (_n_recoPFJet_btag_medium>=1 && _n_recoPFLightJet>=1);
@@ -1863,7 +1885,11 @@ void split_tree(TString filename_in, TString filename_out,
       inv_mass_Z_SFOS &&
       (metLD_flavor) &&
       (_n_recoPFJet>=3 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) ) &&
-      genmatch_2l1tau;
+      genmatch_2l1tau
+      && ((*_recotauh_decayMode)[0] != 5)
+      && ((*_recotauh_decayMode)[0] != 6)
+      && ((*_recotauh_byVVVLooseDeepTau2017v2p1VSe)[0])
+      && ((*_recotauh_byVLooseDeepTau2017v2p1VSmu)[0]);
 
     bool sig_2los1tau_SR =
       sig_2los1tau_base &&
@@ -1903,7 +1929,11 @@ void split_tree(TString filename_in, TString filename_out,
       metLD_fakepair &&
       ( ((*_recotauh_charge)[0]+(*_recotauh_charge)[1]+_recolep_fakeable_charge[0]+_recolep_fakeable_charge[1]) == 0) &&
       (_n_recoPFJet>=2 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) ) &&
-      genmatch_2l2tau;
+      genmatch_2l2tau
+      && ((*_recotauh_decayMode)[0] != 5) && ((*_recotauh_decayMode)[1] != 5)
+      && ((*_recotauh_decayMode)[0] != 6) && ((*_recotauh_decayMode)[1] != 6) 
+      && ((*_recotauh_byVVVLooseDeepTau2017v2p1VSe)[0]) && ((*_recotauh_byVVVLooseDeepTau2017v2p1VSe)[1])
+      && ((*_recotauh_byVLooseDeepTau2017v2p1VSmu)[0])  && ((*_recotauh_byVLooseDeepTau2017v2p1VSmu)[1]);
 
     bool sig_2l2tau_SR =
       sig_2l2tau_base &&
@@ -1983,7 +2013,11 @@ void split_tree(TString filename_in, TString filename_out,
       ( ((*_recotauh_charge)[0]+_recolep_fakeable_charge[0]+_recolep_fakeable_charge[1]+_recolep_fakeable_charge[2]) == 0) &&
       ( _n_recoPFJet>=2 && (_n_recoPFJet_btag_medium>=1 || _n_recoPFJet_btag_loose>=2) ) &&
       (_n_tight_lep<=3) &&
-      genmatch_3l;
+      genmatch_3l
+      && ((*_recotauh_decayMode)[0] != 5)
+      && ((*_recotauh_decayMode)[0] != 6)
+      && ((*_recotauh_byVVVLooseDeepTau2017v2p1VSe)[0])
+      && ((*_recotauh_byVLooseDeepTau2017v2p1VSmu)[0]);
 
     bool sig_3l1tau_SR =
       sig_3l1tau_base &&
@@ -11971,7 +12005,7 @@ void split_tree(TString filename_in, TString filename_out,
 void test16(){
 
   TString fin = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2016/sync_ntuple_converted_ttHNonbb_2016_Oct19_v4.root";
-  TString fout = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_splitted/2016/sync_ntuple_splitted_ttHNonbb_2016_Oct19_v1.root";
+  TString fout = "/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_splitted/2016/sync_ntuple_splitted_ttHNonbb_2016_Oct19_v2_newtaucats.root";
 
   split_tree(fin,fout,0,0,true,2016);
 
