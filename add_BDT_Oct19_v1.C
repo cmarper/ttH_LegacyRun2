@@ -8,7 +8,6 @@
 
 using namespace std;
 
-//ROOT libraries
 #include <TFile.h>
 #include <TTree.h>
 #include <TChain.h>
@@ -366,40 +365,17 @@ TMVA::Reader* Book_HTT_Resolved_MVAReader(std::string basePath, std::string weig
 
 }
 
-//////////////////////////////
-////// Semiboosted HTT ///////
-//////////////////////////////
-
-/*TMVA::Reader* Book_HTT_SemiBoosted_MVAReader(std::string basePath, std::string weightFileName){
-
-  TMVA::Reader* reader = new TMVA::Reader("!Color:!Silent");
-
-  reader->AddVariable("massW_SD",&massW_SD);
-  reader->AddVariable("tau21W",&tau21W);
-  reader->AddVariable("btagDisc_b",&btagDisc_b);
-  reader->AddVariable("m_Wj1Wj2_div_m_bWj1Wj2",&m_Wj1Wj2_div_m_bWj1Wj2);
-  reader->AddVariable("dR_Wj1Wj2",&dR_Wj1Wj2);
-  reader->AddVariable("m_bWj1Wj2",&m_bWj1Wj2);
-  reader->AddVariable("pT_bWj1Wj2",&pT_bWj1Wj2);
-  reader->AddVariable("mass_Wj1",&mass_Wj1);
-  reader->AddVariable("pT_Wj2",&pT_Wj2);
-  reader->AddVariable("mass_Wj2",&mass_Wj2);
-  reader->AddVariable("pT_b",&pT_b);
-  reader->AddVariable("mass_b",&mass_b);
-
-  reader->BookMVA("BDTG method", basePath+"/"+weightFileName);
-
-  return reader;
-
-}*/
-
 //https://github.com/HEP-KBFI/tth-htt/blob/8bd1b484fa968390fd8765562212b197fd1b7183/bin/analyze_1l_1tau.cc#L151-L161
 double comp_cosThetaS(TLorentzVector lep1, TLorentzVector lep2)
 {
-  TLorentzVector dilep = lep1 + lep2;
-  TLorentzVector boost = lep1;
-  boost.Boost(-dilep.BoostVector());
-  return std::fabs(boost.CosTheta());
+  TLorentzVector lep_lead;
+  lep_lead.SetPtEtaPhiM(lep1.Pt(), lep1.Eta(), lep1.Phi(), lep1.M());
+  TLorentzVector lep_sublead;
+  lep_sublead.SetPtEtaPhiM(lep2.Pt(), lep2.Eta(), lep2.Phi(), lep2.M());
+  TLorentzVector dilep = lep_lead + lep_sublead;
+  TLorentzVector lep_boost = lep_lead;
+  lep_boost.Boost(-dilep.BoostVector());
+  return std::fabs(lep_boost.CosTheta());
 }
 
 ////////////////
@@ -440,9 +416,6 @@ void add_BDT(TString filein, TString fileout, vector<TString> treename, int year
 
   TMVA::Reader* MVA_res_HTT_reader = Book_HTT_Resolved_MVAReader("BDT_weights","HTT_HadTopTagger_2017_nomasscut_nvar17_resolved.xml");
   if(!MVA_res_HTT_reader) std::cout << "No resolved HTT xml file"<<std::endl;
-
-  /*TMVA::Reader* MVA_HTT_SemiBoosted_reader = Book_HTT_SemiBoosted_MVAReader("BDT_weights","HTT_HadTopTagger_2017_nomasscut_nvar12_semi_boosted_AK8.xml");
-  if(!MVA_HTT_SemiBoosted_reader) std::cout << "No semiboosted HTT xml file"<<std::endl;*/
 
   ////////////////
   ////////////////
@@ -486,6 +459,7 @@ void add_BDT(TString filein, TString fileout, vector<TString> treename, int year
     vector<float> *_recolep_sel_e;
     vector<float> *_recolep_sel_conept;
     vector<float> *_recolep_sel_pt;
+    vector<float> *_recolep_sel_eta;
     vector<float> *_recolep_sel_phi;
     vector<float> *_recolep_sel_charge;
 
@@ -548,6 +522,7 @@ void add_BDT(TString filein, TString fileout, vector<TString> treename, int year
     tree->SetBranchAddress("recolep_sel_e",&_recolep_sel_e);
     tree->SetBranchAddress("recolep_sel_conept",&_recolep_sel_conept);
     tree->SetBranchAddress("recolep_sel_pt",&_recolep_sel_pt);
+    tree->SetBranchAddress("recolep_sel_eta",&_recolep_sel_eta);
     tree->SetBranchAddress("recolep_sel_phi",&_recolep_sel_phi);
     tree->SetBranchAddress("recolep_sel_charge",&_recolep_sel_charge);
 
@@ -743,6 +718,7 @@ void add_BDT(TString filein, TString fileout, vector<TString> treename, int year
       _recolep_sel_e = 0;
       _recolep_sel_conept = 0;
       _recolep_sel_pt = 0;
+      _recolep_sel_eta = 0;
       _recolep_sel_phi = 0;
       _recolep_sel_charge = 0;
 
@@ -886,7 +862,6 @@ void add_BDT(TString filein, TString fileout, vector<TString> treename, int year
 
       _BDTscore_res_HTT = 0.;
       _BDTscore_res_HTT_2 = 0.;
-      //_BDTscore_semiboosted_HTT = -999.;
 
       tree->GetEntry(i);
 
@@ -972,7 +947,6 @@ void add_BDT(TString filein, TString fileout, vector<TString> treename, int year
       }
 
       _BDTscore_res_HTT = _res_HTT;
-      //cout<<i_jet1<<i_jet2<<i_jet3<<endl;
 
       for ( int i_bjet = 0; i_bjet<_n_recoPFJet; i_bjet++) {
 
@@ -1044,7 +1018,6 @@ void add_BDT(TString filein, TString fileout, vector<TString> treename, int year
 
       _BDTscore_res_HTT_2 = _res_HTT_2;
 
-
       //// loose/medium btag jet collection
 
       vector<bool> _recoPFJet_isLooseDeepJet;
@@ -1094,7 +1067,7 @@ void add_BDT(TString filein, TString fileout, vector<TString> treename, int year
       ////////////////////////
       //////// 0l2tau ////////
       ////////////////////////
-
+      /*
       if(_category==1010 || _category==1020){
 
         TLorentzVector tau1((*_recotauh_sel_px)[0],(*_recotauh_sel_py)[0],(*_recotauh_sel_pz)[0],(*_recotauh_sel_e)[0]); 
@@ -1176,11 +1149,13 @@ void add_BDT(TString filein, TString fileout, vector<TString> treename, int year
         cout<<"0l2tau - BDT score: "<<_BDTscore_0l2tau<<endl;
 
       }
+      */
 
       ////////////////////////
       //////// 1l1tau ////////
       ////////////////////////
 
+      /*
       if(_category==2010 || _category==2020 || _category==2030){
 
         TLorentzVector lep((*_recolep_sel_px)[0],(*_recolep_sel_py)[0],(*_recolep_sel_pz)[0],(*_recolep_sel_e)[0]); 
@@ -1258,18 +1233,21 @@ void add_BDT(TString filein, TString fileout, vector<TString> treename, int year
 
         cout<<"1l1tau - BDT score: "<<_BDTscore_1l1tau<<endl;
 
-      }
+      }*/
       
-
       ////////////////////////
       //////// 1l2tau ////////
       ////////////////////////
 
+      //SYNCHED
       if(_category==2110 || _category==2120){
 
         TLorentzVector lep( (*_recolep_sel_px)[0],(*_recolep_sel_py)[0],(*_recolep_sel_pz)[0],(*_recolep_sel_e)[0]);
         TLorentzVector tau1((*_recotauh_sel_px)[0],(*_recotauh_sel_py)[0],(*_recotauh_sel_pz)[0],(*_recotauh_sel_e)[0]); 
         TLorentzVector tau2((*_recotauh_sel_px)[1],(*_recotauh_sel_py)[1],(*_recotauh_sel_pz)[1],(*_recotauh_sel_e)[1]); 
+
+        TLorentzVector lep_cone;
+        lep_cone.SetPtEtaPhiE((*_recolep_sel_conept)[0], (*_recolep_sel_eta)[0], (*_recolep_sel_phi)[0], (*_recolep_sel_e)[0]);
 
         _tau1_pt = tau1.Pt();
         _tau2_pt = tau2.Pt();
@@ -1294,7 +1272,7 @@ void add_BDT(TString filein, TString fileout, vector<TString> treename, int year
           float i_dR_lep = jet.DeltaR(lep);
           float i_dR_tau1 = jet.DeltaR(tau1);
           float i_dR_tau2 = jet.DeltaR(tau2);
-          if(i_dR_lep < minDR_l_j) minDR_l_j = i_dR_lep;
+          if(i_dR_lep < minDR_l_j)   minDR_l_j = i_dR_lep;
           if(i_dR_tau1 < minDR_t1_j) minDR_t1_j = i_dR_tau1;
           if(i_dR_tau2 < minDR_t2_j) minDR_t2_j = i_dR_tau2;
         }
@@ -1308,10 +1286,16 @@ void add_BDT(TString filein, TString fileout, vector<TString> treename, int year
         _met_LD = _ETmissLD;
 
         TLorentzVector sumL3 = lep + tau1 + tau2;
+        float met_px = _PFMET*std::cos(_PFMET_phi);
+        float met_py = _PFMET*std::sin(_PFMET_phi);
+
         _massL3 = sqrt(2*(sumL3.Pt())*_PFMET*(1-cos((sumL3.Phi())-_PFMET_phi)));
+        float _massL3_v2 =  sqrt( (sumL3.Et()+_PFMET)*(sumL3.Et()+_PFMET) - ( (sumL3.Px()+met_px)*(sumL3.Px()+met_px) + (sumL3.Py()+met_py)*(sumL3.Py()+met_py) ) );
 
         _lep1_conePt = (*_recolep_sel_conept)[0];
-        _mT_lep = sqrt(2*((*_recolep_sel_pt)[0])*_PFMET*(1-cos(((*_recolep_sel_phi)[0])-_PFMET_phi)));
+
+        _mT_lep = sqrt(2*(lep_cone.Pt())*_PFMET*(1-cos((lep_cone.Phi())-_PFMET_phi)));
+        float _mT_lep_v2 =  sqrt( (lep_cone.Et()+_PFMET)*(lep_cone.Et()+_PFMET) - ( (lep_cone.Px()+met_px)*(lep_cone.Px()+met_px) + (lep_cone.Py()+met_py)*(lep_cone.Py()+met_py) ) );
 
         _mbb_loose = 0;
         if(_n_recoPFJet_btag_loose>1) 
@@ -1343,9 +1327,9 @@ void add_BDT(TString filein, TString fileout, vector<TString> treename, int year
         mTauTauVis = _mTauTauVis;
         costS_tau = _costS_tau;
         met_LD = _met_LD;
-        massL3 = _massL3;
+        massL3 = _massL3_v2; //--->CHECK!!!!
         lep1_conePt = _lep1_conePt;
-        mT_lep = _mT_lep;
+        mT_lep = _mT_lep_v2; //--->CHECK!!!!
         res_HTT = _res_HTT;
         HadTop_pt = _HadTop_pt;
         mbb_loose = _mbb_loose;
@@ -1356,10 +1340,27 @@ void add_BDT(TString filein, TString fileout, vector<TString> treename, int year
 
         _BDTscore_1l2tau =  1. / (1. + sqrt((1. - _BDToutput_1l2tau) / (1. + _BDToutput_1l2tau)));
 
-        cout<<"1l2tau - BDT score: "<<_BDTscore_1l2tau<<endl;
+        //cout<<"Event: "<<_EventNumber<<endl;
+        //cout<<"tau1_pt "<<tau1_pt<<endl;
+        //cout<<"tau2_pt "<<tau2_pt<<endl;
+        //cout<<"dr_taus "<<dr_taus<<endl;
+        //cout<<"dr_lep_tau_os "<<dr_lep_tau_os<<endl;
+        //cout<<"dr_lep_tau_ss "<<dr_lep_tau_ss<<endl;
+        //cout<<"Lep_min_dr_jet "<<Lep_min_dr_jet<<endl;
+        //cout<<"mTauTauVis "<<mTauTauVis<<endl;
+        //cout<<"costS_tau "<<costS_tau<<endl;
+        //cout<<"met_LD "<<met_LD<<endl;
+        //cout<<"massL3 "<<massL3<<endl;
+        //cout<<"lep1_conePt "<<lep1_conePt<<endl;
+        //cout<<"mT_lep "<<mT_lep<<endl;
+        //cout<<"res_HTT "<<res_HTT<<endl;
+        //cout<<"HadTop_pt "<<HadTop_pt<<endl;
+        //cout<<"mbb_loose "<<mbb_loose<<endl;
+        //cout<<"avg_dr_jet "<<avg_dr_jet<<endl;
+        //cout<<"max_Lep_eta "<<max_Lep_eta<<endl;
+        //cout<<"--> _BDTscore_1l2tau "<<_BDTscore_1l2tau<<endl;
 
-      }   
-
+      } 
 
       //////////////////////////
       //////// 2los1tau ////////
@@ -1367,11 +1368,20 @@ void add_BDT(TString filein, TString fileout, vector<TString> treename, int year
 
       if(_category==3210 || _category==3220){
 
+        if(_EventNumber!=1381984) continue;
+
         TLorentzVector lep1( (*_recolep_sel_px)[0],(*_recolep_sel_py)[0],(*_recolep_sel_pz)[0],(*_recolep_sel_e)[0]);
         TLorentzVector lep2( (*_recolep_sel_px)[1],(*_recolep_sel_py)[1],(*_recolep_sel_pz)[1],(*_recolep_sel_e)[1]);
         TLorentzVector tau((*_recotauh_sel_px)[0],(*_recotauh_sel_py)[0],(*_recotauh_sel_pz)[0],(*_recotauh_sel_e)[0]); 
 
+        TLorentzVector lep_cone_1;
+        lep_cone_1.SetPtEtaPhiE((*_recolep_sel_conept)[0], (*_recolep_sel_eta)[0], (*_recolep_sel_phi)[0], (*_recolep_sel_e)[0]);
+
+        TLorentzVector lep_cone_2;
+        lep_cone_2.SetPtEtaPhiE((*_recolep_sel_conept)[1], (*_recolep_sel_eta)[1], (*_recolep_sel_phi)[1], (*_recolep_sel_e)[1]);
+
         _lep1_conePt = (*_recolep_sel_conept)[0];
+        _lep2_conePt = (*_recolep_sel_conept)[1];
 
         float minDR_l1_j = 999.;
         for(int i_jet = 0; i_jet<_n_recoPFJet; i_jet++){
@@ -1381,9 +1391,29 @@ void add_BDT(TString filein, TString fileout, vector<TString> treename, int year
         }
         _mindr_lep1_jet = minDR_l1_j;
 
-        _mT_lep1 = sqrt(2*(lep1.Pt())*_PFMET*(1-cos((lep1.Phi())-_PFMET_phi)));
+        float met_px = _PFMET*std::cos(_PFMET_phi);
+        float met_py = _PFMET*std::sin(_PFMET_phi);
 
-        _lep2_conePt = (*_recolep_sel_conept)[1];
+        _mT_lep1 = sqrt(2*(lep_cone_1.Pt())*_PFMET*(1-cos((lep_cone_1.Phi())-_PFMET_phi)));
+        float _mT_lep1_v2 =  sqrt( (lep_cone_1.Et()+_PFMET)*(lep_cone_1.Et()+_PFMET) - ( (lep_cone_1.Px()+met_px)*(lep_cone_1.Px()+met_px) + (lep_cone_1.Py()+met_py)*(lep_cone_1.Py()+met_py) ) );
+
+        _mT_lep2 = sqrt(2*(lep_cone_2.Pt())*_PFMET*(1-cos((lep_cone_2.Phi())-_PFMET_phi)));
+        float _mT_lep2_v2 =  sqrt( (lep_cone_2.Et()+_PFMET)*(lep_cone_2.Et()+_PFMET) - ( (lep_cone_2.Px()+met_px)*(lep_cone_2.Px()+met_px) + (lep_cone_2.Py()+met_py)*(lep_cone_2.Py()+met_py) ) );
+
+        /*if(_EventNumber==1381984){
+          cout<<"lep1 "<<lep1.Pt()<<","<<lep1.Eta()<<","<<lep1.Phi()<<","<<lep1.M()<<endl;
+          cout<<"lep1_cone "<<lep_cone_1.Pt()<<","<<lep_cone_1.Eta()<<","<<lep_cone_1.Phi()<<","<<lep_cone_1.M()<<endl;
+          cout<<"_mT_lep1 "<<_mT_lep1<<endl;
+          cout<<"_mT_lep1_v2 "<<_mT_lep1_v2<<endl;
+          cout<<"---"<<endl;
+          cout<<"lep1 "<<lep1.Pt()<<","<<lep2.Eta()<<","<<lep2.Phi()<<","<<lep2.M()<<endl;
+          cout<<"lep2_cone "<<lep_cone_2.Pt()<<","<<lep_cone_2.Eta()<<","<<lep_cone_2.Phi()<<","<<lep_cone_2.M()<<endl;
+          cout<<"_mT_lep2 "<<_mT_lep2<<endl;
+          cout<<"_mT_lep2_v2 "<<_mT_lep2_v2<<endl;
+          cout<<"--"<<endl;
+          cout<<"_PFMET "<<_PFMET<<endl;
+          cout<<"_PFMET_phi "<<_PFMET_phi<<endl;
+        }*/
 
         float minDR_l2_j = 999.;
         for(int i_jet = 0; i_jet<_n_recoPFJet; i_jet++){
@@ -1393,13 +1423,11 @@ void add_BDT(TString filein, TString fileout, vector<TString> treename, int year
         }
         _mindr_lep2_jet = minDR_l2_j;
 
-        _mT_lep2 = sqrt(2*(lep2.Pt())*_PFMET*(1-cos((lep2.Phi())-_PFMET_phi)));
-
         if( (*_recolep_sel_charge)[0] * (*_recotauh_sel_charge)[0] < 0 ){
           _dr_lep1_tau_os = lep1.DeltaR(tau);
           _dr_lep2_tau_ss = lep2.DeltaR(tau);
         }
-        else if( (*_recolep_sel_charge)[1] * (*_recotauh_sel_charge)[0] > 0 ){
+        if( (*_recolep_sel_charge)[0] * (*_recotauh_sel_charge)[0] > 0 ){
           _dr_lep1_tau_os = lep2.DeltaR(tau);
           _dr_lep2_tau_ss = lep1.DeltaR(tau);
         }
@@ -1430,7 +1458,13 @@ void add_BDT(TString filein, TString fileout, vector<TString> treename, int year
 
         _tau_pt = tau.Pt();
 
-        _mTauTauVis = (lep1+tau).M();
+        //_mTauTauVis = (lep1+tau).M();
+        if( (*_recolep_sel_charge)[0] * (*_recotauh_sel_charge)[0] < 0 ){
+          _mTauTauVis = (lep1+tau).M();
+        }
+        else if( (*_recolep_sel_charge)[1] * (*_recotauh_sel_charge)[0] < 0 ){
+          _mTauTauVis = (lep2+tau).M();
+        }
 
         _mbb_loose = 0;
         if(_n_recoPFJet_btag_loose>1) 
@@ -1445,17 +1479,17 @@ void add_BDT(TString filein, TString fileout, vector<TString> treename, int year
 
         lep1_conePt = _lep1_conePt;
         mindr_lep1_jet = _mindr_lep1_jet;
-        mT_lep1 = _mT_lep1;
+        mT_lep1 = _mT_lep1; //--->CHECK!!!!
         lep2_conePt = _lep2_conePt;
         mindr_lep2_jet = _mindr_lep2_jet;
-        mT_lep2 = _mT_lep2;
+        mT_lep2 = _mT_lep2; //--->CHECK!!!!
         dr_lep2_tau_ss = _dr_lep2_tau_ss;
         dr_lep1_tau_os = _dr_lep1_tau_os;
         dr_leps = _dr_leps;
         mindr_tau_jet = _mindr_tau_jet;
         avg_dr_jet = _avg_dr_jet;
         tau_pt = _tau_pt;
-        mTauTauVis = _mTauTauVis;
+        mTauTauVis = _mTauTauVis; //--->CHECK!!!!
         mbb_loose = _mbb_loose;
         res_HTT = _res_HTT;
         HadTop_pt = _HadTop_pt;
@@ -1466,14 +1500,36 @@ void add_BDT(TString filein, TString fileout, vector<TString> treename, int year
 
         _BDTscore_2los1tau =  1. / (1. + sqrt((1. - _BDToutput_2los1tau) / (1. + _BDToutput_2los1tau)));
 
-        cout<<"2los1tau - BDT score: "<<_BDTscore_2los1tau<<endl;
+        /*if(_EventNumber==1381984 || _EventNumber==1389982 || _EventNumber==1392589 || _EventNumber==1614900){
+          cout<<"--- Event "<<_EventNumber<<endl;
+          cout<<"lep1_conePt "<<lep1_conePt<<endl;
+          cout<<"mindr_lep1_jet "<<mindr_lep1_jet<<endl;
+          cout<<"mT_lep1 "<<mT_lep1<<endl;
+          cout<<"lep2_conePt "<<lep2_conePt<<endl;
+          cout<<"mindr_lep2_jet "<<mindr_lep2_jet<<endl;
+          cout<<"mT_lep2 "<<mT_lep2<<endl;
+          cout<<"dr_lep2_tau_ss "<<dr_lep2_tau_ss<<endl;
+          cout<<"dr_lep1_tau_os "<<dr_lep1_tau_os<<endl;
+          cout<<"dr_leps "<<dr_leps<<endl;
+          cout<<"mindr_tau_jet "<<mindr_tau_jet<<endl;
+          cout<<"avg_dr_jet "<<avg_dr_jet<<endl;
+          cout<<"tau_pt "<<tau_pt<<endl;
+          cout<<"mTauTauVis "<<mTauTauVis<<endl;
+          cout<<"mbb_loose "<<mbb_loose<<endl;
+          cout<<"res_HTT "<<res_HTT<<endl;
+          cout<<"HadTop_pt "<<HadTop_pt<<endl;
+          cout<<"met_LD "<<met_LD<<endl;
+          cout<<"max_Lep_eta "<<max_Lep_eta<<endl;
+          cout<<"--- score "<<_BDTscore_2los1tau<<endl;
+        }*/
 
       }
-
 
       ////////////////////////
       //////// 2l2tau ////////
       ////////////////////////
+
+      // SYNCHED!
 
       if(_category==3310 || _category==3320){
 
@@ -1560,14 +1616,24 @@ void add_BDT(TString filein, TString fileout, vector<TString> treename, int year
 
         _BDTscore_2l2tau =  1. / (1. + sqrt((1. - _BDToutput_2l2tau) / (1. + _BDToutput_2l2tau)));
 
-        cout<<"2l2tau - BDT score: "<<_BDTscore_2l2tau<<endl;
+        //cout<<"Lep_min_dr_jet "<<Lep_min_dr_jet<<endl;
+        //cout<<"min_dr_Lep "<<min_dr_Lep<<endl;
+        //cout<<"avg_dr_jet "<<avg_dr_jet<<endl;
+        //cout<<"tau1_pt "<<tau1_pt<<endl;
+        //cout<<"tau2_pt "<<tau2_pt<<endl;
+        //cout<<"mTauTauVis "<<mTauTauVis<<endl;
+        //cout<<"cosThetaS_hadTau "<<cosThetaS_hadTau<<endl;
+        //cout<<"mbb_loose "<<mbb_loose<<endl;
+        //cout<<"met_LD "<<met_LD<<endl;
+        //cout<<"--_BDTscore_2l2tau "<<_BDTscore_2l2tau<<endl;
 
-      }   
-
+      } 
 
       ////////////////////////
       //////// 3l1tau ////////
       ////////////////////////
+
+      // SYNCHED!
 
       if(_category==4110 || _category==4120){
 
@@ -1634,15 +1700,24 @@ void add_BDT(TString filein, TString fileout, vector<TString> treename, int year
 
         _BDTscore_3l1tau =  1. / (1. + sqrt((1. - _BDToutput_3l1tau) / (1. + _BDToutput_3l1tau)));
 
-        cout<<"3l1tau - BDT score: "<<_BDTscore_3l1tau<<endl;
+        //cout<<"lep1_conePt "<<lep1_conePt<<endl;
+        //cout<<"lep2_conePt "<<lep2_conePt<<endl;
+        //cout<<"lep3_conePt "<<lep3_conePt<<endl;
+        //cout<<"tau1_pt "<<tau1_pt<<endl;
+        //cout<<"mTauTauVis1 "<<mTauTauVis1<<endl;
+        //cout<<"mTauTauVis2 "<<mTauTauVis2<<endl;
+        //cout<<"massL "<<massL<<endl;
+        //cout<<"met_LD "<<met_LD<<endl;
+        //cout<<"has_SFOS "<<has_SFOS<<endl;
+        //cout<<"--score "<<_BDTscore_3l1tau<<endl;
 
       }
-
 
       ////////////////////////
       //////// 4l0tau ////////
       ////////////////////////
 
+      /*
       if(_category==5010 || _category==5020){
 
         TLorentzVector lep1( (*_recolep_sel_px)[0],(*_recolep_sel_py)[0],(*_recolep_sel_pz)[0],(*_recolep_sel_e)[0]);
@@ -1686,6 +1761,7 @@ void add_BDT(TString filein, TString fileout, vector<TString> treename, int year
         cout<<"4l0tau - BDT score: "<<_BDTscore_4l0tau<<endl;
 
       }
+      */
 
       ///////////////////////////////////
       ///////////////////////////////////
