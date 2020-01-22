@@ -196,6 +196,48 @@ std::tuple<TString, int, int, int, TString, bool> get_parameters_MC( TString sam
 	    type = "ttbar";
 	    isMC = true;
     }
+    if( sample == "Oct19v4_MC_2016_MadGraph_TTTo2L2Nu" ) {  
+	    dir_in = "MC_2016_Oct19/TTTo2L2Nu_TuneCP5_13TeV-powheg-pythia8/Oct19v4_MC_2016_MadGraph_TTTo2L2Nu/200108_154548/";
+  	    nfiles = 153;
+	    year = 2016; 
+	    type = "ttbar";
+	    isMC = true;
+    } 
+    if( sample == "Oct19v4_MC_2016_MadGraph_TTTo2L2Nu_PS" ) {  
+	    dir_in = "MC_2016_Oct19/TTTo2L2Nu_TuneCP5_PSweights_13TeV-powheg-pythia8/Oct19v4_MC_2016_MadGraph_TTTo2L2Nu_PS/200108_154637/";
+  	    nfiles = 1056;
+	    year = 2016; 
+	    type = "ttbar";
+	    isMC = true;
+    } 
+    if( sample == "Oct19v4_MC_2016_MadGraph_TTToSemiLeptonic" ) {  
+	    dir_in = "MC_2016_Oct19/TTToSemiLeptonic_TuneCP5_13TeV-powheg-pythia8/Oct19v4_MC_2016_MadGraph_TTToSemiLeptonic/200108_154726/";
+  	    nfiles = 828;
+	    year = 2016; 
+	    type = "ttbar";
+	    isMC = true;
+    }
+    if( sample == "Oct19v4_MC_2016_MadGraph_TTToSemiLeptonic_PS" ) {  
+	    dir_in = "MC_2016_Oct19/TTToSemiLeptonic_TuneCP5_PSweights_13TeV-powheg-pythia8/Oct19v4_MC_2016_MadGraph_TTToSemiLeptonic_PS/200108_154816/";
+  	    nfiles = 2175;
+	    year = 2016; 
+	    type = "ttbar";
+	    isMC = true;
+    }
+    if( sample == "Oct19v4_MC_2016_MadGraph_TTToHadronic" ) {  
+	    dir_in = "MC_2016_Oct19/TTToHadronic_TuneCP5_13TeV-powheg-pythia8/Oct19v4_MC_2016_MadGraph_TTToHadronic/200108_154907/";
+  	    nfiles = 665;
+	    year = 2016; 
+	    type = "ttbar";
+	    isMC = true;
+    }  
+    if( sample == "Oct19v4_MC_2016_MadGraph_TTToHadronic_PS" ) { 
+	    dir_in = "MC_2016_Oct19/TTToHadronic_TuneCP5_PSweights_13TeV-powheg-pythia8/Oct19v4_MC_2016_MadGraph_TTToHadronic_PS/200108_154956/";
+  	    nfiles = 2021;
+	    year = 2016; 
+	    type = "ttbar";
+	    isMC = true;
+    } 
 
     // ggH
     if( sample == "Oct19v1_MC_2016_GluGluHToTauTau" ) {  //23 - GOOD
@@ -514,6 +556,21 @@ std::tuple<TString, int, int, int, TString, bool> get_parameters_MC( TString sam
 	    type = "EWK";
 	    isMC = true;
     }
+    if( sample == "Oct19v1_MC_2016_WZTo2L2Q" ) {  
+	    dir_in = "MC_2016_Oct19/WZTo2L2Q_13TeV_amcatnloFXFX_madspin_pythia8/Oct19v1_MC_2016_WZTo2L2Q/191215_160510/";
+  	    nfiles = 197;
+	    year = 2016; 
+	    type = "EWK";
+	    isMC = true;
+    } 
+    if( sample == "Oct19v1_MC_2016_ZZTo2L2Q" ) { 
+	    dir_in = "MC_2016_Oct19/ZZTo2L2Q_13TeV_amcatnloFXFX_madspin_pythia8/Oct19v1_MC_2016_ZZTo2L2Q/191215_154651/";
+  	    nfiles = 128;
+	    year = 2016; 
+	    type = "EWK";
+	    isMC = true;
+    }   
+
 
     // TTVH
     if( sample == "Oct19v1_MC_2016_TTWH" ) {  //67 - GOOD
@@ -956,6 +1013,48 @@ std::tuple<TString, int, int, int, TString, bool> get_parameters_MC( TString sam
 	    type = "ttbar";
 	    isMC = true;
     }
+    if( sample == "Oct19v1_MC_2017_MadGraph_TTTo2L2Nu" ) {  
+	    dir_in = "MC_2017_Oct19/TTTo2L2Nu_TuneCP5_13TeV-powheg-pythia8/Oct19v1_MC_2017_MadGraph_TTTo2L2Nu/191215_154939/";
+  	    nfiles = 153;
+	    year = 2017; 
+	    type = "ttbar";
+	    isMC = true;
+    }   
+    if( sample == "Oct19v1_MC_2017_MadGraph_TTTo2L2Nu_PS" ) {  
+	    dir_in = "MC_2017_Oct19/TTTo2L2Nu_TuneCP5_PSweights_13TeV-powheg-pythia8/Oct19v1_MC_2017_MadGraph_TTTo2L2Nu_PS/191215_155039/";
+  	    nfiles = 1056;
+	    year = 2017; 
+	    type = "ttbar";
+	    isMC = true;
+    } 
+    if( sample == "Oct19v1_MC_2017_MadGraph_TTToSemiLeptonic" ) {  
+	    dir_in = "MC_2017_Oct19/TTToSemiLeptonic_TuneCP5_13TeV-powheg-pythia8/Oct19v1_MC_2017_MadGraph_TTToSemiLeptonic/191215_155139/";
+  	    nfiles = 828;
+	    year = 2017; 
+	    type = "ttbar";
+	    isMC = true;
+    } 
+    if( sample == "Oct19v1_MC_2017_MadGraph_TTToSemiLeptonic_PS" ) {  
+	    dir_in = "MC_2017_Oct19/TTToSemiLeptonic_TuneCP5_PSweights_13TeV-powheg-pythia8/Oct19v1_MC_2017_MadGraph_TTToSemiLeptonic_PS/191215_155235/";
+  	    nfiles = 2130;
+	    year = 2017; 
+	    type = "ttbar";
+	    isMC = true;
+    } 
+    if( sample == "Oct19v1_MC_2017_MadGraph_TTToHadronic" ) {  
+	    dir_in = "MC_2017_Oct19/TTToHadronic_TuneCP5_13TeV-powheg-pythia8/Oct19v1_MC_2017_MadGraph_TTToHadronic/191215_155327/";
+  	    nfiles = 665;
+	    year = 2017; 
+	    type = "ttbar";
+	    isMC = true;
+    } 
+    if( sample == "Oct19v1_MC_2017_MadGraph_TTToHadronic_PS" ) {  
+	    dir_in = "MC_2017_Oct19/TTToHadronic_TuneCP5_PSweights_13TeV-powheg-pythia8/Oct19v1_MC_2017_MadGraph_TTToHadronic_PS/191215_155422/";
+  	    nfiles = 2021;
+	    year = 2017; 
+	    type = "ttbar";
+	    isMC = true;
+    } 
 
     // ggH
     if( sample == "Oct19v1_MC_2017_GluGluHToTauTau" ) {  //24 - GOOD
@@ -1326,6 +1425,20 @@ std::tuple<TString, int, int, int, TString, bool> get_parameters_MC( TString sam
     if( sample == "Oct19v2_MC_2017_ZZTo4L_ext2" ) {  //75
 	    dir_in = "MC_2017_Oct19/ZZTo4L_13TeV_powheg_pythia8/Oct19v2_MC_2017_ZZTo4L_ext2/191106_142232/";
   	    nfiles = 1623;
+	    year = 2017; 
+	    type = "EWK";
+	    isMC = true;
+    }
+    if( sample == "Oct19v2_MC_2017_WZTo2L2Q" ) {  
+	    dir_in = "MC_2017_Oct19/WZTo2L2Q_13TeV_amcatnloFXFX_madspin_pythia8/Oct19v2_MC_2017_WZTo2L2Q/191215_160548/";
+  	    nfiles = 406;
+	    year = 2017; 
+	    type = "EWK";
+	    isMC = true;
+    }
+    if( sample == "Oct19v1_MC_2017_ZZTo2L2Q" ) {  
+	    dir_in = "MC_2017_Oct19/ZZTo2L2Q_13TeV_amcatnloFXFX_madspin_pythia8/Oct19v1_MC_2017_ZZTo2L2Q/191215_154844/";
+  	    nfiles = 409;
 	    year = 2017; 
 	    type = "EWK";
 	    isMC = true;
@@ -1786,6 +1899,27 @@ std::tuple<TString, int, int, int, TString, bool> get_parameters_MC( TString sam
 	    type = "ttbar";
 	    isMC = true;
     }
+    if( sample == "Oct19v1_MC_2018_MadGraph_TTTo2L2Nu" ) {  //17 - GOOD
+	    dir_in = "MC_2018_Oct19/TTTo2L2Nu_TuneCP5_13TeV-powheg-pythia8/Oct19v1_MC_2018_MadGraph_TTTo2L2Nu/191215_155256/";
+  	    nfiles = 968;
+	    year = 2018; 
+	    type = "ttbar";
+	    isMC = true;
+    }
+    if( sample == "Oct19v1_MC_2018_MadGraph_TTToSemiLeptonic" ) {  //17 - GOOD
+	    dir_in = "MC_2018_Oct19/TTToSemiLeptonic_TuneCP5_13TeV-powheg-pythia8/Oct19v1_MC_2018_MadGraph_TTToSemiLeptonic/191215_155347/";
+  	    nfiles = 1523;
+	    year = 2018; 
+	    type = "ttbar";
+	    isMC = true;
+    }
+    if( sample == "Oct19v1_MC_2018_MadGraph_TTToHadronic" ) {  //17 - GOOD
+	    dir_in = "MC_2018_Oct19/TTToHadronic_TuneCP5_13TeV-powheg-pythia8/Oct19v1_MC_2018_MadGraph_TTToHadronic/191215_155438/";
+  	    nfiles = 3313;
+	    year = 2018; 
+	    type = "ttbar";
+	    isMC = true;
+    }
 
     // ggH
     if( sample == "Oct19v2_MC_2018_GluGluHToTauTau" ) {  //18 - GOOD
@@ -2090,6 +2224,20 @@ std::tuple<TString, int, int, int, TString, bool> get_parameters_MC( TString sam
 	    type = "EWK";
 	    isMC = true;
     }
+    if( sample == "Oct19v1_MC_2018_WZTo2L2Q" ) {  //59
+	    dir_in = "MC_2018_Oct19/WZTo2L2Q_13TeV_amcatnloFXFX_madspin_pythia8/Oct19v1_MC_2018_WZTo2L2Q/191215_155109/";
+  	    nfiles = 501;
+	    year = 2018; 
+	    type = "EWK";
+	    isMC = true;
+    }
+    if( sample == "Oct19v1_MC_2018_ZZTo2L2Q" ) {  //59
+	    dir_in = "MC_2018_Oct19/ZZTo2L2Q_13TeV_amcatnloFXFX_madspin_pythia8/Oct19v1_MC_2018_ZZTo2L2Q/191215_155201/";
+  	    nfiles = 457;
+	    year = 2018; 
+	    type = "EWK";
+	    isMC = true;
+    }    
 
     // TTVH
     if( sample == "Oct19v1_MC_2018_TTWH" ) {  //60 - GOOD
@@ -2192,6 +2340,33 @@ std::tuple<TString, int, int, int, TString, bool> get_parameters_MC( TString sam
 	    type = "HH";
 	    isMC = true;
     }
+
+    // Run later
+
+    if( sample == "Oct19v1_MC_2016_WGToLNuG_01J"){
+    	dir_in = "MC_2016_Oct19/WGToLNuG_01J_5f_TuneCUETP8M1_13TeV-amcatnloFXFX-pythia8/Oct19v1_MC_2016_WGToLNuG_01J/200116_084638/";
+  	    nfiles = 348;
+	    year = 2016; 
+	    type = "EWK";
+	    isMC = true;
+    }
+
+    if( sample == "Oct19v1_MC_2017_WGToLNuG_01J"){
+	 	dir_in = "MC_2017_Oct19/WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/Oct19v1_MC_2017_WGToLNuG_01J/200116_084901/";
+  	    nfiles = 418;
+	    year = 2017; 
+	    type = "EWK";
+	    isMC = true;
+    }
+
+    if( sample == "Oct19v1_MC_2018_WGToLNuG_01J"){
+	 	dir_in = "MC_2018_Oct19/WGToLNuG_01J_5f_TuneCP5_13TeV-amcatnloFXFX-pythia8/Oct19v1_MC_2018_WGToLNuG_01J/200116_085905/";
+  	    nfiles = 430;
+	    year = 2018; 
+	    type = "EWK";
+	    isMC = true;
+    }
+
 
     dir_in = "root://node12.datagrid.cea.fr:1094//dpm/datagrid.cea.fr/home/cms/trivcat/store/user/cmartinp/ttH_Legacy/"+dir_in;
     int i_split_max = i_split_max = nfiles/100;

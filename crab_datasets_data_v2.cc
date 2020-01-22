@@ -711,14 +711,14 @@ std::tuple< TString, TString, TString, vector<TString>, int, bool > load_sample_
    		filelist.push_back(fullfile);
 	}
  	 	
-	//int i_split_max = i_split_max = nfiles/100;
-  int i_split_max = i_split_max = nfiles/50;
+	int i_split_max = i_split_max = nfiles/100;
+  //int i_split_max = i_split_max = nfiles/50;
 
-  //int i_min = i_split*100;
-  int i_min = i_split*50;
+  int i_min = i_split*100;
+  //int i_min = i_split*50;
   if(i_split == 0) i_min++;
-  //int i_max = (i_split+1)*100;
-  int i_max = (i_split+1)*50;
+  int i_max = (i_split+1)*100;
+  //int i_max = (i_split+1)*50;
   if(i_split == i_split_max) i_max = nfiles+1;
 
   vector<TString> list;

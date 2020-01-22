@@ -1,4 +1,4 @@
-//// FOR MC!
+// FOR DATA!!!!
 
 #include <TFile.h>
 #include <TTree.h>
@@ -94,9 +94,9 @@ void split_tree(TString filename_in, TString filename_out,
   vector<bool>  *_recolep_isfakeable;
   vector<bool>  *_recolep_ismvasel;
   vector<bool>  *_recolep_tightcharge;
-  vector<bool>  *_recolep_isGenMatched;
-  vector<bool>  *_recolep_isGenChargeMatched;
-  vector<int>   *_recolep_genMatchInd;
+  //vector<bool>  *_recolep_isGenMatched;
+  //vector<bool>  *_recolep_isGenChargeMatched;
+  //vector<int>   *_recolep_genMatchInd;
 
   vector<int>   *_recomu_charge;
   vector<float> *_recomu_e;
@@ -109,9 +109,9 @@ void split_tree(TString filename_in, TString filename_out,
   vector<float> *_recomu_phi;
   vector<bool>  *_recomu_ismvasel;
   vector<bool>  *_recomu_isfakeable;
-  vector<bool>  *_recomu_isGenMatched;
-  vector<bool>  *_recomu_isGenChargeMatched;
-  vector<int>   *_recomu_genMatchInd;
+  //vector<bool>  *_recomu_isGenMatched;
+  //vector<bool>  *_recomu_isGenChargeMatched;
+  //vector<int>   *_recomu_genMatchInd;
   vector<float> *_recomu_rel_error_trackpt;
 
   vector<int>   *_recoele_charge;
@@ -125,9 +125,9 @@ void split_tree(TString filename_in, TString filename_out,
   vector<float> *_recoele_phi;
   vector<bool>  *_recoele_ismvasel;
   vector<bool>  *_recoele_isfakeable;
-  vector<bool>  *_recoele_isGenMatched;
-  vector<bool>  *_recoele_isGenChargeMatched;
-  vector<int>   *_recoele_genMatchInd;
+  //vector<bool>  *_recoele_isGenMatched;
+  //vector<bool>  *_recoele_isGenChargeMatched;
+  //vector<int>   *_recoele_genMatchInd;
   vector<bool>  *_recoele_isChargeConsistent;
 
   int _n_recotauh;
@@ -176,9 +176,9 @@ void split_tree(TString filename_in, TString filename_out,
   vector<float> *_recotauh_px;
   vector<float> *_recotauh_py;
   vector<float> *_recotauh_pz;
-  vector<bool>  *_recotauh_isGenMatched;
-  vector<bool>  *_recotauh_isGenChargeMatched;
-  vector<int>   *_recotauh_genMatchInd;
+  //vector<bool>  *_recotauh_isGenMatched;
+  //vector<bool>  *_recotauh_isGenChargeMatched;
+  //vector<int>   *_recotauh_genMatchInd;
   vector<float> *_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT;
   vector<float> *_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT;
   vector<float> *_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up;
@@ -241,9 +241,9 @@ void split_tree(TString filename_in, TString filename_out,
   tree->SetBranchAddress("recolep_isfakeable",&_recolep_isfakeable);
   tree->SetBranchAddress("recolep_ismvasel",&_recolep_ismvasel);
   tree->SetBranchAddress("recolep_tightcharge",&_recolep_tightcharge);
-  tree->SetBranchAddress("recolep_isGenMatched",&_recolep_isGenMatched);
-  tree->SetBranchAddress("recolep_genMatchInd",&_recolep_genMatchInd);
-  tree->SetBranchAddress("recolep_isGenChargeMatched",&_recolep_isGenChargeMatched);
+  //tree->SetBranchAddress("recolep_isGenMatched",&_recolep_isGenMatched);
+  //tree->SetBranchAddress("recolep_genMatchInd",&_recolep_genMatchInd);
+  //tree->SetBranchAddress("recolep_isGenChargeMatched",&_recolep_isGenChargeMatched);
 
   tree->SetBranchAddress("recomu_charge",&_recomu_charge);
   tree->SetBranchAddress("recomu_e",&_recomu_e);
@@ -256,9 +256,9 @@ void split_tree(TString filename_in, TString filename_out,
   tree->SetBranchAddress("recomu_phi",&_recomu_phi);
   tree->SetBranchAddress("recomu_isfakeable",&_recomu_isfakeable);
   tree->SetBranchAddress("recomu_ismvasel",&_recomu_ismvasel);
-  tree->SetBranchAddress("recomu_isGenMatched",&_recomu_isGenMatched);
-  tree->SetBranchAddress("recomu_isGenChargeMatched",&_recomu_isGenChargeMatched);
-  tree->SetBranchAddress("recomu_genMatchInd",&_recomu_genMatchInd);
+  //tree->SetBranchAddress("recomu_isGenMatched",&_recomu_isGenMatched);
+  //tree->SetBranchAddress("recomu_isGenChargeMatched",&_recomu_isGenChargeMatched);
+  //tree->SetBranchAddress("recomu_genMatchInd",&_recomu_genMatchInd);
   tree->SetBranchAddress("recomu_rel_error_trackpt",&_recomu_rel_error_trackpt);
 
   tree->SetBranchAddress("recoele_charge",&_recoele_charge);
@@ -272,9 +272,9 @@ void split_tree(TString filename_in, TString filename_out,
   tree->SetBranchAddress("recoele_phi",&_recoele_phi);
   tree->SetBranchAddress("recoele_isfakeable",&_recoele_isfakeable);
   tree->SetBranchAddress("recoele_ismvasel",&_recoele_ismvasel);
-  tree->SetBranchAddress("recoele_isGenMatched",&_recoele_isGenMatched);
-  tree->SetBranchAddress("recoele_isGenChargeMatched",&_recoele_isGenChargeMatched);
-  tree->SetBranchAddress("recoele_genMatchInd",&_recoele_genMatchInd);
+  //tree->SetBranchAddress("recoele_isGenMatched",&_recoele_isGenMatched);
+  //tree->SetBranchAddress("recoele_isGenChargeMatched",&_recoele_isGenChargeMatched);
+  //tree->SetBranchAddress("recoele_genMatchInd",&_recoele_genMatchInd);
   tree->SetBranchAddress("recoele_isChargeConsistent",&_recoele_isChargeConsistent);
 
   tree->SetBranchAddress("n_recotauh",&_n_recotauh);
@@ -323,9 +323,9 @@ void split_tree(TString filename_in, TString filename_out,
   tree->SetBranchAddress("recotauh_px",&_recotauh_px);
   tree->SetBranchAddress("recotauh_py",&_recotauh_py);
   tree->SetBranchAddress("recotauh_pz",&_recotauh_pz);
-  tree->SetBranchAddress("recotauh_isGenMatched",&_recotauh_isGenMatched);
-  tree->SetBranchAddress("recotauh_isGenChargeMatched",&_recotauh_isGenChargeMatched);
-  tree->SetBranchAddress("recotauh_genMatchInd",&_recotauh_genMatchInd);
+  //tree->SetBranchAddress("recotauh_isGenMatched",&_recotauh_isGenMatched);
+  //tree->SetBranchAddress("recotauh_isGenChargeMatched",&_recotauh_isGenChargeMatched);
+  //tree->SetBranchAddress("recotauh_genMatchInd",&_recotauh_genMatchInd);
   tree->SetBranchAddress("recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT",&_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT);
   tree->SetBranchAddress("recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT",&_recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT);
   tree->SetBranchAddress("recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up",&_recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up);
@@ -621,9 +621,9 @@ void split_tree(TString filename_in, TString filename_out,
   vector<bool>  _recolep_fakeable_isfakeable;
   vector<bool>  _recolep_fakeable_ismvasel;
   vector<bool>  _recolep_fakeable_tightcharge;
-  vector<bool>  _recolep_fakeable_isGenMatched;
-  vector<int>   _recolep_fakeable_genMatchInd;
-  vector<bool>  _recolep_fakeable_isGenChargeMatched;
+  //vector<bool>  _recolep_fakeable_isGenMatched;
+  //vector<int>   _recolep_fakeable_genMatchInd;
+  //vector<bool>  _recolep_fakeable_isGenChargeMatched;
 
   vector<int>   _recolep_sel_charge;
   vector<int>   _recolep_sel_pdg;
@@ -648,9 +648,9 @@ void split_tree(TString filename_in, TString filename_out,
   vector<bool>  _recolep_sel_isfakeable;
   vector<bool>  _recolep_sel_ismvasel;
   vector<bool>  _recolep_sel_tightcharge;
-  vector<bool>  _recolep_sel_isGenMatched;
-  vector<bool>  _recolep_sel_isGenChargeMatched;
-  vector<int>   _recolep_sel_genMatchInd;
+  //vector<bool>  _recolep_sel_isGenMatched;
+  //vector<bool>  _recolep_sel_isGenChargeMatched;
+  //vector<int>   _recolep_sel_genMatchInd;
 
   int _n_fakeable_tau;
 
@@ -705,9 +705,9 @@ void split_tree(TString filename_in, TString filename_out,
   vector<float> _recotauh_sel_px;
   vector<float> _recotauh_sel_py;
   vector<float> _recotauh_sel_pz;
-  vector<int>   _recotauh_sel_isGenMatched;
-  vector<int>   _recotauh_sel_isGenChargeMatched;
-  vector<int>   _recotauh_sel_genMatchInd;
+  //vector<int>   _recotauh_sel_isGenMatched;
+  //vector<int>   _recotauh_sel_isGenChargeMatched;
+  //vector<int>   _recotauh_sel_genMatchInd;
   vector<float> _recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT; 
   vector<float> _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT; 
   vector<float> _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up;
@@ -721,7 +721,7 @@ void split_tree(TString filename_in, TString filename_out,
 
   int _n_recoPFLightJet;
 
-  bool _isGenMatched;
+  //bool _isGenMatched;
 
   bool _is_ttH_like;
   bool _is_tH_like_and_not_ttH_like;
@@ -800,9 +800,9 @@ void split_tree(TString filename_in, TString filename_out,
     tree_new[i]->Branch("recolep_sel_isfakeable",&_recolep_sel_isfakeable);
     tree_new[i]->Branch("recolep_sel_ismvasel",&_recolep_sel_ismvasel);
     tree_new[i]->Branch("recolep_sel_tightcharge",&_recolep_sel_tightcharge);
-    tree_new[i]->Branch("recolep_sel_isGenMatched",&_recolep_sel_isGenMatched);
-    tree_new[i]->Branch("recolep_sel_isGenChargeMatched",&_recolep_sel_isGenChargeMatched);
-    tree_new[i]->Branch("recolep_sel_genMatchInd",&_recolep_sel_genMatchInd);
+    //tree_new[i]->Branch("recolep_sel_isGenMatched",&_recolep_sel_isGenMatched);
+    //tree_new[i]->Branch("recolep_sel_isGenChargeMatched",&_recolep_sel_isGenChargeMatched);
+    //tree_new[i]->Branch("recolep_sel_genMatchInd",&_recolep_sel_genMatchInd);
 
     tree_new[i]->Branch("n_fakeable_tau",&_n_fakeable_tau);
 
@@ -827,21 +827,6 @@ void split_tree(TString filename_in, TString filename_out,
     tree_new[i]->Branch("recotauh_sel_byTightDeepTau2017v2p1VSjet",&_recotauh_sel_byTightDeepTau2017v2p1VSjet);
     tree_new[i]->Branch("recotauh_sel_byVTightDeepTau2017v2p1VSjet",&_recotauh_sel_byVTightDeepTau2017v2p1VSjet);
     tree_new[i]->Branch("recotauh_sel_byVVTightDeepTau2017v2p1VSjet",&_recotauh_sel_byVVTightDeepTau2017v2p1VSjet);
-    tree_new[i]->Branch("recotauh_sel_byVVVLooseDeepTau2017v2p1VSe",&_recotauh_sel_byVVVLooseDeepTau2017v2p1VSe);
-    tree_new[i]->Branch("recotauh_sel_byVVLooseDeepTau2017v2p1VSe",&_recotauh_sel_byVVLooseDeepTau2017v2p1VSe);
-    tree_new[i]->Branch("recotauh_sel_byVLooseDeepTau2017v2p1VSe",&_recotauh_sel_byVLooseDeepTau2017v2p1VSe);
-    tree_new[i]->Branch("recotauh_sel_byLooseDeepTau2017v2p1VSe",&_recotauh_sel_byLooseDeepTau2017v2p1VSe);
-    tree_new[i]->Branch("recotauh_sel_byMediumDeepTau2017v2p1VSe",&_recotauh_sel_byMediumDeepTau2017v2p1VSe);
-    tree_new[i]->Branch("recotauh_sel_byTightDeepTau2017v2p1VSe",&_recotauh_sel_byTightDeepTau2017v2p1VSe);
-    tree_new[i]->Branch("recotauh_sel_byVTightDeepTau2017v2p1VSe",&_recotauh_sel_byVTightDeepTau2017v2p1VSe);
-    tree_new[i]->Branch("recotauh_sel_byVVTightDeepTau2017v2p1VSe",&_recotauh_sel_byVVTightDeepTau2017v2p1VSe);
-    tree_new[i]->Branch("recotauh_sel_byVLooseDeepTau2017v2p1VSmu",&_recotauh_sel_byVLooseDeepTau2017v2p1VSmu);
-    tree_new[i]->Branch("recotauh_sel_byLooseDeepTau2017v2p1VSmu",&_recotauh_sel_byLooseDeepTau2017v2p1VSmu);
-    tree_new[i]->Branch("recotauh_sel_byMediumDeepTau2017v2p1VSmu",&_recotauh_sel_byMediumDeepTau2017v2p1VSmu);
-    tree_new[i]->Branch("recotauh_sel_byTightDeepTau2017v2p1VSmu",&_recotauh_sel_byTightDeepTau2017v2p1VSmu);
-    tree_new[i]->Branch("recotauh_sel_byDeepTau2017v2p1VSjetraw",&_recotauh_sel_byDeepTau2017v2p1VSjetraw);
-    tree_new[i]->Branch("recotauh_sel_byDeepTau2017v2p1VSeraw",&_recotauh_sel_byDeepTau2017v2p1VSeraw);
-    tree_new[i]->Branch("recotauh_sel_byDeepTau2017v2p1VSmuraw",&_recotauh_sel_byDeepTau2017v2p1VSmuraw);
     tree_new[i]->Branch("recotauh_sel_decayMode",&_recotauh_sel_decayMode);
     tree_new[i]->Branch("recotauh_sel_decayModeFindingOldDMs",&_recotauh_sel_decayModeFindingOldDMs);
     tree_new[i]->Branch("recotauh_sel_decayModeFindingNewDMs",&_recotauh_sel_decayModeFindingNewDMs);
@@ -849,9 +834,9 @@ void split_tree(TString filename_in, TString filename_out,
     tree_new[i]->Branch("recotauh_sel_px",&_recotauh_sel_px);
     tree_new[i]->Branch("recotauh_sel_py",&_recotauh_sel_py);
     tree_new[i]->Branch("recotauh_sel_pz",&_recotauh_sel_pz);
-    tree_new[i]->Branch("recotauh_sel_isGenMatched",&_recotauh_sel_isGenMatched);
-    tree_new[i]->Branch("recotauh_sel_isGenChargeMatched",&_recotauh_sel_isGenChargeMatched);
-    tree_new[i]->Branch("recotauh_sel_genMatchInd",&_recotauh_sel_genMatchInd);
+    //tree_new[i]->Branch("recotauh_sel_isGenMatched",&_recotauh_sel_isGenMatched);
+    //tree_new[i]->Branch("recotauh_sel_isGenChargeMatched",&_recotauh_sel_isGenChargeMatched);
+    //tree_new[i]->Branch("recotauh_sel_genMatchInd",&_recotauh_sel_genMatchInd);
     tree_new[i]->Branch("recotauh_sel_againstMuonLoose3",&_recotauh_sel_againstMuonLoose3);
     tree_new[i]->Branch("recotauh_sel_againstMuonTight3",&_recotauh_sel_againstMuonTight3);
     tree_new[i]->Branch("recotauh_sel_againstElectronVLooseMVA6",&_recotauh_sel_againstElectronVLooseMVA6);
@@ -872,7 +857,7 @@ void split_tree(TString filename_in, TString filename_out,
 
     tree_new[i]->Branch("n_recoPFLightJet",&_n_recoPFLightJet);
 
-    tree_new[i]->Branch("isGenMatched",&_isGenMatched);
+    //tree_new[i]->Branch("isGenMatched",&_isGenMatched);
 
     tree_new[i]->Branch("is_ttH_like",&_is_ttH_like);
     tree_new[i]->Branch("is_tH_like_and_not_ttH_like",&_is_tH_like_and_not_ttH_like);
@@ -970,9 +955,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_fakeable_isfakeable.clear();
     _recolep_fakeable_ismvasel.clear();
     _recolep_fakeable_tightcharge.clear();
-    _recolep_fakeable_isGenMatched.clear();
-    _recolep_fakeable_isGenChargeMatched.clear();
-    _recolep_fakeable_genMatchInd.clear();
+    //_recolep_fakeable_isGenMatched.clear();
+    //_recolep_fakeable_isGenChargeMatched.clear();
+    //_recolep_fakeable_genMatchInd.clear();
 
     _recolep_sel_charge.clear();
     _recolep_sel_pdg.clear();
@@ -997,9 +982,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
     _recolep_sel_tightcharge.clear();
-    _recolep_sel_isGenMatched.clear();
-    _recolep_sel_isGenChargeMatched.clear();
-    _recolep_sel_genMatchInd.clear();
+    //_recolep_sel_isGenMatched.clear();
+    //_recolep_sel_isGenChargeMatched.clear();
+    //_recolep_sel_genMatchInd.clear();
 
     _n_fakeable_tau = 0;
 
@@ -1054,10 +1039,10 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_px.clear();
     _recotauh_sel_py.clear();
     _recotauh_sel_pz.clear();
-    _recotauh_sel_isGenMatched.clear();
-    _recotauh_sel_isGenChargeMatched.clear();
-    _recotauh_sel_isGenChargeMatched.clear();
-    _recotauh_sel_genMatchInd.clear();
+    //_recotauh_sel_isGenMatched.clear();
+    //_recotauh_sel_isGenChargeMatched.clear();
+    //_recotauh_sel_isGenChargeMatched.clear();
+    //_recotauh_sel_genMatchInd.clear();
     _recotauh_sel_fakerate_byLooseIsolationMVArun2v1DBdR03oldDMwLT.clear();
     _recotauh_sel_fakerate_byMediumIsolationMVArun2v1DBdR03oldDMwLT.clear();
     _recotauh_sel_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up.clear();
@@ -1071,7 +1056,7 @@ void split_tree(TString filename_in, TString filename_out,
 
     _n_recoPFLightJet = 0;
 
-    _isGenMatched = 0;
+    //_isGenMatched = 0;
 
     _is_ttH_like = 0;
     _is_tH_like_and_not_ttH_like = 0;
@@ -1153,9 +1138,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_isfakeable = 0;
     _recolep_ismvasel = 0;
     _recolep_tightcharge = 0;
-    _recolep_isGenMatched = 0;
-    _recolep_isGenChargeMatched = 0;
-    _recolep_genMatchInd = 0;
+    //_recolep_isGenMatched = 0;
+    //_recolep_isGenChargeMatched = 0;
+    //_recolep_genMatchInd = 0;
 
     _recomu_charge = 0;
     _recomu_e = 0;
@@ -1168,9 +1153,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recomu_phi = 0;
     _recomu_ismvasel = 0;
     _recomu_isfakeable = 0;
-    _recomu_isGenMatched = 0;
-    _recomu_isGenChargeMatched = 0;
-    _recomu_genMatchInd = 0;
+    //_recomu_isGenMatched = 0;
+    //_recomu_isGenChargeMatched = 0;
+    //_recomu_genMatchInd = 0;
     _recomu_rel_error_trackpt = 0;
 
     _recoele_charge = 0;
@@ -1184,9 +1169,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recoele_phi = 0;
     _recoele_ismvasel = 0;
     _recoele_isfakeable = 0;
-    _recoele_isGenMatched = 0;
-    _recoele_isGenChargeMatched = 0;
-    _recoele_genMatchInd = 0;
+    //_recoele_isGenMatched = 0;
+    //_recoele_isGenChargeMatched = 0;
+    //_recoele_genMatchInd = 0;
     _recoele_isChargeConsistent = 0;
 
     _n_recotauh = 0;
@@ -1242,9 +1227,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_px = 0;
     _recotauh_py = 0;
     _recotauh_pz = 0;
-    _recotauh_isGenMatched = 0;
-    _recotauh_isGenChargeMatched = 0;
-    _recotauh_genMatchInd = 0;
+    //_recotauh_isGenMatched = 0;
+    //_recotauh_isGenChargeMatched = 0;
+    //_recotauh_genMatchInd = 0;
     _recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT = 0;
     _recotauh_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT = 0;
     _recotauh_fakerate_byLooseIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up = 0;
@@ -1320,7 +1305,7 @@ void split_tree(TString filename_in, TString filename_out,
     if (!isMC) metcut_base = metcut_base && Flag_eeBadScFilter;
   
     if(!metcut_base) continue; 
- 
+
     ////////////////////////////////////////
     ////////// Trigger selections //////////
     ////////////////////////////////////////
@@ -1437,7 +1422,6 @@ void split_tree(TString filename_in, TString filename_out,
     bool pass_HLT_DiMu9_Ele9_CaloIdL_TrackIdL_v = _triggerbit & (bitdigit << 51);
     bool pass_HLT_DiMu9_Ele9_CaloIdL_TrackIdL_DZ_v  = _triggerbit & (bitdigit << 52);
 
-
     bool pass_m = false;
     if(_year==2016) pass_m = ( pass_HLT_IsoMu22_v || pass_HLT_IsoTkMu22_v || pass_HLT_IsoMu22_eta2p1_v || pass_HLT_IsoTkMu22_eta2p1_v || pass_HLT_IsoMu24_v || pass_HLT_IsoTkMu24_v );
     else if(_year==2017) pass_m = ( pass_HLT_IsoMu24_v || pass_HLT_IsoMu27_v );
@@ -1498,7 +1482,6 @@ void split_tree(TString filename_in, TString filename_out,
     else if(_year==2017) pass_2me = pass_HLT_DiMu9_Ele9_CaloIdL_TrackIdL_DZ_v;
     else if(_year==2018) pass_2me = pass_HLT_DiMu9_Ele9_CaloIdL_TrackIdL_DZ_v;
 
- 
     /////////////////////////////////
     //////////// Leptons ////////////
     /////////////////////////////////
@@ -1509,9 +1492,7 @@ void split_tree(TString filename_in, TString filename_out,
 
     for(int i_lep=0; i_lep<_n_loose_lep; i_lep++){
    
- 
       if((*_recolep_isfakeable)[i_lep]){
-
         _n_fakeable_lep += 1;
    
         _recolep_fakeable_charge.push_back((*_recolep_charge)[i_lep]);
@@ -1537,10 +1518,9 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_fakeable_isfakeable.push_back((*_recolep_isfakeable)[i_lep]);
         _recolep_fakeable_ismvasel.push_back((*_recolep_ismvasel)[i_lep]);
         _recolep_fakeable_tightcharge.push_back((*_recolep_tightcharge)[i_lep]);
-        _recolep_fakeable_isGenMatched.push_back((*_recolep_isGenMatched)[i_lep]);
-        _recolep_fakeable_isGenChargeMatched.push_back((*_recolep_isGenChargeMatched)[i_lep]);
-        _recolep_fakeable_genMatchInd.push_back((*_recolep_genMatchInd)[i_lep]);
-
+        //_recolep_fakeable_isGenMatched.push_back((*_recolep_isGenMatched)[i_lep]);
+        //_recolep_fakeable_isGenChargeMatched.push_back((*_recolep_isGenChargeMatched)[i_lep]);
+        //_recolep_fakeable_genMatchInd.push_back((*_recolep_genMatchInd)[i_lep]);
       }
 
       if((*_recolep_ismvasel)[i_lep]) _n_tight_lep += 1;
@@ -1642,7 +1622,6 @@ void split_tree(TString filename_in, TString filename_out,
 
     }
 
-
     bool inv_mass_4l=true;
     bool SFOS_doublepair=false;
     float m_4l = 0;   
@@ -1677,7 +1656,6 @@ void split_tree(TString filename_in, TString filename_out,
         }
       }
     }
-    
 
     //////////////////////////////
     /////////// 2tau  ////////////
@@ -1743,9 +1721,9 @@ void split_tree(TString filename_in, TString filename_out,
     bool sig_1l1tau_flip = 
       sig_1l1tau_base &&
       (_n_tight_lep==1) && (_recolep_fakeable_ismvasel[0]) &&
-      (_n_tight_WPM_tau==1) && ((*_recotauh_byMediumDeepTau2017v2p1VSjet)[0]>0.5) &&
-      ( _recolep_fakeable_isGenMatched[0] && (*_recotauh_isGenMatched)[0]) && 
-      (!(_recolep_fakeable_isGenChargeMatched[0]) || !((*_recotauh_isGenChargeMatched)[0]) );
+      (_n_tight_WPM_tau==1) && ((*_recotauh_byMediumDeepTau2017v2p1VSjet)[0]>0.5); 
+      //( _recolep_fakeable_isGenMatched[0] && (*_recotauh_isGenMatched)[0]) && 
+      //(!(_recolep_fakeable_isGenChargeMatched[0]) || !((*_recotauh_isGenChargeMatched)[0]) );
 
 
     ////////////////////////////////
@@ -2317,9 +2295,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
     _recolep_sel_tightcharge.clear();
-    _recolep_sel_isGenMatched.clear();
-    _recolep_sel_isGenChargeMatched.clear();
-    _recolep_sel_genMatchInd.clear();
+    //_recolep_sel_isGenMatched.clear();
+    //_recolep_sel_isGenChargeMatched.clear();
+    //_recolep_sel_genMatchInd.clear();
 
     _recotauh_sel_eta.clear();
     _recotauh_sel_phi.clear();
@@ -2359,10 +2337,10 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_px.clear();
     _recotauh_sel_py.clear();
     _recotauh_sel_pz.clear();
-    _recotauh_sel_isGenMatched.clear();
-    _recotauh_sel_isGenChargeMatched.clear();
-    _recotauh_sel_isGenChargeMatched.clear();
-    _recotauh_sel_genMatchInd.clear();
+    //_recotauh_sel_isGenMatched.clear();
+    //_recotauh_sel_isGenChargeMatched.clear();
+    //_recotauh_sel_isGenChargeMatched.clear();
+    //_recotauh_sel_genMatchInd.clear();
     _recotauh_sel_againstMuonLoose3.clear();
     _recotauh_sel_againstMuonTight3.clear();
     _recotauh_sel_againstElectronVLooseMVA6.clear();
@@ -2462,9 +2440,9 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_px.push_back((*_recotauh_px)[i_tau]);
         _recotauh_sel_py.push_back((*_recotauh_py)[i_tau]);
         _recotauh_sel_pz.push_back((*_recotauh_pz)[i_tau]);
-        _recotauh_sel_isGenMatched.push_back((*_recotauh_isGenMatched)[i_tau]);
-        _recotauh_sel_isGenChargeMatched.push_back((*_recotauh_isGenChargeMatched)[i_tau]);
-        _recotauh_sel_genMatchInd.push_back((*_recotauh_genMatchInd)[i_tau]);
+        //_recotauh_sel_isGenMatched.push_back((*_recotauh_isGenMatched)[i_tau]);
+        //_recotauh_sel_isGenChargeMatched.push_back((*_recotauh_isGenChargeMatched)[i_tau]);
+        //_recotauh_sel_genMatchInd.push_back((*_recotauh_genMatchInd)[i_tau]);
         _recotauh_sel_againstMuonLoose3.push_back((*_recotauh_againstMuonLoose3)[i_tau]);
         _recotauh_sel_againstMuonTight3.push_back((*_recotauh_againstMuonTight3)[i_tau]);
         _recotauh_sel_againstElectronVLooseMVA6.push_back((*_recotauh_againstElectronVLooseMVA6)[i_tau]);
@@ -2506,7 +2484,7 @@ void split_tree(TString filename_in, TString filename_out,
       
       if(isMC) {
 
-        _tauSF_weight = (1-0.11*_recotauh_sel_isGenMatched[0])*(1-0.11*_recotauh_sel_isGenMatched[1]);
+        //_tauSF_weight = (1-0.11*_recotauh_sel_isGenMatched[0])*(1-0.11*_recotauh_sel_isGenMatched[1]);
 
         _tauSF_weight_tauNormUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up[0];
         _tauSF_weight_tauNormDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down[0];
@@ -2552,9 +2530,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
     _recolep_sel_tightcharge.clear();
-    _recolep_sel_isGenMatched.clear();
-    _recolep_sel_isGenChargeMatched.clear();
-    _recolep_sel_genMatchInd.clear();
+    //_recolep_sel_isGenMatched.clear();
+    //_recolep_sel_isGenChargeMatched.clear();
+    //_recolep_sel_genMatchInd.clear();
 
     _recotauh_sel_eta.clear();
     _recotauh_sel_phi.clear();
@@ -2594,9 +2572,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_px.clear();
     _recotauh_sel_py.clear();
     _recotauh_sel_pz.clear();
-    _recotauh_sel_isGenMatched.clear();
-    _recotauh_sel_isGenChargeMatched.clear();
-    _recotauh_sel_genMatchInd.clear();
+    //_recotauh_sel_isGenMatched.clear();
+    //_recotauh_sel_isGenChargeMatched.clear();
+    //_recotauh_sel_genMatchInd.clear();
     _recotauh_sel_againstMuonLoose3.clear();
     _recotauh_sel_againstMuonTight3.clear();
     _recotauh_sel_againstElectronVLooseMVA6.clear();
@@ -2681,9 +2659,9 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
         _recolep_sel_tightcharge.push_back(_recolep_fakeable_tightcharge[i_lep]);
-        _recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
-        _recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
-        _recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
+        //_recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
+        //_recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
+        //_recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
 
       }
 
@@ -2727,9 +2705,9 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_px.push_back((*_recotauh_px)[i_tau]);
         _recotauh_sel_py.push_back((*_recotauh_py)[i_tau]);
         _recotauh_sel_pz.push_back((*_recotauh_pz)[i_tau]);
-        _recotauh_sel_isGenMatched.push_back((*_recotauh_isGenMatched)[i_tau]);
-        _recotauh_sel_isGenChargeMatched.push_back((*_recotauh_isGenChargeMatched)[i_tau]);
-        _recotauh_sel_genMatchInd.push_back((*_recotauh_genMatchInd)[i_tau]);
+        //_recotauh_sel_isGenMatched.push_back((*_recotauh_isGenMatched)[i_tau]);
+        //_recotauh_sel_isGenChargeMatched.push_back((*_recotauh_isGenChargeMatched)[i_tau]);
+        //_recotauh_sel_genMatchInd.push_back((*_recotauh_genMatchInd)[i_tau]);
         _recotauh_sel_againstMuonLoose3.push_back((*_recotauh_againstMuonLoose3)[i_tau]);
         _recotauh_sel_againstMuonTight3.push_back((*_recotauh_againstMuonTight3)[i_tau]);
         _recotauh_sel_againstElectronVLooseMVA6.push_back((*_recotauh_againstElectronVLooseMVA6)[i_tau]);
@@ -2782,7 +2760,7 @@ void split_tree(TString filename_in, TString filename_out,
       
       if(isMC) {
 
-        _tauSF_weight = (1-0.11*_recotauh_sel_isGenMatched[0]);
+        //_tauSF_weight = (1-0.11*_recotauh_sel_isGenMatched[0]);
 
         _tauSF_weight_tauNormUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up[0];
         _tauSF_weight_tauNormDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down[0];
@@ -2823,9 +2801,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
     _recolep_sel_tightcharge.clear();
-    _recolep_sel_isGenMatched.clear();
-    _recolep_sel_isGenChargeMatched.clear();
-    _recolep_sel_genMatchInd.clear();
+    //_recolep_sel_isGenMatched.clear();
+    //_recolep_sel_isGenChargeMatched.clear();
+    //_recolep_sel_genMatchInd.clear();
 
     _recotauh_sel_eta.clear();
     _recotauh_sel_phi.clear();
@@ -2865,9 +2843,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_px.clear();
     _recotauh_sel_py.clear();
     _recotauh_sel_pz.clear();
-    _recotauh_sel_isGenMatched.clear();
-    _recotauh_sel_isGenChargeMatched.clear();
-    _recotauh_sel_genMatchInd.clear();
+    //_recotauh_sel_isGenMatched.clear();
+    //_recotauh_sel_isGenChargeMatched.clear();
+    //_recotauh_sel_genMatchInd.clear();
     _recotauh_sel_againstMuonLoose3.clear();
     _recotauh_sel_againstMuonTight3.clear();
     _recotauh_sel_againstElectronVLooseMVA6.clear();
@@ -2952,9 +2930,9 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
         _recolep_sel_tightcharge.push_back(_recolep_fakeable_tightcharge[i_lep]);
-        _recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
-        _recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
-        _recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
+        //_recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
+        //_recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
+        //_recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
 
       }  
 
@@ -2998,9 +2976,9 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_px.push_back((*_recotauh_px)[i_tau]);
         _recotauh_sel_py.push_back((*_recotauh_py)[i_tau]);
         _recotauh_sel_pz.push_back((*_recotauh_pz)[i_tau]);
-        _recotauh_sel_isGenMatched.push_back((*_recotauh_isGenMatched)[i_tau]);
-        _recotauh_sel_isGenChargeMatched.push_back((*_recotauh_isGenChargeMatched)[i_tau]);
-        _recotauh_sel_genMatchInd.push_back((*_recotauh_genMatchInd)[i_tau]);
+        //_recotauh_sel_isGenMatched.push_back((*_recotauh_isGenMatched)[i_tau]);
+        //_recotauh_sel_isGenChargeMatched.push_back((*_recotauh_isGenChargeMatched)[i_tau]);
+        //_recotauh_sel_genMatchInd.push_back((*_recotauh_genMatchInd)[i_tau]);
         _recotauh_sel_againstMuonLoose3.push_back((*_recotauh_againstMuonLoose3)[i_tau]);
         _recotauh_sel_againstMuonTight3.push_back((*_recotauh_againstMuonTight3)[i_tau]);
         _recotauh_sel_againstElectronVLooseMVA6.push_back((*_recotauh_againstElectronVLooseMVA6)[i_tau]);
@@ -3053,7 +3031,7 @@ void split_tree(TString filename_in, TString filename_out,
       
       if(isMC) {
 
-        _tauSF_weight = (1-0.11*_recotauh_sel_isGenMatched[0])*(1-0.11*_recotauh_sel_isGenMatched[1]);
+        //_tauSF_weight = (1-0.11*_recotauh_sel_isGenMatched[0])*(1-0.11*_recotauh_sel_isGenMatched[1]);
 
         _tauSF_weight_tauNormUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up[0];
         _tauSF_weight_tauNormDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down[0];
@@ -3099,9 +3077,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
     _recolep_sel_tightcharge.clear();
-    _recolep_sel_isGenMatched.clear();
-    _recolep_sel_isGenChargeMatched.clear();
-    _recolep_sel_genMatchInd.clear();
+    //_recolep_sel_isGenMatched.clear();
+    //_recolep_sel_isGenChargeMatched.clear();
+    //_recolep_sel_genMatchInd.clear();
 
     _recotauh_sel_eta.clear();
     _recotauh_sel_phi.clear();
@@ -3141,9 +3119,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_px.clear();
     _recotauh_sel_py.clear();
     _recotauh_sel_pz.clear();
-    _recotauh_sel_isGenMatched.clear();
-    _recotauh_sel_isGenChargeMatched.clear();
-    _recotauh_sel_genMatchInd.clear();
+    //_recotauh_sel_isGenMatched.clear();
+    //_recotauh_sel_isGenChargeMatched.clear();
+    //_recotauh_sel_genMatchInd.clear();
     _recotauh_sel_againstMuonLoose3.clear();
     _recotauh_sel_againstMuonTight3.clear();
     _recotauh_sel_againstElectronVLooseMVA6.clear();
@@ -3228,9 +3206,9 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
         _recolep_sel_tightcharge.push_back(_recolep_fakeable_tightcharge[i_lep]);
-        _recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
-        _recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
-        _recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
+        //_recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
+        //_recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
+        //_recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
 
       }
 
@@ -3283,9 +3261,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
     _recolep_sel_tightcharge.clear();
-    _recolep_sel_isGenMatched.clear();
-    _recolep_sel_isGenChargeMatched.clear();
-    _recolep_sel_genMatchInd.clear();
+    //_recolep_sel_isGenMatched.clear();
+    //_recolep_sel_isGenChargeMatched.clear();
+    //_recolep_sel_genMatchInd.clear();
 
     _recotauh_sel_eta.clear();
     _recotauh_sel_phi.clear();
@@ -3325,9 +3303,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_px.clear();
     _recotauh_sel_py.clear();
     _recotauh_sel_pz.clear();
-    _recotauh_sel_isGenMatched.clear();
-    _recotauh_sel_isGenChargeMatched.clear();
-    _recotauh_sel_genMatchInd.clear();
+    //_recotauh_sel_isGenMatched.clear();
+    //_recotauh_sel_isGenChargeMatched.clear();
+    //_recotauh_sel_genMatchInd.clear();
     _recotauh_sel_againstMuonLoose3.clear();
     _recotauh_sel_againstMuonTight3.clear();
     _recotauh_sel_againstElectronVLooseMVA6.clear();
@@ -3412,9 +3390,9 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
         _recolep_sel_tightcharge.push_back(_recolep_fakeable_tightcharge[i_lep]);
-        _recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
-        _recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
-        _recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
+        //_recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
+        //_recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
+        //_recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
 
       }
 
@@ -3465,9 +3443,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
     _recolep_sel_tightcharge.clear();
-    _recolep_sel_isGenMatched.clear();
-    _recolep_sel_isGenChargeMatched.clear();
-    _recolep_sel_genMatchInd.clear();
+    //_recolep_sel_isGenMatched.clear();
+    //_recolep_sel_isGenChargeMatched.clear();
+    //_recolep_sel_genMatchInd.clear();
 
     _recotauh_sel_eta.clear();
     _recotauh_sel_phi.clear();
@@ -3507,9 +3485,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_px.clear();
     _recotauh_sel_py.clear();
     _recotauh_sel_pz.clear();
-    _recotauh_sel_isGenMatched.clear();
-    _recotauh_sel_isGenChargeMatched.clear();
-    _recotauh_sel_genMatchInd.clear();
+    //_recotauh_sel_isGenMatched.clear();
+    //_recotauh_sel_isGenChargeMatched.clear();
+    //_recotauh_sel_genMatchInd.clear();
     _recotauh_sel_againstMuonLoose3.clear();
     _recotauh_sel_againstMuonTight3.clear();
     _recotauh_sel_againstElectronVLooseMVA6.clear();
@@ -3594,9 +3572,9 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
         _recolep_sel_tightcharge.push_back(_recolep_fakeable_tightcharge[i_lep]);
-        _recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
-        _recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
-        _recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
+        //_recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
+        //_recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
+        //_recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
 
       }   
 
@@ -3640,9 +3618,9 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_px.push_back((*_recotauh_px)[i_tau]);
         _recotauh_sel_py.push_back((*_recotauh_py)[i_tau]);
         _recotauh_sel_pz.push_back((*_recotauh_pz)[i_tau]);
-        _recotauh_sel_isGenMatched.push_back((*_recotauh_isGenMatched)[i_tau]);
-        _recotauh_sel_isGenChargeMatched.push_back((*_recotauh_isGenChargeMatched)[i_tau]);
-        _recotauh_sel_genMatchInd.push_back((*_recotauh_genMatchInd)[i_tau]);
+        //_recotauh_sel_isGenMatched.push_back((*_recotauh_isGenMatched)[i_tau]);
+        //_recotauh_sel_isGenChargeMatched.push_back((*_recotauh_isGenChargeMatched)[i_tau]);
+        //_recotauh_sel_genMatchInd.push_back((*_recotauh_genMatchInd)[i_tau]);
         _recotauh_sel_againstMuonLoose3.push_back((*_recotauh_againstMuonLoose3)[i_tau]);
         _recotauh_sel_againstMuonTight3.push_back((*_recotauh_againstMuonTight3)[i_tau]);
         _recotauh_sel_againstElectronVLooseMVA6.push_back((*_recotauh_againstElectronVLooseMVA6)[i_tau]);
@@ -3680,7 +3658,7 @@ void split_tree(TString filename_in, TString filename_out,
  
       if(isMC) {
 
-        _tauSF_weight = (1-0.11*_recotauh_sel_isGenMatched[0]);
+        //_tauSF_weight = (1-0.11*_recotauh_sel_isGenMatched[0]);
 
         _tauSF_weight_tauNormUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up[0];
         _tauSF_weight_tauNormDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down[0];
@@ -3723,9 +3701,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
     _recolep_sel_tightcharge.clear();
-    _recolep_sel_isGenMatched.clear();
-    _recolep_sel_isGenChargeMatched.clear();
-    _recolep_sel_genMatchInd.clear();
+    //_recolep_sel_isGenMatched.clear();
+    //_recolep_sel_isGenChargeMatched.clear();
+    //_recolep_sel_genMatchInd.clear();
 
     _recotauh_sel_eta.clear();
     _recotauh_sel_phi.clear();
@@ -3765,9 +3743,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_px.clear();
     _recotauh_sel_py.clear();
     _recotauh_sel_pz.clear();
-    _recotauh_sel_isGenMatched.clear();
-    _recotauh_sel_isGenChargeMatched.clear();
-    _recotauh_sel_genMatchInd.clear();
+    //_recotauh_sel_isGenMatched.clear();
+    //_recotauh_sel_isGenChargeMatched.clear();
+    //_recotauh_sel_genMatchInd.clear();
     _recotauh_sel_againstMuonLoose3.clear();
     _recotauh_sel_againstMuonTight3.clear();
     _recotauh_sel_againstElectronVLooseMVA6.clear();
@@ -3852,9 +3830,9 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
         _recolep_sel_tightcharge.push_back(_recolep_fakeable_tightcharge[i_lep]);
-        _recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
-        _recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
-        _recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
+        //_recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
+        //_recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
+        //_recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
 
       } 
 
@@ -3898,9 +3876,9 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_px.push_back((*_recotauh_px)[i_tau]);
         _recotauh_sel_py.push_back((*_recotauh_py)[i_tau]);
         _recotauh_sel_pz.push_back((*_recotauh_pz)[i_tau]);
-        _recotauh_sel_isGenMatched.push_back((*_recotauh_isGenMatched)[i_tau]);
-        _recotauh_sel_isGenChargeMatched.push_back((*_recotauh_isGenChargeMatched)[i_tau]);
-        _recotauh_sel_genMatchInd.push_back((*_recotauh_genMatchInd)[i_tau]);
+        //_recotauh_sel_isGenMatched.push_back((*_recotauh_isGenMatched)[i_tau]);
+        //_recotauh_sel_isGenChargeMatched.push_back((*_recotauh_isGenChargeMatched)[i_tau]);
+        //_recotauh_sel_genMatchInd.push_back((*_recotauh_genMatchInd)[i_tau]);
         _recotauh_sel_againstMuonLoose3.push_back((*_recotauh_againstMuonLoose3)[i_tau]);
         _recotauh_sel_againstMuonTight3.push_back((*_recotauh_againstMuonTight3)[i_tau]);
         _recotauh_sel_againstElectronVLooseMVA6.push_back((*_recotauh_againstElectronVLooseMVA6)[i_tau]);
@@ -3938,7 +3916,7 @@ void split_tree(TString filename_in, TString filename_out,
 
       if(isMC) {
 
-        _tauSF_weight = (1-0.11*_recotauh_sel_isGenMatched[0]);
+        //_tauSF_weight = (1-0.11*_recotauh_sel_isGenMatched[0]);
 
         _tauSF_weight_tauNormUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up[0];
         _tauSF_weight_tauNormDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down[0];
@@ -3979,9 +3957,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
     _recolep_sel_tightcharge.clear();
-    _recolep_sel_isGenMatched.clear();
-    _recolep_sel_isGenChargeMatched.clear();
-    _recolep_sel_genMatchInd.clear();
+    //_recolep_sel_isGenMatched.clear();
+    //_recolep_sel_isGenChargeMatched.clear();
+    //_recolep_sel_genMatchInd.clear();
 
     _recotauh_sel_eta.clear();
     _recotauh_sel_phi.clear();
@@ -4021,9 +3999,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_px.clear();
     _recotauh_sel_py.clear();
     _recotauh_sel_pz.clear();
-    _recotauh_sel_isGenMatched.clear();
-    _recotauh_sel_isGenChargeMatched.clear();
-    _recotauh_sel_genMatchInd.clear();
+    //_recotauh_sel_isGenMatched.clear();
+    //_recotauh_sel_isGenChargeMatched.clear();
+    //_recotauh_sel_genMatchInd.clear();
     _recotauh_sel_againstMuonLoose3.clear();
     _recotauh_sel_againstMuonTight3.clear();
     _recotauh_sel_againstElectronVLooseMVA6.clear();
@@ -4108,9 +4086,9 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
         _recolep_sel_tightcharge.push_back(_recolep_fakeable_tightcharge[i_lep]);
-        _recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
-        _recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
-        _recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
+        //_recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
+        //_recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
+        //_recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
 
       }
 
@@ -4154,9 +4132,9 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_px.push_back((*_recotauh_px)[i_tau]);
         _recotauh_sel_py.push_back((*_recotauh_py)[i_tau]);
         _recotauh_sel_pz.push_back((*_recotauh_pz)[i_tau]);
-        _recotauh_sel_isGenMatched.push_back((*_recotauh_isGenMatched)[i_tau]);
-        _recotauh_sel_isGenChargeMatched.push_back((*_recotauh_isGenChargeMatched)[i_tau]);
-        _recotauh_sel_genMatchInd.push_back((*_recotauh_genMatchInd)[i_tau]);
+        //_recotauh_sel_isGenMatched.push_back((*_recotauh_isGenMatched)[i_tau]);
+        //_recotauh_sel_isGenChargeMatched.push_back((*_recotauh_isGenChargeMatched)[i_tau]);
+        //_recotauh_sel_genMatchInd.push_back((*_recotauh_genMatchInd)[i_tau]);
         _recotauh_sel_againstMuonLoose3.push_back((*_recotauh_againstMuonLoose3)[i_tau]);
         _recotauh_sel_againstMuonTight3.push_back((*_recotauh_againstMuonTight3)[i_tau]);
         _recotauh_sel_againstElectronVLooseMVA6.push_back((*_recotauh_againstElectronVLooseMVA6)[i_tau]);
@@ -4179,7 +4157,7 @@ void split_tree(TString filename_in, TString filename_out,
       
       if(isMC) {
 
-        _tauSF_weight = (1-0.11*_recotauh_sel_isGenMatched[0])*(1-0.11*_recotauh_sel_isGenMatched[1]);
+        //_tauSF_weight = (1-0.11*_recotauh_sel_isGenMatched[0])*(1-0.11*_recotauh_sel_isGenMatched[1]);
 
         _tauSF_weight_tauNormUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up[0];
         _tauSF_weight_tauNormDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down[0];
@@ -4240,9 +4218,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
     _recolep_sel_tightcharge.clear();
-    _recolep_sel_isGenMatched.clear();
-    _recolep_sel_isGenChargeMatched.clear();
-    _recolep_sel_genMatchInd.clear();
+    //_recolep_sel_isGenMatched.clear();
+    //_recolep_sel_isGenChargeMatched.clear();
+    //_recolep_sel_genMatchInd.clear();
 
     _recotauh_sel_eta.clear();
     _recotauh_sel_phi.clear();
@@ -4282,9 +4260,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_px.clear();
     _recotauh_sel_py.clear();
     _recotauh_sel_pz.clear();
-    _recotauh_sel_isGenMatched.clear();
-    _recotauh_sel_isGenChargeMatched.clear();
-    _recotauh_sel_genMatchInd.clear();
+    //_recotauh_sel_isGenMatched.clear();
+    //_recotauh_sel_isGenChargeMatched.clear();
+    //_recotauh_sel_genMatchInd.clear();
     _recotauh_sel_againstMuonLoose3.clear();
     _recotauh_sel_againstMuonTight3.clear();
     _recotauh_sel_againstElectronVLooseMVA6.clear();
@@ -4369,9 +4347,9 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
         _recolep_sel_tightcharge.push_back(_recolep_fakeable_tightcharge[i_lep]);
-        _recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
-        _recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
-        _recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
+        //_recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
+        //_recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
+        //_recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
 
       }
 
@@ -4430,9 +4408,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
     _recolep_sel_tightcharge.clear();
-    _recolep_sel_isGenMatched.clear();
-    _recolep_sel_isGenChargeMatched.clear();
-    _recolep_sel_genMatchInd.clear();
+    //_recolep_sel_isGenMatched.clear();
+    //_recolep_sel_isGenChargeMatched.clear();
+    //_recolep_sel_genMatchInd.clear();
 
     _recotauh_sel_eta.clear();
     _recotauh_sel_phi.clear();
@@ -4472,9 +4450,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_px.clear();
     _recotauh_sel_py.clear();
     _recotauh_sel_pz.clear();
-    _recotauh_sel_isGenMatched.clear();
-    _recotauh_sel_isGenChargeMatched.clear();
-    _recotauh_sel_genMatchInd.clear();
+    //_recotauh_sel_isGenMatched.clear();
+    //_recotauh_sel_isGenChargeMatched.clear();
+    //_recotauh_sel_genMatchInd.clear();
     _recotauh_sel_againstMuonLoose3.clear();
     _recotauh_sel_againstMuonTight3.clear();
     _recotauh_sel_againstElectronVLooseMVA6.clear();
@@ -4559,9 +4537,9 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
         _recolep_sel_tightcharge.push_back(_recolep_fakeable_tightcharge[i_lep]);
-        _recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
-        _recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
-        _recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
+        //_recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
+        //_recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
+        //_recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
 
       } 
 
@@ -4618,9 +4596,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
     _recolep_sel_tightcharge.clear();
-    _recolep_sel_isGenMatched.clear();
-    _recolep_sel_isGenChargeMatched.clear();
-    _recolep_sel_genMatchInd.clear();
+    //_recolep_sel_isGenMatched.clear();
+    //_recolep_sel_isGenChargeMatched.clear();
+    //_recolep_sel_genMatchInd.clear();
 
     _recotauh_sel_eta.clear();
     _recotauh_sel_phi.clear();
@@ -4660,9 +4638,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_px.clear();
     _recotauh_sel_py.clear();
     _recotauh_sel_pz.clear();
-    _recotauh_sel_isGenMatched.clear();
-    _recotauh_sel_isGenChargeMatched.clear();
-    _recotauh_sel_genMatchInd.clear();
+    //_recotauh_sel_isGenMatched.clear();
+    //_recotauh_sel_isGenChargeMatched.clear();
+    //_recotauh_sel_genMatchInd.clear();
     _recotauh_sel_againstMuonLoose3.clear();
     _recotauh_sel_againstMuonTight3.clear();
     _recotauh_sel_againstElectronVLooseMVA6.clear();
@@ -4747,9 +4725,9 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
         _recolep_sel_tightcharge.push_back(_recolep_fakeable_tightcharge[i_lep]);
-        _recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
-        _recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
-        _recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
+        //_recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
+        //_recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
+        //_recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
 
       } 
 
@@ -4807,9 +4785,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
     _recolep_sel_tightcharge.clear();
-    _recolep_sel_isGenMatched.clear();
-    _recolep_sel_isGenChargeMatched.clear();
-    _recolep_sel_genMatchInd.clear();
+    //_recolep_sel_isGenMatched.clear();
+    //_recolep_sel_isGenChargeMatched.clear();
+    //_recolep_sel_genMatchInd.clear();
 
     _recotauh_sel_eta.clear();
     _recotauh_sel_phi.clear();
@@ -4849,9 +4827,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_px.clear();
     _recotauh_sel_py.clear();
     _recotauh_sel_pz.clear();
-    _recotauh_sel_isGenMatched.clear();
-    _recotauh_sel_isGenChargeMatched.clear();
-    _recotauh_sel_genMatchInd.clear();
+    //_recotauh_sel_isGenMatched.clear();
+    //_recotauh_sel_isGenChargeMatched.clear();
+    //_recotauh_sel_genMatchInd.clear();
     _recotauh_sel_againstMuonLoose3.clear();
     _recotauh_sel_againstMuonTight3.clear();
     _recotauh_sel_againstElectronVLooseMVA6.clear();
@@ -4936,9 +4914,9 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
         _recolep_sel_tightcharge.push_back(_recolep_fakeable_tightcharge[i_lep]);
-        _recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
-        _recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
-        _recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
+        //_recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
+        //_recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
+        //_recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
 
       } 
 
@@ -4995,9 +4973,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
     _recolep_sel_tightcharge.clear();
-    _recolep_sel_isGenMatched.clear();
-    _recolep_sel_isGenChargeMatched.clear();
-    _recolep_sel_genMatchInd.clear();
+    //_recolep_sel_isGenMatched.clear();
+    //_recolep_sel_isGenChargeMatched.clear();
+    //_recolep_sel_genMatchInd.clear();
 
     _recotauh_sel_eta.clear();
     _recotauh_sel_phi.clear();
@@ -5037,9 +5015,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_px.clear();
     _recotauh_sel_py.clear();
     _recotauh_sel_pz.clear();
-    _recotauh_sel_isGenMatched.clear();
-    _recotauh_sel_isGenChargeMatched.clear();
-    _recotauh_sel_genMatchInd.clear();
+    //_recotauh_sel_isGenMatched.clear();
+    //_recotauh_sel_isGenChargeMatched.clear();
+    //_recotauh_sel_genMatchInd.clear();
     _recotauh_sel_againstMuonLoose3.clear();
     _recotauh_sel_againstMuonTight3.clear();
     _recotauh_sel_againstElectronVLooseMVA6.clear();
@@ -5124,9 +5102,9 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
         _recolep_sel_tightcharge.push_back(_recolep_fakeable_tightcharge[i_lep]);
-        _recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
-        _recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
-        _recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
+        //_recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
+        //_recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
+        //_recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
 
       }  
 
@@ -5170,9 +5148,9 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_px.push_back((*_recotauh_px)[i_tau]);
         _recotauh_sel_py.push_back((*_recotauh_py)[i_tau]);
         _recotauh_sel_pz.push_back((*_recotauh_pz)[i_tau]);
-        _recotauh_sel_isGenMatched.push_back((*_recotauh_isGenMatched)[i_tau]);
-        _recotauh_sel_isGenChargeMatched.push_back((*_recotauh_isGenChargeMatched)[i_tau]);
-        _recotauh_sel_genMatchInd.push_back((*_recotauh_genMatchInd)[i_tau]);
+        //_recotauh_sel_isGenMatched.push_back((*_recotauh_isGenMatched)[i_tau]);
+        //_recotauh_sel_isGenChargeMatched.push_back((*_recotauh_isGenChargeMatched)[i_tau]);
+        //_recotauh_sel_genMatchInd.push_back((*_recotauh_genMatchInd)[i_tau]);
         _recotauh_sel_againstMuonLoose3.push_back((*_recotauh_againstMuonLoose3)[i_tau]);
         _recotauh_sel_againstMuonTight3.push_back((*_recotauh_againstMuonTight3)[i_tau]);
         _recotauh_sel_againstElectronVLooseMVA6.push_back((*_recotauh_againstElectronVLooseMVA6)[i_tau]);
@@ -5216,7 +5194,7 @@ void split_tree(TString filename_in, TString filename_out,
 
       if(isMC) {
 
-        _tauSF_weight = (1-0.11*_recotauh_sel_isGenMatched[0]);
+        //_tauSF_weight = (1-0.11*_recotauh_sel_isGenMatched[0]);
 
         _tauSF_weight_tauNormUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up[0];
         _tauSF_weight_tauNormDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down[0];
@@ -5257,9 +5235,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
     _recolep_sel_tightcharge.clear();
-    _recolep_sel_isGenMatched.clear();
-    _recolep_sel_isGenChargeMatched.clear();
-    _recolep_sel_genMatchInd.clear();
+    //_recolep_sel_isGenMatched.clear();
+    //_recolep_sel_isGenChargeMatched.clear();
+    //_recolep_sel_genMatchInd.clear();
 
     _recotauh_sel_eta.clear();
     _recotauh_sel_phi.clear();
@@ -5299,9 +5277,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_px.clear();
     _recotauh_sel_py.clear();
     _recotauh_sel_pz.clear();
-    _recotauh_sel_isGenMatched.clear();
-    _recotauh_sel_isGenChargeMatched.clear();
-    _recotauh_sel_genMatchInd.clear();
+    //_recotauh_sel_isGenMatched.clear();
+    //_recotauh_sel_isGenChargeMatched.clear();
+    //_recotauh_sel_genMatchInd.clear();
     _recotauh_sel_againstMuonLoose3.clear();
     _recotauh_sel_againstMuonTight3.clear();
     _recotauh_sel_againstElectronVLooseMVA6.clear();
@@ -5386,9 +5364,9 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
         _recolep_sel_tightcharge.push_back(_recolep_fakeable_tightcharge[i_lep]);
-        _recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
-        _recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
-        _recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
+        //_recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
+        //_recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
+        //_recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
 
       } 
 
@@ -5450,9 +5428,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
     _recolep_sel_tightcharge.clear();
-    _recolep_sel_isGenMatched.clear();
-    _recolep_sel_isGenChargeMatched.clear();
-    _recolep_sel_genMatchInd.clear();
+    //_recolep_sel_isGenMatched.clear();
+    //_recolep_sel_isGenChargeMatched.clear();
+    //_recolep_sel_genMatchInd.clear();
 
     _recotauh_sel_eta.clear();
     _recotauh_sel_phi.clear();
@@ -5492,9 +5470,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_px.clear();
     _recotauh_sel_py.clear();
     _recotauh_sel_pz.clear();
-    _recotauh_sel_isGenMatched.clear();
-    _recotauh_sel_isGenChargeMatched.clear();
-    _recotauh_sel_genMatchInd.clear();
+    //_recotauh_sel_isGenMatched.clear();
+    //_recotauh_sel_isGenChargeMatched.clear();
+    //_recotauh_sel_genMatchInd.clear();
     _recotauh_sel_againstMuonLoose3.clear();
     _recotauh_sel_againstMuonTight3.clear();
     _recotauh_sel_againstElectronVLooseMVA6.clear();
@@ -5579,9 +5557,9 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
         _recolep_sel_tightcharge.push_back(_recolep_fakeable_tightcharge[i_lep]);
-        _recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
-        _recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
-        _recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
+        //_recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
+        //_recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
+        //_recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
 
       } 
 
@@ -5643,9 +5621,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
     _recolep_sel_tightcharge.clear();
-    _recolep_sel_isGenMatched.clear();
-    _recolep_sel_isGenChargeMatched.clear();
-    _recolep_sel_genMatchInd.clear();
+    //_recolep_sel_isGenMatched.clear();
+    //_recolep_sel_isGenChargeMatched.clear();
+    //_recolep_sel_genMatchInd.clear();
 
     _recotauh_sel_eta.clear();
     _recotauh_sel_phi.clear();
@@ -5685,9 +5663,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_px.clear();
     _recotauh_sel_py.clear();
     _recotauh_sel_pz.clear();
-    _recotauh_sel_isGenMatched.clear();
-    _recotauh_sel_isGenChargeMatched.clear();
-    _recotauh_sel_genMatchInd.clear();
+    //_recotauh_sel_isGenMatched.clear();
+    //_recotauh_sel_isGenChargeMatched.clear();
+    //_recotauh_sel_genMatchInd.clear();
     _recotauh_sel_againstMuonLoose3.clear();
     _recotauh_sel_againstMuonTight3.clear();
     _recotauh_sel_againstElectronVLooseMVA6.clear();
@@ -5772,9 +5750,9 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
         _recolep_sel_tightcharge.push_back(_recolep_fakeable_tightcharge[i_lep]);
-        _recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
-        _recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
-        _recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
+        //_recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
+        //_recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
+        //_recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
 
       } 
 
@@ -5841,9 +5819,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
     _recolep_sel_tightcharge.clear();
-    _recolep_sel_isGenMatched.clear();
-    _recolep_sel_isGenChargeMatched.clear();
-    _recolep_sel_genMatchInd.clear();
+    //_recolep_sel_isGenMatched.clear();
+    //_recolep_sel_isGenChargeMatched.clear();
+    //_recolep_sel_genMatchInd.clear();
 
     _recotauh_sel_eta.clear();
     _recotauh_sel_phi.clear();
@@ -5883,9 +5861,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_px.clear();
     _recotauh_sel_py.clear();
     _recotauh_sel_pz.clear();
-    _recotauh_sel_isGenMatched.clear();
-    _recotauh_sel_isGenChargeMatched.clear();
-    _recotauh_sel_genMatchInd.clear();
+    //_recotauh_sel_isGenMatched.clear();
+    //_recotauh_sel_isGenChargeMatched.clear();
+    //_recotauh_sel_genMatchInd.clear();
     _recotauh_sel_againstMuonLoose3.clear();
     _recotauh_sel_againstMuonTight3.clear();
     _recotauh_sel_againstElectronVLooseMVA6.clear();
@@ -5985,9 +5963,9 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_px.push_back((*_recotauh_px)[i_tau]);
         _recotauh_sel_py.push_back((*_recotauh_py)[i_tau]);
         _recotauh_sel_pz.push_back((*_recotauh_pz)[i_tau]);
-        _recotauh_sel_isGenMatched.push_back((*_recotauh_isGenMatched)[i_tau]);
-        _recotauh_sel_isGenChargeMatched.push_back((*_recotauh_isGenChargeMatched)[i_tau]);
-        _recotauh_sel_genMatchInd.push_back((*_recotauh_genMatchInd)[i_tau]);
+        //_recotauh_sel_isGenMatched.push_back((*_recotauh_isGenMatched)[i_tau]);
+        //_recotauh_sel_isGenChargeMatched.push_back((*_recotauh_isGenChargeMatched)[i_tau]);
+        //_recotauh_sel_genMatchInd.push_back((*_recotauh_genMatchInd)[i_tau]);
         _recotauh_sel_againstMuonLoose3.push_back((*_recotauh_againstMuonLoose3)[i_tau]);
         _recotauh_sel_againstMuonTight3.push_back((*_recotauh_againstMuonTight3)[i_tau]);
         _recotauh_sel_againstElectronVLooseMVA6.push_back((*_recotauh_againstElectronVLooseMVA6)[i_tau]);
@@ -6073,7 +6051,7 @@ void split_tree(TString filename_in, TString filename_out,
 
       if(isMC) {
 
-        _tauSF_weight = (1-0.11*_recotauh_sel_isGenMatched[0])*(1-0.11*_recotauh_sel_isGenMatched[1]);
+        //_tauSF_weight = (1-0.11*_recotauh_sel_isGenMatched[0])*(1-0.11*_recotauh_sel_isGenMatched[1]);
 
         _tauSF_weight_tauNormUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up[0];
         _tauSF_weight_tauNormDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down[0];
@@ -6121,9 +6099,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
     _recolep_sel_tightcharge.clear();
-    _recolep_sel_isGenMatched.clear();
-    _recolep_sel_isGenChargeMatched.clear();
-    _recolep_sel_genMatchInd.clear();
+    //_recolep_sel_isGenMatched.clear();
+    //_recolep_sel_isGenChargeMatched.clear();
+    //_recolep_sel_genMatchInd.clear();
 
     _recotauh_sel_eta.clear();
     _recotauh_sel_phi.clear();
@@ -6163,9 +6141,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_px.clear();
     _recotauh_sel_py.clear();
     _recotauh_sel_pz.clear();
-    _recotauh_sel_isGenMatched.clear();
-    _recotauh_sel_isGenChargeMatched.clear();
-    _recotauh_sel_genMatchInd.clear();
+    //_recotauh_sel_isGenMatched.clear();
+    //_recotauh_sel_isGenChargeMatched.clear();
+    //_recotauh_sel_genMatchInd.clear();
     _recotauh_sel_againstMuonLoose3.clear();
     _recotauh_sel_againstMuonTight3.clear();
     _recotauh_sel_againstElectronVLooseMVA6.clear();
@@ -6250,9 +6228,9 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
         _recolep_sel_tightcharge.push_back(_recolep_fakeable_tightcharge[i_lep]);
-        _recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
-        _recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
-        _recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
+        //_recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
+        //_recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
+        //_recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
 
       }  
 
@@ -6296,9 +6274,9 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_px.push_back((*_recotauh_px)[i_tau]);
         _recotauh_sel_py.push_back((*_recotauh_py)[i_tau]);
         _recotauh_sel_pz.push_back((*_recotauh_pz)[i_tau]);
-        _recotauh_sel_isGenMatched.push_back((*_recotauh_isGenMatched)[i_tau]);
-        _recotauh_sel_isGenChargeMatched.push_back((*_recotauh_isGenChargeMatched)[i_tau]);
-        _recotauh_sel_genMatchInd.push_back((*_recotauh_genMatchInd)[i_tau]);
+        //_recotauh_sel_isGenMatched.push_back((*_recotauh_isGenMatched)[i_tau]);
+        //_recotauh_sel_isGenChargeMatched.push_back((*_recotauh_isGenChargeMatched)[i_tau]);
+        //_recotauh_sel_genMatchInd.push_back((*_recotauh_genMatchInd)[i_tau]);
         _recotauh_sel_againstMuonLoose3.push_back((*_recotauh_againstMuonLoose3)[i_tau]);
         _recotauh_sel_againstMuonTight3.push_back((*_recotauh_againstMuonTight3)[i_tau]);
         _recotauh_sel_againstElectronVLooseMVA6.push_back((*_recotauh_againstElectronVLooseMVA6)[i_tau]);
@@ -6436,7 +6414,7 @@ void split_tree(TString filename_in, TString filename_out,
 
       if(isMC) {
 
-        _tauSF_weight = (1-0.11*_recotauh_sel_isGenMatched[0]);
+        //_tauSF_weight = (1-0.11*_recotauh_sel_isGenMatched[0]);
 
         _tauSF_weight_tauNormUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up[0];
         _tauSF_weight_tauNormDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down[0];
@@ -6477,9 +6455,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
     _recolep_sel_tightcharge.clear();
-    _recolep_sel_isGenMatched.clear();
-    _recolep_sel_isGenChargeMatched.clear();
-    _recolep_sel_genMatchInd.clear();
+    //_recolep_sel_isGenMatched.clear();
+    //_recolep_sel_isGenChargeMatched.clear();
+    //_recolep_sel_genMatchInd.clear();
 
     _recotauh_sel_eta.clear();
     _recotauh_sel_phi.clear();
@@ -6519,9 +6497,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_px.clear();
     _recotauh_sel_py.clear();
     _recotauh_sel_pz.clear();
-    _recotauh_sel_isGenMatched.clear();
-    _recotauh_sel_isGenChargeMatched.clear();
-    _recotauh_sel_genMatchInd.clear();
+    //_recotauh_sel_isGenMatched.clear();
+    //_recotauh_sel_isGenChargeMatched.clear();
+    //_recotauh_sel_genMatchInd.clear();
     _recotauh_sel_againstMuonLoose3.clear();
     _recotauh_sel_againstMuonTight3.clear();
     _recotauh_sel_againstElectronVLooseMVA6.clear();
@@ -6606,9 +6584,9 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
         _recolep_sel_tightcharge.push_back(_recolep_fakeable_tightcharge[i_lep]);
-        _recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
-        _recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
-        _recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
+        //_recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
+        //_recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
+        //_recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
 
       } 
 
@@ -6652,9 +6630,9 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_px.push_back((*_recotauh_px)[i_tau]);
         _recotauh_sel_py.push_back((*_recotauh_py)[i_tau]);
         _recotauh_sel_pz.push_back((*_recotauh_pz)[i_tau]);
-        _recotauh_sel_isGenMatched.push_back((*_recotauh_isGenMatched)[i_tau]);
-        _recotauh_sel_isGenChargeMatched.push_back((*_recotauh_isGenChargeMatched)[i_tau]);
-        _recotauh_sel_genMatchInd.push_back((*_recotauh_genMatchInd)[i_tau]);
+        //_recotauh_sel_isGenMatched.push_back((*_recotauh_isGenMatched)[i_tau]);
+        //_recotauh_sel_isGenChargeMatched.push_back((*_recotauh_isGenChargeMatched)[i_tau]);
+        //_recotauh_sel_genMatchInd.push_back((*_recotauh_genMatchInd)[i_tau]);
         _recotauh_sel_againstMuonLoose3.push_back((*_recotauh_againstMuonLoose3)[i_tau]);
         _recotauh_sel_againstMuonTight3.push_back((*_recotauh_againstMuonTight3)[i_tau]);
         _recotauh_sel_againstElectronVLooseMVA6.push_back((*_recotauh_againstElectronVLooseMVA6)[i_tau]);
@@ -6808,7 +6786,7 @@ void split_tree(TString filename_in, TString filename_out,
 
       if(isMC) {
 
-        _tauSF_weight = (1-0.11*_recotauh_sel_isGenMatched[0])*(1-0.11*_recotauh_sel_isGenMatched[1]);
+        //_tauSF_weight = (1-0.11*_recotauh_sel_isGenMatched[0])*(1-0.11*_recotauh_sel_isGenMatched[1]);
 
         _tauSF_weight_tauNormUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up[0];
         _tauSF_weight_tauNormDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down[0];
@@ -6855,9 +6833,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
     _recolep_sel_tightcharge.clear();
-    _recolep_sel_isGenMatched.clear();
-    _recolep_sel_isGenChargeMatched.clear();
-    _recolep_sel_genMatchInd.clear();
+    //_recolep_sel_isGenMatched.clear();
+    //_recolep_sel_isGenChargeMatched.clear();
+    //_recolep_sel_genMatchInd.clear();
 
     _recotauh_sel_eta.clear();
     _recotauh_sel_phi.clear();
@@ -6897,9 +6875,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_px.clear();
     _recotauh_sel_py.clear();
     _recotauh_sel_pz.clear();
-    _recotauh_sel_isGenMatched.clear();
-    _recotauh_sel_isGenChargeMatched.clear();
-    _recotauh_sel_genMatchInd.clear();
+    //_recotauh_sel_isGenMatched.clear();
+    //_recotauh_sel_isGenChargeMatched.clear();
+    //_recotauh_sel_genMatchInd.clear();
     _recotauh_sel_againstMuonLoose3.clear();
     _recotauh_sel_againstMuonTight3.clear();
     _recotauh_sel_againstElectronVLooseMVA6.clear();
@@ -6984,9 +6962,9 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
         _recolep_sel_tightcharge.push_back(_recolep_fakeable_tightcharge[i_lep]);
-        _recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
-        _recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
-        _recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
+        //_recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
+        //_recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
+        //_recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
 
       }  
 
@@ -7164,9 +7142,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
     _recolep_sel_tightcharge.clear();
-    _recolep_sel_isGenMatched.clear();
-    _recolep_sel_isGenChargeMatched.clear();
-    _recolep_sel_genMatchInd.clear();
+    //_recolep_sel_isGenMatched.clear();
+    //_recolep_sel_isGenChargeMatched.clear();
+    //_recolep_sel_genMatchInd.clear();
 
     _recotauh_sel_eta.clear();
     _recotauh_sel_phi.clear();
@@ -7206,9 +7184,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_px.clear();
     _recotauh_sel_py.clear();
     _recotauh_sel_pz.clear();
-    _recotauh_sel_isGenMatched.clear();
-    _recotauh_sel_isGenChargeMatched.clear();
-    _recotauh_sel_genMatchInd.clear();
+    //_recotauh_sel_isGenMatched.clear();
+    //_recotauh_sel_isGenChargeMatched.clear();
+    //_recotauh_sel_genMatchInd.clear();
     _recotauh_sel_againstMuonLoose3.clear();
     _recotauh_sel_againstMuonTight3.clear();
     _recotauh_sel_againstElectronVLooseMVA6.clear();
@@ -7293,9 +7271,9 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
         _recolep_sel_tightcharge.push_back(_recolep_fakeable_tightcharge[i_lep]);
-        _recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
-        _recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
-        _recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
+        //_recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
+        //_recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
+        //_recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
 
       }  
 
@@ -7472,9 +7450,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
     _recolep_sel_tightcharge.clear();
-    _recolep_sel_isGenMatched.clear();
-    _recolep_sel_isGenChargeMatched.clear();
-    _recolep_sel_genMatchInd.clear();
+    //_recolep_sel_isGenMatched.clear();
+    //_recolep_sel_isGenChargeMatched.clear();
+    //_recolep_sel_genMatchInd.clear();
 
     _recotauh_sel_eta.clear();
     _recotauh_sel_phi.clear();
@@ -7514,9 +7492,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_px.clear();
     _recotauh_sel_py.clear();
     _recotauh_sel_pz.clear();
-    _recotauh_sel_isGenMatched.clear();
-    _recotauh_sel_isGenChargeMatched.clear();
-    _recotauh_sel_genMatchInd.clear();
+    //_recotauh_sel_isGenMatched.clear();
+    //_recotauh_sel_isGenChargeMatched.clear();
+    //_recotauh_sel_genMatchInd.clear();
     _recotauh_sel_againstMuonLoose3.clear();
     _recotauh_sel_againstMuonTight3.clear();
     _recotauh_sel_againstElectronVLooseMVA6.clear();
@@ -7601,9 +7579,9 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
         _recolep_sel_tightcharge.push_back(_recolep_fakeable_tightcharge[i_lep]);
-        _recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
-        _recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
-        _recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
+        //_recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
+        //_recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
+        //_recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
 
       }    
 
@@ -7647,9 +7625,9 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_px.push_back((*_recotauh_px)[i_tau]);
         _recotauh_sel_py.push_back((*_recotauh_py)[i_tau]);
         _recotauh_sel_pz.push_back((*_recotauh_pz)[i_tau]);
-        _recotauh_sel_isGenMatched.push_back((*_recotauh_isGenMatched)[i_tau]);
-        _recotauh_sel_isGenChargeMatched.push_back((*_recotauh_isGenChargeMatched)[i_tau]);
-        _recotauh_sel_genMatchInd.push_back((*_recotauh_genMatchInd)[i_tau]);
+        //_recotauh_sel_isGenMatched.push_back((*_recotauh_isGenMatched)[i_tau]);
+        //_recotauh_sel_isGenChargeMatched.push_back((*_recotauh_isGenChargeMatched)[i_tau]);
+        //_recotauh_sel_genMatchInd.push_back((*_recotauh_genMatchInd)[i_tau]);
         _recotauh_sel_againstMuonLoose3.push_back((*_recotauh_againstMuonLoose3)[i_tau]);
         _recotauh_sel_againstMuonTight3.push_back((*_recotauh_againstMuonTight3)[i_tau]);
         _recotauh_sel_againstElectronVLooseMVA6.push_back((*_recotauh_againstElectronVLooseMVA6)[i_tau]);
@@ -7882,7 +7860,7 @@ void split_tree(TString filename_in, TString filename_out,
 
       if(isMC) {
 
-        _tauSF_weight = (1-0.11*_recotauh_sel_isGenMatched[0]);
+        //_tauSF_weight = (1-0.11*_recotauh_sel_isGenMatched[0]);
 
         _tauSF_weight_tauNormUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up[0];
         _tauSF_weight_tauNormDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down[0];
@@ -7925,9 +7903,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
     _recolep_sel_tightcharge.clear();
-    _recolep_sel_isGenMatched.clear();
-    _recolep_sel_isGenChargeMatched.clear();
-    _recolep_sel_genMatchInd.clear();
+    //_recolep_sel_isGenMatched.clear();
+    //_recolep_sel_isGenChargeMatched.clear();
+    //_recolep_sel_genMatchInd.clear();
 
     _recotauh_sel_eta.clear();
     _recotauh_sel_phi.clear();
@@ -7967,9 +7945,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_px.clear();
     _recotauh_sel_py.clear();
     _recotauh_sel_pz.clear();
-    _recotauh_sel_isGenMatched.clear();
-    _recotauh_sel_isGenChargeMatched.clear();
-    _recotauh_sel_genMatchInd.clear();
+    //_recotauh_sel_isGenMatched.clear();
+    //_recotauh_sel_isGenChargeMatched.clear();
+    //_recotauh_sel_genMatchInd.clear();
     _recotauh_sel_againstMuonLoose3.clear();
     _recotauh_sel_againstMuonTight3.clear();
     _recotauh_sel_againstElectronVLooseMVA6.clear();
@@ -8054,9 +8032,9 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
         _recolep_sel_tightcharge.push_back(_recolep_fakeable_tightcharge[i_lep]);
-        _recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
-        _recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
-        _recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
+        //_recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
+        //_recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
+        //_recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
 
       } 
 
@@ -8100,9 +8078,9 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_px.push_back((*_recotauh_px)[i_tau]);
         _recotauh_sel_py.push_back((*_recotauh_py)[i_tau]);
         _recotauh_sel_pz.push_back((*_recotauh_pz)[i_tau]);
-        _recotauh_sel_isGenMatched.push_back((*_recotauh_isGenMatched)[i_tau]);
-        _recotauh_sel_isGenChargeMatched.push_back((*_recotauh_isGenChargeMatched)[i_tau]);
-        _recotauh_sel_genMatchInd.push_back((*_recotauh_genMatchInd)[i_tau]);
+        //_recotauh_sel_isGenMatched.push_back((*_recotauh_isGenMatched)[i_tau]);
+        //_recotauh_sel_isGenChargeMatched.push_back((*_recotauh_isGenChargeMatched)[i_tau]);
+        //_recotauh_sel_genMatchInd.push_back((*_recotauh_genMatchInd)[i_tau]);
         _recotauh_sel_againstMuonLoose3.push_back((*_recotauh_againstMuonLoose3)[i_tau]);
         _recotauh_sel_againstMuonTight3.push_back((*_recotauh_againstMuonTight3)[i_tau]);
         _recotauh_sel_againstElectronVLooseMVA6.push_back((*_recotauh_againstElectronVLooseMVA6)[i_tau]);
@@ -8280,7 +8258,7 @@ void split_tree(TString filename_in, TString filename_out,
 
       if(isMC) {
 
-        _tauSF_weight = (1-0.11*_recotauh_sel_isGenMatched[0]);
+        //_tauSF_weight = (1-0.11*_recotauh_sel_isGenMatched[0]);
 
         _tauSF_weight_tauNormUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up[0];
         _tauSF_weight_tauNormDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down[0];
@@ -8321,9 +8299,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
     _recolep_sel_tightcharge.clear();
-    _recolep_sel_isGenMatched.clear();
-    _recolep_sel_isGenChargeMatched.clear();
-    _recolep_sel_genMatchInd.clear();
+    //_recolep_sel_isGenMatched.clear();
+    //_recolep_sel_isGenChargeMatched.clear();
+    //_recolep_sel_genMatchInd.clear();
 
     _recotauh_sel_eta.clear();
     _recotauh_sel_phi.clear();
@@ -8363,9 +8341,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_px.clear();
     _recotauh_sel_py.clear();
     _recotauh_sel_pz.clear();
-    _recotauh_sel_isGenMatched.clear();
-    _recotauh_sel_isGenChargeMatched.clear();
-    _recotauh_sel_genMatchInd.clear();
+    //_recotauh_sel_isGenMatched.clear();
+    //_recotauh_sel_isGenChargeMatched.clear();
+    //_recotauh_sel_genMatchInd.clear();
     _recotauh_sel_againstMuonLoose3.clear();
     _recotauh_sel_againstMuonTight3.clear();
     _recotauh_sel_againstElectronVLooseMVA6.clear();
@@ -8450,9 +8428,9 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
         _recolep_sel_tightcharge.push_back(_recolep_fakeable_tightcharge[i_lep]);
-        _recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
-        _recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
-        _recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
+        //_recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
+        //_recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
+        //_recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
 
       } 
 
@@ -8496,9 +8474,9 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_px.push_back((*_recotauh_px)[i_tau]);
         _recotauh_sel_py.push_back((*_recotauh_py)[i_tau]);
         _recotauh_sel_pz.push_back((*_recotauh_pz)[i_tau]);
-        _recotauh_sel_isGenMatched.push_back((*_recotauh_isGenMatched)[i_tau]);
-        _recotauh_sel_isGenChargeMatched.push_back((*_recotauh_isGenChargeMatched)[i_tau]);
-        _recotauh_sel_genMatchInd.push_back((*_recotauh_genMatchInd)[i_tau]);
+        //_recotauh_sel_isGenMatched.push_back((*_recotauh_isGenMatched)[i_tau]);
+        //_recotauh_sel_isGenChargeMatched.push_back((*_recotauh_isGenChargeMatched)[i_tau]);
+        //_recotauh_sel_genMatchInd.push_back((*_recotauh_genMatchInd)[i_tau]);
         _recotauh_sel_againstMuonLoose3.push_back((*_recotauh_againstMuonLoose3)[i_tau]);
         _recotauh_sel_againstMuonTight3.push_back((*_recotauh_againstMuonTight3)[i_tau]);
         _recotauh_sel_againstElectronVLooseMVA6.push_back((*_recotauh_againstElectronVLooseMVA6)[i_tau]);
@@ -8693,7 +8671,7 @@ void split_tree(TString filename_in, TString filename_out,
 
       if(isMC) {
 
-        _tauSF_weight = (1-0.11*_recotauh_sel_isGenMatched[0])*(1-0.11*_recotauh_sel_isGenMatched[1]);
+        //_tauSF_weight = (1-0.11*_recotauh_sel_isGenMatched[0])*(1-0.11*_recotauh_sel_isGenMatched[1]);
 
         _tauSF_weight_tauNormUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up[0];
         _tauSF_weight_tauNormDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down[0];
@@ -8739,9 +8717,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
     _recolep_sel_tightcharge.clear();
-    _recolep_sel_isGenMatched.clear();
-    _recolep_sel_isGenChargeMatched.clear();
-    _recolep_sel_genMatchInd.clear();
+    //_recolep_sel_isGenMatched.clear();
+    //_recolep_sel_isGenChargeMatched.clear();
+    //_recolep_sel_genMatchInd.clear();
 
     _recotauh_sel_eta.clear();
     _recotauh_sel_phi.clear();
@@ -8781,9 +8759,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_px.clear();
     _recotauh_sel_py.clear();
     _recotauh_sel_pz.clear();
-    _recotauh_sel_isGenMatched.clear();
-    _recotauh_sel_isGenChargeMatched.clear();
-    _recotauh_sel_genMatchInd.clear();
+    //_recotauh_sel_isGenMatched.clear();
+    //_recotauh_sel_isGenChargeMatched.clear();
+    //_recotauh_sel_genMatchInd.clear();
     _recotauh_sel_againstMuonLoose3.clear();
     _recotauh_sel_againstMuonTight3.clear();
     _recotauh_sel_againstElectronVLooseMVA6.clear();
@@ -8868,9 +8846,9 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
         _recolep_sel_tightcharge.push_back(_recolep_fakeable_tightcharge[i_lep]);
-        _recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
-        _recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
-        _recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
+        //_recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
+        //_recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
+        //_recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
 
       }  
 
@@ -9109,9 +9087,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
     _recolep_sel_tightcharge.clear();
-    _recolep_sel_isGenMatched.clear();
-    _recolep_sel_isGenChargeMatched.clear();
-    _recolep_sel_genMatchInd.clear();
+    //_recolep_sel_isGenMatched.clear();
+    //_recolep_sel_isGenChargeMatched.clear();
+    //_recolep_sel_genMatchInd.clear();
 
     _recotauh_sel_eta.clear();
     _recotauh_sel_phi.clear();
@@ -9151,9 +9129,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_px.clear();
     _recotauh_sel_py.clear();
     _recotauh_sel_pz.clear();
-    _recotauh_sel_isGenMatched.clear();
-    _recotauh_sel_isGenChargeMatched.clear();
-    _recotauh_sel_genMatchInd.clear();
+    //_recotauh_sel_isGenMatched.clear();
+    //_recotauh_sel_isGenChargeMatched.clear();
+    //_recotauh_sel_genMatchInd.clear();
     _recotauh_sel_againstMuonLoose3.clear();
     _recotauh_sel_againstMuonTight3.clear();
     _recotauh_sel_againstElectronVLooseMVA6.clear();
@@ -9238,9 +9216,9 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
         _recolep_sel_tightcharge.push_back(_recolep_fakeable_tightcharge[i_lep]);
-        _recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
-        _recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
-        _recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
+        //_recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
+        //_recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
+        //_recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
 
       }  
 
@@ -9477,9 +9455,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
     _recolep_sel_tightcharge.clear();
-    _recolep_sel_isGenMatched.clear();
-    _recolep_sel_isGenChargeMatched.clear();
-    _recolep_sel_genMatchInd.clear();
+    //_recolep_sel_isGenMatched.clear();
+    //_recolep_sel_isGenChargeMatched.clear();
+    //_recolep_sel_genMatchInd.clear();
 
     _recotauh_sel_eta.clear();
     _recotauh_sel_phi.clear();
@@ -9519,9 +9497,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_px.clear();
     _recotauh_sel_py.clear();
     _recotauh_sel_pz.clear();
-    _recotauh_sel_isGenMatched.clear();
-    _recotauh_sel_isGenChargeMatched.clear();
-    _recotauh_sel_genMatchInd.clear();
+    //_recotauh_sel_isGenMatched.clear();
+    //_recotauh_sel_isGenChargeMatched.clear();
+    //_recotauh_sel_genMatchInd.clear();
     _recotauh_sel_againstMuonLoose3.clear();
     _recotauh_sel_againstMuonTight3.clear();
     _recotauh_sel_againstElectronVLooseMVA6.clear();
@@ -9606,9 +9584,9 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
         _recolep_sel_tightcharge.push_back(_recolep_fakeable_tightcharge[i_lep]);
-        _recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
-        _recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
-        _recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
+        //_recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
+        //_recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
+        //_recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
 
       }  
 
@@ -9845,9 +9823,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
     _recolep_sel_tightcharge.clear();
-    _recolep_sel_isGenMatched.clear();
-    _recolep_sel_isGenChargeMatched.clear();
-    _recolep_sel_genMatchInd.clear();
+    //_recolep_sel_isGenMatched.clear();
+    //_recolep_sel_isGenChargeMatched.clear();
+    //_recolep_sel_genMatchInd.clear();
 
     _recotauh_sel_eta.clear();
     _recotauh_sel_phi.clear();
@@ -9887,9 +9865,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_px.clear();
     _recotauh_sel_py.clear();
     _recotauh_sel_pz.clear();
-    _recotauh_sel_isGenMatched.clear();
-    _recotauh_sel_isGenChargeMatched.clear();
-    _recotauh_sel_genMatchInd.clear();
+    //_recotauh_sel_isGenMatched.clear();
+    //_recotauh_sel_isGenChargeMatched.clear();
+    //_recotauh_sel_genMatchInd.clear();
     _recotauh_sel_againstMuonLoose3.clear();
     _recotauh_sel_againstMuonTight3.clear();
     _recotauh_sel_againstElectronVLooseMVA6.clear();
@@ -9974,9 +9952,9 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
         _recolep_sel_tightcharge.push_back(_recolep_fakeable_tightcharge[i_lep]);
-        _recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
-        _recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
-        _recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
+        //_recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
+        //_recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
+        //_recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
 
       }  
 
@@ -10213,9 +10191,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
     _recolep_sel_tightcharge.clear();
-    _recolep_sel_isGenMatched.clear();
-    _recolep_sel_isGenChargeMatched.clear();
-    _recolep_sel_genMatchInd.clear();
+    //_recolep_sel_isGenMatched.clear();
+    //_recolep_sel_isGenChargeMatched.clear();
+    //_recolep_sel_genMatchInd.clear();
 
     _recotauh_sel_eta.clear();
     _recotauh_sel_phi.clear();
@@ -10254,9 +10232,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_px.clear();
     _recotauh_sel_py.clear();
     _recotauh_sel_pz.clear();
-    _recotauh_sel_isGenMatched.clear();
-    _recotauh_sel_isGenChargeMatched.clear();
-    _recotauh_sel_genMatchInd.clear();
+    //_recotauh_sel_isGenMatched.clear();
+    //_recotauh_sel_isGenChargeMatched.clear();
+    //_recotauh_sel_genMatchInd.clear();
     _recotauh_sel_againstMuonLoose3.clear();
     _recotauh_sel_againstMuonTight3.clear();
     _recotauh_sel_againstElectronVLooseMVA6.clear();
@@ -10341,9 +10319,9 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
         _recolep_sel_tightcharge.push_back(_recolep_fakeable_tightcharge[i_lep]);
-        _recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
-        _recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
-        _recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
+        //_recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
+        //_recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
+        //_recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
 
       }  
 
@@ -10387,9 +10365,9 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_px.push_back((*_recotauh_px)[i_tau]);
         _recotauh_sel_py.push_back((*_recotauh_py)[i_tau]);
         _recotauh_sel_pz.push_back((*_recotauh_pz)[i_tau]);
-        _recotauh_sel_isGenMatched.push_back((*_recotauh_isGenMatched)[i_tau]);
-        _recotauh_sel_isGenChargeMatched.push_back((*_recotauh_isGenChargeMatched)[i_tau]);
-        _recotauh_sel_genMatchInd.push_back((*_recotauh_genMatchInd)[i_tau]);
+        //_recotauh_sel_isGenMatched.push_back((*_recotauh_isGenMatched)[i_tau]);
+        //_recotauh_sel_isGenChargeMatched.push_back((*_recotauh_isGenChargeMatched)[i_tau]);
+        //_recotauh_sel_genMatchInd.push_back((*_recotauh_genMatchInd)[i_tau]);
         _recotauh_sel_againstMuonLoose3.push_back((*_recotauh_againstMuonLoose3)[i_tau]);
         _recotauh_sel_againstMuonTight3.push_back((*_recotauh_againstMuonTight3)[i_tau]);
         _recotauh_sel_againstElectronVLooseMVA6.push_back((*_recotauh_againstElectronVLooseMVA6)[i_tau]);
@@ -10629,7 +10607,7 @@ void split_tree(TString filename_in, TString filename_out,
 
       if(isMC) {
 
-        _tauSF_weight = (1-0.11*_recotauh_sel_isGenMatched[0]);
+        //_tauSF_weight = (1-0.11*_recotauh_sel_isGenMatched[0]);
 
         _tauSF_weight_tauNormUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up[0];
         _tauSF_weight_tauNormDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down[0];
@@ -10670,9 +10648,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
     _recolep_sel_tightcharge.clear();
-    _recolep_sel_isGenMatched.clear();
-    _recolep_sel_isGenChargeMatched.clear();
-    _recolep_sel_genMatchInd.clear();
+    //_recolep_sel_isGenMatched.clear();
+    //_recolep_sel_isGenChargeMatched.clear();
+    //_recolep_sel_genMatchInd.clear();
 
     _recotauh_sel_eta.clear();
     _recotauh_sel_phi.clear();
@@ -10712,9 +10690,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_px.clear();
     _recotauh_sel_py.clear();
     _recotauh_sel_pz.clear();
-    _recotauh_sel_isGenMatched.clear();
-    _recotauh_sel_isGenChargeMatched.clear();
-    _recotauh_sel_genMatchInd.clear();
+    //_recotauh_sel_isGenMatched.clear();
+    //_recotauh_sel_isGenChargeMatched.clear();
+    //_recotauh_sel_genMatchInd.clear();
     _recotauh_sel_againstMuonLoose3.clear();
     _recotauh_sel_againstMuonTight3.clear();
     _recotauh_sel_againstElectronVLooseMVA6.clear();
@@ -10799,9 +10777,9 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
         _recolep_sel_tightcharge.push_back(_recolep_fakeable_tightcharge[i_lep]);
-        _recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
-        _recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
-        _recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
+        //_recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
+        //_recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
+        //_recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
 
       }  
 
@@ -11099,9 +11077,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
     _recolep_sel_tightcharge.clear();
-    _recolep_sel_isGenMatched.clear();
-    _recolep_sel_isGenChargeMatched.clear();
-    _recolep_sel_genMatchInd.clear();
+    //_recolep_sel_isGenMatched.clear();
+    //_recolep_sel_isGenChargeMatched.clear();
+    //_recolep_sel_genMatchInd.clear();
 
     _recotauh_sel_eta.clear();
     _recotauh_sel_phi.clear();
@@ -11141,9 +11119,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_px.clear();
     _recotauh_sel_py.clear();
     _recotauh_sel_pz.clear();
-    _recotauh_sel_isGenMatched.clear();
-    _recotauh_sel_isGenChargeMatched.clear();
-    _recotauh_sel_genMatchInd.clear();
+    //_recotauh_sel_isGenMatched.clear();
+    //_recotauh_sel_isGenChargeMatched.clear();
+    //_recotauh_sel_genMatchInd.clear();
     _recotauh_sel_againstMuonLoose3.clear();
     _recotauh_sel_againstMuonTight3.clear();
     _recotauh_sel_againstElectronVLooseMVA6.clear();
@@ -11228,9 +11206,9 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
         _recolep_sel_tightcharge.push_back(_recolep_fakeable_tightcharge[i_lep]);
-        _recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
-        _recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
-        _recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
+        //_recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
+        //_recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
+        //_recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
 
       }  
 
@@ -11528,9 +11506,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
     _recolep_sel_tightcharge.clear();
-    _recolep_sel_isGenMatched.clear();
-    _recolep_sel_isGenChargeMatched.clear();
-    _recolep_sel_genMatchInd.clear();
+    //_recolep_sel_isGenMatched.clear();
+    //_recolep_sel_isGenChargeMatched.clear();
+    //_recolep_sel_genMatchInd.clear();
 
     _recotauh_sel_eta.clear();
     _recotauh_sel_phi.clear();
@@ -11570,9 +11548,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_px.clear();
     _recotauh_sel_py.clear();
     _recotauh_sel_pz.clear();
-    _recotauh_sel_isGenMatched.clear();
-    _recotauh_sel_isGenChargeMatched.clear();
-    _recotauh_sel_genMatchInd.clear();
+    //_recotauh_sel_isGenMatched.clear();
+    //_recotauh_sel_isGenChargeMatched.clear();
+    //_recotauh_sel_genMatchInd.clear();
     _recotauh_sel_againstMuonLoose3.clear();
     _recotauh_sel_againstMuonTight3.clear();
     _recotauh_sel_againstElectronVLooseMVA6.clear();
@@ -11657,9 +11635,9 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
         _recolep_sel_tightcharge.push_back(_recolep_fakeable_tightcharge[i_lep]);
-        _recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
-        _recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
-        _recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
+        //_recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
+        //_recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
+        //_recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
 
       }  
 
@@ -11961,9 +11939,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
     _recolep_sel_tightcharge.clear();
-    _recolep_sel_isGenMatched.clear();
-    _recolep_sel_isGenChargeMatched.clear();
-    _recolep_sel_genMatchInd.clear();
+    //_recolep_sel_isGenMatched.clear();
+    //_recolep_sel_isGenChargeMatched.clear();
+    //_recolep_sel_genMatchInd.clear();
 
     _recotauh_sel_eta.clear();
     _recotauh_sel_phi.clear();
@@ -12003,9 +11981,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_px.clear();
     _recotauh_sel_py.clear();
     _recotauh_sel_pz.clear();
-    _recotauh_sel_isGenMatched.clear();
-    _recotauh_sel_isGenChargeMatched.clear();
-    _recotauh_sel_genMatchInd.clear();
+    //_recotauh_sel_isGenMatched.clear();
+    //_recotauh_sel_isGenChargeMatched.clear();
+    //_recotauh_sel_genMatchInd.clear();
     _recotauh_sel_againstMuonLoose3.clear();
     _recotauh_sel_againstMuonTight3.clear();
     _recotauh_sel_againstElectronVLooseMVA6.clear();
@@ -12088,9 +12066,9 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
         _recolep_sel_tightcharge.push_back(_recolep_fakeable_tightcharge[i_lep]);
-        _recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
-        _recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
-        _recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
+        //_recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
+        //_recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
+        //_recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
 
       }
 
@@ -12134,9 +12112,9 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_px.push_back((*_recotauh_px)[i_tau]);
         _recotauh_sel_py.push_back((*_recotauh_py)[i_tau]);
         _recotauh_sel_pz.push_back((*_recotauh_pz)[i_tau]);
-        _recotauh_sel_isGenMatched.push_back((*_recotauh_isGenMatched)[i_tau]);
-        _recotauh_sel_isGenChargeMatched.push_back((*_recotauh_isGenChargeMatched)[i_tau]);
-        _recotauh_sel_genMatchInd.push_back((*_recotauh_genMatchInd)[i_tau]);
+        //_recotauh_sel_isGenMatched.push_back((*_recotauh_isGenMatched)[i_tau]);
+        //_recotauh_sel_isGenChargeMatched.push_back((*_recotauh_isGenChargeMatched)[i_tau]);
+        //_recotauh_sel_genMatchInd.push_back((*_recotauh_genMatchInd)[i_tau]);
         _recotauh_sel_againstMuonLoose3.push_back((*_recotauh_againstMuonLoose3)[i_tau]);
         _recotauh_sel_againstMuonTight3.push_back((*_recotauh_againstMuonTight3)[i_tau]);
         _recotauh_sel_againstElectronVLooseMVA6.push_back((*_recotauh_againstElectronVLooseMVA6)[i_tau]);
@@ -12189,7 +12167,7 @@ void split_tree(TString filename_in, TString filename_out,
       
       if(isMC) {
 
-        _tauSF_weight = (1-0.11*_recotauh_sel_isGenMatched[0]);
+        //_tauSF_weight = (1-0.11*_recotauh_sel_isGenMatched[0]);
 
         _tauSF_weight_tauNormUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up[0];
         _tauSF_weight_tauNormDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down[0];
@@ -12230,9 +12208,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
     _recolep_sel_tightcharge.clear();
-    _recolep_sel_isGenMatched.clear();
-    _recolep_sel_isGenChargeMatched.clear();
-    _recolep_sel_genMatchInd.clear();
+    //_recolep_sel_isGenMatched.clear();
+    //_recolep_sel_isGenChargeMatched.clear();
+    //_recolep_sel_genMatchInd.clear();
 
     _recotauh_sel_eta.clear();
     _recotauh_sel_phi.clear();
@@ -12272,9 +12250,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_px.clear();
     _recotauh_sel_py.clear();
     _recotauh_sel_pz.clear();
-    _recotauh_sel_isGenMatched.clear();
-    _recotauh_sel_isGenChargeMatched.clear();
-    _recotauh_sel_genMatchInd.clear();
+    //_recotauh_sel_isGenMatched.clear();
+    //_recotauh_sel_isGenChargeMatched.clear();
+    //_recotauh_sel_genMatchInd.clear();
     _recotauh_sel_againstMuonLoose3.clear();
     _recotauh_sel_againstMuonTight3.clear();
     _recotauh_sel_againstElectronVLooseMVA6.clear();
@@ -12357,9 +12335,9 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
         _recolep_sel_tightcharge.push_back(_recolep_fakeable_tightcharge[i_lep]);
-        _recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
-        _recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
-        _recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
+        //_recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
+        //_recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
+        //_recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
 
       }
 
@@ -12415,9 +12393,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
     _recolep_sel_tightcharge.clear();
-    _recolep_sel_isGenMatched.clear();
-    _recolep_sel_isGenChargeMatched.clear();
-    _recolep_sel_genMatchInd.clear();
+    //_recolep_sel_isGenMatched.clear();
+    //_recolep_sel_isGenChargeMatched.clear();
+    //_recolep_sel_genMatchInd.clear();
 
     _recotauh_sel_eta.clear();
     _recotauh_sel_phi.clear();
@@ -12457,9 +12435,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_px.clear();
     _recotauh_sel_py.clear();
     _recotauh_sel_pz.clear();
-    _recotauh_sel_isGenMatched.clear();
-    _recotauh_sel_isGenChargeMatched.clear();
-    _recotauh_sel_genMatchInd.clear();
+    //_recotauh_sel_isGenMatched.clear();
+    //_recotauh_sel_isGenChargeMatched.clear();
+    //_recotauh_sel_genMatchInd.clear();
     _recotauh_sel_againstMuonLoose3.clear();
     _recotauh_sel_againstMuonTight3.clear();
     _recotauh_sel_againstElectronVLooseMVA6.clear();
@@ -12542,9 +12520,9 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
         _recolep_sel_tightcharge.push_back(_recolep_fakeable_tightcharge[i_lep]);
-        _recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
-        _recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
-        _recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
+        //_recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
+        //_recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
+        //_recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
 
       } 
 
@@ -12598,9 +12576,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recolep_sel_isfakeable.clear();
     _recolep_sel_ismvasel.clear();
     _recolep_sel_tightcharge.clear();
-    _recolep_sel_isGenMatched.clear();
-    _recolep_sel_isGenChargeMatched.clear();
-    _recolep_sel_genMatchInd.clear();
+    //_recolep_sel_isGenMatched.clear();
+    //_recolep_sel_isGenChargeMatched.clear();
+    //_recolep_sel_genMatchInd.clear();
 
     _recotauh_sel_eta.clear();
     _recotauh_sel_phi.clear();
@@ -12640,9 +12618,9 @@ void split_tree(TString filename_in, TString filename_out,
     _recotauh_sel_px.clear();
     _recotauh_sel_py.clear();
     _recotauh_sel_pz.clear();
-    _recotauh_sel_isGenMatched.clear();
-    _recotauh_sel_isGenChargeMatched.clear();
-    _recotauh_sel_genMatchInd.clear();
+    //_recotauh_sel_isGenMatched.clear();
+    //_recotauh_sel_isGenChargeMatched.clear();
+    //_recotauh_sel_genMatchInd.clear();
     _recotauh_sel_againstMuonLoose3.clear();
     _recotauh_sel_againstMuonTight3.clear();
     _recotauh_sel_againstElectronVLooseMVA6.clear();
@@ -12725,9 +12703,9 @@ void split_tree(TString filename_in, TString filename_out,
         _recolep_sel_isfakeable.push_back(_recolep_fakeable_isfakeable[i_lep]);
         _recolep_sel_ismvasel.push_back(_recolep_fakeable_ismvasel[i_lep]);
         _recolep_sel_tightcharge.push_back(_recolep_fakeable_tightcharge[i_lep]);
-        _recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
-        _recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
-        _recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
+        //_recolep_sel_isGenMatched.push_back(_recolep_fakeable_isGenMatched[i_lep]);
+        //_recolep_sel_isGenChargeMatched.push_back(_recolep_fakeable_isGenChargeMatched[i_lep]);
+        //_recolep_sel_genMatchInd.push_back(_recolep_fakeable_genMatchInd[i_lep]);
 
       } 
 
@@ -12771,9 +12749,9 @@ void split_tree(TString filename_in, TString filename_out,
         _recotauh_sel_px.push_back((*_recotauh_px)[i_tau]);
         _recotauh_sel_py.push_back((*_recotauh_py)[i_tau]);
         _recotauh_sel_pz.push_back((*_recotauh_pz)[i_tau]);
-        _recotauh_sel_isGenMatched.push_back((*_recotauh_isGenMatched)[i_tau]);
-        _recotauh_sel_isGenChargeMatched.push_back((*_recotauh_isGenChargeMatched)[i_tau]);
-        _recotauh_sel_genMatchInd.push_back((*_recotauh_genMatchInd)[i_tau]);
+        //_recotauh_sel_isGenMatched.push_back((*_recotauh_isGenMatched)[i_tau]);
+        //_recotauh_sel_isGenChargeMatched.push_back((*_recotauh_isGenChargeMatched)[i_tau]);
+        //_recotauh_sel_genMatchInd.push_back((*_recotauh_genMatchInd)[i_tau]);
         _recotauh_sel_againstMuonLoose3.push_back((*_recotauh_againstMuonLoose3)[i_tau]);
         _recotauh_sel_againstMuonTight3.push_back((*_recotauh_againstMuonTight3)[i_tau]);
         _recotauh_sel_againstElectronVLooseMVA6.push_back((*_recotauh_againstElectronVLooseMVA6)[i_tau]);
@@ -12819,7 +12797,7 @@ void split_tree(TString filename_in, TString filename_out,
 
       if(isMC) {
 
-        _tauSF_weight = (1-0.11*_recotauh_sel_isGenMatched[0]);
+        //_tauSF_weight = (1-0.11*_recotauh_sel_isGenMatched[0]);
 
         _tauSF_weight_tauNormUp *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Up[0];
         _tauSF_weight_tauNormDown *= _recotauh_sel_fakerate_byMediumIsolationMVArun2v2017v2DBdR03oldDMwLT_par1Down[0];

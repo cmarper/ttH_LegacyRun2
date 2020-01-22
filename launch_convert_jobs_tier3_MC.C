@@ -453,6 +453,36 @@ void create_scripts_all(){
     create_scripts("Oct19v1_MC_2018_TTJets_SingleLeptFromT",15,"2018","MC");            // DONE
     create_scripts("Oct19v2_MC_2018_TTJets_SingleLeptFromTbar",9,"2018","MC");          // DONE
     */
+
+    /*create_scripts("Oct19v1_MC_2016_WZTo2L2Q",1,"2016","MC"); // DONE
+    create_scripts("Oct19v1_MC_2016_ZZTo2L2Q",1,"2016","MC"); // DONE
+    create_scripts("Oct19v2_MC_2017_WZTo2L2Q",4,"2017","MC"); // DONE
+    create_scripts("Oct19v1_MC_2017_ZZTo2L2Q",4,"2017","MC"); // DONE
+    create_scripts("Oct19v1_MC_2018_WZTo2L2Q",5,"2018","MC"); // DONE
+    create_scripts("Oct19v1_MC_2018_ZZTo2L2Q",4,"2018","MC"); // DONE
+
+    create_scripts("Oct19v1_MC_2017_MadGraph_TTTo2L2Nu",1,"2017","MC"); // DONE
+    create_scripts("Oct19v1_MC_2017_MadGraph_TTTo2L2Nu_PS",10,"2017","MC"); // DONE
+    create_scripts("Oct19v1_MC_2017_MadGraph_TTToSemiLeptonic",8,"2017","MC"); // DONE
+    create_scripts("Oct19v1_MC_2017_MadGraph_TTToSemiLeptonic_PS",10,"2017","MC"); // DONE
+    create_scripts("Oct19v1_MC_2017_MadGraph_TTToHadronic",6,"2017","MC"); // DONE
+    create_scripts("Oct19v1_MC_2017_MadGraph_TTToHadronic_PS",10,"2017","MC"); // DONE
+
+    create_scripts("Oct19v1_MC_2018_MadGraph_TTTo2L2Nu",9,"2018","MC"); // DONE
+    create_scripts("Oct19v1_MC_2018_MadGraph_TTToSemiLeptonic",10,"2018","MC"); // DONE
+    create_scripts("Oct19v1_MC_2018_MadGraph_TTToHadronic",10,"2018","MC"); // DONE*/
+
+    //create_scripts("Oct19v4_MC_2016_MadGraph_TTTo2L2Nu",1,"2016","MC"); // DONE
+    //create_scripts("Oct19v4_MC_2016_MadGraph_TTTo2L2Nu_PS",7,"2016","MC"); // DONE
+    //create_scripts("Oct19v4_MC_2016_MadGraph_TTToSemiLeptonic",6,"2016","MC"); // DONE
+    //create_scripts("Oct19v4_MC_2016_MadGraph_TTToSemiLeptonic_PS",8,"2016","MC");// DONE
+    //create_scripts("Oct19v4_MC_2016_MadGraph_TTToHadronic",4,"2016","MC"); //DONE
+    //create_scripts("Oct19v4_MC_2016_MadGraph_TTToHadronic_PS",4,"2016","MC");//DONE
+
+    create_scripts("Oct19v1_MC_2016_WGToLNuG_01J",3,"2016","MC"); // 1,2,3->repeat
+    create_scripts("Oct19v1_MC_2017_WGToLNuG_01J",4,"2017","MC"); // 0,2,3,4->done / 1->repeat
+    create_scripts("Oct19v1_MC_2018_WGToLNuG_01J",4,"2018","MC"); // 1,4->done / 0,2,3->repeat
+
     
 }
 
@@ -791,8 +821,37 @@ void launch_scripts_all(){
     //launch_scripts("Oct19v3_MC_2016_VBFHToBB",0,"2016","MC");
     //launch_scripts("Oct19v6_MC_2016_GluGluHToBB_ext1",0,"2016","MC");
 
-    launch_scripts("Oct19v4_MC_2016_GluGluToHHTo2B2VTo2L2Nu_node_4",0,"2016","MC");
-    launch_scripts("Oct19v4_MC_2018_ZZTo4L_ext2",14,"2018","MC");
+    //launch_scripts("Oct19v4_MC_2016_GluGluToHHTo2B2VTo2L2Nu_node_4",0,"2016","MC");
+    //launch_scripts("Oct19v4_MC_2018_ZZTo4L_ext2",14,"2018","MC");
+
+    /*launch_scripts("Oct19v1_MC_2016_WZTo2L2Q",1,"2016","MC");
+    launch_scripts("Oct19v1_MC_2016_ZZTo2L2Q",1,"2016","MC");
+    launch_scripts("Oct19v2_MC_2017_WZTo2L2Q",4,"2017","MC"); 
+    launch_scripts("Oct19v1_MC_2017_ZZTo2L2Q",4,"2017","MC");
+    launch_scripts("Oct19v1_MC_2018_WZTo2L2Q",5,"2018","MC");
+    launch_scripts("Oct19v1_MC_2018_ZZTo2L2Q",4,"2018","MC");
+
+    launch_scripts("Oct19v1_MC_2017_MadGraph_TTTo2L2Nu",1,"2017","MC");
+    launch_scripts("Oct19v1_MC_2017_MadGraph_TTTo2L2Nu_PS",10,"2017","MC");
+    launch_scripts("Oct19v1_MC_2017_MadGraph_TTToSemiLeptonic",8,"2017","MC");
+    launch_scripts("Oct19v1_MC_2017_MadGraph_TTToSemiLeptonic_PS",10,"2017","MC");
+    launch_scripts("Oct19v1_MC_2017_MadGraph_TTToHadronic",6,"2017","MC");
+    launch_scripts("Oct19v1_MC_2017_MadGraph_TTToHadronic_PS",10,"2017","MC");
+
+    launch_scripts("Oct19v1_MC_2018_MadGraph_TTTo2L2Nu",9,"2018","MC");
+    launch_scripts("Oct19v1_MC_2018_MadGraph_TTToSemiLeptonic",10,"2018","MC");
+    launch_scripts("Oct19v1_MC_2018_MadGraph_TTToHadronic",10,"2018","MC");*/
+
+    //launch_scripts("Oct19v4_MC_2016_MadGraph_TTTo2L2Nu",1,"2016","MC");
+    //launch_scripts("Oct19v4_MC_2016_MadGraph_TTTo2L2Nu_PS",10,"2016","MC");
+    //launch_scripts("Oct19v4_MC_2016_MadGraph_TTToSemiLeptonic",8,"2016","MC");
+    //launch_scripts("Oct19v4_MC_2016_MadGraph_TTToSemiLeptonic_PS",10,"2016","MC");
+    //launch_scripts("Oct19v4_MC_2016_MadGraph_TTToHadronic",6,"2016","MC");
+    //launch_scripts("Oct19v4_MC_2016_MadGraph_TTToHadronic_PS",10,"2016","MC");
+
+    launch_scripts("Oct19v1_MC_2016_WGToLNuG_01J",3,"2016","MC");
+    launch_scripts("Oct19v1_MC_2017_WGToLNuG_01J",4,"2017","MC");
+    launch_scripts("Oct19v1_MC_2018_WGToLNuG_01J",4,"2018","MC");
 
 }
 
