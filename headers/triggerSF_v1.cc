@@ -97,9 +97,12 @@ TGraphAsymmErrors *g_Eleleg_ZMassEtaLt1p48_Data = NULL;
 TGraphAsymmErrors *g_Eleleg_ZMassEta1p48to2p1_Data = NULL;
 
 // tau leg of lepton-tau cross triggers
-SFProvider* tauTrigSFhelper_mutau = NULL;
-SFProvider* tauTrigSFhelper_etau = NULL;
-SFProvider* tauTrigSFhelper_ditau = NULL;
+SFProvider* tauTrigSFhelper_mutau_VVLWP = NULL;
+SFProvider* tauTrigSFhelper_mutau_MWP = NULL;
+SFProvider* tauTrigSFhelper_etau_VVLWP = NULL;
+SFProvider* tauTrigSFhelper_etau_MWP = NULL;
+SFProvider* tauTrigSFhelper_ditau_VVLWP = NULL;
+SFProvider* tauTrigSFhelper_ditau_LWP = NULL;
 
 
 void setup_triggerSF_files(int year){
@@ -149,17 +152,29 @@ void setup_triggerSF_files(int year){
 
   std::string dirtauSF = "TauTriggerSFs/data/";
 
-  tauTrigSFhelper_mutau = new SFProvider(dirtauSF+"2016_tauTriggerEff_DeepTau2017v2p1.root","mutau","Medium");   
-  if(year==2017) tauTrigSFhelper_mutau = new SFProvider(dirtauSF+"2017_tauTriggerEff_DeepTau2017v2p1.root","mutau","Medium");   
-  if(year==2018) tauTrigSFhelper_mutau = new SFProvider(dirtauSF+"2018_tauTriggerEff_DeepTau2017v2p1.root","mutau","Medium"); 
+  tauTrigSFhelper_mutau_VVLWP = new SFProvider(dirtauSF+"2016_tauTriggerEff_DeepTau2017v2p1.root","mutau","VVLoose");   
+  if(year==2017) tauTrigSFhelper_mutau_VVLWP = new SFProvider(dirtauSF+"2017_tauTriggerEff_DeepTau2017v2p1.root","mutau","VVLoose");   
+  if(year==2018) tauTrigSFhelper_mutau_VVLWP = new SFProvider(dirtauSF+"2018_tauTriggerEff_DeepTau2017v2p1.root","mutau","VVLoose");
 
-  tauTrigSFhelper_etau = new SFProvider(dirtauSF+"2016_tauTriggerEff_DeepTau2017v2p1.root","etau","Medium");   
-  if(year==2017) tauTrigSFhelper_etau = new SFProvider(dirtauSF+"2017_tauTriggerEff_DeepTau2017v2p1.root","etau","Medium");   
-  if(year==2018) tauTrigSFhelper_etau = new SFProvider(dirtauSF+"2018_tauTriggerEff_DeepTau2017v2p1.root","etau","Medium"); 
+  tauTrigSFhelper_mutau_MWP = new SFProvider(dirtauSF+"2016_tauTriggerEff_DeepTau2017v2p1.root","mutau","Medium");   
+  if(year==2017) tauTrigSFhelper_mutau_MWP = new SFProvider(dirtauSF+"2017_tauTriggerEff_DeepTau2017v2p1.root","mutau","Medium");   
+  if(year==2018) tauTrigSFhelper_mutau_MWP = new SFProvider(dirtauSF+"2018_tauTriggerEff_DeepTau2017v2p1.root","mutau","Medium"); 
 
-  tauTrigSFhelper_ditau = new SFProvider(dirtauSF+"2016_tauTriggerEff_DeepTau2017v2p1.root","ditau","Loose");   
-  if(year==2017) tauTrigSFhelper_ditau = new SFProvider(dirtauSF+"2017_tauTriggerEff_DeepTau2017v2p1.root","ditau","Loose");   
-  if(year==2018) tauTrigSFhelper_ditau = new SFProvider(dirtauSF+"2018_tauTriggerEff_DeepTau2017v2p1.root","ditau","Loose");   
+  tauTrigSFhelper_etau_VVLWP = new SFProvider(dirtauSF+"2016_tauTriggerEff_DeepTau2017v2p1.root","etau","VVLoose");   
+  if(year==2017) tauTrigSFhelper_etau_VVLWP = new SFProvider(dirtauSF+"2017_tauTriggerEff_DeepTau2017v2p1.root","etau","VVLoose");   
+  if(year==2018) tauTrigSFhelper_etau_VVLWP = new SFProvider(dirtauSF+"2018_tauTriggerEff_DeepTau2017v2p1.root","etau","VVLoose"); 
+
+  tauTrigSFhelper_etau_MWP = new SFProvider(dirtauSF+"2016_tauTriggerEff_DeepTau2017v2p1.root","etau","Medium");   
+  if(year==2017) tauTrigSFhelper_etau_MWP = new SFProvider(dirtauSF+"2017_tauTriggerEff_DeepTau2017v2p1.root","etau","Medium");   
+  if(year==2018) tauTrigSFhelper_etau_MWP = new SFProvider(dirtauSF+"2018_tauTriggerEff_DeepTau2017v2p1.root","etau","Medium"); 
+
+  tauTrigSFhelper_ditau_VVLWP = new SFProvider(dirtauSF+"2016_tauTriggerEff_DeepTau2017v2p1.root","ditau","VVLoose");   
+  if(year==2017) tauTrigSFhelper_ditau_VVLWP = new SFProvider(dirtauSF+"2017_tauTriggerEff_DeepTau2017v2p1.root","ditau","VVLoose");   
+  if(year==2018) tauTrigSFhelper_ditau_VVLWP = new SFProvider(dirtauSF+"2018_tauTriggerEff_DeepTau2017v2p1.root","ditau","VVLoose");  
+
+  tauTrigSFhelper_ditau_LWP = new SFProvider(dirtauSF+"2016_tauTriggerEff_DeepTau2017v2p1.root","ditau","Loose");   
+  if(year==2017) tauTrigSFhelper_ditau_LWP = new SFProvider(dirtauSF+"2017_tauTriggerEff_DeepTau2017v2p1.root","ditau","Loose");   
+  if(year==2018) tauTrigSFhelper_ditau_LWP = new SFProvider(dirtauSF+"2018_tauTriggerEff_DeepTau2017v2p1.root","ditau","Loose");      
 
 }
 
@@ -174,9 +189,12 @@ void close_triggerSF_files(){
   delete file_Ele_SingleElE_hlt_eff;
   delete file_Mu_MuTau_hlt_eff;
   delete file_Ele_EleTau_hlt_eff;
-  delete tauTrigSFhelper_mutau;
-  delete tauTrigSFhelper_etau;
-  delete tauTrigSFhelper_ditau;
+  delete tauTrigSFhelper_mutau_VVLWP;
+  delete tauTrigSFhelper_mutau_MWP;
+  delete tauTrigSFhelper_etau_VVLWP;
+  delete tauTrigSFhelper_etau_MWP;
+  delete tauTrigSFhelper_ditau_VVLWP;
+  delete tauTrigSFhelper_ditau_LWP;
 
 }
 
@@ -303,11 +321,11 @@ float get_eff_lepton_crosstrigger(float pt, float eta, int pdgid, bool isdata)
 
 
 float get_triggerSF_1lep2tau( double lep_pt, double lep_eta, double lep_pdg, 
-                      double tau1_pt, double tau1_eta, double tau1_phi, double tau1_dm,
-                      double tau2_pt, double tau2_eta, double tau2_phi, double tau2_dm,
+                      double tau1_pt, double tau1_eta, double tau1_phi, double tau1_dm, TString tau1_WP,
+                      double tau2_pt, double tau2_eta, double tau2_phi, double tau2_dm, TString tau2_WP,
                       bool passHLT1l, bool passHLT1l1tau, int year, int shift) {
 
-  setup_triggerSF_files(year);
+  setup_triggerSF_files(year); 
 
   // NOMINAL
   
@@ -316,67 +334,132 @@ float get_triggerSF_1lep2tau( double lep_pt, double lep_eta, double lep_pdg,
   float eff_l_data = get_eff_lepton_crosstrigger(lep_pt, lep_eta,lep_pdg, true);
   float eff_l_mc = get_eff_lepton_crosstrigger(lep_pt, lep_eta,lep_pdg, false);
 
-  float eff_t1_data, eff_t1_mc, eff_t2_data, eff_t2_mc;
+  float eff_t1_data = 1.;
+  float eff_t1_mc = 1.;
+  float eff_t2_data = 1.;
+  float eff_t2_mc = 1.;
+  float eff_t1_data_up = 1.;
+  float eff_t1_mc_up = 1.;
+  float eff_t2_data_up = 1.;
+  float eff_t2_mc_up = 1.;
+  float eff_t1_data_down = 1.;
+  float eff_t1_mc_down = 1.;
+  float eff_t2_data_down = 1.;
+  float eff_t2_mc_down = 1.;
 
   if ( tau1_dm == 5 || tau1_dm == 6) tau1_dm = 10; //dummy new DMs
   if ( tau2_dm == 5 || tau2_dm == 6) tau2_dm = 10; //dummy new DMs
   
   if (fabs(lep_pdg)==11) { // ele+tau
-    eff_t1_data = tauTrigSFhelper_etau->getEfficiencyData(tau1_pt,tau1_dm); 
-    eff_t1_mc = tauTrigSFhelper_etau->getEfficiencyMC(tau1_pt,tau1_dm);
-    eff_t2_data = tauTrigSFhelper_etau->getEfficiencyData(tau2_pt,tau2_dm);
-    eff_t2_mc = tauTrigSFhelper_etau->getEfficiencyMC(tau2_pt,tau2_dm);
+
+    if(tau1_WP=="VVLoose"){
+
+      eff_t1_data = tauTrigSFhelper_etau_VVLWP->getEfficiencyData(tau1_pt,tau1_dm); 
+      eff_t1_mc = tauTrigSFhelper_etau_VVLWP->getEfficiencyMC(tau1_pt,tau1_dm);
+      eff_t1_data_up = tauTrigSFhelper_etau_VVLWP->getEfficiencyData(tau1_pt,tau1_dm,+1); 
+      eff_t1_mc_up = tauTrigSFhelper_etau_VVLWP->getEfficiencyMC(tau1_pt,tau1_dm,+1);
+      eff_t1_data_down = tauTrigSFhelper_etau_VVLWP->getEfficiencyData(tau1_pt,tau1_dm,-1); 
+      eff_t1_mc_down = tauTrigSFhelper_etau_VVLWP->getEfficiencyMC(tau1_pt,tau1_dm,-1);
+
+    }
+
+    else if(tau1_WP=="Medium"){
+
+      eff_t1_data = tauTrigSFhelper_etau_MWP->getEfficiencyData(tau1_pt,tau1_dm); 
+      eff_t1_mc = tauTrigSFhelper_etau_MWP->getEfficiencyMC(tau1_pt,tau1_dm);
+      eff_t1_data_up = tauTrigSFhelper_etau_MWP->getEfficiencyData(tau1_pt,tau1_dm,+1); 
+      eff_t1_mc_up = tauTrigSFhelper_etau_MWP->getEfficiencyMC(tau1_pt,tau1_dm,+1);
+      eff_t1_data_down = tauTrigSFhelper_etau_MWP->getEfficiencyData(tau1_pt,tau1_dm,-1); 
+      eff_t1_mc_down = tauTrigSFhelper_etau_MWP->getEfficiencyMC(tau1_pt,tau1_dm,-1);
+
+    }
+
+    if(tau2_WP=="VVLoose"){
+
+      eff_t2_data = tauTrigSFhelper_etau_VVLWP->getEfficiencyData(tau2_pt,tau2_dm); 
+      eff_t2_mc = tauTrigSFhelper_etau_VVLWP->getEfficiencyMC(tau2_pt,tau2_dm);
+      eff_t2_data_up = tauTrigSFhelper_etau_VVLWP->getEfficiencyData(tau2_pt,tau2_dm,+1); 
+      eff_t2_mc_up = tauTrigSFhelper_etau_VVLWP->getEfficiencyMC(tau2_pt,tau2_dm,+1);
+      eff_t2_data_down = tauTrigSFhelper_etau_VVLWP->getEfficiencyData(tau2_pt,tau2_dm,-1); 
+      eff_t2_mc_down = tauTrigSFhelper_etau_VVLWP->getEfficiencyMC(tau2_pt,tau2_dm,-1);
+
+    }
+
+    else if(tau2_WP=="Medium"){
+
+      eff_t2_data = tauTrigSFhelper_etau_MWP->getEfficiencyData(tau2_pt,tau2_dm); 
+      eff_t2_mc = tauTrigSFhelper_etau_MWP->getEfficiencyMC(tau2_pt,tau2_dm);
+      eff_t2_data_up = tauTrigSFhelper_etau_MWP->getEfficiencyData(tau2_pt,tau2_dm,+1); 
+      eff_t2_mc_up = tauTrigSFhelper_etau_MWP->getEfficiencyMC(tau2_pt,tau2_dm,+1);
+      eff_t2_data_down = tauTrigSFhelper_etau_MWP->getEfficiencyData(tau2_pt,tau2_dm,-1); 
+      eff_t2_mc_down = tauTrigSFhelper_etau_MWP->getEfficiencyMC(tau2_pt,tau2_dm,-1);
+
+    }
+
   }
+
   else {
-    eff_t1_data = tauTrigSFhelper_mutau->getEfficiencyData(tau1_pt,tau1_dm); 
-    eff_t1_mc = tauTrigSFhelper_mutau->getEfficiencyMC(tau1_pt,tau1_dm);
-    eff_t2_data = tauTrigSFhelper_mutau->getEfficiencyData(tau2_pt,tau2_dm);
-    eff_t2_mc = tauTrigSFhelper_mutau->getEfficiencyMC(tau2_pt,tau2_dm);
+
+    if(tau1_WP=="VVLoose"){
+
+      eff_t1_data = tauTrigSFhelper_mutau_VVLWP->getEfficiencyData(tau1_pt,tau1_dm); 
+      eff_t1_mc = tauTrigSFhelper_mutau_VVLWP->getEfficiencyMC(tau1_pt,tau1_dm);
+      eff_t1_data_up = tauTrigSFhelper_mutau_VVLWP->getEfficiencyData(tau1_pt,tau1_dm,+1); 
+      eff_t1_mc_up = tauTrigSFhelper_mutau_VVLWP->getEfficiencyMC(tau1_pt,tau1_dm,+1);
+      eff_t1_data_down = tauTrigSFhelper_mutau_VVLWP->getEfficiencyData(tau1_pt,tau1_dm,-1); 
+      eff_t1_mc_down = tauTrigSFhelper_mutau_VVLWP->getEfficiencyMC(tau1_pt,tau1_dm,-1);
+
+    }
+
+    else if(tau1_WP=="Medium"){
+
+      eff_t1_data = tauTrigSFhelper_mutau_MWP->getEfficiencyData(tau1_pt,tau1_dm); 
+      eff_t1_mc = tauTrigSFhelper_mutau_MWP->getEfficiencyMC(tau1_pt,tau1_dm);
+      eff_t1_data_up = tauTrigSFhelper_mutau_MWP->getEfficiencyData(tau1_pt,tau1_dm,+1); 
+      eff_t1_mc_up = tauTrigSFhelper_mutau_MWP->getEfficiencyMC(tau1_pt,tau1_dm,+1);
+      eff_t1_data_down = tauTrigSFhelper_mutau_MWP->getEfficiencyData(tau1_pt,tau1_dm,-1); 
+      eff_t1_mc_down = tauTrigSFhelper_mutau_MWP->getEfficiencyMC(tau1_pt,tau1_dm,-1);
+
+    }
+
+    if(tau2_WP=="VVLoose"){
+
+      eff_t2_data = tauTrigSFhelper_mutau_VVLWP->getEfficiencyData(tau2_pt,tau2_dm); 
+      eff_t2_mc = tauTrigSFhelper_mutau_VVLWP->getEfficiencyMC(tau2_pt,tau2_dm);
+      eff_t2_data_up = tauTrigSFhelper_mutau_VVLWP->getEfficiencyData(tau2_pt,tau2_dm,+1); 
+      eff_t2_mc_up = tauTrigSFhelper_mutau_VVLWP->getEfficiencyMC(tau2_pt,tau2_dm,+1);
+      eff_t2_data_down = tauTrigSFhelper_mutau_VVLWP->getEfficiencyData(tau2_pt,tau2_dm,-1); 
+      eff_t2_mc_down = tauTrigSFhelper_mutau_VVLWP->getEfficiencyMC(tau2_pt,tau2_dm,-1);
+
+    }
+
+    else if(tau2_WP=="Medium"){
+
+      eff_t2_data = tauTrigSFhelper_mutau_MWP->getEfficiencyData(tau2_pt,tau2_dm); 
+      eff_t2_mc = tauTrigSFhelper_mutau_MWP->getEfficiencyMC(tau2_pt,tau2_dm);
+      eff_t2_data_up = tauTrigSFhelper_mutau_MWP->getEfficiencyData(tau2_pt,tau2_dm,+1); 
+      eff_t2_mc_up = tauTrigSFhelper_mutau_MWP->getEfficiencyMC(tau2_pt,tau2_dm,+1);
+      eff_t2_data_down = tauTrigSFhelper_mutau_MWP->getEfficiencyData(tau2_pt,tau2_dm,-1); 
+      eff_t2_mc_down = tauTrigSFhelper_mutau_MWP->getEfficiencyMC(tau2_pt,tau2_dm,-1);
+
+    }
+
   }
  
   float eff_data, eff_mc;
-
-  eff_data = compute_eff_1l2tau(eff_L_data,eff_l_data,eff_t1_data, eff_t2_data, passHLT1l, passHLT1l1tau);
-  eff_mc = compute_eff_1l2tau(eff_L_mc, eff_l_mc, eff_t1_mc, eff_t2_mc, passHLT1l, passHLT1l1tau);
-  
-  float sf_nominal = std::min( eff_data/std::max(1.e-6f, eff_mc), 1.e+1f);
-
-  // UP/DOWN
-
-  float eff_t1_data_up, eff_t1_mc_up, eff_t2_data_up, eff_t2_mc_up;
-  float eff_t1_data_down, eff_t1_mc_down, eff_t2_data_down, eff_t2_mc_down;
-
-  if (fabs(lep_pdg)==11) { // ele+tau
-    eff_t1_data_up = tauTrigSFhelper_etau->getEfficiencyData(tau1_pt,tau1_dm,+1); 
-    eff_t1_mc_up = tauTrigSFhelper_etau->getEfficiencyMC(tau1_pt,tau1_dm,+1);
-    eff_t2_data_up = tauTrigSFhelper_etau->getEfficiencyData(tau2_pt,tau2_dm,+1);
-    eff_t2_mc_up = tauTrigSFhelper_etau->getEfficiencyMC(tau2_pt,tau2_dm,+1);
-    eff_t1_data_down = tauTrigSFhelper_etau->getEfficiencyData(tau1_pt,tau1_dm,-1); 
-    eff_t1_mc_down = tauTrigSFhelper_etau->getEfficiencyMC(tau1_pt,tau1_dm,-1);
-    eff_t2_data_down = tauTrigSFhelper_etau->getEfficiencyData(tau2_pt,tau2_dm,-1);
-    eff_t2_mc_down = tauTrigSFhelper_etau->getEfficiencyMC(tau2_pt,tau2_dm,-1);
-  }
-  else {
-    eff_t1_data_up = tauTrigSFhelper_mutau->getEfficiencyData(tau1_pt,tau1_dm,+1); 
-    eff_t1_mc_up = tauTrigSFhelper_mutau->getEfficiencyMC(tau1_pt,tau1_dm,+1); 
-    eff_t2_data_up = tauTrigSFhelper_mutau->getEfficiencyData(tau2_pt,tau2_dm,+1); 
-    eff_t2_mc_up = tauTrigSFhelper_mutau->getEfficiencyMC(tau2_pt,tau2_dm,+1); 
-    eff_t1_data_down = tauTrigSFhelper_mutau->getEfficiencyData(tau1_pt,tau1_dm,-1); 
-    eff_t1_mc_down = tauTrigSFhelper_mutau->getEfficiencyMC(tau1_pt,tau1_dm,-1); 
-    eff_t2_data_down = tauTrigSFhelper_mutau->getEfficiencyData(tau2_pt,tau2_dm,-1); 
-    eff_t2_mc_down = tauTrigSFhelper_mutau->getEfficiencyMC(tau2_pt,tau2_dm,-1); 
-  }
-
   float eff_data_up, eff_mc_up;
   float eff_data_down, eff_mc_down;
 
+  eff_data = compute_eff_1l2tau(eff_L_data,eff_l_data,eff_t1_data, eff_t2_data, passHLT1l, passHLT1l1tau);
+  eff_mc = compute_eff_1l2tau(eff_L_mc, eff_l_mc, eff_t1_mc, eff_t2_mc, passHLT1l, passHLT1l1tau);
   eff_data_up = compute_eff_1l2tau(eff_L_data,eff_l_data,eff_t1_data_up, eff_t2_data_up, passHLT1l, passHLT1l1tau);
   eff_mc_up = compute_eff_1l2tau(eff_L_mc, eff_l_mc, eff_t1_mc_up, eff_t2_mc_up, passHLT1l, passHLT1l1tau);
   eff_data_down = compute_eff_1l2tau(eff_L_data,eff_l_data,eff_t1_data_down, eff_t2_data_down, passHLT1l, passHLT1l1tau);
   eff_mc_down = compute_eff_1l2tau(eff_L_mc, eff_l_mc, eff_t1_mc_down, eff_t2_mc_down, passHLT1l, passHLT1l1tau);
 
-  float sf_up = std::min( eff_data_up/std::max(1.e-6f, eff_mc_up), 1.e+1f);
-  float sf_down = std::min( eff_data_down/std::max(1.e-6f, eff_mc_down), 1.e+1f);
+  float sf_nominal = std::min( eff_data/std::max(1.e-6f, eff_mc), 1.e+1f);
+  float sf_up = std::min( eff_data_up/std::max(1.e-6f, eff_mc_down), 1.e+1f);
+  float sf_down = std::min( eff_data_down/std::max(1.e-6f, eff_mc_up), 1.e+1f);
 
   close_triggerSF_files();
 
@@ -390,11 +473,12 @@ float get_triggerSF_1lep2tau( double lep_pt, double lep_eta, double lep_pdg,
  
 }
 
+
 float get_triggerSF_1lep1tau( double lep_pt, double lep_eta, double lep_pdg, 
-                      double tau1_pt, double tau1_eta, double tau1_phi, double tau1_dm,
+                      double tau1_pt, double tau1_eta, double tau1_phi, double tau1_dm, TString tau1_WP,
                       bool passHLT1l, bool passHLT1l1tau, int year, int shift) {
 
-  setup_triggerSF_files(year);
+  setup_triggerSF_files(year); 
 
   // NOMINAL
   
@@ -403,54 +487,80 @@ float get_triggerSF_1lep1tau( double lep_pt, double lep_eta, double lep_pdg,
   float eff_l_data = get_eff_lepton_crosstrigger(lep_pt, lep_eta,lep_pdg, true);
   float eff_l_mc = get_eff_lepton_crosstrigger(lep_pt, lep_eta,lep_pdg, false);
 
-  float eff_t1_data, eff_t1_mc;
+  float eff_t1_data = 1.;
+  float eff_t1_mc = 1.;
+  float eff_t1_data_up = 1.;
+  float eff_t1_mc_up = 1.;
+  float eff_t1_data_down = 1.;
+  float eff_t1_mc_down = 1.;
 
   if ( tau1_dm == 5 || tau1_dm == 6) tau1_dm = 10; //dummy new DMs
   
   if (fabs(lep_pdg)==11) { // ele+tau
-    eff_t1_data = tauTrigSFhelper_etau->getEfficiencyData(tau1_pt,tau1_dm); 
-    eff_t1_mc = tauTrigSFhelper_etau->getEfficiencyMC(tau1_pt,tau1_dm);
+
+    if(tau1_WP=="VVLoose"){
+
+      eff_t1_data = tauTrigSFhelper_etau_VVLWP->getEfficiencyData(tau1_pt,tau1_dm); 
+      eff_t1_mc = tauTrigSFhelper_etau_VVLWP->getEfficiencyMC(tau1_pt,tau1_dm);
+      eff_t1_data_up = tauTrigSFhelper_etau_VVLWP->getEfficiencyData(tau1_pt,tau1_dm,+1); 
+      eff_t1_mc_up = tauTrigSFhelper_etau_VVLWP->getEfficiencyMC(tau1_pt,tau1_dm,+1);
+      eff_t1_data_down = tauTrigSFhelper_etau_VVLWP->getEfficiencyData(tau1_pt,tau1_dm,-1); 
+      eff_t1_mc_down = tauTrigSFhelper_etau_VVLWP->getEfficiencyMC(tau1_pt,tau1_dm,-1);
+
+    }
+
+    else if(tau1_WP=="Medium"){
+
+      eff_t1_data = tauTrigSFhelper_etau_MWP->getEfficiencyData(tau1_pt,tau1_dm); 
+      eff_t1_mc = tauTrigSFhelper_etau_MWP->getEfficiencyMC(tau1_pt,tau1_dm);
+      eff_t1_data_up = tauTrigSFhelper_etau_MWP->getEfficiencyData(tau1_pt,tau1_dm,+1); 
+      eff_t1_mc_up = tauTrigSFhelper_etau_MWP->getEfficiencyMC(tau1_pt,tau1_dm,+1);
+      eff_t1_data_down = tauTrigSFhelper_etau_MWP->getEfficiencyData(tau1_pt,tau1_dm,-1); 
+      eff_t1_mc_down = tauTrigSFhelper_etau_MWP->getEfficiencyMC(tau1_pt,tau1_dm,-1);
+
+    }
+
   }
+
   else {
-    eff_t1_data = tauTrigSFhelper_mutau->getEfficiencyData(tau1_pt,tau1_dm); 
-    eff_t1_mc = tauTrigSFhelper_mutau->getEfficiencyMC(tau1_pt,tau1_dm);
+
+    if(tau1_WP=="VVLoose"){
+
+      eff_t1_data = tauTrigSFhelper_mutau_VVLWP->getEfficiencyData(tau1_pt,tau1_dm); 
+      eff_t1_mc = tauTrigSFhelper_mutau_VVLWP->getEfficiencyMC(tau1_pt,tau1_dm);
+      eff_t1_data_up = tauTrigSFhelper_mutau_VVLWP->getEfficiencyData(tau1_pt,tau1_dm,+1); 
+      eff_t1_mc_up = tauTrigSFhelper_mutau_VVLWP->getEfficiencyMC(tau1_pt,tau1_dm,+1);
+      eff_t1_data_down = tauTrigSFhelper_mutau_VVLWP->getEfficiencyData(tau1_pt,tau1_dm,-1); 
+      eff_t1_mc_down = tauTrigSFhelper_mutau_VVLWP->getEfficiencyMC(tau1_pt,tau1_dm,-1);
+
+    }
+
+    else if(tau1_WP=="Medium"){
+
+      eff_t1_data = tauTrigSFhelper_mutau_MWP->getEfficiencyData(tau1_pt,tau1_dm); 
+      eff_t1_mc = tauTrigSFhelper_mutau_MWP->getEfficiencyMC(tau1_pt,tau1_dm);
+      eff_t1_data_up = tauTrigSFhelper_mutau_MWP->getEfficiencyData(tau1_pt,tau1_dm,+1); 
+      eff_t1_mc_up = tauTrigSFhelper_mutau_MWP->getEfficiencyMC(tau1_pt,tau1_dm,+1);
+      eff_t1_data_down = tauTrigSFhelper_mutau_MWP->getEfficiencyData(tau1_pt,tau1_dm,-1); 
+      eff_t1_mc_down = tauTrigSFhelper_mutau_MWP->getEfficiencyMC(tau1_pt,tau1_dm,-1);
+
+    }
   }
  
   float eff_data, eff_mc;
-
-  eff_data = compute_eff_1l1tau(eff_L_data,eff_l_data,eff_t1_data, passHLT1l, passHLT1l1tau);
-  eff_mc = compute_eff_1l1tau(eff_L_mc, eff_l_mc, eff_t1_mc, passHLT1l, passHLT1l1tau);
-  
-  float sf_nominal = std::min( eff_data/std::max(1.e-6f, eff_mc), 1.e+1f);
-
-  // UP/DOWN
-
-  float eff_t1_data_up, eff_t1_mc_up;
-  float eff_t1_data_down, eff_t1_mc_down;
-
-  if (fabs(lep_pdg)==11) { // ele+tau
-    eff_t1_data_up = tauTrigSFhelper_etau->getEfficiencyData(tau1_pt,tau1_dm,+1); 
-    eff_t1_mc_up = tauTrigSFhelper_etau->getEfficiencyMC(tau1_pt,tau1_dm,+1);
-    eff_t1_data_down = tauTrigSFhelper_etau->getEfficiencyData(tau1_pt,tau1_dm,-1); 
-    eff_t1_mc_down = tauTrigSFhelper_etau->getEfficiencyMC(tau1_pt,tau1_dm,-1);
-  }
-  else {
-    eff_t1_data_up = tauTrigSFhelper_mutau->getEfficiencyData(tau1_pt,tau1_dm,+1); 
-    eff_t1_mc_up = tauTrigSFhelper_mutau->getEfficiencyMC(tau1_pt,tau1_dm,+1); 
-    eff_t1_data_down = tauTrigSFhelper_mutau->getEfficiencyData(tau1_pt,tau1_dm,-1); 
-    eff_t1_mc_down = tauTrigSFhelper_mutau->getEfficiencyMC(tau1_pt,tau1_dm,-1); 
-  }
-
   float eff_data_up, eff_mc_up;
   float eff_data_down, eff_mc_down;
 
+  eff_data = compute_eff_1l1tau(eff_L_data,eff_l_data,eff_t1_data, passHLT1l, passHLT1l1tau);
+  eff_mc = compute_eff_1l1tau(eff_L_mc, eff_l_mc, eff_t1_mc, passHLT1l, passHLT1l1tau);
   eff_data_up = compute_eff_1l1tau(eff_L_data,eff_l_data,eff_t1_data_up, passHLT1l, passHLT1l1tau);
   eff_mc_up = compute_eff_1l1tau(eff_L_mc, eff_l_mc, eff_t1_mc_up, passHLT1l, passHLT1l1tau);
   eff_data_down = compute_eff_1l1tau(eff_L_data,eff_l_data,eff_t1_data_down, passHLT1l, passHLT1l1tau);
   eff_mc_down = compute_eff_1l1tau(eff_L_mc, eff_l_mc, eff_t1_mc_down, passHLT1l, passHLT1l1tau);
 
-  float sf_up = std::min( eff_data_up/std::max(1.e-6f, eff_mc_up), 1.e+1f);
-  float sf_down = std::min( eff_data_down/std::max(1.e-6f, eff_mc_down), 1.e+1f);
+  float sf_nominal = std::min( eff_data/std::max(1.e-6f, eff_mc), 1.e+1f);
+  float sf_up = std::min( eff_data_up/std::max(1.e-6f, eff_mc_down), 1.e+1f);
+  float sf_down = std::min( eff_data_down/std::max(1.e-6f, eff_mc_up), 1.e+1f);
 
   close_triggerSF_files();
 
@@ -464,17 +574,55 @@ float get_triggerSF_1lep1tau( double lep_pt, double lep_eta, double lep_pdg,
  
 }
 
-float get_triggerSF_ditau ( double tau1_pt, double tau1_eta, double tau1_phi, double tau1_dm,
-                           double tau2_pt, double tau2_eta, double tau2_phi, double tau2_dm,
+float get_triggerSF_ditau ( double tau1_pt, double tau1_eta, double tau1_phi, double tau1_dm, TString tau1_WP,
+                           double tau2_pt, double tau2_eta, double tau2_phi, double tau2_dm, TString tau2_WP,
                            int year, int shift) {
 
   setup_triggerSF_files(year);
 
   if ( tau1_dm == 5 || tau1_dm == 6) tau1_dm = 10; //dummy new DMs
 
-  float sf_nominal = tauTrigSFhelper_ditau->getSF(tau1_pt, tau1_dm);
-  float sf_up = tauTrigSFhelper_ditau->getSF(tau1_pt, tau1_dm, +1);
-  float sf_down = tauTrigSFhelper_ditau->getSF(tau1_pt, tau1_dm, -1);
+  float sf_nominal_tau1 = 1.;
+  float sf_up_tau1 = 1.;
+  float sf_down_tau1 = 1.;
+
+  float sf_nominal_tau2 = 1.;
+  float sf_up_tau2 = 1.;
+  float sf_down_tau2 = 1.;
+
+  if(tau1_WP=="VVLoose"){
+
+    sf_nominal_tau1 = tauTrigSFhelper_ditau_VVLWP->getSF(tau1_pt, tau1_dm);
+    sf_up_tau1 = tauTrigSFhelper_ditau_VVLWP->getSF(tau1_pt, tau1_dm, +1);
+    sf_down_tau1 = tauTrigSFhelper_ditau_VVLWP->getSF(tau1_pt, tau1_dm, -1);
+
+  }
+  else if(tau1_WP=="Loose"){
+
+    sf_nominal_tau1 = tauTrigSFhelper_ditau_LWP->getSF(tau1_pt, tau1_dm);
+    sf_up_tau1 = tauTrigSFhelper_ditau_LWP->getSF(tau1_pt, tau1_dm, +1);
+    sf_down_tau1 = tauTrigSFhelper_ditau_LWP->getSF(tau1_pt, tau1_dm, -1);
+
+  }
+
+  if(tau2_WP=="VVLoose"){
+
+    sf_nominal_tau2 = tauTrigSFhelper_ditau_VVLWP->getSF(tau2_pt, tau2_dm);
+    sf_up_tau2 = tauTrigSFhelper_ditau_VVLWP->getSF(tau2_pt, tau2_dm, +2);
+    sf_down_tau2 = tauTrigSFhelper_ditau_VVLWP->getSF(tau2_pt, tau2_dm, -2);
+
+  }
+  else if(tau2_WP=="Loose"){
+
+    sf_nominal_tau2 = tauTrigSFhelper_ditau_LWP->getSF(tau2_pt, tau2_dm);
+    sf_up_tau2 = tauTrigSFhelper_ditau_LWP->getSF(tau2_pt, tau2_dm, +2);
+    sf_down_tau2 = tauTrigSFhelper_ditau_LWP->getSF(tau2_pt, tau2_dm, -2);
+
+  }
+
+  float sf_nominal = sf_nominal_tau1*sf_nominal_tau2;
+  float sf_up = sf_up_tau1*sf_up_tau2;
+  float sf_down = sf_down_tau1*sf_down_tau2;
 
   float sf = 1.;
 
