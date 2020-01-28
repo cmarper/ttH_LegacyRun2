@@ -581,6 +581,7 @@ float get_triggerSF_ditau ( double tau1_pt, double tau1_eta, double tau1_phi, do
   setup_triggerSF_files(year);
 
   if ( tau1_dm == 5 || tau1_dm == 6) tau1_dm = 10; //dummy new DMs
+  if ( tau2_dm == 5 || tau2_dm == 6) tau2_dm = 10; //dummy new DMs
 
   float sf_nominal_tau1 = 1.;
   float sf_up_tau1 = 1.;
@@ -608,15 +609,15 @@ float get_triggerSF_ditau ( double tau1_pt, double tau1_eta, double tau1_phi, do
   if(tau2_WP=="VVLoose"){
 
     sf_nominal_tau2 = tauTrigSFhelper_ditau_VVLWP->getSF(tau2_pt, tau2_dm);
-    sf_up_tau2 = tauTrigSFhelper_ditau_VVLWP->getSF(tau2_pt, tau2_dm, +2);
-    sf_down_tau2 = tauTrigSFhelper_ditau_VVLWP->getSF(tau2_pt, tau2_dm, -2);
+    sf_up_tau2 = tauTrigSFhelper_ditau_VVLWP->getSF(tau2_pt, tau2_dm, +1);
+    sf_down_tau2 = tauTrigSFhelper_ditau_VVLWP->getSF(tau2_pt, tau2_dm, -1);
 
   }
   else if(tau2_WP=="Loose"){
 
     sf_nominal_tau2 = tauTrigSFhelper_ditau_LWP->getSF(tau2_pt, tau2_dm);
-    sf_up_tau2 = tauTrigSFhelper_ditau_LWP->getSF(tau2_pt, tau2_dm, +2);
-    sf_down_tau2 = tauTrigSFhelper_ditau_LWP->getSF(tau2_pt, tau2_dm, -2);
+    sf_up_tau2 = tauTrigSFhelper_ditau_LWP->getSF(tau2_pt, tau2_dm, +1);
+    sf_down_tau2 = tauTrigSFhelper_ditau_LWP->getSF(tau2_pt, tau2_dm, -1);
 
   }
 

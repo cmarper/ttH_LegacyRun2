@@ -6,7 +6,9 @@
 
 // RECO->LOOSE
 
-// Reco electrons -> EGamma 
+// ELECTRONS 
+
+// 1. Reco -> Loose1 POG (EGamma POG) 
 TFile *_file_RecoToLoose1_ele_pt0to20_2016 = NULL;
 TFile *_file_RecoToLoose1_ele_pt20_2016 = NULL;
 TFile *_file_RecoToLoose1_ele_pt0to20_2017 = NULL;
@@ -19,7 +21,7 @@ TH2F *_histo_RecoToLoose1_ele_pt0to20_2017 = NULL;
 TH2F *_histo_RecoToLoose1_ele_pt20_2017 = NULL;
 TH2F *_histo_RecoToLoose1_ele_2018 = NULL;
 
-// Loose electrons -> Barbara
+// 2. Reco -> Loose2 POG (Barbara)
 TFile *_file_RecoToLoose2_ele_2016 = NULL;
 TFile *_file_RecoToLoose2_ele_2017 = NULL;
 TFile *_file_RecoToLoose2_ele_2018 = NULL;
@@ -28,7 +30,7 @@ TH2F *_histo_RecoToLoose2_ele_2016 = NULL;
 TH2F *_histo_RecoToLoose2_ele_2017 = NULL;
 TH2F *_histo_RecoToLoose2_ele_2018 = NULL;
 
-// Loose to loose ttH electrons -> Barbara
+// 3. Loose POG -> Loose ttH (Barbara)
 TFile *_file_LooseToLooseTTH_ele_2016 = NULL;
 TFile *_file_LooseToLooseTTH_ele_2017 = NULL;
 TFile *_file_LooseToLooseTTH_ele_2018 = NULL;
@@ -37,7 +39,9 @@ TH2F *_histo_LooseToLooseTTH_ele_2016 = NULL;
 TH2F *_histo_LooseToLooseTTH_ele_2017 = NULL;
 TH2F *_histo_LooseToLooseTTH_ele_2018 = NULL;
 
-// Loose muons
+// MUONS 
+
+// 1. Reco -> Loose
 TFile *_file_RecoToLoose_mu_2016 = NULL;
 TFile *_file_RecoToLoose_mu_2017 = NULL;
 TFile *_file_RecoToLoose_mu_2018 = NULL;
@@ -172,7 +176,6 @@ float get_RecoToLoose_leptonSF(int year,int pdgid, float pt, float eta, int nlep
 
       _file_RecoToLoose_mu_2016->Close();
 
-
       return out;
 
     }
@@ -220,7 +223,10 @@ float get_RecoToLoose_leptonSF(int year,int pdgid, float pt, float eta, int nlep
 
 // LOOSE->TIGHT
 
-// Loose ttH to tight electrons -> Barbara
+// ELECTRONS
+
+// Loose ttH -> tight with tight charge (Barbara) nlep==2
+
 TFile *_file_LooseTTHToTight_ele_tightcharge_2016 = NULL;
 TFile *_file_LooseTTHToTight_ele_tightcharge_2017 = NULL;
 TFile *_file_LooseTTHToTight_ele_tightcharge_2018 = NULL;
@@ -228,6 +234,8 @@ TFile *_file_LooseTTHToTight_ele_tightcharge_2018 = NULL;
 TH2F *_histo_LooseTTHToTight_ele_tightcharge_2016 = NULL;
 TH2F *_histo_LooseTTHToTight_ele_tightcharge_2017 = NULL;
 TH2F *_histo_LooseTTHToTight_ele_tightcharge_2018 = NULL;
+
+// Loose ttH -> tight without tight charge (Barbara) nlep==3
 
 TFile *_file_LooseTTHToTight_ele_notightcharge_2016 = NULL;
 TFile *_file_LooseTTHToTight_ele_notightcharge_2017 = NULL;
@@ -237,7 +245,10 @@ TH2F *_histo_LooseTTHToTight_ele_notightcharge_2016 = NULL;
 TH2F *_histo_LooseTTHToTight_ele_notightcharge_2017 = NULL;
 TH2F *_histo_LooseTTHToTight_ele_notightcharge_2018 = NULL;
 
-// Loose ttH to tight muons -> Barbara
+// MUONS
+
+// Loose ttH -> tight with tight charge (Barbara) nlep==2
+
 TFile *_file_LooseTTHToTight_mu_tightcharge_2016 = NULL;
 TFile *_file_LooseTTHToTight_mu_tightcharge_2017 = NULL;
 TFile *_file_LooseTTHToTight_mu_tightcharge_2018 = NULL;
@@ -245,6 +256,8 @@ TFile *_file_LooseTTHToTight_mu_tightcharge_2018 = NULL;
 TH2F *_histo_LooseTTHToTight_mu_tightcharge_2016 = NULL;
 TH2F *_histo_LooseTTHToTight_mu_tightcharge_2017 = NULL;
 TH2F *_histo_LooseTTHToTight_mu_tightcharge_2018 = NULL;
+
+// Loose ttH -> tight without tight charge (Barbara) nlep==3
 
 TFile *_file_LooseTTHToTight_mu_notightcharge_2016 = NULL;
 TFile *_file_LooseTTHToTight_mu_notightcharge_2017 = NULL;
@@ -395,9 +408,12 @@ float get_leptonSF(int year,int pdgid, float pt, float eta, int nlep, float var=
 
   float SF_RecoToLoose = get_RecoToLoose_leptonSF(year,pdgid,pt,eta,nlep,var); 
   float SF_LooseToTight = get_LooseToTight_leptonSF(year,pdgid,pt,eta,nlep,var);
-  float res = SF_RecoToLoose*SF_LooseToTight;
+  
+  float sf = SF_RecoToLoose*SF_LooseToTight;
+  
   assert (res>0);
-  return res;
+
+  return sf;
 
 }
 

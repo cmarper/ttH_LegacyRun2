@@ -13,6 +13,7 @@ TauIDSFTool* tauIDSFHelper_DeepTauVsJet_VVLoose = NULL;
 TauIDSFTool* tauIDSFHelper_DeepTauVsJet_VLoose = NULL;
 TauIDSFTool* tauIDSFHelper_DeepTauVsJet_Loose = NULL;
 TauIDSFTool* tauIDSFHelper_DeepTauVsJet_Medium = NULL;
+TauIDSFTool* tauIDSFHelper_DeepTauVsJet_VTight = NULL;
 
 //TauIDSFTool* tauIDSFHelper_DeepTauVsEle_VVVLoose = NULL; // no SF
 //TauIDSFTool* tauIDSFHelper_DeepTauVsMu_VLoose = NULL;
@@ -35,6 +36,10 @@ void setup_tauSF_files(int year){
   	if(year==2017) tauIDSFHelper_DeepTauVsJet_Medium = new TauIDSFTool("2017ReReco","DeepTau2017v2p1VSjet","Medium",true);
   	if(year==2018) tauIDSFHelper_DeepTauVsJet_Medium = new TauIDSFTool("2018ReReco","DeepTau2017v2p1VSjet","Medium",true);
 
+  	tauIDSFHelper_DeepTauVsJet_VTight = new TauIDSFTool("2016Legacy","DeepTau2017v2p1VSjet","VTight",true);
+  	if(year==2017) tauIDSFHelper_DeepTauVsJet_VTight = new TauIDSFTool("2017ReReco","DeepTau2017v2p1VSjet","VTight",true);
+  	if(year==2018) tauIDSFHelper_DeepTauVsJet_VTight = new TauIDSFTool("2018ReReco","DeepTau2017v2p1VSjet","VTight",true);
+
   	//tauIDSFHelper_DeepTauVsEle_VVVLoose = new TauIDSFTool("2016Legacy","DeepTau2017v2p1VSe","VVVLoose");
   	//if(year==2017) tauIDSFHelper_DeepTauVsEle_VVVLoose = new TauIDSFTool("2017ReReco","DeepTau2017v2p1VSe","VVVLoose");
   	//if(year==2018) tauIDSFHelper_DeepTauVsEle_VVVLoose = new TauIDSFTool("2018ReReco","DeepTau2017v2p1VSe","VVVLoose");
@@ -54,6 +59,7 @@ void close_tauSF_files(){
 	delete tauIDSFHelper_DeepTauVsJet_VLoose;
 	delete tauIDSFHelper_DeepTauVsJet_Loose;
 	delete tauIDSFHelper_DeepTauVsJet_Medium;
+	delete tauIDSFHelper_DeepTauVsJet_VTight;
 
 	//delete tauIDSFHelper_DeepTauVsEle_VVVLoose;
 	//delete tauIDSFHelper_DeepTauVsMu_VLoose;
@@ -99,6 +105,14 @@ float get_tauSF(int year, float tau_pt, float tau_eta, float tau_dm, TString tau
 		sf_nominal 	= tauIDSFHelper_DeepTauVsJet_Medium->getSFvsDM(tau_pt,tau_dm,5);
 		sf_up 		= tauIDSFHelper_DeepTauVsJet_Medium->getSFvsDM(tau_pt,tau_dm,5,"Up");
 		sf_down 	= tauIDSFHelper_DeepTauVsJet_Medium->getSFvsDM(tau_pt,tau_dm,5,"Down");
+
+	}
+
+	else if(tau_wpVsJets=="VTight") {
+
+		sf_nominal 	= tauIDSFHelper_DeepTauVsJet_VTight->getSFvsDM(tau_pt,tau_dm,5);
+		sf_up 		= tauIDSFHelper_DeepTauVsJet_VTight->getSFvsDM(tau_pt,tau_dm,5,"Up");
+		sf_down 	= tauIDSFHelper_DeepTauVsJet_VTight->getSFvsDM(tau_pt,tau_dm,5,"Down");
 
 	}
 
