@@ -79,7 +79,7 @@ void create_scripts_all(){
 
     //2016
 
-    create_scripts("Oct19v1_Data_2016_SingleElectron_BlockB",36,"2016","data"); // CHECKED/DONE? // 27,31->not properly closed
+    //create_scripts("Oct19v1_Data_2016_SingleElectron_BlockB",36,"2016","data"); // ---> CHECKED/DONE!
     //create_scripts("Oct19v1_Data_2016_SingleElectron_BlockC",11,"2016","data"); // ---> CHECKED/DONE!
     //create_scripts("Oct19v1_Data_2016_SingleElectron_BlockD",19,"2016","data"); // ---> CHECKED/DONE!
     //create_scripts("Oct19v1_Data_2016_SingleElectron_BlockE",25,"2016","data"); // ---> CHECKED/DONE!
@@ -91,9 +91,9 @@ void create_scripts_all(){
     //create_scripts("Oct19v1_Data_2016_SingleMuon_BlockC",11,"2016","data"); // ---> CHECKED/DONE!
     //create_scripts("Oct19v1_Data_2016_SingleMuon_BlockD",19,"2016","data"); // ---> CHECKED/DONE!
     //create_scripts("Oct19v1_Data_2016_SingleMuon_BlockE",16,"2016","data"); // ---> CHECKED/DONE!
-    create_scripts("Oct19v1_Data_2016_SingleMuon_BlockF",12,"2016","data"); // CHECKED/DONE**-- // 2->missing
+    //create_scripts("Oct19v1_Data_2016_SingleMuon_BlockF",12,"2016","data"); // ---> CHECKED/DONE!
     //create_scripts("Oct19v1_Data_2016_SingleMuon_BlockG",28,"2016","data"); // ---> CHECKED/DONE!
-    create_scripts("Oct19v1_Data_2016_SingleMuon_BlockH",31,"2016","data"); // CHECKED/DONE**???? // 0,1,3,6,7,8,11,12,16,19,21,23,24,26,27,29,30,31->missing
+    //create_scripts("Oct19v1_Data_2016_SingleMuon_BlockH",31,"2016","data"); // ---> CHECKED/DONE!
 
     /*create_scripts("Oct19v1_Data_2016_DoubleEG_BlockB",17*2+1,"2016","data"); 
     create_scripts("Oct19v1_Data_2016_DoubleEG_BlockC",5*2+1,"2016","data"); 

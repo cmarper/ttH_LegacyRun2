@@ -493,12 +493,16 @@ void create_scripts_all(){
     create_scripts("Oct19v1_MC_2018_MadGraph_TTToSemiLeptonic",10,"2018","ttbar"); // DONE
     create_scripts("Oct19v1_MC_2018_MadGraph_TTToHadronic",10,"2018","ttbar"); // DONE*/
 
-    create_scripts("Oct19v4_MC_2016_MadGraph_TTTo2L2Nu",1,"2016","ttbar"); // DONE
+    /*create_scripts("Oct19v4_MC_2016_MadGraph_TTTo2L2Nu",1,"2016","ttbar"); // DONE
     create_scripts("Oct19v4_MC_2016_MadGraph_TTTo2L2Nu_PS",7,"2016","ttbar"); // 6->repeat
     create_scripts("Oct19v4_MC_2016_MadGraph_TTToSemiLeptonic",6,"2016","ttbar"); // DONE
     create_scripts("Oct19v4_MC_2016_MadGraph_TTToSemiLeptonic_PS",8,"2016","ttbar"); // DONE (7 doesnt exist) 
     create_scripts("Oct19v4_MC_2016_MadGraph_TTToHadronic",4,"2016","ttbar"); // DONE
-    create_scripts("Oct19v4_MC_2016_MadGraph_TTToHadronic_PS",4,"2016","ttbar"); // DONE
+    create_scripts("Oct19v4_MC_2016_MadGraph_TTToHadronic_PS",4,"2016","ttbar"); // DONE*/
+
+    create_scripts("Oct19v1_MC_2016_WGToLNuG_01J",3,"2016","EWK"); // DONE??? / 1,2->repeat
+    //create_scripts("Oct19v1_MC_2017_WGToLNuG_01J",4,"2017","EWK"); // DONE
+    //create_scripts("Oct19v1_MC_2018_WGToLNuG_01J",4,"2018","EWK"); // DONE
     
 }
 

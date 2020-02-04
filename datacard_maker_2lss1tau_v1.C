@@ -14,7 +14,7 @@ float XS_tHQ_ctcvcp = 0.07096;
 float XS_tHW_ctcvcp = 0.01561;
 
 float XS_ttZ = 0.281;
-float XS_ttZ_lowmass = 0.04537;
+float XS_ttZ_lowmass = 0.0822;
 float XS_ttW = 0.1960;
 float XS_ttWW = 0.006981;
 
@@ -138,12 +138,13 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_fakeCR_filename.clear();
 	MC_fakeCR_filename_norm.clear();
 
-	luminosity = 36814;
+	luminosity = 35900;
 
 	////////////////////////////////////////////////////////////
 	
 	TString filename_ttH = 			"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_splitted_MEM/2016/nominal/ttH/ntuple_Oct19v1_MC_2016_ttHJetToNonbb_MEM_SR.root";
-	TString filename_ttH_ctcvcp = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_splitted_MEM/2016/nominal/ttH/ntuple_Oct19v1_MC_2016_ttH_ctcvcp_MEM_SR.root";
+	//TString filename_ttH        =   "/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_datacards/2016/nominal/ttH/ntuple_Oct19v1_MC_2016_ttHJetToNonbb_MEM_SR_SFsv1.root";
+    TString filename_ttH_ctcvcp = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_splitted_MEM/2016/nominal/ttH/ntuple_Oct19v1_MC_2016_ttH_ctcvcp_MEM_SR.root";
 	TString filename_tHQ_ctcvcp = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_splitted_MEM/2016/nominal/ttH/ntuple_Oct19v1_MC_2016_THQ_ctcvcp_MEM_SR.root";
 	TString filename_tHW_ctcvcp = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_splitted_MEM/2016/nominal/ttH/ntuple_Oct19v1_MC_2016_THW_ctcvcp_MEM_SR.root";
 
@@ -1694,11 +1695,12 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_fakeCR_filename.clear();
 	MC_fakeCR_filename_norm.clear();
 
-	luminosity = 41298;
+	luminosity = 41400;
 
 	////////////////////////////////////////////////////////////
 
 	TString filename_ttH = 			"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_splitted_MEM/2017/nominal/ttH/ntuple_Oct19v1_MC_2017_ttHJetToNonbb_MEM_SR.root";
+	//TString filename_ttH = 			"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_datacards/2017/nominal/ttH/ntuple_Oct19v1_MC_2017_ttHJetToNonbb_MEM_SR_SFsv1.root";
 	TString filename_ttH_ctcvcp = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_splitted_MEM/2017/nominal/ttH/ntuple_Oct19v1_MC_2017_TTH_ctcvcp_MEM_SR.root";
 	TString filename_tHQ_ctcvcp = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_splitted_MEM/2017/nominal/ttH/ntuple_Oct19v1_MC_2017_THQ_ctcvcp_MEM_SR.root";
 	TString filename_tHW_ctcvcp = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_splitted_MEM/2017/nominal/ttH/ntuple_Oct19v3_MC_2017_THW_ctcvcp_MEM_SR.root";
@@ -3291,11 +3293,12 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_fakeCR_filename.clear();
 	MC_fakeCR_filename_norm.clear();
 
-	luminosity = 59741;
+	luminosity = 59700;
 
 	////////////////////////////////////////////////////////////
 
 	TString filename_ttH = 			"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_splitted_MEM/2018/nominal/ttH/ntuple_Oct19v2_MC_2018_ttHJetToNonbb_MEM_SR.root";
+	//TString filename_ttH = 			"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_datacards/2018/nominal/ttH/ntuple_Oct19v2_MC_2018_ttHJetToNonbb_MEM_SR_SFsv1.root";
 	TString filename_ttH_ctcvcp = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_splitted_MEM/2018/nominal/ttH/ntuple_Oct19v2_MC_2018_TTH_ctcvcp_MEM_SR.root";
 	TString filename_tHQ_ctcvcp = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_splitted_MEM/2018/nominal/ttH/ntuple_Oct19v1_MC_2018_THQ_ctcvcp_MEM_SR.root";
 	TString filename_tHW_ctcvcp = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_splitted_MEM/2018/nominal/ttH/ntuple_Oct19v1_MC_2018_THW_ctcvcp_MEM_SR.root";
@@ -4785,7 +4788,8 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
 	for(unsigned i_MC=0;i_MC<samplename_MC.size();i_MC++){
 
 		TString MC_weight = "MC_weight";
-		if( samplename_MC[i_MC].Contains("tHq") || samplename_MC[i_MC].Contains("tHW"))
+		if( samplename_MC[i_MC].Contains("tHQ") || samplename_MC[i_MC].Contains("tHW"))
+			//MC_weight = "(MC_weights_rwgt[11]/MC_weight_originalXWGTUP)*sign(MC_weight)";
 			MC_weight = "MC_weight";
 
 		TH1F* h_MC_norm = single_plot(filename_norm_MC[i_MC],
@@ -4806,18 +4810,19 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
 		if( samplename_MC[i_MC].Contains("s2") || samplename_MC[i_MC].Contains("s3") ) continue;
 
 		TString MC_weight = "MC_weight";
-		if( samplename_MC[i_MC].Contains("tHq") || samplename_MC[i_MC].Contains("tHW"))
-			MC_weight = "MC_weight";
+		if( samplename_MC[i_MC].Contains("tHQ") || samplename_MC[i_MC].Contains("tHW"))
+			MC_weight = "(MC_weights_rwgt[11]/MC_weight_originalXWGTUP)";
+			//MC_weight = "MC_weight";
 
 		TH1F* h_MC = single_plot(filename_MC[i_MC],
 			"HTauTauTree_2lss1tau_SR", 
 			var,
-			MC_weight+"*PU_weight_v1*triggerSF_weight*leptonSF_ttH_weight*bTagSF_CSVshape_weight*tauSF_weight*("+samplecut_MC[i_MC]+" && "+cut_cat+")",
+			//MC_weight+"*PU_weight_v1*prefire_weight*triggerSF_weight_v1*leptonSF_weight_v1*bTagSF_CSVshape_weight*tauSF_weight_v1*("+samplecut_MC[i_MC]+" && "+cut_cat+")",
+            "MC_weight*PU_weight_v1*prefire_weight*triggerSF_weight*bTagSF_CSVshape_weight*tauSF_weight*("+samplecut_MC[i_MC]+" && "+cut_cat+")",
             nbin,xmin,xmax);
 
 		h_MC->Scale(lumin*XS_MC[i_MC]/norm_MC[i_MC]);
 
-		//h_MC->SetNameTitle("x_"+samplename_MC[i_MC],"x_"+samplename_MC[i_MC]);
 		h_MC->SetNameTitle("x_"+sampletag_MC[i_MC],"x_"+sampletag_MC[i_MC]);
 		makeBinContentsPositive(h_MC,true);
 		//h_MC->Write();
@@ -4941,7 +4946,7 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
 		TH1F* h_MC_fake = single_plot(MC_fakeCR_filename[i_MC],
 			"HTauTauTree_2lss1tau_fake", 
 			var,
-			"MC_weight*PU_weight_v1*triggerSF_weight*bTagSF_CSVshape_weight*event_weight_ttH*leptonSF_ttH_weight*tauSF_weight*(" + cut_cat + ")",
+			"MC_weight*PU_weight_v1*prefire_weight*triggerSF_weight*bTagSF_CSVshape_weight*tauSF_weight*("+cut_cat+")*event_weight_ttH",
             nbin,xmin,xmax);
 
 		h_MC_fake->Scale(lumin*XS_MC_fakeCR[i_MC]/norm_MC_fakeCR[i_MC]);

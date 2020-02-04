@@ -16,9 +16,9 @@ void compare_events(std::pair<TString, TString> filepair){
 	cout<<filein1<<endl;
 	cout<<filein2<<endl;
 
-	TChain * tree1 = new TChain("HTauTauTree_2lss1tau_SR");
+	//TChain * tree1 = new TChain("HTauTauTree_2lss1tau_SR");
     //TChain * tree1 = new TChain("HTauTauTree_2lss1tau_fake");
-    //TChain * tree1 = new TChain("HTauTauTree_2lss1tau_flip");
+    TChain * tree1 = new TChain("HTauTauTree_2lss1tau_flip");
 
 	tree1->Add(filein1);
 	Long64_t nentries1 = tree1->GetEntries();
@@ -51,9 +51,9 @@ std::pair<TString, TString> create_file_pair(TString sample, TString year, TStri
 
   TString file1 = dirin1+"ntuple_"+sample+".root";
   
-  TString file2 = dirin2+"ntuple_"+sample+"_MEM_SR.root";
+  //TString file2 = dirin2+"ntuple_"+sample+"_MEM_SR.root";
   //TString file2 = dirin2+"ntuple_"+sample+"_MEM_fake.root";
-  //TString file2 = dirin2+"ntuple_"+sample+"_MEM_flip.root";
+  TString file2 = dirin2+"ntuple_"+sample+"_MEM_flip.root";
 
   return std::make_pair(file1, file2);
 
@@ -63,7 +63,7 @@ void test(){
 
 	vector<std::pair<TString, TString>> filepairs;
 
-    filepairs.push_back(create_file_pair("Oct19v1_MC_2016_ttHJetToNonbb","2016","ttH"));
+    /*filepairs.push_back(create_file_pair("Oct19v1_MC_2016_ttHJetToNonbb","2016","ttH"));
     filepairs.push_back(create_file_pair("Oct19v1_MC_2016_ttH_ctcvcp","2016","ttH"));
     filepairs.push_back(create_file_pair("Oct19v1_MC_2016_THQ_ctcvcp","2016","ttH"));
     filepairs.push_back(create_file_pair("Oct19v1_MC_2016_THW_ctcvcp","2016","ttH"));
@@ -388,7 +388,77 @@ void test(){
     filepairs.push_back(create_file_pair("Oct19v2_MC_2018_GluGluToHHTo2B2Tau_node_9","2018","HH"));
     filepairs.push_back(create_file_pair("Oct19v2_MC_2018_GluGluToHHTo2B2Tau_node_10","2018","HH"));
     filepairs.push_back(create_file_pair("Oct19v3_MC_2018_GluGluToHHTo2B2Tau_node_11","2018","HH"));
-    filepairs.push_back(create_file_pair("Oct19v2_MC_2018_GluGluToHHTo2B2Tau_node_12","2018","HH"));
+    filepairs.push_back(create_file_pair("Oct19v2_MC_2018_GluGluToHHTo2B2Tau_node_12","2018","HH"));*/
+
+    /*filepairs.push_back(create_file_pair("Oct19v1_Data_2016_SingleElectron_BlockB","2016","Data"));
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2016_SingleElectron_BlockC","2016","Data"));
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2016_SingleElectron_BlockD","2016","Data"));
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2016_SingleElectron_BlockE","2016","Data"));
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2016_SingleElectron_BlockF","2016","Data"));
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2016_SingleElectron_BlockG","2016","Data"));
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2016_SingleElectron_BlockH","2016","Data"));
+
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2016_SingleMuon_BlockB","2016","Data"));
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2016_SingleMuon_BlockC","2016","Data"));
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2016_SingleMuon_BlockD","2016","Data"));
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2016_SingleMuon_BlockE","2016","Data"));
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2016_SingleMuon_BlockF","2016","Data"));
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2016_SingleMuon_BlockG","2016","Data"));
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2016_SingleMuon_BlockH","2016","Data"));
+
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2016_DoubleEG_BlockB","2016","Data"));
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2016_DoubleEG_BlockC","2016","Data"));
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2016_DoubleEG_BlockD","2016","Data"));
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2016_DoubleEG_BlockE","2016","Data"));
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2016_DoubleEG_BlockF","2016","Data"));
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2016_DoubleEG_BlockG","2016","Data"));
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2016_DoubleEG_BlockH","2016","Data"));
+
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2016_DoubleMu_BlockB","2016","Data"));
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2016_DoubleMu_BlockC","2016","Data"));
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2016_DoubleMu_BlockD","2016","Data"));
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2016_DoubleMu_BlockE","2016","Data"));
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2016_DoubleMu_BlockF","2016","Data"));
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2016_DoubleMu_BlockG","2016","Data"));
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2016_DoubleMu_BlockH","2016","Data"));
+
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2016_MuonEG_BlockB","2016","Data"));
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2016_MuonEG_BlockC","2016","Data"));
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2016_MuonEG_BlockD","2016","Data"));
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2016_MuonEG_BlockE","2016","Data"));
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2016_MuonEG_BlockF","2016","Data"));
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2016_MuonEG_BlockG","2016","Data"));
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2016_MuonEG_BlockH","2016","Data"));*/
+
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2017_SingleElectron_BlockB","2017","Data"));
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2017_SingleElectron_BlockC","2017","Data"));
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2017_SingleElectron_BlockD","2017","Data"));
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2017_SingleElectron_BlockE","2017","Data"));
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2017_SingleElectron_BlockF","2017","Data"));
+
+    /*filepairs.push_back(create_file_pair("Oct19v1_Data_2017_SingleMuon_BlockB","2017","Data"));
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2017_SingleMuon_BlockC","2017","Data"));
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2017_SingleMuon_BlockD","2017","Data"));
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2017_SingleMuon_BlockE","2017","Data"));
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2017_SingleMuon_BlockF","2017","Data"));*/
+
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2017_DoubleEG_BlockB","2017","Data"));
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2017_DoubleEG_BlockC","2017","Data"));
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2017_DoubleEG_BlockD","2017","Data"));
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2017_DoubleEG_BlockE","2017","Data"));
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2017_DoubleEG_BlockF","2017","Data"));
+
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2017_DoubleMu_BlockB","2017","Data"));
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2017_DoubleMu_BlockC","2017","Data"));
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2017_DoubleMu_BlockD","2017","Data"));
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2017_DoubleMu_BlockE","2017","Data"));
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2017_DoubleMu_BlockF","2017","Data"));
+
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2017_MuonEG_BlockB","2017","Data"));
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2017_MuonEG_BlockC","2017","Data"));
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2017_MuonEG_BlockD","2017","Data"));
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2017_MuonEG_BlockE","2017","Data"));
+    filepairs.push_back(create_file_pair("Oct19v1_Data_2017_MuonEG_BlockF","2017","Data"));
 
  
 	for (unsigned int i=0; i<filepairs.size(); i++)

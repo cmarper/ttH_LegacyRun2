@@ -684,7 +684,8 @@ std::tuple< TString, TString, TString, vector<TString>, int, bool > load_sample_
 
 	TString file = "ntuple_"+sample;
 
-	TString dir_out="/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_converted/";
+	//TString dir_out="/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_converted/";
+  TString dir_out="/data_CMPerez/mperez/ttH_Legacy/ntuples_converted/";
 	dir_out += year;
 	if(JEC>0)
     	dir_out += "/JECup/";

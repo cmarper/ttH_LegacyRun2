@@ -9,13 +9,14 @@
 
 #include "headers/triggerSF_v1.cc"
 #include "headers/leptonSF_v1.cc"
-#include "headers/tauSF_v1.cc"
+#include "headers/tauIDSF_v1.cc"
+#include "headers/tauESSF_v1.cc"
 #include "headers/fakerateSF_v1.cc"
 #include "headers/fliprateSF_v1.cc"
 
 using namespace std;
 
-void add_SFs(TString filein, TString fileout, vector<TString> treename, bool isMC){
+void add_SFs(TString filein, TString fileout, vector<TString> treename, bool isMC, int year){
 
 	  /*
 	  1010 2tau_SR
@@ -86,7 +87,7 @@ void add_SFs(TString filein, TString fileout, vector<TString> treename, bool isM
     
       Long64_t nentries = tree->GetEntries();
       //nentries = 10;
-      cout<<treename[i_tree]<<", nentries="<<tree->GetEntries()<<endl;
+      cout<<", nentries="<<tree->GetEntries()<<endl;
 
       // old branches used
 
@@ -142,20 +143,29 @@ void add_SFs(TString filein, TString fileout, vector<TString> treename, bool isM
 
       // new branches
 
-      float _triggerSF_weight_v1;
-      float _triggerSF_weight_up_v1;
-      float _triggerSF_weight_down_v1;
+      TTree* tree_new=tree->GetTree()->CloneTree(0);
+      //tree_new->SetDirectory(0);
 
-      float _leptonSF_weight_v1;
+      float _trigger_weight_v1;
+      float _trigger_weight_up_v1;
+      float _trigger_weight_down_v1;
 
-      float _tauSF_weight_v1;
-      float _tauSF_weight_up_v1;
-      float _tauSF_weight_down_v1;
+      float _lepton_weight_v1;
+      float _lepton_weight_up_v1;
+      float _lepton_weight_down_v1;
 
-      float _tauSF_weight_tauNormUp_v1;
-      float _tauSF_weight_tauNormDown_v1;
-      float _tauSF_weight_tauShapeUp_v1;
-      float _tauSF_weight_tauShapeDown_v1;
+      float _tauID_weight_v1;
+      float _tauID_weight_up_v1;
+      float _tauID_weight_down_v1;
+
+      float _tauID_weight_tauNormUp_v1;
+      float _tauID_weight_tauNormDown_v1;
+      float _tauID_weight_tauShapeUp_v1;
+      float _tauID_weight_tauShapeDown_v1;
+
+      float _tauES_weight_v1;
+      float _tauES_weight_up_v1;
+      float _tauES_weight_down_v1;
 
       float _event_weight_ttH_v1;
 
@@ -180,22 +190,26 @@ void add_SFs(TString filein, TString fileout, vector<TString> treename, bool isM
       float _event_weight_ttH_mu_FR_QCD_MC_v1;
       float _event_weight_ttH_mu_FR_TT_MC_v1;
 
-    	TTree* tree_new=tree->GetTree()->CloneTree(0);
+      tree_new->Branch("trigger_weight_v1",&_trigger_weight_v1,"trigger_weight_v1/F");
+      tree_new->Branch("trigger_weight_up_v1",&_trigger_weight_up_v1,"trigger_weight_up_v1/F");
+      tree_new->Branch("trigger_weight_down_v1",&_trigger_weight_down_v1,"trigger_weight_down_v1/F");
 
-    	tree_new->Branch("triggerSF_weight_v1",&_triggerSF_weight_v1,"triggerSF_weight_v1/F");
-    	tree_new->Branch("triggerSF_weight_up_v1",&_triggerSF_weight_up_v1,"triggerSF_weight_up_v1/F");
-    	tree_new->Branch("triggerSF_weight_down_v1",&_triggerSF_weight_down_v1,"triggerSF_weight_down_v1/F");
+      tree_new->Branch("lepton_weight_v1",&_lepton_weight_v1,"lepton_weight_v1/F");
+      tree_new->Branch("lepton_weight_up_v1",&_lepton_weight_up_v1,"lepton_weight_up_v1/F");
+      tree_new->Branch("lepton_weight_down_v1",&_lepton_weight_down_v1,"lepton_weight_down_v1/F");
 
-    	tree_new->Branch("leptonSF_weight_v1",&_leptonSF_weight_v1,"leptonSF_weight_v1/F");
+      tree_new->Branch("tauID_weight_v1",&_tauID_weight_v1,"tauID_weight_v1/F");
+      tree_new->Branch("tauID_weight_up_v1",&_tauID_weight_up_v1,"tauID_weight_up_v1/F");
+      tree_new->Branch("tauID_weight_down_v1",&_tauID_weight_down_v1,"tauID_weight_down_v1/F");
 
-      tree_new->Branch("tauSF_weight_v1",&_tauSF_weight_v1,"tauSF_weight_v1/F");
-      tree_new->Branch("tauSF_weight_up_v1",&_tauSF_weight_up_v1,"tauSF_weight_up_v1/F");
-      tree_new->Branch("tauSF_weight_down_v1",&_tauSF_weight_down_v1,"tauSF_weight_down_v1/F");
+      tree_new->Branch("tauID_weight_tauNormUp_v1",&_tauID_weight_tauNormUp_v1,"tauID_weight_tauNormUp_v1/F");
+      tree_new->Branch("tauID_weight_tauNormDown_v1",&_tauID_weight_tauNormDown_v1,"tauID_weight_tauNormDown_v1/F");
+      tree_new->Branch("tauID_weight_tauShapeUp_v1",&_tauID_weight_tauShapeUp_v1,"tauID_weight_tauShapeUp_v1/F");
+      tree_new->Branch("tauID_weight_tauShapeDown_v1",&_tauID_weight_tauShapeDown_v1,"tauID_weight_tauShapeDown_v1/F");
 
-      tree_new->Branch("tauSF_weight_tauNormUp_v1",&_tauSF_weight_tauNormUp_v1,"tauSF_weight_tauNormUp_v1/F");
-      tree_new->Branch("tauSF_weight_tauNormDown_v1",&_tauSF_weight_tauNormDown_v1,"tauSF_weight_tauNormDown_v1/F");
-      tree_new->Branch("tauSF_weight_tauShapeUp_v1",&_tauSF_weight_tauShapeUp_v1,"tauSF_weight_tauShapeUp_v1/F");
-      tree_new->Branch("tauSF_weight_tauShapeDown_v1",&_tauSF_weight_tauShapeDown_v1,"tauSF_weight_tauShapeDown_v1/F");
+      tree_new->Branch("tauES_weight_v1",&_tauES_weight_v1,"tauES_weight_v1/F");
+      tree_new->Branch("tauES_weight_up_v1",&_tauES_weight_up_v1,"tauES_weight_up_v1/F");
+      tree_new->Branch("tauES_weight_down_v1",&_tauES_weight_down_v1,"tauES_weight_down_v1/F");
 
       tree_new->Branch("event_weight_ttH_v1",&_event_weight_ttH_v1,"event_weight_ttH_v1/F");
 
@@ -228,42 +242,98 @@ void add_SFs(TString filein, TString fileout, vector<TString> treename, bool isM
 	      // Old variables
 
 	      _category = 0;
-	      _year = 0;
+        _year = 0;
 
-	      _triggerbit = 0; 
+        _triggerbit = 0;
 
-	      _recolep_sel_pdg = 0;
-      	_recolep_sel_conept = 0;
-      	_recolep_sel_pt = 0;
-      	_recolep_sel_eta = 0;
-      	_recolep_sel_phi = 0;
-      	_recolep_sel_ismvasel = 0;
+        _recolep_sel_pdg = 0;
+        _recolep_sel_conept = 0;
+        _recolep_sel_pt = 0;
+        _recolep_sel_eta = 0;
+        _recolep_sel_phi = 0;
+        _recolep_sel_ismvasel = 0;
+        _recolep_sel_charge = 0;
 
-      	_recotauh_sel_pt = 0;
-      	_recotauh_sel_eta = 0;
-      	_recotauh_sel_phi = 0;
-      	_recotauh_sel_decayMode = 0;
+        _recotauh_sel_pt = 0;
+        _recotauh_sel_eta = 0;
+        _recotauh_sel_phi = 0;
+        _recotauh_sel_decayMode = 0;
         _recotauh_sel_byVVLooseDeepTau2017v2p1VSjet = 0;
         _recotauh_sel_byVLooseDeepTau2017v2p1VSjet = 0;
         _recotauh_sel_byLooseDeepTau2017v2p1VSjet = 0;
         _recotauh_sel_byMediumDeepTau2017v2p1VSjet = 0;
         _recotauh_sel_byVTightDeepTau2017v2p1VSjet = 0;
         _recotauh_sel_isGenMatched = 0;
+        _recotauh_sel_charge = 0;
 
-        _triggerSF_weight_v1 = 1.;
-        _triggerSF_weight_up_v1 = 1.;
-        _triggerSF_weight_down_v1 = 1.;
+        //////////
 
-        _leptonSF_weight_v1 = 1.;
+        _trigger_weight_v1 = 0;
+        _trigger_weight_up_v1 = 0;
+        _trigger_weight_down_v1 = 0;
 
-        _tauSF_weight_v1 = 1.;
-        _tauSF_weight_up_v1 = 1.;
-        _tauSF_weight_down_v1 = 1.;
+        _lepton_weight_v1 = 0;
+        _lepton_weight_up_v1 = 0;
+        _lepton_weight_down_v1 = 0;
 
-        _tauSF_weight_tauNormUp_v1 = 1.;
-        _tauSF_weight_tauNormDown_v1 = 1.;
-        _tauSF_weight_tauShapeUp_v1 = 1.;
-        _tauSF_weight_tauShapeDown_v1 = 1.;
+        _tauID_weight_v1 = 0;
+        _tauID_weight_up_v1 = 0;
+        _tauID_weight_down_v1 = 0;
+
+        _tauID_weight_tauNormUp_v1 = 0;
+        _tauID_weight_tauNormDown_v1 = 0;
+        _tauID_weight_tauShapeUp_v1 = 0;
+        _tauID_weight_tauShapeDown_v1 = 0;
+
+        _tauES_weight_v1 = 0;
+        _tauES_weight_up_v1 = 0;
+        _tauES_weight_down_v1 = 0;
+
+        _event_weight_ttH_v1 = 0;
+
+        _event_weight_ttH_ele_up_v1 = 0;
+        _event_weight_ttH_ele_down_v1 = 0;
+        _event_weight_ttH_ele_pt1_v1 = 0;
+        _event_weight_ttH_ele_pt2_v1 = 0;
+        _event_weight_ttH_ele_be1_v1 = 0;
+        _event_weight_ttH_ele_be2_v1 = 0;
+
+        _event_weight_ttH_mu_up_v1 = 0;
+        _event_weight_ttH_mu_down_v1 = 0;
+        _event_weight_ttH_mu_pt1_v1 = 0;
+        _event_weight_ttH_mu_pt2_v1 = 0;
+        _event_weight_ttH_mu_be1_v1 = 0;
+        _event_weight_ttH_mu_be2_v1 = 0;
+
+        _event_weight_ttH_FR_QCD_MC_v1 = 0;
+        _event_weight_ttH_FR_TT_MC_v1 = 0;
+        _event_weight_ttH_ele_FR_QCD_MC_v1 = 0;
+        _event_weight_ttH_ele_FR_TT_MC_v1 = 0;
+        _event_weight_ttH_mu_FR_QCD_MC_v1 = 0;
+        _event_weight_ttH_mu_FR_TT_MC_v1 = 0;
+
+      	tree->GetEntry(i);
+
+        _trigger_weight_v1 = 1.;
+        _trigger_weight_up_v1 = 1.;
+        _trigger_weight_down_v1 = 1.;
+
+        _lepton_weight_v1 = 1.;
+        _lepton_weight_up_v1 = 1.;
+        _lepton_weight_down_v1 = 1.;
+
+        _tauID_weight_v1 = 1.;
+        _tauID_weight_up_v1 = 1.;
+        _tauID_weight_down_v1 = 1.;
+
+        _tauID_weight_tauNormUp_v1 = 1.;
+        _tauID_weight_tauNormDown_v1 = 1.;
+        _tauID_weight_tauShapeUp_v1 = 1.;
+        _tauID_weight_tauShapeDown_v1 = 1.;
+
+        _tauES_weight_v1 = 1.;
+        _tauES_weight_up_v1 = 1.;
+        _tauES_weight_down_v1 = 1.;
 
         _event_weight_ttH_v1 = 1.;
 
@@ -287,8 +357,6 @@ void add_SFs(TString filein, TString fileout, vector<TString> treename, bool isM
         _event_weight_ttH_ele_FR_TT_MC_v1 = 1.;
         _event_weight_ttH_mu_FR_QCD_MC_v1 = 1.;
         _event_weight_ttH_mu_FR_TT_MC_v1 = 1.;
-
-      	tree->GetEntry(i);
 
         // New variables
 
@@ -431,13 +499,13 @@ void add_SFs(TString filein, TString fileout, vector<TString> treename, bool isM
             if((*_recotauh_sel_byLooseDeepTau2017v2p1VSjet)[1]==1) wp2 = "Loose";
             else wp2 = "VVLoose";
 
-            _triggerSF_weight_v1 = get_triggerSF_ditau((*_recotauh_sel_pt)[0],(*_recotauh_sel_eta)[0],(*_recotauh_sel_phi)[0],(*_recotauh_sel_decayMode)[0],wp1,
+            _trigger_weight_v1 = get_triggerSF_ditau((*_recotauh_sel_pt)[0],(*_recotauh_sel_eta)[0],(*_recotauh_sel_phi)[0],(*_recotauh_sel_decayMode)[0],wp1,
                                            (*_recotauh_sel_pt)[1],(*_recotauh_sel_eta)[1],(*_recotauh_sel_phi)[1],(*_recotauh_sel_decayMode)[1],wp2,
                                            _year, 0 );
-            _triggerSF_weight_up_v1 = get_triggerSF_ditau((*_recotauh_sel_pt)[0],(*_recotauh_sel_eta)[0],(*_recotauh_sel_phi)[0],(*_recotauh_sel_decayMode)[0],wp1,
+            _trigger_weight_up_v1 = get_triggerSF_ditau((*_recotauh_sel_pt)[0],(*_recotauh_sel_eta)[0],(*_recotauh_sel_phi)[0],(*_recotauh_sel_decayMode)[0],wp1,
                                            (*_recotauh_sel_pt)[1],(*_recotauh_sel_eta)[1],(*_recotauh_sel_phi)[1],(*_recotauh_sel_decayMode)[1],wp2,
                                            _year, +1 );
-            _triggerSF_weight_down_v1 = get_triggerSF_ditau((*_recotauh_sel_pt)[0],(*_recotauh_sel_eta)[0],(*_recotauh_sel_phi)[0],(*_recotauh_sel_decayMode)[0],wp1,
+            _trigger_weight_down_v1 = get_triggerSF_ditau((*_recotauh_sel_pt)[0],(*_recotauh_sel_eta)[0],(*_recotauh_sel_phi)[0],(*_recotauh_sel_decayMode)[0],wp1,
                                            (*_recotauh_sel_pt)[1],(*_recotauh_sel_eta)[1],(*_recotauh_sel_phi)[1],(*_recotauh_sel_decayMode)[1],wp2,
                                            _year, -1 );
 
@@ -452,13 +520,13 @@ void add_SFs(TString filein, TString fileout, vector<TString> treename, bool isM
             if((*_recotauh_sel_byMediumDeepTau2017v2p1VSjet)[0]==1) wp = "Medium";
             else wp = "VVLoose";
 
-            _triggerSF_weight_v1 = get_triggerSF_1lep1tau((*_recolep_sel_pt)[0],(*_recolep_sel_eta)[0],(*_recolep_sel_pdg)[0],
+            _trigger_weight_v1 = get_triggerSF_1lep1tau((*_recolep_sel_pt)[0],(*_recolep_sel_eta)[0],(*_recolep_sel_pdg)[0],
                                            (*_recotauh_sel_pt)[0],(*_recotauh_sel_eta)[0],(*_recotauh_sel_phi)[0],(*_recotauh_sel_decayMode)[0],wp,
                                            passHLT1l, passHLT1l1tau, _year, 0 );
-            _triggerSF_weight_up_v1 = get_triggerSF_1lep1tau((*_recolep_sel_pt)[0],(*_recolep_sel_eta)[0],(*_recolep_sel_pdg)[0],
+            _trigger_weight_up_v1 = get_triggerSF_1lep1tau((*_recolep_sel_pt)[0],(*_recolep_sel_eta)[0],(*_recolep_sel_pdg)[0],
                                            (*_recotauh_sel_pt)[0],(*_recotauh_sel_eta)[0],(*_recotauh_sel_phi)[0],(*_recotauh_sel_decayMode)[0],wp,
                                            passHLT1l, passHLT1l1tau, _year, +1 );
-            _triggerSF_weight_down_v1 = get_triggerSF_1lep1tau((*_recolep_sel_pt)[0],(*_recolep_sel_eta)[0],(*_recolep_sel_pdg)[0],
+            _trigger_weight_down_v1 = get_triggerSF_1lep1tau((*_recolep_sel_pt)[0],(*_recolep_sel_eta)[0],(*_recolep_sel_pdg)[0],
                                            (*_recotauh_sel_pt)[0],(*_recotauh_sel_eta)[0],(*_recotauh_sel_phi)[0],(*_recotauh_sel_decayMode)[0],wp,
                                            passHLT1l, passHLT1l1tau, _year, -1 );
 
@@ -466,17 +534,17 @@ void add_SFs(TString filein, TString fileout, vector<TString> treename, bool isM
 
         else if ( cat_2lss1tau || cat_2los1tau || cat_2l2tau ) { // 2-lepton triggers
 
-            _triggerSF_weight_v1 = get_triggerSF_leptonic((*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],2,0,_year);
-            _triggerSF_weight_up_v1 = get_triggerSF_leptonic((*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],2,+1,_year);
-            _triggerSF_weight_down_v1 = get_triggerSF_leptonic((*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],2,-1,_year);
+            _trigger_weight_v1 = get_triggerSF_leptonic((*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],2,0,_year);
+            _trigger_weight_up_v1 = get_triggerSF_leptonic((*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],2,+1,_year);
+            _trigger_weight_down_v1 = get_triggerSF_leptonic((*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],2,-1,_year);
 
         }
 
         else if ( cat_3l1tau ){ // 3-lepton triggers
 
-            _triggerSF_weight_v1 = get_triggerSF_leptonic((*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],3,0,_year);
-            _triggerSF_weight_up_v1 = get_triggerSF_leptonic((*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],3,+1,_year);
-            _triggerSF_weight_down_v1 = get_triggerSF_leptonic((*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],3,-1,_year);
+            _trigger_weight_v1 = get_triggerSF_leptonic((*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],3,0,_year);
+            _trigger_weight_up_v1 = get_triggerSF_leptonic((*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],3,+1,_year);
+            _trigger_weight_down_v1 = get_triggerSF_leptonic((*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],3,-1,_year);
 
         }
 
@@ -493,15 +561,15 @@ void add_SFs(TString filein, TString fileout, vector<TString> treename, bool isM
             if((*_recotauh_sel_byMediumDeepTau2017v2p1VSjet)[1]==1) wp2 = "Medium";
             else wp2 = "VVLoose";
 
-            _triggerSF_weight_v1 = get_triggerSF_1lep2tau((*_recolep_sel_pt)[0],(*_recolep_sel_eta)[0],(*_recolep_sel_pdg)[0],
+            _trigger_weight_v1 = get_triggerSF_1lep2tau((*_recolep_sel_pt)[0],(*_recolep_sel_eta)[0],(*_recolep_sel_pdg)[0],
                                            (*_recotauh_sel_pt)[0],(*_recotauh_sel_eta)[0],(*_recotauh_sel_phi)[0],(*_recotauh_sel_decayMode)[0],wp1,
                                            (*_recotauh_sel_pt)[1],(*_recotauh_sel_eta)[1],(*_recotauh_sel_phi)[1],(*_recotauh_sel_decayMode)[1],wp2,
                                            passHLT1l, passHLT1l1tau, _year, 0 );
-            _triggerSF_weight_up_v1 = get_triggerSF_1lep2tau((*_recolep_sel_pt)[0],(*_recolep_sel_eta)[0],(*_recolep_sel_pdg)[0],
+            _trigger_weight_up_v1 = get_triggerSF_1lep2tau((*_recolep_sel_pt)[0],(*_recolep_sel_eta)[0],(*_recolep_sel_pdg)[0],
                                            (*_recotauh_sel_pt)[0],(*_recotauh_sel_eta)[0],(*_recotauh_sel_phi)[0],(*_recotauh_sel_decayMode)[0],wp1,
                                            (*_recotauh_sel_pt)[1],(*_recotauh_sel_eta)[1],(*_recotauh_sel_phi)[1],(*_recotauh_sel_decayMode)[1],wp2,
                                            passHLT1l, passHLT1l1tau, _year, +1 );
-            _triggerSF_weight_down_v1 = get_triggerSF_1lep2tau((*_recolep_sel_pt)[0],(*_recolep_sel_eta)[0],(*_recolep_sel_pdg)[0],
+            _trigger_weight_down_v1 = get_triggerSF_1lep2tau((*_recolep_sel_pt)[0],(*_recolep_sel_eta)[0],(*_recolep_sel_pdg)[0],
                                            (*_recotauh_sel_pt)[0],(*_recotauh_sel_eta)[0],(*_recotauh_sel_phi)[0],(*_recotauh_sel_decayMode)[0],wp1,
                                            (*_recotauh_sel_pt)[1],(*_recotauh_sel_eta)[1],(*_recotauh_sel_phi)[1],(*_recotauh_sel_decayMode)[1],wp2,
                                            passHLT1l, passHLT1l1tau, _year, -1 );
@@ -515,57 +583,136 @@ void add_SFs(TString filein, TString fileout, vector<TString> treename, bool isM
 
       	if ( cat_1l1tau || cat_1l2tau ){ // 1 lepton no tight charge
 
-      			if((*_recolep_sel_ismvasel)[0])
-        			_leptonSF_weight_v1 *= get_leptonSF(_year,(*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_eta)[0],3); 
-      			else
-        			_leptonSF_weight_v1 *= get_RecoToLoose_leptonSF(_year,(*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_eta)[0],3,0);
+      			if((*_recolep_sel_ismvasel)[0]){
+
+        			_lepton_weight_v1 *= get_leptonSF(_year,(*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_eta)[0],3); 
+              _lepton_weight_up_v1 *= get_leptonSF(_year,(*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_eta)[0],3,+1); 
+              _lepton_weight_down_v1 *= get_leptonSF(_year,(*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_eta)[0],3,-1); 
+
+            }
+      			else{
+
+        			_lepton_weight_v1 *= get_RecoToLoose_leptonSF(_year,(*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_eta)[0],3,0);
+              _lepton_weight_up_v1 *= get_RecoToLoose_leptonSF(_year,(*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_eta)[0],3,+1);
+              _lepton_weight_down_v1 *= get_RecoToLoose_leptonSF(_year,(*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_eta)[0],3,-1);
+            }
 
       	}
 
       	else if ( cat_2lss1tau ){ // 2 leptons tight charge
 
-      		  if((*_recolep_sel_ismvasel)[0])
-        			_leptonSF_weight_v1 *= get_leptonSF(_year,(*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_eta)[0],2); 
-      			else
-        			_leptonSF_weight_v1 *= get_RecoToLoose_leptonSF(_year,(*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_eta)[0],3,2);
+      		  if((*_recolep_sel_ismvasel)[0]){
 
-      			if((*_recolep_sel_ismvasel)[1])
-        			_leptonSF_weight_v1 *= get_leptonSF(_year,(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],(*_recolep_sel_eta)[1],2);
-      			else
-        			_leptonSF_weight_v1 *= get_RecoToLoose_leptonSF(_year,(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],(*_recolep_sel_eta)[1],3,2);
+        			_lepton_weight_v1 *= get_leptonSF(_year,(*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_eta)[0],2); 
+              _lepton_weight_up_v1 *= get_leptonSF(_year,(*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_eta)[0],2,+1); 
+              _lepton_weight_down_v1 *= get_leptonSF(_year,(*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_eta)[0],2,-1); 
+
+            }
+      			else{
+
+        			_lepton_weight_v1 *= get_RecoToLoose_leptonSF(_year,(*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_eta)[0],2,0);
+              _lepton_weight_up_v1 *= get_RecoToLoose_leptonSF(_year,(*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_eta)[0],2,+1);
+              _lepton_weight_down_v1 *= get_RecoToLoose_leptonSF(_year,(*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_eta)[0],2,-1);
+
+            }
+
+      			if((*_recolep_sel_ismvasel)[1]){
+
+        			_lepton_weight_v1 *= get_leptonSF(_year,(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],(*_recolep_sel_eta)[1],2,0);
+              _lepton_weight_up_v1 *= get_leptonSF(_year,(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],(*_recolep_sel_eta)[1],2,+1);
+              _lepton_weight_down_v1 *= get_leptonSF(_year,(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],(*_recolep_sel_eta)[1],2,-1);
+
+            }
+      			else{
+
+        			_lepton_weight_v1 *= get_RecoToLoose_leptonSF(_year,(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],(*_recolep_sel_eta)[1],2,0);
+              _lepton_weight_up_v1 *= get_RecoToLoose_leptonSF(_year,(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],(*_recolep_sel_eta)[1],2,+1);
+              _lepton_weight_down_v1 *= get_RecoToLoose_leptonSF(_year,(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],(*_recolep_sel_eta)[1],2,-1);
+
+            }
 
         }
 
       	else if ( cat_2l2tau || cat_2los1tau ){ // 2 leptons not tight charge
 
-      		  if((*_recolep_sel_ismvasel)[0])
-        			_leptonSF_weight_v1 *= get_leptonSF(_year,(*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_eta)[0],3); 
-      			else
-        			_leptonSF_weight_v1 *= get_RecoToLoose_leptonSF(_year,(*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_eta)[0],3,0);
+      		  if((*_recolep_sel_ismvasel)[0]){
 
-      			if((*_recolep_sel_ismvasel)[1])
-        			_leptonSF_weight_v1 *= get_leptonSF(_year,(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],(*_recolep_sel_eta)[1],3);
-      			else
-        			_leptonSF_weight_v1 *= get_RecoToLoose_leptonSF(_year,(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],(*_recolep_sel_eta)[1],3,0);
+        			_lepton_weight_v1 *= get_leptonSF(_year,(*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_eta)[0],3,0); 
+              _lepton_weight_up_v1 *= get_leptonSF(_year,(*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_eta)[0],3,+1); 
+              _lepton_weight_down_v1 *= get_leptonSF(_year,(*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_eta)[0],3,-1); 
+
+            }
+      			else{
+
+        			_lepton_weight_v1 *= get_RecoToLoose_leptonSF(_year,(*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_eta)[0],3,0);
+              _lepton_weight_up_v1 *= get_RecoToLoose_leptonSF(_year,(*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_eta)[0],3,+1);
+              _lepton_weight_down_v1 *= get_RecoToLoose_leptonSF(_year,(*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_eta)[0],3,-1);
+
+            }
+
+      			if((*_recolep_sel_ismvasel)[1]){
+
+        			_lepton_weight_v1 *= get_leptonSF(_year,(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],(*_recolep_sel_eta)[1],3,0);
+              _lepton_weight_up_v1 *= get_leptonSF(_year,(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],(*_recolep_sel_eta)[1],3,+1);
+              _lepton_weight_down_v1 *= get_leptonSF(_year,(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],(*_recolep_sel_eta)[1],3,-1);
+
+            }
+      			else{
+
+        			_lepton_weight_v1 *= get_RecoToLoose_leptonSF(_year,(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],(*_recolep_sel_eta)[1],3,0);
+              _lepton_weight_up_v1 *= get_RecoToLoose_leptonSF(_year,(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],(*_recolep_sel_eta)[1],3,+1);
+              _lepton_weight_down_v1 *= get_RecoToLoose_leptonSF(_year,(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],(*_recolep_sel_eta)[1],3,-1);
+
+            }
 
         }
 
         else if ( cat_3l1tau ){ // 3 leptons no tight charge
 
-      		  if((*_recolep_sel_ismvasel)[0])
-        			_leptonSF_weight_v1 *= get_leptonSF(_year,(*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_eta)[0],3); 
-      			else
-        			_leptonSF_weight_v1 *= get_RecoToLoose_leptonSF(_year,(*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_eta)[0],3,0);
+      		  if((*_recolep_sel_ismvasel)[0]){
 
-      			if((*_recolep_sel_ismvasel)[1])
-        			_leptonSF_weight_v1 *= get_leptonSF(_year,(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],(*_recolep_sel_eta)[1],3);
-      			else
-        			_leptonSF_weight_v1 *= get_RecoToLoose_leptonSF(_year,(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],(*_recolep_sel_eta)[1],3,0);
+        			_lepton_weight_v1 *= get_leptonSF(_year,(*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_eta)[0],3,0); 
+              _lepton_weight_up_v1 *= get_leptonSF(_year,(*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_eta)[0],3,+1); 
+              _lepton_weight_down_v1 *= get_leptonSF(_year,(*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_eta)[0],3,-1); 
 
-        		if((*_recolep_sel_ismvasel)[2])
-        			_leptonSF_weight_v1 *= get_leptonSF(_year,(*_recolep_sel_pdg)[2],(*_recolep_sel_pt)[2],(*_recolep_sel_eta)[2],3);
-      			else
-        			_leptonSF_weight_v1 *= get_RecoToLoose_leptonSF(_year,(*_recolep_sel_pdg)[2],(*_recolep_sel_pt)[2],(*_recolep_sel_eta)[2],3,0);
+            }
+      			else{
+
+        			_lepton_weight_v1 *= get_RecoToLoose_leptonSF(_year,(*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_eta)[0],3,0);
+              _lepton_weight_up_v1 *= get_RecoToLoose_leptonSF(_year,(*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_eta)[0],3,+1);
+              _lepton_weight_down_v1 *= get_RecoToLoose_leptonSF(_year,(*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_eta)[0],3,-1);
+
+            }
+
+      			if((*_recolep_sel_ismvasel)[1]){
+
+        			_lepton_weight_v1 *= get_leptonSF(_year,(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],(*_recolep_sel_eta)[1],3,0);
+              _lepton_weight_up_v1 *= get_leptonSF(_year,(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],(*_recolep_sel_eta)[1],3,+1);
+              _lepton_weight_down_v1 *= get_leptonSF(_year,(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],(*_recolep_sel_eta)[1],3,-1);
+
+            }
+      			else{
+
+        			_lepton_weight_v1 *= get_RecoToLoose_leptonSF(_year,(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],(*_recolep_sel_eta)[1],3,0);
+              _lepton_weight_v1 *= get_RecoToLoose_leptonSF(_year,(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],(*_recolep_sel_eta)[1],3,+1);
+              _lepton_weight_v1 *= get_RecoToLoose_leptonSF(_year,(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],(*_recolep_sel_eta)[1],3,-1);
+
+            }
+
+        		if((*_recolep_sel_ismvasel)[2]){
+
+        			_lepton_weight_v1 *= get_leptonSF(_year,(*_recolep_sel_pdg)[2],(*_recolep_sel_pt)[2],(*_recolep_sel_eta)[2],3,0);
+              _lepton_weight_up_v1 *= get_leptonSF(_year,(*_recolep_sel_pdg)[2],(*_recolep_sel_pt)[2],(*_recolep_sel_eta)[2],3,+1);
+              _lepton_weight_down_v1 *= get_leptonSF(_year,(*_recolep_sel_pdg)[2],(*_recolep_sel_pt)[2],(*_recolep_sel_eta)[2],3,-1);
+
+            }
+      			else{
+
+        			_lepton_weight_v1 *= get_RecoToLoose_leptonSF(_year,(*_recolep_sel_pdg)[2],(*_recolep_sel_pt)[2],(*_recolep_sel_eta)[2],3,0);
+              _lepton_weight_up_v1 *= get_RecoToLoose_leptonSF(_year,(*_recolep_sel_pdg)[2],(*_recolep_sel_pt)[2],(*_recolep_sel_eta)[2],3,+1);
+              _lepton_weight_down_v1 *= get_RecoToLoose_leptonSF(_year,(*_recolep_sel_pdg)[2],(*_recolep_sel_pt)[2],(*_recolep_sel_eta)[2],3,-1);
+
+            }
 
         }
 
@@ -584,17 +731,25 @@ void add_SFs(TString filein, TString fileout, vector<TString> treename, bool isM
                 if((*_recotauh_sel_byVLooseDeepTau2017v2p1VSjet)[0]==1) wp = "VLoose";
                 else wp = "VVLoose";
 
-                _tauSF_weight_v1 *= get_tauSF(_year, (*_recotauh_sel_pt)[0], (*_recotauh_sel_eta)[0], (*_recotauh_sel_decayMode)[0], wp);
-                _tauSF_weight_up_v1 *= get_tauSF(_year, (*_recotauh_sel_pt)[0], (*_recotauh_sel_eta)[0], (*_recotauh_sel_decayMode)[0], wp,+1);
-                _tauSF_weight_down_v1 *= get_tauSF(_year, (*_recotauh_sel_pt)[0], (*_recotauh_sel_eta)[0], (*_recotauh_sel_decayMode)[0], wp,-1);
+                _tauID_weight_v1 *= get_tauSF(_year, (*_recotauh_sel_pt)[0], (*_recotauh_sel_eta)[0], (*_recotauh_sel_decayMode)[0], wp);
+                _tauID_weight_up_v1 *= get_tauSF(_year, (*_recotauh_sel_pt)[0], (*_recotauh_sel_eta)[0], (*_recotauh_sel_decayMode)[0], wp,+1);
+                _tauID_weight_down_v1 *= get_tauSF(_year, (*_recotauh_sel_pt)[0], (*_recotauh_sel_eta)[0], (*_recotauh_sel_decayMode)[0], wp,-1);
+
+                _tauES_weight_v1 *= get_tauESSF(_year, (*_recotauh_sel_decayMode)[0]);
+                _tauES_weight_up_v1 *= get_tauESSF(_year, (*_recotauh_sel_decayMode)[0],+1);
+                _tauES_weight_down_v1 *= get_tauESSF(_year, (*_recotauh_sel_decayMode)[0],-1);
 
             }
 
             else{
 
-                _tauSF_weight_v1 = 1.;
-                _tauSF_weight_up_v1 = 0.;
-                _tauSF_weight_down_v1 = 0.;
+                _tauID_weight_v1 = 1.;
+                _tauID_weight_up_v1 = 1.;
+                _tauID_weight_down_v1 = 1.;
+
+                _tauES_weight_v1 = 1.;
+                _tauES_weight_up_v1 = 1.;
+                _tauES_weight_down_v1 = 1.;
 
             }
 
@@ -602,10 +757,10 @@ void add_SFs(TString filein, TString fileout, vector<TString> treename, bool isM
 
                 std::tuple<float, float, float, float, float> tau_fakerate = get_fakerate_tau_Loose(_year,(*_recotauh_sel_pt)[0],(*_recotauh_sel_eta)[0]);
 
-                _tauSF_weight_tauNormUp_v1 = std::get<1>(tau_fakerate);
-                _tauSF_weight_tauNormDown_v1 = std::get<2>(tau_fakerate);
-                _tauSF_weight_tauShapeUp_v1 = std::get<3>(tau_fakerate);
-                _tauSF_weight_tauShapeDown_v1 = std::get<4>(tau_fakerate);
+                _tauID_weight_tauNormUp_v1 = std::get<1>(tau_fakerate);
+                _tauID_weight_tauNormDown_v1 = std::get<2>(tau_fakerate);
+                _tauID_weight_tauShapeUp_v1 = std::get<3>(tau_fakerate);
+                _tauID_weight_tauShapeDown_v1 = std::get<4>(tau_fakerate);
 
             }
 
@@ -619,17 +774,25 @@ void add_SFs(TString filein, TString fileout, vector<TString> treename, bool isM
                 if((*_recotauh_sel_byMediumDeepTau2017v2p1VSjet)[0]==1) wp = "Medium";
                 else wp = "VVLoose";
 
-                _tauSF_weight_v1 *= get_tauSF(_year, (*_recotauh_sel_pt)[0], (*_recotauh_sel_eta)[0], (*_recotauh_sel_decayMode)[0], wp);
-                _tauSF_weight_up_v1 *= get_tauSF(_year, (*_recotauh_sel_pt)[0], (*_recotauh_sel_eta)[0], (*_recotauh_sel_decayMode)[0], wp,+1);
-                _tauSF_weight_down_v1 *= get_tauSF(_year, (*_recotauh_sel_pt)[0], (*_recotauh_sel_eta)[0], (*_recotauh_sel_decayMode)[0], wp,-1);
+                _tauID_weight_v1 *= get_tauSF(_year, (*_recotauh_sel_pt)[0], (*_recotauh_sel_eta)[0], (*_recotauh_sel_decayMode)[0], wp);
+                _tauID_weight_up_v1 *= get_tauSF(_year, (*_recotauh_sel_pt)[0], (*_recotauh_sel_eta)[0], (*_recotauh_sel_decayMode)[0], wp,+1);
+                _tauID_weight_down_v1 *= get_tauSF(_year, (*_recotauh_sel_pt)[0], (*_recotauh_sel_eta)[0], (*_recotauh_sel_decayMode)[0], wp,-1);
+
+                _tauES_weight_v1 *= get_tauESSF(_year, (*_recotauh_sel_decayMode)[0]);
+                _tauES_weight_up_v1 *= get_tauESSF(_year, (*_recotauh_sel_decayMode)[0],+1);
+                _tauES_weight_down_v1 *= get_tauESSF(_year, (*_recotauh_sel_decayMode)[0],-1);
 
             }
 
             else{
 
-                _tauSF_weight_v1 = 1.;
-                _tauSF_weight_up_v1 = 0.;
-                _tauSF_weight_down_v1 = 0.;
+                _tauID_weight_v1 = 1.;
+                _tauID_weight_up_v1 = 1.;
+                _tauID_weight_down_v1 = 1.;
+
+                _tauES_weight_v1 = 1.;
+                _tauES_weight_up_v1 = 1.;
+                _tauES_weight_down_v1 = 1.;
 
             }
 
@@ -637,10 +800,10 @@ void add_SFs(TString filein, TString fileout, vector<TString> treename, bool isM
 
                 std::tuple<float, float, float, float, float> tau_fakerate = get_fakerate_tau_Loose(_year,(*_recotauh_sel_pt)[0],(*_recotauh_sel_eta)[0]);
 
-                _tauSF_weight_tauNormUp_v1 = std::get<1>(tau_fakerate);
-                _tauSF_weight_tauNormDown_v1 = std::get<2>(tau_fakerate);
-                _tauSF_weight_tauShapeUp_v1 = std::get<3>(tau_fakerate);
-                _tauSF_weight_tauShapeDown_v1 = std::get<4>(tau_fakerate);
+                _tauID_weight_tauNormUp_v1 = std::get<1>(tau_fakerate);
+                _tauID_weight_tauNormDown_v1 = std::get<2>(tau_fakerate);
+                _tauID_weight_tauShapeUp_v1 = std::get<3>(tau_fakerate);
+                _tauID_weight_tauShapeDown_v1 = std::get<4>(tau_fakerate);
 
             }
 
@@ -654,17 +817,13 @@ void add_SFs(TString filein, TString fileout, vector<TString> treename, bool isM
                 if((*_recotauh_sel_byVTightDeepTau2017v2p1VSjet)[0]==1) wp = "VTight";
                 else wp = "VVLoose";
 
-                _tauSF_weight_v1 *= get_tauSF(_year, (*_recotauh_sel_pt)[0], (*_recotauh_sel_eta)[0], (*_recotauh_sel_decayMode)[0], wp);
-                _tauSF_weight_up_v1 *= get_tauSF(_year, (*_recotauh_sel_pt)[0], (*_recotauh_sel_eta)[0], (*_recotauh_sel_decayMode)[0], wp,+1);
-                _tauSF_weight_down_v1 *= get_tauSF(_year, (*_recotauh_sel_pt)[0], (*_recotauh_sel_eta)[0], (*_recotauh_sel_decayMode)[0], wp,-1);
+                _tauID_weight_v1 *= get_tauSF(_year, (*_recotauh_sel_pt)[0], (*_recotauh_sel_eta)[0], (*_recotauh_sel_decayMode)[0], wp);
+                _tauID_weight_up_v1 *= get_tauSF(_year, (*_recotauh_sel_pt)[0], (*_recotauh_sel_eta)[0], (*_recotauh_sel_decayMode)[0], wp,+1);
+                _tauID_weight_down_v1 *= get_tauSF(_year, (*_recotauh_sel_pt)[0], (*_recotauh_sel_eta)[0], (*_recotauh_sel_decayMode)[0], wp,-1);
 
-            }
-
-            else{
-
-                _tauSF_weight_v1 = 1.;
-                _tauSF_weight_up_v1 = 0.;
-                _tauSF_weight_down_v1 = 0.;
+                _tauES_weight_v1 *= get_tauESSF(_year, (*_recotauh_sel_decayMode)[0]);
+                _tauES_weight_up_v1 *= get_tauESSF(_year, (*_recotauh_sel_decayMode)[0],+1);
+                _tauES_weight_down_v1 *= get_tauESSF(_year, (*_recotauh_sel_decayMode)[0],-1);
 
             }
 
@@ -672,10 +831,10 @@ void add_SFs(TString filein, TString fileout, vector<TString> treename, bool isM
 
                 std::tuple<float, float, float, float, float> tau_fakerate = get_fakerate_tau_Loose(_year,(*_recotauh_sel_pt)[0],(*_recotauh_sel_eta)[0]);
 
-                _tauSF_weight_tauNormUp_v1 = std::get<1>(tau_fakerate);
-                _tauSF_weight_tauNormDown_v1 = std::get<2>(tau_fakerate);
-                _tauSF_weight_tauShapeUp_v1 = std::get<3>(tau_fakerate);
-                _tauSF_weight_tauShapeDown_v1 = std::get<4>(tau_fakerate);
+                _tauID_weight_tauNormUp_v1 = std::get<1>(tau_fakerate);
+                _tauID_weight_tauNormDown_v1 = std::get<2>(tau_fakerate);
+                _tauID_weight_tauShapeUp_v1 = std::get<3>(tau_fakerate);
+                _tauID_weight_tauShapeDown_v1 = std::get<4>(tau_fakerate);
 
             }
 
@@ -691,9 +850,13 @@ void add_SFs(TString filein, TString fileout, vector<TString> treename, bool isM
                   if((*_recotauh_sel_byLooseDeepTau2017v2p1VSjet)[0]==1) wp = "Loose";
                   else wp = "VVLoose";
 
-                  _tauSF_weight_v1 *= get_tauSF(_year, (*_recotauh_sel_pt)[0], (*_recotauh_sel_eta)[0], (*_recotauh_sel_decayMode)[0], wp);
-                  _tauSF_weight_up_v1 *= get_tauSF(_year, (*_recotauh_sel_pt)[0], (*_recotauh_sel_eta)[0], (*_recotauh_sel_decayMode)[0], wp,+1);
-                  _tauSF_weight_down_v1 *= get_tauSF(_year, (*_recotauh_sel_pt)[0], (*_recotauh_sel_eta)[0], (*_recotauh_sel_decayMode)[0], wp,-1);
+                  _tauID_weight_v1 *= get_tauSF(_year, (*_recotauh_sel_pt)[0], (*_recotauh_sel_eta)[0], (*_recotauh_sel_decayMode)[0], wp);
+                  _tauID_weight_up_v1 *= get_tauSF(_year, (*_recotauh_sel_pt)[0], (*_recotauh_sel_eta)[0], (*_recotauh_sel_decayMode)[0], wp,+1);
+                  _tauID_weight_down_v1 *= get_tauSF(_year, (*_recotauh_sel_pt)[0], (*_recotauh_sel_eta)[0], (*_recotauh_sel_decayMode)[0], wp,-1);
+
+                  _tauES_weight_v1 *= get_tauESSF(_year, (*_recotauh_sel_decayMode)[0]);
+                  _tauES_weight_up_v1 *= get_tauESSF(_year, (*_recotauh_sel_decayMode)[0],+1);
+                  _tauES_weight_down_v1 *= get_tauESSF(_year, (*_recotauh_sel_decayMode)[0],-1);
 
               }
 
@@ -703,19 +866,15 @@ void add_SFs(TString filein, TString fileout, vector<TString> treename, bool isM
                   if((*_recotauh_sel_byLooseDeepTau2017v2p1VSjet)[1]==1) wp = "Loose";
                   else wp = "VVLoose";
 
-                  _tauSF_weight_v1 *= get_tauSF(_year, (*_recotauh_sel_pt)[1], (*_recotauh_sel_eta)[1], (*_recotauh_sel_decayMode)[1], wp);
-                  _tauSF_weight_up_v1 *= get_tauSF(_year, (*_recotauh_sel_pt)[1], (*_recotauh_sel_eta)[1], (*_recotauh_sel_decayMode)[1], wp,+1);
-                  _tauSF_weight_down_v1 *= get_tauSF(_year, (*_recotauh_sel_pt)[1], (*_recotauh_sel_eta)[1], (*_recotauh_sel_decayMode)[1], wp,-1);
+                  _tauID_weight_v1 *= get_tauSF(_year, (*_recotauh_sel_pt)[1], (*_recotauh_sel_eta)[1], (*_recotauh_sel_decayMode)[1], wp);
+                  _tauID_weight_up_v1 *= get_tauSF(_year, (*_recotauh_sel_pt)[1], (*_recotauh_sel_eta)[1], (*_recotauh_sel_decayMode)[1], wp,+1);
+                  _tauID_weight_down_v1 *= get_tauSF(_year, (*_recotauh_sel_pt)[1], (*_recotauh_sel_eta)[1], (*_recotauh_sel_decayMode)[1], wp,-1);
+
+                  _tauES_weight_v1 *= get_tauESSF(_year, (*_recotauh_sel_decayMode)[1]);
+                  _tauES_weight_up_v1 *= get_tauESSF(_year, (*_recotauh_sel_decayMode)[1],+1);
+                  _tauES_weight_down_v1 *= get_tauESSF(_year, (*_recotauh_sel_decayMode)[1],-1);
 
               }
-
-            }
-
-            else{
-
-                _tauSF_weight_v1 = 1.;
-                _tauSF_weight_up_v1 = 0.;
-                _tauSF_weight_down_v1 = 0.;
 
             }
 
@@ -724,15 +883,15 @@ void add_SFs(TString filein, TString fileout, vector<TString> treename, bool isM
                 std::tuple<float, float, float, float, float> tau_fakerate1 = get_fakerate_tau_Loose(_year,(*_recotauh_sel_pt)[0],(*_recotauh_sel_eta)[0]);
                 std::tuple<float, float, float, float, float> tau_fakerate2 = get_fakerate_tau_Loose(_year,(*_recotauh_sel_pt)[1],(*_recotauh_sel_eta)[1]);
 
-                _tauSF_weight_tauNormUp_v1 = std::get<1>(tau_fakerate1);
-                _tauSF_weight_tauNormDown_v1 = std::get<2>(tau_fakerate1);
-                _tauSF_weight_tauShapeUp_v1 = std::get<3>(tau_fakerate1);
-                _tauSF_weight_tauShapeDown_v1 = std::get<4>(tau_fakerate1);
+                _tauID_weight_tauNormUp_v1 = std::get<1>(tau_fakerate1);
+                _tauID_weight_tauNormDown_v1 = std::get<2>(tau_fakerate1);
+                _tauID_weight_tauShapeUp_v1 = std::get<3>(tau_fakerate1);
+                _tauID_weight_tauShapeDown_v1 = std::get<4>(tau_fakerate1);
 
-                _tauSF_weight_tauNormUp_v1 *= std::get<1>(tau_fakerate2);
-                _tauSF_weight_tauNormDown_v1 *= std::get<2>(tau_fakerate2);
-                _tauSF_weight_tauShapeUp_v1 *= std::get<3>(tau_fakerate2);
-                _tauSF_weight_tauShapeDown_v1 *= std::get<4>(tau_fakerate2);
+                _tauID_weight_tauNormUp_v1 *= std::get<1>(tau_fakerate2);
+                _tauID_weight_tauNormDown_v1 *= std::get<2>(tau_fakerate2);
+                _tauID_weight_tauShapeUp_v1 *= std::get<3>(tau_fakerate2);
+                _tauID_weight_tauShapeDown_v1 *= std::get<4>(tau_fakerate2);
 
             }
 
@@ -748,9 +907,13 @@ void add_SFs(TString filein, TString fileout, vector<TString> treename, bool isM
                   if((*_recotauh_sel_byMediumDeepTau2017v2p1VSjet)[0]==1) wp = "Medium";
                   else wp = "VVLoose";
 
-                  _tauSF_weight_v1 *= get_tauSF(_year, (*_recotauh_sel_pt)[0], (*_recotauh_sel_eta)[0], (*_recotauh_sel_decayMode)[0], wp);
-                  _tauSF_weight_up_v1 *= get_tauSF(_year, (*_recotauh_sel_pt)[0], (*_recotauh_sel_eta)[0], (*_recotauh_sel_decayMode)[0], wp,+1);
-                  _tauSF_weight_down_v1 *= get_tauSF(_year, (*_recotauh_sel_pt)[0], (*_recotauh_sel_eta)[0], (*_recotauh_sel_decayMode)[0], wp,-1);
+                  _tauID_weight_v1 *= get_tauSF(_year, (*_recotauh_sel_pt)[0], (*_recotauh_sel_eta)[0], (*_recotauh_sel_decayMode)[0], wp);
+                  _tauID_weight_up_v1 *= get_tauSF(_year, (*_recotauh_sel_pt)[0], (*_recotauh_sel_eta)[0], (*_recotauh_sel_decayMode)[0], wp,+1);
+                  _tauID_weight_down_v1 *= get_tauSF(_year, (*_recotauh_sel_pt)[0], (*_recotauh_sel_eta)[0], (*_recotauh_sel_decayMode)[0], wp,-1);
+
+                  _tauES_weight_v1 *= get_tauESSF(_year, (*_recotauh_sel_decayMode)[0]);
+                  _tauES_weight_up_v1 *= get_tauESSF(_year, (*_recotauh_sel_decayMode)[0],+1);
+                  _tauES_weight_down_v1 *= get_tauESSF(_year, (*_recotauh_sel_decayMode)[0],-1);
 
               }
 
@@ -760,19 +923,15 @@ void add_SFs(TString filein, TString fileout, vector<TString> treename, bool isM
                   if((*_recotauh_sel_byMediumDeepTau2017v2p1VSjet)[1]==1) wp = "Medium";
                   else wp = "VVLoose";
 
-                  _tauSF_weight_v1 *= get_tauSF(_year, (*_recotauh_sel_pt)[1], (*_recotauh_sel_eta)[1], (*_recotauh_sel_decayMode)[1], wp);
-                  _tauSF_weight_up_v1 *= get_tauSF(_year, (*_recotauh_sel_pt)[1], (*_recotauh_sel_eta)[1], (*_recotauh_sel_decayMode)[1], wp,+1);
-                  _tauSF_weight_down_v1 *= get_tauSF(_year, (*_recotauh_sel_pt)[1], (*_recotauh_sel_eta)[1], (*_recotauh_sel_decayMode)[1], wp,-1);
+                  _tauID_weight_v1 *= get_tauSF(_year, (*_recotauh_sel_pt)[1], (*_recotauh_sel_eta)[1], (*_recotauh_sel_decayMode)[1], wp);
+                  _tauID_weight_up_v1 *= get_tauSF(_year, (*_recotauh_sel_pt)[1], (*_recotauh_sel_eta)[1], (*_recotauh_sel_decayMode)[1], wp,+1);
+                  _tauID_weight_down_v1 *= get_tauSF(_year, (*_recotauh_sel_pt)[1], (*_recotauh_sel_eta)[1], (*_recotauh_sel_decayMode)[1], wp,-1);
+
+                  _tauES_weight_v1 *= get_tauESSF(_year, (*_recotauh_sel_decayMode)[1]);
+                  _tauES_weight_up_v1 *= get_tauESSF(_year, (*_recotauh_sel_decayMode)[1],+1);
+                  _tauES_weight_down_v1 *= get_tauESSF(_year, (*_recotauh_sel_decayMode)[1],-1);
 
               }
-
-            }
-
-            else{
-
-                _tauSF_weight_v1 = 1.;
-                _tauSF_weight_up_v1 = 0.;
-                _tauSF_weight_down_v1 = 0.;
 
             }
 
@@ -781,15 +940,15 @@ void add_SFs(TString filein, TString fileout, vector<TString> treename, bool isM
                 std::tuple<float, float, float, float, float> tau_fakerate1 = get_fakerate_tau_Loose(_year,(*_recotauh_sel_pt)[0],(*_recotauh_sel_eta)[0]);
                 std::tuple<float, float, float, float, float> tau_fakerate2 = get_fakerate_tau_Loose(_year,(*_recotauh_sel_pt)[1],(*_recotauh_sel_eta)[1]);
 
-                _tauSF_weight_tauNormUp_v1 = std::get<1>(tau_fakerate1);
-                _tauSF_weight_tauNormDown_v1 = std::get<2>(tau_fakerate1);
-                _tauSF_weight_tauShapeUp_v1 = std::get<3>(tau_fakerate1);
-                _tauSF_weight_tauShapeDown_v1 = std::get<4>(tau_fakerate1);
+                _tauID_weight_tauNormUp_v1 = std::get<1>(tau_fakerate1);
+                _tauID_weight_tauNormDown_v1 = std::get<2>(tau_fakerate1);
+                _tauID_weight_tauShapeUp_v1 = std::get<3>(tau_fakerate1);
+                _tauID_weight_tauShapeDown_v1 = std::get<4>(tau_fakerate1);
 
-                _tauSF_weight_tauNormUp_v1 *= std::get<1>(tau_fakerate2);
-                _tauSF_weight_tauNormDown_v1 *= std::get<2>(tau_fakerate2);
-                _tauSF_weight_tauShapeUp_v1 *= std::get<3>(tau_fakerate2);
-                _tauSF_weight_tauShapeDown_v1 *= std::get<4>(tau_fakerate2);
+                _tauID_weight_tauNormUp_v1 *= std::get<1>(tau_fakerate2);
+                _tauID_weight_tauNormDown_v1 *= std::get<2>(tau_fakerate2);
+                _tauID_weight_tauShapeUp_v1 *= std::get<3>(tau_fakerate2);
+                _tauID_weight_tauShapeDown_v1 *= std::get<4>(tau_fakerate2);
 
             }
 
@@ -2375,44 +2534,395 @@ void add_SFs(TString filein, TString fileout, vector<TString> treename, bool isM
 }
 
 
-void test(){
+void loadsample_SR(TString sample, int year, TString type, bool ismc){
 
-  	vector<TString> filein;
-  	//filein.push_back("/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_splitted_BDT/2016/nominal/Rares/ntuple_Oct19v1_MC_2016_WWW_BDT.root");
-  	//filein.push_back("/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_splitted/2016/nominal/ttV/ntuple_Oct19v1_MC_2016_TTWJetsToLNu.root");
-    //filein.push_back("/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_splitted/2017/nominal/ttV/ntuple_Oct19v1_MC_2017_TTWJetsToLNu.root");
-    filein.push_back("/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_splitted_MEM/2016/nominal/ttH/ntuple_Oct19v1_MC_2016_ttHJetToNonbb_MEM_SR.root");
-    filein.push_back("/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_splitted_MEM/2017/nominal/ttH/ntuple_Oct19v1_MC_2017_ttHJetToNonbb_MEM_SR.root");
-    filein.push_back("/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_splitted_MEM/2018/nominal/ttH/ntuple_Oct19v2_MC_2018_ttHJetToNonbb_MEM_SR.root");
+    cout<<"Processing SR sample: "<<sample;
 
-  	vector<TString> fileout;
-  	//fileout.push_back("/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_splitted_BDT/2016/nominal/Rares/ntuple_Oct19v1_MC_2016_WWW_BDT_SFs.root");
-  	//fileout.push_back("/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_splitted/2016/nominal/ttV/ntuple_Oct19v1_MC_2016_TTW_SFs_test.root");
-    //fileout.push_back("/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_splitted/2017/nominal/ttV/ntuple_Oct19v1_MC_2017_TTW_SFs_test.root");
-    fileout.push_back("/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_datacards/2016/nominal/ttH/ntuple_Oct19v1_MC_2016_ttHJetToNonbb_MEM_SR_v1.root");
-    fileout.push_back("/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_datacards/2017/nominal/ttH/ntuple_Oct19v1_MC_2017_ttHJetToNonbb_MEM_SR_v1.root");
-    fileout.push_back("/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_datacards/2018/nominal/ttH/ntuple_Oct19v2_MC_2018_ttHJetToNonbb_MEM_SR_v1.root");
+    TString year_s = std::to_string(year);
+
+  	TString filein = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_splitted_MEM/"+year_s+"/nominal/"+type+"/ntuple_"+sample+"_MEM_SR.root";
+    TString fileout = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/"+year_s+"/nominal/"+type+"/ntuple_"+sample+"_MEM_SR_SFsv1.root";
 
   	vector<TString> tree;
-  	tree.push_back("HTauTauTree_2lss1tau_SR");
-  	//tree.push_back("HTauTauTree_2lss1tau_fake");
-  	//tree.push_back("HTauTauTree_2lss1tau_flip");
-  	//tree.push_back("HTauTauTree_2tau_SR");
-    //tree.push_back("HTauTauTree_2tau_fake");
-  	//tree.push_back("HTauTauTree_1l1tau_SR");
-    //tree.push_back("HTauTauTree_1l1tau_fake");
-  	//tree.push_back("HTauTauTree_1l2tau_SR");
-  	//tree.push_back("HTauTauTree_1l2tau_fake");
-  	//tree.push_back("HTauTauTree_2los1tau_SR");
-  	//tree.push_back("HTauTauTree_2los1tau_fake");
-  	//tree.push_back("HTauTauTree_2l2tau_SR");
-  	//tree.push_back("HTauTauTree_2l2tau_fake");
-  	//tree.push_back("HTauTauTree_3l1tau_SR");
-  	//tree.push_back("HTauTauTree_3l1tau_fake");
+    tree.push_back("HTauTauTree_2lss1tau_SR");
 
-  	for (unsigned int i_file = 0; i_file<filein.size(); i_file++){
-  		cout<<filein[i_file]<<endl;
-    	add_SFs(filein[i_file],fileout[i_file],tree,true);  
-  	}  
+    add_SFs(filein,fileout,tree,ismc,year);
+
+
+}
+
+void loadsample_fake(TString sample, int year, TString type, bool ismc){
+
+    cout<<"Processing fake sample: "<<sample;
+
+    TString year_s = std::to_string(year);
+
+    TString filein = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_splitted_MEM/"+year_s+"/nominal/"+type+"/ntuple_"+sample+"_MEM_fake.root";
+    TString fileout = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/"+year_s+"/nominal/"+type+"/ntuple_"+sample+"_MEM_fake_SFsv1.root";
+
+    vector<TString> tree;
+    tree.push_back("HTauTauTree_2lss1tau_fake");
+
+    add_SFs(filein,fileout,tree,ismc,year);
+
+
+}
+
+void loadsample_flip(TString sample, int year, TString type, bool ismc){
+
+    cout<<"Processing flip sample: "<<sample;
+
+    TString year_s = std::to_string(year);
+
+    TString filein = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_splitted_MEM/"+year_s+"/nominal/"+type+"/ntuple_"+sample+"_MEM_flip.root";
+    TString fileout = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/"+year_s+"/nominal/"+type+"/ntuple_"+sample+"_MEM_flip_SFsv1.root";
+
+    vector<TString> tree;
+    tree.push_back("HTauTauTree_2lss1tau_flip");
+
+    add_SFs(filein,fileout,tree,ismc,year);
+
+
+}
+
+
+void test_SR_2016(){
+
+    //loadsample_SR("Oct19v1_MC_2016_ttHJetToNonbb",2016,"ttH",true);
+    //loadsample_SR("Oct19v1_MC_2016_ttH_ctcvcp",2016,"ttH",true);
+    //loadsample_SR("Oct19v1_MC_2016_THQ_ctcvcp",2016,"ttH",true);
+    //loadsample_SR("Oct19v1_MC_2016_THW_ctcvcp",2016,"ttH",true);
+
+    //loadsample_SR("Oct19v1_MC_2016_TTZToLLNuNu_M-10_ext2",2016,"ttV",true);
+    //loadsample_SR("Oct19v1_MC_2016_TTZToLLNuNu_M-10_ext3",2016,"ttV",true);
+    //loadsample_SR("Oct19v1_MC_2016_TTZToLL_M-1to10",2016,"ttV",true);
+    //loadsample_SR("Oct19v1_MC_2016_TTWJetsToLNu",2016,"ttV",true);
+    //loadsample_SR("Oct19v1_MC_2016_TTWW",2016,"ttV",true);
+
+    loadsample_SR("Oct19v1_MC_2016_WWW",2016,"Rares",true);
+    loadsample_SR("Oct19v1_MC_2016_WWZ",2016,"Rares",true);
+    loadsample_SR("Oct19v1_MC_2016_WZZ",2016,"Rares",true);
+    loadsample_SR("Oct19v1_MC_2016_ZZZ",2016,"Rares",true);
+    loadsample_SR("Oct19v1_MC_2016_WZG",2016,"Rares",true);
+    /*loadsample_SR("Oct19v1_MC_2016_WGToLNuG_ext1",2016,"Rares",true);
+    loadsample_SR("Oct19v1_MC_2016_WGToLNuG_ext2",2016,"Rares",true);
+    loadsample_SR("Oct19v1_MC_2016_WGToLNuG_ext3",2016,"Rares",true);
+    loadsample_SR("Oct19v1_MC_2016_ZGTo2LG",2016,"Rares",true);
+    loadsample_SR("Oct19v1_MC_2016_TGJets_leptonDecays",2016,"Rares",true);
+    loadsample_SR("Oct19v1_MC_2016_TTGJets",2016,"Rares",true);
+    loadsample_SR("Oct19v1_MC_2016_TTGJets_ext1",2016,"Rares",true);
+    //loadsample_SR("Oct19v2_MC_2016_tZq_ll",2016,"Rares",true);
+    //loadsample_SR("Oct19v1_MC_2016_tZq_ll_PS",2016,"Rares",true);
+    loadsample_SR("Oct19v1_MC_2016_WpWpJJ",2016,"Rares",true);
+    loadsample_SR("Oct19v2_MC_2016_WWTo2L2Nu_DoubleScattering",2016,"Rares",true);
+    loadsample_SR("Oct19v1_MC_2016_TTTT",2016,"Rares",true);
+
+    loadsample_SR("Oct19v1_MC_2016_DYJetsToLL_M-10to50",2016,"EWK",true);
+    loadsample_SR("Oct19v1_MC_2016_DYJetsToLL_M-50",2016,"EWK",true);
+    loadsample_SR("Oct19v1_MC_2016_WJetsToLNu_ext2",2016,"EWK",true);
+    loadsample_SR("Oct19v1_MC_2016_WJetsToLNu",2016,"EWK",true);
+    loadsample_SR("Oct19v1_MC_2016_WWTo2L2Nu",2016,"EWK",true);
+    loadsample_SR("Oct19v1_MC_2016_WZTo3LNu",2016,"EWK",true);
+    loadsample_SR("Oct19v1_MC_2016_ZZTo4L",2016,"EWK",true);
+
+    loadsample_SR("Oct19v1_MC_2016_ST_s-channel",2016,"ttbar",true);
+    loadsample_SR("Oct19v1_MC_2016_ST_s-channel_PS",2016,"ttbar",true);
+    loadsample_SR("Oct19v1_MC_2016_ST_t-channel_top",2016,"ttbar",true);
+    loadsample_SR("Oct19v1_MC_2016_ST_t-channel_antitop",2016,"ttbar",true);
+    loadsample_SR("Oct19v1_MC_2016_ST_t-channel_antitop_PS",2016,"ttbar",true);
+    loadsample_SR("Oct19v1_MC_2016_ST_tW_top",2016,"ttbar",true);
+    loadsample_SR("Oct19v1_MC_2016_ST_tW_antitop",2016,"ttbar",true);
+    loadsample_SR("Oct19v1_MC_2016_ST_tWll",2016,"ttbar",true);
+    loadsample_SR("Oct19v1_MC_2016_TTJets_DiLept_ext1",2016,"ttbar",true);
+    loadsample_SR("Oct19v1_MC_2016_TTJets_DiLept",2016,"ttbar",true);
+    loadsample_SR("Oct19v2_MC_2016_TTJets_SingleLeptFromT_ext1",2016,"ttbar",true);
+    loadsample_SR("Oct19v1_MC_2016_TTJets_SingleLeptFromT",2016,"ttbar",true);
+    loadsample_SR("Oct19v1_MC_2016_TTJets_SingleLeptFromTbar",2016,"ttbar",true);
+    loadsample_SR("Oct19v3_MC_2016_TTJets_SingleLeptFromTbar_ext1",2016,"ttbar",true);
+
+    loadsample_SR("Oct19v1_MC_2016_GluGluHToTauTau",2016,"ggH",true);
+    loadsample_SR("Oct19v1_MC_2016_GluGluHToZZTo4L",2016,"ggH",true);
+    loadsample_SR("Oct19v1_MC_2016_GluGluHToWWToLNuQQ",2016,"ggH",true);
+    loadsample_SR("Oct19v1_MC_2016_GluGluHToWWTo2L2Nu",2016,"ggH",true);
+    loadsample_SR("Oct19v1_MC_2016_GluGluHToMuMu",2016,"ggH",true);
+    loadsample_SR("Oct19v1_MC_2016_GluGluHToBB",2016,"ggH",true);
+    loadsample_SR("Oct19v6_MC_2016_GluGluHToBB_ext1",2016,"ggH",true);
+    loadsample_SR("Oct19v1_MC_2016_GluGluHToGG",2016,"ggH",true);
+
+    loadsample_SR("Oct19v2_MC_2016_VBFHToTauTau",2016,"VBF",true);
+    loadsample_SR("Oct19v2_MC_2016_VBF_HToZZTo4L",2016,"VBF",true);
+    loadsample_SR("Oct19v1_MC_2016_VBFHToWWToLNuQQ",2016,"VBF",true);
+    loadsample_SR("Oct19v1_MC_2016_VBFHToWWTo2L2Nu",2016,"VBF",true);
+    loadsample_SR("Oct19v1_MC_2016_VBFHToMuMu",2016,"VBF",true);
+    loadsample_SR("Oct19v3_MC_2016_VBFHToBB",2016,"VBF",true);
+    loadsample_SR("Oct19v1_MC_2016_VBFHToBB_ext1",2016,"VBF",true);
+    loadsample_SR("Oct19v1_MC_2016_VBFHToGG_ext1",2016,"VBF",true);
+    loadsample_SR("Oct19v1_MC_2016_VBFHToGG_ext2",2016,"VBF",true);
+
+    loadsample_SR("Oct19v1_MC_2016_VHToNonbb",2016,"VH",true);
+    loadsample_SR("Oct19v1_MC_2016_ZH_HToBB_ZToLL",2016,"VH",true);
+    loadsample_SR("Oct19v1_MC_2016_ZHToTauTau",2016,"VH",true);
+
+    loadsample_SR("Oct19v1_MC_2016_TTWH",2016,"ttVH",true);
+    loadsample_SR("Oct19v2_MC_2016_TTZH",2016,"ttVH",true);
+
+    loadsample_SR("Oct19v2_MC_2016_GluGluToHHTo2B2VTo2L2Nu_node_SM",2016,"HH",true);
+    loadsample_SR("Oct19v2_MC_2016_GluGluToHHTo2B2VTo2L2Nu_node_box",2016,"HH",true);
+    loadsample_SR("Oct19v3_MC_2016_GluGluToHHTo2B2VTo2L2Nu_node_1",2016,"HH",true);
+    loadsample_SR("Oct19v1_MC_2016_GluGluToHHTo2B2VTo2L2Nu_node_2",2016,"HH",true);
+    loadsample_SR("Oct19v1_MC_2016_GluGluToHHTo2B2VTo2L2Nu_node_3",2016,"HH",true);
+    loadsample_SR("Oct19v4_MC_2016_GluGluToHHTo2B2VTo2L2Nu_node_4",2016,"HH",true);
+    loadsample_SR("Oct19v2_MC_2016_GluGluToHHTo2B2VTo2L2Nu_node_5",2016,"HH",true);
+    loadsample_SR("Oct19v2_MC_2016_GluGluToHHTo2B2VTo2L2Nu_node_6",2016,"HH",true);
+    loadsample_SR("Oct19v2_MC_2016_GluGluToHHTo2B2VTo2L2Nu_node_7",2016,"HH",true);
+    loadsample_SR("Oct19v2_MC_2016_GluGluToHHTo2B2VTo2L2Nu_node_8",2016,"HH",true);
+    loadsample_SR("Oct19v3_MC_2016_GluGluToHHTo2B2VTo2L2Nu_node_9",2016,"HH",true);
+    loadsample_SR("Oct19v1_MC_2016_GluGluToHHTo2B2VTo2L2Nu_node_10",2016,"HH",true);
+    loadsample_SR("Oct19v2_MC_2016_GluGluToHHTo2B2VTo2L2Nu_node_11",2016,"HH",true);
+    loadsample_SR("Oct19v1_MC_2016_GluGluToHHTo2B2VTo2L2Nu_node_12",2016,"HH",true);
+    loadsample_SR("Oct19v1_MC_2016_GluGluToHHTo2B2Tau_node_SM",2016,"HH",true);
+    loadsample_SR("Oct19v1_MC_2016_GluGluToHHTo2B2Tau_node_box",2016,"HH",true);
+    loadsample_SR("Oct19v1_MC_2016_GluGluToHHTo2B2Tau_node_2",2016,"HH",true);
+    loadsample_SR("Oct19v2_MC_2016_GluGluToHHTo2B2Tau_node_9",2016,"HH",true);
+    loadsample_SR("Oct19v1_MC_2016_GluGluToHHTo2B2Tau_node_10",2016,"HH",true);
+    loadsample_SR("Oct19v1_MC_2016_GluGluToHHTo2B2Tau_node_11",2016,"HH",true);
+    loadsample_SR("Oct19v1_MC_2016_GluGluToHHTo2B2Tau_node_12",2016,"HH",true);
+    loadsample_SR("Oct19v3_MC_2016_GluGluToHHTo2B2Tau_node_13",2016,"HH",true);
+    loadsample_SR("Oct19v1_MC_2016_GluGluToHHTo4Tau_node_SM",2016,"HH",true);
+    loadsample_SR("Oct19v1_MC_2016_GluGluToHHTo4Tau_node_box",2016,"HH",true);
+    loadsample_SR("Oct19v1_MC_2016_GluGluToHHTo4Tau_node_2",2016,"HH",true);
+    loadsample_SR("Oct19v2_MC_2016_GluGluToHHTo4Tau_node_3",2016,"HH",true);
+    loadsample_SR("Oct19v1_MC_2016_GluGluToHHTo4Tau_node_4",2016,"HH",true);
+    loadsample_SR("Oct19v1_MC_2016_GluGluToHHTo4Tau_node_5",2016,"HH",true);
+    loadsample_SR("Oct19v1_MC_2016_GluGluToHHTo4Tau_node_6",2016,"HH",true);
+    loadsample_SR("Oct19v1_MC_2016_GluGluToHHTo4Tau_node_7",2016,"HH",true);
+    loadsample_SR("Oct19v2_MC_2016_GluGluToHHTo4Tau_node_8",2016,"HH",true);
+    loadsample_SR("Oct19v1_MC_2016_GluGluToHHTo4Tau_node_9",2016,"HH",true);
+    loadsample_SR("Oct19v2_MC_2016_GluGluToHHTo4Tau_node_10",2016,"HH",true);
+    loadsample_SR("Oct19v2_MC_2016_GluGluToHHTo4Tau_node_11",2016,"HH",true);
+    loadsample_SR("Oct19v1_MC_2016_GluGluToHHTo4Tau_node_12",2016,"HH",true);*/
+
+}
+
+void test_SR_2017(){
+
+    //loadsample_SR("Oct19v1_MC_2017_ttHJetToNonbb",2017,"ttH",true);
+    //loadsample_SR("Oct19v1_MC_2017_THQ_ctcvcp",2017,"ttH",true);
+    //loadsample_SR("Oct19v3_MC_2017_THW_ctcvcp",2017,"ttH",true);
+    //loadsample_SR("Oct19v1_MC_2017_TTH_ctcvcp",2017,"ttH",true);
+
+    //loadsample_SR("Oct19v1_MC_2017_TTZToLLNuNu_M-10",2017,"ttV",true);
+    //loadsample_SR("Oct19v1_MC_2017_TTZToLLNuNu_M-10_PS",2017,"ttV",true);
+    //loadsample_SR("Oct19v1_MC_2017_TTZToLL_M-1to10",2017,"ttV",true);
+    //loadsample_SR("Oct19v1_MC_2017_TTWJetsToLNu",2017,"ttV",true);
+    //loadsample_SR("Oct19v1_MC_2017_TTWJetsToLNu_PS",2017,"ttV",true);
+    //loadsample_SR("Oct19v1_MC_2017_TTWW",2017,"ttV",true);
+
+    //loadsample_SR("Oct19v1_MC_2017_WWW",2017,"Rares",true);
+    //loadsample_SR("Oct19v1_MC_2017_WWZ",2017,"Rares",true);
+    //loadsample_SR("Oct19v2_MC_2017_WZZ",2017,"Rares",true);
+    //loadsample_SR("Oct19v2_MC_2017_ZZZ",2017,"Rares",true);
+    //loadsample_SR("Oct19v1_MC_2017_WZG",2017,"Rares",true);
+    //loadsample_SR("Oct19v1_MC_2017_WGToLNuG",2017,"Rares",true);
+    //loadsample_SR("Oct19v1_MC_2017_ZGToLLG",2017,"Rares",true);
+    //loadsample_SR("Oct19v1_MC_2017_TGJets",2017,"Rares",true);
+    //loadsample_SR("Oct19v1_MC_2017_TTGJets",2017,"Rares",true);
+    //loadsample_SR("Oct19v1_MC_2017_TTGJets_ext1",2017,"Rares",true);
+    //loadsample_SR("Oct19v1_MC_2017_tZq_ll",2017,"Rares",true);
+    //loadsample_SR("Oct19v2_MC_2017_WpWpJJ",2017,"Rares",true);
+    //loadsample_SR("Oct19v1_MC_2017_WWTo2L2Nu_DoubleScattering",2017,"Rares",true);
+    //loadsample_SR("Oct19v1_MC_2017_TTTT",2017,"Rares",true);
+    //loadsample_SR("Oct19v1_MC_2017_TTTT_PS",2017,"Rares",true);
+    
+    //loadsample_SR("Oct19v1_MC_2017_DYJetsToLL_M-10to50",2017,"EWK",true);
+    //loadsample_SR("Oct19v1_MC_2017_DYJetsToLL_M-10to50_ext1",2017,"EWK",true);
+    //loadsample_SR("Oct19v1_MC_2017_DYJetsToLL_M-50",2017,"EWK",true);
+    //loadsample_SR("Oct19v3_MC_2017_DYJetsToLL_M-50_ext1",2017,"EWK",true);
+    //loadsample_SR("Oct19v2_MC_2017_WJetsToLNu",2017,"EWK",true);
+    //loadsample_SR("Oct19v1_MC_2017_WJetsToLNu_ext1",2017,"EWK",true);
+    //loadsample_SR("Oct19v2_MC_2017_WWTo2L2Nu",2017,"EWK",true);
+    //loadsample_SR("Oct19v1_MC_2017_WWTo2L2Nu_ext1",2017,"EWK",true);
+    //loadsample_SR("Oct19v1_MC_2017_WZTo3LNu",2017,"EWK",true);
+    //loadsample_SR("Oct19v1_MC_2017_ZZTo4L",2017,"EWK",true);
+    //loadsample_SR("Oct19v1_MC_2017_ZZTo4L_ext1",2017,"EWK",true);
+    //loadsample_SR("Oct19v2_MC_2017_ZZTo4L_ext2",2017,"EWK",true);
+
+    //loadsample_SR("Oct19v1_MC_2017_ST_s-channel",2017,"ttbar",true);
+    //loadsample_SR("Oct19v2_MC_2017_ST_s-channel_PS",2017,"ttbar",true);
+    //loadsample_SR("Oct19v1_MC_2017_ST_t-channel_top",2017,"ttbar",true);
+    //loadsample_SR("Oct19v2_MC_2017_ST_t-channel_top_PS",2017,"ttbar",true);
+    //loadsample_SR("Oct19v1_MC_2017_ST_t-channel_antitop",2017,"ttbar",true);
+    //loadsample_SR("Oct19v2_MC_2017_ST_t-channel_antitop_PS",2017,"ttbar",true);
+    //loadsample_SR("Oct19v3_MC_2017_ST_tW_top",2017,"ttbar",true);
+    //loadsample_SR("Oct19v1_MC_2017_ST_tW_top_PS",2017,"ttbar",true);
+    //loadsample_SR("Oct19v1_MC_2017_ST_tW_antitop",2017,"ttbar",true);
+    //loadsample_SR("Oct19v1_MC_2017_ST_tW_antitop_PS",2017,"ttbar",true);
+    //loadsample_SR("Oct19v1_MC_2017_ST_tWll",2017,"ttbar",true);
+    //loadsample_SR("Oct19v1_MC_2017_TTJets_DiLept",2017,"ttbar",true);
+    //loadsample_SR("Oct19v1_MC_2017_TTJets_SingleLeptFromT",2017,"ttbar",true);
+    //loadsample_SR("Oct19v1_MC_2017_TTJets_SingleLeptFromTbar",2017,"ttbar",true);
+
+    //loadsample_SR("Oct19v1_MC_2017_GluGluHToTauTau",2017,"ggH",true);
+    //loadsample_SR("Oct19v3_MC_2017_GluGluHToTauTau_ext1",2017,"ggH",true);
+    //loadsample_SR("Oct19v1_MC_2017_GluGluHToZZTo4L_ext1",2017,"ggH",true);
+    //loadsample_SR("Oct19v2_MC_2017_GluGluHToZZTo4L_ext3",2017,"ggH",true);
+    //loadsample_SR("Oct19v1_MC_2017_GluGluHToZZTo4L_ext4",2017,"ggH",true);
+    //loadsample_SR("Oct19v2_MC_2017_GluGluHToZZTo2L2Q",2017,"ggH",true);
+    //loadsample_SR("Oct19v1_MC_2017_GluGluHToWWToLNuQQ",2017,"ggH",true);
+    //loadsample_SR("Oct19v1_MC_2017_GluGluHToWWTo2L2Nu",2017,"ggH",true);
+    //loadsample_SR("Oct19v3_MC_2017_GluGluHToMuMu",2017,"ggH",true);
+    //loadsample_SR("Oct19v1_MC_2017_GluGluHToMuMu_ext1",2017,"ggH",true);
+    //loadsample_SR("Oct19v2_MC_2017_GluGluHToBB",2017,"ggH",true);
+    //loadsample_SR("Oct19v3_MC_2017_GluGluHToGG",2017,"ggH",true);
+
+    //loadsample_SR("Oct19v1_MC_2017_VBFHToTauTau",2017,"VBF",true);
+    //loadsample_SR("Oct19v2_MC_2017_VBF_HToZZTo4L_ext2",2017,"VBF",true);
+    //loadsample_SR("Oct19v1_MC_2017_VBF_HToZZTo4L_ext1",2017,"VBF",true);
+    //loadsample_SR("Oct19v1_MC_2017_VBF_HToZZTo4L",2017,"VBF",true);
+    //loadsample_SR("Oct19v1_MC_2017_VBFHToWWToLNuQQ",2017,"VBF",true);
+    //loadsample_SR("Oct19v1_MC_2017_VBFHToWWTo2L2Nu",2017,"VBF",true);
+    //loadsample_SR("Oct19v1_MC_2017_VBFHToMuMu",2017,"VBF",true);
+    //loadsample_SR("Oct19v1_MC_2017_VBFHToBB",2017,"VBF",true);
+    //loadsample_SR("Oct19v1_MC_2017_VBFHToGG",2017,"VBF",true);
+    //loadsample_SR("Oct19v2_MC_2017_VBFHToGG_PS",2017,"VBF",true);
+
+    //loadsample_SR("Oct19v1_MC_2017_VHToNonbb",2017,"VH",true);
+    //loadsample_SR("Oct19v1_MC_2017_ZH_HToBB_ZToLL",2017,"VH",true);
+    //loadsample_SR("Oct19v1_MC_2017_ZHToTauTau",2017,"VH",true);
+
+    //loadsample_SR("Oct19v4_MC_2017_TTWH",2017,"ttVH",true);
+    //loadsample_SR("Oct19v1_MC_2017_TTZH",2017,"ttVH",true);
+
+    //loadsample_SR("Oct19v2_MC_2017_GluGluToHHTo2B2VTo2L2Nu_node_SM",2017,"HH",true);
+    //loadsample_SR("Oct19v2_MC_2017_GluGluToHHTo2B2VTo2L2Nu_node_2",2017,"HH",true);
+    //loadsample_SR("Oct19v2_MC_2017_GluGluToHHTo2B2VTo2L2Nu_node_3",2017,"HH",true);
+    //loadsample_SR("Oct19v1_MC_2017_GluGluToHHTo2B2VTo2L2Nu_node_7",2017,"HH",true);
+    //loadsample_SR("Oct19v1_MC_2017_GluGluToHHTo2B2VTo2L2Nu_node_9",2017,"HH",true);
+    //loadsample_SR("Oct19v4_MC_2017_GluGluToHHTo2B2VTo2L2Nu_node_12",2017,"HH",true);
+    //loadsample_SR("Oct19v1_MC_2017_GluGluToHHTo2B2Tau_node_SM",2017,"HH",true);
+    //loadsample_SR("Oct19v1_MC_2017_GluGluToHHTo2B2Tau_node_2",2017,"HH",true);
+    //loadsample_SR("Oct19v1_MC_2017_GluGluToHHTo2B2Tau_node_3",2017,"HH",true);
+    //loadsample_SR("Oct19v1_MC_2017_GluGluToHHTo2B2Tau_node_4",2017,"HH",true);
+    //loadsample_SR("Oct19v1_MC_2017_GluGluToHHTo2B2Tau_node_7",2017,"HH",true);
+    //loadsample_SR("Oct19v1_MC_2017_GluGluToHHTo2B2Tau_node_9",2017,"HH",true);
+    //loadsample_SR("Oct19v1_MC_2017_GluGluToHHTo2B2Tau_node_12",2017,"HH",true);
+    //loadsample_SR("Oct19v1_MC_2017_GluGluToHHTo4Tau_node_SM_13",2017,"HH",true);
+    //loadsample_SR("Oct19v1_MC_2017_GluGluToHHTo4Tau_node_2",2017,"HH",true);
+    //loadsample_SR("Oct19v1_MC_2017_GluGluToHHTo4Tau_node_3",2017,"HH",true);
+    //loadsample_SR("Oct19v2_MC_2017_GluGluToHHTo4Tau_node_7",2017,"HH",true);
+    //loadsample_SR("Oct19v1_MC_2017_GluGluToHHTo4Tau_node_9",2017,"HH",true);
+    //loadsample_SR("Oct19v1_MC_2017_GluGluToHHTo4Tau_node_12",2017,"HH",true);
+    //loadsample_SR("Oct19v2_MC_2017_GluGluToHHTo2V2Tau_node_SM",2017,"HH",true);
+    //loadsample_SR("Oct19v1_MC_2017_GluGluToHHTo2V2Tau_node_2",2017,"HH",true);
+    //loadsample_SR("Oct19v2_MC_2017_GluGluToHHTo2V2Tau_node_3",2017,"HH",true);
+    //loadsample_SR("Oct19v1_MC_2017_GluGluToHHTo2V2Tau_node_4",2017,"HH",true);
+    //loadsample_SR("Oct19v1_MC_2017_GluGluToHHTo2V2Tau_node_5",2017,"HH",true);
+    //loadsample_SR("Oct19v1_MC_2017_GluGluToHHTo2V2Tau_node_6",2017,"HH",true);
+    //loadsample_SR("Oct19v2_MC_2017_GluGluToHHTo2V2Tau_node_7",2017,"HH",true);
+    //loadsample_SR("Oct19v1_MC_2017_GluGluToHHTo2V2Tau_node_8",2017,"HH",true);
+    //loadsample_SR("Oct19v1_MC_2017_GluGluToHHTo2V2Tau_node_9",2017,"HH",true);
+    //loadsample_SR("Oct19v1_MC_2017_GluGluToHHTo2V2Tau_node_10",2017,"HH",true);
+    //loadsample_SR("Oct19v1_MC_2017_GluGluToHHTo2V2Tau_node_11",2017,"HH",true);
+    //loadsample_SR("Oct19v2_MC_2017_GluGluToHHTo2V2Tau_node_12",2017,"HH",true);
+    //loadsample_SR("Oct19v1_MC_2017_GluGluToHHTo4V_node_SM",2017,"HH",true);
+    //loadsample_SR("Oct19v2_MC_2017_GluGluToHHTo4V_node_2",2017,"HH",true);
+    //loadsample_SR("Oct19v1_MC_2017_GluGluToHHTo4V_node_3",2017,"HH",true);
+    //loadsample_SR("Oct19v1_MC_2017_GluGluToHHTo4V_node_4",2017,"HH",true);
+    //loadsample_SR("Oct19v1_MC_2017_GluGluToHHTo4V_node_5",2017,"HH",true);
+    //loadsample_SR("Oct19v1_MC_2017_GluGluToHHTo4V_node_6",2017,"HH",true);
+    //loadsample_SR("Oct19v1_MC_2017_GluGluToHHTo4V_node_7",2017,"HH",true);
+    //loadsample_SR("Oct19v1_MC_2017_GluGluToHHTo4V_node_8",2017,"HH",true);
+    //loadsample_SR("Oct19v1_MC_2017_GluGluToHHTo4V_node_9",2017,"HH",true);
+    //loadsample_SR("Oct19v1_MC_2017_GluGluToHHTo4V_node_10",2017,"HH",true);
+    //loadsample_SR("Oct19v2_MC_2017_GluGluToHHTo4V_node_11",2017,"HH",true);
+    //loadsample_SR("Oct19v2_MC_2017_GluGluToHHTo4V_node_12",2017,"HH",true);
+
+}
+
+
+void test_SR_2018(){
+
+    //loadsample_SR("Oct19v2_MC_2018_ttHJetToNonbb",2018,"ttH",true);
+    //loadsample_SR("Oct19v2_MC_2018_TTH_ctcvcp",2018,"ttH",true);
+    //loadsample_SR("Oct19v1_MC_2018_THQ_ctcvcp",2018,"ttH",true);
+    //loadsample_SR("Oct19v1_MC_2018_THW_ctcvcp",2018,"ttH",true);
+
+    //loadsample_SR("Oct19v1_MC_2018_TTZToLLNuNu_M-10",2018,"ttV",true);
+    //loadsample_SR("Oct19v1_MC_2018_TTZToLL_M-1to10",2018,"ttV",true);
+    //loadsample_SR("Oct19v1_MC_2018_TTWJetsToLNu",2018,"ttV",true);
+    //loadsample_SR("Oct19v1_MC_2018_TTWW_ext1",2018,"ttV",true);
+    //loadsample_SR("Oct19v1_MC_2018_TTWW_ext2",2018,"ttV",true);
+
+    //loadsample_SR("Oct19v2_MC_2018_WWW",2018,"Rares",true);
+    //loadsample_SR("Oct19v2_MC_2018_WWZ",2018,"Rares",true);
+    //loadsample_SR("Oct19v1_MC_2018_WZZ",2018,"Rares",true);
+    //loadsample_SR("Oct19v1_MC_2018_ZZZ",2018,"Rares",true);
+    //loadsample_SR("Oct19v1_MC_2018_WZG",2018,"Rares",true);
+    //loadsample_SR("Oct19v1_MC_2018_WGToLNuG",2018,"Rares",true);
+    //loadsample_SR("Oct19v2_MC_2018_ZGToLLG",2018,"Rares",true);
+    //loadsample_SR("Oct19v1_MC_2018_TGJets",2018,"Rares",true);
+    //loadsample_SR("Oct19v1_MC_2018_TTGJets",2018,"Rares",true);
+    //loadsample_SR("Oct19v1_MC_2018_tZq_ll",2018,"Rares",true);
+    //loadsample_SR("Oct19v1_MC_2018_WpWpJJ",2018,"Rares",true);
+    //loadsample_SR("Oct19v1_MC_2018_WWTo2L2Nu_DoubleScattering",2018,"Rares",true);
+    //loadsample_SR("Oct19v1_MC_2018_TTTT",2018,"Rares",true);
+    
+    /*loadsample_SR("Oct19v3_MC_2018_DYJetsToLL_M-10to50",2018,"EWK",true);
+    //loadsample_SR("Oct19v2_MC_2018_DYJetsToLL_M-50",2018,"EWK",true);
+    //loadsample_SR("Oct19v3_MC_2018_DYJetsToLL_M-50_ext2",2018,"EWK",true);
+    //loadsample_SR("Oct19v2_MC_2018_WJetsToLNu",2018,"EWK",true);*/
+    //loadsample_SR("Oct19v3_MC_2018_WWTo2L2Nu",2018,"EWK",true);
+    //loadsample_SR("Oct19v1_MC_2018_WZTo3LNu",2018,"EWK",true);
+    //loadsample_SR("Oct19v2_MC_2018_WZTo3LNu_ext1",2018,"EWK",true);
+    //loadsample_SR("Oct19v2_MC_2018_ZZTo4L",2018,"EWK",true);
+    //loadsample_SR("Oct19v4_MC_2018_ZZTo4L_ext2",2018,"EWK",true);
+
+    //loadsample_SR("Oct19v1_MC_2018_ST_s-channel",2018,"ttbar",true);
+    //loadsample_SR("Oct19v2_MC_2018_ST_t-channel_top",2018,"ttbar",true);
+    //loadsample_SR("Oct19v3_MC_2018_ST_t-channel_antitop",2018,"ttbar",true);
+    //loadsample_SR("Oct19v3_MC_2018_ST_tW_top",2018,"ttbar",true);
+    //loadsample_SR("Oct19v1_MC_2018_ST_tW_antitop",2018,"ttbar",true);
+    //loadsample_SR("Oct19v1_MC_2018_ST_tWll",2018,"ttbar",true);
+    //loadsample_SR("Oct19v1_MC_2018_TTJets_DiLept",2018,"ttbar",true);
+    //loadsample_SR("Oct19v1_MC_2018_TTJets_SingleLeptFromT",2018,"ttbar",true);
+    //loadsample_SR("Oct19v2_MC_2018_TTJets_SingleLeptFromTbar",2018,"ttbar",true);
+
+    /*loadsample_SR("Oct19v2_MC_2018_GluGluHToTauTau",2018,"ggH",true);
+    //loadsample_SR("Oct19v1_MC_2018_GluGluHToZZTo4L",2018,"ggH",true);
+    //loadsample_SR("Oct19v2_MC_2018_GluGluHToZZTo2L2Q",2018,"ggH",true);
+    //loadsample_SR("Oct19v1_MC_2018_GluGluHToWWToLNuQQ",2018,"ggH",true);
+    //loadsample_SR("Oct19v2_MC_2018_GluGluHToWWTo2L2Nu",2018,"ggH",true);
+    //loadsample_SR("Oct19v1_MC_2018_GluGluHToMuMu",2018,"ggH",true);
+    //loadsample_SR("Oct19v2_MC_2018_GluGluHToMuMu_ext1",2018,"ggH",true);
+    //loadsample_SR("Oct19v1_MC_2018_GluGluHToBB",2018,"ggH",true);
+    //loadsample_SR("Oct19v1_MC_2018_GluGluHToGG",2018,"ggH",true);*/
+
+    /*loadsample_SR("Oct19v1_MC_2018_VBFHToTauTau",2018,"VBF",true);
+    //loadsample_SR("Oct19v2_MC_2018_VBF_HToZZTo4L",2018,"VBF",true);
+    //loadsample_SR("Oct19v2_MC_2018_VBFHToWWToLNuQQ",2018,"VBF",true);
+    //loadsample_SR("Oct19v1_MC_2018_VBFHToWWTo2L2Nu",2018,"VBF",true);
+    //loadsample_SR("Oct19v1_MC_2018_VBFHToMuMu",2018,"VBF",true);
+    //loadsample_SR("Oct19v2_MC_2018_VBFHToBB",2018,"VBF",true);
+    //loadsample_SR("Oct19v2_MC_2018_VBFHToGG",2018,"VBF",true);*/
+
+    /*loadsample_SR("Oct19v2_MC_2018_VHToNonbb",2018,"VH",true);
+    //loadsample_SR("Oct19v1_MC_2018_ZH_HToBB_ZToLL",2018,"VH",true);
+    //loadsample_SR("Oct19v3_MC_2018_ZH_HToBB_ZToLL_ext1",2018,"VH",true);
+    //loadsample_SR("Oct19v2_MC_2018_ZHToTauTau",2018,"VH",true);*/
+
+    /*loadsample_SR("Oct19v1_MC_2018_TTWH",2018,"ttVH",true);
+    //loadsample_SR("Oct19v2_MC_2018_TTZH",2018,"ttVH",true);*/
+
+    /*loadsample_SR("Oct19v2_MC_2018_GluGluToHHTo2B2Tau_node_SM",2018,"HH",true);
+    //loadsample_SR("Oct19v1_MC_2018_GluGluToHHTo2B2Tau_node_2",2018,"HH",true);
+    //loadsample_SR("Oct19v2_MC_2018_GluGluToHHTo2B2Tau_node_3",2018,"HH",true);
+    //loadsample_SR("Oct19v1_MC_2018_GluGluToHHTo2B2Tau_node_4",2018,"HH",true);
+    //loadsample_SR("Oct19v1_MC_2018_GluGluToHHTo2B2Tau_node_5",2018,"HH",true);
+    //loadsample_SR("Oct19v1_MC_2018_GluGluToHHTo2B2Tau_node_6",2018,"HH",true);
+    //loadsample_SR("Oct19v2_MC_2018_GluGluToHHTo2B2Tau_node_7",2018,"HH",true);
+    //loadsample_SR("Oct19v3_MC_2018_GluGluToHHTo2B2Tau_node_8",2018,"HH",true);
+    //loadsample_SR("Oct19v2_MC_2018_GluGluToHHTo2B2Tau_node_9",2018,"HH",true);
+    //loadsample_SR("Oct19v2_MC_2018_GluGluToHHTo2B2Tau_node_10",2018,"HH",true);
+    //loadsample_SR("Oct19v3_MC_2018_GluGluToHHTo2B2Tau_node_11",2018,"HH",true);*/
 
 }

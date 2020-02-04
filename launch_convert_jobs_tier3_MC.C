@@ -479,9 +479,9 @@ void create_scripts_all(){
     //create_scripts("Oct19v4_MC_2016_MadGraph_TTToHadronic",4,"2016","MC"); //DONE
     //create_scripts("Oct19v4_MC_2016_MadGraph_TTToHadronic_PS",4,"2016","MC");//DONE
 
-    create_scripts("Oct19v1_MC_2016_WGToLNuG_01J",3,"2016","MC"); // 1,2,3->repeat
-    create_scripts("Oct19v1_MC_2017_WGToLNuG_01J",4,"2017","MC"); // 0,2,3,4->done / 1->repeat
-    create_scripts("Oct19v1_MC_2018_WGToLNuG_01J",4,"2018","MC"); // 1,4->done / 0,2,3->repeat
+    create_scripts("Oct19v1_MC_2016_WGToLNuG_01J",3,"2016","MC"); // DONE???
+    //create_scripts("Oct19v1_MC_2017_WGToLNuG_01J",4,"2017","MC"); // DONE
+    //create_scripts("Oct19v1_MC_2018_WGToLNuG_01J",4,"2018","MC"); // DONE
 
     
 }
