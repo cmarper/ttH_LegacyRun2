@@ -625,6 +625,8 @@ float get_triggerSF_ditau ( double tau1_pt, double tau1_eta, double tau1_phi, do
   float sf_up = sf_up_tau1*sf_up_tau2;
   float sf_down = sf_down_tau1*sf_down_tau2;
 
+  close_triggerSF_files();
+
   float sf = 1.;
 
   if(shift==0)  sf = sf_nominal;

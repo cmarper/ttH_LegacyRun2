@@ -50,7 +50,7 @@ TH2F *_histo_RecoToLoose_mu_2016 = NULL;
 TH2F *_histo_RecoToLoose_mu_2017 = NULL;
 TH2F *_histo_RecoToLoose_mu_2018 = NULL;
 
-float get_RecoToLoose_leptonSF(int year,int pdgid, float pt, float eta, int nlep, float var){
+float get_RecoToLoose_leptonSF(int year,int pdgid, float pt, float eta, int nlep, int var){
 
   if (abs(pdgid)==11){
 
@@ -70,23 +70,29 @@ float get_RecoToLoose_leptonSF(int year,int pdgid, float pt, float eta, int nlep
       int etabin1  = std::max(1, std::min(hist1->GetNbinsX(), hist1->GetXaxis()->FindBin(eta)));
       int ptbin1 = std::max(1, std::min(hist1->GetNbinsY(), hist1->GetYaxis()->FindBin(pt)));
       float out = hist1->GetBinContent(etabin1,ptbin1);
+      float err1 = hist1->GetBinError(etabin1,ptbin1);
 
       TH2F *hist2 = _histo_RecoToLoose2_ele_2016;
       int etabin2  = std::max(1, std::min(hist2->GetNbinsX(), hist2->GetXaxis()->FindBin(fabs(eta))));
       int ptbin2 = std::max(1, std::min(hist2->GetNbinsY(), hist2->GetYaxis()->FindBin(pt)));
       out *= hist2->GetBinContent(etabin2,ptbin2);
+      float err2 = hist2->GetBinError(etabin1,ptbin1);
 
       TH2F *hist3 = _histo_LooseToLooseTTH_ele_2016;
       int etabin3  = std::max(1, std::min(hist3->GetNbinsX(), hist3->GetXaxis()->FindBin(fabs(eta))));
       int ptbin3 = std::max(1, std::min(hist3->GetNbinsY(), hist3->GetYaxis()->FindBin(pt)));
       out *= hist3->GetBinContent(etabin3,ptbin3);
+      float err3 = hist3->GetBinError(etabin1,ptbin1);
+
+      float err_max1 = std::max(err1,err2);
+      float error = std::max(err_max1,err3);
 
       _file_RecoToLoose1_ele_pt0to20_2016->Close();
       _file_RecoToLoose1_ele_pt20_2016->Close();
       _file_RecoToLoose2_ele_2016->Close();
       _file_LooseToLooseTTH_ele_2016->Close();
 
-      return out;
+      return out + var*error;
 
     }
 
@@ -106,23 +112,29 @@ float get_RecoToLoose_leptonSF(int year,int pdgid, float pt, float eta, int nlep
       int etabin1  = std::max(1, std::min(hist1->GetNbinsX(), hist1->GetXaxis()->FindBin(eta)));
       int ptbin1 = std::max(1, std::min(hist1->GetNbinsY(), hist1->GetYaxis()->FindBin(pt)));
       float out = hist1->GetBinContent(etabin1,ptbin1);
+      float err1 = hist1->GetBinError(etabin1,ptbin1);
 
       TH2F *hist2 = _histo_RecoToLoose2_ele_2017;
       int etabin2  = std::max(1, std::min(hist2->GetNbinsX(), hist2->GetXaxis()->FindBin(fabs(eta))));
       int ptbin2 = std::max(1, std::min(hist2->GetNbinsY(), hist2->GetYaxis()->FindBin(pt)));
       out *= hist2->GetBinContent(etabin2,ptbin2);
+      float err2 = hist2->GetBinError(etabin1,ptbin1);
 
       TH2F *hist3 = _histo_LooseToLooseTTH_ele_2017;
       int etabin3  = std::max(1, std::min(hist3->GetNbinsX(), hist3->GetXaxis()->FindBin(fabs(eta))));
       int ptbin3 = std::max(1, std::min(hist3->GetNbinsY(), hist3->GetYaxis()->FindBin(pt)));
       out *= hist3->GetBinContent(etabin3,ptbin3);
+      float err3 = hist3->GetBinError(etabin1,ptbin1);
+
+      float err_max1 = std::max(err1,err2);
+      float error = std::max(err_max1,err3);
 
       _file_RecoToLoose1_ele_pt0to20_2017->Close();
       _file_RecoToLoose1_ele_pt20_2017->Close();
       _file_RecoToLoose2_ele_2017->Close();
       _file_LooseToLooseTTH_ele_2017->Close();
 
-      return out;
+      return out + var*error;
 
     }
 
@@ -140,22 +152,28 @@ float get_RecoToLoose_leptonSF(int year,int pdgid, float pt, float eta, int nlep
       int etabin1  = std::max(1, std::min(hist1->GetNbinsX(), hist1->GetXaxis()->FindBin(eta)));
       int ptbin1 = std::max(1, std::min(hist1->GetNbinsY(), hist1->GetYaxis()->FindBin(pt)));
       float out = hist1->GetBinContent(etabin1,ptbin1);
+      float err1 = hist1->GetBinError(etabin1,ptbin1);
 
       TH2F *hist2 = _histo_RecoToLoose2_ele_2018;
       int etabin2  = std::max(1, std::min(hist2->GetNbinsX(), hist2->GetXaxis()->FindBin(fabs(eta))));
       int ptbin2 = std::max(1, std::min(hist2->GetNbinsY(), hist2->GetYaxis()->FindBin(pt)));
       out *= hist2->GetBinContent(etabin2,ptbin2);
+      float err2 = hist2->GetBinError(etabin1,ptbin1);
 
       TH2F *hist3 = _histo_LooseToLooseTTH_ele_2018;
       int etabin3  = std::max(1, std::min(hist3->GetNbinsX(), hist3->GetXaxis()->FindBin(fabs(eta))));
       int ptbin3 = std::max(1, std::min(hist3->GetNbinsY(), hist3->GetYaxis()->FindBin(pt)));
       out *= hist3->GetBinContent(etabin3,ptbin3);
+      float err3 = hist3->GetBinError(etabin1,ptbin1);
+
+      float err_max1 = std::max(err1,err2);
+      float error = std::max(err_max1,err3);
 
       _file_RecoToLoose1_ele_2018->Close();
       _file_RecoToLoose2_ele_2018->Close();
       _file_LooseToLooseTTH_ele_2018->Close();
 
-      return out;
+      return out + var*error;
 
     }
 
@@ -173,10 +191,11 @@ float get_RecoToLoose_leptonSF(int year,int pdgid, float pt, float eta, int nlep
       int etabin1  = std::max(1, std::min(hist1->GetNbinsX(), hist1->GetXaxis()->FindBin(fabs(eta))));
       int ptbin1 = std::max(1, std::min(hist1->GetNbinsY(), hist1->GetYaxis()->FindBin(pt)));
       float out = hist1->GetBinContent(etabin1,ptbin1);
+      float error = hist1->GetBinError(etabin1,ptbin1);
 
       _file_RecoToLoose_mu_2016->Close();
 
-      return out;
+      return out + var*error;
 
     }
 
@@ -190,10 +209,11 @@ float get_RecoToLoose_leptonSF(int year,int pdgid, float pt, float eta, int nlep
       int etabin1  = std::max(1, std::min(hist1->GetNbinsX(), hist1->GetXaxis()->FindBin(fabs(eta))));
       int ptbin1 = std::max(1, std::min(hist1->GetNbinsY(), hist1->GetYaxis()->FindBin(pt)));
       float out = hist1->GetBinContent(etabin1,ptbin1);
+      float error = hist1->GetBinError(etabin1,ptbin1);
 
       _file_RecoToLoose_mu_2017->Close();
 
-      return out;
+      return out + var*error;
 
     }
 
@@ -207,10 +227,11 @@ float get_RecoToLoose_leptonSF(int year,int pdgid, float pt, float eta, int nlep
       int etabin1  = std::max(1, std::min(hist1->GetNbinsX(), hist1->GetXaxis()->FindBin(fabs(eta))));
       int ptbin1 = std::max(1, std::min(hist1->GetNbinsY(), hist1->GetYaxis()->FindBin(pt)));
       float out = hist1->GetBinContent(etabin1,ptbin1);
+      float error = hist1->GetBinError(etabin1,ptbin1);
 
       _file_RecoToLoose_mu_2018->Close();
 
-      return out;
+      return out + var*error;
 
     }
 
@@ -267,8 +288,42 @@ TH2F *_histo_LooseTTHToTight_mu_notightcharge_2016 = NULL;
 TH2F *_histo_LooseTTHToTight_mu_notightcharge_2017 = NULL;
 TH2F *_histo_LooseTTHToTight_mu_notightcharge_2018 = NULL;
 
+// Errors
 
-float get_LooseToTight_leptonSF(int year, int pdgid, float pt, float eta, int nlep, float var){
+TFile *_file_LooseTTHToTight_ele_errorpT_2016 = NULL;
+TFile *_file_LooseTTHToTight_ele_errorpT_2017 = NULL;
+TFile *_file_LooseTTHToTight_ele_errorpT_2018 = NULL;
+
+TFile *_file_LooseTTHToTight_mu_errorpT_2016 = NULL;
+TFile *_file_LooseTTHToTight_mu_errorpT_2017 = NULL;
+TFile *_file_LooseTTHToTight_mu_errorpT_2018 = NULL;
+
+TFile *_file_LooseTTHToTight_ele_errorEta_2016 = NULL;
+TFile *_file_LooseTTHToTight_ele_errorEta_2017 = NULL;
+TFile *_file_LooseTTHToTight_ele_errorEta_2018 = NULL;
+
+TFile *_file_LooseTTHToTight_mu_errorEta_2016 = NULL;
+TFile *_file_LooseTTHToTight_mu_errorEta_2017 = NULL;
+TFile *_file_LooseTTHToTight_mu_errorEta_2018 = NULL;
+
+TH1F *_histo_LooseTTHToTight_ele_errorpT_2016 = NULL;
+TH1F *_histo_LooseTTHToTight_ele_errorpT_2017 = NULL;
+TH1F *_histo_LooseTTHToTight_ele_errorpT_2018 = NULL;
+
+TH1F *_histo_LooseTTHToTight_mu_errorpT_2016 = NULL;
+TH1F *_histo_LooseTTHToTight_mu_errorpT_2017 = NULL;
+TH1F *_histo_LooseTTHToTight_mu_errorpT_2018 = NULL;
+
+TH1F *_histo_LooseTTHToTight_ele_errorEta_2016 = NULL;
+TH1F *_histo_LooseTTHToTight_ele_errorEta_2017 = NULL;
+TH1F *_histo_LooseTTHToTight_ele_errorEta_2018 = NULL;
+
+TH1F *_histo_LooseTTHToTight_mu_errorEta_2016 = NULL;
+TH1F *_histo_LooseTTHToTight_mu_errorEta_2017 = NULL;
+TH1F *_histo_LooseTTHToTight_mu_errorEta_2018 = NULL;
+
+
+float get_LooseToTight_leptonSF(int year, int pdgid, float pt, float eta, int nlep, int var){
 
   if (abs(pdgid)==11){
 
@@ -288,7 +343,26 @@ float get_LooseToTight_leptonSF(int year, int pdgid, float pt, float eta, int nl
       _file_LooseTTHToTight_ele_tightcharge_2016->Close();
       _file_LooseTTHToTight_ele_notightcharge_2016->Close();
 
-      return out;
+      _file_LooseTTHToTight_ele_errorpT_2016 = new TFile("lepSF/ele_loosetotight_pt_2016.root","read");
+      _file_LooseTTHToTight_ele_errorEta_2016 = new TFile("lepSF/ele_loosetotight_eta_2016.root","read");
+
+      _histo_LooseTTHToTight_ele_errorpT_2016 = (TH1F*)(_file_LooseTTHToTight_ele_errorpT_2016->Get("histo_eff_data"));
+      _histo_LooseTTHToTight_ele_errorEta_2016 = (TH1F*)(_file_LooseTTHToTight_ele_errorEta_2016->Get("histo_eff_data"));
+
+      TH1F *histErrPt = _histo_LooseTTHToTight_ele_errorpT_2016;
+      int ptbin = std::max(1, histErrPt->GetXaxis()->FindBin(pt));
+      float errpt = fabs(1.0 - (histErrPt->GetBinContent(ptbin)));
+
+      TH1F *histErrEta = _histo_LooseTTHToTight_ele_errorEta_2016;
+      int etabin = std::max(1, histErrEta->GetXaxis()->FindBin(fabs(eta)));
+      float erreta = fabs(1.0 - (histErrEta->GetBinContent(etabin)));
+
+      float error = std::max(errpt,erreta);
+
+      _file_LooseTTHToTight_ele_errorpT_2016->Close();
+      _file_LooseTTHToTight_ele_errorEta_2016->Close();
+
+      return out + var*error;
 
     }
 
@@ -308,7 +382,26 @@ float get_LooseToTight_leptonSF(int year, int pdgid, float pt, float eta, int nl
       _file_LooseTTHToTight_ele_tightcharge_2017->Close();
       _file_LooseTTHToTight_ele_notightcharge_2017->Close();
 
-      return out;
+      _file_LooseTTHToTight_ele_errorpT_2017 = new TFile("lepSF/ele_loosetotight_pt_2017.root","read");
+      _file_LooseTTHToTight_ele_errorEta_2017 = new TFile("lepSF/ele_loosetotight_eta_2017.root","read");
+
+      _histo_LooseTTHToTight_ele_errorpT_2017 = (TH1F*)(_file_LooseTTHToTight_ele_errorpT_2017->Get("histo_eff_data"));
+      _histo_LooseTTHToTight_ele_errorEta_2017 = (TH1F*)(_file_LooseTTHToTight_ele_errorEta_2017->Get("histo_eff_data"));
+
+      TH1F *histErrPt = _histo_LooseTTHToTight_ele_errorpT_2017;
+      int ptbin = std::max(1, histErrPt->GetXaxis()->FindBin(pt));
+      float errpt = fabs(1.0 - (histErrPt->GetBinContent(ptbin)));
+
+      TH1F *histErrEta = _histo_LooseTTHToTight_ele_errorEta_2017;
+      int etabin = std::max(1, histErrEta->GetXaxis()->FindBin(fabs(eta)));
+      float erreta = fabs(1.0 - (histErrEta->GetBinContent(etabin)));
+
+      float error = std::max(errpt,erreta);
+
+      _file_LooseTTHToTight_ele_errorpT_2017->Close();
+      _file_LooseTTHToTight_ele_errorEta_2017->Close();
+
+      return out + var*error;
 
     }
 
@@ -328,7 +421,26 @@ float get_LooseToTight_leptonSF(int year, int pdgid, float pt, float eta, int nl
       _file_LooseTTHToTight_ele_tightcharge_2018->Close();
       _file_LooseTTHToTight_ele_notightcharge_2018->Close();
 
-      return out;
+      _file_LooseTTHToTight_ele_errorpT_2018 = new TFile("lepSF/ele_loosetotight_pt_2018.root","read");
+      _file_LooseTTHToTight_ele_errorEta_2018 = new TFile("lepSF/ele_loosetotight_eta_2018.root","read");
+
+      _histo_LooseTTHToTight_ele_errorpT_2018 = (TH1F*)(_file_LooseTTHToTight_ele_errorpT_2018->Get("histo_eff_data"));
+      _histo_LooseTTHToTight_ele_errorEta_2018 = (TH1F*)(_file_LooseTTHToTight_ele_errorEta_2018->Get("histo_eff_data"));
+
+      TH1F *histErrPt = _histo_LooseTTHToTight_ele_errorpT_2018;
+      int ptbin = std::max(1, histErrPt->GetXaxis()->FindBin(pt));
+      float errpt = fabs(1.0 - (histErrPt->GetBinContent(ptbin)));
+
+      TH1F *histErrEta = _histo_LooseTTHToTight_ele_errorEta_2018;
+      int etabin = std::max(1, histErrEta->GetXaxis()->FindBin(fabs(eta)));
+      float erreta = fabs(1.0 - (histErrEta->GetBinContent(etabin)));
+
+      float error = std::max(errpt,erreta);
+
+      _file_LooseTTHToTight_ele_errorpT_2018->Close();
+      _file_LooseTTHToTight_ele_errorEta_2018->Close();
+
+      return out + var*error;
 
     }
 
@@ -352,7 +464,26 @@ float get_LooseToTight_leptonSF(int year, int pdgid, float pt, float eta, int nl
       _file_LooseTTHToTight_mu_tightcharge_2016->Close();
       _file_LooseTTHToTight_mu_notightcharge_2016->Close();
 
-      return out;
+      _file_LooseTTHToTight_mu_errorpT_2016 = new TFile("lepSF/mu_loosetotight_pt_2016.root","read");
+      _file_LooseTTHToTight_mu_errorEta_2016 = new TFile("lepSF/mu_loosetotight_eta_2016.root","read");
+
+      _histo_LooseTTHToTight_mu_errorpT_2016 = (TH1F*)(_file_LooseTTHToTight_mu_errorpT_2016->Get("histo_eff_data"));
+      _histo_LooseTTHToTight_mu_errorEta_2016 = (TH1F*)(_file_LooseTTHToTight_mu_errorEta_2016->Get("histo_eff_data"));
+
+      TH1F *histErrPt = _histo_LooseTTHToTight_mu_errorpT_2016;
+      int ptbin = std::max(1, histErrPt->GetXaxis()->FindBin(pt));
+      float errpt = fabs(1.0 - (histErrPt->GetBinContent(ptbin)));
+
+      TH1F *histErrEta = _histo_LooseTTHToTight_mu_errorEta_2016;
+      int etabin = std::max(1, histErrEta->GetXaxis()->FindBin(fabs(eta)));
+      float erreta = fabs(1.0 - (histErrEta->GetBinContent(etabin)));
+
+      float error = std::max(errpt,erreta);
+
+      _file_LooseTTHToTight_mu_errorpT_2016->Close();
+      _file_LooseTTHToTight_mu_errorEta_2016->Close();
+
+      return out + var*error;
 
     }
 
@@ -372,7 +503,26 @@ float get_LooseToTight_leptonSF(int year, int pdgid, float pt, float eta, int nl
       _file_LooseTTHToTight_mu_tightcharge_2017->Close();
       _file_LooseTTHToTight_mu_notightcharge_2017->Close();
 
-      return out;
+      _file_LooseTTHToTight_mu_errorpT_2017 = new TFile("lepSF/mu_loosetotight_pt_2017.root","read");
+      _file_LooseTTHToTight_mu_errorEta_2017 = new TFile("lepSF/mu_loosetotight_eta_2017.root","read");
+
+      _histo_LooseTTHToTight_mu_errorpT_2017 = (TH1F*)(_file_LooseTTHToTight_mu_errorpT_2017->Get("histo_eff_data"));
+      _histo_LooseTTHToTight_mu_errorEta_2017 = (TH1F*)(_file_LooseTTHToTight_mu_errorEta_2017->Get("histo_eff_data"));
+
+      TH1F *histErrPt = _histo_LooseTTHToTight_mu_errorpT_2017;
+      int ptbin = std::max(1, histErrPt->GetXaxis()->FindBin(pt));
+      float errpt = fabs(1.0 - (histErrPt->GetBinContent(ptbin)));
+
+      TH1F *histErrEta = _histo_LooseTTHToTight_mu_errorEta_2017;
+      int etabin = std::max(1, histErrEta->GetXaxis()->FindBin(fabs(eta)));
+      float erreta = fabs(1.0 - (histErrEta->GetBinContent(etabin)));
+
+      float error = std::max(errpt,erreta);
+
+      _file_LooseTTHToTight_mu_errorpT_2017->Close();
+      _file_LooseTTHToTight_mu_errorEta_2017->Close();
+
+      return out + var*error;
 
     }
 
@@ -392,7 +542,26 @@ float get_LooseToTight_leptonSF(int year, int pdgid, float pt, float eta, int nl
       _file_LooseTTHToTight_mu_tightcharge_2018->Close();
       _file_LooseTTHToTight_mu_notightcharge_2018->Close();
 
-      return out;
+      _file_LooseTTHToTight_mu_errorpT_2018 = new TFile("lepSF/mu_loosetotight_pt_2018.root","read");
+      _file_LooseTTHToTight_mu_errorEta_2018 = new TFile("lepSF/mu_loosetotight_eta_2018.root","read");
+
+      _histo_LooseTTHToTight_mu_errorpT_2018 = (TH1F*)(_file_LooseTTHToTight_mu_errorpT_2018->Get("histo_eff_data"));
+      _histo_LooseTTHToTight_mu_errorEta_2018 = (TH1F*)(_file_LooseTTHToTight_mu_errorEta_2018->Get("histo_eff_data"));
+
+      TH1F *histErrPt = _histo_LooseTTHToTight_mu_errorpT_2018;
+      int ptbin = std::max(1, histErrPt->GetXaxis()->FindBin(pt));
+      float errpt = fabs(1.0 - (histErrPt->GetBinContent(ptbin)));
+
+      TH1F *histErrEta = _histo_LooseTTHToTight_mu_errorEta_2018;
+      int etabin = std::max(1, histErrEta->GetXaxis()->FindBin(fabs(eta)));
+      float erreta = fabs(1.0 - (histErrEta->GetBinContent(etabin)));
+
+      float error = std::max(errpt,erreta);
+
+      _file_LooseTTHToTight_mu_errorpT_2018->Close();
+      _file_LooseTTHToTight_mu_errorEta_2018->Close();
+
+      return out + var*error;
 
     }
 
@@ -410,8 +579,6 @@ float get_leptonSF(int year,int pdgid, float pt, float eta, int nlep, float var=
   float SF_LooseToTight = get_LooseToTight_leptonSF(year,pdgid,pt,eta,nlep,var);
   
   float sf = SF_RecoToLoose*SF_LooseToTight;
-  
-  assert (res>0);
 
   return sf;
 
