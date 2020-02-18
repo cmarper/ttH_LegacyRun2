@@ -1,0 +1,3821 @@
+#include <TFile.h>
+#include <TTree.h>
+#include <TChain.h>
+#include <TH1F.h>
+#include <TF1.h>
+
+#include "headers/Helpers.C"
+
+////////////////////////////////////////////////////////////
+
+float XS_ttH = 0.2118;
+float XS_ttH_ctcvcp = 0.5071; 
+float XS_tHQ_ctcvcp = 0.07096; 
+float XS_tHW_ctcvcp = 0.01561;
+
+float XS_ttZ = 0.281;
+float XS_ttZ_lowmass = 0.0822;
+float XS_ttW = 0.1960;
+float XS_ttWW = 0.006981;
+
+float XS_WW = 12.2;
+float XS_WZ = 4.43;
+float XS_ZZ = 1.256;
+
+float XS_DY_M10to50 = 18610;
+float XS_DY_M50 = 6077.22;
+float XS_WJets = 61526.7;
+
+float XS_WWW = 0.2086;
+float XS_WWZ = 0.1676;
+float XS_WZZ = 0.05701;
+float XS_ZZZ = 0.01473;
+float XS_WZG = 0.04345;
+float XS_tZq = 0.07358;
+float XS_WpWp = 0.04926;
+float XS_WW_DS = 0.2232;
+float XS_tttt = 0.008213;
+
+float XS_WG = 464.8;
+float XS_ZG = 123.9;
+float XS_tG = 1.018;
+float XS_ttG = 4.215;
+
+float XS_St_schannel = 3.364;
+float XS_St_tchannel_top = 136.02;
+float XS_St_tchannel_antitop = 80.95;
+float XS_St_tW = 35.85;
+float XS_St_tWll = 0.01096;
+
+float XS_ttbar_DiLept = 88.40;
+float XS_ttbar_SingleLep = 182.76;
+
+float XS_ggHToTauTau = 3.0469;
+float XS_ggHToZZ = 0.01297;
+float XS_ggHToWWToLNuQQ = 4.5621;
+float XS_ggHToWWTo2L2Nu = 1.1033;
+float XS_ggHToMuMu = 0.010571;
+float XS_ggHToBB = 28.293;
+float XS_ggHToGG = 0.11028;
+
+float XS_VBFHToTauTau = 0.2372;
+float XS_VBFHToZZ = 0.0010099;
+float XS_VBFHToWWToLNuQQ = 0.35517;
+float XS_VBFHToWWTo2L2Nu = 0.085894;
+float XS_VBFHToMuMu = 0.00082296;
+float XS_VBFHToBB = 2.2026;
+float XS_VBFHToGG = 0.0085851;
+
+float XS_VHToNonbb = 0.9425;
+float XS_ZHToTauTau = 0.05544;
+float XS_ZH_HToBB_ZToLL = 0.05198;
+
+float XS_ttWH = 0.001582;
+float XS_ttZH = 0.001535;
+
+float XS_ggHHTo2B2VTo2L2Nu = 0.00082039;
+float XS_ggHHTo2B2Tau = 0.00226840;
+float XS_ggHHTo4Tau = 0.00012214;
+float XS_ggHHTo2V2Tau = 0.00093435;
+float XS_ggHHTo4V = 0.00178684;
+
+////////////////////////////////////////////////////////////
+
+vector<float> 	MC_XS;
+vector<TString> MC_filename;
+vector<TString> MC_filename_norm;
+vector<TString> MC_samplename;
+vector<TString> MC_samplecut;
+vector<TString> MC_sampletag;
+vector<TString> MC_samplegroup;
+vector<int>		MC_nsamples;
+vector<TString> MC_convs_samplecut;
+
+vector<TString>	Data_SR_filename;
+vector<TString> Data_fake_filename;
+vector<TString> Data_flip_filename;
+
+float luminosity;
+
+////////////////////////////////////////////////////////////
+
+TString chargematch = "(recolep_sel_isGenChargeMatched[0] && recolep_sel_isGenChargeMatched[1])";
+TString genmatch = "(recolep_sel_isGenMatched[0] && recolep_sel_isGenMatched[1])";
+TString conversmatch = "((recolep_matchedGenPartIdx[0]>=0 && genpart_pdg[recolep_matchedGenPartIdx[0]]==22) || (recolep_matchedGenPartIdx[1]>=0 && genpart_pdg[recolep_matchedGenPartIdx[1]]==22))";
+
+TString hww = "(genH_decayMode[1]>5 && n_genW==4)";
+TString hzz = "(genH_decayMode[1]>5 && n_genZ==2)";
+TString htt = "(genH_decayMode[1]<=5)";
+
+////////////////////////////////////////////////////////////
+
+std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<int>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, float > initialize_2016(){
+
+	MC_XS.clear();
+
+	MC_filename.clear();
+	MC_filename_norm.clear();
+	MC_samplename.clear();
+	MC_samplecut.clear();
+	MC_sampletag.clear();
+	MC_samplegroup.clear();
+	MC_nsamples.clear();
+	MC_convs_samplecut.clear();
+
+	Data_SR_filename.clear();
+	Data_fake_filename.clear();
+	Data_flip_filename.clear();
+
+	luminosity = 35920;
+
+	////////////////////////////////////////////////////////////
+	
+	TString filename_ttH = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ttH/ntuple_Oct19v1_MC_2016_ttHJetToNonbb_MEM_SR_SF_v1.root";
+    TString filename_ttH_ctcvcp = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ttH/ntuple_Oct19v1_MC_2016_ttH_ctcvcp_MEM_SR_SF_v1.root";
+	TString filename_tHQ_ctcvcp = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ttH/ntuple_Oct19v1_MC_2016_THQ_ctcvcp_MEM_SR_SF_v1.root";
+	TString filename_tHW_ctcvcp = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ttH/ntuple_Oct19v1_MC_2016_THW_ctcvcp_MEM_SR_SF_v1.root";
+
+	TString filename_ttZ_ext2 = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ttV/ntuple_Oct19v1_MC_2016_TTZToLLNuNu_M-10_ext2_MEM_SR_SF_v1.root";
+	TString filename_ttZ_ext3 = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ttV/ntuple_Oct19v1_MC_2016_TTZToLLNuNu_M-10_ext3_MEM_SR_SF_v1.root";
+	TString filename_ttZ_lowmass = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ttV/ntuple_Oct19v1_MC_2016_TTZToLL_M-1to10_MEM_SR_SF_v1.root";
+	TString filename_ttW = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ttV/ntuple_Oct19v1_MC_2016_TTWJetsToLNu_MEM_SR_SF_v1.root";
+	TString filename_ttWW = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ttV/ntuple_Oct19v1_MC_2016_TTWW_MEM_SR_SF_v1.root";
+
+	TString filename_WW = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/EWK/ntuple_Oct19v1_MC_2016_WWTo2L2Nu_MEM_SR_SF_v1.root";
+	TString filename_WZ = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/EWK/ntuple_Oct19v1_MC_2016_WZTo3LNu_MEM_SR_SF_v1.root";
+	TString filename_ZZ = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/EWK/ntuple_Oct19v1_MC_2016_ZZTo4L_MEM_SR_SF_v1.root";
+
+	TString filename_DY_M10to50 = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/EWK/ntuple_Oct19v1_MC_2016_DYJetsToLL_M-10to50_MEM_SR_SF_v1.root";
+	TString filename_DY_M50 = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/EWK/ntuple_Oct19v1_MC_2016_DYJetsToLL_M-50_MEM_SR_SF_v1.root";
+
+	TString filename_WJets = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/EWK/ntuple_Oct19v1_MC_2016_WJetsToLNu_MEM_SR_SF_v1.root";
+	TString filename_WJets_ext2 = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/EWK/ntuple_Oct19v1_MC_2016_WJetsToLNu_ext2_MEM_SR_SF_v1.root";
+
+	TString filename_WWW = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Rares/ntuple_Oct19v1_MC_2016_WWW_MEM_SR_SF_v1.root";
+	TString filename_WWZ = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Rares/ntuple_Oct19v1_MC_2016_WWZ_MEM_SR_SF_v1.root";
+	TString filename_WZZ = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Rares/ntuple_Oct19v1_MC_2016_WZZ_MEM_SR_SF_v1.root";
+	TString filename_ZZZ = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Rares/ntuple_Oct19v1_MC_2016_ZZZ_MEM_SR_SF_v1.root";
+	TString filename_WZG = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Rares/ntuple_Oct19v1_MC_2016_WZG_MEM_SR_SF_v1.root";
+	TString filename_WG_ext1 = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Rares/ntuple_Oct19v1_MC_2016_WGToLNuG_ext1_MEM_SR_SF_v1.root";
+	TString filename_WG_ext2 = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Rares/ntuple_Oct19v1_MC_2016_WGToLNuG_ext2_MEM_SR_SF_v1.root";
+	TString filename_WG_ext3 = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Rares/ntuple_Oct19v1_MC_2016_WGToLNuG_ext3_MEM_SR_SF_v1.root";
+	TString filename_ZG = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Rares/ntuple_Oct19v1_MC_2016_ZGTo2LG_MEM_SR_SF_v1.root";
+	TString filename_tG = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Rares/ntuple_Oct19v1_MC_2016_TGJets_leptonDecays_MEM_SR_SF_v1.root";
+	TString filename_ttG = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Rares/ntuple_Oct19v1_MC_2016_TTGJets_MEM_SR_SF_v1.root";
+	TString filename_ttG_ext1 = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Rares/ntuple_Oct19v1_MC_2016_TTGJets_ext1_MEM_SR_SF_v1.root";
+	TString filename_tZq = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Rares/ntuple_Oct19v2_MC_2016_tZq_ll_MEM_SR_SF_v1.root";
+	TString filename_tZq_PS = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Rares/ntuple_Oct19v1_MC_2016_tZq_ll_PS_MEM_SR_SF_v1.root";
+	TString filename_WpWp = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Rares/ntuple_Oct19v1_MC_2016_WpWpJJ_MEM_SR_SF_v1.root";
+	TString filename_WW_DS = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Rares/ntuple_Oct19v2_MC_2016_WWTo2L2Nu_DoubleScattering_MEM_SR_SF_v1.root";
+	TString filename_tttt = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Rares/ntuple_Oct19v1_MC_2016_TTTT_MEM_SR_SF_v1.root";
+
+	TString filename_St_schannel = 				"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ttbar/ntuple_Oct19v1_MC_2016_ST_s-channel_MEM_SR_SF_v1.root";
+	TString filename_St_schannel_PS = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ttbar/ntuple_Oct19v1_MC_2016_ST_s-channel_PS_MEM_SR_SF_v1.root";
+	TString filename_St_tchannel_top = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ttbar/ntuple_Oct19v1_MC_2016_ST_t-channel_top_MEM_SR_SF_v1.root";
+	TString filename_St_tchannel_antitop = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ttbar/ntuple_Oct19v1_MC_2016_ST_t-channel_antitop_MEM_SR_SF_v1.root";
+	TString filename_St_tchannel_antitop_PS = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ttbar/ntuple_Oct19v1_MC_2016_ST_t-channel_antitop_PS_MEM_SR_SF_v1.root";
+	TString filename_St_tW_top = 				"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ttbar/ntuple_Oct19v1_MC_2016_ST_tW_top_MEM_SR_SF_v1.root";
+	TString filename_St_tW_antitop = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ttbar/ntuple_Oct19v1_MC_2016_ST_tW_antitop_MEM_SR_SF_v1.root";
+	TString filename_St_tWll = 					"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ttbar/ntuple_Oct19v1_MC_2016_ST_tWll_MEM_SR_SF_v1.root";
+
+	TString filename_ttbar_DiLept = 					"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ttbar/ntuple_Oct19v1_MC_2016_TTJets_DiLept_MEM_SR_SF_v1.root";
+	TString filename_ttbar_DiLept_ext1 = 				"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ttbar/ntuple_Oct19v1_MC_2016_TTJets_DiLept_ext1_MEM_SR_SF_v1.root";
+	TString filename_ttbar_SingleLeptFromt = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ttbar/ntuple_Oct19v1_MC_2016_TTJets_SingleLeptFromT_MEM_SR_SF_v1.root";
+	TString filename_ttbar_SingleLeptFromt_ext1 = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ttbar/ntuple_Oct19v2_MC_2016_TTJets_SingleLeptFromT_ext1_MEM_SR_SF_v1.root";
+	TString filename_ttbar_SingleLeptFromtbar = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ttbar/ntuple_Oct19v1_MC_2016_TTJets_SingleLeptFromTbar_MEM_SR_SF_v1.root";
+	TString filename_ttbar_SingleLeptFromtbar_ext1 = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ttbar/ntuple_Oct19v3_MC_2016_TTJets_SingleLeptFromTbar_ext1_MEM_SR_SF_v1.root";
+
+	TString filename_ggHToTauTau = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ggH/ntuple_Oct19v1_MC_2016_GluGluHToTauTau_MEM_SR_SF_v1.root";
+	TString filename_ggHToZZ = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ggH/ntuple_Oct19v1_MC_2016_GluGluHToZZTo4L_MEM_SR_SF_v1.root";
+	TString filename_ggHToWWToLNuQQ = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ggH/ntuple_Oct19v1_MC_2016_GluGluHToWWToLNuQQ_MEM_SR_SF_v1.root";
+	TString filename_ggHToWWTo2L2Nu = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ggH/ntuple_Oct19v1_MC_2016_GluGluHToWWTo2L2Nu_MEM_SR_SF_v1.root";
+	TString filename_ggHToMuMu = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ggH/ntuple_Oct19v1_MC_2016_GluGluHToMuMu_MEM_SR_SF_v1.root";
+	TString filename_ggHToBB = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ggH/ntuple_Oct19v1_MC_2016_GluGluHToBB_MEM_SR_SF_v1.root";
+	TString filename_ggHToBB_ext1 = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ggH/ntuple_Oct19v6_MC_2016_GluGluHToBB_ext1_MEM_SR_SF_v1.root";
+	TString filename_ggHToGG = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ggH/ntuple_Oct19v1_MC_2016_GluGluHToGG_MEM_SR_SF_v1.root";
+
+	TString filename_VBFHToTauTau = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/VBF/ntuple_Oct19v2_MC_2016_VBFHToTauTau_MEM_SR_SF_v1.root";
+	TString filename_VBFHToZZ = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/VBF/ntuple_Oct19v2_MC_2016_VBF_HToZZTo4L_MEM_SR_SF_v1.root";
+	TString filename_VBFHToWWToLNuQQ = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/VBF/ntuple_Oct19v1_MC_2016_VBFHToWWToLNuQQ_MEM_SR_SF_v1.root";
+	TString filename_VBFHToWWTo2L2Nu = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/VBF/ntuple_Oct19v1_MC_2016_VBFHToWWTo2L2Nu_MEM_SR_SF_v1.root";
+	TString filename_VBFHToMuMu = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/VBF/ntuple_Oct19v1_MC_2016_VBFHToMuMu_MEM_SR_SF_v1.root";
+	TString filename_VBFHToBB = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/VBF/ntuple_Oct19v3_MC_2016_VBFHToBB_MEM_SR_SF_v1.root";
+	TString filename_VBFHToBB_ext1 = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/VBF/ntuple_Oct19v1_MC_2016_VBFHToBB_ext1_MEM_SR_SF_v1.root";
+	TString filename_VBFHToGG_ext1 = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/VBF/ntuple_Oct19v1_MC_2016_VBFHToGG_ext1_MEM_SR_SF_v1.root";
+	TString filename_VBFHToGG_ext2 = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/VBF/ntuple_Oct19v1_MC_2016_VBFHToGG_ext2_MEM_SR_SF_v1.root";
+
+	TString filename_VHToNonbb = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/VH/ntuple_Oct19v1_MC_2016_VHToNonbb_MEM_SR_SF_v1.root";
+	TString filename_ZHToTauTau = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/VH/ntuple_Oct19v1_MC_2016_ZHToTauTau_MEM_SR_SF_v1.root";
+	TString filename_ZH_HToBB_ZToLL = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/VH/ntuple_Oct19v1_MC_2016_ZH_HToBB_ZToLL_MEM_SR_SF_v1.root";
+
+	TString filename_ttWH = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ttVH/ntuple_Oct19v1_MC_2016_TTWH_MEM_SR_SF_v1.root";
+	TString filename_ttZH = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ttVH/ntuple_Oct19v2_MC_2016_TTZH_MEM_SR_SF_v1.root";
+
+	TString filename_ggHHTo2B2VTo2L2Nu = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/HH/ntuple_Oct19v2_MC_2016_GluGluToHHTo2B2VTo2L2Nu_node_SM_MEM_SR_SF_v1.root";
+	TString filename_ggHHTo2B2Tau = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/HH/ntuple_Oct19v1_MC_2016_GluGluToHHTo2B2Tau_node_SM_MEM_SR_SF_v1.root";
+	TString filename_ggHHTo4Tau = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/HH/ntuple_Oct19v1_MC_2016_GluGluToHHTo4Tau_node_SM_MEM_SR_SF_v1.root";
+
+	////////////////////////////////////////////////////////////
+
+	TString filename_norm_ttH = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ttH/ntuple_Oct19v1_MC_2016_ttHJetToNonbb_norm.root";
+	TString filename_norm_ttH_ctcvcp = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ttH/ntuple_Oct19v1_MC_2016_ttH_ctcvcp_norm.root";
+	TString filename_norm_tHQ_ctcvcp = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ttH/ntuple_Oct19v1_MC_2016_THQ_ctcvcp_norm.root";
+	TString filename_norm_tHW_ctcvcp = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ttH/ntuple_Oct19v1_MC_2016_THW_ctcvcp_norm.root";
+
+	TString filename_norm_ttZ_ext2 = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ttV/ntuple_Oct19v1_MC_2016_TTZToLLNuNu_M-10_ext2_norm.root";
+	TString filename_norm_ttZ_ext3 = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ttV/ntuple_Oct19v1_MC_2016_TTZToLLNuNu_M-10_ext3_norm.root";
+	TString filename_norm_ttZ_lowmass = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ttV/ntuple_Oct19v1_MC_2016_TTZToLL_M-1to10_norm.root";
+	TString filename_norm_ttW = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ttV/ntuple_Oct19v1_MC_2016_TTWJetsToLNu_norm.root";
+	TString filename_norm_ttWW = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ttV/ntuple_Oct19v1_MC_2016_TTWW_norm.root";
+
+	TString filename_norm_WW = 			"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/EWK/ntuple_Oct19v1_MC_2016_WWTo2L2Nu_norm.root";
+	TString filename_norm_WZ = 			"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/EWK/ntuple_Oct19v1_MC_2016_WZTo3LNu_norm.root";
+	TString filename_norm_ZZ = 			"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/EWK/ntuple_Oct19v1_MC_2016_ZZTo4L_norm.root";
+
+	TString filename_norm_DY_M10to50 = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/EWK/ntuple_Oct19v1_MC_2016_DYJetsToLL_M-10to50_norm.root";
+	TString filename_norm_DY_M50 = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/EWK/ntuple_Oct19v1_MC_2016_DYJetsToLL_M-50_norm.root";
+
+	TString filename_norm_WJets = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/EWK/ntuple_Oct19v1_MC_2016_WJetsToLNu_norm.root";
+	TString filename_norm_WJets_ext2 = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/EWK/ntuple_Oct19v1_MC_2016_WJetsToLNu_ext2_norm.root";
+
+	TString filename_norm_WWW = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/Rares/ntuple_Oct19v1_MC_2016_WWW_norm.root";
+	TString filename_norm_WWZ = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/Rares/ntuple_Oct19v1_MC_2016_WWZ_norm.root";
+	TString filename_norm_WZZ = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/Rares/ntuple_Oct19v1_MC_2016_WZZ_norm.root";
+	TString filename_norm_ZZZ = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/Rares/ntuple_Oct19v1_MC_2016_ZZZ_norm.root";
+	TString filename_norm_WZG = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/Rares/ntuple_Oct19v1_MC_2016_WZG_norm.root";
+	TString filename_norm_WG_ext1 = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/Rares/ntuple_Oct19v1_MC_2016_WGToLNuG_ext1_norm.root";
+	TString filename_norm_WG_ext2 = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/Rares/ntuple_Oct19v1_MC_2016_WGToLNuG_ext2_norm.root";
+	TString filename_norm_WG_ext3 = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/Rares/ntuple_Oct19v1_MC_2016_WGToLNuG_ext3_norm.root";
+	TString filename_norm_ZG = 			"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/Rares/ntuple_Oct19v1_MC_2016_ZGTo2LG_norm.root";
+	TString filename_norm_tG = 			"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/Rares/ntuple_Oct19v1_MC_2016_TGJets_leptonDecays_norm.root";
+	TString filename_norm_ttG = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/Rares/ntuple_Oct19v1_MC_2016_TTGJets_norm.root";
+	TString filename_norm_ttG_ext1 = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/Rares/ntuple_Oct19v1_MC_2016_TTGJets_ext1_norm.root";
+	TString filename_norm_tZq = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/Rares/ntuple_Oct19v2_MC_2016_tZq_ll_norm.root";
+	TString filename_norm_tZq_PS = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/Rares/ntuple_Oct19v1_MC_2016_tZq_ll_PS_norm.root";
+	TString filename_norm_WpWp = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/Rares/ntuple_Oct19v1_MC_2016_WpWpJJ_norm.root";
+	TString filename_norm_WW_DS = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/Rares/ntuple_Oct19v2_MC_2016_WWTo2L2Nu_DoubleScattering_norm.root";
+	TString filename_norm_tttt = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/Rares/ntuple_Oct19v1_MC_2016_TTTT_norm.root";
+
+	TString filename_norm_St_schannel = 			"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ttbar/ntuple_Oct19v1_MC_2016_ST_s-channel_norm.root";
+	TString filename_norm_St_schannel_PS = 			"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ttbar/ntuple_Oct19v1_MC_2016_ST_s-channel_PS_norm.root";
+	TString filename_norm_St_tchannel_top = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ttbar/ntuple_Oct19v1_MC_2016_ST_t-channel_top_norm.root";
+	TString filename_norm_St_tchannel_antitop = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ttbar/ntuple_Oct19v1_MC_2016_ST_t-channel_antitop_norm.root";
+	TString filename_norm_St_tchannel_antitop_PS = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ttbar/ntuple_Oct19v1_MC_2016_ST_t-channel_antitop_PS_norm.root";
+	TString filename_norm_St_tW_top = 				"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ttbar/ntuple_Oct19v1_MC_2016_ST_tW_top_norm.root";
+	TString filename_norm_St_tW_antitop = 			"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ttbar/ntuple_Oct19v1_MC_2016_ST_tW_antitop_norm.root";
+	TString filename_norm_St_tWll = 				"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ttbar/ntuple_Oct19v1_MC_2016_ST_tWll_norm.root";
+
+	TString filename_norm_ttbar_DiLept = 					"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ttbar/ntuple_Oct19v1_MC_2016_TTJets_DiLept_norm.root";
+	TString filename_norm_ttbar_DiLept_ext1 = 				"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ttbar/ntuple_Oct19v1_MC_2016_TTJets_DiLept_ext1_norm.root";
+	TString filename_norm_ttbar_SingleLeptFromt = 			"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ttbar/ntuple_Oct19v1_MC_2016_TTJets_SingleLeptFromT_norm.root";
+	TString filename_norm_ttbar_SingleLeptFromt_ext1 = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ttbar/ntuple_Oct19v2_MC_2016_TTJets_SingleLeptFromT_ext1_norm.root";
+	TString filename_norm_ttbar_SingleLeptFromtbar = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ttbar/ntuple_Oct19v1_MC_2016_TTJets_SingleLeptFromTbar_norm.root";
+	TString filename_norm_ttbar_SingleLeptFromtbar_ext1 = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ttbar/ntuple_Oct19v3_MC_2016_TTJets_SingleLeptFromTbar_ext1_norm.root";
+
+	TString filename_norm_ggHToTauTau = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ggH/ntuple_Oct19v1_MC_2016_GluGluHToTauTau_norm.root";
+	TString filename_norm_ggHToZZ = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ggH/ntuple_Oct19v1_MC_2016_GluGluHToZZTo4L_norm.root";
+	TString filename_norm_ggHToWWToLNuQQ = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ggH/ntuple_Oct19v1_MC_2016_GluGluHToWWToLNuQQ_norm.root";
+	TString filename_norm_ggHToWWTo2L2Nu = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ggH/ntuple_Oct19v1_MC_2016_GluGluHToWWTo2L2Nu_norm.root";
+	TString filename_norm_ggHToMuMu = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ggH/ntuple_Oct19v1_MC_2016_GluGluHToMuMu_norm.root";
+	TString filename_norm_ggHToBB = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ggH/ntuple_Oct19v1_MC_2016_GluGluHToBB_norm.root";
+	TString filename_norm_ggHToBB_ext1 = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ggH/ntuple_Oct19v6_MC_2016_GluGluHToBB_ext1_norm.root";
+	TString filename_norm_ggHToGG = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ggH/ntuple_Oct19v1_MC_2016_GluGluHToGG_norm.root";
+
+	TString filename_norm_VBFHToTauTau = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/VBF/ntuple_Oct19v2_MC_2016_VBFHToTauTau_norm.root";
+	TString filename_norm_VBFHToZZ = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/VBF/ntuple_Oct19v2_MC_2016_VBF_HToZZTo4L_norm.root";
+	TString filename_norm_VBFHToWWToLNuQQ = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/VBF/ntuple_Oct19v1_MC_2016_VBFHToWWToLNuQQ_norm.root";
+	TString filename_norm_VBFHToWWTo2L2Nu = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/VBF/ntuple_Oct19v1_MC_2016_VBFHToWWTo2L2Nu_norm.root";
+	TString filename_norm_VBFHToMuMu = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/VBF/ntuple_Oct19v1_MC_2016_VBFHToMuMu_norm.root";
+	TString filename_norm_VBFHToBB = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/VBF/ntuple_Oct19v3_MC_2016_VBFHToBB_norm.root";
+	TString filename_norm_VBFHToBB_ext1 = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/VBF/ntuple_Oct19v1_MC_2016_VBFHToBB_ext1_norm.root";
+	TString filename_norm_VBFHToGG_ext1 = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/VBF/ntuple_Oct19v1_MC_2016_VBFHToGG_ext1_norm.root";
+	TString filename_norm_VBFHToGG_ext2 = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/VBF/ntuple_Oct19v1_MC_2016_VBFHToGG_ext2_norm.root";
+
+	TString filename_norm_VHToNonbb = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/VH/ntuple_Oct19v1_MC_2016_VHToNonbb_norm.root";
+	TString filename_norm_ZHToTauTau = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/VH/ntuple_Oct19v1_MC_2016_ZHToTauTau_norm.root";
+	TString filename_norm_ZH_HToBB_ZToLL = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/VH/ntuple_Oct19v1_MC_2016_ZH_HToBB_ZToLL_norm.root";
+
+	TString filename_norm_ttWH = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ttVH/ntuple_Oct19v1_MC_2016_TTWH_norm.root";
+	TString filename_norm_ttZH = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ttVH/ntuple_Oct19v2_MC_2016_TTZH_norm.root";
+
+	TString filename_norm_ggHHTo2B2VTo2L2Nu = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/HH/ntuple_Oct19v2_MC_2016_GluGluToHHTo2B2VTo2L2Nu_node_SM_norm.root";
+	TString filename_norm_ggHHTo2B2Tau = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/HH/ntuple_Oct19v1_MC_2016_GluGluToHHTo2B2Tau_node_SM_norm.root";
+	TString filename_norm_ggHHTo4Tau = 			"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/HH/ntuple_Oct19v1_MC_2016_GluGluToHHTo4Tau_node_SM_norm.root";
+
+	///////////////////////////////////////////////////////
+
+	TString filename_SingleElectron_BlockB_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/SR/ntuple_Oct19v1_Data_2016_SingleElectron_BlockB_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_SingleElectron_BlockC_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/SR/ntuple_Oct19v1_Data_2016_SingleElectron_BlockC_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_SingleElectron_BlockD_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/SR/ntuple_Oct19v1_Data_2016_SingleElectron_BlockD_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_SingleElectron_BlockE_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/SR/ntuple_Oct19v1_Data_2016_SingleElectron_BlockE_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_SingleElectron_BlockF_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/SR/ntuple_Oct19v1_Data_2016_SingleElectron_BlockF_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_SingleElectron_BlockG_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/SR/ntuple_Oct19v1_Data_2016_SingleElectron_BlockG_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_SingleElectron_BlockH_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/SR/ntuple_Oct19v1_Data_2016_SingleElectron_BlockH_MEM_SR_SF_v1_noOverlap.root";
+
+	TString filename_SingleMuon_BlockB_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/SR/ntuple_Oct19v1_Data_2016_SingleMuon_BlockB_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_SingleMuon_BlockC_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/SR/ntuple_Oct19v1_Data_2016_SingleMuon_BlockC_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_SingleMuon_BlockD_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/SR/ntuple_Oct19v1_Data_2016_SingleMuon_BlockD_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_SingleMuon_BlockE_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/SR/ntuple_Oct19v1_Data_2016_SingleMuon_BlockE_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_SingleMuon_BlockF_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/SR/ntuple_Oct19v1_Data_2016_SingleMuon_BlockF_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_SingleMuon_BlockG_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/SR/ntuple_Oct19v1_Data_2016_SingleMuon_BlockG_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_SingleMuon_BlockH_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/SR/ntuple_Oct19v1_Data_2016_SingleMuon_BlockH_MEM_SR_SF_v1_noOverlap.root";
+
+	TString filename_DoubleEG_BlockB_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/SR/ntuple_Oct19v1_Data_2016_DoubleEG_BlockB_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_DoubleEG_BlockC_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/SR/ntuple_Oct19v1_Data_2016_DoubleEG_BlockC_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_DoubleEG_BlockD_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/SR/ntuple_Oct19v1_Data_2016_DoubleEG_BlockD_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_DoubleEG_BlockE_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/SR/ntuple_Oct19v1_Data_2016_DoubleEG_BlockE_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_DoubleEG_BlockF_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/SR/ntuple_Oct19v1_Data_2016_DoubleEG_BlockF_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_DoubleEG_BlockG_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/SR/ntuple_Oct19v1_Data_2016_DoubleEG_BlockG_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_DoubleEG_BlockH_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/SR/ntuple_Oct19v1_Data_2016_DoubleEG_BlockH_MEM_SR_SF_v1_noOverlap.root";
+
+	TString filename_DoubleMu_BlockB_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/SR/ntuple_Oct19v1_Data_2016_DoubleEG_BlockB_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_DoubleMu_BlockC_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/SR/ntuple_Oct19v1_Data_2016_DoubleEG_BlockC_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_DoubleMu_BlockD_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/SR/ntuple_Oct19v1_Data_2016_DoubleEG_BlockD_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_DoubleMu_BlockE_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/SR/ntuple_Oct19v1_Data_2016_DoubleEG_BlockE_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_DoubleMu_BlockF_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/SR/ntuple_Oct19v1_Data_2016_DoubleEG_BlockF_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_DoubleMu_BlockG_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/SR/ntuple_Oct19v1_Data_2016_DoubleEG_BlockG_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_DoubleMu_BlockH_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/SR/ntuple_Oct19v1_Data_2016_DoubleEG_BlockH_MEM_SR_SF_v1_noOverlap.root";
+
+	TString filename_MuonEG_BlockB_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/SR/ntuple_Oct19v1_Data_2016_DoubleEG_BlockB_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_MuonEG_BlockC_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/SR/ntuple_Oct19v1_Data_2016_DoubleEG_BlockC_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_MuonEG_BlockD_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/SR/ntuple_Oct19v1_Data_2016_DoubleEG_BlockD_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_MuonEG_BlockE_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/SR/ntuple_Oct19v1_Data_2016_DoubleEG_BlockE_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_MuonEG_BlockF_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/SR/ntuple_Oct19v1_Data_2016_DoubleEG_BlockF_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_MuonEG_BlockG_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/SR/ntuple_Oct19v1_Data_2016_DoubleEG_BlockG_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_MuonEG_BlockH_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/SR/ntuple_Oct19v1_Data_2016_DoubleEG_BlockH_MEM_SR_SF_v1_noOverlap.root";
+
+	///////////////////////////////////////////////////////
+
+	TString filename_SingleElectron_BlockB_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_SingleElectron_BlockB_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_SingleElectron_BlockC_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_SingleElectron_BlockC_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_SingleElectron_BlockD_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_SingleElectron_BlockD_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_SingleElectron_BlockE_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_SingleElectron_BlockE_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_SingleElectron_BlockF_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_SingleElectron_BlockF_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_SingleElectron_BlockG_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_SingleElectron_BlockG_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_SingleElectron_BlockH_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_SingleElectron_BlockH_MEM_fake_SF_v1_noOverlap.root";
+
+	TString filename_SingleMuon_BlockB_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_SingleMuon_BlockB_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_SingleMuon_BlockC_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_SingleMuon_BlockC_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_SingleMuon_BlockD_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_SingleMuon_BlockD_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_SingleMuon_BlockE_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_SingleMuon_BlockE_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_SingleMuon_BlockF_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_SingleMuon_BlockF_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_SingleMuon_BlockG_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_SingleMuon_BlockG_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_SingleMuon_BlockH_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_SingleMuon_BlockH_MEM_fake_SF_v1_noOverlap.root";
+
+	TString filename_DoubleEG_BlockB_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockB_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_DoubleEG_BlockC_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockC_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_DoubleEG_BlockD_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockD_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_DoubleEG_BlockE_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockE_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_DoubleEG_BlockF_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockF_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_DoubleEG_BlockG_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockG_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_DoubleEG_BlockH_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockH_MEM_fake_SF_v1_noOverlap.root";
+
+	TString filename_DoubleMu_BlockB_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockB_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_DoubleMu_BlockC_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockC_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_DoubleMu_BlockD_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockD_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_DoubleMu_BlockE_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockE_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_DoubleMu_BlockF_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockF_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_DoubleMu_BlockG_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockG_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_DoubleMu_BlockH_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockH_MEM_fake_SF_v1_noOverlap.root";
+
+	TString filename_MuonEG_BlockB_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockB_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_MuonEG_BlockC_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockC_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_MuonEG_BlockD_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockD_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_MuonEG_BlockE_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockE_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_MuonEG_BlockF_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockF_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_MuonEG_BlockG_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockG_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_MuonEG_BlockH_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockH_MEM_fake_SF_v1_noOverlap.root";
+
+	///////////////////////////////////////////////////////
+
+	TString filename_SingleElectron_BlockB_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/flip/ntuple_Oct19v1_Data_2016_SingleElectron_BlockB_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_SingleElectron_BlockC_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/flip/ntuple_Oct19v1_Data_2016_SingleElectron_BlockC_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_SingleElectron_BlockD_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/flip/ntuple_Oct19v1_Data_2016_SingleElectron_BlockD_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_SingleElectron_BlockE_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/flip/ntuple_Oct19v1_Data_2016_SingleElectron_BlockE_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_SingleElectron_BlockF_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/flip/ntuple_Oct19v1_Data_2016_SingleElectron_BlockF_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_SingleElectron_BlockG_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/flip/ntuple_Oct19v1_Data_2016_SingleElectron_BlockG_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_SingleElectron_BlockH_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/flip/ntuple_Oct19v1_Data_2016_SingleElectron_BlockH_MEM_flip_SF_v1_noOverlap.root";
+
+	TString filename_SingleMuon_BlockB_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/flip/ntuple_Oct19v1_Data_2016_SingleMuon_BlockB_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_SingleMuon_BlockC_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/flip/ntuple_Oct19v1_Data_2016_SingleMuon_BlockC_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_SingleMuon_BlockD_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/flip/ntuple_Oct19v1_Data_2016_SingleMuon_BlockD_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_SingleMuon_BlockE_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/flip/ntuple_Oct19v1_Data_2016_SingleMuon_BlockE_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_SingleMuon_BlockF_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/flip/ntuple_Oct19v1_Data_2016_SingleMuon_BlockF_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_SingleMuon_BlockG_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/flip/ntuple_Oct19v1_Data_2016_SingleMuon_BlockG_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_SingleMuon_BlockH_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/flip/ntuple_Oct19v1_Data_2016_SingleMuon_BlockH_MEM_flip_SF_v1_noOverlap.root";
+
+	TString filename_DoubleEG_BlockB_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/flip/ntuple_Oct19v1_Data_2016_DoubleEG_BlockB_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_DoubleEG_BlockC_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/flip/ntuple_Oct19v1_Data_2016_DoubleEG_BlockC_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_DoubleEG_BlockD_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/flip/ntuple_Oct19v1_Data_2016_DoubleEG_BlockD_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_DoubleEG_BlockE_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/flip/ntuple_Oct19v1_Data_2016_DoubleEG_BlockE_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_DoubleEG_BlockF_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/flip/ntuple_Oct19v1_Data_2016_DoubleEG_BlockF_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_DoubleEG_BlockG_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/flip/ntuple_Oct19v1_Data_2016_DoubleEG_BlockG_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_DoubleEG_BlockH_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/flip/ntuple_Oct19v1_Data_2016_DoubleEG_BlockH_MEM_flip_SF_v1_noOverlap.root";
+
+	TString filename_DoubleMu_BlockB_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/flip/ntuple_Oct19v1_Data_2016_DoubleEG_BlockB_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_DoubleMu_BlockC_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/flip/ntuple_Oct19v1_Data_2016_DoubleEG_BlockC_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_DoubleMu_BlockD_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/flip/ntuple_Oct19v1_Data_2016_DoubleEG_BlockD_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_DoubleMu_BlockE_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/flip/ntuple_Oct19v1_Data_2016_DoubleEG_BlockE_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_DoubleMu_BlockF_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/flip/ntuple_Oct19v1_Data_2016_DoubleEG_BlockF_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_DoubleMu_BlockG_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/flip/ntuple_Oct19v1_Data_2016_DoubleEG_BlockG_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_DoubleMu_BlockH_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/flip/ntuple_Oct19v1_Data_2016_DoubleEG_BlockH_MEM_flip_SF_v1_noOverlap.root";
+
+	TString filename_MuonEG_BlockB_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/flip/ntuple_Oct19v1_Data_2016_DoubleEG_BlockB_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_MuonEG_BlockC_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/flip/ntuple_Oct19v1_Data_2016_DoubleEG_BlockC_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_MuonEG_BlockD_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/flip/ntuple_Oct19v1_Data_2016_DoubleEG_BlockD_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_MuonEG_BlockE_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/flip/ntuple_Oct19v1_Data_2016_DoubleEG_BlockE_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_MuonEG_BlockF_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/flip/ntuple_Oct19v1_Data_2016_DoubleEG_BlockF_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_MuonEG_BlockG_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/flip/ntuple_Oct19v1_Data_2016_DoubleEG_BlockG_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_MuonEG_BlockH_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/flip/ntuple_Oct19v1_Data_2016_DoubleEG_BlockH_MEM_flip_SF_v1_noOverlap.root";
+
+	///////////////////////////////////////////////////////
+
+	// ttH
+
+	MC_XS.push_back(XS_ttH);
+	MC_filename.push_back(filename_ttH);
+	MC_filename_norm.push_back(filename_norm_ttH);
+	MC_samplename.push_back("ttH_s1");
+	MC_sampletag.push_back("ttH");
+	MC_samplegroup.push_back("ttH");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ttH);
+	MC_filename.push_back(filename_ttH);
+	MC_filename_norm.push_back(filename_norm_ttH);
+	MC_samplename.push_back("ttHhww_s1");
+	MC_sampletag.push_back("ttHhww");
+	MC_samplegroup.push_back("ttHhww");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch+" && "+hww);
+	MC_convs_samplecut.push_back(conversmatch+" && "+hww);
+
+	MC_XS.push_back(XS_ttH);
+	MC_filename.push_back(filename_ttH);
+	MC_filename_norm.push_back(filename_norm_ttH);
+	MC_samplename.push_back("ttHhzz_s1");
+	MC_sampletag.push_back("ttHhzz");
+	MC_samplegroup.push_back("ttHhzz");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch+" && "+hzz);
+	MC_convs_samplecut.push_back(conversmatch+" && "+hzz);
+
+	MC_XS.push_back(XS_ttH);
+	MC_filename.push_back(filename_ttH);
+	MC_filename_norm.push_back(filename_norm_ttH);
+	MC_samplename.push_back("ttHhtt_s1");
+	MC_sampletag.push_back("ttHhtt");
+	MC_samplegroup.push_back("ttHhtt");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch+" && "+htt);
+	MC_convs_samplecut.push_back(conversmatch+" && "+htt);
+
+	///////////////////////////////////////////////////////
+
+	// tHQ
+
+	MC_XS.push_back(XS_tHQ_ctcvcp);
+	MC_filename.push_back(filename_tHQ_ctcvcp);
+	MC_filename_norm.push_back(filename_norm_tHQ_ctcvcp);
+	MC_samplename.push_back("tHQ_s1");
+	MC_sampletag.push_back("tHQ");
+	MC_samplegroup.push_back("tHq");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	// tHW
+
+	MC_XS.push_back(XS_tHW_ctcvcp);
+	MC_filename.push_back(filename_tHW_ctcvcp);
+	MC_filename_norm.push_back(filename_norm_tHW_ctcvcp);
+	MC_samplename.push_back("tHW_s1");
+	MC_sampletag.push_back("tHW");
+	MC_samplegroup.push_back("tHq");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	///////////////////////////////////////////////////////
+
+	// VH
+
+	MC_XS.push_back(XS_VHToNonbb);
+	MC_filename.push_back(filename_VHToNonbb);
+	MC_filename_norm.push_back(filename_norm_VHToNonbb);
+	MC_samplename.push_back("VHToNonbb_s1");
+	MC_sampletag.push_back("VHToNonbb");
+	MC_samplegroup.push_back("VH");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ZHToTauTau);
+	MC_filename.push_back(filename_ZHToTauTau);
+	MC_filename_norm.push_back(filename_norm_ZHToTauTau);
+	MC_samplename.push_back("ZHToTauTau_s1");
+	MC_sampletag.push_back("ZHToTauTau");
+	MC_samplegroup.push_back("VH");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ZH_HToBB_ZToLL);
+	MC_filename.push_back(filename_ZH_HToBB_ZToLL);
+	MC_filename_norm.push_back(filename_norm_ZH_HToBB_ZToLL);
+	MC_samplename.push_back("HToBBZToLL_s1");
+	MC_sampletag.push_back("ZHToBBZToLL");
+	MC_samplegroup.push_back("VH");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	///////////////////////////////////////////////////////
+
+	// ttVH
+
+	MC_XS.push_back(XS_ttWH);
+	MC_filename.push_back(filename_ttWH);
+	MC_filename_norm.push_back(filename_norm_ttWH);
+	MC_samplename.push_back("ttWH_s1");
+	MC_sampletag.push_back("ttWH");
+	MC_samplegroup.push_back("ttVH");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ttZH);
+	MC_filename.push_back(filename_ttZH);
+	MC_filename_norm.push_back(filename_norm_ttZH);
+	MC_samplename.push_back("ttZH_s1");
+	MC_sampletag.push_back("ttZH");
+	MC_samplegroup.push_back("ttVH");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	///////////////////////////////////////////////////////
+
+	// ggH
+
+	MC_XS.push_back(XS_ggHToTauTau);
+	MC_filename.push_back(filename_ggHToTauTau);
+	MC_filename_norm.push_back(filename_norm_ggHToTauTau);
+	MC_samplename.push_back("ggHToTauTau_s1");
+	MC_sampletag.push_back("ggHToTauTau");
+	MC_samplegroup.push_back("ggH");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ggHToZZ);
+	MC_filename.push_back(filename_ggHToZZ);
+	MC_filename_norm.push_back(filename_norm_ggHToZZ);
+	MC_samplename.push_back("ggHToZZ_s1");
+	MC_sampletag.push_back("ggHToZZ");
+	MC_samplegroup.push_back("ggH");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ggHToWWToLNuQQ);
+	MC_filename.push_back(filename_ggHToWWToLNuQQ);
+	MC_filename_norm.push_back(filename_norm_ggHToWWToLNuQQ);
+	MC_samplename.push_back("ggHToWWToLNuQQ_s1");
+	MC_sampletag.push_back("ggHToWWToLNuQQ");
+	MC_samplegroup.push_back("ggH");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ggHToWWTo2L2Nu);
+	MC_filename.push_back(filename_ggHToWWTo2L2Nu);
+	MC_filename_norm.push_back(filename_norm_ggHToWWTo2L2Nu);
+	MC_samplename.push_back("ggHToWWTo2L2Nu_s1");
+	MC_sampletag.push_back("ggHToWWTo2L2Nu");
+	MC_samplegroup.push_back("ggH");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ggHToMuMu);
+	MC_filename.push_back(filename_ggHToMuMu);
+	MC_filename_norm.push_back(filename_norm_ggHToMuMu);
+	MC_samplename.push_back("ggHToMuMu_s1");
+	MC_sampletag.push_back("ggHToMuMu");
+	MC_samplegroup.push_back("ggH");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ggHToBB);
+	MC_filename.push_back(filename_ggHToBB);
+	MC_filename_norm.push_back(filename_norm_ggHToBB);
+	MC_samplename.push_back("ggHToBB_s1");
+	MC_sampletag.push_back("ggHToBB");
+	MC_samplegroup.push_back("ggH");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ggHToGG);
+	MC_filename.push_back(filename_ggHToGG);
+	MC_filename_norm.push_back(filename_norm_ggHToGG);
+	MC_samplename.push_back("ggHToGG_s1");
+	MC_sampletag.push_back("ggHToGG");
+	MC_samplegroup.push_back("ggH");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	///////////////////////////////////////////////////////
+
+	// qqH
+
+	MC_XS.push_back(XS_VBFHToTauTau);
+	MC_filename.push_back(filename_VBFHToTauTau);
+	MC_filename_norm.push_back(filename_norm_VBFHToTauTau);
+	MC_samplename.push_back("VBFHToTauTau_s1");
+	MC_sampletag.push_back("VBFHToTauTau");
+	MC_samplegroup.push_back("VBF");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_VBFHToZZ);
+	MC_filename.push_back(filename_VBFHToZZ);
+	MC_filename_norm.push_back(filename_norm_VBFHToZZ);
+	MC_samplename.push_back("VBFHToZZ_s1");
+	MC_sampletag.push_back("VBFHToZZ");
+	MC_samplegroup.push_back("VBF");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_VBFHToWWToLNuQQ);
+	MC_filename.push_back(filename_VBFHToWWToLNuQQ);
+	MC_filename_norm.push_back(filename_norm_VBFHToWWToLNuQQ);
+	MC_samplename.push_back("VBFHToWWToLNuQQ_s1");
+	MC_sampletag.push_back("VBFHToWWToLNuQQ");
+	MC_samplegroup.push_back("VBF");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_VBFHToWWTo2L2Nu);
+	MC_filename.push_back(filename_VBFHToWWTo2L2Nu);
+	MC_filename_norm.push_back(filename_norm_VBFHToWWTo2L2Nu);
+	MC_samplename.push_back("VBFHToWWTo2L2Nu_s1");
+	MC_sampletag.push_back("VBFHToWWTo2L2Nu");
+	MC_samplegroup.push_back("VBF");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_VBFHToMuMu);
+	MC_filename.push_back(filename_VBFHToMuMu);
+	MC_filename_norm.push_back(filename_norm_VBFHToMuMu);
+	MC_samplename.push_back("VBFHToMuMu_s1");
+	MC_sampletag.push_back("VBFHToMuMu");
+	MC_samplegroup.push_back("VBF");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_VBFHToBB);
+	MC_filename.push_back(filename_VBFHToBB);
+	MC_filename_norm.push_back(filename_norm_VBFHToBB);
+	MC_samplename.push_back("VBFHToBB_s1");
+	MC_sampletag.push_back("VBFHToBB");
+	MC_samplegroup.push_back("VBF");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_VBFHToGG);
+	MC_filename.push_back(filename_VBFHToGG_ext1);
+	MC_filename_norm.push_back(filename_norm_VBFHToGG_ext1);
+	MC_samplename.push_back("VBFHToGG_s1");
+	MC_sampletag.push_back("VBFHToGG");
+	MC_samplegroup.push_back("VBF");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	///////////////////////////////////////////////////////
+
+	// HH
+
+	MC_XS.push_back(XS_ggHHTo2B2VTo2L2Nu);
+	MC_filename.push_back(filename_ggHHTo2B2VTo2L2Nu);
+	MC_filename_norm.push_back(filename_norm_ggHHTo2B2VTo2L2Nu);
+	MC_samplename.push_back("ggHHTo2B2VTo2L2Nu_s1");
+	MC_sampletag.push_back("ggHHTo2B2VTo2L2Nu");
+	MC_samplegroup.push_back("HH");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ggHHTo2B2Tau);
+	MC_filename.push_back(filename_ggHHTo2B2Tau);
+	MC_filename_norm.push_back(filename_norm_ggHHTo2B2Tau);
+	MC_samplename.push_back("ggHHTo2B2Tau_s1");
+	MC_sampletag.push_back("ggHHTo2B2Tau");
+	MC_samplegroup.push_back("HH");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ggHHTo4Tau);
+	MC_filename.push_back(filename_ggHHTo4Tau);
+	MC_filename_norm.push_back(filename_norm_ggHHTo4Tau);
+	MC_samplename.push_back("ggHHTo4Tau_s1");
+	MC_sampletag.push_back("ggHHTo4Tau");
+	MC_samplegroup.push_back("HH");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	///////////////////////////////////////////////////////
+
+	// ttZ
+
+	/*MC_XS.push_back(XS_ttZ);
+	MC_filename.push_back(filename_ttZ_ext2); 
+	MC_filename_norm.push_back(filename_norm_ttZ_ext2);
+	MC_samplename.push_back("ttZ_s2");
+	MC_sampletag.push_back("ttZ");
+	MC_samplegroup.push_back("ttZ");
+	MC_nsamples.push_back(2);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);*/
+
+	MC_XS.push_back(XS_ttZ);
+	MC_filename.push_back(filename_ttZ_ext3); 
+	MC_filename_norm.push_back(filename_norm_ttZ_ext3);
+	MC_samplename.push_back("ttZ_s1");
+	MC_sampletag.push_back("ttZ");
+	MC_samplegroup.push_back("ttZ");
+	MC_nsamples.push_back(2);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ttZ_lowmass);
+	MC_filename.push_back(filename_ttZ_lowmass);
+	MC_filename_norm.push_back(filename_norm_ttZ_lowmass);
+	MC_samplename.push_back("ttZm1to10_s1");
+	MC_sampletag.push_back("ttZm1to10");
+	MC_samplegroup.push_back("ttZ");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	/*MC_XS.push_back(XS_ttbar_DiLept);
+	MC_filename.push_back(filename_ttbar_DiLept); 
+	MC_filename_norm.push_back(filename_norm_ttbar_DiLept);
+	MC_samplename.push_back("ttbarDL_s2");
+	MC_sampletag.push_back("ttbarDL");
+	MC_samplegroup.push_back("ttZ");
+	MC_nsamples.push_back(2);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);*/
+
+	MC_XS.push_back(XS_ttbar_DiLept);
+	MC_filename.push_back(filename_ttbar_DiLept_ext1); 
+	MC_filename_norm.push_back(filename_norm_ttbar_DiLept_ext1);
+	MC_samplename.push_back("ttbarDL_s1");
+	MC_sampletag.push_back("ttbarDL");
+	MC_samplegroup.push_back("ttZ");
+	MC_nsamples.push_back(2);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	/*MC_XS.push_back(XS_ttbar_SingleLep);
+	MC_filename.push_back(filename_ttbar_SingleLeptFromt); 
+	MC_filename_norm.push_back(filename_norm_ttbar_SingleLeptFromt);
+	MC_samplename.push_back("ttbarSLfromT_s2");
+	MC_sampletag.push_back("ttbarSLfromT");
+	MC_samplegroup.push_back("ttZ");
+	MC_nsamples.push_back(2);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);*/
+
+	MC_XS.push_back(XS_ttbar_SingleLep);
+	MC_filename.push_back(filename_ttbar_SingleLeptFromt_ext1); 
+	MC_filename_norm.push_back(filename_norm_ttbar_SingleLeptFromt_ext1);
+	MC_samplename.push_back("ttbarSLfromT_s1");
+	MC_sampletag.push_back("ttbarSLfromT");
+	MC_samplegroup.push_back("ttZ");
+	MC_nsamples.push_back(2);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	/*MC_XS.push_back(XS_ttbar_SingleLep);
+	MC_filename.push_back(filename_ttbar_SingleLeptFromtbar); 
+	MC_filename_norm.push_back(filename_norm_ttbar_SingleLeptFromtbar);
+	MC_samplename.push_back("ttbarSLfromTbar_s2");
+	MC_sampletag.push_back("ttbarSLfromTbar");
+	MC_samplegroup.push_back("ttZ");
+	MC_nsamples.push_back(2);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);*/
+
+	MC_XS.push_back(XS_ttbar_SingleLep);
+	MC_filename.push_back(filename_ttbar_SingleLeptFromtbar_ext1); 
+	MC_filename_norm.push_back(filename_norm_ttbar_SingleLeptFromtbar_ext1);
+	MC_samplename.push_back("ttbarSLfromTbar_s1");
+	MC_sampletag.push_back("ttbarSLfromTbar");
+	MC_samplegroup.push_back("ttZ");
+	MC_nsamples.push_back(2);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	///////////////////////////////////////////////////////
+
+	// ttW
+
+	MC_XS.push_back(XS_ttW);
+	MC_filename.push_back(filename_ttW);
+	MC_filename_norm.push_back(filename_norm_ttW);
+	MC_samplename.push_back("ttW_s1");
+	MC_sampletag.push_back("ttW");
+	MC_samplegroup.push_back("ttW");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	// ttWW
+
+	MC_XS.push_back(XS_ttWW);
+	MC_filename.push_back(filename_ttWW);
+	MC_filename_norm.push_back(filename_norm_ttWW);
+	MC_samplename.push_back("ttWW_s1");
+	MC_sampletag.push_back("ttWW");
+	MC_samplegroup.push_back("ttW");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	///////////////////////////////////////////////////////
+
+	// WW
+
+	MC_XS.push_back(XS_WW);
+	MC_filename.push_back(filename_WW);
+	MC_filename_norm.push_back(filename_norm_WW);
+	MC_samplename.push_back("WW_s1");
+	MC_sampletag.push_back("WW");
+	MC_samplegroup.push_back("EWK");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	// WZ
+
+	MC_XS.push_back(XS_WZ);
+	MC_filename.push_back(filename_WZ);
+	MC_filename_norm.push_back(filename_norm_WZ);
+	MC_samplename.push_back("WZ_s1");
+	MC_sampletag.push_back("WZ");
+	MC_samplegroup.push_back("EWK");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	// ZZ
+
+	MC_XS.push_back(XS_ZZ);
+	MC_filename.push_back(filename_ZZ);
+	MC_filename_norm.push_back(filename_norm_ZZ);
+	MC_samplename.push_back("ZZ_s1");
+	MC_sampletag.push_back("ZZ");
+	MC_samplegroup.push_back("EWK");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	///////////////////////////////////////////////////////
+
+	// Rares
+
+	MC_XS.push_back(XS_WWW);
+	MC_filename.push_back(filename_WWW);
+	MC_filename_norm.push_back(filename_norm_WWW);
+	MC_samplename.push_back("WWW_s1");
+	MC_sampletag.push_back("WWW");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_WWZ);
+	MC_filename.push_back(filename_WWZ);
+	MC_filename_norm.push_back(filename_norm_WWZ);
+	MC_samplename.push_back("WWZ_s1");
+	MC_sampletag.push_back("WWZ");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_WZZ);
+	MC_filename.push_back(filename_WZZ);
+	MC_filename_norm.push_back(filename_norm_WZZ);
+	MC_samplename.push_back("WZZ_s1");
+	MC_sampletag.push_back("WZZ");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ZZZ);
+	MC_filename.push_back(filename_ZZZ);
+	MC_filename_norm.push_back(filename_norm_ZZZ);
+	MC_samplename.push_back("ZZZ_s1");
+	MC_sampletag.push_back("ZZZ");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_WZG);
+	MC_filename.push_back(filename_WZG);
+	MC_filename_norm.push_back(filename_norm_WZG);
+	MC_samplename.push_back("WZG_s1");
+	MC_sampletag.push_back("WZG");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_WG);
+	MC_filename.push_back(filename_WG_ext1);
+	MC_filename_norm.push_back(filename_norm_WG_ext1);
+	MC_samplename.push_back("WG_s1");
+	MC_sampletag.push_back("WG");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(3);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	/*MC_XS.push_back(XS_WG);
+	MC_filename.push_back(filename_WG_ext2);
+	MC_filename_norm.push_back(filename_norm_WG_ext2);
+	MC_samplename.push_back("WG_s2");
+	MC_sampletag.push_back("WG");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(3);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);*/
+
+	/*MC_XS.push_back(XS_WG);
+	MC_filename.push_back(filename_WG_ext3);
+	MC_filename_norm.push_back(filename_norm_WG_ext3);
+	MC_samplename.push_back("WG_s3");
+	MC_sampletag.push_back("WG");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(3);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);*/
+
+	MC_XS.push_back(XS_ZG);
+	MC_filename.push_back(filename_ZG);
+	MC_filename_norm.push_back(filename_norm_ZG);
+	MC_samplename.push_back("ZG_s1");
+	MC_sampletag.push_back("ZG");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_tG);
+	MC_filename.push_back(filename_tG);
+	MC_filename_norm.push_back(filename_norm_tG);
+	MC_samplename.push_back("tG_s1");
+	MC_sampletag.push_back("tG");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ttG);
+	MC_filename.push_back(filename_ttG);
+	MC_filename_norm.push_back(filename_norm_ttG);
+	MC_samplename.push_back("ttG_s1");
+	MC_sampletag.push_back("ttG");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(2);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	/*MC_XS.push_back(XS_ttG);
+	MC_filename.push_back(filename_ttG_ext1);
+	MC_filename_norm.push_back(filename_norm_ttG_ext1);
+	MC_samplename.push_back("ttG_s2");
+	MC_sampletag.push_back("ttG");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(2);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);*/
+
+	/*MC_XS.push_back(XS_tZq);
+	MC_filename.push_back(filename_tZq); 
+	MC_filename_norm.push_back(filename_norm_tZq);
+	MC_samplename.push_back("tZq_s2");
+	MC_sampletag.push_back("tZq");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(2);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);*/
+
+	MC_XS.push_back(XS_tZq);
+	MC_filename.push_back(filename_tZq_PS); 
+	MC_filename_norm.push_back(filename_norm_tZq_PS);
+	MC_samplename.push_back("tZq_s1");
+	MC_sampletag.push_back("tZq");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(2);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_WpWp);
+	MC_filename.push_back(filename_WpWp); 
+	MC_filename_norm.push_back(filename_norm_WpWp);
+	MC_samplename.push_back("WpWp_s1");
+	MC_sampletag.push_back("WpWp");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_WW_DS);
+	MC_filename.push_back(filename_WW_DS); 
+	MC_filename_norm.push_back(filename_norm_WW_DS);
+	MC_samplename.push_back("WWss_s1");
+	MC_sampletag.push_back("WWss");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_tttt);
+	MC_filename.push_back(filename_tttt); 
+	MC_filename_norm.push_back(filename_norm_tttt);
+	MC_samplename.push_back("tttt_s1");
+	MC_sampletag.push_back("tttt");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_St_schannel);
+	MC_filename.push_back(filename_St_schannel); 
+	MC_filename_norm.push_back(filename_norm_St_schannel);
+	MC_samplename.push_back("TsCh_s1");
+	MC_sampletag.push_back("TsCh");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(2);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	/*MC_XS.push_back(XS_St_schannel);
+	MC_filename.push_back(filename_St_schannel_PS); 
+	MC_filename_norm.push_back(filename_norm_St_schannel_PS);
+	MC_samplename.push_back("TsCh_s2");
+	MC_sampletag.push_back("TsCh");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(2);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);*/
+
+	MC_XS.push_back(XS_St_tchannel_top);
+	MC_filename.push_back(filename_St_tchannel_top); 
+	MC_filename_norm.push_back(filename_norm_St_tchannel_top);
+	MC_samplename.push_back("TtChTop_s1");
+	MC_sampletag.push_back("TtChTop");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_St_tchannel_antitop);
+	MC_filename.push_back(filename_St_tchannel_antitop); 
+	MC_filename_norm.push_back(filename_norm_St_tchannel_antitop);
+	MC_samplename.push_back("TtChAntitop_s1");
+	MC_sampletag.push_back("TtChAntitop");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(2);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	/*MC_XS.push_back(XS_St_tchannel_antitop);
+	MC_filename.push_back(filename_St_tchannel_antitop_PS); 
+	MC_filename_norm.push_back(filename_norm_St_tchannel_antitop_PS);
+	MC_samplename.push_back("TtChAntitop_s2");
+	MC_sampletag.push_back("TtChAntitop");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(2);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);*/
+
+	MC_XS.push_back(XS_St_tW);
+	MC_filename.push_back(filename_St_tW_top); 
+	MC_filename_norm.push_back(filename_norm_St_tW_top);
+	MC_samplename.push_back("TtwChTop_s1");
+	MC_sampletag.push_back("TtwChTop");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_St_tW);
+	MC_filename.push_back(filename_St_tW_antitop); 
+	MC_filename_norm.push_back(filename_norm_St_tW_antitop);
+	MC_samplename.push_back("TtwChAntitop_s1");
+	MC_sampletag.push_back("TtwChAntitop");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_St_tWll);
+	MC_filename.push_back(filename_St_tWll); 
+	MC_filename_norm.push_back(filename_norm_St_tWll);
+	MC_samplename.push_back("TtwChll_s1");
+	MC_sampletag.push_back("TtwChll");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	///////////////////////////////////////////////////////
+
+	Data_SR_filename.push_back(filename_SingleElectron_BlockB_SR);
+	Data_SR_filename.push_back(filename_SingleElectron_BlockC_SR);
+	Data_SR_filename.push_back(filename_SingleElectron_BlockD_SR);
+	Data_SR_filename.push_back(filename_SingleElectron_BlockE_SR);
+	Data_SR_filename.push_back(filename_SingleElectron_BlockF_SR);
+	Data_SR_filename.push_back(filename_SingleElectron_BlockG_SR);
+	Data_SR_filename.push_back(filename_SingleElectron_BlockH_SR);
+
+	Data_SR_filename.push_back(filename_SingleMuon_BlockB_SR);
+	Data_SR_filename.push_back(filename_SingleMuon_BlockC_SR);
+	Data_SR_filename.push_back(filename_SingleMuon_BlockD_SR);
+	Data_SR_filename.push_back(filename_SingleMuon_BlockE_SR);
+	Data_SR_filename.push_back(filename_SingleMuon_BlockF_SR);
+	Data_SR_filename.push_back(filename_SingleMuon_BlockG_SR);
+	Data_SR_filename.push_back(filename_SingleMuon_BlockH_SR);
+
+	Data_SR_filename.push_back(filename_DoubleEG_BlockB_SR);
+	Data_SR_filename.push_back(filename_DoubleEG_BlockC_SR);
+	Data_SR_filename.push_back(filename_DoubleEG_BlockD_SR);
+	Data_SR_filename.push_back(filename_DoubleEG_BlockE_SR);
+	Data_SR_filename.push_back(filename_DoubleEG_BlockF_SR);
+	Data_SR_filename.push_back(filename_DoubleEG_BlockG_SR);
+	Data_SR_filename.push_back(filename_DoubleEG_BlockH_SR);
+
+	Data_SR_filename.push_back(filename_DoubleMu_BlockB_SR);
+	Data_SR_filename.push_back(filename_DoubleMu_BlockC_SR);
+	Data_SR_filename.push_back(filename_DoubleMu_BlockD_SR);
+	Data_SR_filename.push_back(filename_DoubleMu_BlockE_SR);
+	Data_SR_filename.push_back(filename_DoubleMu_BlockF_SR);
+	Data_SR_filename.push_back(filename_DoubleMu_BlockG_SR);
+	Data_SR_filename.push_back(filename_DoubleMu_BlockH_SR);
+
+	Data_SR_filename.push_back(filename_MuonEG_BlockB_SR);
+	Data_SR_filename.push_back(filename_MuonEG_BlockC_SR);
+	Data_SR_filename.push_back(filename_MuonEG_BlockD_SR);
+	Data_SR_filename.push_back(filename_MuonEG_BlockE_SR);
+	Data_SR_filename.push_back(filename_MuonEG_BlockF_SR);
+	Data_SR_filename.push_back(filename_MuonEG_BlockG_SR);
+	Data_SR_filename.push_back(filename_MuonEG_BlockH_SR);
+
+	///////////////////////////////////////////////////////
+
+	Data_fake_filename.push_back(filename_SingleElectron_BlockB_fake);
+	Data_fake_filename.push_back(filename_SingleElectron_BlockC_fake);
+	Data_fake_filename.push_back(filename_SingleElectron_BlockD_fake);
+	Data_fake_filename.push_back(filename_SingleElectron_BlockE_fake);
+	Data_fake_filename.push_back(filename_SingleElectron_BlockF_fake);
+	Data_fake_filename.push_back(filename_SingleElectron_BlockG_fake);
+	Data_fake_filename.push_back(filename_SingleElectron_BlockH_fake);
+
+	Data_fake_filename.push_back(filename_SingleMuon_BlockB_fake);
+	Data_fake_filename.push_back(filename_SingleMuon_BlockC_fake);
+	Data_fake_filename.push_back(filename_SingleMuon_BlockD_fake);
+	Data_fake_filename.push_back(filename_SingleMuon_BlockE_fake);
+	Data_fake_filename.push_back(filename_SingleMuon_BlockF_fake);
+	Data_fake_filename.push_back(filename_SingleMuon_BlockG_fake);
+	Data_fake_filename.push_back(filename_SingleMuon_BlockH_fake);
+
+	Data_fake_filename.push_back(filename_DoubleEG_BlockB_fake);
+	Data_fake_filename.push_back(filename_DoubleEG_BlockC_fake);
+	Data_fake_filename.push_back(filename_DoubleEG_BlockD_fake);
+	Data_fake_filename.push_back(filename_DoubleEG_BlockE_fake);
+	Data_fake_filename.push_back(filename_DoubleEG_BlockF_fake);
+	Data_fake_filename.push_back(filename_DoubleEG_BlockG_fake);
+	Data_fake_filename.push_back(filename_DoubleEG_BlockH_fake);
+
+	Data_fake_filename.push_back(filename_DoubleMu_BlockB_fake);
+	Data_fake_filename.push_back(filename_DoubleMu_BlockC_fake);
+	Data_fake_filename.push_back(filename_DoubleMu_BlockD_fake);
+	Data_fake_filename.push_back(filename_DoubleMu_BlockE_fake);
+	Data_fake_filename.push_back(filename_DoubleMu_BlockF_fake);
+	Data_fake_filename.push_back(filename_DoubleMu_BlockG_fake);
+	Data_fake_filename.push_back(filename_DoubleMu_BlockH_fake);
+
+	Data_fake_filename.push_back(filename_MuonEG_BlockB_fake);
+	Data_fake_filename.push_back(filename_MuonEG_BlockC_fake);
+	Data_fake_filename.push_back(filename_MuonEG_BlockD_fake);
+	Data_fake_filename.push_back(filename_MuonEG_BlockE_fake);
+	Data_fake_filename.push_back(filename_MuonEG_BlockF_fake);
+	Data_fake_filename.push_back(filename_MuonEG_BlockG_fake);
+	Data_fake_filename.push_back(filename_MuonEG_BlockH_fake);
+
+	///////////////////////////////////////////////////////
+
+	Data_flip_filename.push_back(filename_SingleElectron_BlockB_flip);
+	Data_flip_filename.push_back(filename_SingleElectron_BlockC_flip);
+	Data_flip_filename.push_back(filename_SingleElectron_BlockD_flip);
+	Data_flip_filename.push_back(filename_SingleElectron_BlockE_flip);
+	Data_flip_filename.push_back(filename_SingleElectron_BlockF_flip);
+	Data_flip_filename.push_back(filename_SingleElectron_BlockG_flip);
+	Data_flip_filename.push_back(filename_SingleElectron_BlockH_flip);
+
+	Data_flip_filename.push_back(filename_SingleMuon_BlockB_flip);
+	Data_flip_filename.push_back(filename_SingleMuon_BlockC_flip);
+	Data_flip_filename.push_back(filename_SingleMuon_BlockD_flip);
+	Data_flip_filename.push_back(filename_SingleMuon_BlockE_flip);
+	Data_flip_filename.push_back(filename_SingleMuon_BlockF_flip);
+	Data_flip_filename.push_back(filename_SingleMuon_BlockG_flip);
+	Data_flip_filename.push_back(filename_SingleMuon_BlockH_flip);
+
+	Data_flip_filename.push_back(filename_DoubleEG_BlockB_flip);
+	Data_flip_filename.push_back(filename_DoubleEG_BlockC_flip);
+	Data_flip_filename.push_back(filename_DoubleEG_BlockD_flip);
+	Data_flip_filename.push_back(filename_DoubleEG_BlockE_flip);
+	Data_flip_filename.push_back(filename_DoubleEG_BlockF_flip);
+	Data_flip_filename.push_back(filename_DoubleEG_BlockG_flip);
+	Data_flip_filename.push_back(filename_DoubleEG_BlockH_flip);
+
+	Data_flip_filename.push_back(filename_DoubleMu_BlockB_flip);
+	Data_flip_filename.push_back(filename_DoubleMu_BlockC_flip);
+	Data_flip_filename.push_back(filename_DoubleMu_BlockD_flip);
+	Data_flip_filename.push_back(filename_DoubleMu_BlockE_flip);
+	Data_flip_filename.push_back(filename_DoubleMu_BlockF_flip);
+	Data_flip_filename.push_back(filename_DoubleMu_BlockG_flip);
+	Data_flip_filename.push_back(filename_DoubleMu_BlockH_flip);
+
+	Data_flip_filename.push_back(filename_MuonEG_BlockB_flip);
+	Data_flip_filename.push_back(filename_MuonEG_BlockC_flip);
+	Data_flip_filename.push_back(filename_MuonEG_BlockD_flip);
+	Data_flip_filename.push_back(filename_MuonEG_BlockE_flip);
+	Data_flip_filename.push_back(filename_MuonEG_BlockF_flip);
+	Data_flip_filename.push_back(filename_MuonEG_BlockG_flip);
+	Data_flip_filename.push_back(filename_MuonEG_BlockH_flip);
+
+	///////////////////////////////////////////////////////
+
+	return std::make_tuple(MC_XS, MC_filename, MC_filename_norm, MC_samplename, MC_samplecut, MC_sampletag, MC_samplegroup, MC_nsamples, MC_convs_samplecut, Data_SR_filename, Data_fake_filename, Data_flip_filename, luminosity);
+
+}
+
+std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<int>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, float > initialize_2017(){
+
+	MC_XS.clear();
+
+	MC_filename.clear();
+	MC_filename_norm.clear();
+	MC_samplename.clear();
+	MC_samplecut.clear();
+	MC_sampletag.clear();
+	MC_samplegroup.clear();
+	MC_nsamples.clear();
+	MC_convs_samplecut.clear();
+
+	Data_SR_filename.clear();
+	Data_fake_filename.clear();
+	Data_flip_filename.clear();
+
+	luminosity = 41530;
+
+	////////////////////////////////////////////////////////////
+
+	TString filename_ttH = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/ttH/ntuple_Oct19v1_MC_2017_ttHJetToNonbb_MEM_SR_SF_v1.root";
+	TString filename_ttH_ctcvcp = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/ttH/ntuple_Oct19v1_MC_2017_TTH_ctcvcp_MEM_SR_SF_v1.root";
+	TString filename_tHQ_ctcvcp = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/ttH/ntuple_Oct19v1_MC_2017_THQ_ctcvcp_MEM_SR_SF_v1.root";
+	TString filename_tHW_ctcvcp = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/ttH/ntuple_Oct19v3_MC_2017_THW_ctcvcp_MEM_SR_SF_v1.root";
+
+	TString filename_ttZ = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/ttV/ntuple_Oct19v1_MC_2017_TTZToLLNuNu_M-10_MEM_SR_SF_v1.root";
+	TString filename_ttZ_PS = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/ttV/ntuple_Oct19v1_MC_2017_TTZToLLNuNu_M-10_PS_MEM_SR_SF_v1.root";
+	TString filename_ttZ_lowmass = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/ttV/ntuple_Oct19v1_MC_2017_TTZToLL_M-1to10_MEM_SR_SF_v1.root";
+	TString filename_ttW = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/ttV/ntuple_Oct19v1_MC_2017_TTWJetsToLNu_MEM_SR_SF_v1.root";
+	TString filename_ttW_PS = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/ttV/ntuple_Oct19v1_MC_2017_TTWJetsToLNu_PS_MEM_SR_SF_v1.root";
+	TString filename_ttWW = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/ttV/ntuple_Oct19v1_MC_2017_TTWW_MEM_SR_SF_v1.root";
+
+	TString filename_WW = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/EWK/ntuple_Oct19v2_MC_2017_WWTo2L2Nu_MEM_SR_SF_v1.root";
+	TString filename_WW_ext1 = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/EWK/ntuple_Oct19v1_MC_2017_WWTo2L2Nu_ext1_MEM_SR_SF_v1.root";
+	TString filename_WZ = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/EWK/ntuple_Oct19v1_MC_2017_WZTo3LNu_MEM_SR_SF_v1.root";
+	TString filename_ZZ = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/EWK/ntuple_Oct19v1_MC_2017_ZZTo4L_MEM_SR_SF_v1.root";
+	TString filename_ZZ_ext1 = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/EWK/ntuple_Oct19v1_MC_2017_ZZTo4L_ext1_MEM_SR_SF_v1.root";
+	TString filename_ZZ_ext2 = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/EWK/ntuple_Oct19v2_MC_2017_ZZTo4L_ext2_MEM_SR_SF_v1.root";
+
+	TString filename_DY_M10to50 = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/EWK/ntuple_Oct19v1_MC_2017_DYJetsToLL_M-10to50_MEM_SR_SF_v1.root";
+	TString filename_DY_M10to50_ext1 = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/EWK/ntuple_Oct19v1_MC_2017_DYJetsToLL_M-10to50_ext1_MEM_SR_SF_v1.root";
+	TString filename_DY_M50 = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/EWK/ntuple_Oct19v1_MC_2017_DYJetsToLL_M-50_MEM_SR_SF_v1.root";
+	TString filename_DY_M50_ext1 = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/EWK/ntuple_Oct19v3_MC_2017_DYJetsToLL_M-50_ext1_MEM_SR_SF_v1.root";
+
+	TString filename_WJets = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/EWK/ntuple_Oct19v2_MC_2017_WJetsToLNu_MEM_SR_SF_v1.root";
+	TString filename_WJets_ext1 = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/EWK/ntuple_Oct19v1_MC_2017_WJetsToLNu_ext1_MEM_SR_SF_v1.root";
+
+	TString filename_WWW = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Rares/ntuple_Oct19v1_MC_2017_WWW_MEM_SR_SF_v1.root";
+	TString filename_WWZ = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Rares/ntuple_Oct19v1_MC_2017_WWZ_MEM_SR_SF_v1.root";
+	TString filename_WZZ = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Rares/ntuple_Oct19v2_MC_2017_WZZ_MEM_SR_SF_v1.root";
+	TString filename_ZZZ = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Rares/ntuple_Oct19v2_MC_2017_ZZZ_MEM_SR_SF_v1.root";
+	TString filename_WZG = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Rares/ntuple_Oct19v1_MC_2017_WZG_MEM_SR_SF_v1.root";
+	TString filename_WG = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Rares/ntuple_Oct19v1_MC_2017_WGToLNuG_MEM_SR_SF_v1.root";
+	TString filename_ZG = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Rares/ntuple_Oct19v1_MC_2017_ZGToLLG_MEM_SR_SF_v1.root";
+	TString filename_tG = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Rares/ntuple_Oct19v1_MC_2017_TGJets_MEM_SR_SF_v1.root";
+	TString filename_ttG = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Rares/ntuple_Oct19v1_MC_2017_TTGJets_MEM_SR_SF_v1.root";
+	TString filename_ttG_ext1 = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Rares/ntuple_Oct19v1_MC_2017_TTGJets_ext1_MEM_SR_SF_v1.root";
+	TString filename_tZq = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Rares/ntuple_Oct19v1_MC_2017_tZq_ll_MEM_SR_SF_v1.root";
+	TString filename_WpWp = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Rares/ntuple_Oct19v2_MC_2017_WpWpJJ_MEM_SR_SF_v1.root";
+	TString filename_WW_DS = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Rares/ntuple_Oct19v1_MC_2017_WWTo2L2Nu_DoubleScattering_MEM_SR_SF_v1.root";
+	TString filename_tttt = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Rares/ntuple_Oct19v1_MC_2017_TTTT_MEM_SR_SF_v1.root";
+	TString filename_tttt_PS = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Rares/ntuple_Oct19v1_MC_2017_TTTT_PS_MEM_SR_SF_v1.root";
+
+	TString filename_St_schannel = 				"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/ttbar/ntuple_Oct19v1_MC_2017_ST_s-channel_MEM_SR_SF_v1.root";
+	TString filename_St_schannel_PS = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/ttbar/ntuple_Oct19v2_MC_2017_ST_s-channel_PS_MEM_SR_SF_v1.root";
+	TString filename_St_tchannel_top = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/ttbar/ntuple_Oct19v1_MC_2017_ST_t-channel_top_MEM_SR_SF_v1.root";
+	TString filename_St_tchannel_top_PS = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/ttbar/ntuple_Oct19v2_MC_2017_ST_t-channel_top_PS_MEM_SR_SF_v1.root";
+	TString filename_St_tchannel_antitop = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/ttbar/ntuple_Oct19v1_MC_2017_ST_t-channel_antitop_MEM_SR_SF_v1.root";
+	TString filename_St_tchannel_antitop_PS = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/ttbar/ntuple_Oct19v2_MC_2017_ST_t-channel_antitop_PS_MEM_SR_SF_v1.root";
+	TString filename_St_tW_top = 				"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/ttbar/ntuple_Oct19v3_MC_2017_ST_tW_top_MEM_SR_SF_v1.root";
+	TString filename_St_tW_top_PS = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/ttbar/ntuple_Oct19v1_MC_2017_ST_tW_top_PS_MEM_SR_SF_v1.root";
+	TString filename_St_tW_antitop = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/ttbar/ntuple_Oct19v1_MC_2017_ST_tW_antitop_MEM_SR_SF_v1.root";
+	TString filename_St_tW_antitop_PS = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/ttbar/ntuple_Oct19v1_MC_2017_ST_tW_antitop_PS_MEM_SR_SF_v1.root";
+	TString filename_St_tWll = 					"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/ttbar/ntuple_Oct19v1_MC_2017_ST_tWll_MEM_SR_SF_v1.root";
+
+	TString filename_ttbar_DiLept = 				"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/ttbar/ntuple_Oct19v1_MC_2017_TTJets_DiLept_MEM_SR_SF_v1.root";
+	TString filename_ttbar_SingleLeptFromt = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/ttbar/ntuple_Oct19v1_MC_2017_TTJets_SingleLeptFromT_MEM_SR_SF_v1.root";
+	TString filename_ttbar_SingleLeptFromtbar = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/ttbar/ntuple_Oct19v1_MC_2017_TTJets_SingleLeptFromTbar_MEM_SR_SF_v1.root";
+
+	TString filename_ggHToTauTau = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/ggH/ntuple_Oct19v1_MC_2017_GluGluHToTauTau_MEM_SR_SF_v1.root";
+	TString filename_ggHToTauTau_ext1 = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/ggH/ntuple_Oct19v3_MC_2017_GluGluHToTauTau_ext1_MEM_SR_SF_v1.root";
+	TString filename_ggHToZZ_ext1 = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/ggH/ntuple_Oct19v1_MC_2017_GluGluHToZZTo4L_ext1_MEM_SR_SF_v1.root";
+	TString filename_ggHToZZ_ext3 = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/ggH/ntuple_Oct19v2_MC_2017_GluGluHToZZTo4L_ext3_MEM_SR_SF_v1.root";
+	TString filename_ggHToZZ_ext4 = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/ggH/ntuple_Oct19v1_MC_2017_GluGluHToZZTo4L_ext4_MEM_SR_SF_v1.root";
+	TString filename_ggHToWWToLNuQQ = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/ggH/ntuple_Oct19v1_MC_2017_GluGluHToWWToLNuQQ_MEM_SR_SF_v1.root";
+	TString filename_ggHToWWTo2L2Nu = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/ggH/ntuple_Oct19v1_MC_2017_GluGluHToWWTo2L2Nu_MEM_SR_SF_v1.root";
+	TString filename_ggHToMuMu = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/ggH/ntuple_Oct19v3_MC_2017_GluGluHToMuMu_MEM_SR_SF_v1.root";
+	TString filename_ggHToMuMu_ext1 = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/ggH/ntuple_Oct19v1_MC_2017_GluGluHToMuMu_ext1_MEM_SR_SF_v1.root";
+	TString filename_ggHToBB = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/ggH/ntuple_Oct19v2_MC_2017_GluGluHToBB_MEM_SR_SF_v1.root";
+	TString filename_ggHToGG = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/ggH/ntuple_Oct19v3_MC_2017_GluGluHToGG_MEM_SR_SF_v1.root";
+
+	TString filename_VBFHToTauTau = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/VBF/ntuple_Oct19v1_MC_2017_VBFHToTauTau_MEM_SR_SF_v1.root";
+	TString filename_VBFHToZZ = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/VBF/ntuple_Oct19v1_MC_2017_VBF_HToZZTo4L_MEM_SR_SF_v1.root";
+	TString filename_VBFHToZZ_ext1 = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/VBF/ntuple_Oct19v1_MC_2017_VBF_HToZZTo4L_ext1_MEM_SR_SF_v1.root";
+	TString filename_VBFHToZZ_ext2 = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/VBF/ntuple_Oct19v2_MC_2017_VBF_HToZZTo4L_ext2_MEM_SR_SF_v1.root";
+	TString filename_VBFHToWWToLNuQQ = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/VBF/ntuple_Oct19v1_MC_2017_VBFHToWWToLNuQQ_MEM_SR_SF_v1.root";
+	TString filename_VBFHToWWTo2L2Nu = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/VBF/ntuple_Oct19v1_MC_2017_VBFHToWWTo2L2Nu_MEM_SR_SF_v1.root";
+	TString filename_VBFHToMuMu = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/VBF/ntuple_Oct19v1_MC_2017_VBFHToMuMu_MEM_SR_SF_v1.root";
+	TString filename_VBFHToBB = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/VBF/ntuple_Oct19v1_MC_2017_VBFHToBB_MEM_SR_SF_v1.root";
+	TString filename_VBFHToGG = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/VBF/ntuple_Oct19v1_MC_2017_VBFHToGG_MEM_SR_SF_v1.root";
+	TString filename_VBFHToGG_PS = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/VBF/ntuple_Oct19v2_MC_2017_VBFHToGG_PS_MEM_SR_SF_v1.root";
+
+	TString filename_VHToNonbb = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/VH/ntuple_Oct19v1_MC_2017_VHToNonbb_MEM_SR_SF_v1.root";
+	TString filename_ZHToTauTau = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/VH/ntuple_Oct19v1_MC_2017_ZHToTauTau_MEM_SR_SF_v1.root";
+	TString filename_ZH_HToBB_ZToLL = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/VH/ntuple_Oct19v1_MC_2017_ZH_HToBB_ZToLL_MEM_SR_SF_v1.root";
+
+	TString filename_ttWH = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/ttVH/ntuple_Oct19v4_MC_2017_TTWH_MEM_SR_SF_v1.root";
+	TString filename_ttZH = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/ttVH/ntuple_Oct19v1_MC_2017_TTZH_MEM_SR_SF_v1.root";
+
+	TString filename_ggHHTo2B2VTo2L2Nu = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/HH/ntuple_Oct19v2_MC_2017_GluGluToHHTo2B2VTo2L2Nu_node_SM_MEM_SR_SF_v1.root";
+	TString filename_ggHHTo2B2Tau = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/HH/ntuple_Oct19v1_MC_2017_GluGluToHHTo2B2Tau_node_SM_MEM_SR_SF_v1.root";
+	TString filename_ggHHTo4Tau = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/HH/ntuple_Oct19v1_MC_2017_GluGluToHHTo4Tau_node_SM_13_MEM_SR_SF_v1.root";
+	TString filename_ggHHTo2V2Tau = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/HH/ntuple_Oct19v2_MC_2017_GluGluToHHTo2V2Tau_node_SM_MEM_SR_SF_v1.root";
+	TString filename_ggHHTo4V = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/HH/ntuple_Oct19v1_MC_2017_GluGluToHHTo4V_node_SM_MEM_SR_SF_v1.root";
+
+	////////////////////////////////////////////////////////////
+
+	TString filename_norm_ttH = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/ttH/ntuple_Oct19v1_MC_2017_ttHJetToNonbb_norm.root";
+	TString filename_norm_ttH_ctcvcp = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/ttH/ntuple_Oct19v1_MC_2017_TTH_ctcvcp_norm.root";
+	TString filename_norm_tHQ_ctcvcp = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/ttH/ntuple_Oct19v1_MC_2017_THQ_ctcvcp_norm.root";
+	TString filename_norm_tHW_ctcvcp = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/ttH/ntuple_Oct19v3_MC_2017_THW_ctcvcp_norm.root";
+
+	TString filename_norm_ttZ = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/ttV/ntuple_Oct19v1_MC_2017_TTZToLLNuNu_M-10_norm.root";
+	TString filename_norm_ttZ_PS = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/ttV/ntuple_Oct19v1_MC_2017_TTZToLLNuNu_M-10_PS_norm.root";
+	TString filename_norm_ttZ_lowmass = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/ttV/ntuple_Oct19v1_MC_2017_TTZToLL_M-1to10_norm.root";
+	TString filename_norm_ttW = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/ttV/ntuple_Oct19v1_MC_2017_TTWJetsToLNu_norm.root";
+	TString filename_norm_ttW_PS = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/ttV/ntuple_Oct19v1_MC_2017_TTWJetsToLNu_PS_norm.root";
+	TString filename_norm_ttWW = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/ttV/ntuple_Oct19v1_MC_2017_TTWW_norm.root";
+
+	TString filename_norm_WW = 			"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/EWK/ntuple_Oct19v2_MC_2017_WWTo2L2Nu_norm.root";
+	TString filename_norm_WW_ext1 = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/EWK/ntuple_Oct19v1_MC_2017_WWTo2L2Nu_ext1_norm.root";
+	TString filename_norm_WZ = 			"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/EWK/ntuple_Oct19v1_MC_2017_WZTo3LNu_norm.root";
+	TString filename_norm_ZZ = 			"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/EWK/ntuple_Oct19v1_MC_2017_ZZTo4L_norm.root";
+	TString filename_norm_ZZ_ext1 = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/EWK/ntuple_Oct19v1_MC_2017_ZZTo4L_ext1_norm.root";
+	TString filename_norm_ZZ_ext2 = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/EWK/ntuple_Oct19v2_MC_2017_ZZTo4L_ext2_norm.root";
+
+	TString filename_norm_DY_M10to50 = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/EWK/ntuple_Oct19v1_MC_2017_DYJetsToLL_M-10to50_norm.root";
+	TString filename_norm_DY_M10to50_ext1 = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/EWK/ntuple_Oct19v1_MC_2017_DYJetsToLL_M-10to50_ext1_norm.root";
+	TString filename_norm_DY_M50 = 			"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/EWK/ntuple_Oct19v1_MC_2017_DYJetsToLL_M-50_norm.root";
+	TString filename_norm_DY_M50_ext1 = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/EWK/ntuple_Oct19v3_MC_2017_DYJetsToLL_M-50_ext1_norm.root";
+
+	TString filename_norm_WJets = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/EWK/ntuple_Oct19v2_MC_2017_WJetsToLNu_norm.root";
+	TString filename_norm_WJets_ext1 = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/EWK/ntuple_Oct19v1_MC_2017_WJetsToLNu_ext1_norm.root";
+
+	TString filename_norm_WWW = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/Rares/ntuple_Oct19v1_MC_2017_WWW_norm.root";
+	TString filename_norm_WWZ = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/Rares/ntuple_Oct19v1_MC_2017_WWZ_norm.root";
+	TString filename_norm_WZZ = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/Rares/ntuple_Oct19v2_MC_2017_WZZ_norm.root";
+	TString filename_norm_ZZZ = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/Rares/ntuple_Oct19v2_MC_2017_ZZZ_norm.root";
+	TString filename_norm_WZG = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/Rares/ntuple_Oct19v1_MC_2017_WZG_norm.root";
+	TString filename_norm_WG = 			"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/Rares/ntuple_Oct19v1_MC_2017_WGToLNuG_norm.root";
+	TString filename_norm_ZG = 			"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/Rares/ntuple_Oct19v1_MC_2017_ZGToLLG_norm.root";
+	TString filename_norm_tG = 			"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/Rares/ntuple_Oct19v1_MC_2017_TGJets_norm.root";
+	TString filename_norm_ttG = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/Rares/ntuple_Oct19v1_MC_2017_TTGJets_norm.root";
+	TString filename_norm_ttG_ext1 = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/Rares/ntuple_Oct19v1_MC_2017_TTGJets_ext1_norm.root";
+	TString filename_norm_tZq = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/Rares/ntuple_Oct19v1_MC_2017_tZq_ll_norm.root";
+	TString filename_norm_WpWp = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/Rares/ntuple_Oct19v2_MC_2017_WpWpJJ_norm.root";
+	TString filename_norm_WW_DS = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/Rares/ntuple_Oct19v1_MC_2017_WWTo2L2Nu_DoubleScattering_norm.root";
+	TString filename_norm_tttt = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/Rares/ntuple_Oct19v1_MC_2017_TTTT_norm.root";
+	TString filename_norm_tttt_PS = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/Rares/ntuple_Oct19v1_MC_2017_TTTT_PS_norm.root";
+
+	TString filename_norm_St_schannel = 			"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/ttbar/ntuple_Oct19v1_MC_2017_ST_s-channel_norm.root";
+	TString filename_norm_St_schannel_PS = 			"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/ttbar/ntuple_Oct19v2_MC_2017_ST_s-channel_PS_norm.root";
+	TString filename_norm_St_tchannel_top = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/ttbar/ntuple_Oct19v1_MC_2017_ST_t-channel_top_norm.root";
+	TString filename_norm_St_tchannel_top_PS = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/ttbar/ntuple_Oct19v2_MC_2017_ST_t-channel_top_PS_norm.root";
+	TString filename_norm_St_tchannel_antitop = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/ttbar/ntuple_Oct19v1_MC_2017_ST_t-channel_antitop_norm.root";
+	TString filename_norm_St_tchannel_antitop_PS = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/ttbar/ntuple_Oct19v2_MC_2017_ST_t-channel_antitop_PS_norm.root";
+	TString filename_norm_St_tW_top = 				"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/ttbar/ntuple_Oct19v3_MC_2017_ST_tW_top_norm.root";
+	TString filename_norm_St_tW_top_PS = 			"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/ttbar/ntuple_Oct19v1_MC_2017_ST_tW_top_PS_norm.root";
+	TString filename_norm_St_tW_antitop = 			"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/ttbar/ntuple_Oct19v1_MC_2017_ST_tW_antitop_norm.root";
+	TString filename_norm_St_tW_antitop_PS = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/ttbar/ntuple_Oct19v1_MC_2017_ST_tW_antitop_PS_norm.root";
+	TString filename_norm_St_tWll = 				"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/ttbar/ntuple_Oct19v1_MC_2017_ST_tWll_norm.root";
+
+	TString filename_norm_ttbar_DiLept = 				"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/ttbar/ntuple_Oct19v1_MC_2017_TTJets_DiLept_norm.root";
+	TString filename_norm_ttbar_SingleLeptFromt = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/ttbar/ntuple_Oct19v1_MC_2017_TTJets_SingleLeptFromT_norm.root";
+	TString filename_norm_ttbar_SingleLeptFromtbar = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/ttbar/ntuple_Oct19v1_MC_2017_TTJets_SingleLeptFromTbar_norm.root";
+
+	TString filename_norm_ggHToTauTau = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/ggH/ntuple_Oct19v1_MC_2017_GluGluHToTauTau_norm.root";
+	TString filename_norm_ggHToTauTau_ext1 = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/ggH/ntuple_Oct19v3_MC_2017_GluGluHToTauTau_ext1_norm.root";
+	TString filename_norm_ggHToZZ_ext1 = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/ggH/ntuple_Oct19v1_MC_2017_GluGluHToZZTo4L_ext1_norm.root";
+	TString filename_norm_ggHToZZ_ext3 = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/ggH/ntuple_Oct19v2_MC_2017_GluGluHToZZTo4L_ext3_norm.root";
+	TString filename_norm_ggHToZZ_ext4 = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/ggH/ntuple_Oct19v1_MC_2017_GluGluHToZZTo4L_ext4_norm.root";
+	TString filename_norm_ggHToWWToLNuQQ = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/ggH/ntuple_Oct19v1_MC_2017_GluGluHToWWToLNuQQ_norm.root";
+	TString filename_norm_ggHToWWTo2L2Nu = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/ggH/ntuple_Oct19v1_MC_2017_GluGluHToWWTo2L2Nu_norm.root";
+	TString filename_norm_ggHToMuMu = 			"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/ggH/ntuple_Oct19v3_MC_2017_GluGluHToMuMu_norm.root";
+	TString filename_norm_ggHToMuMu_ext1 = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/ggH/ntuple_Oct19v1_MC_2017_GluGluHToMuMu_ext1_norm.root";
+	TString filename_norm_ggHToBB = 			"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/ggH/ntuple_Oct19v2_MC_2017_GluGluHToBB_norm.root";
+	TString filename_norm_ggHToGG = 			"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/ggH/ntuple_Oct19v3_MC_2017_GluGluHToGG_norm.root";
+
+	TString filename_norm_VBFHToTauTau = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/VBF/ntuple_Oct19v1_MC_2017_VBFHToTauTau_norm.root";
+	TString filename_norm_VBFHToZZ = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/VBF/ntuple_Oct19v1_MC_2017_VBF_HToZZTo4L_norm.root";
+	TString filename_norm_VBFHToZZ_ext1 = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/VBF/ntuple_Oct19v1_MC_2017_VBF_HToZZTo4L_ext1_norm.root";
+	TString filename_norm_VBFHToZZ_ext2 = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/VBF/ntuple_Oct19v2_MC_2017_VBF_HToZZTo4L_ext2_norm.root";
+	TString filename_norm_VBFHToWWToLNuQQ = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/VBF/ntuple_Oct19v1_MC_2017_VBFHToWWToLNuQQ_norm.root";
+	TString filename_norm_VBFHToWWTo2L2Nu = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/VBF/ntuple_Oct19v1_MC_2017_VBFHToWWTo2L2Nu_norm.root";
+	TString filename_norm_VBFHToMuMu = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/VBF/ntuple_Oct19v1_MC_2017_VBFHToMuMu_norm.root";
+	TString filename_norm_VBFHToBB = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/VBF/ntuple_Oct19v1_MC_2017_VBFHToBB_norm.root";
+	TString filename_norm_VBFHToGG = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/VBF/ntuple_Oct19v1_MC_2017_VBFHToGG_norm.root";
+	TString filename_norm_VBFHToGG_PS = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/VBF/ntuple_Oct19v2_MC_2017_VBFHToGG_PS_norm.root";
+
+	TString filename_norm_VHToNonbb = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/VH/ntuple_Oct19v1_MC_2017_VHToNonbb_norm.root";
+	TString filename_norm_ZHToTauTau = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/VH/ntuple_Oct19v1_MC_2017_ZHToTauTau_norm.root";
+	TString filename_norm_ZH_HToBB_ZToLL = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/VH/ntuple_Oct19v1_MC_2017_ZH_HToBB_ZToLL_norm.root";
+	
+	TString filename_norm_ttWH = 			"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/ttVH/ntuple_Oct19v4_MC_2017_TTWH_norm.root";
+	TString filename_norm_ttZH = 			"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/ttVH/ntuple_Oct19v1_MC_2017_TTZH_norm.root";
+
+	TString filename_norm_ggHHTo2B2VTo2L2Nu = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/HH/ntuple_Oct19v2_MC_2017_GluGluToHHTo2B2VTo2L2Nu_node_SM_norm.root";
+	TString filename_norm_ggHHTo2B2Tau = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/HH/ntuple_Oct19v1_MC_2017_GluGluToHHTo2B2Tau_node_SM_norm.root";
+	TString filename_norm_ggHHTo4Tau = 			"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/HH/ntuple_Oct19v1_MC_2017_GluGluToHHTo4Tau_node_SM_13_norm.root";
+	TString filename_norm_ggHHTo2V2Tau = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/HH/ntuple_Oct19v2_MC_2017_GluGluToHHTo2V2Tau_node_SM_norm.root";
+	TString filename_norm_ggHHTo4V = 			"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/nominal/HH/ntuple_Oct19v1_MC_2017_GluGluToHHTo4V_node_SM_norm.root";
+
+	////////////////////////////////////////////////////////////
+
+	TString filename_SingleElectron_BlockB_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/SR/ntuple_Oct19v1_Data_2017_SingleElectron_BlockB_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_SingleElectron_BlockC_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/SR/ntuple_Oct19v1_Data_2017_SingleElectron_BlockC_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_SingleElectron_BlockD_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/SR/ntuple_Oct19v1_Data_2017_SingleElectron_BlockD_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_SingleElectron_BlockE_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/SR/ntuple_Oct19v1_Data_2017_SingleElectron_BlockE_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_SingleElectron_BlockF_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/SR/ntuple_Oct19v1_Data_2017_SingleElectron_BlockF_MEM_SR_SF_v1_noOverlap.root";
+
+	TString filename_SingleMuon_BlockB_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/SR/ntuple_Oct19v1_Data_2017_SingleMuon_BlockB_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_SingleMuon_BlockC_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/SR/ntuple_Oct19v1_Data_2017_SingleMuon_BlockC_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_SingleMuon_BlockD_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/SR/ntuple_Oct19v1_Data_2017_SingleMuon_BlockD_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_SingleMuon_BlockE_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/SR/ntuple_Oct19v1_Data_2017_SingleMuon_BlockE_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_SingleMuon_BlockF_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/SR/ntuple_Oct19v1_Data_2017_SingleMuon_BlockF_MEM_SR_SF_v1_noOverlap.root";
+
+	TString filename_DoubleEG_BlockB_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/SR/ntuple_Oct19v1_Data_2017_DoubleEG_BlockB_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_DoubleEG_BlockC_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/SR/ntuple_Oct19v1_Data_2017_DoubleEG_BlockC_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_DoubleEG_BlockD_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/SR/ntuple_Oct19v1_Data_2017_DoubleEG_BlockD_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_DoubleEG_BlockE_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/SR/ntuple_Oct19v1_Data_2017_DoubleEG_BlockE_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_DoubleEG_BlockF_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/SR/ntuple_Oct19v1_Data_2017_DoubleEG_BlockF_MEM_SR_SF_v1_noOverlap.root";
+
+	TString filename_DoubleMu_BlockB_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/SR/ntuple_Oct19v1_Data_2017_DoubleEG_BlockB_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_DoubleMu_BlockC_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/SR/ntuple_Oct19v1_Data_2017_DoubleEG_BlockC_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_DoubleMu_BlockD_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/SR/ntuple_Oct19v1_Data_2017_DoubleEG_BlockD_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_DoubleMu_BlockE_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/SR/ntuple_Oct19v1_Data_2017_DoubleEG_BlockE_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_DoubleMu_BlockF_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/SR/ntuple_Oct19v1_Data_2017_DoubleEG_BlockF_MEM_SR_SF_v1_noOverlap.root";
+
+	TString filename_MuonEG_BlockB_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/SR/ntuple_Oct19v1_Data_2017_DoubleEG_BlockB_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_MuonEG_BlockC_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/SR/ntuple_Oct19v1_Data_2017_DoubleEG_BlockC_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_MuonEG_BlockD_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/SR/ntuple_Oct19v1_Data_2017_DoubleEG_BlockD_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_MuonEG_BlockE_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/SR/ntuple_Oct19v1_Data_2017_DoubleEG_BlockE_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_MuonEG_BlockF_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/SR/ntuple_Oct19v1_Data_2017_DoubleEG_BlockF_MEM_SR_SF_v1_noOverlap.root";
+
+	////////////////////////////////////////////////////////////
+
+	TString filename_SingleElectron_BlockB_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_SingleElectron_BlockB_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_SingleElectron_BlockC_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_SingleElectron_BlockC_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_SingleElectron_BlockD_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_SingleElectron_BlockD_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_SingleElectron_BlockE_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_SingleElectron_BlockE_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_SingleElectron_BlockF_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_SingleElectron_BlockF_MEM_fake_SF_v1_noOverlap.root";
+
+	TString filename_SingleMuon_BlockB_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_SingleMuon_BlockB_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_SingleMuon_BlockC_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_SingleMuon_BlockC_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_SingleMuon_BlockD_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_SingleMuon_BlockD_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_SingleMuon_BlockE_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_SingleMuon_BlockE_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_SingleMuon_BlockF_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_SingleMuon_BlockF_MEM_fake_SF_v1_noOverlap.root";
+
+	TString filename_DoubleEG_BlockB_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_DoubleEG_BlockB_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_DoubleEG_BlockC_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_DoubleEG_BlockC_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_DoubleEG_BlockD_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_DoubleEG_BlockD_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_DoubleEG_BlockE_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_DoubleEG_BlockE_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_DoubleEG_BlockF_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_DoubleEG_BlockF_MEM_fake_SF_v1_noOverlap.root";
+
+	TString filename_DoubleMu_BlockB_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_DoubleEG_BlockB_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_DoubleMu_BlockC_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_DoubleEG_BlockC_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_DoubleMu_BlockD_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_DoubleEG_BlockD_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_DoubleMu_BlockE_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_DoubleEG_BlockE_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_DoubleMu_BlockF_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_DoubleEG_BlockF_MEM_fake_SF_v1_noOverlap.root";
+
+	TString filename_MuonEG_BlockB_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_DoubleEG_BlockB_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_MuonEG_BlockC_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_DoubleEG_BlockC_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_MuonEG_BlockD_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_DoubleEG_BlockD_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_MuonEG_BlockE_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_DoubleEG_BlockE_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_MuonEG_BlockF_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_DoubleEG_BlockF_MEM_fake_SF_v1_noOverlap.root";
+
+	////////////////////////////////////////////////////////////
+
+	TString filename_SingleElectron_BlockB_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/flip/ntuple_Oct19v1_Data_2017_SingleElectron_BlockB_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_SingleElectron_BlockC_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/flip/ntuple_Oct19v1_Data_2017_SingleElectron_BlockC_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_SingleElectron_BlockD_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/flip/ntuple_Oct19v1_Data_2017_SingleElectron_BlockD_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_SingleElectron_BlockE_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/flip/ntuple_Oct19v1_Data_2017_SingleElectron_BlockE_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_SingleElectron_BlockF_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/flip/ntuple_Oct19v1_Data_2017_SingleElectron_BlockF_MEM_flip_SF_v1_noOverlap.root";
+
+	TString filename_SingleMuon_BlockB_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/flip/ntuple_Oct19v1_Data_2017_SingleMuon_BlockB_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_SingleMuon_BlockC_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/flip/ntuple_Oct19v1_Data_2017_SingleMuon_BlockC_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_SingleMuon_BlockD_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/flip/ntuple_Oct19v1_Data_2017_SingleMuon_BlockD_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_SingleMuon_BlockE_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/flip/ntuple_Oct19v1_Data_2017_SingleMuon_BlockE_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_SingleMuon_BlockF_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/flip/ntuple_Oct19v1_Data_2017_SingleMuon_BlockF_MEM_flip_SF_v1_noOverlap.root";
+
+	TString filename_DoubleEG_BlockB_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/flip/ntuple_Oct19v1_Data_2017_DoubleEG_BlockB_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_DoubleEG_BlockC_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/flip/ntuple_Oct19v1_Data_2017_DoubleEG_BlockC_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_DoubleEG_BlockD_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/flip/ntuple_Oct19v1_Data_2017_DoubleEG_BlockD_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_DoubleEG_BlockE_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/flip/ntuple_Oct19v1_Data_2017_DoubleEG_BlockE_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_DoubleEG_BlockF_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/flip/ntuple_Oct19v1_Data_2017_DoubleEG_BlockF_MEM_flip_SF_v1_noOverlap.root";
+
+	TString filename_DoubleMu_BlockB_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/flip/ntuple_Oct19v1_Data_2017_DoubleEG_BlockB_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_DoubleMu_BlockC_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/flip/ntuple_Oct19v1_Data_2017_DoubleEG_BlockC_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_DoubleMu_BlockD_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/flip/ntuple_Oct19v1_Data_2017_DoubleEG_BlockD_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_DoubleMu_BlockE_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/flip/ntuple_Oct19v1_Data_2017_DoubleEG_BlockE_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_DoubleMu_BlockF_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/flip/ntuple_Oct19v1_Data_2017_DoubleEG_BlockF_MEM_flip_SF_v1_noOverlap.root";
+
+	TString filename_MuonEG_BlockB_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/flip/ntuple_Oct19v1_Data_2017_DoubleEG_BlockB_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_MuonEG_BlockC_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/flip/ntuple_Oct19v1_Data_2017_DoubleEG_BlockC_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_MuonEG_BlockD_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/flip/ntuple_Oct19v1_Data_2017_DoubleEG_BlockD_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_MuonEG_BlockE_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/flip/ntuple_Oct19v1_Data_2017_DoubleEG_BlockE_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_MuonEG_BlockF_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/flip/ntuple_Oct19v1_Data_2017_DoubleEG_BlockF_MEM_flip_SF_v1_noOverlap.root";
+
+	////////////////////////////////////////////////////////////
+
+	// ttH
+
+	MC_XS.push_back(XS_ttH);
+	MC_filename.push_back(filename_ttH);
+	MC_filename_norm.push_back(filename_norm_ttH);
+	MC_samplename.push_back("ttH_s1");
+	MC_sampletag.push_back("ttH");
+	MC_samplegroup.push_back("ttH");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ttH);
+	MC_filename.push_back(filename_ttH);
+	MC_filename_norm.push_back(filename_norm_ttH);
+	MC_samplename.push_back("ttHhww_s1");
+	MC_sampletag.push_back("ttHhww");
+	MC_samplegroup.push_back("ttHhww");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch+" && "+hww);
+	MC_convs_samplecut.push_back(conversmatch+" && "+hww);
+
+	MC_XS.push_back(XS_ttH);
+	MC_filename.push_back(filename_ttH);
+	MC_filename_norm.push_back(filename_norm_ttH);
+	MC_samplename.push_back("ttHhzz_s1");
+	MC_sampletag.push_back("ttHhzz");
+	MC_samplegroup.push_back("ttHhzz");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch+" && "+hzz);
+	MC_convs_samplecut.push_back(conversmatch+" && "+hzz);
+
+	MC_XS.push_back(XS_ttH);
+	MC_filename.push_back(filename_ttH);
+	MC_filename_norm.push_back(filename_norm_ttH);
+	MC_samplename.push_back("ttHhtt_s1");
+	MC_sampletag.push_back("ttHhtt");
+	MC_samplegroup.push_back("ttHhtt");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch+" && "+htt);
+	MC_convs_samplecut.push_back(conversmatch+" && "+htt);
+
+	///////////////////////////////////////////////////////
+
+	// tHQ
+
+	MC_XS.push_back(XS_tHQ_ctcvcp);
+	MC_filename.push_back(filename_tHQ_ctcvcp);
+	MC_filename_norm.push_back(filename_norm_tHQ_ctcvcp);
+	MC_samplename.push_back("tHQ_s1");
+	MC_sampletag.push_back("tHQ");
+	MC_samplegroup.push_back("tHq");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	// tHW
+
+	MC_XS.push_back(XS_tHW_ctcvcp);
+	MC_filename.push_back(filename_tHW_ctcvcp);
+	MC_filename_norm.push_back(filename_norm_tHW_ctcvcp);
+	MC_samplename.push_back("tHW_s1");
+	MC_sampletag.push_back("tHW");
+	MC_samplegroup.push_back("tHq");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	///////////////////////////////////////////////////////
+
+	// VH
+
+	MC_XS.push_back(XS_VHToNonbb);
+	MC_filename.push_back(filename_VHToNonbb);
+	MC_filename_norm.push_back(filename_norm_VHToNonbb);
+	MC_samplename.push_back("VHToNonbb_s1");
+	MC_sampletag.push_back("VHToNonbb");
+	MC_samplegroup.push_back("VH");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ZHToTauTau);
+	MC_filename.push_back(filename_ZHToTauTau);
+	MC_filename_norm.push_back(filename_norm_ZHToTauTau);
+	MC_samplename.push_back("ZHToTauTau_s1");
+	MC_sampletag.push_back("ZHToTauTau");
+	MC_samplegroup.push_back("VH");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ZH_HToBB_ZToLL);
+	MC_filename.push_back(filename_ZH_HToBB_ZToLL);
+	MC_filename_norm.push_back(filename_norm_ZH_HToBB_ZToLL);
+	MC_samplename.push_back("HToBBZToLL_s1");
+	MC_sampletag.push_back("ZHToBBZToLL");
+	MC_samplegroup.push_back("VH");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	///////////////////////////////////////////////////////
+
+	// ttVH
+
+	MC_XS.push_back(XS_ttWH);
+	MC_filename.push_back(filename_ttWH);
+	MC_filename_norm.push_back(filename_norm_ttWH);
+	MC_samplename.push_back("ttWH_s1");
+	MC_sampletag.push_back("ttWH");
+	MC_samplegroup.push_back("ttVH");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ttZH);
+	MC_filename.push_back(filename_ttZH);
+	MC_filename_norm.push_back(filename_norm_ttZH);
+	MC_samplename.push_back("ttZH_s1");
+	MC_sampletag.push_back("ttZH");
+	MC_samplegroup.push_back("ttVH");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	///////////////////////////////////////////////////////
+
+	// ggH
+
+	MC_XS.push_back(XS_ggHToTauTau);
+	MC_filename.push_back(filename_ggHToTauTau);
+	MC_filename_norm.push_back(filename_norm_ggHToTauTau);
+	MC_samplename.push_back("ggHToTauTau_s1");
+	MC_sampletag.push_back("ggHToTauTau");
+	MC_samplegroup.push_back("ggH");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ggHToZZ);
+	MC_filename.push_back(filename_ggHToZZ_ext1);
+	MC_filename_norm.push_back(filename_norm_ggHToZZ_ext1);
+	MC_samplename.push_back("ggHToZZ_s1");
+	MC_sampletag.push_back("ggHToZZ");
+	MC_samplegroup.push_back("ggH");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ggHToWWToLNuQQ);
+	MC_filename.push_back(filename_ggHToWWToLNuQQ);
+	MC_filename_norm.push_back(filename_norm_ggHToWWToLNuQQ);
+	MC_samplename.push_back("ggHToWWToLNuQQ_s1");
+	MC_sampletag.push_back("ggHToWWToLNuQQ");
+	MC_samplegroup.push_back("ggH");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ggHToWWTo2L2Nu);
+	MC_filename.push_back(filename_ggHToWWTo2L2Nu);
+	MC_filename_norm.push_back(filename_norm_ggHToWWTo2L2Nu);
+	MC_samplename.push_back("ggHToWWTo2L2Nu_s1");
+	MC_sampletag.push_back("ggHToWWTo2L2Nu");
+	MC_samplegroup.push_back("ggH");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ggHToMuMu);
+	MC_filename.push_back(filename_ggHToMuMu);
+	MC_filename_norm.push_back(filename_norm_ggHToMuMu);
+	MC_samplename.push_back("ggHToMuMu_s1");
+	MC_sampletag.push_back("ggHToMuMu");
+	MC_samplegroup.push_back("ggH");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ggHToBB);
+	MC_filename.push_back(filename_ggHToBB);
+	MC_filename_norm.push_back(filename_norm_ggHToBB);
+	MC_samplename.push_back("ggHToBB_s1");
+	MC_sampletag.push_back("ggHToBB");
+	MC_samplegroup.push_back("ggH");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ggHToGG);
+	MC_filename.push_back(filename_ggHToGG);
+	MC_filename_norm.push_back(filename_norm_ggHToGG);
+	MC_samplename.push_back("ggHToGG_s1");
+	MC_sampletag.push_back("ggHToGG");
+	MC_samplegroup.push_back("ggH");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	///////////////////////////////////////////////////////
+
+	// qqH
+
+	MC_XS.push_back(XS_VBFHToTauTau);
+	MC_filename.push_back(filename_VBFHToTauTau);
+	MC_filename_norm.push_back(filename_norm_VBFHToTauTau);
+	MC_samplename.push_back("VBFHToTauTau_s1");
+	MC_sampletag.push_back("VBFHToTauTau");
+	MC_samplegroup.push_back("VBF");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_VBFHToZZ);
+	MC_filename.push_back(filename_VBFHToZZ);
+	MC_filename_norm.push_back(filename_norm_VBFHToZZ);
+	MC_samplename.push_back("VBFHToZZ_s1");
+	MC_sampletag.push_back("VBFHToZZ");
+	MC_samplegroup.push_back("VBF");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_VBFHToWWToLNuQQ);
+	MC_filename.push_back(filename_VBFHToWWToLNuQQ);
+	MC_filename_norm.push_back(filename_norm_VBFHToWWToLNuQQ);
+	MC_samplename.push_back("VBFHToWWToLNuQQ_s1");
+	MC_sampletag.push_back("VBFHToWWToLNuQQ");
+	MC_samplegroup.push_back("VBF");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_VBFHToWWTo2L2Nu);
+	MC_filename.push_back(filename_VBFHToWWTo2L2Nu);
+	MC_filename_norm.push_back(filename_norm_VBFHToWWTo2L2Nu);
+	MC_samplename.push_back("VBFHToWWTo2L2Nu_s1");
+	MC_sampletag.push_back("VBFHToWWTo2L2Nu");
+	MC_samplegroup.push_back("VBF");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_VBFHToMuMu);
+	MC_filename.push_back(filename_VBFHToMuMu);
+	MC_filename_norm.push_back(filename_norm_VBFHToMuMu);
+	MC_samplename.push_back("VBFHToMuMu_s1");
+	MC_sampletag.push_back("VBFHToMuMu");
+	MC_samplegroup.push_back("VBF");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_VBFHToBB);
+	MC_filename.push_back(filename_VBFHToBB);
+	MC_filename_norm.push_back(filename_norm_VBFHToBB);
+	MC_samplename.push_back("VBFHToBB_s1");
+	MC_sampletag.push_back("VBFHToBB");
+	MC_samplegroup.push_back("VBF");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_VBFHToGG);
+	MC_filename.push_back(filename_VBFHToGG);
+	MC_filename_norm.push_back(filename_norm_VBFHToGG);
+	MC_samplename.push_back("VBFHToGG_s1");
+	MC_sampletag.push_back("VBFHToGG");
+	MC_samplegroup.push_back("VBF");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	///////////////////////////////////////////////////////
+
+	// HH
+
+	MC_XS.push_back(XS_ggHHTo2B2VTo2L2Nu);
+	MC_filename.push_back(filename_ggHHTo2B2VTo2L2Nu);
+	MC_filename_norm.push_back(filename_norm_ggHHTo2B2VTo2L2Nu);
+	MC_samplename.push_back("ggHHTo2B2VTo2L2Nu_s1");
+	MC_sampletag.push_back("ggHHTo2B2VTo2L2Nu");
+	MC_samplegroup.push_back("HH");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ggHHTo2B2Tau);
+	MC_filename.push_back(filename_ggHHTo2B2Tau);
+	MC_filename_norm.push_back(filename_norm_ggHHTo2B2Tau);
+	MC_samplename.push_back("ggHHTo2B2Tau_s1");
+	MC_sampletag.push_back("ggHHTo2B2Tau");
+	MC_samplegroup.push_back("HH");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ggHHTo4Tau);
+	MC_filename.push_back(filename_ggHHTo4Tau);
+	MC_filename_norm.push_back(filename_norm_ggHHTo4Tau);
+	MC_samplename.push_back("ggHHTo4Tau_s1");
+	MC_sampletag.push_back("ggHHTo4Tau");
+	MC_samplegroup.push_back("HH");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ggHHTo2V2Tau);
+	MC_filename.push_back(filename_ggHHTo2V2Tau);
+	MC_filename_norm.push_back(filename_norm_ggHHTo2V2Tau);
+	MC_samplename.push_back("ggHHTo2V2Tau_s1");
+	MC_sampletag.push_back("ggHHTo2V2Tau");
+	MC_samplegroup.push_back("HH");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ggHHTo4V);
+	MC_filename.push_back(filename_ggHHTo4V);
+	MC_filename_norm.push_back(filename_norm_ggHHTo4V);
+	MC_samplename.push_back("ggHHTo4V_s1");
+	MC_sampletag.push_back("ggHHTo4V");
+	MC_samplegroup.push_back("HH");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	///////////////////////////////////////////////////////
+
+	// ttZ
+
+	/*MC_XS.push_back(XS_ttZ);
+	MC_filename.push_back(filename_ttZ); 
+	MC_filename_norm.push_back(filename_norm_ttZ);
+	MC_samplename.push_back("ttZ_s2");
+	MC_sampletag.push_back("ttZ");
+	MC_samplegroup.push_back("ttZ");
+	MC_nsamples.push_back(2);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);*/
+
+	MC_XS.push_back(XS_ttZ);
+	MC_filename.push_back(filename_ttZ_PS); 
+	MC_filename_norm.push_back(filename_norm_ttZ_PS);
+	MC_samplename.push_back("ttZ_s1");
+	MC_sampletag.push_back("ttZ");
+	MC_samplegroup.push_back("ttZ");
+	MC_nsamples.push_back(2);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ttZ_lowmass);
+	MC_filename.push_back(filename_ttZ_lowmass);
+	MC_filename_norm.push_back(filename_norm_ttZ_lowmass);
+	MC_samplename.push_back("ttZm1to10_s1");
+	MC_sampletag.push_back("ttZm1to10");
+	MC_samplegroup.push_back("ttZ");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ttbar_DiLept);
+	MC_filename.push_back(filename_ttbar_DiLept); 
+	MC_filename_norm.push_back(filename_norm_ttbar_DiLept);
+	MC_samplename.push_back("ttbarDL_s1");
+	MC_sampletag.push_back("ttbarDL");
+	MC_samplegroup.push_back("ttZ");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ttbar_SingleLep);
+	MC_filename.push_back(filename_ttbar_SingleLeptFromt); 
+	MC_filename_norm.push_back(filename_norm_ttbar_SingleLeptFromt);
+	MC_samplename.push_back("ttbarSLfromT_s1");
+	MC_sampletag.push_back("ttbarSLfromT");
+	MC_samplegroup.push_back("ttZ");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ttbar_SingleLep);
+	MC_filename.push_back(filename_ttbar_SingleLeptFromtbar); 
+	MC_filename_norm.push_back(filename_norm_ttbar_SingleLeptFromtbar);
+	MC_samplename.push_back("ttbarSLfromTbar_s1");
+	MC_sampletag.push_back("ttbarSLfromTbar");
+	MC_samplegroup.push_back("ttZ");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	///////////////////////////////////////////////////////
+
+	// ttW
+
+	MC_XS.push_back(XS_ttW);
+	MC_filename.push_back(filename_ttW);
+	MC_filename_norm.push_back(filename_norm_ttW);
+	MC_samplename.push_back("ttW_s1");
+	MC_sampletag.push_back("ttW");
+	MC_samplegroup.push_back("ttW");
+	MC_nsamples.push_back(2);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	/*MC_XS.push_back(XS_ttW);
+	MC_filename.push_back(filename_ttW_PS);
+	MC_filename_norm.push_back(filename_norm_ttW_PS);
+	MC_samplename.push_back("ttW_s2");
+	MC_sampletag.push_back("ttW");
+	MC_samplegroup.push_back("ttW");
+	MC_nsamples.push_back(2);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);*/
+
+	// ttWW
+
+	MC_XS.push_back(XS_ttWW);
+	MC_filename.push_back(filename_ttWW);
+	MC_filename_norm.push_back(filename_norm_ttWW);
+	MC_samplename.push_back("ttWW_s1");
+	MC_sampletag.push_back("ttWW");
+	MC_samplegroup.push_back("ttW");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	///////////////////////////////////////////////////////
+
+	// WW
+
+	MC_XS.push_back(XS_WW);
+	MC_filename.push_back(filename_WW);
+	MC_filename_norm.push_back(filename_norm_WW);
+	MC_samplename.push_back("WW_s1");
+	MC_sampletag.push_back("WW");
+	MC_samplegroup.push_back("EWK");
+	MC_nsamples.push_back(2);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	/*MC_XS.push_back(XS_WW);
+	MC_filename.push_back(filename_WW_ext1);
+	MC_filename_norm.push_back(filename_norm_WW_ext1);
+	MC_samplename.push_back("WW_s2");
+	MC_sampletag.push_back("WW");
+	MC_samplegroup.push_back("EWK");
+	MC_nsamples.push_back(2);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);*/
+
+	// WZ
+
+	MC_XS.push_back(XS_WZ);
+	MC_filename.push_back(filename_WZ);
+	MC_filename_norm.push_back(filename_norm_WZ);
+	MC_samplename.push_back("WZ_s1");
+	MC_sampletag.push_back("WZ");
+	MC_samplegroup.push_back("EWK");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	// ZZ
+
+	/*MC_XS.push_back(XS_ZZ);
+	MC_filename.push_back(filename_ZZ);
+	MC_filename_norm.push_back(filename_norm_ZZ);
+	MC_samplename.push_back("ZZ_s2");
+	MC_sampletag.push_back("ZZ");
+	MC_samplegroup.push_back("EWK");
+	MC_nsamples.push_back(3);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);*/
+
+	MC_XS.push_back(XS_ZZ);
+	MC_filename.push_back(filename_ZZ_ext1);
+	MC_filename_norm.push_back(filename_norm_ZZ_ext1);
+	MC_samplename.push_back("ZZ_s1");
+	MC_sampletag.push_back("ZZ");
+	MC_samplegroup.push_back("EWK");
+	MC_nsamples.push_back(3);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	/*MC_XS.push_back(XS_ZZ);
+	MC_filename.push_back(filename_ZZ_ext2);
+	MC_filename_norm.push_back(filename_norm_ZZ_ext2);
+	MC_samplename.push_back("ZZ_s3");
+	MC_sampletag.push_back("ZZ");
+	MC_samplegroup.push_back("EWK");
+	MC_nsamples.push_back(3);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);*/
+
+	///////////////////////////////////////////////////////
+
+	// Rares
+
+	MC_XS.push_back(XS_WWW);
+	MC_filename.push_back(filename_WWW);
+	MC_filename_norm.push_back(filename_norm_WWW);
+	MC_samplename.push_back("WWW_s1");
+	MC_sampletag.push_back("WWW");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_WWZ);
+	MC_filename.push_back(filename_WWZ);
+	MC_filename_norm.push_back(filename_norm_WWZ);
+	MC_samplename.push_back("WWZ_s1");
+	MC_sampletag.push_back("WWZ");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_WZZ);
+	MC_filename.push_back(filename_WZZ);
+	MC_filename_norm.push_back(filename_norm_WZZ);
+	MC_samplename.push_back("WZZ_s1");
+	MC_sampletag.push_back("WZZ");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ZZZ);
+	MC_filename.push_back(filename_ZZZ);
+	MC_filename_norm.push_back(filename_norm_ZZZ);
+	MC_samplename.push_back("ZZZ_s1");
+	MC_sampletag.push_back("ZZZ");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_WZG);
+	MC_filename.push_back(filename_WZG);
+	MC_filename_norm.push_back(filename_norm_WZG);
+	MC_samplename.push_back("WZG_s1");
+	MC_sampletag.push_back("WZG");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_WG);
+	MC_filename.push_back(filename_WG);
+	MC_filename_norm.push_back(filename_norm_WG);
+	MC_samplename.push_back("WG_s1");
+	MC_sampletag.push_back("WG");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ZG);
+	MC_filename.push_back(filename_ZG);
+	MC_filename_norm.push_back(filename_norm_ZG);
+	MC_samplename.push_back("ZG_s1");
+	MC_sampletag.push_back("ZG");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_tG);
+	MC_filename.push_back(filename_tG);
+	MC_filename_norm.push_back(filename_norm_tG);
+	MC_samplename.push_back("tG_s1");
+	MC_sampletag.push_back("tG");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	/*MC_XS.push_back(XS_ttG);
+	MC_filename.push_back(filename_ttG);
+	MC_filename_norm.push_back(filename_norm_ttG);
+	MC_samplename.push_back("ttG_s2");
+	MC_sampletag.push_back("ttG");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(2);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);*/
+
+	MC_XS.push_back(XS_ttG);
+	MC_filename.push_back(filename_ttG_ext1);
+	MC_filename_norm.push_back(filename_norm_ttG_ext1);
+	MC_samplename.push_back("ttG_s1");
+	MC_sampletag.push_back("ttG");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(2);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_tZq);
+	MC_filename.push_back(filename_tZq); 
+	MC_filename_norm.push_back(filename_norm_tZq);
+	MC_samplename.push_back("tZq_s1");
+	MC_sampletag.push_back("tZq");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_WpWp);
+	MC_filename.push_back(filename_WpWp); 
+	MC_filename_norm.push_back(filename_norm_WpWp);
+	MC_samplename.push_back("WpWp_s1");
+	MC_sampletag.push_back("WpWp");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_WW_DS);
+	MC_filename.push_back(filename_WW_DS); 
+	MC_filename_norm.push_back(filename_norm_WW_DS);
+	MC_samplename.push_back("WWss_s1");
+	MC_sampletag.push_back("WWss");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_tttt);
+	MC_filename.push_back(filename_tttt); 
+	MC_filename_norm.push_back(filename_norm_tttt);
+	MC_samplename.push_back("tttt_s1");
+	MC_sampletag.push_back("tttt");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(2);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	/*MC_XS.push_back(XS_tttt);
+	MC_filename.push_back(filename_tttt_PS); 
+	MC_filename_norm.push_back(filename_norm_tttt_PS);
+	MC_samplename.push_back("tttt_s2");
+	MC_sampletag.push_back("tttt");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(2);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);*/
+
+	MC_XS.push_back(XS_St_schannel);
+	MC_filename.push_back(filename_St_schannel); 
+	MC_filename_norm.push_back(filename_norm_St_schannel);
+	MC_samplename.push_back("TsCh_s1");
+	MC_sampletag.push_back("TsCh");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(2);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	/*MC_XS.push_back(XS_St_schannel);
+	MC_filename.push_back(filename_St_schannel_PS); 
+	MC_filename_norm.push_back(filename_norm_St_schannel_PS);
+	MC_samplename.push_back("TsCh_s2");
+	MC_sampletag.push_back("TsCh");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(2);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);*/
+
+	MC_XS.push_back(XS_St_tchannel_top);
+	MC_filename.push_back(filename_St_tchannel_top); 
+	MC_filename_norm.push_back(filename_norm_St_tchannel_top);
+	MC_samplename.push_back("TtChTop_s1");
+	MC_sampletag.push_back("TtChTop");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(2);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	/*MC_XS.push_back(XS_St_tchannel_top);
+	MC_filename.push_back(filename_St_tchannel_top_PS); 
+	MC_filename_norm.push_back(filename_norm_St_tchannel_top_PS);
+	MC_samplename.push_back("TtChTop_s2");
+	MC_sampletag.push_back("TtChTop");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(2);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);*/
+
+	MC_XS.push_back(XS_St_tchannel_antitop);
+	MC_filename.push_back(filename_St_tchannel_antitop); 
+	MC_filename_norm.push_back(filename_norm_St_tchannel_antitop);
+	MC_samplename.push_back("TtChAntitop_s1");
+	MC_sampletag.push_back("TtChAntitop");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(2);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	/*MC_XS.push_back(XS_St_tchannel_antitop);
+	MC_filename.push_back(filename_St_tchannel_antitop_PS); 
+	MC_filename_norm.push_back(filename_norm_St_tchannel_antitop_PS);
+	MC_samplename.push_back("TtChAntitop_s2");
+	MC_sampletag.push_back("TtChAntitop");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(2);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);*/
+
+	MC_XS.push_back(XS_St_tW);
+	MC_filename.push_back(filename_St_tW_top); 
+	MC_filename_norm.push_back(filename_norm_St_tW_top);
+	MC_samplename.push_back("TtwChTop_s1");
+	MC_sampletag.push_back("TtwChTop");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(2);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	/*MC_XS.push_back(XS_St_tW);
+	MC_filename.push_back(filename_St_tW_top_PS); 
+	MC_filename_norm.push_back(filename_norm_St_tW_top_PS);
+	MC_samplename.push_back("TtwChTop_s2");
+	MC_sampletag.push_back("TtwChTop");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(2);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);*/
+
+	MC_XS.push_back(XS_St_tW);
+	MC_filename.push_back(filename_St_tW_antitop); 
+	MC_filename_norm.push_back(filename_norm_St_tW_antitop);
+	MC_samplename.push_back("TtwChAntitop_s1");
+	MC_sampletag.push_back("TtwChAntitop");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(2);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	/*MC_XS.push_back(XS_St_tW);
+	MC_filename.push_back(filename_St_tW_antitop_PS); 
+	MC_filename_norm.push_back(filename_norm_St_tW_antitop_PS);
+	MC_samplename.push_back("TtwChAntitop_s2");
+	MC_sampletag.push_back("TtwChAntitop");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(2);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);*/
+
+	MC_XS.push_back(XS_St_tWll);
+	MC_filename.push_back(filename_St_tWll); 
+	MC_filename_norm.push_back(filename_norm_St_tWll);
+	MC_samplename.push_back("TtwChll_s1");
+	MC_sampletag.push_back("TtwChll");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	///////////////////////////////////////////////////////
+
+	Data_SR_filename.push_back(filename_SingleElectron_BlockB_SR);
+	Data_SR_filename.push_back(filename_SingleElectron_BlockC_SR);
+	Data_SR_filename.push_back(filename_SingleElectron_BlockD_SR);
+	Data_SR_filename.push_back(filename_SingleElectron_BlockE_SR);
+	Data_SR_filename.push_back(filename_SingleElectron_BlockF_SR);
+
+	Data_SR_filename.push_back(filename_SingleMuon_BlockB_SR);
+	Data_SR_filename.push_back(filename_SingleMuon_BlockC_SR);
+	Data_SR_filename.push_back(filename_SingleMuon_BlockD_SR);
+	Data_SR_filename.push_back(filename_SingleMuon_BlockE_SR);
+	Data_SR_filename.push_back(filename_SingleMuon_BlockF_SR);
+
+	Data_SR_filename.push_back(filename_DoubleEG_BlockB_SR);
+	Data_SR_filename.push_back(filename_DoubleEG_BlockC_SR);
+	Data_SR_filename.push_back(filename_DoubleEG_BlockD_SR);
+	Data_SR_filename.push_back(filename_DoubleEG_BlockE_SR);
+	Data_SR_filename.push_back(filename_DoubleEG_BlockF_SR);
+
+	Data_SR_filename.push_back(filename_DoubleMu_BlockB_SR);
+	Data_SR_filename.push_back(filename_DoubleMu_BlockC_SR);
+	Data_SR_filename.push_back(filename_DoubleMu_BlockD_SR);
+	Data_SR_filename.push_back(filename_DoubleMu_BlockE_SR);
+	Data_SR_filename.push_back(filename_DoubleMu_BlockF_SR);
+
+	Data_SR_filename.push_back(filename_MuonEG_BlockB_SR);
+	Data_SR_filename.push_back(filename_MuonEG_BlockC_SR);
+	Data_SR_filename.push_back(filename_MuonEG_BlockD_SR);
+	Data_SR_filename.push_back(filename_MuonEG_BlockE_SR);
+	Data_SR_filename.push_back(filename_MuonEG_BlockF_SR);
+
+	///////////////////////////////////////////////////////
+
+	Data_fake_filename.push_back(filename_SingleElectron_BlockB_fake);
+	Data_fake_filename.push_back(filename_SingleElectron_BlockC_fake);
+	Data_fake_filename.push_back(filename_SingleElectron_BlockD_fake);
+	Data_fake_filename.push_back(filename_SingleElectron_BlockE_fake);
+	Data_fake_filename.push_back(filename_SingleElectron_BlockF_fake);
+
+	Data_fake_filename.push_back(filename_SingleMuon_BlockB_fake);
+	Data_fake_filename.push_back(filename_SingleMuon_BlockC_fake);
+	Data_fake_filename.push_back(filename_SingleMuon_BlockD_fake);
+	Data_fake_filename.push_back(filename_SingleMuon_BlockE_fake);
+	Data_fake_filename.push_back(filename_SingleMuon_BlockF_fake);
+
+	Data_fake_filename.push_back(filename_DoubleEG_BlockB_fake);
+	Data_fake_filename.push_back(filename_DoubleEG_BlockC_fake);
+	Data_fake_filename.push_back(filename_DoubleEG_BlockD_fake);
+	Data_fake_filename.push_back(filename_DoubleEG_BlockE_fake);
+	Data_fake_filename.push_back(filename_DoubleEG_BlockF_fake);
+
+	Data_fake_filename.push_back(filename_DoubleMu_BlockB_fake);
+	Data_fake_filename.push_back(filename_DoubleMu_BlockC_fake);
+	Data_fake_filename.push_back(filename_DoubleMu_BlockD_fake);
+	Data_fake_filename.push_back(filename_DoubleMu_BlockE_fake);
+	Data_fake_filename.push_back(filename_DoubleMu_BlockF_fake);
+
+	Data_fake_filename.push_back(filename_MuonEG_BlockB_fake);
+	Data_fake_filename.push_back(filename_MuonEG_BlockC_fake);
+	Data_fake_filename.push_back(filename_MuonEG_BlockD_fake);
+	Data_fake_filename.push_back(filename_MuonEG_BlockE_fake);
+	Data_fake_filename.push_back(filename_MuonEG_BlockF_fake);
+
+	///////////////////////////////////////////////////////
+
+	Data_flip_filename.push_back(filename_SingleElectron_BlockB_flip);
+	Data_flip_filename.push_back(filename_SingleElectron_BlockC_flip);
+	Data_flip_filename.push_back(filename_SingleElectron_BlockD_flip);
+	Data_flip_filename.push_back(filename_SingleElectron_BlockE_flip);
+	Data_flip_filename.push_back(filename_SingleElectron_BlockF_flip);
+
+	Data_flip_filename.push_back(filename_SingleMuon_BlockB_flip);
+	Data_flip_filename.push_back(filename_SingleMuon_BlockC_flip);
+	Data_flip_filename.push_back(filename_SingleMuon_BlockD_flip);
+	Data_flip_filename.push_back(filename_SingleMuon_BlockE_flip);
+	Data_flip_filename.push_back(filename_SingleMuon_BlockF_flip);
+
+	Data_flip_filename.push_back(filename_DoubleEG_BlockB_flip);
+	Data_flip_filename.push_back(filename_DoubleEG_BlockC_flip);
+	Data_flip_filename.push_back(filename_DoubleEG_BlockD_flip);
+	Data_flip_filename.push_back(filename_DoubleEG_BlockE_flip);
+	Data_flip_filename.push_back(filename_DoubleEG_BlockF_flip);
+
+	Data_flip_filename.push_back(filename_DoubleMu_BlockB_flip);
+	Data_flip_filename.push_back(filename_DoubleMu_BlockC_flip);
+	Data_flip_filename.push_back(filename_DoubleMu_BlockD_flip);
+	Data_flip_filename.push_back(filename_DoubleMu_BlockE_flip);
+	Data_flip_filename.push_back(filename_DoubleMu_BlockF_flip);
+
+	Data_flip_filename.push_back(filename_MuonEG_BlockB_flip);
+	Data_flip_filename.push_back(filename_MuonEG_BlockC_flip);
+	Data_flip_filename.push_back(filename_MuonEG_BlockD_flip);
+	Data_flip_filename.push_back(filename_MuonEG_BlockE_flip);
+	Data_flip_filename.push_back(filename_MuonEG_BlockF_flip);
+
+	///////////////////////////////////////////////////////
+
+	return std::make_tuple(MC_XS, MC_filename, MC_filename_norm, MC_samplename, MC_samplecut, MC_sampletag, MC_samplegroup, MC_nsamples, MC_convs_samplecut, Data_SR_filename, Data_fake_filename, Data_flip_filename, luminosity);
+
+}
+
+
+std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<int>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, float > initialize_2018(){
+
+	MC_XS.clear();
+
+	MC_filename.clear();
+	MC_filename_norm.clear();
+	MC_samplename.clear();
+	MC_samplecut.clear();
+	MC_sampletag.clear();
+	MC_samplegroup.clear();
+	MC_nsamples.clear();
+	MC_convs_samplecut.clear();
+
+	Data_SR_filename.clear();
+	Data_fake_filename.clear();
+	Data_flip_filename.clear();
+
+	luminosity = 59740;
+
+	////////////////////////////////////////////////////////////
+
+	TString filename_ttH = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/ttH/ntuple_Oct19v2_MC_2018_ttHJetToNonbb_MEM_SR_SF_v1.root";
+	TString filename_ttH_ctcvcp = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/ttH/ntuple_Oct19v2_MC_2018_TTH_ctcvcp_MEM_SR_SF_v1.root";
+	TString filename_tHQ_ctcvcp = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/ttH/ntuple_Oct19v1_MC_2018_THQ_ctcvcp_MEM_SR_SF_v1.root";
+	TString filename_tHW_ctcvcp = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/ttH/ntuple_Oct19v1_MC_2018_THW_ctcvcp_MEM_SR_SF_v1.root";
+
+	TString filename_ttZ = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/ttV/ntuple_Oct19v1_MC_2018_TTZToLLNuNu_M-10_MEM_SR_SF_v1.root";
+	TString filename_ttZ_lowmass = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/ttV/ntuple_Oct19v1_MC_2018_TTZToLL_M-1to10_MEM_SR_SF_v1.root";
+	TString filename_ttW = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/ttV/ntuple_Oct19v1_MC_2018_TTWJetsToLNu_MEM_SR_SF_v1.root";
+	TString filename_ttWW_ext1 = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/ttV/ntuple_Oct19v1_MC_2018_TTWW_ext1_MEM_SR_SF_v1.root";
+	TString filename_ttWW_ext2 = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/ttV/ntuple_Oct19v1_MC_2018_TTWW_ext2_MEM_SR_SF_v1.root";
+
+	TString filename_WW = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/EWK/ntuple_Oct19v3_MC_2018_WWTo2L2Nu_MEM_SR_SF_v1.root";
+	TString filename_WZ = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/EWK/ntuple_Oct19v1_MC_2018_WZTo3LNu_MEM_SR_SF_v1.root";
+	TString filename_WZ_ext1 = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/EWK/ntuple_Oct19v2_MC_2018_WZTo3LNu_ext1_MEM_SR_SF_v1.root";
+	TString filename_ZZ = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/EWK/ntuple_Oct19v2_MC_2018_ZZTo4L_MEM_SR_SF_v1.root";
+	TString filename_ZZ_ext2 = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/EWK/ntuple_Oct19v4_MC_2018_ZZTo4L_ext2_MEM_SR_SF_v1.root";
+
+	TString filename_DY_M10to50 = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/EWK/ntuple_Oct19v3_MC_2018_DYJetsToLL_M-10to50_MEM_SR_SF_v1.root";
+	TString filename_DY_M50 = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/EWK/ntuple_Oct19v2_MC_2018_DYJetsToLL_M-50_MEM_SR_SF_v1.root";
+	TString filename_DY_M50_ext2 = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/EWK/ntuple_Oct19v3_MC_2018_DYJetsToLL_M-50_ext2_MEM_SR_SF_v1.root";
+
+	TString filename_WJets = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/EWK/ntuple_Oct19v2_MC_2018_WJetsToLNu_MEM_SR_SF_v1.root";
+
+	TString filename_WWW = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Rares/ntuple_Oct19v2_MC_2018_WWW_MEM_SR_SF_v1.root";
+	TString filename_WWZ = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Rares/ntuple_Oct19v2_MC_2018_WWZ_MEM_SR_SF_v1.root";
+	TString filename_WZZ = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Rares/ntuple_Oct19v1_MC_2018_WZZ_MEM_SR_SF_v1.root";
+	TString filename_ZZZ = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Rares/ntuple_Oct19v1_MC_2018_ZZZ_MEM_SR_SF_v1.root";
+	TString filename_WZG = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Rares/ntuple_Oct19v1_MC_2018_WZG_MEM_SR_SF_v1.root";
+	TString filename_WG = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Rares/ntuple_Oct19v1_MC_2018_WGToLNuG_MEM_SR_SF_v1.root";
+	TString filename_ZG = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Rares/ntuple_Oct19v2_MC_2018_ZGToLLG_MEM_SR_SF_v1.root";
+	TString filename_tG = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Rares/ntuple_Oct19v1_MC_2018_TGJets_MEM_SR_SF_v1.root";
+	TString filename_ttG = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Rares/ntuple_Oct19v1_MC_2018_TTGJets_MEM_SR_SF_v1.root";
+	TString filename_tZq = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Rares/ntuple_Oct19v1_MC_2018_tZq_ll_MEM_SR_SF_v1.root";
+	TString filename_WpWp = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Rares/ntuple_Oct19v1_MC_2018_WpWpJJ_MEM_SR_SF_v1.root";
+	TString filename_WW_DS = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Rares/ntuple_Oct19v1_MC_2018_WWTo2L2Nu_DoubleScattering_MEM_SR_SF_v1.root";
+	TString filename_tttt = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Rares/ntuple_Oct19v1_MC_2018_TTTT_MEM_SR_SF_v1.root";
+
+	TString filename_St_schannel = 				"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/ttbar/ntuple_Oct19v1_MC_2018_ST_s-channel_MEM_SR_SF_v1.root";
+	TString filename_St_tchannel_top = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/ttbar/ntuple_Oct19v2_MC_2018_ST_t-channel_top_MEM_SR_SF_v1.root";
+	TString filename_St_tchannel_antitop = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/ttbar/ntuple_Oct19v3_MC_2018_ST_t-channel_antitop_MEM_SR_SF_v1.root";
+	TString filename_St_tW_top = 				"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/ttbar/ntuple_Oct19v3_MC_2018_ST_tW_top_MEM_SR_SF_v1.root";
+	TString filename_St_tW_antitop = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/ttbar/ntuple_Oct19v1_MC_2018_ST_tW_antitop_MEM_SR_SF_v1.root";
+	TString filename_St_tWll = 					"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/ttbar/ntuple_Oct19v1_MC_2018_ST_tWll_MEM_SR_SF_v1.root";
+
+	TString filename_ttbar_DiLept = 					"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/ttbar/ntuple_Oct19v1_MC_2018_TTJets_DiLept_MEM_SR_SF_v1.root";
+	TString filename_ttbar_SingleLeptFromt = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/ttbar/ntuple_Oct19v1_MC_2018_TTJets_SingleLeptFromT_MEM_SR_SF_v1.root";
+	TString filename_ttbar_SingleLeptFromtbar = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/ttbar/ntuple_Oct19v2_MC_2018_TTJets_SingleLeptFromTbar_MEM_SR_SF_v1.root";
+
+	TString filename_ggHToTauTau = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/ggH/ntuple_Oct19v2_MC_2018_GluGluHToTauTau_MEM_SR_SF_v1.root";
+	TString filename_ggHToZZ4l = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/ggH/ntuple_Oct19v1_MC_2018_GluGluHToZZTo4L_MEM_SR_SF_v1.root";
+	TString filename_ggHToZZ2l2Q = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/ggH/ntuple_Oct19v2_MC_2018_GluGluHToZZTo2L2Q_MEM_SR_SF_v1.root";
+	TString filename_ggHToWWToLNuQQ = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/ggH/ntuple_Oct19v1_MC_2018_GluGluHToWWToLNuQQ_MEM_SR_SF_v1.root";
+	TString filename_ggHToWWTo2L2Nu = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/ggH/ntuple_Oct19v2_MC_2018_GluGluHToWWTo2L2Nu_MEM_SR_SF_v1.root";
+	TString filename_ggHToMuMu = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/ggH/ntuple_Oct19v1_MC_2018_GluGluHToMuMu_MEM_SR_SF_v1.root";
+	TString filename_ggHToMuMu_ext1 = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/ggH/ntuple_Oct19v2_MC_2018_GluGluHToMuMu_ext1_MEM_SR_SF_v1.root";
+	TString filename_ggHToBB = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/ggH/ntuple_Oct19v1_MC_2018_GluGluHToBB_MEM_SR_SF_v1.root";
+	TString filename_ggHToGG = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/ggH/ntuple_Oct19v1_MC_2018_GluGluHToGG_MEM_SR_SF_v1.root";
+
+	TString filename_VBFHToTauTau = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/VBF/ntuple_Oct19v1_MC_2018_VBFHToTauTau_MEM_SR_SF_v1.root";
+	TString filename_VBFHToZZ = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/VBF/ntuple_Oct19v2_MC_2018_VBF_HToZZTo4L_MEM_SR_SF_v1.root";
+	TString filename_VBFHToWWToLNuQQ = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/VBF/ntuple_Oct19v2_MC_2018_VBFHToWWToLNuQQ_MEM_SR_SF_v1.root";
+	TString filename_VBFHToWWTo2L2Nu = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/VBF/ntuple_Oct19v1_MC_2018_VBFHToWWTo2L2Nu_MEM_SR_SF_v1.root";
+	TString filename_VBFHToMuMu = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/VBF/ntuple_Oct19v1_MC_2018_VBFHToMuMu_MEM_SR_SF_v1.root";
+	TString filename_VBFHToBB = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/VBF/ntuple_Oct19v2_MC_2018_VBFHToBB_MEM_SR_SF_v1.root";
+	TString filename_VBFHToGG = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/VBF/ntuple_Oct19v2_MC_2018_VBFHToGG_MEM_SR_SF_v1.root";
+
+	TString filename_VHToNonbb = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/VH/ntuple_Oct19v2_MC_2018_VHToNonbb_MEM_SR_SF_v1.root";
+	TString filename_ZHToTauTau = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/VH/ntuple_Oct19v2_MC_2018_ZHToTauTau_MEM_SR_SF_v1.root";
+	TString filename_ZH_HToBB_ZToLL = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/VH/ntuple_Oct19v1_MC_2018_ZH_HToBB_ZToLL_MEM_SR_SF_v1.root";
+	TString filename_ZH_HToBB_ZToLL_ext1 = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/VH/ntuple_Oct19v3_MC_2018_ZH_HToBB_ZToLL_ext1_MEM_SR_SF_v1.root";
+
+	TString filename_ttWH = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/ttVH/ntuple_Oct19v1_MC_2018_TTWH_MEM_SR_SF_v1.root";
+	TString filename_ttZH = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/ttVH/ntuple_Oct19v2_MC_2018_TTZH_MEM_SR_SF_v1.root";
+
+	TString filename_ggHHTo2B2Tau = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/HH/ntuple_Oct19v2_MC_2018_GluGluToHHTo2B2Tau_node_SM_MEM_SR_SF_v1.root";
+
+	////////////////////////////////////////////////////////////
+
+	TString filename_norm_ttH = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/ttH/ntuple_Oct19v2_MC_2018_ttHJetToNonbb_norm.root";
+	TString filename_norm_ttH_ctcvcp = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/ttH/ntuple_Oct19v2_MC_2018_TTH_ctcvcp_norm.root";
+	TString filename_norm_tHQ_ctcvcp = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/ttH/ntuple_Oct19v1_MC_2018_THQ_ctcvcp_norm.root";
+	TString filename_norm_tHW_ctcvcp = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/ttH/ntuple_Oct19v1_MC_2018_THW_ctcvcp_norm.root";
+
+	TString filename_norm_ttZ = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/ttV/ntuple_Oct19v1_MC_2018_TTZToLLNuNu_M-10_norm.root";
+	TString filename_norm_ttZ_lowmass = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/ttV/ntuple_Oct19v1_MC_2018_TTZToLL_M-1to10_norm.root";
+	TString filename_norm_ttW = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/ttV/ntuple_Oct19v1_MC_2018_TTWJetsToLNu_norm.root";
+	TString filename_norm_ttWW_ext1 = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/ttV/ntuple_Oct19v1_MC_2018_TTWW_ext1_norm.root";
+	TString filename_norm_ttWW_ext2 = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/ttV/ntuple_Oct19v1_MC_2018_TTWW_ext2_norm.root";
+
+	TString filename_norm_WW = 			"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/EWK/ntuple_Oct19v3_MC_2018_WWTo2L2Nu_norm.root";
+	TString filename_norm_WZ = 			"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/EWK/ntuple_Oct19v1_MC_2018_WZTo3LNu_norm.root";
+	TString filename_norm_WZ_ext1 = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/EWK/ntuple_Oct19v2_MC_2018_WZTo3LNu_ext1_norm.root";
+	TString filename_norm_ZZ = 			"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/EWK/ntuple_Oct19v2_MC_2018_ZZTo4L_norm.root";
+	TString filename_norm_ZZ_ext2 = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/EWK/ntuple_Oct19v4_MC_2018_ZZTo4L_ext2_norm.root";
+
+	TString filename_norm_DY_M10to50 = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/EWK/ntuple_Oct19v3_MC_2018_DYJetsToLL_M-10to50_norm.root";
+	TString filename_norm_DY_M50 = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/EWK/ntuple_Oct19v2_MC_2018_DYJetsToLL_M-50_norm.root";
+	TString filename_norm_DY_M50_ext2 = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/EWK/ntuple_Oct19v3_MC_2018_DYJetsToLL_M-50_ext2_norm.root";
+
+	TString filename_norm_WJets = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/EWK/ntuple_Oct19v2_MC_2018_WJetsToLNu_norm.root";
+
+	TString filename_norm_WWW = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/Rares/ntuple_Oct19v2_MC_2018_WWW_norm.root";
+	TString filename_norm_WWZ = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/Rares/ntuple_Oct19v2_MC_2018_WWZ_norm.root";
+	TString filename_norm_WZZ = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/Rares/ntuple_Oct19v1_MC_2018_WZZ_norm.root";
+	TString filename_norm_ZZZ = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/Rares/ntuple_Oct19v1_MC_2018_ZZZ_norm.root";
+	TString filename_norm_WZG = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/Rares/ntuple_Oct19v1_MC_2018_WZG_norm.root";
+	TString filename_norm_WG = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/Rares/ntuple_Oct19v1_MC_2018_WGToLNuG_norm.root";
+	TString filename_norm_ZG = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/Rares/ntuple_Oct19v2_MC_2018_ZGToLLG_norm.root";
+	TString filename_norm_tG = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/Rares/ntuple_Oct19v1_MC_2018_TGJets_norm.root";
+	TString filename_norm_ttG = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/Rares/ntuple_Oct19v1_MC_2018_TTGJets_norm.root";
+	TString filename_norm_tZq = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/Rares/ntuple_Oct19v1_MC_2018_tZq_ll_norm.root";
+	TString filename_norm_WpWp = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/Rares/ntuple_Oct19v1_MC_2018_WpWpJJ_norm.root";
+	TString filename_norm_WW_DS = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/Rares/ntuple_Oct19v1_MC_2018_WWTo2L2Nu_DoubleScattering_norm.root";
+	TString filename_norm_tttt = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/Rares/ntuple_Oct19v1_MC_2018_TTTT_norm.root";
+
+	TString filename_norm_St_schannel = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/ttbar/ntuple_Oct19v1_MC_2018_ST_s-channel_norm.root";
+	TString filename_norm_St_tchannel_top = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/ttbar/ntuple_Oct19v2_MC_2018_ST_t-channel_top_norm.root";
+	TString filename_norm_St_tchannel_antitop = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/ttbar/ntuple_Oct19v3_MC_2018_ST_t-channel_antitop_norm.root";
+	TString filename_norm_St_tW_top = 			"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/ttbar/ntuple_Oct19v3_MC_2018_ST_tW_top_norm.root";
+	TString filename_norm_St_tW_antitop = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/ttbar/ntuple_Oct19v1_MC_2018_ST_tW_antitop_norm.root";
+	TString filename_norm_St_tWll = 			"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/ttbar/ntuple_Oct19v1_MC_2018_ST_tWll_norm.root";
+
+	TString filename_norm_ttbar_DiLept = 				"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/ttbar/ntuple_Oct19v1_MC_2018_TTJets_DiLept_norm.root";
+	TString filename_norm_ttbar_SingleLeptFromt = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/ttbar/ntuple_Oct19v1_MC_2018_TTJets_SingleLeptFromT_norm.root";
+	TString filename_norm_ttbar_SingleLeptFromtbar = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/ttbar/ntuple_Oct19v2_MC_2018_TTJets_SingleLeptFromTbar_norm.root";
+
+	TString filename_norm_ggHToTauTau = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/ggH/ntuple_Oct19v2_MC_2018_GluGluHToTauTau_norm.root";
+	TString filename_norm_ggHToZZ4l = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/ggH/ntuple_Oct19v1_MC_2018_GluGluHToZZTo4L_norm.root";
+	TString filename_norm_ggHToZZ2l2Q = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/ggH/ntuple_Oct19v2_MC_2018_GluGluHToZZTo2L2Q_norm.root";
+	TString filename_norm_ggHToWWToLNuQQ = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/ggH/ntuple_Oct19v1_MC_2018_GluGluHToWWToLNuQQ_norm.root";
+	TString filename_norm_ggHToWWTo2L2Nu = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/ggH/ntuple_Oct19v2_MC_2018_GluGluHToWWTo2L2Nu_norm.root";
+	TString filename_norm_ggHToMuMu = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/ggH/ntuple_Oct19v1_MC_2018_GluGluHToMuMu_norm.root";
+	TString filename_norm_ggHToMuMu_ext1 = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/ggH/ntuple_Oct19v2_MC_2018_GluGluHToMuMu_ext1_norm.root";
+	TString filename_norm_ggHToBB = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/ggH/ntuple_Oct19v1_MC_2018_GluGluHToBB_norm.root";
+	TString filename_norm_ggHToGG = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/ggH/ntuple_Oct19v1_MC_2018_GluGluHToGG_norm.root";
+
+	TString filename_norm_VBFHToTauTau = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/VBF/ntuple_Oct19v1_MC_2018_VBFHToTauTau_norm.root";
+	TString filename_norm_VBFHToZZ = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/VBF/ntuple_Oct19v2_MC_2018_VBF_HToZZTo4L_norm.root";
+	TString filename_norm_VBFHToWWToLNuQQ = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/VBF/ntuple_Oct19v2_MC_2018_VBFHToWWToLNuQQ_norm.root";
+	TString filename_norm_VBFHToWWTo2L2Nu = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/VBF/ntuple_Oct19v1_MC_2018_VBFHToWWTo2L2Nu_norm.root";
+	TString filename_norm_VBFHToMuMu = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/VBF/ntuple_Oct19v1_MC_2018_VBFHToMuMu_norm.root";
+	TString filename_norm_VBFHToBB = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/VBF/ntuple_Oct19v2_MC_2018_VBFHToBB_norm.root";
+	TString filename_norm_VBFHToGG = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/VBF/ntuple_Oct19v2_MC_2018_VBFHToGG_norm.root";
+
+	TString filename_norm_VHToNonbb = 			"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/VH/ntuple_Oct19v2_MC_2018_VHToNonbb_norm.root";
+	TString filename_norm_ZHToTauTau = 			"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/VH/ntuple_Oct19v2_MC_2018_ZHToTauTau_norm.root";
+	TString filename_norm_ZH_HToBB_ZToLL = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/VH/ntuple_Oct19v1_MC_2018_ZH_HToBB_ZToLL_norm.root";
+	TString filename_norm_ZH_HToBB_ZToLL_ext1 = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/VH/ntuple_Oct19v3_MC_2018_ZH_HToBB_ZToLL_ext1_norm.root";
+
+	TString filename_norm_ttWH = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/ttVH/ntuple_Oct19v1_MC_2018_TTWH_norm.root";
+	TString filename_norm_ttZH = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/ttVH/ntuple_Oct19v2_MC_2018_TTZH_norm.root";
+
+	TString filename_norm_ggHHTo2B2Tau = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2018/nominal/HH/ntuple_Oct19v2_MC_2018_GluGluToHHTo2B2Tau_node_SM_norm.root";
+
+	///////////////////////////////////////////////////////
+
+	TString filename_EGamma_BlockA_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/SR/ntuple_Oct19v1_Data_2018_EGamma_BlockA_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_EGamma_BlockB_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/SR/ntuple_Oct19v1_Data_2018_EGamma_BlockB_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_EGamma_BlockC_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/SR/ntuple_Oct19v1_Data_2018_EGamma_BlockC_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_EGamma_BlockD_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/SR/ntuple_Oct19v1_Data_2018_EGamma_BlockD_MEM_SR_SF_v1_noOverlap.root";
+
+	TString filename_SingleMuon_BlockA_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/SR/ntuple_Oct19v1_Data_2018_SingleMuon_BlockA_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_SingleMuon_BlockB_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/SR/ntuple_Oct19v1_Data_2018_SingleMuon_BlockB_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_SingleMuon_BlockC_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/SR/ntuple_Oct19v1_Data_2018_SingleMuon_BlockC_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_SingleMuon_BlockD_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/SR/ntuple_Oct19v1_Data_2018_SingleMuon_BlockD_MEM_SR_SF_v1_noOverlap.root";
+	
+	TString filename_DoubleMu_BlockA_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/SR/ntuple_Oct19v1_Data_2018_DoubleMu_BlockA_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_DoubleMu_BlockB_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/SR/ntuple_Oct19v1_Data_2018_DoubleMu_BlockB_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_DoubleMu_BlockC_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/SR/ntuple_Oct19v1_Data_2018_DoubleMu_BlockC_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_DoubleMu_BlockD_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/SR/ntuple_Oct19v1_Data_2018_DoubleMu_BlockD_MEM_SR_SF_v1_noOverlap.root";
+
+	TString filename_MuonEG_BlockA_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/SR/ntuple_Oct19v1_Data_2018_MuonEG_BlockA_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_MuonEG_BlockB_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/SR/ntuple_Oct19v1_Data_2018_MuonEG_BlockB_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_MuonEG_BlockC_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/SR/ntuple_Oct19v1_Data_2018_MuonEG_BlockC_MEM_SR_SF_v1_noOverlap.root";
+	TString filename_MuonEG_BlockD_SR = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/SR/ntuple_Oct19v1_Data_2018_MuonEG_BlockD_MEM_SR_SF_v1_noOverlap.root";
+
+	///////////////////////////////////////////////////////
+
+	TString filename_EGamma_BlockA_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/fake/ntuple_Oct19v1_Data_2018_EGamma_BlockA_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_EGamma_BlockB_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/fake/ntuple_Oct19v1_Data_2018_EGamma_BlockB_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_EGamma_BlockC_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/fake/ntuple_Oct19v1_Data_2018_EGamma_BlockC_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_EGamma_BlockD_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/fake/ntuple_Oct19v1_Data_2018_EGamma_BlockD_MEM_fake_SF_v1_noOverlap.root";
+
+	TString filename_SingleMuon_BlockA_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/fake/ntuple_Oct19v1_Data_2018_SingleMuon_BlockA_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_SingleMuon_BlockB_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/fake/ntuple_Oct19v1_Data_2018_SingleMuon_BlockB_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_SingleMuon_BlockC_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/fake/ntuple_Oct19v1_Data_2018_SingleMuon_BlockC_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_SingleMuon_BlockD_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/fake/ntuple_Oct19v1_Data_2018_SingleMuon_BlockD_MEM_fake_SF_v1_noOverlap.root";
+	
+	TString filename_DoubleMu_BlockA_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/fake/ntuple_Oct19v1_Data_2018_DoubleMu_BlockA_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_DoubleMu_BlockB_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/fake/ntuple_Oct19v1_Data_2018_DoubleMu_BlockB_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_DoubleMu_BlockC_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/fake/ntuple_Oct19v1_Data_2018_DoubleMu_BlockC_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_DoubleMu_BlockD_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/fake/ntuple_Oct19v1_Data_2018_DoubleMu_BlockD_MEM_fake_SF_v1_noOverlap.root";
+
+	TString filename_MuonEG_BlockA_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/fake/ntuple_Oct19v1_Data_2018_MuonEG_BlockA_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_MuonEG_BlockB_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/fake/ntuple_Oct19v1_Data_2018_MuonEG_BlockB_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_MuonEG_BlockC_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/fake/ntuple_Oct19v1_Data_2018_MuonEG_BlockC_MEM_fake_SF_v1_noOverlap.root";
+	TString filename_MuonEG_BlockD_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/fake/ntuple_Oct19v1_Data_2018_MuonEG_BlockD_MEM_fake_SF_v1_noOverlap.root";
+
+	///////////////////////////////////////////////////////
+
+	TString filename_EGamma_BlockA_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/flip/ntuple_Oct19v1_Data_2018_EGamma_BlockA_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_EGamma_BlockB_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/flip/ntuple_Oct19v1_Data_2018_EGamma_BlockB_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_EGamma_BlockC_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/flip/ntuple_Oct19v1_Data_2018_EGamma_BlockC_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_EGamma_BlockD_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/flip/ntuple_Oct19v1_Data_2018_EGamma_BlockD_MEM_flip_SF_v1_noOverlap.root";
+
+	TString filename_SingleMuon_BlockA_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/flip/ntuple_Oct19v1_Data_2018_SingleMuon_BlockA_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_SingleMuon_BlockB_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/flip/ntuple_Oct19v1_Data_2018_SingleMuon_BlockB_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_SingleMuon_BlockC_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/flip/ntuple_Oct19v1_Data_2018_SingleMuon_BlockC_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_SingleMuon_BlockD_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/flip/ntuple_Oct19v1_Data_2018_SingleMuon_BlockD_MEM_flip_SF_v1_noOverlap.root";
+	
+	TString filename_DoubleMu_BlockA_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/flip/ntuple_Oct19v1_Data_2018_DoubleMu_BlockA_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_DoubleMu_BlockB_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/flip/ntuple_Oct19v1_Data_2018_DoubleMu_BlockB_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_DoubleMu_BlockC_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/flip/ntuple_Oct19v1_Data_2018_DoubleMu_BlockC_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_DoubleMu_BlockD_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/flip/ntuple_Oct19v1_Data_2018_DoubleMu_BlockD_MEM_flip_SF_v1_noOverlap.root";
+
+	TString filename_MuonEG_BlockA_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/flip/ntuple_Oct19v1_Data_2018_MuonEG_BlockA_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_MuonEG_BlockB_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/flip/ntuple_Oct19v1_Data_2018_MuonEG_BlockB_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_MuonEG_BlockC_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/flip/ntuple_Oct19v1_Data_2018_MuonEG_BlockC_MEM_flip_SF_v1_noOverlap.root";
+	TString filename_MuonEG_BlockD_flip = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/flip/ntuple_Oct19v1_Data_2018_MuonEG_BlockD_MEM_flip_SF_v1_noOverlap.root";
+
+	///////////////////////////////////////////////////////
+
+	// ttH
+
+	MC_XS.push_back(XS_ttH);
+	MC_filename.push_back(filename_ttH);
+	MC_filename_norm.push_back(filename_norm_ttH);
+	MC_samplename.push_back("ttH_s1");
+	MC_sampletag.push_back("ttH");
+	MC_samplegroup.push_back("ttH");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ttH);
+	MC_filename.push_back(filename_ttH);
+	MC_filename_norm.push_back(filename_norm_ttH);
+	MC_samplename.push_back("ttHhww_s1");
+	MC_sampletag.push_back("ttHhww");
+	MC_samplegroup.push_back("ttHhww");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch+" && "+hww);
+	MC_convs_samplecut.push_back(conversmatch+" && "+hww);
+
+	MC_XS.push_back(XS_ttH);
+	MC_filename.push_back(filename_ttH);
+	MC_filename_norm.push_back(filename_norm_ttH);
+	MC_samplename.push_back("ttHhzz_s1");
+	MC_sampletag.push_back("ttHhzz");
+	MC_samplegroup.push_back("ttHhzz");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch+" && "+hzz);
+	MC_convs_samplecut.push_back(conversmatch+" && "+hzz);
+
+	MC_XS.push_back(XS_ttH);
+	MC_filename.push_back(filename_ttH);
+	MC_filename_norm.push_back(filename_norm_ttH);
+	MC_samplename.push_back("ttHhtt_s1");
+	MC_sampletag.push_back("ttHhtt");
+	MC_samplegroup.push_back("ttHhtt");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch+" && "+htt);
+	MC_convs_samplecut.push_back(conversmatch+" && "+htt);
+
+	///////////////////////////////////////////////////////
+
+	// tHQ
+
+	MC_XS.push_back(XS_tHQ_ctcvcp);
+	MC_filename.push_back(filename_tHQ_ctcvcp);
+	MC_filename_norm.push_back(filename_norm_tHQ_ctcvcp);
+	MC_samplename.push_back("tHQ_s1");
+	MC_sampletag.push_back("tHQ");
+	MC_samplegroup.push_back("tHq");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	// tHW
+
+	MC_XS.push_back(XS_tHW_ctcvcp);
+	MC_filename.push_back(filename_tHW_ctcvcp);
+	MC_filename_norm.push_back(filename_norm_tHW_ctcvcp);
+	MC_samplename.push_back("tHW_s1");
+	MC_sampletag.push_back("tHW");
+	MC_samplegroup.push_back("tHq");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	///////////////////////////////////////////////////////
+
+	// VH
+
+	MC_XS.push_back(XS_VHToNonbb);
+	MC_filename.push_back(filename_VHToNonbb);
+	MC_filename_norm.push_back(filename_norm_VHToNonbb);
+	MC_samplename.push_back("VHToNonbb_s1");
+	MC_sampletag.push_back("VHToNonbb");
+	MC_samplegroup.push_back("VH");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ZHToTauTau);
+	MC_filename.push_back(filename_ZHToTauTau);
+	MC_filename_norm.push_back(filename_norm_ZHToTauTau);
+	MC_samplename.push_back("ZHToTauTau_s1");
+	MC_sampletag.push_back("ZHToTauTau");
+	MC_samplegroup.push_back("VH");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ZH_HToBB_ZToLL);
+	MC_filename.push_back(filename_ZH_HToBB_ZToLL);
+	MC_filename_norm.push_back(filename_norm_ZH_HToBB_ZToLL);
+	MC_samplename.push_back("ZHToBBZToLL_s1");
+	MC_sampletag.push_back("ZHToBBZToLL");
+	MC_samplegroup.push_back("VH");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	///////////////////////////////////////////////////////
+
+	// ttVH
+
+	MC_XS.push_back(XS_ttWH);
+	MC_filename.push_back(filename_ttWH);
+	MC_filename_norm.push_back(filename_norm_ttWH);
+	MC_samplename.push_back("ttWH_s1");
+	MC_sampletag.push_back("ttWH");
+	MC_samplegroup.push_back("ttVH");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ttZH);
+	MC_filename.push_back(filename_ttZH);
+	MC_filename_norm.push_back(filename_norm_ttZH);
+	MC_samplename.push_back("ttZH_s1");
+	MC_sampletag.push_back("ttZH");
+	MC_samplegroup.push_back("ttVH");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	///////////////////////////////////////////////////////
+
+	// ggH
+
+	MC_XS.push_back(XS_ggHToTauTau);
+	MC_filename.push_back(filename_ggHToTauTau);
+	MC_filename_norm.push_back(filename_norm_ggHToTauTau);
+	MC_samplename.push_back("ggHToTauTau_s1");
+	MC_sampletag.push_back("ggHToTauTau");
+	MC_samplegroup.push_back("ggH");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ggHToZZ);
+	MC_filename.push_back(filename_ggHToZZ4l);
+	MC_filename_norm.push_back(filename_norm_ggHToZZ4l);
+	MC_samplename.push_back("ggHToZZ4l_s1");
+	MC_sampletag.push_back("ggHToZZ4l");
+	MC_samplegroup.push_back("ggH");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ggHToWWToLNuQQ);
+	MC_filename.push_back(filename_ggHToWWToLNuQQ);
+	MC_filename_norm.push_back(filename_norm_ggHToWWToLNuQQ);
+	MC_samplename.push_back("ggHToWWToLNuQQ_s1");
+	MC_sampletag.push_back("ggHToWWToLNuQQ");
+	MC_samplegroup.push_back("ggH");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ggHToWWTo2L2Nu);
+	MC_filename.push_back(filename_ggHToWWTo2L2Nu);
+	MC_filename_norm.push_back(filename_norm_ggHToWWTo2L2Nu);
+	MC_samplename.push_back("ggHToWWTo2L2Nu_s1");
+	MC_sampletag.push_back("ggHToWWTo2L2Nu");
+	MC_samplegroup.push_back("ggH");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ggHToMuMu);
+	MC_filename.push_back(filename_ggHToMuMu);
+	MC_filename_norm.push_back(filename_norm_ggHToMuMu);
+	MC_samplename.push_back("ggHToMuMu_s1");
+	MC_sampletag.push_back("ggHToMuMu");
+	MC_samplegroup.push_back("ggH");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ggHToBB);
+	MC_filename.push_back(filename_ggHToBB);
+	MC_filename_norm.push_back(filename_norm_ggHToBB);
+	MC_samplename.push_back("ggHToBB_s1");
+	MC_sampletag.push_back("ggHToBB");
+	MC_samplegroup.push_back("ggH");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ggHToGG);
+	MC_filename.push_back(filename_ggHToGG);
+	MC_filename_norm.push_back(filename_norm_ggHToGG);
+	MC_samplename.push_back("ggHToGG_s1");
+	MC_sampletag.push_back("ggHToGG");
+	MC_samplegroup.push_back("ggH");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	///////////////////////////////////////////////////////
+
+	// qqH
+
+	MC_XS.push_back(XS_VBFHToTauTau);
+	MC_filename.push_back(filename_VBFHToTauTau);
+	MC_filename_norm.push_back(filename_norm_VBFHToTauTau);
+	MC_samplename.push_back("VBFHToTauTau_s1");
+	MC_sampletag.push_back("VBFHToTauTau");
+	MC_samplegroup.push_back("VBF");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_VBFHToZZ);
+	MC_filename.push_back(filename_VBFHToZZ);
+	MC_filename_norm.push_back(filename_norm_VBFHToZZ);
+	MC_samplename.push_back("VBFHToZZ_s1");
+	MC_sampletag.push_back("VBFHToZZ");
+	MC_samplegroup.push_back("VBF");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_VBFHToWWToLNuQQ);
+	MC_filename.push_back(filename_VBFHToWWToLNuQQ);
+	MC_filename_norm.push_back(filename_norm_VBFHToWWToLNuQQ);
+	MC_samplename.push_back("VBFHToWWToLNuQQ_s1");
+	MC_sampletag.push_back("VBFHToWWToLNuQQ");
+	MC_samplegroup.push_back("VBF");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_VBFHToWWTo2L2Nu);
+	MC_filename.push_back(filename_VBFHToWWTo2L2Nu);
+	MC_filename_norm.push_back(filename_norm_VBFHToWWTo2L2Nu);
+	MC_samplename.push_back("VBFHToWWTo2L2Nu_s1");
+	MC_sampletag.push_back("VBFHToWWTo2L2Nu");
+	MC_samplegroup.push_back("VBF");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_VBFHToMuMu);
+	MC_filename.push_back(filename_VBFHToMuMu);
+	MC_filename_norm.push_back(filename_norm_VBFHToMuMu);
+	MC_samplename.push_back("VBFHToMuMu_s1");
+	MC_sampletag.push_back("VBFHToMuMu");
+	MC_samplegroup.push_back("VBF");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_VBFHToBB);
+	MC_filename.push_back(filename_VBFHToBB);
+	MC_filename_norm.push_back(filename_norm_VBFHToBB);
+	MC_samplename.push_back("VBFHToBB_s1");
+	MC_sampletag.push_back("VBFHToBB");
+	MC_samplegroup.push_back("VBF");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_VBFHToGG);
+	MC_filename.push_back(filename_VBFHToGG);
+	MC_filename_norm.push_back(filename_norm_VBFHToGG);
+	MC_samplename.push_back("VBFHToGG_s1");
+	MC_sampletag.push_back("VBFHToGG");
+	MC_samplegroup.push_back("VBF");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	///////////////////////////////////////////////////////
+
+	// HH
+
+	MC_XS.push_back(XS_ggHHTo2B2Tau);
+	MC_filename.push_back(filename_ggHHTo2B2Tau);
+	MC_filename_norm.push_back(filename_norm_ggHHTo2B2Tau);
+	MC_samplename.push_back("ggHHTo2B2Tau_s1");
+	MC_sampletag.push_back("ggHHTo2B2Tau");
+	MC_samplegroup.push_back("HH");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	///////////////////////////////////////////////////////
+
+	// ttZ
+
+	MC_XS.push_back(XS_ttZ);
+	MC_filename.push_back(filename_ttZ); 
+	MC_filename_norm.push_back(filename_norm_ttZ);
+	MC_samplename.push_back("ttZ_s1");
+	MC_sampletag.push_back("ttZ");
+	MC_samplegroup.push_back("ttZ");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ttZ_lowmass);
+	MC_filename.push_back(filename_ttZ_lowmass);
+	MC_filename_norm.push_back(filename_norm_ttZ_lowmass);
+	MC_samplename.push_back("ttZm1to10_s1");
+	MC_sampletag.push_back("ttZm1to10");
+	MC_samplegroup.push_back("ttZ");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ttbar_DiLept);
+	MC_filename.push_back(filename_ttbar_DiLept); 
+	MC_filename_norm.push_back(filename_norm_ttbar_DiLept);
+	MC_samplename.push_back("ttbarDL_s1");
+	MC_sampletag.push_back("ttbarDL");
+	MC_samplegroup.push_back("ttZ");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ttbar_SingleLep);
+	MC_filename.push_back(filename_ttbar_SingleLeptFromt); 
+	MC_filename_norm.push_back(filename_norm_ttbar_SingleLeptFromt);
+	MC_samplename.push_back("ttbarSLfromT_s1");
+	MC_sampletag.push_back("ttbarSLfromT");
+	MC_samplegroup.push_back("ttZ");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ttbar_SingleLep);
+	MC_filename.push_back(filename_ttbar_SingleLeptFromtbar); 
+	MC_filename_norm.push_back(filename_norm_ttbar_SingleLeptFromtbar);
+	MC_samplename.push_back("ttbarSLfromTbar_s1");
+	MC_sampletag.push_back("ttbarSLfromTbar");
+	MC_samplegroup.push_back("ttZ");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	///////////////////////////////////////////////////////
+
+	// ttW
+
+	MC_XS.push_back(XS_ttW);
+	MC_filename.push_back(filename_ttW);
+	MC_filename_norm.push_back(filename_norm_ttW);
+	MC_samplename.push_back("ttW_s1");
+	MC_sampletag.push_back("ttW");
+	MC_samplegroup.push_back("ttW");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	// ttWW
+
+	/*MC_XS.push_back(XS_ttWW);
+	MC_filename.push_back(filename_ttWW_ext1);
+	MC_filename_norm.push_back(filename_norm_ttWW_ext1);
+	MC_samplename.push_back("ttWW_s2");
+	MC_sampletag.push_back("ttWW");
+	MC_samplegroup.push_back("ttW");
+	MC_nsamples.push_back(2);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);*/
+
+	MC_XS.push_back(XS_ttWW);
+	MC_filename.push_back(filename_ttWW_ext2);
+	MC_filename_norm.push_back(filename_norm_ttWW_ext2);
+	MC_samplename.push_back("ttWW_s1");
+	MC_sampletag.push_back("ttWW");
+	MC_samplegroup.push_back("ttW");
+	MC_nsamples.push_back(2);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	///////////////////////////////////////////////////////
+
+	// WW
+
+	MC_XS.push_back(XS_WW);
+	MC_filename.push_back(filename_WW);
+	MC_filename_norm.push_back(filename_norm_WW);
+	MC_samplename.push_back("WW_s1");
+	MC_sampletag.push_back("WW");
+	MC_samplegroup.push_back("EWK");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	// WZ
+
+	/*MC_XS.push_back(XS_WZ);
+	MC_filename.push_back(filename_WZ);
+	MC_filename_norm.push_back(filename_norm_WZ);
+	MC_samplename.push_back("WZ_s2");
+	MC_sampletag.push_back("WZ");
+	MC_samplegroup.push_back("EWK");
+	MC_nsamples.push_back(2);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);*/
+
+	MC_XS.push_back(XS_WZ);
+	MC_filename.push_back(filename_WZ_ext1);
+	MC_filename_norm.push_back(filename_norm_WZ_ext1);
+	MC_samplename.push_back("WZ_s1");
+	MC_sampletag.push_back("WZ");
+	MC_samplegroup.push_back("EWK");
+	MC_nsamples.push_back(2);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	// ZZ
+
+	/*MC_XS.push_back(XS_ZZ);
+	MC_filename.push_back(filename_ZZ);
+	MC_filename_norm.push_back(filename_norm_ZZ);
+	MC_samplename.push_back("ZZ_s2");
+	MC_sampletag.push_back("ZZ");
+	MC_samplegroup.push_back("EWK");
+	MC_nsamples.push_back(2);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);*/
+
+	MC_XS.push_back(XS_ZZ);
+	MC_filename.push_back(filename_ZZ_ext2);
+	MC_filename_norm.push_back(filename_norm_ZZ_ext2);
+	MC_samplename.push_back("ZZ_s1");
+	MC_sampletag.push_back("ZZ");
+	MC_samplegroup.push_back("EWK");
+	MC_nsamples.push_back(2);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	///////////////////////////////////////////////////////
+
+	// Rares
+
+	MC_XS.push_back(XS_WWW);
+	MC_filename.push_back(filename_WWW);
+	MC_filename_norm.push_back(filename_norm_WWW);
+	MC_samplename.push_back("WWW_s1");
+	MC_sampletag.push_back("WWW");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_WWZ);
+	MC_filename.push_back(filename_WWZ);
+	MC_filename_norm.push_back(filename_norm_WWZ);
+	MC_samplename.push_back("WWZ_s1");
+	MC_sampletag.push_back("WWZ");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_WZZ);
+	MC_filename.push_back(filename_WZZ);
+	MC_filename_norm.push_back(filename_norm_WZZ);
+	MC_samplename.push_back("WZZ_s1");
+	MC_sampletag.push_back("WZZ");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ZZZ);
+	MC_filename.push_back(filename_ZZZ);
+	MC_filename_norm.push_back(filename_norm_ZZZ);
+	MC_samplename.push_back("ZZZ_s1");
+	MC_sampletag.push_back("ZZZ");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_WZG);
+	MC_filename.push_back(filename_WZG);
+	MC_filename_norm.push_back(filename_norm_WZG);
+	MC_samplename.push_back("WZG_s1");
+	MC_sampletag.push_back("WZG");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_WG);
+	MC_filename.push_back(filename_WG);
+	MC_filename_norm.push_back(filename_norm_WG);
+	MC_samplename.push_back("WG_s1");
+	MC_sampletag.push_back("WG");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ZG);
+	MC_filename.push_back(filename_ZG);
+	MC_filename_norm.push_back(filename_norm_ZG);
+	MC_samplename.push_back("ZG_s1");
+	MC_sampletag.push_back("ZG");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_tG);
+	MC_filename.push_back(filename_tG);
+	MC_filename_norm.push_back(filename_norm_tG);
+	MC_samplename.push_back("tG_s1");
+	MC_sampletag.push_back("tG");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_ttG);
+	MC_filename.push_back(filename_ttG);
+	MC_filename_norm.push_back(filename_norm_ttG);
+	MC_samplename.push_back("ttG_s1");
+	MC_sampletag.push_back("ttG");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_tZq);
+	MC_filename.push_back(filename_tZq); 
+	MC_filename_norm.push_back(filename_norm_tZq);
+	MC_samplename.push_back("tZq_s1");
+	MC_sampletag.push_back("tZq");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_WpWp);
+	MC_filename.push_back(filename_WpWp); 
+	MC_filename_norm.push_back(filename_norm_WpWp);
+	MC_samplename.push_back("WpWp_s1");
+	MC_sampletag.push_back("WpWp");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_WW_DS);
+	MC_filename.push_back(filename_WW_DS); 
+	MC_filename_norm.push_back(filename_norm_WW_DS);
+	MC_samplename.push_back("WWss_s1");
+	MC_sampletag.push_back("WWss");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_tttt);
+	MC_filename.push_back(filename_tttt); 
+	MC_filename_norm.push_back(filename_norm_tttt);
+	MC_samplename.push_back("tttt_s1");
+	MC_sampletag.push_back("tttt");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_St_schannel);
+	MC_filename.push_back(filename_St_schannel); 
+	MC_filename_norm.push_back(filename_norm_St_schannel);
+	MC_samplename.push_back("TsCh_s1");
+	MC_sampletag.push_back("TsCh");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_St_tchannel_top);
+	MC_filename.push_back(filename_St_tchannel_top); 
+	MC_filename_norm.push_back(filename_norm_St_tchannel_top);
+	MC_samplename.push_back("TtChTop_s1");
+	MC_sampletag.push_back("TtChTop");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_St_tchannel_antitop);
+	MC_filename.push_back(filename_St_tchannel_antitop); 
+	MC_filename_norm.push_back(filename_norm_St_tchannel_antitop);
+	MC_samplename.push_back("TtChAntitop_s1");
+	MC_sampletag.push_back("TtChAntitop");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_St_tW);
+	MC_filename.push_back(filename_St_tW_top); 
+	MC_filename_norm.push_back(filename_norm_St_tW_top);
+	MC_samplename.push_back("TtwChTop_s1");
+	MC_sampletag.push_back("TtwChTop");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_St_tW);
+	MC_filename.push_back(filename_St_tW_antitop); 
+	MC_filename_norm.push_back(filename_norm_St_tW_antitop);
+	MC_samplename.push_back("TtwChAntitop_s1");
+	MC_sampletag.push_back("TtwChAntitop");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	MC_XS.push_back(XS_St_tWll);
+	MC_filename.push_back(filename_St_tWll); 
+	MC_filename_norm.push_back(filename_norm_St_tWll);
+	MC_samplename.push_back("TtwChll_s1");
+	MC_sampletag.push_back("TtwChll");
+	MC_samplegroup.push_back("Rares");
+	MC_nsamples.push_back(1);
+	MC_samplecut.push_back(genmatch+" && "+chargematch);
+	MC_convs_samplecut.push_back(conversmatch);
+
+	///////////////////////////////////////////////////////
+
+	Data_SR_filename.push_back(filename_EGamma_BlockA_SR);
+	Data_SR_filename.push_back(filename_EGamma_BlockB_SR);
+	Data_SR_filename.push_back(filename_EGamma_BlockC_SR);
+	Data_SR_filename.push_back(filename_EGamma_BlockD_SR);
+
+	Data_SR_filename.push_back(filename_SingleMuon_BlockA_SR);
+	Data_SR_filename.push_back(filename_SingleMuon_BlockB_SR);
+	Data_SR_filename.push_back(filename_SingleMuon_BlockC_SR);
+	Data_SR_filename.push_back(filename_SingleMuon_BlockD_SR);
+
+	Data_SR_filename.push_back(filename_DoubleMu_BlockA_SR);
+	Data_SR_filename.push_back(filename_DoubleMu_BlockB_SR);
+	Data_SR_filename.push_back(filename_DoubleMu_BlockC_SR);
+	Data_SR_filename.push_back(filename_DoubleMu_BlockD_SR);
+
+	Data_SR_filename.push_back(filename_MuonEG_BlockA_SR);
+	Data_SR_filename.push_back(filename_MuonEG_BlockB_SR);
+	Data_SR_filename.push_back(filename_MuonEG_BlockC_SR);
+	Data_SR_filename.push_back(filename_MuonEG_BlockD_SR);
+
+	///////////////////////////////////////////////////////
+
+	Data_fake_filename.push_back(filename_EGamma_BlockA_fake);
+	Data_fake_filename.push_back(filename_EGamma_BlockB_fake);
+	Data_fake_filename.push_back(filename_EGamma_BlockC_fake);
+	Data_fake_filename.push_back(filename_EGamma_BlockD_fake);
+
+	Data_fake_filename.push_back(filename_SingleMuon_BlockA_fake);
+	Data_fake_filename.push_back(filename_SingleMuon_BlockB_fake);
+	Data_fake_filename.push_back(filename_SingleMuon_BlockC_fake);
+	Data_fake_filename.push_back(filename_SingleMuon_BlockD_fake);
+
+	Data_fake_filename.push_back(filename_DoubleMu_BlockA_fake);
+	Data_fake_filename.push_back(filename_DoubleMu_BlockB_fake);
+	Data_fake_filename.push_back(filename_DoubleMu_BlockC_fake);
+	Data_fake_filename.push_back(filename_DoubleMu_BlockD_fake);
+
+	Data_fake_filename.push_back(filename_MuonEG_BlockA_fake);
+	Data_fake_filename.push_back(filename_MuonEG_BlockB_fake);
+	Data_fake_filename.push_back(filename_MuonEG_BlockC_fake);
+	Data_fake_filename.push_back(filename_MuonEG_BlockD_fake);
+
+	///////////////////////////////////////////////////////
+
+	Data_flip_filename.push_back(filename_EGamma_BlockA_flip);
+	Data_flip_filename.push_back(filename_EGamma_BlockB_flip);
+	Data_flip_filename.push_back(filename_EGamma_BlockC_flip);
+	Data_flip_filename.push_back(filename_EGamma_BlockD_flip);
+
+	Data_flip_filename.push_back(filename_SingleMuon_BlockA_flip);
+	Data_flip_filename.push_back(filename_SingleMuon_BlockB_flip);
+	Data_flip_filename.push_back(filename_SingleMuon_BlockC_flip);
+	Data_flip_filename.push_back(filename_SingleMuon_BlockD_flip);
+
+	Data_flip_filename.push_back(filename_DoubleMu_BlockA_flip);
+	Data_flip_filename.push_back(filename_DoubleMu_BlockB_flip);
+	Data_flip_filename.push_back(filename_DoubleMu_BlockC_flip);
+	Data_flip_filename.push_back(filename_DoubleMu_BlockD_flip);
+
+	Data_flip_filename.push_back(filename_MuonEG_BlockA_flip);
+	Data_flip_filename.push_back(filename_MuonEG_BlockB_flip);
+	Data_flip_filename.push_back(filename_MuonEG_BlockC_flip);
+	Data_flip_filename.push_back(filename_MuonEG_BlockD_flip);
+
+	///////////////////////////////////////////////////////
+
+	return std::make_tuple(MC_XS, MC_filename, MC_filename_norm, MC_samplename, MC_samplecut, MC_sampletag, MC_samplegroup, MC_nsamples, MC_convs_samplecut, Data_SR_filename, Data_fake_filename, Data_flip_filename, luminosity);
+
+}
+
+
+
+void datacard_maker(TString var1, int nbin, float xmin, float xmax,
+					TString cut_cat, TString file, bool syst=false, int year=2016){
+
+	cout<<" "<<endl;
+	cout<<" ************************************************ "<<endl;
+	cout<<" Creating datacards..."<<endl;
+	cout<<"   Year: "<<year<<endl;
+
+	TString var = var1 + "*(" + var1 + Form("<=%f) + %f*(",xmax,0.999*xmax) + var1 + Form(">%f)",xmax);
+  	cout<<"   Variable: "<<var<<endl;
+
+  	std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<int>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, float > loadedsamples;
+  	
+  	if(year==2016) loadedsamples = initialize_2016();
+  	else if(year==2017) loadedsamples = initialize_2017();
+  	else if(year==2018) loadedsamples = initialize_2018();
+
+  	vector<float> 	XS_MC 				= std::get<0>(loadedsamples);
+  	vector<TString> filename_MC 		= std::get<1>(loadedsamples);
+  	vector<TString> filename_norm_MC 	= std::get<2>(loadedsamples);
+  	vector<TString> samplename_MC 		= std::get<3>(loadedsamples);
+  	vector<TString> samplecut_MC 		= std::get<4>(loadedsamples);
+  	vector<TString> sampletag_MC 		= std::get<5>(loadedsamples);
+  	vector<TString> samplegroup_MC 		= std::get<6>(loadedsamples);
+  	vector<int> 	nsamples_MC 		= std::get<7>(loadedsamples);
+  	vector<TString> samplecutconvs_MC 	= std::get<8>(loadedsamples);
+  	vector<TString> filename_data_SR 	= std::get<9>(loadedsamples);
+  	vector<TString> filename_data_fake 	= std::get<10>(loadedsamples);
+  	vector<TString> filename_data_flip 	= std::get<11>(loadedsamples);
+  	float 			lumin 				= std::get<12>(loadedsamples);
+
+  	cout<<"   Lumi: "<<lumin<<endl;
+
+  	cout<<" ************************************************ "<<endl;
+  	cout<<" "<<endl;
+
+  	TString cat_name = "ttH_2lss_1tau";
+
+  	TFile* f_new = TFile::Open(file,"RECREATE");
+  	TDirectory* dir = f_new->mkdir(cat_name);
+    dir->cd();
+
+	///////////////////////////////////////////////////////
+
+	// MC normalization files
+
+	vector<float> norm_MC;
+
+	for(unsigned i_MC=0;i_MC<samplename_MC.size();i_MC++){
+
+		//if( samplename_MC[i_MC].Contains("s2") || samplename_MC[i_MC].Contains("s3") ) continue;
+
+		TString MC_weight = "MC_weight";
+
+		if( samplename_MC[i_MC].Contains("tHQ") || samplename_MC[i_MC].Contains("tHW")) //FIXME
+			//MC_weight = "(MC_weights_rwgt[11]/MC_weight_originalXWGTUP)*sign(MC_weight)";
+			MC_weight = "MC_weight";
+
+		TH1F* h_MC_norm = single_plot(filename_norm_MC[i_MC],
+			"Tree",
+			"1",
+			MC_weight+"*PU_weight_v1",
+			3,0,3);
+
+		norm_MC.push_back(h_MC_norm->Integral());
+
+	}  	
+
+	///////////////////////////////////////////////////////
+
+	// MC SR prompt files
+
+	for(unsigned i_MC=0;i_MC<samplename_MC.size();i_MC++){
+
+		//if( samplename_MC[i_MC].Contains("s2") || samplename_MC[i_MC].Contains("s3") ) continue;
+
+		TString MC_weight = "MC_weight";
+
+		if( samplename_MC[i_MC].Contains("tHQ") || samplename_MC[i_MC].Contains("tHW")) //FIXME
+			MC_weight = "10*(MC_weights_rwgt[11]/MC_weight_originalXWGTUP)";
+			//MC_weight = "(MC_weights_rwgt[11]/MC_weight_originalXWGTUP)";
+			//MC_weight = "MC_weight";
+
+		TH1F* h_MC = single_plot(filename_MC[i_MC],
+			"HTauTauTree_2lss1tau_SR", 
+			var,
+			MC_weight+"*PU_weight_v1*prefire_weight*trigger_weight_v1*leptonID_weight_v1*bTagSF_CSVshape_weight*tauID_weight_v1*tauES_weight_v1*("+samplecut_MC[i_MC]+" && "+cut_cat+")",
+            nbin,xmin,xmax);
+
+		h_MC->Scale(lumin*XS_MC[i_MC]/norm_MC[i_MC]);
+
+		h_MC->SetNameTitle("x_"+sampletag_MC[i_MC],"x_"+sampletag_MC[i_MC]);
+		makeBinContentsPositive(h_MC,true);
+		//h_MC->Write();
+
+	}
+
+	///////////////////////////////////////////////////////
+
+	// MC SR conversion files
+
+	for(unsigned i_MC=0;i_MC<samplename_MC.size();i_MC++){
+
+		//if( samplename_MC[i_MC].Contains("s2") || samplename_MC[i_MC].Contains("s3") ) continue;
+
+		TString MC_weight = "MC_weight";
+
+		if( samplename_MC[i_MC].Contains("tHQ") || samplename_MC[i_MC].Contains("tHW")) //FIXME
+			MC_weight = "10*(MC_weights_rwgt[11]/MC_weight_originalXWGTUP)";
+			//MC_weight = "(MC_weights_rwgt[11]/MC_weight_originalXWGTUP)";
+			//MC_weight = "MC_weight";
+
+		//if( samplename_MC[i_MC].Contains("ttHHww") || samplename_MC[i_MC].Contains("ttHHzz") || samplename_MC[i_MC].Contains("ttHHtt") ) 
+		//	continue;
+
+		TH1F* h_MC_Convs = single_plot(filename_MC[i_MC],
+			"HTauTauTree_2lss1tau_SR", 
+			var,
+			MC_weight+"*PU_weight_v1*prefire_weight*trigger_weight_v1*leptonID_weight_v1*bTagSF_CSVshape_weight*tauID_weight_v1*tauES_weight_v1*("+samplecutconvs_MC[i_MC]+" && "+cut_cat+")",
+            nbin,xmin,xmax);
+
+		h_MC_Convs->Scale(lumin*XS_MC[i_MC]/norm_MC[i_MC]);
+
+		h_MC_Convs->SetNameTitle("x_Convs_"+sampletag_MC[i_MC],"x_"+sampletag_MC[i_MC]);
+		makeBinContentsPositive(h_MC_Convs,true);
+		//h_MC_Convs->Write();
+
+	}
+
+	///////////////////////////////////////////////////////
+
+	cout<<" "<<endl;
+	cout<<"Grouping samples..."<<endl;
+
+	// Grouping samples
+
+	TH1F* h_ttH;
+	TH1F* h_ttHhww;
+	TH1F* h_ttHhzz;
+	TH1F* h_ttHhtt;
+	TH1F* h_tHq;
+	TH1F* h_VH;
+	TH1F* h_ttVH;
+	TH1F* h_ggH;
+	TH1F* h_VBF;
+	TH1F* h_HH;
+	TH1F* h_ttZ;
+	TH1F* h_ttW;
+	TH1F* h_EWK;
+	TH1F* h_Rares;
+	TH1F* h_Convs;
+
+	int n_ttH = 0;
+	int n_ttHhww = 0;
+	int n_ttHhzz = 0;
+	int n_ttHhtt = 0;
+	int n_tHq = 0;
+	int n_VH = 0;
+	int n_ttVH = 0;
+	int n_ggH = 0;
+	int n_VBF = 0;
+	int n_HH = 0;
+	int n_ttZ = 0;
+	int n_ttW = 0;
+	int n_EWK = 0;
+	int n_Rares = 0;
+
+	for(unsigned i_MC=0;i_MC<samplename_MC.size();i_MC++){
+
+		if( samplegroup_MC[i_MC] == "ttH" ){
+			cout<<" "<<samplegroup_MC[i_MC]<<": "<<sampletag_MC[i_MC]<<endl;
+			if (n_ttH==0) h_ttH = (TH1F*)f_new->Get(cat_name+"/x_"+sampletag_MC[i_MC]);
+			else h_ttH->Add( (TH1F*)f_new->Get(cat_name+"/x_"+sampletag_MC[i_MC]) );
+			n_ttH++;
+		}
+
+		else if( samplegroup_MC[i_MC] == "ttHhww" ){
+			cout<<" "<<samplegroup_MC[i_MC]<<": "<<sampletag_MC[i_MC]<<endl;
+			if (n_ttHhww==0) h_ttHhww = (TH1F*)f_new->Get(cat_name+"/x_"+sampletag_MC[i_MC]);
+			else h_ttHhww->Add( (TH1F*)f_new->Get(cat_name+"/x_"+sampletag_MC[i_MC]) );
+			n_ttHhww++;
+		}
+
+		else if( samplegroup_MC[i_MC] == "ttHhzz" ){
+			cout<<" "<<samplegroup_MC[i_MC]<<": "<<sampletag_MC[i_MC]<<endl;
+			if (n_ttHhzz==0) h_ttHhzz = (TH1F*)f_new->Get(cat_name+"/x_"+sampletag_MC[i_MC]);
+			else h_ttHhzz->Add( (TH1F*)f_new->Get(cat_name+"/x_"+sampletag_MC[i_MC]) );
+			n_ttHhzz++;
+		}
+
+		else if( samplegroup_MC[i_MC] == "ttHhtt" ){
+			cout<<" "<<samplegroup_MC[i_MC]<<": "<<sampletag_MC[i_MC]<<endl;
+			if (n_ttHhtt==0) h_ttHhtt = (TH1F*)f_new->Get(cat_name+"/x_"+sampletag_MC[i_MC]);
+			else h_ttHhtt->Add( (TH1F*)f_new->Get(cat_name+"/x_"+sampletag_MC[i_MC]) );
+			n_ttHhtt++;
+		}
+
+		else if( samplegroup_MC[i_MC] == "tHq" ){
+			cout<<" "<<samplegroup_MC[i_MC]<<": "<<sampletag_MC[i_MC]<<endl;
+			if (n_tHq==0) h_tHq = (TH1F*)f_new->Get(cat_name+"/x_"+sampletag_MC[i_MC]);
+			else h_tHq->Add( (TH1F*)f_new->Get(cat_name+"/x_"+sampletag_MC[i_MC]) );
+			n_tHq++;
+		}
+
+		else if( samplegroup_MC[i_MC] == "VH" ){
+			cout<<" "<<samplegroup_MC[i_MC]<<": "<<sampletag_MC[i_MC]<<endl;
+			if (n_VH==0) h_VH = (TH1F*)f_new->Get(cat_name+"/x_"+sampletag_MC[i_MC]);
+			else h_VH->Add( (TH1F*)f_new->Get(cat_name+"/x_"+sampletag_MC[i_MC]) );
+			n_VH++;
+		}
+
+		else if( samplegroup_MC[i_MC] == "ttVH" ){
+			cout<<" "<<samplegroup_MC[i_MC]<<": "<<sampletag_MC[i_MC]<<endl;
+			if (n_ttVH==0) h_ttVH = (TH1F*)f_new->Get(cat_name+"/x_"+sampletag_MC[i_MC]);
+			else h_ttVH->Add( (TH1F*)f_new->Get(cat_name+"/x_"+sampletag_MC[i_MC]) );
+			n_ttVH++;
+		}
+
+		else if( samplegroup_MC[i_MC] == "ggH" ){
+			cout<<" "<<samplegroup_MC[i_MC]<<": "<<sampletag_MC[i_MC]<<endl;
+			if (n_ggH==0) h_ggH = (TH1F*)f_new->Get(cat_name+"/x_"+sampletag_MC[i_MC]);
+			else h_ggH->Add( (TH1F*)f_new->Get(cat_name+"/x_"+sampletag_MC[i_MC]) );
+			n_ggH++;
+		}
+
+		else if( samplegroup_MC[i_MC] == "VBF" ){
+			cout<<" "<<samplegroup_MC[i_MC]<<": "<<sampletag_MC[i_MC]<<endl;
+			if (n_VBF==0) h_VBF = (TH1F*)f_new->Get(cat_name+"/x_"+sampletag_MC[i_MC]);
+			else h_VBF->Add( (TH1F*)f_new->Get(cat_name+"/x_"+sampletag_MC[i_MC]) );
+			n_VBF++;
+		}
+
+		else if( samplegroup_MC[i_MC] == "HH" ){
+			cout<<" "<<samplegroup_MC[i_MC]<<": "<<sampletag_MC[i_MC]<<endl;
+			if (n_HH==0) h_HH = (TH1F*)f_new->Get(cat_name+"/x_"+sampletag_MC[i_MC]);
+			else h_HH->Add( (TH1F*)f_new->Get(cat_name+"/x_"+sampletag_MC[i_MC]) );
+			n_HH++;
+		}
+
+		else if( samplegroup_MC[i_MC] == "ttZ" ){
+			cout<<" "<<samplegroup_MC[i_MC]<<": "<<sampletag_MC[i_MC]<<endl;
+			if (n_ttZ==0) h_ttZ = (TH1F*)f_new->Get(cat_name+"/x_"+sampletag_MC[i_MC]);
+			else h_ttZ->Add( (TH1F*)f_new->Get(cat_name+"/x_"+sampletag_MC[i_MC]) );
+			n_ttZ++;
+		}
+
+		else if( samplegroup_MC[i_MC] == "ttW" ){
+			cout<<" "<<samplegroup_MC[i_MC]<<": "<<sampletag_MC[i_MC]<<endl;
+			if (n_ttW==0) h_ttW = (TH1F*)f_new->Get(cat_name+"/x_"+sampletag_MC[i_MC]);
+			else h_ttW->Add( (TH1F*)f_new->Get(cat_name+"/x_"+sampletag_MC[i_MC]) );
+			n_ttW++;
+		}
+
+		else if( samplegroup_MC[i_MC] == "EWK" ){
+			cout<<" "<<samplegroup_MC[i_MC]<<": "<<sampletag_MC[i_MC]<<endl;
+			if (n_EWK==0) h_EWK = (TH1F*)f_new->Get(cat_name+"/x_"+sampletag_MC[i_MC]);
+			else h_EWK->Add( (TH1F*)f_new->Get(cat_name+"/x_"+sampletag_MC[i_MC]) );
+			n_EWK++;
+		}
+
+		else if( samplegroup_MC[i_MC] == "Rares" ){
+			cout<<" "<<samplegroup_MC[i_MC]<<": "<<sampletag_MC[i_MC]<<endl;
+			if (n_Rares==0) h_Rares = (TH1F*)f_new->Get(cat_name+"/x_"+sampletag_MC[i_MC]);
+			else h_Rares->Add( (TH1F*)f_new->Get(cat_name+"/x_"+sampletag_MC[i_MC]) );
+			n_Rares++;
+		}
+
+		if( !(samplename_MC[i_MC]=="ttHHww" || samplename_MC[i_MC]=="ttHHzz" || samplename_MC[i_MC]=="ttHhtt") ) {
+			if (i_MC==0) h_Convs = (TH1F*)f_new->Get(cat_name+"/x_Convs_"+sampletag_MC[i_MC]);
+			else h_Convs->Add( (TH1F*)f_new->Get(cat_name+"/x_Convs_"+sampletag_MC[i_MC]) );
+		}
+	
+	}
+
+	h_ttH->SetNameTitle("TTH","TTH");
+	h_ttHhww->SetNameTitle("TTH_HWW","TTH_HWW");
+	h_ttHhzz->SetNameTitle("TTH_HZZ","TTH_HZZ");
+	h_ttHhtt->SetNameTitle("TTH_HTT","TTH_HTT");
+	h_tHq->SetNameTitle("TH","TH");
+	h_VH->SetNameTitle("VH","VH");
+	h_ttVH->SetNameTitle("TTVH","TTVH");
+	h_ggH->SetNameTitle("ggH","ggH");
+	h_VBF->SetNameTitle("VBF","VBF");
+	h_HH->SetNameTitle("HH","HH");
+	h_ttZ->SetNameTitle("TTZ","TTZ");
+	h_ttW->SetNameTitle("TTW","TTW");
+	h_EWK->SetNameTitle("EWK","EWK");
+	h_Rares->SetNameTitle("Rares","Rares");
+	h_Convs->SetNameTitle("Convs","Convs");
+
+	h_ttH->Write();
+	h_ttHhww->Write();
+	h_ttHhzz->Write();
+	h_ttHhtt->Write();
+	h_tHq->Write();
+	h_VH->Write();
+	h_ttVH->Write();
+	h_ggH->Write();
+	h_VBF->Write();
+	h_HH->Write();
+	h_ttZ->Write();
+	h_ttW->Write();
+	h_EWK->Write();
+	h_Rares->Write();
+	h_Convs->Write();
+
+	cout<<" "<<endl;
+
+    ///////////////////////////////////////////////////////
+
+	// Fakes from data
+
+    TH1F* h_fakes =single_plot(filename_data_fake,
+			"HTauTauTree_2lss1tau_fake",
+			var,
+			"event_weight_ttH_v1*("+cut_cat+")",
+			nbin,xmin,xmax);
+    
+    h_fakes->SetNameTitle("data_fakes","data_fakes");
+    makeBinContentsPositive(h_fakes,true);
+    h_fakes->Write();
+
+	///////////////////////////////////////////////////////
+
+	// Flips from data
+
+    TH1F* h_flips =single_plot(filename_data_flip,
+			"HTauTauTree_2lss1tau_flip",
+			var,
+			"event_weight_ttH_v1*("+cut_cat+")",
+			nbin,xmin,xmax);
+    
+    h_flips->SetNameTitle("data_flips","data_flips");
+    makeBinContentsPositive(h_flips,true);
+    h_flips->Write();
+
+	///////////////////////////////////////////////////////
+
+	// Data
+
+    TH1F* h_data_obs =single_plot(filename_data_SR,
+		    "HTauTauTree_2lss1tau_SR",
+		    var,
+            cut_cat,
+            nbin,xmin,xmax);
+      
+    h_data_obs->SetNameTitle("data_obs","data_obs");
+    makeBinContentsPositive(h_data_obs,true);
+    h_data_obs->Write();
+
+    ///////////////////////////////////////////////////////
+
+    cout<<"OK nominal"<<endl;
+
+    if(!syst){
+      f_new->Close();
+      return;
+    }
+
+    ///////////////////////////////////////////////////////
+
+    
+
+}
+
+
+void datacard_maker_n_recotauh(int year = 2016){
+
+	std::string year_s = to_string(year);
+
+  	TString var = "n_recotauh";
+  	
+  	int nbin = 5;
+  	float xmin = 0.;
+  	float xmax = 5.;
+  	TString cut = "((recotauh_decayMode[0]!=5) && (recotauh_decayMode[0]!=6) && (recotauh_byVVVLooseDeepTau2017v2p1VSe[0]) && (recotauh_byVLooseDeepTau2017v2p1VSmu[0]) )";
+  	TString file = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/datacards/2lss_1tau/datacard_nrecotauh_2lss1tau_"+year_s+".root";
+	
+  	datacard_maker(var,nbin,xmin,xmax,cut,file,false,year);
+
+}
+
+void datacard_maker_MEM_nomiss(int year = 2016){
+
+	std::string year_s = to_string(year);
+
+  	TString var="Integral_ttH/(Integral_ttH+1e-18*(Integral_ttbar_DL_fakelep_tlep+Integral_ttbar_DL_fakelep_ttau)+1e-1*Integral_ttZ+2e-1*Integral_ttZ_Zll)";
+  	
+  	int nbin = 10;
+  	float xmin = 0.;
+  	float xmax = 1.;
+
+  	TString cut = "integration_type==0 && ((recotauh_decayMode[0]!=5) && (recotauh_decayMode[0]!=6) && (recotauh_byVVVLooseDeepTau2017v2p1VSe[0]) && (recotauh_byVLooseDeepTau2017v2p1VSmu[0]) )";
+  	TString file = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/datacards/2lss_1tau/datacard_MEM_nomiss_2lss1tau_"+year_s+".root";
+	
+  	datacard_maker(var,nbin,xmin,xmax,cut,file,false,year);
+
+}
+
+void datacard_maker_MEM_miss(int year = 2016){
+
+	std::string year_s = to_string(year);
+
+  	TString var="Integral_ttH/(Integral_ttH+5e-15*(Integral_ttbar_DL_fakelep_tlep+Integral_ttbar_DL_fakelep_ttau)+5e-2*Integral_ttZ+5e-1*Integral_ttZ_Zll)";
+  
+  	int nbin = 10;
+  	float xmin = 0.;
+  	float xmax = 1.;
+
+  	TString cut = "integration_type==1 && ((recotauh_decayMode[0]!=5) && (recotauh_decayMode[0]!=6) && (recotauh_byVVVLooseDeepTau2017v2p1VSe[0]) && (recotauh_byVLooseDeepTau2017v2p1VSmu[0]) )";
+  	TString file = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/datacards/2lss_1tau/datacard_MEM_miss_2lss1tau_"+year_s+".root";
+	
+  	datacard_maker(var,nbin,xmin,xmax,cut,file,false,year);
+
+}
+
