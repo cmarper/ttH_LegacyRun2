@@ -4681,6 +4681,23 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
 
   	float 			lumin 						= std::get<17>(loadedsamples);
 
+  	/*cout<<"SIZES: "<<endl;
+  	cout<<XS_MC.size()<<endl;
+  	cout<<filename_MC.size()<<endl;
+  	cout<<filename_MC_fakeCR.size()<<endl;
+  	cout<<filename_norm_MC.size()<<endl;
+  	cout<<samplename_MC.size()<<endl;
+  	cout<<samplecut_MC.size()<<endl;
+  	cout<<sampletag_MC.size()<<endl;
+  	cout<<samplegroup_MC.size()<<endl;
+  	cout<<nsamples_MC.size()<<endl;
+  	cout<<samplecutconvs_MC.size()<<endl;
+  	cout<<samplecutfaketau_MC.size()<<endl;
+  	cout<<samplecutconvsfaketau_MC.size()<<endl;
+  	cout<<samplecutgentau_MC.size()<<endl;
+  	cout<<samplecutconvsgentau_MC.size()<<endl;
+  	cout<<"---"<<endl;*/
+
   	cout<<"   Lumi: "<<lumin<<endl;
 
   	cout<<" ************************************************ "<<endl;
@@ -4823,7 +4840,7 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
 
 	// Fakes from data
 
-    TH1F* h_fakes =single_plot(filename_data_fake,
+    TH1F* h_fakes = single_plot(filename_data_fake,
 			"HTauTauTree_2lss1tau_fake",
 			var,
 			"event_weight_ttH_v2*("+cut_cat+")",
@@ -4832,6 +4849,46 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
     h_fakes->SetNameTitle("data_fakes","data_fakes");
     makeBinContentsPositive(h_fakes,false);
     h_fakes->Write();
+
+    // Fakes from MC
+
+    for(unsigned i_MC=0;i_MC<samplename_MC.size();i_MC++){
+
+		TString MC_weight = "MC_weight";
+
+		//if( sampletag_MC[i_MC] == "tHQ" || sampletag_MC[i_MC] == "tHW") //FIXME
+			//MC_weight = "10*(MC_weights_rwgt[11]/MC_weight_originalXWGTUP)";
+			//MC_weight = "(MC_weights_rwgt[11]/MC_weight_originalXWGTUP)";
+
+		////////////////////////////////////////////////////////////////////////////
+
+		TH1F* h_MC_fake = single_plot(filename_MC_fakeCR[i_MC],
+			"HTauTauTree_2lss1tau_fake", 
+			var,
+			MC_weight+"*PU_weight_v1*prefire_weight*trigger_weight_v1*leptonID_weight_v1*bTagSF_CSVshape_weight*tauID_weight_v3*event_weight_ttH_v2*tauES_weight_v1*("+cut_cat+")",
+            nbin,xmin,xmax);
+
+		h_MC_fake->Scale(lumin*XS_MC[i_MC]/norm_MC[i_MC]);
+		h_MC_fake->SetNameTitle("x_fake_"+sampletag_MC[i_MC],"x_fake_"+sampletag_MC[i_MC]);
+		makeBinContentsPositive(h_MC_fake,false);
+		//h_fakes_MC->Add( (TH1F*)h_MC_fake );
+
+	}
+
+	TH1F* histo_MC_fakes;
+	int counts_fakes = 0;
+
+	for(unsigned i_MC=0;i_MC<samplename_MC.size();i_MC++){
+
+		if (counts_fakes==0) histo_MC_fakes = (TH1F*)f_new->Get(cat_name+"/x_fake_"+sampletag_MC[i_MC]);
+		else histo_MC_fakes->Add( (TH1F*)f_new->Get(cat_name+"/x_fake_"+sampletag_MC[i_MC]) );
+		counts_fakes++;
+
+	}
+
+	TString name_MC_fakes = "MC_fakes";
+	histo_MC_fakes->SetNameTitle(name_MC_fakes,name_MC_fakes);
+	histo_MC_fakes->Write();
 
 	///////////////////////////////////////////////////////
 
@@ -4874,7 +4931,6 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
     ////////////////////////////////
     ////       SYSTEMATICS       ///
     ////////////////////////////////
-
 
     ////////////////
     //// THEORY ////
@@ -5045,7 +5101,6 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
 
     }
 
-    cout<<" "<<endl;
     cout<<"OK theory syst"<<endl;
 
     ///////////////
@@ -5240,7 +5295,6 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
 
 	}
 
-	cout<<" "<<endl;
     cout<<"OK b-tag syst"<<endl;
 
     ////////////////////
@@ -5248,6 +5302,10 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
     ////////////////////
 
     // CHECKED
+
+    TString sel_ee = "( (fabs((*_recolep_sel_pdg)[0]) + fabs((*_recolep_sel_pdg)[1])) == 22 )";
+    TString sel_mm = "( (fabs((*_recolep_sel_pdg)[0]) + fabs((*_recolep_sel_pdg)[1])) == 26 )";
+    TString sel_em = "( (fabs((*_recolep_sel_pdg)[0]) + fabs((*_recolep_sel_pdg)[1])) == 24 )";
 
     cout<<" "<<endl;
     cout<<"------ TRIGGER SYST ------"<<endl;
@@ -5306,13 +5364,154 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
 
         ////////////////////////////////////////////////////////////////////////////
 
+        TH1F* h_MC_trigger_ee_Up = single_plot(filename_MC[i_MC],
+			"HTauTauTree_2lss1tau_SR", 
+			var,
+			MC_weight+"*PU_weight_v1*prefire_weight*trigger_weight_ee_up_v4*trigger_weight_em_v4*trigger_weight_mm_v4*leptonID_weight_v1*bTagSF_CSVshape_weight*tauID_weight_v3*tauES_weight_v1*("+samplecut_MC[i_MC]+" && "+cut_cat+")",
+            nbin,xmin,xmax);
+
+		h_MC_trigger_ee_Up->Scale(lumin*XS_MC[i_MC]/norm_MC[i_MC]);
+    	h_MC_trigger_ee_Up->SetNameTitle("x_"+sampletag_MC[i_MC]+"_trigger_ee_Up","x_"+sampletag_MC[i_MC]+"_trigger_ee_Up");
+        makeBinContentsPositive(h_MC_trigger_ee_Up,false);
+
+        TH1F* h_MC_trigger_ee_Down = single_plot(filename_MC[i_MC],
+			"HTauTauTree_2lss1tau_SR", 
+			var,
+			MC_weight+"*PU_weight_v1*prefire_weight*trigger_weight_ee_down_v4*trigger_weight_em_v4*trigger_weight_mm_v4*leptonID_weight_v1*bTagSF_CSVshape_weight*tauID_weight_v3*tauES_weight_v1*("+samplecut_MC[i_MC]+" && "+cut_cat+")",
+            nbin,xmin,xmax);
+
+		h_MC_trigger_ee_Down->Scale(lumin*XS_MC[i_MC]/norm_MC[i_MC]);
+    	h_MC_trigger_ee_Down->SetNameTitle("x_"+sampletag_MC[i_MC]+"_trigger_ee_Down","x_"+sampletag_MC[i_MC]+"_trigger_ee_Down");
+        makeBinContentsPositive(h_MC_trigger_ee_Down,false);
+
+        ////////////////////////////////////////////////////////////////////////////
+
+        TH1F* h_MC_trigger_ee_Up_Convs = single_plot(filename_MC[i_MC],
+			"HTauTauTree_2lss1tau_SR", 
+			var,
+			MC_weight+"*PU_weight_v1*prefire_weight*trigger_weight_ee_up_v4*trigger_weight_em_v4*trigger_weight_mm_v4*leptonID_weight_v1*bTagSF_CSVshape_weight*tauID_weight_v3*tauES_weight_v1*("+samplecutconvs_MC[i_MC]+" && "+cut_cat+")",
+            nbin,xmin,xmax);
+
+		h_MC_trigger_ee_Up_Convs->Scale(lumin*XS_MC[i_MC]/norm_MC[i_MC]);
+    	h_MC_trigger_ee_Up_Convs->SetNameTitle("x_Convs_"+sampletag_MC[i_MC]+"_trigger_ee_Up","x_Convs_"+sampletag_MC[i_MC]+"_trigger_ee_Up");
+        makeBinContentsPositive(h_MC_trigger_ee_Up_Convs,false);
+
+        TH1F* h_MC_trigger_ee_Down_Convs = single_plot(filename_MC[i_MC],
+			"HTauTauTree_2lss1tau_SR", 
+			var,
+			MC_weight+"*PU_weight_v1*prefire_weight*trigger_weight_ee_down_v4*trigger_weight_em_v4*trigger_weight_mm_v4*leptonID_weight_v1*bTagSF_CSVshape_weight*tauID_weight_v3*tauES_weight_v1*("+samplecutconvs_MC[i_MC]+" && "+cut_cat+")",
+            nbin,xmin,xmax);
+
+		h_MC_trigger_ee_Down_Convs->Scale(lumin*XS_MC[i_MC]/norm_MC[i_MC]);
+    	h_MC_trigger_ee_Down_Convs->SetNameTitle("x_Convs_"+sampletag_MC[i_MC]+"_trigger_ee_Down","x_Convs_"+sampletag_MC[i_MC]+"_trigger_ee_Down");
+        makeBinContentsPositive(h_MC_trigger_ee_Down_Convs,false);
+
+        ////////////////////////////////////////////////////////////////////////////
+
+        TH1F* h_MC_trigger_em_Up = single_plot(filename_MC[i_MC],
+			"HTauTauTree_2lss1tau_SR", 
+			var,
+			MC_weight+"*PU_weight_v1*prefire_weight*trigger_weight_em_up_v4*trigger_weight_ee_v4*trigger_weight_mm_v4*leptonID_weight_v1*bTagSF_CSVshape_weight*tauID_weight_v3*tauES_weight_v1*("+samplecut_MC[i_MC]+" && "+cut_cat+")",
+            nbin,xmin,xmax);
+
+		h_MC_trigger_em_Up->Scale(lumin*XS_MC[i_MC]/norm_MC[i_MC]);
+    	h_MC_trigger_em_Up->SetNameTitle("x_"+sampletag_MC[i_MC]+"_trigger_em_Up","x_"+sampletag_MC[i_MC]+"_trigger_em_Up");
+        makeBinContentsPositive(h_MC_trigger_em_Up,false);
+
+        TH1F* h_MC_trigger_em_Down = single_plot(filename_MC[i_MC],
+			"HTauTauTree_2lss1tau_SR", 
+			var,
+			MC_weight+"*PU_weight_v1*prefire_weight*trigger_weight_em_down_v4*trigger_weight_ee_v4*trigger_weight_mm_v4*leptonID_weight_v1*bTagSF_CSVshape_weight*tauID_weight_v3*tauES_weight_v1*("+samplecut_MC[i_MC]+" && "+cut_cat+")",
+            nbin,xmin,xmax);
+
+		h_MC_trigger_em_Down->Scale(lumin*XS_MC[i_MC]/norm_MC[i_MC]);
+    	h_MC_trigger_em_Down->SetNameTitle("x_"+sampletag_MC[i_MC]+"_trigger_em_Down","x_"+sampletag_MC[i_MC]+"_trigger_em_Down");
+        makeBinContentsPositive(h_MC_trigger_em_Down,false);
+
+        ////////////////////////////////////////////////////////////////////////////
+
+        TH1F* h_MC_trigger_em_Up_Convs = single_plot(filename_MC[i_MC],
+			"HTauTauTree_2lss1tau_SR", 
+			var,
+			MC_weight+"*PU_weight_v1*prefire_weight*trigger_weight_em_up_v4*trigger_weight_ee_v4*trigger_weight_mm_v4*leptonID_weight_v1*bTagSF_CSVshape_weight*tauID_weight_v3*tauES_weight_v1*("+samplecutconvs_MC[i_MC]+" && "+cut_cat+")",
+            nbin,xmin,xmax);
+
+		h_MC_trigger_em_Up_Convs->Scale(lumin*XS_MC[i_MC]/norm_MC[i_MC]);
+    	h_MC_trigger_em_Up_Convs->SetNameTitle("x_Convs_"+sampletag_MC[i_MC]+"_trigger_em_Up","x_Convs_"+sampletag_MC[i_MC]+"_trigger_em_Up");
+        makeBinContentsPositive(h_MC_trigger_em_Up_Convs,false);
+
+        TH1F* h_MC_trigger_em_Down_Convs = single_plot(filename_MC[i_MC],
+			"HTauTauTree_2lss1tau_SR", 
+			var,
+			MC_weight+"*PU_weight_v1*prefire_weight*trigger_weight_em_down_v4*trigger_weight_ee_v4*trigger_weight_mm_v4*leptonID_weight_v1*bTagSF_CSVshape_weight*tauID_weight_v3*tauES_weight_v1*("+samplecutconvs_MC[i_MC]+" && "+cut_cat+")",
+            nbin,xmin,xmax);
+
+		h_MC_trigger_em_Down_Convs->Scale(lumin*XS_MC[i_MC]/norm_MC[i_MC]);
+    	h_MC_trigger_em_Down_Convs->SetNameTitle("x_Convs_"+sampletag_MC[i_MC]+"_trigger_em_Down","x_Convs_"+sampletag_MC[i_MC]+"_trigger_em_Down");
+        makeBinContentsPositive(h_MC_trigger_em_Down_Convs,false);
+
+        ////////////////////////////////////////////////////////////////////////////
+
+       	TH1F* h_MC_trigger_mm_Up = single_plot(filename_MC[i_MC],
+			"HTauTauTree_2lss1tau_SR", 
+			var,
+			MC_weight+"*PU_weight_v1*prefire_weight*trigger_weight_mm_up_v4*trigger_weight_ee_v4*trigger_weight_em_v4*leptonID_weight_v1*bTagSF_CSVshape_weight*tauID_weight_v3*tauES_weight_v1*("+samplecut_MC[i_MC]+" && "+cut_cat+")",
+            nbin,xmin,xmax);
+
+		h_MC_trigger_mm_Up->Scale(lumin*XS_MC[i_MC]/norm_MC[i_MC]);
+    	h_MC_trigger_mm_Up->SetNameTitle("x_"+sampletag_MC[i_MC]+"_trigger_mm_Up","x_"+sampletag_MC[i_MC]+"_trigger_mm_Up");
+        makeBinContentsPositive(h_MC_trigger_mm_Up,false);
+
+        TH1F* h_MC_trigger_mm_Down = single_plot(filename_MC[i_MC],
+			"HTauTauTree_2lss1tau_SR", 
+			var,
+			MC_weight+"*PU_weight_v1*prefire_weight*trigger_weight_mm_down_v4*trigger_weight_ee_v4*trigger_weight_em_v4*leptonID_weight_v1*bTagSF_CSVshape_weight*tauID_weight_v3*tauES_weight_v1*("+samplecut_MC[i_MC]+" && "+cut_cat+")",
+            nbin,xmin,xmax);
+
+		h_MC_trigger_mm_Down->Scale(lumin*XS_MC[i_MC]/norm_MC[i_MC]);
+    	h_MC_trigger_mm_Down->SetNameTitle("x_"+sampletag_MC[i_MC]+"_trigger_mm_Down","x_"+sampletag_MC[i_MC]+"_trigger_mm_Down");
+        makeBinContentsPositive(h_MC_trigger_mm_Down,false);
+
+        ////////////////////////////////////////////////////////////////////////////
+
+        TH1F* h_MC_trigger_mm_Up_Convs = single_plot(filename_MC[i_MC],
+			"HTauTauTree_2lss1tau_SR", 
+			var,
+			MC_weight+"*PU_weight_v1*prefire_weight*trigger_weight_mm_up_v4*trigger_weight_ee_v4*trigger_weight_em_v4*leptonID_weight_v1*bTagSF_CSVshape_weight*tauID_weight_v3*tauES_weight_v1*("+samplecutconvs_MC[i_MC]+" && "+cut_cat+")",
+            nbin,xmin,xmax);
+
+		h_MC_trigger_mm_Up_Convs->Scale(lumin*XS_MC[i_MC]/norm_MC[i_MC]);
+    	h_MC_trigger_mm_Up_Convs->SetNameTitle("x_Convs_"+sampletag_MC[i_MC]+"_trigger_mm_Up","x_Convs_"+sampletag_MC[i_MC]+"_trigger_mm_Up");
+        makeBinContentsPositive(h_MC_trigger_mm_Up_Convs,false);
+
+        TH1F* h_MC_trigger_mm_Down_Convs = single_plot(filename_MC[i_MC],
+			"HTauTauTree_2lss1tau_SR", 
+			var,
+			MC_weight+"*PU_weight_v1*prefire_weight*trigger_weight_mm_down_v4*trigger_weight_ee_v4*trigger_weight_em_v4*leptonID_weight_v1*bTagSF_CSVshape_weight*tauID_weight_v3*tauES_weight_v1*("+samplecutconvs_MC[i_MC]+" && "+cut_cat+")",
+            nbin,xmin,xmax);
+
+		h_MC_trigger_mm_Down_Convs->Scale(lumin*XS_MC[i_MC]/norm_MC[i_MC]);
+    	h_MC_trigger_mm_Down_Convs->SetNameTitle("x_Convs_"+sampletag_MC[i_MC]+"_trigger_mm_Down","x_Convs_"+sampletag_MC[i_MC]+"_trigger_mm_Down");
+        makeBinContentsPositive(h_MC_trigger_mm_Down_Convs,false);
+
+        ////////////////////////////////////////////////////////////////////////////
+
     }
 
-
+    
 	for (unsigned i_group=0;i_group<group_names.size();i_group++){
 
 		TH1F* histo_up;
 		TH1F* histo_down;
+
+		TH1F* histo_up_ee;
+		TH1F* histo_down_ee;
+
+		TH1F* histo_up_em;
+		TH1F* histo_down_em;
+
+		TH1F* histo_up_mm;
+		TH1F* histo_down_mm;
 
 		int counts = 0;
 		
@@ -5321,6 +5520,15 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
 			TString h_name_up = "x_"+sampletag_MC[i_MC]+"_trigger_Up";
 			TString h_name_down = "x_"+sampletag_MC[i_MC]+"_trigger_Down";
 
+			TString h_name_up_ee = "x_"+sampletag_MC[i_MC]+"_trigger_ee_Up";
+			TString h_name_down_ee = "x_"+sampletag_MC[i_MC]+"_trigger_ee_Down";
+
+			TString h_name_up_em = "x_"+sampletag_MC[i_MC]+"_trigger_em_Up";
+			TString h_name_down_em = "x_"+sampletag_MC[i_MC]+"_trigger_em_Down";
+
+			TString h_name_up_mm = "x_"+sampletag_MC[i_MC]+"_trigger_mm_Up";
+			TString h_name_down_mm = "x_"+sampletag_MC[i_MC]+"_trigger_mm_Down";
+
 			if( samplegroup_MC[i_MC] == group_names[i_group] ){
 
 				if (counts==0) {
@@ -5328,12 +5536,30 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
 					histo_up = (TH1F*)f_new->Get(cat_name+"/"+h_name_up);
 					histo_down = (TH1F*)f_new->Get(cat_name+"/"+h_name_down);
 
+					histo_up_ee = (TH1F*)f_new->Get(cat_name+"/"+h_name_up_ee);
+					histo_down_ee = (TH1F*)f_new->Get(cat_name+"/"+h_name_down_ee);
+
+					histo_up_em = (TH1F*)f_new->Get(cat_name+"/"+h_name_up_em);
+					histo_down_em = (TH1F*)f_new->Get(cat_name+"/"+h_name_down_em);
+
+					histo_up_mm = (TH1F*)f_new->Get(cat_name+"/"+h_name_up_mm);
+					histo_down_mm = (TH1F*)f_new->Get(cat_name+"/"+h_name_down_mm);
+
 				}
 
 				else {
 
 					histo_up->Add( (TH1F*)f_new->Get(cat_name+"/"+h_name_up) );
 					histo_down->Add( (TH1F*)f_new->Get(cat_name+"/"+h_name_down) );
+
+					histo_up_ee->Add( (TH1F*)f_new->Get(cat_name+"/"+h_name_up_ee) );
+					histo_down_ee->Add( (TH1F*)f_new->Get(cat_name+"/"+h_name_down_ee) );
+
+					histo_up_em->Add( (TH1F*)f_new->Get(cat_name+"/"+h_name_up_em) );
+					histo_down_em->Add( (TH1F*)f_new->Get(cat_name+"/"+h_name_down_em) );
+
+					histo_up_mm->Add( (TH1F*)f_new->Get(cat_name+"/"+h_name_up_mm) );
+					histo_down_mm->Add( (TH1F*)f_new->Get(cat_name+"/"+h_name_down_mm) );
 
 				}
 
@@ -5346,27 +5572,81 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
 		TString h_name_group_up = group_names[i_group]+"_CMS_ttHl"+s_year+"_triggerUp";
 		TString h_name_group_down = group_names[i_group]+"_CMS_ttHl"+s_year+"_triggerDown";
 
+		TString h_name_group_ee_up = group_names[i_group]+"_CMS_ttHl"+s_year+"_trigger_eeUp";
+		TString h_name_group_ee_down = group_names[i_group]+"_CMS_ttHl"+s_year+"_trigger_eeDown";
+
+		TString h_name_group_em_up = group_names[i_group]+"_CMS_ttHl"+s_year+"_trigger_emUp";
+		TString h_name_group_em_down = group_names[i_group]+"_CMS_ttHl"+s_year+"_trigger_emDown";
+
+		TString h_name_group_mm_up = group_names[i_group]+"_CMS_ttHl"+s_year+"_trigger_mmUp";
+		TString h_name_group_mm_down = group_names[i_group]+"_CMS_ttHl"+s_year+"_trigger_mmDown";
+
 		histo_up->SetNameTitle(h_name_group_up,h_name_group_up);
 		histo_down->SetNameTitle(h_name_group_down,h_name_group_down);
+
+		histo_up_ee->SetNameTitle(h_name_group_ee_up,h_name_group_ee_up);
+		histo_down_ee->SetNameTitle(h_name_group_ee_down,h_name_group_ee_down);
+
+		histo_up_em->SetNameTitle(h_name_group_em_up,h_name_group_em_up);
+		histo_down_em->SetNameTitle(h_name_group_em_down,h_name_group_em_down);
+
+		histo_up_mm->SetNameTitle(h_name_group_mm_up,h_name_group_mm_up);
+		histo_down_mm->SetNameTitle(h_name_group_mm_down,h_name_group_mm_down);
 
 		histo_up->Write();
 		histo_down->Write();
 
-	}
+		histo_up_ee->Write();
+		histo_down_ee->Write();
 
+		histo_up_em->Write();
+		histo_down_em->Write();
+
+		histo_up_mm->Write();
+		histo_down_mm->Write();
+
+	}
 
 	TH1F* histo_convs_trig_up;
 	TH1F* histo_convs_trig_down;
+
+	TH1F* histo_convs_trig_ee_up;
+	TH1F* histo_convs_trig_ee_down;
+
+	TH1F* histo_convs_trig_em_up;
+	TH1F* histo_convs_trig_em_down;
+
+	TH1F* histo_convs_trig_mm_up;
+	TH1F* histo_convs_trig_mm_down;
+
 
 	for(unsigned i_MC=0;i_MC<samplename_MC.size();i_MC++){
 
 		TString h_name_convs_up = "x_Convs_"+sampletag_MC[i_MC]+"_trigger_Up";
 		TString h_name_convs_down = "x_Convs_"+sampletag_MC[i_MC]+"_trigger_Down";
 
+		TString h_name_convs_ee_up = "x_Convs_"+sampletag_MC[i_MC]+"_trigger_ee_Up";
+		TString h_name_convs_ee_down = "x_Convs_"+sampletag_MC[i_MC]+"_trigger_ee_Down";
+
+		TString h_name_convs_em_up = "x_Convs_"+sampletag_MC[i_MC]+"_trigger_em_Up";
+		TString h_name_convs_em_down = "x_Convs_"+sampletag_MC[i_MC]+"_trigger_em_Down";
+
+		TString h_name_convs_mm_up = "x_Convs_"+sampletag_MC[i_MC]+"_trigger_mm_Up";
+		TString h_name_convs_mm_down = "x_Convs_"+sampletag_MC[i_MC]+"_trigger_mm_Down";
+
 		if (i_MC==0) {
 
 			histo_convs_trig_up = (TH1F*)f_new->Get(cat_name+"/"+h_name_convs_up);
 			histo_convs_trig_down = (TH1F*)f_new->Get(cat_name+"/"+h_name_convs_down);
+
+			histo_convs_trig_ee_up = (TH1F*)f_new->Get(cat_name+"/"+h_name_convs_ee_up);
+			histo_convs_trig_ee_down = (TH1F*)f_new->Get(cat_name+"/"+h_name_convs_ee_down);
+
+			histo_convs_trig_em_up = (TH1F*)f_new->Get(cat_name+"/"+h_name_convs_em_up);
+			histo_convs_trig_em_down = (TH1F*)f_new->Get(cat_name+"/"+h_name_convs_em_down);
+
+			histo_convs_trig_mm_up = (TH1F*)f_new->Get(cat_name+"/"+h_name_convs_mm_up);
+			histo_convs_trig_mm_down = (TH1F*)f_new->Get(cat_name+"/"+h_name_convs_mm_down);
 
 		}
 
@@ -5375,6 +5655,15 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
 			histo_convs_trig_up->Add( (TH1F*)f_new->Get(cat_name+"/"+h_name_convs_up) );
 			histo_convs_trig_down->Add( (TH1F*)f_new->Get(cat_name+"/"+h_name_convs_down) );
 
+			histo_convs_trig_ee_up->Add( (TH1F*)f_new->Get(cat_name+"/"+h_name_convs_ee_up) );
+			histo_convs_trig_ee_down->Add( (TH1F*)f_new->Get(cat_name+"/"+h_name_convs_ee_down) );
+
+			histo_convs_trig_em_up->Add( (TH1F*)f_new->Get(cat_name+"/"+h_name_convs_em_up) );
+			histo_convs_trig_em_down->Add( (TH1F*)f_new->Get(cat_name+"/"+h_name_convs_em_down) );
+
+			histo_convs_trig_mm_up->Add( (TH1F*)f_new->Get(cat_name+"/"+h_name_convs_mm_up) );
+			histo_convs_trig_mm_down->Add( (TH1F*)f_new->Get(cat_name+"/"+h_name_convs_mm_down) );
+
 		}
 
 	}
@@ -5382,13 +5671,39 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
 	TString h_name_convs_trig_up = "Convs_CMS_ttHl"+s_year+"_triggerUp";
 	TString h_name_convs_trig_down = "Convs_CMS_ttHl"+s_year+"_triggerDown";
 
+	TString h_name_convs_trig_ee_up = "Convs_CMS_ttHl"+s_year+"_trigger_eeUp";
+	TString h_name_convs_trig_ee_down = "Convs_CMS_ttHl"+s_year+"_trigger_eeDown";
+
+	TString h_name_convs_trig_em_up = "Convs_CMS_ttHl"+s_year+"_trigger_emUp";
+	TString h_name_convs_trig_em_down = "Convs_CMS_ttHl"+s_year+"_trigger_emDown";
+
+	TString h_name_convs_trig_mm_up = "Convs_CMS_ttHl"+s_year+"_trigger_mmUp";
+	TString h_name_convs_trig_mm_down = "Convs_CMS_ttHl"+s_year+"_trigger_mmDown";
+
 	histo_convs_trig_up->SetNameTitle(h_name_convs_trig_up,h_name_convs_trig_up);
 	histo_convs_trig_down->SetNameTitle(h_name_convs_trig_down,h_name_convs_trig_down);
+
+	histo_convs_trig_ee_up->SetNameTitle(h_name_convs_trig_ee_up,h_name_convs_trig_ee_up);
+	histo_convs_trig_ee_down->SetNameTitle(h_name_convs_trig_ee_down,h_name_convs_trig_ee_down);
+
+	histo_convs_trig_em_up->SetNameTitle(h_name_convs_trig_em_up,h_name_convs_trig_em_up);
+	histo_convs_trig_em_down->SetNameTitle(h_name_convs_trig_em_down,h_name_convs_trig_em_down);
+
+	histo_convs_trig_mm_up->SetNameTitle(h_name_convs_trig_mm_up,h_name_convs_trig_mm_up);
+	histo_convs_trig_mm_down->SetNameTitle(h_name_convs_trig_mm_down,h_name_convs_trig_mm_down);
 
 	histo_convs_trig_up->Write();
 	histo_convs_trig_down->Write();
 
-	cout<<" "<<endl;
+	histo_convs_trig_ee_up->Write();
+	histo_convs_trig_ee_down->Write();
+
+	histo_convs_trig_em_up->Write();
+	histo_convs_trig_em_down->Write();
+
+	histo_convs_trig_mm_up->Write();
+	histo_convs_trig_mm_down->Write();
+
     cout<<"OK trigger syst"<<endl;
 
     ////////////////////
@@ -5538,7 +5853,6 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
 	  histo_convs_prefire_up->Write();
 	  histo_convs_prefire_down->Write();
 
-	cout<<" "<<endl;
     cout<<"OK prefiring syst"<<endl;
 
 	}
@@ -5689,9 +6003,7 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
 	histo_convs_pu_up->Write();
 	histo_convs_pu_down->Write();
 
-	cout<<" "<<endl;
     cout<<"OK pileup syst"<<endl;
-
 
     //////////////////////
     ////// LEPTON ID /////
@@ -6167,7 +6479,6 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
 	histo_convs_lepeff_up_mtight->Write();
 	histo_convs_lepeff_down_mtight->Write();
 
-	cout<<" "<<endl;
     cout<<"OK lepton ID syst"<<endl;
     */
 
@@ -6317,7 +6628,6 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
 	histo_convs_tauid_up->Write();
 	histo_convs_tauid_down->Write();
 
-	cout<<" "<<endl;
     cout<<"OK tau ID syst"<<endl;
 
     ////////////////////
@@ -6465,8 +6775,8 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
 	histo_convs_taues_up->Write();
 	histo_convs_taues_down->Write();
 
-	cout<<" "<<endl;
     cout<<"OK tau ES syst"<<endl;
+
 
     /////////////////////////
     //// JET-TO-TAU FR 1 ////
@@ -6639,7 +6949,6 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
 
 	}
 
-	cout<<" "<<endl;
     cout<<"OK jet->tau FR syst"<<endl;
 
 
@@ -6849,7 +7158,6 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
 	histo_convs_FRjtMCUp->Write();
 	histo_convs_FRjtMCDown->Write();
 
-	cout<<" "<<endl;
     cout<<"OK jet->tau FR MC syst"<<endl;
 
 
@@ -6940,8 +7248,87 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
 
   	}
 
-  	cout<<" "<<endl;
     cout<<"OK jet->lep FR syst"<<endl;
+
+
+    ////////////////////////////////////////
+    //// FAKE LEPTON CLOSURE SYSTEMATICS ///
+    ////////////////////////////////////////
+
+    cout<<" "<<endl;
+    cout<<"------ JET->LEP CLOSURE SYST ------"<<endl;
+
+    // Shape syst
+
+    TH1F* h_fakes_clos_ele_Up = (TH1F*)h_fakes->Clone();
+    TH1F* h_fakes_clos_ele_Down = (TH1F*)h_fakes->Clone();
+
+    TH1F* h_fakes_clos_mu_Up = (TH1F*)h_fakes->Clone();
+    TH1F* h_fakes_clos_mu_Down = (TH1F*)h_fakes->Clone();
+
+    for(unsigned i_MC=0;i_MC<samplename_MC.size();i_MC++){
+
+    	TString MC_weight = "MC_weight";
+
+		//if( sampletag_MC[i_MC] == "tHQ" || sampletag_MC[i_MC] == "tHW") //FIXME
+			//MC_weight = "10*(MC_weights_rwgt[11]/MC_weight_originalXWGTUP)";
+			//MC_weight = "(MC_weights_rwgt[11]/MC_weight_originalXWGTUP)";
+
+		////////////////////////////////////////////////////////////////////////////
+
+		TH1F* h_clos_ele_diff = single_plot(filename_MC_fakeCR[i_MC],
+			"HTauTauTree_2lss1tau_fake", 
+			var,
+			MC_weight+"*PU_weight_v1*prefire_weight*trigger_weight_v1*leptonID_weight_v1*bTagSF_CSVshape_weight*tauID_weight_v3*tauES_weight_v1*(event_weight_ttH_ele_FR_TT_MC_v2-event_weight_ttH_ele_FR_QCD_MC_v2)*("+genmatch+" && "+chargematch+" && "+cut_cat+")",
+			nbin,xmin,xmax);
+
+		h_clos_ele_diff->Scale(lumin*XS_MC[i_MC]/norm_MC[i_MC]);
+
+	    TString name_clos_ele_diff = "x_fakeMC_"+sampletag_MC[i_MC]+"clos_ele";
+	    h_clos_ele_diff->SetNameTitle(name_clos_ele_diff,name_clos_ele_diff);
+	    makeBinContentsPositive(h_clos_ele_diff);
+	    //h_clos_ele_diff->Write();
+
+	    TH1F* h_clos_mu_diff = single_plot(filename_MC_fakeCR[i_MC],
+			"HTauTauTree_2lss1tau_fake", 
+			var,
+			MC_weight+"*PU_weight_v1*prefire_weight*trigger_weight_v1*leptonID_weight_v1*bTagSF_CSVshape_weight*tauID_weight_v3*tauES_weight_v1*(event_weight_ttH_mu_FR_TT_MC_v2-event_weight_ttH_mu_FR_QCD_MC_v2)*("+genmatch+" && "+chargematch+" && "+cut_cat+")",
+			nbin,xmin,xmax);
+
+		h_clos_mu_diff->Scale(lumin*XS_MC[i_MC]/norm_MC[i_MC]);
+
+	    TString name_clos_mu_diff = "x_fakeMC_"+sampletag_MC[i_MC]+"clos_mu";
+	    h_clos_mu_diff->SetNameTitle(name_clos_mu_diff,name_clos_mu_diff);
+	    makeBinContentsPositive(h_clos_mu_diff);
+	    //h_clos_mu_diff->Write();
+
+	    ////////////////////////////////////////////////////////////////////////////
+
+	    h_fakes_clos_ele_Up->Add(h_clos_ele_diff,+1);  
+	    h_fakes_clos_ele_Down->Add(h_clos_ele_diff,-1);  
+
+	    h_fakes_clos_mu_Up->Add(h_clos_mu_diff,+1);  
+	    h_fakes_clos_mu_Down->Add(h_clos_mu_diff,-1); 
+
+	}
+   
+    h_fakes_clos_ele_Up->SetNameTitle("data_fakes_CMS_ttHl_Clos_e_shapeUp","data_fakes_CMS_ttHl_Clos_e_shapeUp");
+    makeBinContentsPositive(h_fakes_clos_ele_Up);
+    h_fakes_clos_ele_Up->Write();
+
+    h_fakes_clos_ele_Down->SetNameTitle("data_fakes_CMS_ttHl_Clos_e_shapeDown","data_fakes_CMS_ttHl_Clos_e_shapeDown");
+    makeBinContentsPositive(h_fakes_clos_ele_Down);
+    h_fakes_clos_ele_Down->Write();
+
+    h_fakes_clos_mu_Up->SetNameTitle("fata_fakes_CMS_ttHl_Clos_m_shapeUp","fata_fakes_CMS_ttHl_Clos_m_shapeUp");
+    makeBinContentsPositive(h_fakes_clos_mu_Up);
+    h_fakes_clos_mu_Up->Write();
+
+    h_fakes_clos_mu_Down->SetNameTitle("data_fakes_CMS_ttHl_Clos_m_shapeDown","data_fakes_CMS_ttHl_Clos_m_shapeDown");
+    makeBinContentsPositive(h_fakes_clos_mu_Down);
+    h_fakes_clos_mu_Down->Write();
+
+    cout<<"OK jet->lep closure syst"<<endl;
 
     ///////////////////////////////////////////////////////
 
