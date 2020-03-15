@@ -7638,7 +7638,7 @@ void datacard_maker_n_recotauh(int year = 2016){
   	TString cut = "((recotauh_decayMode[0]!=5) && (recotauh_decayMode[0]!=6) && (recotauh_byVVVLooseDeepTau2017v2p1VSe[0]) && (recotauh_byVLooseDeepTau2017v2p1VSmu[0]) )";
   	TString file = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/datacards/2lss_1tau/datacard_nrecotauh_2lss1tau_"+s_year+".root";
 	
-  	datacard_maker(var,nbin,xmin,xmax,cut,file,true,year);
+  	datacard_maker(var,nbin,xmin,xmax,cut,file,false,year);
 
 }
 
@@ -7655,7 +7655,7 @@ void datacard_maker_MEM_nomiss(int year = 2016){
   	TString cut = "integration_type==0 && ((recotauh_decayMode[0]!=5) && (recotauh_decayMode[0]!=6) && (recotauh_byVVVLooseDeepTau2017v2p1VSe[0]) && (recotauh_byVLooseDeepTau2017v2p1VSmu[0]) )";
   	TString file = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/datacards/2lss_1tau/datacard_MEM_nomiss_2lss1tau_"+s_year+".root";
 	
-  	datacard_maker(var,nbin,xmin,xmax,cut,file,true,year);
+  	datacard_maker(var,nbin,xmin,xmax,cut,file,false,year);
 
 }
 
@@ -7672,7 +7672,24 @@ void datacard_maker_MEM_miss(int year = 2016){
   	TString cut = "integration_type==1 && ((recotauh_decayMode[0]!=5) && (recotauh_decayMode[0]!=6) && (recotauh_byVVVLooseDeepTau2017v2p1VSe[0]) && (recotauh_byVLooseDeepTau2017v2p1VSmu[0]) )";
   	TString file = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/datacards/2lss_1tau/datacard_MEM_miss_2lss1tau_"+s_year+".root";
 	
-  	datacard_maker(var,nbin,xmin,xmax,cut,file,true,year);
+  	datacard_maker(var,nbin,xmin,xmax,cut,file,false,year);
+
+}
+
+void datacard_maker_MEM_others(int year = 2016){
+
+	std::string s_year = to_string(year);
+
+  	TString var="is_tH_like_and_not_ttH_like";
+  
+  	int nbin = 1;
+  	float xmin = 0.;
+  	float xmax = 2.;
+
+  	TString cut = "integration_type==-1 && ((recotauh_decayMode[0]!=5) && (recotauh_decayMode[0]!=6) && (recotauh_byVVVLooseDeepTau2017v2p1VSe[0]) && (recotauh_byVLooseDeepTau2017v2p1VSmu[0]) )";
+  	TString file = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/datacards/2lss_1tau/datacard_MEM_others_2lss1tau_"+s_year+".root";
+	
+  	datacard_maker(var,nbin,xmin,xmax,cut,file,false,year);
 
 }
 

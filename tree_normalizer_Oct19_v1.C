@@ -56,8 +56,8 @@ void add_pu(TString filein, TString fileout, TString year){
   tree_new->Branch("npu",&_npu,"npu/F");
   tree_new->Branch("MC_weight",&_MC_weight,"MC_weight/F");
   tree_new->Branch("MC_weight_originalXWGTUP",&_MC_weight_originalXWGTUP,"MC_weight_originalXWGTUP/F");
-  tree_new->Branch("MC_weights",&_MC_weights,"MC_weights/F");
-  tree_new->Branch("MC_weights_rwgt",&_MC_weights_rwgt,"MC_weights_rwgt/F");
+  tree_new->Branch("MC_weights",&_MC_weights,"MC_weights");
+  tree_new->Branch("MC_weights_rwgt",&_MC_weights_rwgt,"MC_weights_rwgt");
   tree_new->Branch("MC_weights_rwgt_sum",&_MC_weights_rwgt_sum,"MC_weights_rwgt_sum/F");
   tree_new->Branch("PU_weight_v1",&_PU_weight_v1,"PU_weight_v1/F");
 
@@ -115,3 +115,55 @@ void normalize_tree(TString in = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_
   add_pu(infile, outfile, yearmc);
 
 }
+
+void test(){
+
+  normalize_tree("/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_converted/2017/nominal/ttH/ntuple_Oct19v1_MC_2017_THQ_ctcvcp_0.root",
+    "/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2017/ntuple_Oct19v1_MC_2017_THQ_ctcvcp_norm_0.root",
+    "2017");
+
+  vector<TString> samples;
+  samples.clear();
+
+  TString year;
+
+  /*year = "2016";
+  samples.push_back("ntuple_Oct19v1_MC_2016_THQ_ctcvcp_0");
+  samples.push_back("ntuple_Oct19v1_MC_2016_THQ_ctcvcp_1");
+  samples.push_back("ntuple_Oct19v1_MC_2016_THW_ctcvcp_0");
+  samples.push_back("ntuple_Oct19v1_MC_2016_THW_ctcvcp_1");*/
+
+  year = "2017";
+  samples.push_back("ntuple_Oct19v1_MC_2017_THQ_ctcvcp_0");
+  samples.push_back("ntuple_Oct19v1_MC_2017_THQ_ctcvcp_1");
+  samples.push_back("ntuple_Oct19v1_MC_2017_THQ_ctcvcp_2");
+  samples.push_back("ntuple_Oct19v3_MC_2017_THW_ctcvcp_0");
+  samples.push_back("ntuple_Oct19v3_MC_2017_THW_ctcvcp_1");
+
+  /*year = "2018";
+  samples.push_back("ntuple_Oct19v1_MC_2018_THQ_ctcvcp_0");
+  samples.push_back("ntuple_Oct19v1_MC_2018_THQ_ctcvcp_1");
+  samples.push_back("ntuple_Oct19v1_MC_2018_THQ_ctcvcp_2");
+  samples.push_back("ntuple_Oct19v1_MC_2018_THQ_ctcvcp_3");
+  samples.push_back("ntuple_Oct19v1_MC_2018_THQ_ctcvcp_4");
+  samples.push_back("ntuple_Oct19v1_MC_2018_THQ_ctcvcp_5");
+  samples.push_back("ntuple_Oct19v1_MC_2018_THQ_ctcvcp_6");
+  samples.push_back("ntuple_Oct19v1_MC_2018_THQ_ctcvcp_7");
+  samples.push_back("ntuple_Oct19v1_MC_2018_THW_ctcvcp_0");
+  samples.push_back("ntuple_Oct19v1_MC_2018_THW_ctcvcp_1");
+  samples.push_back("ntuple_Oct19v1_MC_2018_THW_ctcvcp_2");
+  samples.push_back("ntuple_Oct19v1_MC_2018_THW_ctcvcp_3");
+  samples.push_back("ntuple_Oct19v1_MC_2018_THW_ctcvcp_4");*/
+
+  for(int isample=0; isample<samples.size(); isample++){
+
+    TString samplein = samples.at(isample)+".root";
+    TString dirin = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_converted/"+year+"/nominal/ttH/"+samplein;
+    TString sampleout = samples.at(isample)+"_norm.root";
+    TString dirout = "/data_CMS/cms/mperez/ntuples_normalized/Oct19/ntuples_converted/"+year+"/nominal/ttH/"+sampleout;
+    normalize_tree(samplein,sampleout,year);
+
+  }
+
+}
+

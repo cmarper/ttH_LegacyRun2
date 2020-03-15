@@ -29,9 +29,11 @@ using namespace std;
 
 void create_scripts( TString sample="Oct19v1_MC_2016_ttHJetToNonbb", int maxsplit=0, TString year="2016", TString type="ttH" ){
 
-  TString dirin = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_converted/";
+  //TString dirin = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_converted/";
+  TString dirin = "/data_CMPerez/mperez/ttH_Legacy/ntuples_converted/";
   dirin += year;
-  dirin += "/nominal/";
+  //dirin += "/nominal/";
+  dirin += "/JECdown/";
   dirin += type;
   dirin += "/";
 
@@ -39,7 +41,8 @@ void create_scripts( TString sample="Oct19v1_MC_2016_ttHJetToNonbb", int maxspli
 
   TString dirout = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_splitted/";
   dirout += year;
-  dirout += "/nominal/";
+  //dirout += "/nominal/";
+  dirout += "/JECdown/";
   dirout += type;
   dirout += "/";
 
@@ -49,11 +52,11 @@ void create_scripts( TString sample="Oct19v1_MC_2016_ttHJetToNonbb", int maxspli
 
     std::string isample = std::to_string(j);
 
-    TString filename = "ntuple_"+sample+"_"+isample+".root";
+    TString filename = "ntuple_"+sample+"_"+isample+"_JECdown.root";
 
     //cout<<filename<<endl;
 
-    TString ScriptName = Form("script_tier3_MC/"+year+"/split_"+sample+"_%i.sh",j);
+    TString ScriptName = Form("script_tier3_MC/"+year+"/split_"+sample+"_%i_JECdown.sh",j);
     ofstream myscript;
     myscript.open (ScriptName.Data());
     myscript << "#!/bin/bash\n";
@@ -77,8 +80,8 @@ void launch_scripts( TString sample="Oct19v1_MC_2016_ttHJetToNonbb", int maxspli
 
   for(int j=0;j<maxsplit+1;j++){
     
-    TString LaunchExec = "/opt/exp_soft/cms/t3/t3submit_new ";
-    LaunchExec += Form("script_tier3_MC/"+year+"/split_"+sample+"_%i.sh",j);
+    TString LaunchExec = "/opt/exp_soft/cms/t3/t3submit ";
+    LaunchExec += Form("script_tier3_MC/"+year+"/split_"+sample+"_%i_JECdown.sh",j);
     gSystem->Exec(LaunchExec.Data());
  
   }
@@ -87,8 +90,8 @@ void launch_scripts( TString sample="Oct19v1_MC_2016_ttHJetToNonbb", int maxspli
 
 void launch_single_script( TString sample="Oct19v1_MC_2016_THQ_ctcvcp", int isplit=0, TString year="2016", TString type="MC" ){
 
-  TString LaunchExec = "/opt/exp_soft/cms/t3/t3submit_new ";
-  LaunchExec += Form("script_tier3_MC/"+year+"/split_"+sample+"_%i.sh",isplit);
+  TString LaunchExec = "/opt/exp_soft/cms/t3/t3submit ";
+  LaunchExec += Form("script_tier3_MC/"+year+"/split_"+sample+"_%i_JECdown.sh",isplit);
   gSystem->Exec(LaunchExec.Data());
  
 }
@@ -97,51 +100,51 @@ void launch_single_script( TString sample="Oct19v1_MC_2016_THQ_ctcvcp", int ispl
 
 void create_scripts_all(){
 
-    //ttH  ---> RUNNING
+    //ttH
 
-    /*
-    create_scripts("Oct19v1_MC_2016_ttHJetToNonbb", 0,"2016","ttH"); // DONE
-    create_scripts("Oct19v1_MC_2016_ttH_ctcvcp", 1, "2016","ttH");   // DONE
-    create_scripts("Oct19v1_MC_2016_THQ_ctcvcp", 1, "2016", "ttH");  // DONE
-    create_scripts("Oct19v1_MC_2016_THW_ctcvcp", 1, "2016", "ttH");  // DONE
-    */
+    create_scripts("Oct19v1_MC_2016_ttHJetToNonbb", 0, "2016","ttH");
+    create_scripts("Oct19v1_MC_2016_THQ_ctcvcp", 1, "2016", "ttH");
+    create_scripts("Oct19v1_MC_2016_THW_ctcvcp", 1, "2016", "ttH");
 
-    /*
-    create_scripts("Oct19v1_MC_2017_ttHJetToNonbb", 2, "2017", "ttH"); // DONE
-    create_scripts("Oct19v1_MC_2017_THQ_ctcvcp", 2, "2017", "ttH");    // DONE
-    create_scripts("Oct19v3_MC_2017_THW_ctcvcp", 1, "2017","ttH");     // DONE
-    create_scripts("Oct19v1_MC_2017_TTH_ctcvcp", 2, "2017", "ttH");    // DONE
-    */
+    create_scripts("Oct19v1_MC_2017_ttHJetToNonbb", 2, "2017", "ttH");
+    create_scripts("Oct19v1_MC_2017_THQ_ctcvcp", 2, "2017", "ttH");
+    create_scripts("Oct19v3_MC_2017_THW_ctcvcp", 1, "2017","ttH");
 
-    /*
-    create_scripts("Oct19v2_MC_2018_ttHJetToNonbb",2,"2018","ttH");     // DONE
-    create_scripts("Oct19v2_MC_2018_TTH_ctcvcp", 7, "2018","ttH");      // DONE
-    create_scripts("Oct19v1_MC_2018_THQ_ctcvcp", 7, "2018", "ttH");     // DONE
-    create_scripts("Oct19v1_MC_2018_THW_ctcvcp", 4, "2018", "ttH");     // DONE
-    */
+    create_scripts("Oct19v2_MC_2018_ttHJetToNonbb", 2,"2018","ttH");
+    create_scripts("Oct19v1_MC_2018_THQ_ctcvcp", 7, "2018", "ttH");
+    create_scripts("Oct19v1_MC_2018_THW_ctcvcp", 4, "2018", "ttH");
 
-    //ttV  ---> DONE
+    //ttV
 
-    /*
-    create_scripts("Oct19v1_MC_2016_TTZToLLNuNu_M-10_ext2",0,"2016","ttV"); // DONE
-    create_scripts("Oct19v1_MC_2016_TTZToLLNuNu_M-10_ext3",0,"2016","ttV"); // DONE
-    create_scripts("Oct19v1_MC_2016_TTZToLL_M-1to10", 0, "2016", "ttV" );   // DONE 
-    create_scripts("Oct19v1_MC_2016_TTWJetsToLNu",0,"2016","ttV");          // DONE
-    create_scripts("Oct19v1_MC_2016_TTWW", 0, "2016", "ttV" );              // DONE
+    create_scripts("Oct19v1_MC_2016_TTZToLLNuNu_M-10_ext3",0,"2016","ttV");
+    create_scripts("Oct19v1_MC_2016_TTZToLL_M-1to10", 0, "2016", "ttV" );
+    create_scripts("Oct19v1_MC_2016_TTWJetsToLNu",0,"2016","ttV");
+    create_scripts("Oct19v1_MC_2016_TTWW", 0, "2016", "ttV" );
 
-    create_scripts("Oct19v1_MC_2017_TTZToLLNuNu_M-10", 1, "2017", "ttV" );  // DONE
-    create_scripts("Oct19v1_MC_2017_TTZToLLNuNu_M-10_PS",3,"2017","ttV");   // DONE
-    create_scripts("Oct19v1_MC_2017_TTZToLL_M-1to10", 0, "2017", "ttV" );   // DONE    
-    create_scripts("Oct19v1_MC_2017_TTWJetsToLNu", 0, "2017", "ttV" );      // DONE
-    create_scripts("Oct19v1_MC_2017_TTWJetsToLNu_PS",1,"2017","ttV");       // DONE
-    create_scripts("Oct19v1_MC_2017_TTWW", 0,"2017", "ttV" );               // DONE
+    create_scripts("Oct19v1_MC_2017_TTZToLLNuNu_M-10_PS",3,"2017","ttV");
+    create_scripts("Oct19v1_MC_2017_TTZToLL_M-1to10", 0, "2017", "ttV" );
+    create_scripts("Oct19v1_MC_2017_TTWJetsToLNu", 0, "2017", "ttV" );
+    create_scripts("Oct19v1_MC_2017_TTWW", 0,"2017", "ttV" );
 
-    create_scripts("Oct19v1_MC_2018_TTZToLLNuNu_M-10", 3, "2018", "ttV" );  // DONE
-    create_scripts("Oct19v1_MC_2018_TTZToLL_M-1to10", 0, "2018", "ttV" );   // DONE 
-    create_scripts("Oct19v1_MC_2018_TTWJetsToLNu", 1, "2018", "ttV" );      // DONE
-    create_scripts("Oct19v1_MC_2018_TTWW_ext1", 0, "2018", "ttV" );         // DONE
-    create_scripts("Oct19v1_MC_2018_TTWW_ext2", 0, "2018", "ttV" );         // DONE
-    */
+    create_scripts("Oct19v1_MC_2018_TTZToLLNuNu_M-10", 3, "2018", "ttV" );
+    create_scripts("Oct19v1_MC_2018_TTZToLL_M-1to10", 0, "2018", "ttV" );
+    create_scripts("Oct19v1_MC_2018_TTWJetsToLNu", 1, "2018", "ttV" );
+    create_scripts("Oct19v1_MC_2018_TTWW_ext2", 0, "2018", "ttV" );
+
+    // EWK
+
+    create_scripts("Oct19v1_MC_2016_WWTo2L2Nu", 0, "2016", "EWK");
+    create_scripts("Oct19v1_MC_2016_WZTo3LNu", 0, "2016", "EWK");
+    create_scripts("Oct19v1_MC_2016_ZZTo4L", 0, "2016", "EWK");
+
+    create_scripts("Oct19v2_MC_2017_WWTo2L2Nu",0,"2017","EWK");
+    create_scripts("Oct19v1_MC_2017_WZTo3LNu", 1, "2017", "EWK");
+    create_scripts("Oct19v1_MC_2017_ZZTo4L_ext1", 11, "2017", "EWK"); // repeat 5 JECdown
+
+    create_scripts("Oct19v3_MC_2018_WWTo2L2Nu",1, "2018","EWK");
+    create_scripts("Oct19v2_MC_2018_WZTo3LNu_ext1",2,"2018","EWK");
+    create_scripts("Oct19v4_MC_2018_ZZTo4L_ext2",5,"2018","EWK");
+
 
     // Rares  ---> DONE
 
@@ -197,40 +200,6 @@ void create_scripts_all(){
     create_scripts("Oct19v1_MC_2018_WpWpJJ",0,"2018", "Rares");                     // DONE 
     create_scripts("Oct19v1_MC_2018_WWTo2L2Nu_DoubleScattering",0,"2018", "Rares"); // DONE
     create_scripts("Oct19v1_MC_2018_TTTT",0,"2018", "Rares");                       // DONE  
-    */
-
-    // EWK ---> DONE
-    /*
-    create_scripts("Oct19v1_MC_2016_DYJetsToLL_M-10to50",2,"2016","EWK");       // DONE
-    create_scripts("Oct19v1_MC_2016_DYJetsToLL_M-50", 7, "2016", "EWK");        // DONE
-    create_scripts("Oct19v1_MC_2016_WJetsToLNu_ext2",2,"2016","EWK");           // DONE
-    create_scripts("Oct19v1_MC_2016_WJetsToLNu", 2, "2016", "EWK");             // DONE
-    create_scripts("Oct19v1_MC_2016_WWTo2L2Nu", 0, "2016", "EWK");              // DONE
-    create_scripts("Oct19v1_MC_2016_WZTo3LNu", 0, "2016", "EWK");               // DONE
-    create_scripts("Oct19v1_MC_2016_ZZTo4L", 0, "2016", "EWK");                 // DONE
-
-    create_scripts("Oct19v1_MC_2017_DYJetsToLL_M-10to50", 4, "2017", "EWK");    // DONE
-    create_scripts("Oct19v1_MC_2017_DYJetsToLL_M-10to50_ext1",4,"2017","EWK");  // DONE
-    create_scripts("Oct19v1_MC_2017_DYJetsToLL_M-50",3,"2017","EWK");           // DONE
-    create_scripts("Oct19v3_MC_2017_DYJetsToLL_M-50_ext1",7,"2017","EWK");      // DONE
-    create_scripts("Oct19v2_MC_2017_WJetsToLNu",4,"2017","EWK");                // DONE
-    create_scripts("Oct19v1_MC_2017_WJetsToLNu_ext1", 7 , "2017", "EWK");       // DONE
-    create_scripts("Oct19v2_MC_2017_WWTo2L2Nu",0,"2017","EWK");                 // DONE 
-    create_scripts("Oct19v1_MC_2017_WWTo2L2Nu_ext1", 0, "2017", "EWK");         // DONE
-    create_scripts("Oct19v1_MC_2017_WZTo3LNu", 1, "2017", "EWK");               // DONE
-    create_scripts("Oct19v1_MC_2017_ZZTo4L", 0, "2017", "EWK");                 // DONE
-    create_scripts("Oct19v1_MC_2017_ZZTo4L_ext1", 11, "2017", "EWK");           // DONE
-    create_scripts("Oct19v2_MC_2017_ZZTo4L_ext2",0,"2017","EWK");               // DONE
-
-    create_scripts("Oct19v3_MC_2018_DYJetsToLL_M-10to50",5,"2018","EWK");       // DONE
-    create_scripts("Oct19v2_MC_2018_DYJetsToLL_M-50", 0, "2018", "EWK");        // DONE
-    create_scripts("Oct19v3_MC_2018_DYJetsToLL_M-50_ext2",6,"2018","EWK");      // DONE
-    create_scripts("Oct19v2_MC_2018_WJetsToLNu",9,"2018","EWK");                // DONE
-    create_scripts("Oct19v3_MC_2018_WWTo2L2Nu",1, "2018","EWK");                // DONE
-    create_scripts("Oct19v1_MC_2018_WZTo3LNu", 2, "2018", "EWK");               // DONE
-    create_scripts("Oct19v2_MC_2018_WZTo3LNu_ext1",2,"2018","EWK");             // DONE
-    create_scripts("Oct19v2_MC_2018_ZZTo4L", 1, "2018", "EWK");                 // DONE
-    create_scripts("Oct19v4_MC_2018_ZZTo4L_ext2",7,"2018","EWK");               // DONE
     */
 
     // ggH  ---> DONE
@@ -500,7 +469,7 @@ void create_scripts_all(){
     create_scripts("Oct19v4_MC_2016_MadGraph_TTToHadronic",4,"2016","ttbar"); // DONE
     create_scripts("Oct19v4_MC_2016_MadGraph_TTToHadronic_PS",4,"2016","ttbar"); // DONE*/
 
-    create_scripts("Oct19v1_MC_2016_WGToLNuG_01J",3,"2016","EWK"); // DONE??? / 1,2->repeat
+    //create_scripts("Oct19v1_MC_2016_WGToLNuG_01J",3,"2016","EWK"); // DONE??? / 1,2->repeat
     //create_scripts("Oct19v1_MC_2017_WGToLNuG_01J",4,"2017","EWK"); // DONE
     //create_scripts("Oct19v1_MC_2018_WGToLNuG_01J",4,"2018","EWK"); // DONE
     
@@ -508,43 +477,50 @@ void create_scripts_all(){
 
 void launch_scripts_all(){
 
-    //ttH --> CHECKED
+    //ttH
 
-    /*launch_scripts("Oct19v1_MC_2016_ttHJetToNonbb", 0,"2016","ttH");    
-    launch_scripts("Oct19v1_MC_2016_ttH_ctcvcp", 1,"2016","ttH");
+    /*launch_scripts("Oct19v1_MC_2016_ttHJetToNonbb", 0,"2016","ttH");
     launch_scripts("Oct19v1_MC_2016_THQ_ctcvcp", 1, "2016", "ttH");
-    launch_scripts("Oct19v1_MC_2016_THW_ctcvcp", 1, "2016", "ttH");*/
+    launch_scripts("Oct19v1_MC_2016_THW_ctcvcp", 1, "2016", "ttH");
 
-    /*launch_scripts("Oct19v1_MC_2017_ttHJetToNonbb", 2, "2017", "ttH");  
+    launch_scripts("Oct19v1_MC_2017_ttHJetToNonbb", 2, "2017", "ttH");
     launch_scripts("Oct19v1_MC_2017_THQ_ctcvcp", 2, "2017", "ttH");
-    launch_scripts("Oct19v3_MC_2017_THW_ctcvcp",1,"2017","ttH"); 
-    launch_scripts("Oct19v1_MC_2017_TTH_ctcvcp", 2, "2017", "ttH");
+    launch_scripts("Oct19v3_MC_2017_THW_ctcvcp", 1, "2017","ttH");
 
-    launch_scripts("Oct19v2_MC_2018_ttHJetToNonbb",2,"2018","ttH");
-    launch_scripts("Oct19v2_MC_2018_TTH_ctcvcp", 7, "2018","ttH");
+    launch_scripts("Oct19v2_MC_2018_ttHJetToNonbb", 2,"2018","ttH");
     launch_scripts("Oct19v1_MC_2018_THQ_ctcvcp", 7, "2018", "ttH");
     launch_scripts("Oct19v1_MC_2018_THW_ctcvcp", 4, "2018", "ttH");*/
 
     //ttV
 
-    /*launch_scripts("Oct19v1_MC_2016_TTZToLLNuNu_M-10_ext2",0,"2016","ttV");  
-    launch_scripts("Oct19v1_MC_2016_TTZToLLNuNu_M-10_ext3",0,"2016","ttV");  
-    launch_scripts("Oct19v1_MC_2016_TTZToLL_M-1to10", 0, "2016", "ttV" );    
-    launch_scripts("Oct19v1_MC_2016_TTWJetsToLNu",0,"2016","ttV"); 
+    /*launch_scripts("Oct19v1_MC_2016_TTZToLLNuNu_M-10_ext3",0,"2016","ttV");
+    launch_scripts("Oct19v1_MC_2016_TTZToLL_M-1to10", 0, "2016", "ttV" );
+    launch_scripts("Oct19v1_MC_2016_TTWJetsToLNu",0,"2016","ttV");
     launch_scripts("Oct19v1_MC_2016_TTWW", 0, "2016", "ttV" );
 
-    launch_scripts("Oct19v1_MC_2017_TTZToLLNuNu_M-10", 1, "2017", "ttV" );   
-    launch_scripts("Oct19v1_MC_2017_TTZToLLNuNu_M-10_PS",3,"2017","ttV");    
-    launch_scripts("Oct19v1_MC_2017_TTZToLL_M-1to10", 0, "2017", "ttV" );    
+    launch_scripts("Oct19v1_MC_2017_TTZToLLNuNu_M-10_PS",3,"2017","ttV");
+    launch_scripts("Oct19v1_MC_2017_TTZToLL_M-1to10", 0, "2017", "ttV" );
     launch_scripts("Oct19v1_MC_2017_TTWJetsToLNu", 0, "2017", "ttV" );
-    launch_scripts("Oct19v1_MC_2017_TTWJetsToLNu_PS",1,"2017","ttV"); 
-    launch_scripts("Oct19v1_MC_2017_TTWW", 0,"2017", "ttV" ); 
+    launch_scripts("Oct19v1_MC_2017_TTWW", 0,"2017", "ttV" );
 
-    launch_scripts("Oct19v1_MC_2018_TTZToLLNuNu_M-10", 3, "2018", "ttV" );   
-    launch_scripts("Oct19v1_MC_2018_TTZToLL_M-1to10", 0, "2018", "ttV" );    
+    launch_scripts("Oct19v1_MC_2018_TTZToLLNuNu_M-10", 3, "2018", "ttV" );
+    launch_scripts("Oct19v1_MC_2018_TTZToLL_M-1to10", 0, "2018", "ttV" );
     launch_scripts("Oct19v1_MC_2018_TTWJetsToLNu", 1, "2018", "ttV" );
-    launch_scripts("Oct19v1_MC_2018_TTWW_ext1", 0, "2018", "ttV" );   
-    launch_scripts("Oct19v1_MC_2018_TTWW_ext2", 0, "2018", "ttV" );   */
+    launch_scripts("Oct19v1_MC_2018_TTWW_ext2", 0, "2018", "ttV" );*/
+
+    // EWK
+
+    launch_scripts("Oct19v1_MC_2016_WWTo2L2Nu", 0, "2016", "EWK");
+    launch_scripts("Oct19v1_MC_2016_WZTo3LNu", 0, "2016", "EWK");
+    launch_scripts("Oct19v1_MC_2016_ZZTo4L", 0, "2016", "EWK");
+
+    launch_scripts("Oct19v2_MC_2017_WWTo2L2Nu",0,"2017","EWK");
+    launch_scripts("Oct19v1_MC_2017_WZTo3LNu", 1, "2017", "EWK");
+    launch_scripts("Oct19v1_MC_2017_ZZTo4L_ext1", 11, "2017", "EWK");
+
+    launch_scripts("Oct19v3_MC_2018_WWTo2L2Nu",1, "2018","EWK");
+    launch_scripts("Oct19v2_MC_2018_WZTo3LNu_ext1",2,"2018","EWK");
+    launch_scripts("Oct19v4_MC_2018_ZZTo4L_ext2",5,"2018","EWK");
 
     // Rares 
 
@@ -889,111 +865,43 @@ void launch_scripts_all(){
     launch_scripts("Oct19v1_MC_2018_MadGraph_TTToSemiLeptonic",10,"2018","ttbar"); // DONE
     launch_scripts("Oct19v1_MC_2018_MadGraph_TTToHadronic",10,"2018","ttbar"); // DONE*/
 
-    launch_scripts("Oct19v4_MC_2016_MadGraph_TTTo2L2Nu",1,"2016","ttbar"); // DONE
+    /*launch_scripts("Oct19v4_MC_2016_MadGraph_TTTo2L2Nu",1,"2016","ttbar"); // DONE
     launch_scripts("Oct19v4_MC_2016_MadGraph_TTTo2L2Nu_PS",7,"2016","ttbar"); // DONE
     launch_scripts("Oct19v4_MC_2016_MadGraph_TTToSemiLeptonic",6,"2016","ttbar"); // DONE
     launch_scripts("Oct19v4_MC_2016_MadGraph_TTToSemiLeptonic_PS",8,"2016","ttbar");// DONE
     launch_scripts("Oct19v4_MC_2016_MadGraph_TTToHadronic",4,"2016","ttbar"); //DONE
-    launch_scripts("Oct19v4_MC_2016_MadGraph_TTToHadronic_PS",4,"2016","ttbar");//DONE
+    launch_scripts("Oct19v4_MC_2016_MadGraph_TTToHadronic_PS",4,"2016","ttbar");//DONE*/
 
 }
 
 void launch_single_script_all(){
 
-launch_single_script("Oct19v1_MC_2016_DYJetsToLL_M-50",3,"2016","EWK");
-launch_single_script("Oct19v1_MC_2016_DYJetsToLL_M-50",6,"2016","EWK");
-launch_single_script("Oct19v1_MC_2016_WJetsToLNu_ext2",2,"2016","EWK");
-launch_single_script("Oct19v1_MC_2016_WJetsToLNu_ext2",3,"2016","EWK");
-launch_single_script("Oct19v1_MC_2016_WJetsToLNu",1,"2016","EWK");
-launch_single_script("Oct19v1_MC_2017_DYJetsToLL_M-10to50",3,"2017","EWK");
-launch_single_script("Oct19v1_MC_2017_DYJetsToLL_M-10to50_ext1",0,"2017","EWK");
-launch_single_script("Oct19v1_MC_2017_DYJetsToLL_M-10to50_ext1",1,"2017","EWK");
-launch_single_script("Oct19v1_MC_2017_DYJetsToLL_M-10to50_ext1",3,"2017","EWK");
-launch_single_script("Oct19v1_MC_2017_DYJetsToLL_M-10to50_ext1",4,"2017","EWK");
-launch_single_script("Oct19v1_MC_2017_DYJetsToLL_M-50",1,"2017","EWK");
-launch_single_script("Oct19v1_MC_2017_DYJetsToLL_M-50",2,"2017","EWK");
-launch_single_script("Oct19v3_MC_2017_DYJetsToLL_M-50_ext1",0,"2017","EWK");
-launch_single_script("Oct19v3_MC_2017_DYJetsToLL_M-50_ext1",1,"2017","EWK");
-launch_single_script("Oct19v3_MC_2017_DYJetsToLL_M-50_ext1",2,"2017","EWK");
-launch_single_script("Oct19v3_MC_2017_DYJetsToLL_M-50_ext1",4,"2017","EWK");
-launch_single_script("Oct19v3_MC_2017_DYJetsToLL_M-50_ext1",6,"2017","EWK");
-launch_single_script("Oct19v3_MC_2017_DYJetsToLL_M-50_ext1",7,"2017","EWK");
-launch_single_script("Oct19v2_MC_2017_WJetsToLNu",0,"2017","EWK");
-launch_single_script("Oct19v2_MC_2017_WJetsToLNu",2,"2017","EWK");
-launch_single_script("Oct19v2_MC_2017_WJetsToLNu",3,"2017","EWK");
-launch_single_script("Oct19v2_MC_2017_WJetsToLNu",4,"2017","EWK");
-launch_single_script("Oct19v1_MC_2017_WJetsToLNu_ext1",0,"2017","EWK");
-launch_single_script("Oct19v1_MC_2017_WJetsToLNu_ext1",1,"2017","EWK");
-launch_single_script("Oct19v1_MC_2017_WJetsToLNu_ext1",2,"2017","EWK");
-launch_single_script("Oct19v1_MC_2017_WJetsToLNu_ext1",3,"2017","EWK");
-launch_single_script("Oct19v1_MC_2017_WJetsToLNu_ext1",4,"2017","EWK");
-launch_single_script("Oct19v1_MC_2017_WJetsToLNu_ext1",5,"2017","EWK");
-launch_single_script("Oct19v1_MC_2017_WJetsToLNu_ext1",6,"2017","EWK");
-launch_single_script("Oct19v1_MC_2017_WJetsToLNu_ext1",7,"2017","EWK");
-launch_single_script("Oct19v1_MC_2017_WWTo2L2Nu_ext1",0,"2017","EWK");
-launch_single_script("Oct19v1_MC_2017_WZTo3LNu",0,"2017","EWK");
-launch_single_script("Oct19v1_MC_2017_WZTo3LNu",1,"2017","EWK");
-launch_single_script("Oct19v1_MC_2017_ZZTo4L",0,"2017","EWK");
-launch_single_script("Oct19v1_MC_2017_ZZTo4L_ext1",0,"2017","EWK");
-launch_single_script("Oct19v1_MC_2017_ZZTo4L_ext1",1,"2017","EWK");
-launch_single_script("Oct19v1_MC_2017_ZZTo4L_ext1",2,"2017","EWK");
-launch_single_script("Oct19v1_MC_2017_ZZTo4L_ext1",3,"2017","EWK");
-launch_single_script("Oct19v1_MC_2017_ZZTo4L_ext1",4,"2017","EWK");
-launch_single_script("Oct19v1_MC_2017_ZZTo4L_ext1",5,"2017","EWK");
-launch_single_script("Oct19v1_MC_2017_ZZTo4L_ext1",6,"2017","EWK");
-launch_single_script("Oct19v1_MC_2017_ZZTo4L_ext1",7,"2017","EWK");
-launch_single_script("Oct19v1_MC_2017_ZZTo4L_ext1",8,"2017","EWK");
-launch_single_script("Oct19v1_MC_2017_ZZTo4L_ext1",9,"2017","EWK");
+//DOWN
 launch_single_script("Oct19v1_MC_2017_ZZTo4L_ext1",10,"2017","EWK");
-launch_single_script("Oct19v2_MC_2017_ZZTo4L_ext2",0,"2017","EWK");
-launch_single_script("Oct19v3_MC_2018_DYJetsToLL_M-10to50",0,"2018","EWK");
-launch_single_script("Oct19v3_MC_2018_DYJetsToLL_M-10to50",2,"2018","EWK");
-launch_single_script("Oct19v3_MC_2018_DYJetsToLL_M-10to50",3,"2018","EWK");
-launch_single_script("Oct19v3_MC_2018_DYJetsToLL_M-10to50",4,"2018","EWK");
-launch_single_script("Oct19v2_MC_2018_DYJetsToLL_M-50",0,"2018","EWK");
-launch_single_script("Oct19v2_MC_2018_WJetsToLNu",0,"2018","EWK");
-launch_single_script("Oct19v2_MC_2018_WJetsToLNu",1,"2018","EWK");
-launch_single_script("Oct19v2_MC_2018_WJetsToLNu",2,"2018","EWK");
-launch_single_script("Oct19v2_MC_2018_WJetsToLNu",3,"2018","EWK");
-launch_single_script("Oct19v2_MC_2018_WJetsToLNu",4,"2018","EWK");
-launch_single_script("Oct19v2_MC_2018_WJetsToLNu",5,"2018","EWK");
-launch_single_script("Oct19v2_MC_2018_WJetsToLNu",7,"2018","EWK");
-launch_single_script("Oct19v2_MC_2018_WJetsToLNu",8,"2018","EWK");
-launch_single_script("Oct19v2_MC_2018_WJetsToLNu",9,"2018","EWK");
-launch_single_script("Oct19v3_MC_2018_WWTo2L2Nu",0,"2018","EWK");
-launch_single_script("Oct19v1_MC_2018_WZTo3LNu",0,"2018","EWK");
-launch_single_script("Oct19v1_MC_2018_WZTo3LNu",1,"2018","EWK");
-launch_single_script("Oct19v1_MC_2018_WZTo3LNu",2,"2018","EWK");
-launch_single_script("Oct19v2_MC_2018_WZTo3LNu_ext1",0,"2018","EWK");
-launch_single_script("Oct19v2_MC_2018_WZTo3LNu_ext1",1,"2018","EWK");
-launch_single_script("Oct19v2_MC_2018_ZZTo4L",0,"2018","EWK");
-launch_single_script("Oct19v4_MC_2018_ZZTo4L_ext2",0,"2018","EWK");
 launch_single_script("Oct19v4_MC_2018_ZZTo4L_ext2",1,"2018","EWK");
-launch_single_script("Oct19v4_MC_2018_ZZTo4L_ext2",2,"2018","EWK");
+launch_single_script("Oct19v1_MC_2017_ZZTo4L_ext1",8,"2017","EWK");
+launch_single_script("Oct19v1_MC_2016_WWTo2L2Nu",0,"2016","EWK");
+launch_single_script("Oct19v1_MC_2017_ZZTo4L_ext1",0,"2017","EWK");
+launch_single_script("Oct19v1_MC_2017_TTZToLLNuNu_M-10_PS",2,"2017","ttV");
 launch_single_script("Oct19v4_MC_2018_ZZTo4L_ext2",3,"2018","EWK");
+launch_single_script("Oct19v1_MC_2017_WZTo3LNu",0,"2017","EWK");
+launch_single_script("Oct19v1_MC_2018_TTWJetsToLNu",0,"2018","ttV");
+launch_single_script("Oct19v1_MC_2016_ttHJetToNonbb",0,"2016","ttH");
+launch_single_script("Oct19v4_MC_2018_ZZTo4L_ext2",2,"2018","EWK");
+launch_single_script("Oct19v1_MC_2017_WZTo3LNu",1,"2017","EWK");
+launch_single_script("Oct19v1_MC_2017_ZZTo4L_ext1",9,"2017","EWK");
+
+//UP
+/*launch_single_script("Oct19v1_MC_2017_ZZTo4L_ext1",10,"2017","EWK");
+launch_single_script("Oct19v1_MC_2017_ZZTo4L_ext1",0,"2017","EWK");
 launch_single_script("Oct19v4_MC_2018_ZZTo4L_ext2",4,"2018","EWK");
+launch_single_script("Oct19v1_MC_2017_ZZTo4L_ext1",11,"2017","EWK");
+launch_single_script("Oct19v1_MC_2016_TTZToLLNuNu_M-10_ext3",0,"2016","ttV");
+launch_single_script("Oct19v1_MC_2018_TTZToLLNuNu_M-10",0,"2018","ttV");
+launch_single_script("Oct19v1_MC_2016_ttHJetToNonbb",0,"2016","ttH");
+launch_single_script("Oct19v1_MC_2017_ZZTo4L_ext1",1,"2017","EWK");
 launch_single_script("Oct19v4_MC_2018_ZZTo4L_ext2",5,"2018","EWK");
-launch_single_script("Oct19v4_MC_2018_ZZTo4L_ext2",6,"2018","EWK");
-launch_single_script("Oct19v3_MC_2018_DYJetsToLL_M-50_ext2",1,"2018","EWK");
-launch_single_script("Oct19v3_MC_2018_DYJetsToLL_M-50_ext2",2,"2018","EWK");
-launch_single_script("Oct19v3_MC_2018_DYJetsToLL_M-50_ext2",3,"2018","EWK");
-launch_single_script("Oct19v3_MC_2018_DYJetsToLL_M-50_ext2",4,"2018","EWK");
-launch_single_script("Oct19v3_MC_2018_DYJetsToLL_M-50_ext2",5,"2018","EWK");
-launch_single_script("Oct19v3_MC_2018_DYJetsToLL_M-50_ext2",7,"2018","EWK");
-launch_single_script("Oct19v1_MC_2016_GluGluHToMuMu",0,"2016","ggH");
-launch_single_script("Oct19v1_MC_2017_GluGluHToTauTau",0,"2017","ggH");
-launch_single_script("Oct19v3_MC_2017_GluGluHToTauTau_ext1",0,"2017","ggH");
-launch_single_script("Oct19v3_MC_2017_GluGluHToTauTau_ext1",1,"2017","ggH");
-launch_single_script("Oct19v1_MC_2017_GluGluHToZZTo4L_ext1",0,"2017","ggH");
-launch_single_script("Oct19v1_MC_2017_GluGluHToMuMu_ext1",0,"2017","ggH");
-launch_single_script("Oct19v2_MC_2017_GluGluHToBB",0,"2017","ggH");
-launch_single_script("Oct19v2_MC_2017_GluGluHToBB",1,"2017","ggH");
-launch_single_script("Oct19v2_MC_2018_GluGluHToTauTau",0,"2018","ggH");
-launch_single_script("Oct19v2_MC_2018_GluGluHToTauTau",1,"2018","ggH");
-launch_single_script("Oct19v2_MC_2018_GluGluHToMuMu_ext1",0,"2018","ggH");
-launch_single_script("Oct19v1_MC_2018_GluGluHToBB",0,"2018","ggH");
-launch_single_script("Oct19v1_MC_2018_GluGluHToBB",1,"2018","ggH");
-launch_single_script("Oct19v1_MC_2018_GluGluHToBB",2,"2018","ggH");
-launch_single_script("Oct19v1_MC_2018_GluGluHToGG",0,"2018","ggH");
+launch_single_script("Oct19v1_MC_2017_ZZTo4L_ext1",2,"2017","EWK");
+*/
 
 }

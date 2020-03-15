@@ -14,11 +14,12 @@ void count_events(TString sample, TString year, TString type){
 	TString dirin = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_splitted/";
 
 	dirin += year;
-	dirin += "/nominal/";
+	//dirin += "/nominal/";
+	dirin += "/JECdown/";
 	dirin += type;
 	dirin += "/";
 
-	TString filein = dirin+"ntuple_"+sample+".root";
+	TString filein = dirin+"ntuple_"+sample+"_JECdown.root";
 
 	TChain * tree_SR = new TChain("HTauTauTree_2lss1tau_SR");
 	TChain * tree_fake = new TChain("HTauTauTree_2lss1tau_fake");
@@ -29,14 +30,51 @@ void count_events(TString sample, TString year, TString type){
 	tree_flip->Add(filein);
 
 	Long64_t nentries_SR = tree_SR->GetEntries();
-	Long64_t nentries_fake = tree_fake->GetEntries();
-	Long64_t nentries_flip = tree_flip->GetEntries();
+	//Long64_t nentries_fake = tree_fake->GetEntries();
+	//Long64_t nentries_flip = tree_flip->GetEntries();
 
-	cout<<filein<<" --> "<<nentries_SR<<","<<nentries_fake<<","<<nentries_flip<<endl;
+	//cout<<filein<<" --> "<<nentries_SR<<","<<nentries_fake<<","<<nentries_flip<<endl;
+	cout<<filein<<" --> "<<nentries_SR<<","<<endl;
 
 }
 
 void test(){
+
+count_events("Oct19v1_MC_2016_ttHJetToNonbb","2016","ttH"); 
+count_events("Oct19v1_MC_2016_THQ_ctcvcp","2016","ttH"); 
+count_events("Oct19v1_MC_2016_THW_ctcvcp","2016","ttH"); 
+
+count_events("Oct19v1_MC_2017_ttHJetToNonbb","2017","ttH"); 
+count_events("Oct19v1_MC_2017_THQ_ctcvcp","2017","ttH"); 
+count_events("Oct19v3_MC_2017_THW_ctcvcp","2017","ttH"); 
+
+//Oct19v2_MC_2018_ttHJetToNonbb -> 2, NORM -> rerunning 0 convert up!!!
+count_events("Oct19v1_MC_2018_THQ_ctcvcp","2018","ttH"); 
+count_events("Oct19v1_MC_2018_THW_ctcvcp","2018","ttH"); 
+
+count_events("Oct19v1_MC_2016_TTZToLLNuNu_M-10_ext3","2016","ttV"); 
+count_events("Oct19v1_MC_2016_TTZToLL_M-1to10","2016","ttV");
+count_events("Oct19v1_MC_2016_TTWJetsToLNu","2016","ttV");
+count_events("Oct19v1_MC_2016_TTWW","2016","ttV");
+
+count_events("Oct19v1_MC_2017_TTZToLLNuNu_M-10_PS","2017","ttV");
+count_events("Oct19v1_MC_2017_TTZToLL_M-1to10","2017","ttV");
+count_events("Oct19v1_MC_2017_TTWJetsToLNu","2017","ttV");
+count_events("Oct19v1_MC_2017_TTWW","2017","ttV");
+
+//Oct19v1_MC_2018_TTZToLLNuNu_M-10 -> 3 -> rerunning all split up (615977-615980) [1,2,3 done]
+count_events("Oct19v1_MC_2018_TTZToLL_M-1to10","2018","ttV");
+//Oct19v1_MC_2018_TTWJetsToLNu -> 1 -> rerunning all split down (615987,615988) [1 done]
+count_events("Oct19v1_MC_2018_TTWW_ext2","2018","ttV");
+
+count_events("Oct19v1_MC_2016_WZTo3LNu","2016","EWK");
+count_events("Oct19v1_MC_2016_ZZTo4L","2016","EWK");
+
+count_events("Oct19v1_MC_2017_WZTo3LNu","2017","EWK");
+//Oct19v1_MC_2017_ZZTo4L_ext1 -> 11 -> rerunning all split up (615981-615986) [2,3,4,5 done], rerunning 5 split down (615989)
+
+count_events("Oct19v2_MC_2018_WZTo3LNu_ext1","2018","EWK");
+count_events("Oct19v4_MC_2018_ZZTo4L_ext2","2018","EWK");
 
  //ttH  
 
@@ -435,11 +473,11 @@ void test(){
   count_events("Oct19v1_Data_2016_MuonEG_BlockG","2016","Data"); 
   count_events("Oct19v1_Data_2016_MuonEG_BlockH","2016","Data"); */
 
-  count_events("Oct19v1_Data_2017_SingleElectron_BlockB","2017","Data"); 
+  /*count_events("Oct19v1_Data_2017_SingleElectron_BlockB","2017","Data"); 
   count_events("Oct19v1_Data_2017_SingleElectron_BlockC","2017","Data");  
   count_events("Oct19v1_Data_2017_SingleElectron_BlockD","2017","Data");  
   count_events("Oct19v1_Data_2017_SingleElectron_BlockE","2017","Data");  
-  count_events("Oct19v1_Data_2017_SingleElectron_BlockF","2017","Data"); 
+  count_events("Oct19v1_Data_2017_SingleElectron_BlockF","2017","Data"); */
 
   /*count_events("Oct19v1_Data_2017_DoubleEG_BlockB","2017","Data"); 
   count_events("Oct19v1_Data_2017_DoubleEG_BlockC","2017","Data");  
@@ -458,6 +496,26 @@ void test(){
   count_events("Oct19v1_Data_2017_MuonEG_BlockD","2017","Data");  
   count_events("Oct19v1_Data_2017_MuonEG_BlockE","2017","Data");  
   count_events("Oct19v1_Data_2017_MuonEG_BlockF","2017","Data");  */
+
+  //count_events("Oct19v1_Data_2018_EGamma_BlockA","2018","Data"); 
+  //count_events("Oct19v1_Data_2018_EGamma_BlockB","2018","Data"); 
+  //count_events("Oct19v1_Data_2018_EGamma_BlockC","2018","Data");  
+  //count_events("Oct19v1_Data_2018_EGamma_BlockD","2018","Data");  
+
+  //count_events("Oct19v1_Data_2018_SingleMuon_BlockA","2018","Data"); 
+  //count_events("Oct19v1_Data_2018_SingleMuon_BlockB","2018","Data"); 
+  //count_events("Oct19v1_Data_2018_SingleMuon_BlockC","2018","Data");  
+  //count_events("Oct19v1_Data_2018_SingleMuon_BlockD","2018","Data");
+
+  /*count_events("Oct19v1_Data_2018_DoubleMu_BlockA","2018","Data"); 
+  count_events("Oct19v1_Data_2018_DoubleMu_BlockB","2018","Data"); 
+  count_events("Oct19v1_Data_2018_DoubleMu_BlockC","2018","Data");  
+  count_events("Oct19v1_Data_2018_DoubleMu_BlockD","2018","Data");  
+
+  count_events("Oct19v1_Data_2018_MuonEG_BlockA","2018","Data"); 
+  count_events("Oct19v1_Data_2018_MuonEG_BlockB","2018","Data"); 
+  count_events("Oct19v1_Data_2018_MuonEG_BlockC","2018","Data");  
+  count_events("Oct19v1_Data_2018_MuonEG_BlockD","2018","Data");  */
 
 }
 

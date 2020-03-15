@@ -25,7 +25,7 @@
 #include "headers/bTagSF.cc"
 #include "headers/bTagSF_CSVshape.cc"
 //#include "PUReweight.cc"
-#include "crab_datasets_MC.cc"
+#include "crab_datasets_MC_newConePt.cc"
 
 #include <vector>
 #include <map>
@@ -266,10 +266,10 @@ void convert_tree(
   cout<<" "<<endl;
 
   TFile* f_new = TFile::Open(dir_out+file);
-  if(f_new!=0){
+  /*if(f_new!=0){
     cout<<dir_out+file<<" already exists, please delete it before converting again"<<endl;
     return;
-  }
+  }*/
  
   f_new = TFile::Open(dir_out+file,"RECREATE");
 

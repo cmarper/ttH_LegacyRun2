@@ -68,7 +68,20 @@ void add_SFs(TString filein, TString fileout, vector<TString> treename, bool isM
   	11020 4l_CR_fake
   	*/
 
+    TString pu_file_name;
+
+    if (year==2016) pu_file_name = "PU_weights/pu_weights_2016.root";
+    else if (year==2017) pu_file_name = "PU_weights/pu_weights_2017.root";
+    else if (year==2018) pu_file_name = "PU_weights/pu_weights_2018.root";
+
+    TFile* pu_file = TFile::Open(pu_file_name);
+    TH1F* pu_histo_up = (TH1F*)pu_file->Get("weights_varUp");
+    TH1F* pu_histo_down = (TH1F*)pu_file->Get("weights_varDn");
+
+    ///////////////
+
   	TFile* f_new = TFile::Open(fileout);
+
   	/*if(f_new!=0){
     	cout<<fileout<<" already exists, please delete it before converting again"<<endl;
     	return;
@@ -88,6 +101,8 @@ void add_SFs(TString filein, TString fileout, vector<TString> treename, bool isM
 
     	int _category;
     	int _year;
+
+      float _npu;
 
     	Long64_t _triggerbit; 
 
@@ -113,6 +128,8 @@ void add_SFs(TString filein, TString fileout, vector<TString> treename, bool isM
 
     	tree->SetBranchAddress("category",&_category);
     	tree->SetBranchAddress("year",&_year);
+
+      if(isMC) tree->SetBranchAddress("npu",&_npu);
 
     	tree->SetBranchAddress("triggerbit",&_triggerbit);
 
@@ -140,6 +157,9 @@ void add_SFs(TString filein, TString fileout, vector<TString> treename, bool isM
 
       TTree* tree_new=tree->GetTree()->CloneTree(0);
 
+      float _PU_weight_up_v4;
+      float _PU_weight_down_v4;
+
       float _trigger_weight_ee_v4;
       float _trigger_weight_ee_up_v4;
       float _trigger_weight_ee_down_v4;
@@ -152,7 +172,7 @@ void add_SFs(TString filein, TString fileout, vector<TString> treename, bool isM
       float _trigger_weight_mm_up_v4;
       float _trigger_weight_mm_down_v4;
 
-      float _leptonID_weight_mloose_v4;
+      /*float _leptonID_weight_mloose_v4;
       float _leptonID_weight_mloose_up_v4;
       float _leptonID_weight_mloose_down_v4;
 
@@ -166,7 +186,10 @@ void add_SFs(TString filein, TString fileout, vector<TString> treename, bool isM
 
       float _leptonID_weight_etight_v4;
       float _leptonID_weight_etight_up_v4;
-      float _leptonID_weight_etight_down_v4;
+      float _leptonID_weight_etight_down_v4;*/
+
+      tree_new->Branch("PU_weight_up_v4",       &_PU_weight_up_v4,        "PU_weight_up_v4/F");
+      tree_new->Branch("PU_weight_down_v4",     &_PU_weight_down_v4,      "PU_weight_down_v4/F");
 
       tree_new->Branch("trigger_weight_ee_v4",            &_trigger_weight_ee_v4,             "trigger_weight_ee_v4/F");
       tree_new->Branch("trigger_weight_ee_up_v4",         &_trigger_weight_ee_up_v4,          "trigger_weight_ee_up_v4/F");
@@ -180,7 +203,7 @@ void add_SFs(TString filein, TString fileout, vector<TString> treename, bool isM
       tree_new->Branch("trigger_weight_mm_up_v4",         &_trigger_weight_mm_up_v4,          "trigger_weight_mm_up_v4/F");
       tree_new->Branch("trigger_weight_mm_down_v4",       &_trigger_weight_mm_down_v4,        "trigger_weight_mm_down_v4/F");
 
-      tree_new->Branch("leptonID_weight_mloose_v4",       &_leptonID_weight_mloose_v4,        "leptonID_weight_mloose_v4/F");
+      /*tree_new->Branch("leptonID_weight_mloose_v4",       &_leptonID_weight_mloose_v4,        "leptonID_weight_mloose_v4/F");
       tree_new->Branch("leptonID_weight_mloose_up_v4",    &_leptonID_weight_mloose_up_v4,     "leptonID_weight_mloose_up_v4/F");
       tree_new->Branch("leptonID_weight_mloose_down_v4",  &_leptonID_weight_mloose_down_v4,   "leptonID_weight_mloose_down_v4/F");
 
@@ -194,7 +217,7 @@ void add_SFs(TString filein, TString fileout, vector<TString> treename, bool isM
 
       tree_new->Branch("leptonID_weight_etight_v4",       &_leptonID_weight_etight_v4,        "leptonID_weight_etight_v4/F");
       tree_new->Branch("leptonID_weight_etight_up_v4",    &_leptonID_weight_etight_up_v4,     "leptonID_weight_etight_up_v4/F");
-      tree_new->Branch("leptonID_weight_etight_down_v4",  &_leptonID_weight_etight_down_v4,   "leptonID_weight_etight_down_v4/F");
+      tree_new->Branch("leptonID_weight_etight_down_v4",  &_leptonID_weight_etight_down_v4,   "leptonID_weight_etight_down_v4/F");*/
 
 
     	for(int i=0;i<nentries;i++){
@@ -231,6 +254,9 @@ void add_SFs(TString filein, TString fileout, vector<TString> treename, bool isM
 
         //////////
 
+        _PU_weight_up_v4 = 0;
+        _PU_weight_down_v4 = 0;
+
         _trigger_weight_ee_v4 = 0;
         _trigger_weight_ee_up_v4 = 0;
         _trigger_weight_ee_down_v4 = 0;
@@ -243,7 +269,7 @@ void add_SFs(TString filein, TString fileout, vector<TString> treename, bool isM
         _trigger_weight_mm_up_v4 = 0;
         _trigger_weight_mm_down_v4 = 0;
 
-        _leptonID_weight_mloose_v4 = 0;
+        /*_leptonID_weight_mloose_v4 = 0;
         _leptonID_weight_mloose_up_v4 = 0;
         _leptonID_weight_mloose_down_v4 = 0;
 
@@ -257,11 +283,14 @@ void add_SFs(TString filein, TString fileout, vector<TString> treename, bool isM
 
         _leptonID_weight_etight_v4 = 0;
         _leptonID_weight_etight_up_v4 = 0;
-        _leptonID_weight_etight_down_v4 = 0;
+        _leptonID_weight_etight_down_v4 = 0;*/
 
       	tree->GetEntry(i);
 
         if(i==(nentries-1)) cout<<"FINISHED!!!"<<endl;
+
+        _PU_weight_up_v4 = 1;
+        _PU_weight_down_v4 = 1;
 
         _trigger_weight_ee_v4 = 1;
         _trigger_weight_ee_up_v4 = 1;
@@ -275,7 +304,7 @@ void add_SFs(TString filein, TString fileout, vector<TString> treename, bool isM
         _trigger_weight_mm_up_v4 = 1;
         _trigger_weight_mm_down_v4 = 1;
 
-        _leptonID_weight_mloose_v4 = 1;
+        /*_leptonID_weight_mloose_v4 = 1;
         _leptonID_weight_mloose_up_v4 = 1;
         _leptonID_weight_mloose_down_v4 = 1;
 
@@ -289,7 +318,7 @@ void add_SFs(TString filein, TString fileout, vector<TString> treename, bool isM
 
         _leptonID_weight_etight_v4 = 1;
         _leptonID_weight_etight_up_v4 = 1;
-        _leptonID_weight_etight_down_v4 = 1;
+        _leptonID_weight_etight_down_v4 = 1;*/
 
         // New variables
 
@@ -300,6 +329,26 @@ void add_SFs(TString filein, TString fileout, vector<TString> treename, bool isM
       	bool cat_2los1tau = (_category == 3210 || _category==3220);
       	bool cat_2l2tau = 	(_category == 3310 || _category==3320);
       	bool cat_3l1tau = 	(_category == 4110 || _category==4120);
+
+
+        //////////////////////////////////////////////////////
+        /////////////////////// PU SFS ///////////////////////
+        //////////////////////////////////////////////////////
+
+        if (!isMC){
+          _PU_weight_up_v4 = 1.;
+          _PU_weight_down_v4 = 1.;
+        }
+
+        else if (isMC) {
+
+          int xbinup = pu_histo_up->FindBin(_npu);
+          _PU_weight_up_v4 = pu_histo_up->GetBinContent(xbinup);
+
+          int xbindown = pu_histo_down->FindBin(_npu);
+          _PU_weight_down_v4 = pu_histo_down->GetBinContent(xbindown);
+
+        }
 
         ///////////////////////////////////////////////////////////
         /////////////////////// TRIGGER SFS ///////////////////////
@@ -430,17 +479,41 @@ void add_SFs(TString filein, TString fileout, vector<TString> treename, bool isM
               _trigger_weight_ee_up_v4 *= get_triggerSF_leptonic((*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],2,+1,_year);
               _trigger_weight_ee_down_v4 *= get_triggerSF_leptonic((*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],2,-1,_year);
 
+              _trigger_weight_em_v4 *= get_triggerSF_leptonic((*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],2,0,_year);
+              _trigger_weight_em_up_v4 *= get_triggerSF_leptonic((*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],2,0,_year);
+              _trigger_weight_em_down_v4 *= get_triggerSF_leptonic((*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],2,0,_year);
+
+              _trigger_weight_mm_v4 *= get_triggerSF_leptonic((*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],2,0,_year);
+              _trigger_weight_mm_up_v4 *= get_triggerSF_leptonic((*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],2,0,_year);
+              _trigger_weight_mm_down_v4 *= get_triggerSF_leptonic((*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],2,0,_year);
+
             }
 
             else if( (fabs((*_recolep_sel_pdg)[0])==13 && fabs((*_recolep_sel_pdg)[1])==11) || (fabs((*_recolep_sel_pdg)[0])==11 && fabs((*_recolep_sel_pdg)[1])==13) ) {
+
+              _trigger_weight_ee_v4 *= get_triggerSF_leptonic((*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],2,0,_year);
+              _trigger_weight_ee_up_v4 *= get_triggerSF_leptonic((*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],2,0,_year);
+              _trigger_weight_ee_down_v4 *= get_triggerSF_leptonic((*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],2,0,_year);
 
               _trigger_weight_em_v4 *= get_triggerSF_leptonic((*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],2,0,_year);
               _trigger_weight_em_up_v4 *= get_triggerSF_leptonic((*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],2,+1,_year);
               _trigger_weight_em_down_v4 *= get_triggerSF_leptonic((*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],2,-1,_year);
 
+              _trigger_weight_mm_v4 *= get_triggerSF_leptonic((*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],2,0,_year);
+              _trigger_weight_mm_up_v4 *= get_triggerSF_leptonic((*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],2,0,_year);
+              _trigger_weight_mm_down_v4 *= get_triggerSF_leptonic((*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],2,0,_year);
+
             }
 
             else if(fabs((*_recolep_sel_pdg)[0])==13 && fabs((*_recolep_sel_pdg)[1])==13){
+
+              _trigger_weight_ee_v4 *= get_triggerSF_leptonic((*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],2,0,_year);
+              _trigger_weight_ee_up_v4 *= get_triggerSF_leptonic((*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],2,0,_year);
+              _trigger_weight_ee_down_v4 *= get_triggerSF_leptonic((*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],2,0,_year);
+
+              _trigger_weight_em_v4 *= get_triggerSF_leptonic((*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],2,0,_year);
+              _trigger_weight_em_up_v4 *= get_triggerSF_leptonic((*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],2,0,_year);
+              _trigger_weight_em_down_v4 *= get_triggerSF_leptonic((*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],2,0,_year);
 
               _trigger_weight_mm_v4 *= get_triggerSF_leptonic((*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],2,0,_year);
               _trigger_weight_mm_up_v4 *= get_triggerSF_leptonic((*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],2,+1,_year);
@@ -455,6 +528,7 @@ void add_SFs(TString filein, TString fileout, vector<TString> treename, bool isM
       	//////// LEPTON ID SFS ///////
       	//////////////////////////////
 
+        /*
       	if ( cat_1l1tau || cat_1l2tau ){ // 1 lepton no tight charge
 
       			if((*_recolep_sel_ismvasel)[0]){
@@ -855,6 +929,7 @@ void add_SFs(TString filein, TString fileout, vector<TString> treename, bool isM
             }
 
         }
+        */
 
       	/////////////////////////////////////////////////////////////
 
@@ -868,6 +943,7 @@ void add_SFs(TString filein, TString fileout, vector<TString> treename, bool isM
 	}
 
 	f_new->Close();
+  pu_file->Close();
 
   return;
 

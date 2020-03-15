@@ -29,9 +29,11 @@ using namespace std;
 
 void create_scripts( TString sample="Oct19v1_MC_2016_ttHJetToNonbb", int maxsplit=0, TString year="2016", TString type="ttH" ){
 
-  TString dirin = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_converted/";
+  //TString dirin = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_converted/";
+  TString dirin = "/data_CMPerez/mperez/ttH_Legacy/ntuples_converted/";
   dirin += year;
-  dirin += "/nominal/";
+  //dirin += "/nominal/";
+  dirin += "/JECup/";
   dirin += type;
   dirin += "/";
 
@@ -39,7 +41,7 @@ void create_scripts( TString sample="Oct19v1_MC_2016_ttHJetToNonbb", int maxspli
 
   TString dirout = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/";
   dirout += year;
-  dirout += "/nominal/";
+  dirout += "/JEC/";
   dirout += type;
   dirout += "/";
 
@@ -49,8 +51,8 @@ void create_scripts( TString sample="Oct19v1_MC_2016_ttHJetToNonbb", int maxspli
 
     std::string isample = std::to_string(j);
 
-    TString filename = "ntuple_"+sample+"_"+isample+".root";
-    TString filenameout = "ntuple_"+sample+"_norm_"+isample+".root";
+    TString filename = "ntuple_"+sample+"_"+isample+"_JECup.root";
+    TString filenameout = "ntuple_"+sample+"_norm_JEC_"+isample+".root";
 
     //cout<<filename<<endl;
 
@@ -78,7 +80,7 @@ void launch_scripts( TString sample="Oct19v1_MC_2016_ttHJetToNonbb", int maxspli
 
   for(int j=0;j<maxsplit+1;j++){
     
-    TString LaunchExec = "/opt/exp_soft/cms/t3/t3submit_new ";
+    TString LaunchExec = "/opt/exp_soft/cms/t3/t3submit ";
     LaunchExec += Form("script_tier3_MC/"+year+"/normalize_"+sample+"_%i.sh",j);
     gSystem->Exec(LaunchExec.Data());
  
@@ -88,7 +90,7 @@ void launch_scripts( TString sample="Oct19v1_MC_2016_ttHJetToNonbb", int maxspli
 
 void launch_single_script( TString sample="Oct19v1_MC_2016_THQ_ctcvcp", int isplit=0, TString year="2016", TString type="MC" ){
 
-  TString LaunchExec = "/opt/exp_soft/cms/t3/t3submit_new ";
+  TString LaunchExec = "/opt/exp_soft/cms/t3/t3submit ";
   LaunchExec += Form("script_tier3_MC/"+year+"/normalize_"+sample+"_%i.sh",isplit);
   gSystem->Exec(LaunchExec.Data());
  
@@ -97,6 +99,8 @@ void launch_single_script( TString sample="Oct19v1_MC_2016_THQ_ctcvcp", int ispl
 
 
 void create_scripts_all(){
+
+create_scripts("Oct19v1_MC_2017_ZGToLLG",3,"2017","Rares");
 
     //ttH   ---> good
 
@@ -493,6 +497,17 @@ void create_scripts_all(){
 
 void launch_scripts_all(){
 
+launch_scripts("Oct19v1_MC_2016_ttHJetToNonbb",0,"2016","ttH"); 
+launch_scripts("Oct19v3_MC_2017_THW_ctcvcp",1,"2017","ttH");
+launch_scripts("Oct19v2_MC_2018_ttHJetToNonbb",2,"2018","ttH");
+launch_scripts("Oct19v1_MC_2016_TTZToLLNuNu_M-10_ext3",0,"2016","ttV");
+launch_scripts("Oct19v1_MC_2016_TTWJetsToLNu",0,"2016","ttV");
+launch_scripts("Oct19v2_MC_2017_WWTo2L2Nu",0,"2017","EWK");
+launch_scripts("Oct19v3_MC_2018_WWTo2L2Nu",1, "2018","EWK");
+launch_scripts("Oct19v2_MC_2018_WZTo3LNu_ext1",2,"2018","EWK");
+launch_scripts("Oct19v4_MC_2018_ZZTo4L_ext2",5,"2018","EWK");
+launch_scripts("Oct19v1_MC_2016_ZGTo2LG",1,"2016","Rares");
+
     //ttH  
 
     /*launch_scripts("Oct19v1_MC_2016_ttHJetToNonbb", 0,"2016","ttH"); 
@@ -879,9 +894,9 @@ void launch_scripts_all(){
     launch_scripts("Oct19v4_MC_2016_MadGraph_TTToHadronic",4,"2016","ttbar"); //DONE
     launch_scripts("Oct19v4_MC_2016_MadGraph_TTToHadronic_PS",4,"2016","ttbar");//DONE*/
 
-    //create_scripts("Oct19v1_MC_2016_WGToLNuG_01J",3,"2016","MC"); // 
-    create_scripts("Oct19v1_MC_2017_WGToLNuG_01J",4,"2017","MC"); // 
-    //create_scripts("Oct19v1_MC_2018_WGToLNuG_01J",4,"2018","MC"); // 
+    //launch_scripts("Oct19v1_MC_2016_WGToLNuG_01J",3,"2016","MC"); // 
+    //launch_scripts("Oct19v1_MC_2017_WGToLNuG_01J",4,"2017","MC"); // 
+    //launch_scripts("Oct19v1_MC_2018_WGToLNuG_01J",4,"2018","MC"); // 
     
 }
 
