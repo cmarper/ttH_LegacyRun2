@@ -266,10 +266,10 @@ void convert_tree(
   cout<<" "<<endl;
 
   TFile* f_new = TFile::Open(dir_out+file);
-  if(f_new!=0){
+  /*if(f_new!=0){
     cout<<dir_out+file<<" already exists, please delete it before converting again"<<endl;
     return;
-  }
+  }*/
  
   f_new = TFile::Open(dir_out+file,"RECREATE");
 
@@ -2242,6 +2242,7 @@ void convert_tree(
   for (int i=skip_entries;i<skip_entries+nentries;i++) {
 
     if(i%10000==0) cout<<"i="<<i<<endl;
+    if(i==skip_entries+nentries-1) cout<<"FINISHED!"<<endl;
 
     _daughters_pt.clear();
     _daughters_eta.clear();

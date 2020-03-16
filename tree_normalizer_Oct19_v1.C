@@ -11,7 +11,7 @@ using namespace std;
 
 void add_pu(TString filein, TString fileout, TString year){
   
-  TString treename = "Tree";
+  TString treename = "HTauTauTree";
 
   TFile* f_new = TFile::Open(fileout);
   /*if(f_new!=0){

@@ -36,7 +36,7 @@ void split_tree(TString filename_in, TString filename_out,
   vector<TString> list;
   list.push_back(filename_in);
 
-  TChain * tree = new TChain("Tree");
+  TChain * tree = new TChain("HTauTauTree");
   int nFiles = list.size();
 
   for(int i=0;i<nFiles;i++){
@@ -65,6 +65,7 @@ void split_tree(TString filename_in, TString filename_out,
   Long64_t _triggerbit; 
   Int_t _metfilterbit;
   bool _passecalBadCalibFilterUpdate;
+  
   Float_t _prefiringweight;
   Float_t _prefiringweightup;
   Float_t _prefiringweightdown;

@@ -85,9 +85,11 @@ void plot_2lSS1tau(vector<TString> datacards, vector<TString> dirs, TString varn
   TH1F ttVH = h_from_cards_dir(datacards,dirs,"TTVH");
   TH1F VBF = h_from_cards_dir(datacards,dirs,"VBF");
   TH1F ggH = h_from_cards_dir(datacards,dirs,"ggH");
+  TH1F HH = h_from_cards_dir(datacards,dirs,"HH");
   Higgs.Add(&ttVH);
   Higgs.Add(&VBF);
   Higgs.Add(&ggH);
+  Higgs.Add(&HH);
   h_Higgs.Add( &Higgs );
   h_Higgs.SetFillColor(kBlue);
   h_Higgs.SetLineColor(kBlack);

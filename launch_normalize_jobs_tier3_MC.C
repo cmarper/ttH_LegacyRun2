@@ -100,7 +100,14 @@ void launch_single_script( TString sample="Oct19v1_MC_2016_THQ_ctcvcp", int ispl
 
 void create_scripts_all(){
 
-create_scripts("Oct19v1_MC_2017_ZGToLLG",3,"2017","Rares");
+    create_scripts("Oct19v1_MC_2016_ZGTo2LG",1,"2016","Rares");
+    create_scripts("Oct19v1_MC_2017_WGToLNuG",0,"2017","Rares");
+    create_scripts("Oct19v1_MC_2017_ZGToLLG",3,"2017","Rares");
+    create_scripts("Oct19v1_MC_2018_WGToLNuG",1,"2018","Rares");
+    create_scripts("Oct19v2_MC_2018_ZGToLLG",3,"2018","Rares");
+    create_scripts("Oct19v1_MC_2018_TTGJets",1,"2018","Rares");
+
+//create_scripts("Oct19v1_MC_2017_ZGToLLG",3,"2017","Rares");
 
     //ttH   ---> good
 
@@ -497,7 +504,14 @@ create_scripts("Oct19v1_MC_2017_ZGToLLG",3,"2017","Rares");
 
 void launch_scripts_all(){
 
-launch_scripts("Oct19v1_MC_2016_ttHJetToNonbb",0,"2016","ttH"); 
+    launch_scripts("Oct19v1_MC_2016_ZGTo2LG",1,"2016","Rares");
+    launch_scripts("Oct19v1_MC_2017_WGToLNuG",0,"2017","Rares");
+    launch_scripts("Oct19v1_MC_2017_ZGToLLG",3,"2017","Rares");
+    launch_scripts("Oct19v1_MC_2018_WGToLNuG",1,"2018","Rares");
+    launch_scripts("Oct19v2_MC_2018_ZGToLLG",3,"2018","Rares");
+    launch_scripts("Oct19v1_MC_2018_TTGJets",1,"2018","Rares");
+
+/*launch_scripts("Oct19v1_MC_2016_ttHJetToNonbb",0,"2016","ttH"); 
 launch_scripts("Oct19v3_MC_2017_THW_ctcvcp",1,"2017","ttH");
 launch_scripts("Oct19v2_MC_2018_ttHJetToNonbb",2,"2018","ttH");
 launch_scripts("Oct19v1_MC_2016_TTZToLLNuNu_M-10_ext3",0,"2016","ttV");
@@ -507,6 +521,7 @@ launch_scripts("Oct19v3_MC_2018_WWTo2L2Nu",1, "2018","EWK");
 launch_scripts("Oct19v2_MC_2018_WZTo3LNu_ext1",2,"2018","EWK");
 launch_scripts("Oct19v4_MC_2018_ZZTo4L_ext2",5,"2018","EWK");
 launch_scripts("Oct19v1_MC_2016_ZGTo2LG",1,"2016","Rares");
+*/
 
     //ttH  
 

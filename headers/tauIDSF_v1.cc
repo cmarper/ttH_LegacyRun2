@@ -68,7 +68,7 @@ void close_tauSF_files(){
 
 }
 
-float get_tauSF(int year, float tau_pt, float tau_eta, float tau_dm, TString tau_wpVsJets, int shift = 0){
+float get_tauIDSF(int year, float tau_pt, float tau_eta, float tau_dm, TString tau_wpVsJets, int shift = 0){
 
 	setup_tauSF_files(year);
 

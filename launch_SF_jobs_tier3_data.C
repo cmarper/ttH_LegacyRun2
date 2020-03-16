@@ -121,7 +121,7 @@ void create_scripts_all(){
     //create_scripts("Oct19v1_Data_2017_SingleElectron_BlockF",19,"2017","data"); // DONE
 
     //create_scripts("Oct19v1_Data_2017_SingleMuon_BlockB",8,"2017","data");  // DONE
-    //create_scripts("Oct19v1_Data_2017_SingleMuon_BlockC",17,"2017","data"); // DONE
+    create_scripts("Oct19v1_Data_2017_SingleMuon_BlockC",17,"2017","data"); // repeat: 4 with data_CMS!!!
     //create_scripts("Oct19v1_Data_2017_SingleMuon_BlockD",9,"2017","data");  // DONE
     //create_scripts("Oct19v1_Data_2017_SingleMuon_BlockE",14,"2017","data"); // DONE
     //create_scripts("Oct19v1_Data_2017_SingleMuon_BlockF",19,"2017","data"); // DONE
@@ -153,27 +153,27 @@ void create_scripts_all(){
   
     // 2018
 
-    //create_scripts("Oct19v1_Data_2018_EGamma_BlockA",56,"2018","data"); // DONE
-    //create_scripts("Oct19v1_Data_2018_EGamma_BlockB",28,"2018","data"); // DONE
+    create_scripts("Oct19v1_Data_2018_EGamma_BlockA",56,"2018","data"); // run: 21,23,30
+    create_scripts("Oct19v1_Data_2018_EGamma_BlockB",28,"2018","data"); // run: 0
     //create_scripts("Oct19v1_Data_2018_EGamma_BlockC",26,"2018","data"); // DONE
-    //create_scripts("Oct19v1_Data_2018_EGamma_BlockD",83,"2018","data"); // DONE
+    create_scripts("Oct19v1_Data_2018_EGamma_BlockD",83,"2018","data"); // run: a lot
 
     //create_scripts("Oct19v1_Data_2018_SingleMuon_BlockA",55,"2018","data"); // DONE
     //create_scripts("Oct19v1_Data_2018_SingleMuon_BlockB",26,"2018","data"); // DONE
-    //create_scripts("Oct19v1_Data_2018_SingleMuon_BlockC",26,"2018","data"); // DONE
-    //create_scripts("Oct19v1_Data_2018_SingleMuon_BlockD",83,"2018","data"); // DONE
+    create_scripts("Oct19v1_Data_2018_SingleMuon_BlockC",26,"2018","data"); // run: 8
+    create_scripts("Oct19v1_Data_2018_SingleMuon_BlockD",83,"2018","data"); // running
 
-    //create_scripts("Oct19v1_Data_2018_DoubleMu_BlockA",56,"2018","data"); // DONE
-    //create_scripts("Oct19v1_Data_2018_DoubleMu_BlockB",26,"2018","data"); // DONE
-    //create_scripts("Oct19v1_Data_2018_DoubleMu_BlockC",26,"2018","data"); // DONE
-    //create_scripts("Oct19v1_Data_2018_DoubleMu_BlockD",83,"2018","data"); // DONE
+    /*create_scripts("Oct19v1_Data_2018_DoubleMu_BlockA",56,"2018","data"); 
+    create_scripts("Oct19v1_Data_2018_DoubleMu_BlockB",26,"2018","data"); 
+    create_scripts("Oct19v1_Data_2018_DoubleMu_BlockC",26,"2018","data"); 
+    create_scripts("Oct19v1_Data_2018_DoubleMu_BlockD",83,"2018","data"); 
 
-    //create_scripts("Oct19v1_Data_2018_MuonEG_BlockA",55,"2018","data"); // DONE
-    //create_scripts("Oct19v1_Data_2018_MuonEG_BlockB",26,"2018","data"); // DONE
-    //create_scripts("Oct19v1_Data_2018_MuonEG_BlockC",26,"2018","data"); // DONE
-    //create_scripts("Oct19v1_Data_2018_MuonEG_BlockD",85,"2018","data"); // DONE
+    create_scripts("Oct19v1_Data_2018_MuonEG_BlockA",55,"2018","data"); 
+    create_scripts("Oct19v1_Data_2018_MuonEG_BlockB",26,"2018","data"); 
+    create_scripts("Oct19v1_Data_2018_MuonEG_BlockC",26,"2018","data"); 
+    create_scripts("Oct19v1_Data_2018_MuonEG_BlockD",85,"2018","data"); 
 
-    /*create_scripts("Oct19v1_Data_2018_Tau_BlockA",55,"2018","data"); 
+    create_scripts("Oct19v1_Data_2018_Tau_BlockA",55,"2018","data"); 
     create_scripts("Oct19v1_Data_2018_Tau_BlockB",26,"2018","data"); 
     create_scripts("Oct19v1_Data_2018_Tau_BlockC",26,"2018","data"); 
     create_scripts("Oct19v1_Data_2018_Tau_BlockD",89,"2018","data"); 
@@ -290,24 +290,31 @@ void launch_scripts_all(){
 
 void launch_single_script_all(){
 
-launch_single_script("Oct19v1_Data_2018_SingleMuon_BlockD",3,"2018","data");
-launch_single_script("Oct19v1_Data_2018_DoubleMu_BlockD",67,"2018","data"); 
-launch_single_script("Oct19v1_Data_2018_DoubleMu_BlockD",13,"2018","data"); 
-launch_single_script("Oct19v1_Data_2018_DoubleMu_BlockD",57,"2018","data"); 
-launch_single_script("Oct19v1_Data_2018_DoubleMu_BlockD",36,"2018","data"); 
-launch_single_script("Oct19v1_Data_2018_DoubleMu_BlockD",46,"2018","data"); 
-launch_single_script("Oct19v1_Data_2018_DoubleMu_BlockD",18,"2018","data"); 
-launch_single_script("Oct19v1_Data_2018_DoubleMu_BlockD",66,"2018","data"); 
-launch_single_script("Oct19v1_Data_2018_DoubleMu_BlockD",20,"2018","data"); 
-launch_single_script("Oct19v1_Data_2018_DoubleMu_BlockD",10,"2018","data"); 
-launch_single_script("Oct19v1_Data_2018_DoubleMu_BlockD",25,"2018","data"); 
-launch_single_script("Oct19v1_Data_2018_DoubleMu_BlockD",60,"2018","data"); 
-launch_single_script("Oct19v1_Data_2018_DoubleMu_BlockD",33,"2018","data"); 
-launch_single_script("Oct19v1_Data_2018_DoubleMu_BlockD",27,"2018","data"); 
-launch_single_script("Oct19v1_Data_2018_DoubleMu_BlockD",29,"2018","data"); 
-launch_single_script("Oct19v1_Data_2018_DoubleMu_BlockD",50,"2018","data"); 
-launch_single_script("Oct19v1_Data_2018_DoubleMu_BlockD",80,"2018","data"); 
-launch_single_script("Oct19v1_Data_2018_DoubleMu_BlockD",69,"2018","data"); 
-
+launch_single_script("Oct19v1_Data_2018_SingleMuon_BlockD",20,"2018","data"); 
+launch_single_script("Oct19v1_Data_2018_SingleMuon_BlockD",40,"2018","data"); 
+launch_single_script("Oct19v1_Data_2018_SingleMuon_BlockD",51,"2018","data"); 
+launch_single_script("Oct19v1_Data_2018_SingleMuon_BlockD",36,"2018","data"); 
+launch_single_script("Oct19v1_Data_2018_SingleMuon_BlockD",80,"2018","data"); 
+launch_single_script("Oct19v1_Data_2018_SingleMuon_BlockD",56,"2018","data"); 
+launch_single_script("Oct19v1_Data_2018_SingleMuon_BlockD",74,"2018","data"); 
+launch_single_script("Oct19v1_Data_2018_SingleMuon_BlockD",6,"2018","data"); 
+launch_single_script("Oct19v1_Data_2018_SingleMuon_BlockD",66,"2018","data"); 
+launch_single_script("Oct19v1_Data_2018_SingleMuon_BlockD",63,"2018","data"); 
+launch_single_script("Oct19v1_Data_2018_SingleMuon_BlockD",46,"2018","data"); 
+launch_single_script("Oct19v1_Data_2018_SingleMuon_BlockD",16,"2018","data"); 
+launch_single_script("Oct19v1_Data_2018_SingleMuon_BlockD",10,"2018","data"); 
+launch_single_script("Oct19v1_Data_2018_SingleMuon_BlockD",62,"2018","data"); 
+launch_single_script("Oct19v1_Data_2018_SingleMuon_BlockD",25,"2018","data"); 
+launch_single_script("Oct19v1_Data_2018_SingleMuon_BlockD",31,"2018","data"); 
+launch_single_script("Oct19v1_Data_2018_SingleMuon_BlockD",70,"2018","data"); 
+launch_single_script("Oct19v1_Data_2018_SingleMuon_BlockD",9,"2018","data"); 
+launch_single_script("Oct19v1_Data_2018_SingleMuon_BlockD",59,"2018","data"); 
+launch_single_script("Oct19v1_Data_2018_SingleMuon_BlockD",44,"2018","data"); 
+launch_single_script("Oct19v1_Data_2018_SingleMuon_BlockD",76,"2018","data"); 
+launch_single_script("Oct19v1_Data_2018_SingleMuon_BlockD",53,"2018","data"); 
+launch_single_script("Oct19v1_Data_2018_SingleMuon_BlockD",45,"2018","data"); 
+launch_single_script("Oct19v1_Data_2018_SingleMuon_BlockD",0,"2018","data"); 
+launch_single_script("Oct19v1_Data_2018_SingleMuon_BlockD",11,"2018","data"); 
+launch_single_script("Oct19v1_Data_2018_SingleMuon_BlockD",72,"2018","data"); 
 
 }

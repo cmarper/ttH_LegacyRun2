@@ -396,17 +396,13 @@ std::tuple< float, float, float, float, float> get_fakerate_tau_Loose(int year, 
 		fakerate_tau_deepVSjLoose = fakerate_from_TGraph(gr_fakerate_tau_deepVSjLoose_barrel,tau_pt);
 		fakerate_tau_deepVSjLoose *= f_dataMC_fakerate_tau_deepVSjLoose_barrel->Eval(tau_pt);
 
-		fakerate_tau_deepVSjLoose_par1Up = fakerate_from_TGraph(gr_fakerate_tau_deepVSjLoose_barrel,tau_pt);
-		fakerate_tau_deepVSjLoose_par1Up *= f_dataMC_fakerate_tau_deepVSjLoose_barrel_par1Up->Eval(tau_pt);
+		fakerate_tau_deepVSjLoose_par1Up = f_dataMC_fakerate_tau_deepVSjLoose_barrel_par1Up->Eval(tau_pt);
 
-		fakerate_tau_deepVSjLoose_par1Down = fakerate_from_TGraph(gr_fakerate_tau_deepVSjLoose_barrel,tau_pt);
-    fakerate_tau_deepVSjLoose_par1Down *= f_dataMC_fakerate_tau_deepVSjLoose_barrel_par1Down->Eval(tau_pt);
+		fakerate_tau_deepVSjLoose_par1Down = f_dataMC_fakerate_tau_deepVSjLoose_barrel_par1Down->Eval(tau_pt);
 
-    fakerate_tau_deepVSjLoose_par2Up = fakerate_from_TGraph(gr_fakerate_tau_deepVSjLoose_barrel,tau_pt);
-    fakerate_tau_deepVSjLoose_par2Up *= f_dataMC_fakerate_tau_deepVSjLoose_barrel_par2Up->Eval(tau_pt);
+    fakerate_tau_deepVSjLoose_par2Up = f_dataMC_fakerate_tau_deepVSjLoose_barrel_par2Up->Eval(tau_pt);
 
-    fakerate_tau_deepVSjLoose_par2Down = fakerate_from_TGraph(gr_fakerate_tau_deepVSjLoose_barrel,tau_pt);
-    fakerate_tau_deepVSjLoose_par2Down *= f_dataMC_fakerate_tau_deepVSjLoose_barrel_par2Down->Eval(tau_pt);
+    fakerate_tau_deepVSjLoose_par2Down = f_dataMC_fakerate_tau_deepVSjLoose_barrel_par2Down->Eval(tau_pt);
 
 	}
 
@@ -415,17 +411,13 @@ std::tuple< float, float, float, float, float> get_fakerate_tau_Loose(int year, 
 		fakerate_tau_deepVSjLoose = fakerate_from_TGraph(gr_fakerate_tau_deepVSjLoose_endcaps,tau_pt);
 		fakerate_tau_deepVSjLoose *= f_dataMC_fakerate_tau_deepVSjLoose_endcaps->Eval(tau_pt);
 
-		fakerate_tau_deepVSjLoose_par1Up = fakerate_from_TGraph(gr_fakerate_tau_deepVSjLoose_endcaps,tau_pt);
-		fakerate_tau_deepVSjLoose_par1Up *= f_dataMC_fakerate_tau_deepVSjLoose_endcaps_par1Up->Eval(tau_pt);
+		fakerate_tau_deepVSjLoose_par1Up = f_dataMC_fakerate_tau_deepVSjLoose_endcaps_par1Up->Eval(tau_pt);
 
-		fakerate_tau_deepVSjLoose_par1Down = fakerate_from_TGraph(gr_fakerate_tau_deepVSjLoose_endcaps,tau_pt);
-    fakerate_tau_deepVSjLoose_par1Down *= f_dataMC_fakerate_tau_deepVSjLoose_endcaps_par1Down->Eval(tau_pt);
+		fakerate_tau_deepVSjLoose_par1Down = f_dataMC_fakerate_tau_deepVSjLoose_endcaps_par1Down->Eval(tau_pt);
 
-    fakerate_tau_deepVSjLoose_par2Up = fakerate_from_TGraph(gr_fakerate_tau_deepVSjLoose_endcaps,tau_pt);
-    fakerate_tau_deepVSjLoose_par2Up *= f_dataMC_fakerate_tau_deepVSjLoose_endcaps_par2Up->Eval(tau_pt);
+    fakerate_tau_deepVSjLoose_par2Up = f_dataMC_fakerate_tau_deepVSjLoose_endcaps_par2Up->Eval(tau_pt);
 
-    fakerate_tau_deepVSjLoose_par2Down = fakerate_from_TGraph(gr_fakerate_tau_deepVSjLoose_endcaps,tau_pt);
-    fakerate_tau_deepVSjLoose_par2Down *= f_dataMC_fakerate_tau_deepVSjLoose_endcaps_par2Down->Eval(tau_pt);
+    fakerate_tau_deepVSjLoose_par2Down = f_dataMC_fakerate_tau_deepVSjLoose_endcaps_par2Down->Eval(tau_pt);
 
 	}
 

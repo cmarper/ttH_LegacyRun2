@@ -25,11 +25,9 @@ std::tuple< TString, TString, TString, vector<TString> > setup_files(TString sam
 
   if(sample=="sync16"){
 
-    //file="sync_ntuple_converted_ttHNonbb_2016_v25";
-    file="sync_ntuple_converted_ttHNonbb_2016_Oct19_v1";
+    file="sync_ntuple_converted_ttHNonbb_2016_Oct19_v4";
     dir_out="/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_converted/2016/";
-    //dir_in="/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_LLRHtautau/2016/sync_ntuple_LLRHtautau_ttHNonbb_2016_v13.root";
-    dir_in="/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_LLRHtautau/2016/sync_ntuple_LLRHtautau_ttHNonbb_2016_Oct19_v1.root";
+    dir_in="/data_CMS/cms/mperez/ttH_Legacy/sync_ntuples/ntuples_LLRHtautau/2016/sync_ntuple_LLRHtautau_ttHNonbb_2016_Oct19_v4.root";
     list.push_back(dir_in);
 
   }

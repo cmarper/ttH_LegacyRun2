@@ -2399,8 +2399,9 @@ std::tuple< TString, TString, TString, vector<TString>, int, bool > load_sample_
 
 	TString file = "ntuple_"+sample;
 
-	TString dir_out="/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_converted/";
-	dir_out += year;
+	//TString dir_out="/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_converted/";
+	TString dir_out="/data_CMPerez/mperez/ttH_Legacy/ntuples_converted/";
+        dir_out += year;
 	if(JEC>0)
     	dir_out += "/JECup/";
     if(JEC<0)
@@ -2409,8 +2410,8 @@ std::tuple< TString, TString, TString, vector<TString>, int, bool > load_sample_
     	dir_out += "/TESup/";
     if(TES<0)
     	dir_out += "/TESdown/";
-    else
-    	dir_out += "/nominal/";
+    //else
+    	//dir_out += "/nominal/";
   	dir_out += type;
   	dir_out += "/";
 
@@ -2422,7 +2423,7 @@ std::tuple< TString, TString, TString, vector<TString>, int, bool > load_sample_
     if(i_split == i_split_max) i_max = nfiles+1;
 
     vector<TString> list;
-    for(int i = i_min; i < i_max; i++){ //i_min
+    for(int i = 6; i < i_max; i++){ //i_min
       cout<<dir_in+Form("HTauTauAnalysis_%i.root",i)<<endl;
       list.push_back(dir_in+Form("HTauTauAnalysis_%i.root",i));
     }

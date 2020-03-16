@@ -27,7 +27,7 @@ TFile *_file_recoToLoose_leptonSF_gsf2 = NULL;
 TH2F *_histo_recoToLoose_leptonSF_gsf1 = NULL;
 TH2F *_histo_recoToLoose_leptonSF_gsf2 = NULL;
 
-float _get_recoToLoose_leptonSF_ttH(int pdgid, float pt, float eta, int nlep, float var){
+float _get_recoToLoose_leptonSF_ttH(int year,int pdgid, float pt, float eta, int nlep, float var){
 
   // nlep is ignored for the loose selection
 
@@ -111,25 +111,65 @@ TH2F *_histo_looseToTight_leptonSF_mu_3l = NULL;
 TFile *_file_looseToTight_leptonSF_el_3l = NULL;
 TH2F *_histo_looseToTight_leptonSF_el_3l = NULL;
 
-float _get_looseToTight_leptonSF_ttH(int pdgid, float pt, float eta, int nlep, float var){
+float _get_looseToTight_leptonSF_ttH(int year, int pdgid, float pt, float eta, int nlep, float var){
 
   // var is ignored in all cases (systematics handled in systsEnv.txt)
 
-  if (!_histo_looseToTight_leptonSF_mu_2lss) {
-    _file_looseToTight_leptonSF_mu_2lss = new TFile("lepSF/lepMVAEffSF_m_2lss.root","read");
-    _histo_looseToTight_leptonSF_mu_2lss = (TH2F*)(_file_looseToTight_leptonSF_mu_2lss->Get("sf"));
+  if(year==2016){
+    if (!_histo_looseToTight_leptonSF_mu_2lss) {
+      _file_looseToTight_leptonSF_mu_2lss = new TFile("lepSF/looseToTight_2016_m_2lss.root","read");
+      _histo_looseToTight_leptonSF_mu_2lss = (TH2F*)(_file_looseToTight_leptonSF_mu_2lss->Get("EGamma_SF2D"));
+    }
+    if (!_histo_looseToTight_leptonSF_el_2lss) {
+      _file_looseToTight_leptonSF_el_2lss = new TFile("lepSF/looseToTight_2016_e_2lss.root","read");
+      _histo_looseToTight_leptonSF_el_2lss = (TH2F*)(_file_looseToTight_leptonSF_el_2lss->Get("EGamma_SF2D"));
+    }
+    if (!_histo_looseToTight_leptonSF_mu_3l) {
+      _file_looseToTight_leptonSF_mu_3l = new TFile("lepSF/looseToTight_2016_m_3l.root","read");
+      _histo_looseToTight_leptonSF_mu_3l = (TH2F*)(_file_looseToTight_leptonSF_mu_3l->Get("EGamma_SF2D"));
+    }
+    if (!_histo_looseToTight_leptonSF_el_3l) {
+      _file_looseToTight_leptonSF_el_3l = new TFile("lepSF/looseToTight_2016_e_3l.root","read");
+      _histo_looseToTight_leptonSF_el_3l = (TH2F*)(_file_looseToTight_leptonSF_el_3l->Get("EGamma_SF2D"));
+    }
   }
-  if (!_histo_looseToTight_leptonSF_el_2lss) {
-    _file_looseToTight_leptonSF_el_2lss = new TFile("lepSF/lepMVAEffSF_e_2lss.root","read");
-    _histo_looseToTight_leptonSF_el_2lss = (TH2F*)(_file_looseToTight_leptonSF_el_2lss->Get("sf"));
+
+  else if(year==2017){
+    if (!_histo_looseToTight_leptonSF_mu_2lss) {
+      _file_looseToTight_leptonSF_mu_2lss = new TFile("lepSF/looseToTight_2017_m_2lss.root","read");
+      _histo_looseToTight_leptonSF_mu_2lss = (TH2F*)(_file_looseToTight_leptonSF_mu_2lss->Get("EGamma_SF2D"));
+    }
+    if (!_histo_looseToTight_leptonSF_el_2lss) {
+      _file_looseToTight_leptonSF_el_2lss = new TFile("lepSF/looseToTight_2017_e_2lss.root","read");
+      _histo_looseToTight_leptonSF_el_2lss = (TH2F*)(_file_looseToTight_leptonSF_el_2lss->Get("EGamma_SF2D"));
+    }
+    if (!_histo_looseToTight_leptonSF_mu_3l) {
+      _file_looseToTight_leptonSF_mu_3l = new TFile("lepSF/looseToTight_2017_m_3l.root","read");
+      _histo_looseToTight_leptonSF_mu_3l = (TH2F*)(_file_looseToTight_leptonSF_mu_3l->Get("EGamma_SF2D"));
+    }
+    if (!_histo_looseToTight_leptonSF_el_3l) {
+      _file_looseToTight_leptonSF_el_3l = new TFile("lepSF/looseToTight_2017_e_3l.root","read");
+      _histo_looseToTight_leptonSF_el_3l = (TH2F*)(_file_looseToTight_leptonSF_el_3l->Get("EGamma_SF2D"));
+    }
   }
-  if (!_histo_looseToTight_leptonSF_mu_3l) {
-    _file_looseToTight_leptonSF_mu_3l = new TFile("lepSF/lepMVAEffSF_m_3l.root","read");
-    _histo_looseToTight_leptonSF_mu_3l = (TH2F*)(_file_looseToTight_leptonSF_mu_3l->Get("sf"));
-  }
-  if (!_histo_looseToTight_leptonSF_el_3l) {
-    _file_looseToTight_leptonSF_el_3l = new TFile("lepSF/lepMVAEffSF_e_3l.root","read");
-    _histo_looseToTight_leptonSF_el_3l = (TH2F*)(_file_looseToTight_leptonSF_el_3l->Get("sf"));
+
+  else if(year==2018){
+    if (!_histo_looseToTight_leptonSF_mu_2lss) {
+      _file_looseToTight_leptonSF_mu_2lss = new TFile("lepSF/looseToTight_2018_m_2lss.root","read");
+      _histo_looseToTight_leptonSF_mu_2lss = (TH2F*)(_file_looseToTight_leptonSF_mu_2lss->Get("EGamma_SF2D"));
+    }
+    if (!_histo_looseToTight_leptonSF_el_2lss) {
+      _file_looseToTight_leptonSF_el_2lss = new TFile("lepSF/looseToTight_2018_e_2lss.root","read");
+      _histo_looseToTight_leptonSF_el_2lss = (TH2F*)(_file_looseToTight_leptonSF_el_2lss->Get("EGamma_SF2D"));
+    }
+    if (!_histo_looseToTight_leptonSF_mu_3l) {
+      _file_looseToTight_leptonSF_mu_3l = new TFile("lepSF/looseToTight_2018_m_3l.root","read");
+      _histo_looseToTight_leptonSF_mu_3l = (TH2F*)(_file_looseToTight_leptonSF_mu_3l->Get("EGamma_SF2D"));
+    }
+    if (!_histo_looseToTight_leptonSF_el_3l) {
+      _file_looseToTight_leptonSF_el_3l = new TFile("lepSF/looseToTight_2018_e_3l.root","read");
+      _histo_looseToTight_leptonSF_el_3l = (TH2F*)(_file_looseToTight_leptonSF_el_3l->Get("EGamma_SF2D"));
+    }
   }
 
   TH2F *hist = 0;
@@ -143,77 +183,11 @@ float _get_looseToTight_leptonSF_ttH(int pdgid, float pt, float eta, int nlep, f
 }
 
 
-float leptonSF_ttH(int pdgid, float pt, float eta, int nlep, float var=0){
-
-  float recoToLoose = _get_recoToLoose_leptonSF_ttH(pdgid,pt,eta,nlep,var);
-  float looseToTight = _get_looseToTight_leptonSF_ttH(pdgid,pt,eta,nlep,var);
+float leptonSF_ttH(int year,int pdgid, float pt, float eta, int nlep, float var=0){
+  float recoToLoose = _get_recoToLoose_leptonSF_ttH(year,pdgid,pt,eta,nlep,var); //MISSING LEGACY
+  float looseToTight = _get_looseToTight_leptonSF_ttH(year,pdgid,pt,eta,nlep,var);
   float res = recoToLoose*looseToTight;
   assert (res>0);
   return res;
-
 }
 
-
-/*
-//TFile *file_triggerSF_ttH = NULL;
-//TH2Poly* t2poly_triggerSF_ttH_mm = NULL;
-//TH2Poly* t2poly_triggerSF_ttH_ee = NULL;
-//TH2Poly* t2poly_triggerSF_ttH_em = NULL;
-//TH2Poly* t2poly_triggerSF_ttH_3l = NULL;
-
-float triggerSF_ttH(int pdgid1, float pt1, int pdgid2, float pt2, int nlep, float shift = 0){
-
-  if (nlep>=3) return 1.0+shift*0.05;
-
-  int comb = abs(pdgid1)+abs(pdgid2);
-
-  if (comb==22) return (pt1<30) ? (0.937+shift*0.027) : (0.991+shift*0.002); // ee
-  else if (comb==24) { // em
-    if (pt1<35) return 0.952+shift*0.008;
-    else if (pt1<50) return 0.983+shift*0.003;
-    else return 1.0+shift*0.001;
-  }
-  else if (comb==26) return (pt1<35) ? (0.972+shift*0.006) : (0.994+shift*0.001); // mm
-
-  std::cout << "ERROR: triggerSF_ttH called with wrong input, returning 1" << std::endl;
-  return 1;
-
-}
-
-//Trigger SF for 1l+2tau
-TFile *file_triggerSF_ttH_e = NULL;
-TFile *file_triggerSF_ttH_m = NULL;
-TH2F* h_triggerSF_ttH_e = NULL;
-TH2F* h_triggerSF_ttH_m = NULL;
-
-float triggerSF_ttH_1l(int pdgid, float pt, float eta, float var=0){
-
-  if (!(file_triggerSF_ttH_e && file_triggerSF_ttH_m)) {
-    file_triggerSF_ttH_e = new TFile("lepSF/ElTriggerPerformance_Sep27.root");
-    h_triggerSF_ttH_e = (TH2F*)(file_triggerSF_ttH_e->Get("electrontrig_sf_eta_pt"));
-    file_triggerSF_ttH_m = new TFile("lepSF/MuonTriggerPerformance_Sep06.root");
-    h_triggerSF_ttH_m = (TH2F*)(file_triggerSF_ttH_m->Get("muontrig_sf_abseta_pt"));
-
-    if (!(h_triggerSF_ttH_e && h_triggerSF_ttH_m)) {
-      std::cout << "Impossible to load trigger scale factors!" << std::endl;
-      file_triggerSF_ttH_e->ls();
-      file_triggerSF_ttH_e = NULL;
-      file_triggerSF_ttH_m->ls();
-      file_triggerSF_ttH_m = NULL;
-    }
-  }
-
-  TH2F* hist = NULL;
-  if (abs(pdgid)==13) hist = h_triggerSF_ttH_m;
-  else if (abs(pdgid)==11) hist = h_triggerSF_ttH_e;
-
-  float searchPt = TMath::Min(pt,float(499.0));
-  float searchEta = eta;
-  if(abs(pdgid)==13) searchEta = fabs(eta);
-  int bin = hist->FindBin(searchEta, searchPt);
-  float nomval = hist->GetBinContent(bin);
-  float error = hist->GetBinError(bin);
-  float SF = nomval + var*error;
-  return SF;
-
-}*/

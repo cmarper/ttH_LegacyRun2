@@ -132,6 +132,7 @@ void merge_MEM(TString sample, TString year, TString type, TString region){
     ////////////////////////////////////////////////////////////////////////////////
 
     int vectorsize = Integral_ttH_vector.size();
+
     if( nentries1 != vectorsize )
         cout<<" **** ERROR ****: different number of events in tree and vector!"<<endl;
 
@@ -190,9 +191,9 @@ void merge_MEM(TString sample, TString year, TString type, TString region){
 
 void test(){
 
-    //TString myregion = "SR";
+    TString myregion = "SR";
     //TString myregion = "fake";
-    TString myregion = "flip";
+    //TString myregion = "flip";
 
     /*merge_MEM("Oct19v1_MC_2016_ttHJetToNonbb","2016","ttH",myregion);
     merge_MEM("Oct19v1_MC_2016_ttH_ctcvcp","2016","ttH",myregion);
@@ -559,7 +560,7 @@ void test(){
     merge_MEM("Oct19v1_Data_2016_MuonEG_BlockE","2016","Data",myregion);
     merge_MEM("Oct19v1_Data_2016_MuonEG_BlockF","2016","Data",myregion);
     merge_MEM("Oct19v1_Data_2016_MuonEG_BlockG","2016","Data",myregion);
-    merge_MEM("Oct19v1_Data_2016_MuonEG_BlockH","2016","Data",myregion);*/
+    merge_MEM("Oct19v1_Data_2016_MuonEG_BlockH","2016","Data",myregion);
 
     merge_MEM("Oct19v1_Data_2017_SingleElectron_BlockB","2017","Data",myregion);
     merge_MEM("Oct19v1_Data_2017_SingleElectron_BlockC","2017","Data",myregion);
@@ -567,11 +568,11 @@ void test(){
     merge_MEM("Oct19v1_Data_2017_SingleElectron_BlockE","2017","Data",myregion);
     merge_MEM("Oct19v1_Data_2017_SingleElectron_BlockF","2017","Data",myregion);
 
-    /*merge_MEM("Oct19v1_Data_2017_SingleMuon_BlockB","2017","Data",myregion);
+    merge_MEM("Oct19v1_Data_2017_SingleMuon_BlockB","2017","Data",myregion);
     merge_MEM("Oct19v1_Data_2017_SingleMuon_BlockC","2017","Data",myregion);
     merge_MEM("Oct19v1_Data_2017_SingleMuon_BlockD","2017","Data",myregion);
     merge_MEM("Oct19v1_Data_2017_SingleMuon_BlockE","2017","Data",myregion);
-    merge_MEM("Oct19v1_Data_2017_SingleMuon_BlockF","2017","Data",myregion);*/
+    merge_MEM("Oct19v1_Data_2017_SingleMuon_BlockF","2017","Data",myregion);
 
     merge_MEM("Oct19v1_Data_2017_DoubleEG_BlockB","2017","Data",myregion);
     merge_MEM("Oct19v1_Data_2017_DoubleEG_BlockC","2017","Data",myregion);
@@ -589,7 +590,17 @@ void test(){
     merge_MEM("Oct19v1_Data_2017_MuonEG_BlockC","2017","Data",myregion);
     merge_MEM("Oct19v1_Data_2017_MuonEG_BlockD","2017","Data",myregion);
     merge_MEM("Oct19v1_Data_2017_MuonEG_BlockE","2017","Data",myregion);
-    merge_MEM("Oct19v1_Data_2017_MuonEG_BlockF","2017","Data",myregion);
+    merge_MEM("Oct19v1_Data_2017_MuonEG_BlockF","2017","Data",myregion);*/
+
+    merge_MEM("Oct19v1_Data_2018_DoubleMu_BlockA","2018","Data",myregion);
+    merge_MEM("Oct19v1_Data_2018_DoubleMu_BlockB","2018","Data",myregion);
+    merge_MEM("Oct19v1_Data_2018_DoubleMu_BlockC","2018","Data",myregion);
+    merge_MEM("Oct19v1_Data_2018_DoubleMu_BlockD","2018","Data",myregion);
+
+    merge_MEM("Oct19v1_Data_2018_MuonEG_BlockA","2018","Data",myregion);
+    merge_MEM("Oct19v1_Data_2018_MuonEG_BlockB","2018","Data",myregion);
+    merge_MEM("Oct19v1_Data_2018_MuonEG_BlockC","2018","Data",myregion);
+    merge_MEM("Oct19v1_Data_2018_MuonEG_BlockD","2018","Data",myregion);
 
 }
 
