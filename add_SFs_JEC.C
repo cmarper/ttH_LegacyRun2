@@ -46,6 +46,7 @@ void add_SFs(TString filein, TString fileout, vector<TString> treename, bool isM
 
     int _category;
     int _year;
+    float _npu;
 
     Long64_t _triggerbit; 
 
@@ -120,6 +121,7 @@ void add_SFs(TString filein, TString fileout, vector<TString> treename, bool isM
 
 	    _category = 0;
       _year = 0;
+      _npu = 0;
 
       _triggerbit = 0;
 
@@ -196,7 +198,8 @@ void add_SFs(TString filein, TString fileout, vector<TString> treename, bool isM
       }
 
       else if(!(*_recotauh_sel_isGenMatched)[0]){
-
+        
+        std::tuple<float, float, float, float, float> tau_fakerate = get_fakerate_tau_Loose(_year,(*_recotauh_sel_pt)[0],(*_recotauh_sel_eta)[0]);
         _tauID_weight_v3 *= std::get<0>(tau_fakerate);
 
       }

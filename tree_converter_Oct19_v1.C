@@ -1889,7 +1889,8 @@ void convert_tree(
   vector<int> _daughters_genindex;
   float _MC_weight = -1., _MC_weight_scale_muF0p5 = -1., _MC_weight_scale_muF2 = -1., _MC_weight_scale_muR0p5 = -1., _MC_weight_scale_muR2 = -1.;
   float _MC_weight_originalXWGTUP = -1.;
-  vector<float> _MC_weights, _MC_weights_rwgt;
+  vector<float> *_MC_weights;
+  vector<float> *_MC_weights_rwgt;
   float _MC_weights_rwgt_sum = -1.;
   float _lheHt = -1.;
   int _lheNOutPartons = -1;
@@ -1920,7 +1921,7 @@ void convert_tree(
     tree_new->Branch("MC_weight_scale_muF2",&_MC_weight_scale_muF2,"MC_weight_scale_muF2/F");
     tree_new->Branch("MC_weight_scale_muR0p5",&_MC_weight_scale_muR0p5,"MC_weight_scale_muR0p5/F");
     tree_new->Branch("MC_weight_scale_muR2",&_MC_weight_scale_muR2,"MC_weight_scale_muR2/F");
-    tree_new->Branch("MC_weight_originalXWGTUP",&_MC_weight_originalXWGTUP,"MC_weight_originalXWGTUP/F");
+    //tree_new->Branch("MC_weight_originalXWGTUP",&_MC_weight_originalXWGTUP,"MC_weight_originalXWGTUP/F");
     //tree_new->Branch("MC_weights",&_MC_weights);
     //tree_new->Branch("MC_weights_rwgt",&_MC_weights_rwgt);
     //tree_new->Branch("MC_weights_rwgt_sum",&_MC_weights_rwgt_sum,"MC_weights_rwgt_sum/F");
@@ -2025,11 +2026,11 @@ void convert_tree(
 
     tree->SetBranchAddress("npu",&_npu);
 
-    //tree->SetBranchAddress("MC_weight",&_MC_weight);
-    //tree->SetBranchAddress("MC_weight_originalXWGTUP",&_MC_weight_originalXWGTUP);
-    //tree->SetBranchAddress("MC_weights",&_MC_weights);
-    //tree->SetBranchAddress("MC_weights_rwgt",&_MC_weights_rwgt);
-    //tree->SetBranchAddress("MC_weights_rwgt_sum",&_MC_weights_rwgt_sum);
+    tree->SetBranchAddress("MC_weight",&_MC_weight);
+    tree->SetBranchAddress("MC_weight_originalXWGTUP",&_MC_weight_originalXWGTUP);
+    tree->SetBranchAddress("MC_weights",&_MC_weights);
+    tree->SetBranchAddress("MC_weights_rwgt",&_MC_weights_rwgt);
+    tree->SetBranchAddress("MC_weights_rwgt_sum",&_MC_weights_rwgt_sum);
 
     //tree->SetBranchAddress("PU_weight",&_PU_weight);
  
@@ -2059,7 +2060,7 @@ void convert_tree(
     tree_new->Branch("MC_weights_rwgt",&_MC_weights_rwgt);
     tree_new->Branch("MC_weights_rwgt_sum",&_MC_weights_rwgt_sum);
 
-    tree_new->Branch("PU_weight",&_PU_weight,"PU_weight/F");
+    //tree_new->Branch("PU_weight",&_PU_weight,"PU_weight/F");
     tree_new->Branch("min_mll",&_min_mll,"min_mll/F");
 
   }
@@ -3036,8 +3037,8 @@ void convert_tree(
     
     _MC_weight = 0.;
     _MC_weight_originalXWGTUP = 0.;
-    _MC_weights.clear();
-    _MC_weights_rwgt.clear();
+    _MC_weights = 0;
+    _MC_weights_rwgt = 0;
     _MC_weights_rwgt_sum = 0.;
  
    
