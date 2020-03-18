@@ -56,8 +56,8 @@ void add_pu(TString filein, TString fileout, TString year){
   tree_new->Branch("npu",&_npu,"npu/F");
   tree_new->Branch("MC_weight",&_MC_weight,"MC_weight/F");
   tree_new->Branch("MC_weight_originalXWGTUP",&_MC_weight_originalXWGTUP,"MC_weight_originalXWGTUP/F");
-  tree_new->Branch("MC_weights",&_MC_weights,"MC_weights");
-  tree_new->Branch("MC_weights_rwgt",&_MC_weights_rwgt,"MC_weights_rwgt");
+  tree_new->Branch("MC_weights",&_MC_weights);
+  tree_new->Branch("MC_weights_rwgt",&_MC_weights_rwgt);
   tree_new->Branch("MC_weights_rwgt_sum",&_MC_weights_rwgt_sum,"MC_weights_rwgt_sum/F");
   tree_new->Branch("PU_weight_v1",&_PU_weight_v1,"PU_weight_v1/F");
 
@@ -72,7 +72,7 @@ void add_pu(TString filein, TString fileout, TString year){
   tree->SetBranchAddress("MC_weights_rwgt_sum",&_MC_weights_rwgt_sum);
 
   for(int i=0;i<nentries;i++){ //nentries
-  
+      if(i==nentries-1) cout<<"FINISHED!"<<endl;  
       if(i%10000==0)
 	    cout<<"i="<<i<<endl;
 
