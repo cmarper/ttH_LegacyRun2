@@ -15,7 +15,7 @@
 
 using namespace std;
 
-void add_SFs(TString filein, TString fileout, vector<TString> treename, bool isMC, int year){
+void add_SFs(TString filein, TString fileout, vector<TString> treename, int year){
 
   TString pu_file_name;
 
@@ -165,43 +165,43 @@ void add_SFs(TString filein, TString fileout, vector<TString> treename, bool isM
 
       // New variables
 
-      bool cat_2lss1tau = (_category == 3110 || _category==3120 || _category==3130);
-
-      if (!cat_2lss1tau) continue;
+      //bool cat_2lss1tau = (_category == 3110 || _category==3120 || _category==3130);
+      //if (!cat_2lss1tau) continue;
 
       int xbin = pu_histo->FindBin(_npu);
       _PU_weight_v1 = pu_histo->GetBinContent(xbin);
 
+      ///////////
+
       _trigger_weight_v1 = get_triggerSF_leptonic((*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],2,0,_year); 
+
+      ///////////
 
       if((*_recolep_sel_ismvasel)[0])
         _leptonID_weight_v1 *= get_leptonSF(_year,(*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_eta)[0],2,0); 
-
       else
         _leptonID_weight_v1 *= get_RecoToLoose_leptonSF(_year,(*_recolep_sel_pdg)[0],(*_recolep_sel_pt)[0],(*_recolep_sel_eta)[0],2,0);
 
+      ///////////
+
       if((*_recolep_sel_ismvasel)[1])
         _leptonID_weight_v1 *= get_leptonSF(_year,(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],(*_recolep_sel_eta)[1],2,0);
-
       else
         _leptonID_weight_v1 *= get_RecoToLoose_leptonSF(_year,(*_recolep_sel_pdg)[1],(*_recolep_sel_pt)[1],(*_recolep_sel_eta)[1],2,0);
+
+      ///////////
 
       TString wp;
       if((*_recotauh_sel_byVLooseDeepTau2017v2p1VSjet)[0]==1) wp = "VLoose";
       else wp = "VVLoose";
 
       if( (*_recotauh_sel_isGenMatched)[0] ) {
-
         _tauID_weight_v3 *= get_tauIDSF(_year, (*_recotauh_sel_pt)[0], (*_recotauh_sel_eta)[0], (*_recotauh_sel_decayMode)[0], wp,0);
         _tauES_weight_v1 *= get_tauESSF(_year, (*_recotauh_sel_decayMode)[0],0);
-
       }
-
       else if(!(*_recotauh_sel_isGenMatched)[0]){
-        
         std::tuple<float, float, float, float, float> tau_fakerate = get_fakerate_tau_Loose(_year,(*_recotauh_sel_pt)[0],(*_recotauh_sel_eta)[0]);
         _tauID_weight_v3 *= std::get<0>(tau_fakerate);
-
       }
 
       /////////////////////////////////////////////////////////////
@@ -223,40 +223,118 @@ void add_SFs(TString filein, TString fileout, vector<TString> treename, bool isM
 }
 
 
-void loadsample(TString sample, int year, TString type, bool ismc){
+void loadsample(TString sample, int year, TString type){
 
     cout<<"Processing SR sample: "<<sample;
 
     TString year_s = std::to_string(year);
 
   	TString filein;
-    filein = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_splitted_MEM/"+year_s+"/nominal/"+type+"/ntuple_"+sample+"_MEM_SR.root";
+    filein = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_splitted_MEM/"+year_s+"/JECdown/"+type+"/ntuple_"+sample+"_MEM_SR_JECdown.root";
 
     TString fileout;
-    fileout = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/"+year_s+"/nominal/"+type+"/ntuple_"+sample+"_MEM_SR_SF_v1.root";
+    fileout = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/"+year_s+"/JECdown/"+type+"/ntuple_"+sample+"_MEM_SR_JECdown_SF_v1.root";
 
   	vector<TString> tree;
     tree.push_back("HTauTauTree_2lss1tau_SR");
 
-    add_SFs(filein,fileout,tree,ismc,year);
+    add_SFs(filein,fileout,tree,year);
 
 
 }
 
-void test_2016(TString region = "SR"){
+void test_ttH(){
 
-  //loadsample("Oct19v1_MC_2016_GluGluToHHTo4Tau_node_12",2016,"HH",true);
+  loadsample("Oct19v1_MC_2016_ttHJetToNonbb",2016,"ttH");
+  loadsample("Oct19v1_MC_2016_THQ_ctcvcp",2016,"ttH");
+  loadsample("Oct19v1_MC_2016_THW_ctcvcp",2016,"ttH");
+  loadsample("Oct19v1_MC_2017_ttHJetToNonbb",2017,"ttH");
+  loadsample("Oct19v1_MC_2017_THQ_ctcvcp",2017,"ttH");
+  loadsample("Oct19v3_MC_2017_THW_ctcvcp",2017,"ttH");
+  loadsample("Oct19v2_MC_2018_ttHJetToNonbb",2018,"ttH");
+  loadsample("Oct19v1_MC_2018_THQ_ctcvcp",2018,"ttH");
+  loadsample("Oct19v1_MC_2018_THW_ctcvcp",2018,"ttH");
 
 }
 
-void test_2017(TString region = "SR"){
+void test_ttV(){
 
-  //loadsample("Oct19v2_MC_2017_GluGluToHHTo4V_node_12",2017,"HH",true);
+  loadsample("Oct19v1_MC_2016_TTZToLLNuNu_M-10_ext3",2016,"ttV");
+  loadsample("Oct19v1_MC_2016_TTZToLL_M-1to10",2016,"ttV");
+  loadsample("Oct19v1_MC_2016_TTWJetsToLNu",2016,"ttV");
+  loadsample("Oct19v1_MC_2016_TTWW",2016,"ttV");
+  loadsample("Oct19v1_MC_2017_TTZToLLNuNu_M-10_PS",2017,"ttV");
+  loadsample("Oct19v1_MC_2017_TTZToLL_M-1to10",2017,"ttV");
+  loadsample("Oct19v1_MC_2017_TTWJetsToLNu",2017,"ttV");
+  loadsample("Oct19v1_MC_2017_TTWW",2017,"ttV");
+  loadsample("Oct19v1_MC_2018_TTZToLLNuNu_M-10",2018,"ttV");
+  loadsample("Oct19v1_MC_2018_TTZToLL_M-1to10",2018,"ttV");
+  loadsample("Oct19v1_MC_2018_TTWJetsToLNu",2018,"ttV");
+  loadsample("Oct19v1_MC_2018_TTWW_ext2",2018,"ttV");
 
 }
 
-void test_2018(TString region = "SR"){
+void test_EWK(){
 
-  //loadsample("Oct19v3_MC_2018_GluGluToHHTo2B2Tau_node_11",2018,"HH",true);
+  loadsample("Oct19v1_MC_2016_WZTo3LNu",2016,"EWK");
+  loadsample("Oct19v1_MC_2016_ZZTo4L",2016,"EWK");
+  loadsample("Oct19v1_MC_2017_WZTo3LNu",2017,"EWK");
+  loadsample("Oct19v1_MC_2017_ZZTo4L_ext1",2017,"EWK");
+  loadsample("Oct19v2_MC_2018_WZTo3LNu_ext1",2018,"EWK");
+  loadsample("Oct19v4_MC_2018_ZZTo4L_ext2",2018,"EWK");
+
+}
+
+void test_Rares(){
+
+  /*loadsample("Oct19v1_MC_2016_WWW",2016,"Rares");
+  loadsample("Oct19v1_MC_2016_WWZ",2016,"Rares");
+  loadsample("Oct19v1_MC_2016_WZZ",2016,"Rares");
+  loadsample("Oct19v1_MC_2016_ZZZ",2016,"Rares");
+  loadsample("Oct19v1_MC_2016_WZG",2016,"Rares");
+  loadsample("Oct19v1_MC_2016_WGToLNuG_ext1",2016,"Rares");
+  loadsample("Oct19v1_MC_2016_ZGTo2LG",2016,"Rares");
+  loadsample("Oct19v1_MC_2016_TGJets_leptonDecays",2016,"Rares");
+  loadsample("Oct19v1_MC_2016_TTGJets",2016,"Rares");
+  loadsample("Oct19v1_MC_2016_tZq_ll_PS",2016,"Rares");
+  loadsample("Oct19v1_MC_2016_WpWpJJ",2016,"Rares");
+  loadsample("Oct19v2_MC_2016_WWTo2L2Nu_DoubleScattering",2016,"Rares");
+  loadsample("Oct19v1_MC_2016_TTTT",2016,"Rares");
+  loadsample("Oct19v1_MC_2017_WWW",2017,"Rares");
+  loadsample("Oct19v1_MC_2017_WWZ",2017,"Rares");
+  loadsample("Oct19v2_MC_2017_WZZ",2017,"Rares");
+  loadsample("Oct19v2_MC_2017_ZZZ",2017,"Rares");
+  loadsample("Oct19v1_MC_2017_WZG",2017,"Rares");
+  loadsample("Oct19v1_MC_2017_WGToLNuG",2017,"Rares");
+  loadsample("Oct19v1_MC_2017_ZGToLLG",2017,"Rares");
+  loadsample("Oct19v1_MC_2017_TGJets",2017,"Rares");
+  loadsample("Oct19v1_MC_2017_TTGJets_ext1",2017,"Rares");*/
+  loadsample("Oct19v1_MC_2017_tZq_ll",2017,"Rares");
+  loadsample("Oct19v2_MC_2017_WpWpJJ",2017,"Rares");
+  loadsample("Oct19v1_MC_2017_WWTo2L2Nu_DoubleScattering",2017,"Rares");
+  loadsample("Oct19v1_MC_2017_TTTT",2017,"Rares");
+  loadsample("Oct19v2_MC_2018_WWW",2018,"Rares");
+  loadsample("Oct19v2_MC_2018_WWZ",2018,"Rares");
+  loadsample("Oct19v1_MC_2018_WZZ",2018,"Rares");
+  loadsample("Oct19v1_MC_2018_ZZZ",2018,"Rares");
+  loadsample("Oct19v1_MC_2018_WZG",2018,"Rares");
+  loadsample("Oct19v1_MC_2018_WGToLNuG",2018,"Rares");
+  loadsample("Oct19v2_MC_2018_ZGToLLG",2018,"Rares");
+  loadsample("Oct19v1_MC_2018_TGJets",2018,"Rares");
+  loadsample("Oct19v1_MC_2018_tZq_ll",2018,"Rares");
+  loadsample("Oct19v1_MC_2018_WpWpJJ",2018,"Rares");
+  loadsample("Oct19v1_MC_2018_WWTo2L2Nu_DoubleScattering",2018,"Rares");
+
+}
+
+void test_ttbar(){
+
+  //MISSING TTBAR 2016
+  loadsample("Oct19v1_MC_2017_TTJets_DiLept",2017,"ttbar");
+  loadsample("Oct19v1_MC_2017_TTJets_SingleLeptFromT",2017,"ttbar");
+  loadsample("Oct19v1_MC_2017_TTJets_SingleLeptFromTbar",2017,"ttbar");
+  loadsample("Oct19v1_MC_2018_TTJets_DiLept",2018,"ttbar");
+  loadsample("Oct19v1_MC_2018_TTJets_SingleLeptFromT",2018,"ttbar");
+  loadsample("Oct19v2_MC_2018_TTJets_SingleLeptFromTbar",2018,"ttbar");
 
 }
