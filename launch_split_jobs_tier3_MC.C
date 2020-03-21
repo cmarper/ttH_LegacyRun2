@@ -33,7 +33,7 @@ void create_scripts( TString sample="Oct19v1_MC_2016_ttHJetToNonbb", int maxspli
   TString dirin = "/data_CMPerez/mperez/ttH_Legacy/ntuples_converted/";
   dirin += year;
   //dirin += "/nominal/";
-  dirin += "/JECdown/";
+  dirin += "/JECup/";
   dirin += type;
   dirin += "/";
 
@@ -42,7 +42,7 @@ void create_scripts( TString sample="Oct19v1_MC_2016_ttHJetToNonbb", int maxspli
   TString dirout = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_splitted/";
   dirout += year;
   //dirout += "/nominal/";
-  dirout += "/JECdown/";
+  dirout += "/JECup/";
   dirout += type;
   dirout += "/";
 
@@ -52,11 +52,11 @@ void create_scripts( TString sample="Oct19v1_MC_2016_ttHJetToNonbb", int maxspli
 
     std::string isample = std::to_string(j);
 
-    TString filename = "ntuple_"+sample+"_"+isample+"_JECdown.root";
+    TString filename = "ntuple_"+sample+"_"+isample+"_JECup.root";
 
     //cout<<filename<<endl;
 
-    TString ScriptName = Form("script_tier3_MC/"+year+"/split_"+sample+"_%i_JECdown.sh",j);
+    TString ScriptName = Form("script_tier3_MC/"+year+"/split_"+sample+"_%i_JECup.sh",j);
     ofstream myscript;
     myscript.open (ScriptName.Data());
     myscript << "#!/bin/bash\n";
@@ -81,7 +81,7 @@ void launch_scripts( TString sample="Oct19v1_MC_2016_ttHJetToNonbb", int maxspli
   for(int j=0;j<maxsplit+1;j++){
     
     TString LaunchExec = "/opt/exp_soft/cms/t3/t3submit ";
-    LaunchExec += Form("script_tier3_MC/"+year+"/split_"+sample+"_%i_JECdown.sh",j);
+    LaunchExec += Form("script_tier3_MC/"+year+"/split_"+sample+"_%i_JECup.sh",j);
     gSystem->Exec(LaunchExec.Data());
  
   }
@@ -91,7 +91,7 @@ void launch_scripts( TString sample="Oct19v1_MC_2016_ttHJetToNonbb", int maxspli
 void launch_single_script( TString sample="Oct19v1_MC_2016_THQ_ctcvcp", int isplit=0, TString year="2016", TString type="MC" ){
 
   TString LaunchExec = "/opt/exp_soft/cms/t3/t3submit ";
-  LaunchExec += Form("script_tier3_MC/"+year+"/split_"+sample+"_%i_JECdown.sh",isplit);
+  LaunchExec += Form("script_tier3_MC/"+year+"/split_"+sample+"_%i_JECup.sh",isplit);
   gSystem->Exec(LaunchExec.Data());
  
 }
@@ -100,7 +100,23 @@ void launch_single_script( TString sample="Oct19v1_MC_2016_THQ_ctcvcp", int ispl
 
 void create_scripts_all(){
 
-create_scripts("Oct19v1_MC_2016_WWW",0,"2016", "Rares");
+    // UP:624780-624784
+
+    create_scripts("Oct19v1_MC_2018_TTTT",0,"2018", "Rares");   // 624774
+    create_scripts("Oct19v2_MC_2016_TTJets_SingleLeptFromT_ext1",0,"2016","ttbar");  //624779
+    create_scripts("Oct19v1_MC_2017_TTJets_SingleLeptFromTbar",0,"2017","ttbar"); //624776
+    create_scripts("Oct19v1_MC_2018_TTJets_DiLept",0,"2018","ttbar"); //624777
+    create_scripts("Oct19v2_MC_2018_TTJets_SingleLeptFromTbar",0,"2018","ttbar"); //624778
+
+    //create_scripts("Oct19v3_MC_2016_TTJets_SingleLeptFromTbar_ext1",0,"2016","ttbar");
+    //create_scripts("Oct19v1_MC_2017_TTJets_DiLept",0,"2017","ttbar");
+    //create_scripts("Oct19v1_MC_2017_TTJets_SingleLeptFromT",0,"2017","ttbar");
+    //create_scripts("Oct19v1_MC_2017_TTJets_SingleLeptFromTbar",0,"2017","ttbar");
+    //create_scripts("Oct19v1_MC_2018_TTJets_DiLept",0,"2018","ttbar");
+    //create_scripts("Oct19v2_MC_2018_TTJets_SingleLeptFromTbar",0,"2018","ttbar");
+    //create_scripts("Oct19v1_MC_2018_TTJets_SingleLeptFromT",0,"2018","ttbar");
+
+/*create_scripts("Oct19v1_MC_2016_WWW",0,"2016", "Rares");
 create_scripts("Oct19v1_MC_2016_WWZ",0,"2016", "Rares");
 create_scripts("Oct19v1_MC_2016_WZZ",0,"2016", "Rares");
 create_scripts("Oct19v1_MC_2016_ZZZ",0,"2016", "Rares");
@@ -140,6 +156,9 @@ create_scripts("Oct19v1_MC_2018_TTGJets",1,"2018","Rares");
 create_scripts("Oct19v1_MC_2018_tZq_ll",3,"2018","Rares"); 
 create_scripts("Oct19v1_MC_2018_WpWpJJ",0,"2018","Rares"); 
 create_scripts("Oct19v1_MC_2018_WWTo2L2Nu_DoubleScattering",1,"2018","Rares"); 
+
+create_scripts("Oct19v1_MC_2018_TTTT",0,"2018","Rares");
+*/
 
     //ttH
 
@@ -182,7 +201,7 @@ create_scripts("Oct19v1_MC_2018_WWTo2L2Nu_DoubleScattering",1,"2018","Rares");
 
     create_scripts("Oct19v2_MC_2017_WWTo2L2Nu",0,"2017","EWK");
     create_scripts("Oct19v1_MC_2017_WZTo3LNu", 1, "2017", "EWK");
-    create_scripts("Oct19v1_MC_2017_ZZTo4L_ext1", 11, "2017", "EWK"); // repeat 5 JECdown
+    create_scripts("Oct19v1_MC_2017_ZZTo4L_ext1", 11, "2017", "EWK"); // repeat 5 JECup
 
     create_scripts("Oct19v3_MC_2018_WWTo2L2Nu",1, "2018","EWK");
     create_scripts("Oct19v2_MC_2018_WZTo3LNu_ext1",2,"2018","EWK");
@@ -520,7 +539,22 @@ create_scripts("Oct19v1_MC_2018_WWTo2L2Nu_DoubleScattering",1,"2018","Rares");
 
 void launch_scripts_all(){
 
-launch_scripts("Oct19v1_MC_2016_WWW",0,"2016", "Rares");
+    launch_scripts("Oct19v1_MC_2018_TTTT",0,"2018", "Rares");   // 624774
+    launch_scripts("Oct19v2_MC_2016_TTJets_SingleLeptFromT_ext1",0,"2016","ttbar");  //624779
+    launch_scripts("Oct19v1_MC_2017_TTJets_SingleLeptFromTbar",0,"2017","ttbar"); //624776
+    launch_scripts("Oct19v1_MC_2018_TTJets_DiLept",0,"2018","ttbar"); //624777
+    launch_scripts("Oct19v2_MC_2018_TTJets_SingleLeptFromTbar",0,"2018","ttbar"); //624778
+
+    //launch_scripts("Oct19v3_MC_2016_TTJets_SingleLeptFromTbar_ext1",0,"2016","ttbar");
+    //launch_scripts("Oct19v1_MC_2017_TTJets_DiLept",0,"2017","ttbar");
+    //launch_scripts("Oct19v1_MC_2017_TTJets_SingleLeptFromT",0,"2017","ttbar");
+    //launch_scripts("Oct19v1_MC_2017_TTJets_SingleLeptFromTbar",0,"2017","ttbar");
+    //launch_scripts("Oct19v1_MC_2018_TTJets_DiLept",0,"2018","ttbar");
+    //launch_scripts("Oct19v2_MC_2018_TTJets_SingleLeptFromTbar",0,"2018","ttbar");
+
+    //launch_scripts("Oct19v1_MC_2018_TTJets_SingleLeptFromT",0,"2018","ttbar");
+
+/*launch_scripts("Oct19v1_MC_2016_WWW",0,"2016", "Rares");
 launch_scripts("Oct19v1_MC_2016_WWZ",0,"2016", "Rares");
 launch_scripts("Oct19v1_MC_2016_WZZ",0,"2016", "Rares");
 launch_scripts("Oct19v1_MC_2016_ZZZ",0,"2016", "Rares");
@@ -559,7 +593,8 @@ launch_scripts("Oct19v1_MC_2018_TGJets",0,"2018","Rares");
 launch_scripts("Oct19v1_MC_2018_TTGJets",1,"2018","Rares"); 
 launch_scripts("Oct19v1_MC_2018_tZq_ll",3,"2018","Rares"); 
 launch_scripts("Oct19v1_MC_2018_WpWpJJ",0,"2018","Rares"); 
-launch_scripts("Oct19v1_MC_2018_WWTo2L2Nu_DoubleScattering",1,"2018","Rares"); 
+launch_scripts("Oct19v1_MC_2018_WWTo2L2Nu_DoubleScattering",1,"2018","Rares"); */
+
 
     //ttH
 
@@ -960,7 +995,21 @@ launch_scripts("Oct19v1_MC_2018_WWTo2L2Nu_DoubleScattering",1,"2018","Rares");
 
 void launch_single_script_all(){
 
-launch_single_script("Oct19v1_MC_2018_WWTo2L2Nu_DoubleScattering",1,"2018","Rares");
+    launch_single_script("Oct19v1_MC_2018_TTTT",0,"2018", "Rares");   // 624774
+    launch_single_script("Oct19v2_MC_2016_TTJets_SingleLeptFromT_ext1",0,"2016","ttbar");  //624779
+    launch_single_script("Oct19v1_MC_2017_TTJets_SingleLeptFromTbar",0,"2017","ttbar"); //624776
+    launch_single_script("Oct19v1_MC_2018_TTJets_DiLept",0,"2018","ttbar"); //624777
+    launch_single_script("Oct19v2_MC_2018_TTJets_SingleLeptFromTbar",0,"2018","ttbar"); //624778
+
+    //launch_single_script("Oct19v1_MC_2016_THQ_ctcvcp",1,"2016","ttH");
+    //launch_single_script("Oct19v1_MC_2016_THW_ctcvcp",1,"2016","ttH");
+    //launch_single_script("Oct19v3_MC_2017_THW_ctcvcp",0,"2017","ttH");
+    //launch_single_script("Oct19v1_MC_2016_THQ_ctcvcp",1,"2016","ttH");
+
+
+//launch_single_script("Oct19v1_MC_2018_WWTo2L2Nu_DoubleScattering",1,"2018","Rares");
+//launch_single_script("Oct19v1_MC_2016_ZGTo2LG",0,"2016","Rares");
+//launch_single_script("Oct19v1_MC_2018_WWTo2L2Nu_DoubleScattering",1,"2018","Rares");
 
 //DOWN
 /*launch_single_script("Oct19v1_MC_2017_ZZTo4L_ext1",10,"2017","EWK");

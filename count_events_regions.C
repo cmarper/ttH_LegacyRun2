@@ -40,7 +40,35 @@ void count_events(TString sample, TString year, TString type){
 
 void test(){
 
-count_events("Oct19v1_MC_2016_ttHJetToNonbb","2016","ttH"); 
+count_events("Oct19v1_MC_2017_WWW","2017","Rares"); 
+count_events("Oct19v1_MC_2017_WWZ","2017","Rares"); 
+count_events("Oct19v2_MC_2017_WZZ","2017","Rares"); 
+count_events("Oct19v2_MC_2017_ZZZ","2017","Rares"); 
+count_events("Oct19v1_MC_2017_WZG","2017","Rares"); 
+count_events("Oct19v1_MC_2017_WGToLNuG","2017","Rares"); 
+count_events("Oct19v1_MC_2017_ZGToLLG","2017","Rares"); 
+count_events("Oct19v1_MC_2017_TGJets","2017","Rares"); 
+count_events("Oct19v1_MC_2017_TTGJets_ext1","2017","Rares"); 
+count_events("Oct19v1_MC_2017_tZq_ll","2017","Rares"); 
+count_events("Oct19v2_MC_2017_WpWpJJ","2017","Rares"); 
+count_events("Oct19v1_MC_2017_WWTo2L2Nu_DoubleScattering","2017","Rares"); 
+count_events("Oct19v1_MC_2017_TTTT","2017","Rares"); 
+
+count_events("Oct19v2_MC_2018_WWW","2018","Rares"); 
+count_events("Oct19v2_MC_2018_WWZ","2018","Rares"); 
+count_events("Oct19v1_MC_2018_WZZ","2018","Rares"); 
+count_events("Oct19v1_MC_2018_ZZZ","2018","Rares"); 
+count_events("Oct19v1_MC_2018_WZG","2018","Rares"); 
+count_events("Oct19v1_MC_2018_WGToLNuG","2018","Rares"); 
+count_events("Oct19v2_MC_2018_ZGToLLG","2018","Rares"); 
+count_events("Oct19v1_MC_2018_TGJets","2018","Rares"); 
+count_events("Oct19v1_MC_2018_TTGJets","2018","Rares"); 
+count_events("Oct19v1_MC_2018_tZq_ll","2018","Rares"); 
+count_events("Oct19v1_MC_2018_WpWpJJ","2018","Rares"); 
+count_events("Oct19v1_MC_2018_WWTo2L2Nu_DoubleScattering","2018","Rares"); 
+count_events("Oct19v1_MC_2018_TTTT","2018","Rares"); 
+
+/*count_events("Oct19v1_MC_2016_ttHJetToNonbb","2016","ttH"); 
 count_events("Oct19v1_MC_2016_THQ_ctcvcp","2016","ttH"); 
 count_events("Oct19v1_MC_2016_THW_ctcvcp","2016","ttH"); 
 
@@ -74,7 +102,7 @@ count_events("Oct19v1_MC_2017_WZTo3LNu","2017","EWK");
 //Oct19v1_MC_2017_ZZTo4L_ext1 -> 11 -> rerunning all split up (615981-615986) [2,3,4,5 done], rerunning 5 split down (615989)
 
 count_events("Oct19v2_MC_2018_WZTo3LNu_ext1","2018","EWK");
-count_events("Oct19v4_MC_2018_ZZTo4L_ext2","2018","EWK");
+count_events("Oct19v4_MC_2018_ZZTo4L_ext2","2018","EWK");*/
 
  //ttH  
 

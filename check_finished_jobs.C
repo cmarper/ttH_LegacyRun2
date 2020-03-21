@@ -46,14 +46,14 @@ void test(){
 
     vector<char*> myfiles;
 
-    //myfiles.push_back("convert_Oct19v1_Data_2016_SingleElectron_BlockD_10.sh.o544915"); 
+    //myfiles.push_back("split_Oct19v1_MC_2016_THQ_ctcvcp_1_JECup.sh.o617002");
 
-    myfiles.push_back("split_Oct19v1_MC_2018_TTGJets_1_JECdown.sh.o616525");
-    myfiles.push_back("split_Oct19v1_MC_2018_WZG_0_JECup.sh.o616458");
-    myfiles.push_back("split_Oct19v1_MC_2017_TTTT_0_JECdown.sh.o616511");
-    myfiles.push_back("split_Oct19v1_MC_2017_WGToLNuG_0_JECdown.sh.o616496");
-    myfiles.push_back("split_Oct19v1_MC_2017_TTGJets_ext1_2_JECdown.sh.o616505");
-
+    myfiles.push_back("split_Oct19v2_MC_2018_TTJets_SingleLeptFromTbar_0_JECup.sh.o624784");
+    myfiles.push_back("split_Oct19v1_MC_2017_TTJets_SingleLeptFromTbar_0_JECup.sh.o624782");
+    myfiles.push_back("split_Oct19v2_MC_2018_TTJets_SingleLeptFromTbar_0_JECdown.sh.o624789");
+    myfiles.push_back("split_Oct19v1_MC_2018_TTJets_DiLept_0_JECup.sh.o624783");
+    myfiles.push_back("split_Oct19v1_MC_2017_TTJets_SingleLeptFromTbar_0_JECdown.sh.o624787");
+    
     loadfiles(myfiles);
 
 }

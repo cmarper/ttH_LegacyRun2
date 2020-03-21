@@ -13,19 +13,15 @@ void compare_events(std::pair<TString, TString> filepair){
 
 	TString filein1 = filepair.first;
 	TString filein2 = filepair.second;
+    cout<<"-------------------------"<<endl;
 	cout<<filein1<<endl;
 	cout<<filein2<<endl;
 
-	//TChain * tree1 = new TChain("HTauTauTree_2lss1tau_SR");
-    //TChain * tree1 = new TChain("HTauTauTree_2lss1tau_fake");
-    //TChain * tree1 = new TChain("HTauTauTree_2lss1tau_flip");
-    TChain * tree1 = new TChain("Tree");
-
+	TChain * tree1 = new TChain("HTauTauTree_2lss1tau_SR");
 	tree1->Add(filein1);
 	Long64_t nentries1 = tree1->GetEntries();
 
-	//TChain * tree2 = new TChain("T");
-    TChain * tree2 = new TChain("HTauTauTree");
+	TChain * tree2 = new TChain("T");
 	tree2->Add(filein2);
 	Long64_t nentries2 = tree2->GetEntries();
 
@@ -33,36 +29,59 @@ void compare_events(std::pair<TString, TString> filepair){
 	if(nentries1 != nentries2) cout << nentries1<<"/"<<nentries2<<" -> **** ERROR ****! " << endl;
 	cout<<" "<<endl;
 
+    /*float _MC_weight;
+    tree1->SetBranchAddress("MC_weight",&_MC_weight);
+
+    int entries = 0;
+    if(nentries1>100) entries = 100;
+    else entries=nentries1;
+    
+    for(int i=0;i<entries;i++){
+        _MC_weight = 0.;
+        tree1->GetEntry(i);
+        cout<<_MC_weight<<endl;
+    }*/
+
+    /*int _integration_type;
+    float _Integral_ttH;
+
+    tree2->SetBranchAddress("integration_type",&_integration_type);
+    tree2->SetBranchAddress("Integral_ttH",&_Integral_ttH);
+
+    int entries = 0;
+    if(nentries2>100) entries = 100;
+    else entries=nentries2;
+
+    for(int i=0;i<entries;i++){
+        _integration_type = 0;
+        _Integral_ttH = 0.;
+        tree2->GetEntry(i);
+        cout<<_integration_type<<"  "<<_Integral_ttH<<endl;
+    }*/
+
+
+
 }
 
 
 std::pair<TString, TString> create_file_pair(TString sample, TString year, TString type){
 
-  //TString dirin1 = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_splitted/";
-  //TString dirin2 = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_MEM/";
-  //TString dirin1 = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_converted/";
-  TString dirin1 = "/data_CMS_upgrade/mperez/ttH_samples/ntuples_converted/"; // for EWK samples
-  TString dirin2 = "/data_CMPerez/mperez/ttH_Legacy/ntuples_converted/";
+  TString dirin1 = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_splitted/";
+  TString dirin2 = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_MEM/";
 
   dirin1 += year;
-  //dirin1 += "/nominal/";
-  //dirin1 += type;
+  dirin1 += "/JECdown/";
+  dirin1 += type;
   dirin1 += "/";
 
+  TString file1 = dirin1+"ntuple_"+sample+"_JECdown.root";
+
   dirin2 += year;
-  //dirin2 += "/nominal/";
-  //dirin2 += "/JECup/";
   dirin2 += "/JECdown/";
   dirin2 += type;
   dirin2 += "/";
 
-  TString file1 = dirin1+"ntuple_"+sample+".root";
-  
-  //TString file2 = dirin2+"ntuple_"+sample+"_MEM_SR.root";
-  //TString file2 = dirin2+"ntuple_"+sample+"_MEM_fake.root";
-  //TString file2 = dirin2+"ntuple_"+sample+"_MEM_flip.root";
-  //TString file2 = dirin2+"ntuple_"+sample+"_JECup.root";
-  TString file2 = dirin2+"ntuple_"+sample+"_JECdown.root";
+  TString file2 = dirin2+"ntuple_"+sample+"_MEM_SR_JECdown.root";
 
   return std::make_pair(file1, file2);
 
@@ -70,7 +89,83 @@ std::pair<TString, TString> create_file_pair(TString sample, TString year, TStri
 
 void test(){
 
-	vector<std::pair<TString, TString>> filepairs;
+vector<std::pair<TString, TString>> filepairs;
+
+filepairs.push_back(create_file_pair("Oct19v1_MC_2016_ttHJetToNonbb","2016","ttH"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2016_THQ_ctcvcp","2016","ttH"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2016_THW_ctcvcp","2016","ttH"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2017_ttHJetToNonbb","2017","ttH"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2017_THQ_ctcvcp","2017","ttH"));
+filepairs.push_back(create_file_pair("Oct19v3_MC_2017_THW_ctcvcp","2017","ttH"));
+filepairs.push_back(create_file_pair("Oct19v2_MC_2018_ttHJetToNonbb","2018","ttH"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2018_THQ_ctcvcp","2018","ttH"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2018_THW_ctcvcp","2018","ttH"));
+
+filepairs.push_back(create_file_pair("Oct19v1_MC_2016_TTZToLLNuNu_M-10_ext3","2016","ttV"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2016_TTZToLL_M-1to10","2016","ttV"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2016_TTWJetsToLNu","2016","ttV"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2016_TTWW","2016","ttV"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2017_TTZToLLNuNu_M-10_PS","2017","ttV"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2017_TTZToLL_M-1to10","2017","ttV"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2017_TTWJetsToLNu","2017","ttV"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2017_TTWW","2017","ttV"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2018_TTZToLLNuNu_M-10","2018","ttV"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2018_TTZToLL_M-1to10","2018","ttV"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2018_TTWJetsToLNu","2018","ttV"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2018_TTWW_ext2","2018","ttV"));
+
+filepairs.push_back(create_file_pair("Oct19v1_MC_2016_WZTo3LNu","2016","EWK"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2016_ZZTo4L","2016","EWK"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2017_WZTo3LNu","2017","EWK"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2017_ZZTo4L_ext1","2017","EWK"));
+filepairs.push_back(create_file_pair("Oct19v2_MC_2018_WZTo3LNu_ext1","2018","EWK"));
+filepairs.push_back(create_file_pair("Oct19v4_MC_2018_ZZTo4L_ext2","2018","EWK"));
+
+filepairs.push_back(create_file_pair("Oct19v1_MC_2016_WWW","2016","Rares"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2016_WWZ","2016","Rares"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2016_WZZ","2016","Rares"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2016_ZZZ","2016","Rares"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2016_WZG","2016","Rares"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2016_WGToLNuG_ext1","2016","Rares"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2016_ZGTo2LG","2016","Rares"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2016_TGJets_leptonDecays","2016","Rares"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2016_TTGJets","2016","Rares"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2016_tZq_ll_PS","2016","Rares"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2016_WpWpJJ","2016","Rares"));
+filepairs.push_back(create_file_pair("Oct19v2_MC_2016_WWTo2L2Nu_DoubleScattering","2016","Rares"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2016_TTTT","2016","Rares"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2017_WWW","2017","Rares"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2017_WWZ","2017","Rares"));
+filepairs.push_back(create_file_pair("Oct19v2_MC_2017_WZZ","2017","Rares"));
+filepairs.push_back(create_file_pair("Oct19v2_MC_2017_ZZZ","2017","Rares"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2017_WZG","2017","Rares"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2017_WGToLNuG","2017","Rares"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2017_ZGToLLG","2017","Rares"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2017_TGJets","2017","Rares"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2017_TTGJets_ext1","2017","Rares"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2017_tZq_ll","2017","Rares"));
+filepairs.push_back(create_file_pair("Oct19v2_MC_2017_WpWpJJ","2017","Rares"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2017_WWTo2L2Nu_DoubleScattering","2017","Rares"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2017_TTTT","2017","Rares"));
+filepairs.push_back(create_file_pair("Oct19v2_MC_2018_WWW","2018","Rares"));
+filepairs.push_back(create_file_pair("Oct19v2_MC_2018_WWZ","2018","Rares"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2018_WZZ","2018","Rares"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2018_ZZZ","2018","Rares"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2018_WZG","2018","Rares"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2018_WGToLNuG","2018","Rares"));
+filepairs.push_back(create_file_pair("Oct19v2_MC_2018_ZGToLLG","2018","Rares"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2018_TGJets","2018","Rares"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2018_tZq_ll","2018","Rares"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2018_WpWpJJ","2018","Rares"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2018_WWTo2L2Nu_DoubleScattering","2018","Rares"));
+
+//MISSING TTBAR 2016
+filepairs.push_back(create_file_pair("Oct19v1_MC_2017_TTJets_DiLept","2017","ttbar"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2017_TTJets_SingleLeptFromT","2017","ttbar"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2017_TTJets_SingleLeptFromTbar","2017","ttbar"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2018_TTJets_DiLept","2018","ttbar"));
+filepairs.push_back(create_file_pair("Oct19v1_MC_2018_TTJets_SingleLeptFromT","2018","ttbar"));
+filepairs.push_back(create_file_pair("Oct19v2_MC_2018_TTJets_SingleLeptFromTbar","2018","ttbar"));
 
     //ttH
 
@@ -174,7 +269,7 @@ void test(){
     filepairs.push_back(create_file_pair("Oct19v4_MC_2018_ZZTo4L_ext2_14","2018", "EWK"));
     */
 
-
+/*
 filepairs.push_back(create_file_pair("Oct19v1_MC_2016_WWW_0","2016", "Rares"));           
 filepairs.push_back(create_file_pair("Oct19v1_MC_2016_WWZ_0","2016", "Rares"));           
 filepairs.push_back(create_file_pair("Oct19v1_MC_2016_WZZ_0","2016", "Rares"));           
@@ -229,7 +324,8 @@ filepairs.push_back(create_file_pair("Oct19v1_MC_2018_tZq_ll_2","2018", "Rares")
 filepairs.push_back(create_file_pair("Oct19v1_MC_2018_tZq_ll_3","2018", "Rares"));       
 filepairs.push_back(create_file_pair("Oct19v1_MC_2018_WpWpJJ_0","2018", "Rares"));        
 filepairs.push_back(create_file_pair("Oct19v1_MC_2018_WWTo2L2Nu_DoubleScattering_0","2018", "Rares"));  
-filepairs.push_back(create_file_pair("Oct19v1_MC_2018_TTTT_0","2018", "Rares"));          
+filepairs.push_back(create_file_pair("Oct19v1_MC_2018_TTTT_0","2018", "Rares"));     
+*/     
 
 
     /*filepairs.push_back(create_file_pair("Oct19v1_MC_2016_ttHJetToNonbb","2016","ttH"));
