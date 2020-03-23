@@ -48,7 +48,7 @@ float XS_St_tW = 35.85;
 float XS_St_tWll = 0.01096;
 
 float XS_ttbar_DiLept = 88.40;
-float XS_ttbar_SingleLep = 182.76;
+float XS_ttbar_SingleLep = 2*182.76;
 
 float XS_ggHToTauTau = 3.0469;
 float XS_ggHToZZ = 0.01297;
@@ -86,6 +86,9 @@ vector<float> 	MC_XS;
 vector<TString> MC_filename;
 vector<TString> MC_filename_fakeCR;
 vector<TString> MC_filename_norm;
+vector<TString> MC_filename_JECup;
+vector<TString> MC_filename_JECdown;
+vector<TString> MC_filename_norm_JEC;
 vector<TString> MC_samplename;
 vector<TString> MC_samplecut;
 vector<TString> MC_sampletag;
@@ -115,13 +118,16 @@ TString htt = "(genH_decayMode[1]<=5)";
 
 ////////////////////////////////////////////////////////////
 
-std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<int>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, float > initialize_2016(){
+std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<int>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, float > initialize_2016(){
 
 	MC_XS.clear();
 
 	MC_filename.clear();
 	MC_filename_fakeCR.clear();
 	MC_filename_norm.clear();
+	MC_filename_JECup.clear();
+	MC_filename_JECdown.clear();
+	MC_filename_norm_JEC.clear();
 	MC_samplename.clear();
 	MC_samplecut.clear();
 	MC_sampletag.clear();
@@ -233,7 +239,7 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	TString filename_JECup_ttW = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/ttV/ntuple_Oct19v1_MC_2016_TTWJetsToLNu_MEM_SR_JECup_SF_v1.root";
 	TString filename_JECup_ttWW = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/ttV/ntuple_Oct19v1_MC_2016_TTWW_MEM_SR_JECup_SF_v1.root";
 
-	TString filename_JECup_WW = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/EWK/ntuple_Oct19v1_MC_2016_WWTo2L2Nu_MEM_SR_JECup_SF_v1.root";
+	TString filename_JECup_WW = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/EWK/ntuple_Oct19v1_MC_2016_WWTo2L2Nu_MEM_SR_SF_v5.root";
 	TString filename_JECup_WZ = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/EWK/ntuple_Oct19v1_MC_2016_WZTo3LNu_MEM_SR_JECup_SF_v1.root";
 	TString filename_JECup_ZZ = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/EWK/ntuple_Oct19v1_MC_2016_ZZTo4L_MEM_SR_JECup_SF_v1.root";
 
@@ -248,58 +254,58 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	TString filename_JECup_ZG = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/Rares/ntuple_Oct19v1_MC_2016_ZGTo2LG_MEM_SR_JECup_SF_v1.root";
 	TString filename_JECup_tG = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/Rares/ntuple_Oct19v1_MC_2016_TGJets_leptonDecays_MEM_SR_JECup_SF_v1.root";
 	TString filename_JECup_ttG = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/Rares/ntuple_Oct19v1_MC_2016_TTGJets_MEM_SR_JECup_SF_v1.root";
-	TString filename_JECup_ttG_ext1 = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/Rares/ntuple_Oct19v1_MC_2016_TTGJets_ext1_MEM_SR_JECup_SF_v1.root";
+	TString filename_JECup_ttG_ext1 = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/Rares/ntuple_Oct19v1_MC_2016_TTGJets_ext1_MEM_SR_JECup_SF_v1.root";
 	TString filename_JECup_tZq = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/Rares/ntuple_Oct19v2_MC_2016_tZq_ll_MEM_SR_JECup_SF_v1.root";
 	TString filename_JECup_tZq_PS = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/Rares/ntuple_Oct19v1_MC_2016_tZq_ll_PS_MEM_SR_JECup_SF_v1.root";
-	TString filename_JECup_WpWp = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/Rares/ntuple_Oct19v1_MC_2016_WpWpJJ_MEM_SR_JECup_SF_v1.root";
-	TString filename_JECup_WW_DS = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/Rares/ntuple_Oct19v2_MC_2016_WWTo2L2Nu_DoubleScattering_MEM_SR_JECup_SF_v1.root";
-	TString filename_JECup_tttt = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/Rares/ntuple_Oct19v1_MC_2016_TTTT_MEM_SR_JECup_SF_v1.root";
+	TString filename_JECup_WpWp = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/Rares/ntuple_Oct19v1_MC_2016_WpWpJJ_MEM_SR_JECup_SF_v1.root";
+	TString filename_JECup_WW_DS = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/Rares/ntuple_Oct19v2_MC_2016_WWTo2L2Nu_DoubleScattering_MEM_SR_JECup_SF_v1.root";
+	TString filename_JECup_tttt = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/Rares/ntuple_Oct19v1_MC_2016_TTTT_MEM_SR_JECup_SF_v1.root";
 
-	TString filename_JECup_St_schannel = 				"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/ttbar/ntuple_Oct19v1_MC_2016_ST_s-channel_MEM_SR_JECup_SF_v1.root";
-	TString filename_JECup_St_schannel_PS = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/ttbar/ntuple_Oct19v1_MC_2016_ST_s-channel_PS_MEM_SR_JECup_SF_v1.root";
-	TString filename_JECup_St_tchannel_top = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/ttbar/ntuple_Oct19v1_MC_2016_ST_t-channel_top_MEM_SR_JECup_SF_v1.root";
-	TString filename_JECup_St_tchannel_antitop = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/ttbar/ntuple_Oct19v1_MC_2016_ST_t-channel_antitop_MEM_SR_JECup_SF_v1.root";
-	TString filename_JECup_St_tchannel_antitop_PS = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/ttbar/ntuple_Oct19v1_MC_2016_ST_t-channel_antitop_PS_MEM_SR_JECup_SF_v1.root";
-	TString filename_JECup_St_tW_top = 				"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/ttbar/ntuple_Oct19v1_MC_2016_ST_tW_top_MEM_SR_JECup_SF_v1.root";
-	TString filename_JECup_St_tW_antitop = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/ttbar/ntuple_Oct19v1_MC_2016_ST_tW_antitop_MEM_SR_JECup_SF_v1.root";
-	TString filename_JECup_St_tWll = 					"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/ttbar/ntuple_Oct19v1_MC_2016_ST_tWll_MEM_SR_JECup_SF_v1.root";
+	TString filename_JECup_St_schannel = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ttbar/ntuple_Oct19v1_MC_2016_ST_s-channel_MEM_SR_SF_v5.root";
+	TString filename_JECup_St_schannel_PS = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ttbar/ntuple_Oct19v1_MC_2016_ST_s-channel_PS_MEM_SR_SF_v5.root";
+	TString filename_JECup_St_tchannel_top = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ttbar/ntuple_Oct19v1_MC_2016_ST_t-channel_top_MEM_SR_SF_v5.root";
+	TString filename_JECup_St_tchannel_antitop = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ttbar/ntuple_Oct19v1_MC_2016_ST_t-channel_antitop_MEM_SR_SF_v5.root";
+	TString filename_JECup_St_tchannel_antitop_PS = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ttbar/ntuple_Oct19v1_MC_2016_ST_t-channel_antitop_PS_MEM_SR_SF_v5.root";
+	TString filename_JECup_St_tW_top = 				"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ttbar/ntuple_Oct19v1_MC_2016_ST_tW_top_MEM_SR_SF_v5.root";
+	TString filename_JECup_St_tW_antitop = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ttbar/ntuple_Oct19v1_MC_2016_ST_tW_antitop_MEM_SR_SF_v5.root";
+	TString filename_JECup_St_tWll = 				"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ttbar/ntuple_Oct19v1_MC_2016_ST_tWll_MEM_SR_SF_v5.root";
 
 	TString filename_JECup_ttbar_DiLept = 					"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/ttbar/ntuple_Oct19v1_MC_2016_TTJets_DiLept_MEM_SR_JECup_SF_v1.root";
 	TString filename_JECup_ttbar_DiLept_ext1 = 				"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/ttbar/ntuple_Oct19v1_MC_2016_TTJets_DiLept_ext1_MEM_SR_JECup_SF_v1.root";
 	TString filename_JECup_ttbar_SingleLeptFromt = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/ttbar/ntuple_Oct19v1_MC_2016_TTJets_SingleLeptFromT_MEM_SR_JECup_SF_v1.root";
-	TString filename_JECup_ttbar_SingleLeptFromt_ext1 = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/ttbar/ntuple_Oct19v2_MC_2016_TTJets_SingleLeptFromT_ext1_MEM_SR_JECup_SF_v1.root";
+	TString filename_JECup_ttbar_SingleLeptFromt_ext1 = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/ttbar/ntuple_Oct19v2_MC_2016_TTJets_SingleLeptFromT_ext1_MEM_SR_JECup_SF_v1.root";
 	TString filename_JECup_ttbar_SingleLeptFromtbar = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/ttbar/ntuple_Oct19v1_MC_2016_TTJets_SingleLeptFromTbar_MEM_SR_JECup_SF_v1.root";
 	TString filename_JECup_ttbar_SingleLeptFromtbar_ext1 = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/ttbar/ntuple_Oct19v3_MC_2016_TTJets_SingleLeptFromTbar_ext1_MEM_SR_JECup_SF_v1.root";
 
-	TString filename_JECup_ggHToTauTau = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/ggH/ntuple_Oct19v1_MC_2016_GluGluHToTauTau_MEM_SR_JECup_SF_v1.root";
-	TString filename_JECup_ggHToZZ = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/ggH/ntuple_Oct19v1_MC_2016_GluGluHToZZTo4L_MEM_SR_JECup_SF_v1.root";
-	TString filename_JECup_ggHToWWToLNuQQ = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/ggH/ntuple_Oct19v1_MC_2016_GluGluHToWWToLNuQQ_MEM_SR_JECup_SF_v1.root";
-	TString filename_JECup_ggHToWWTo2L2Nu = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/ggH/ntuple_Oct19v1_MC_2016_GluGluHToWWTo2L2Nu_MEM_SR_JECup_SF_v1.root";
-	TString filename_JECup_ggHToMuMu = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/ggH/ntuple_Oct19v1_MC_2016_GluGluHToMuMu_MEM_SR_JECup_SF_v1.root";
-	TString filename_JECup_ggHToBB = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/ggH/ntuple_Oct19v1_MC_2016_GluGluHToBB_MEM_SR_JECup_SF_v1.root";
-	TString filename_JECup_ggHToBB_ext1 = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/ggH/ntuple_Oct19v6_MC_2016_GluGluHToBB_ext1_MEM_SR_JECup_SF_v1.root";
-	TString filename_JECup_ggHToGG = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/ggH/ntuple_Oct19v1_MC_2016_GluGluHToGG_MEM_SR_JECup_SF_v1.root";
+	TString filename_JECup_ggHToTauTau = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ggH/ntuple_Oct19v1_MC_2016_GluGluHToTauTau_MEM_SR_SF_v5.root";
+	TString filename_JECup_ggHToZZ = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ggH/ntuple_Oct19v1_MC_2016_GluGluHToZZTo4L_MEM_SR_SF_v5.root";
+	TString filename_JECup_ggHToWWToLNuQQ = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ggH/ntuple_Oct19v1_MC_2016_GluGluHToWWToLNuQQ_MEM_SR_SF_v5.root";
+	TString filename_JECup_ggHToWWTo2L2Nu = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ggH/ntuple_Oct19v1_MC_2016_GluGluHToWWTo2L2Nu_MEM_SR_SF_v5.root";
+	TString filename_JECup_ggHToMuMu = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ggH/ntuple_Oct19v1_MC_2016_GluGluHToMuMu_MEM_SR_SF_v5.root";
+	TString filename_JECup_ggHToBB = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ggH/ntuple_Oct19v1_MC_2016_GluGluHToBB_MEM_SR_SF_v5.root";
+	TString filename_JECup_ggHToBB_ext1 = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ggH/ntuple_Oct19v6_MC_2016_GluGluHToBB_ext1_MEM_SR_SF_v5.root";
+	TString filename_JECup_ggHToGG = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ggH/ntuple_Oct19v1_MC_2016_GluGluHToGG_MEM_SR_SF_v5.root";
 
-	TString filename_JECup_VBFHToTauTau = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/VBF/ntuple_Oct19v2_MC_2016_VBFHToTauTau_MEM_SR_JECup_SF_v1.root";
-	TString filename_JECup_VBFHToZZ = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/VBF/ntuple_Oct19v2_MC_2016_VBF_HToZZTo4L_MEM_SR_JECup_SF_v1.root";
-	TString filename_JECup_VBFHToWWToLNuQQ = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/VBF/ntuple_Oct19v1_MC_2016_VBFHToWWToLNuQQ_MEM_SR_JECup_SF_v1.root";
-	TString filename_JECup_VBFHToWWTo2L2Nu = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/VBF/ntuple_Oct19v1_MC_2016_VBFHToWWTo2L2Nu_MEM_SR_JECup_SF_v1.root";
-	TString filename_JECup_VBFHToMuMu = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/VBF/ntuple_Oct19v1_MC_2016_VBFHToMuMu_MEM_SR_JECup_SF_v1.root";
-	TString filename_JECup_VBFHToBB = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/VBF/ntuple_Oct19v3_MC_2016_VBFHToBB_MEM_SR_JECup_SF_v1.root";
-	TString filename_JECup_VBFHToBB_ext1 = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/VBF/ntuple_Oct19v1_MC_2016_VBFHToBB_ext1_MEM_SR_JECup_SF_v1.root";
-	TString filename_JECup_VBFHToGG_ext1 = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/VBF/ntuple_Oct19v1_MC_2016_VBFHToGG_ext1_MEM_SR_JECup_SF_v1.root";
-	TString filename_JECup_VBFHToGG_ext2 = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/VBF/ntuple_Oct19v1_MC_2016_VBFHToGG_ext2_MEM_SR_JECup_SF_v1.root";
+	TString filename_JECup_VBFHToTauTau = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/VBF/ntuple_Oct19v2_MC_2016_VBFHToTauTau_MEM_SR_SF_v5.root";
+	TString filename_JECup_VBFHToZZ = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/VBF/ntuple_Oct19v2_MC_2016_VBF_HToZZTo4L_MEM_SR_SF_v5.root";
+	TString filename_JECup_VBFHToWWToLNuQQ = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/VBF/ntuple_Oct19v1_MC_2016_VBFHToWWToLNuQQ_MEM_SR_SF_v5.root";
+	TString filename_JECup_VBFHToWWTo2L2Nu = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/VBF/ntuple_Oct19v1_MC_2016_VBFHToWWTo2L2Nu_MEM_SR_SF_v5.root";
+	TString filename_JECup_VBFHToMuMu = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/VBF/ntuple_Oct19v1_MC_2016_VBFHToMuMu_MEM_SR_SF_v5.root";
+	TString filename_JECup_VBFHToBB = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/VBF/ntuple_Oct19v3_MC_2016_VBFHToBB_MEM_SR_SF_v5.root";
+	TString filename_JECup_VBFHToBB_ext1 = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/VBF/ntuple_Oct19v1_MC_2016_VBFHToBB_ext1_MEM_SR_SF_v5.root";
+	TString filename_JECup_VBFHToGG_ext1 = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/VBF/ntuple_Oct19v1_MC_2016_VBFHToGG_ext1_MEM_SR_SF_v5.root";
+	TString filename_JECup_VBFHToGG_ext2 = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/VBF/ntuple_Oct19v1_MC_2016_VBFHToGG_ext2_MEM_SR_SF_v5.root";
 
-	TString filename_JECup_VHToNonbb = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/VH/ntuple_Oct19v1_MC_2016_VHToNonbb_MEM_SR_JECup_SF_v1.root";
-	TString filename_JECup_ZHToTauTau = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/VH/ntuple_Oct19v1_MC_2016_ZHToTauTau_MEM_SR_JECup_SF_v1.root";
-	TString filename_JECup_ZH_HToBB_ZToLL = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/VH/ntuple_Oct19v1_MC_2016_ZH_HToBB_ZToLL_MEM_SR_JECup_SF_v1.root";
+	TString filename_JECup_VHToNonbb = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/VH/ntuple_Oct19v1_MC_2016_VHToNonbb_MEM_SR_SF_v5.root";
+	TString filename_JECup_ZHToTauTau = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/VH/ntuple_Oct19v1_MC_2016_ZHToTauTau_MEM_SR_SF_v5.root";
+	TString filename_JECup_ZH_HToBB_ZToLL = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/VH/ntuple_Oct19v1_MC_2016_ZH_HToBB_ZToLL_MEM_SR_SF_v5.root";
 
-	TString filename_JECup_ttWH = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/ttVH/ntuple_Oct19v1_MC_2016_TTWH_MEM_SR_JECup_SF_v1.root";
-	TString filename_JECup_ttZH = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/ttVH/ntuple_Oct19v2_MC_2016_TTZH_MEM_SR_JECup_SF_v1.root";
+	TString filename_JECup_ttWH = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ttVH/ntuple_Oct19v1_MC_2016_TTWH_MEM_SR_SF_v5.root";
+	TString filename_JECup_ttZH = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ttVH/ntuple_Oct19v2_MC_2016_TTZH_MEM_SR_SF_v5.root";
 
-	TString filename_JECup_ggHHTo2B2VTo2L2Nu = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/HH/ntuple_Oct19v2_MC_2016_GluGluToHHTo2B2VTo2L2Nu_node_SM_MEM_SR_JECup_SF_v1.root";
-	TString filename_JECup_ggHHTo2B2Tau = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/HH/ntuple_Oct19v1_MC_2016_GluGluToHHTo2B2Tau_node_SM_MEM_SR_JECup_SF_v1.root";
-	TString filename_JECup_ggHHTo4Tau = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECup/HH/ntuple_Oct19v1_MC_2016_GluGluToHHTo4Tau_node_SM_MEM_SR_JECup_SF_v1.root";
+	TString filename_JECup_ggHHTo2B2VTo2L2Nu = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/HH/ntuple_Oct19v2_MC_2016_GluGluToHHTo2B2VTo2L2Nu_node_SM_MEM_SR_SF_v5.root";
+	TString filename_JECup_ggHHTo2B2Tau = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/HH/ntuple_Oct19v1_MC_2016_GluGluToHHTo2B2Tau_node_SM_MEM_SR_SF_v5.root";
+	TString filename_JECup_ggHHTo4Tau = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/HH/ntuple_Oct19v1_MC_2016_GluGluToHHTo4Tau_node_SM_MEM_SR_SF_v5.root";
 
 	////////////////////////////////////////////////////////////
 
@@ -314,7 +320,7 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	TString filename_JECdown_ttW = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECdown/ttV/ntuple_Oct19v1_MC_2016_TTWJetsToLNu_MEM_SR_JECdown_SF_v1.root";
 	TString filename_JECdown_ttWW = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECdown/ttV/ntuple_Oct19v1_MC_2016_TTWW_MEM_SR_JECdown_SF_v1.root";
 
-	TString filename_JECdown_WW = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECdown/EWK/ntuple_Oct19v1_MC_2016_WWTo2L2Nu_MEM_SR_JECdown_SF_v1.root";
+	TString filename_JECdown_WW = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/EWK/ntuple_Oct19v1_MC_2016_WWTo2L2Nu_MEM_SR_SF_v5.root";
 	TString filename_JECdown_WZ = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECdown/EWK/ntuple_Oct19v1_MC_2016_WZTo3LNu_MEM_SR_JECdown_SF_v1.root";
 	TString filename_JECdown_ZZ = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECdown/EWK/ntuple_Oct19v1_MC_2016_ZZTo4L_MEM_SR_JECdown_SF_v1.root";
 
@@ -336,14 +342,14 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	TString filename_JECdown_WW_DS = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECdown/Rares/ntuple_Oct19v2_MC_2016_WWTo2L2Nu_DoubleScattering_MEM_SR_JECdown_SF_v1.root";
 	TString filename_JECdown_tttt = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECdown/Rares/ntuple_Oct19v1_MC_2016_TTTT_MEM_SR_JECdown_SF_v1.root";
 
-	TString filename_JECdown_St_schannel = 				"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECdown/ttbar/ntuple_Oct19v1_MC_2016_ST_s-channel_MEM_SR_JECdown_SF_v1.root";
-	TString filename_JECdown_St_schannel_PS = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECdown/ttbar/ntuple_Oct19v1_MC_2016_ST_s-channel_PS_MEM_SR_JECdown_SF_v1.root";
-	TString filename_JECdown_St_tchannel_top = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECdown/ttbar/ntuple_Oct19v1_MC_2016_ST_t-channel_top_MEM_SR_JECdown_SF_v1.root";
-	TString filename_JECdown_St_tchannel_antitop = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECdown/ttbar/ntuple_Oct19v1_MC_2016_ST_t-channel_antitop_MEM_SR_JECdown_SF_v1.root";
-	TString filename_JECdown_St_tchannel_antitop_PS = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECdown/ttbar/ntuple_Oct19v1_MC_2016_ST_t-channel_antitop_PS_MEM_SR_JECdown_SF_v1.root";
-	TString filename_JECdown_St_tW_top = 				"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECdown/ttbar/ntuple_Oct19v1_MC_2016_ST_tW_top_MEM_SR_JECdown_SF_v1.root";
-	TString filename_JECdown_St_tW_antitop = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECdown/ttbar/ntuple_Oct19v1_MC_2016_ST_tW_antitop_MEM_SR_JECdown_SF_v1.root";
-	TString filename_JECdown_St_tWll = 					"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECdown/ttbar/ntuple_Oct19v1_MC_2016_ST_tWll_MEM_SR_JECdown_SF_v1.root";
+	TString filename_JECdown_St_schannel = 				"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ttbar/ntuple_Oct19v1_MC_2016_ST_s-channel_MEM_SR_SF_v5.root";
+	TString filename_JECdown_St_schannel_PS = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ttbar/ntuple_Oct19v1_MC_2016_ST_s-channel_PS_MEM_SR_SF_v5.root";
+	TString filename_JECdown_St_tchannel_top = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ttbar/ntuple_Oct19v1_MC_2016_ST_t-channel_top_MEM_SR_SF_v5.root";
+	TString filename_JECdown_St_tchannel_antitop = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ttbar/ntuple_Oct19v1_MC_2016_ST_t-channel_antitop_MEM_SR_SF_v5.root";
+	TString filename_JECdown_St_tchannel_antitop_PS = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ttbar/ntuple_Oct19v1_MC_2016_ST_t-channel_antitop_PS_MEM_SR_SF_v5.root";
+	TString filename_JECdown_St_tW_top = 				"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ttbar/ntuple_Oct19v1_MC_2016_ST_tW_top_MEM_SR_SF_v5.root";
+	TString filename_JECdown_St_tW_antitop = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ttbar/ntuple_Oct19v1_MC_2016_ST_tW_antitop_MEM_SR_SF_v5.root";
+	TString filename_JECdown_St_tWll = 					"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ttbar/ntuple_Oct19v1_MC_2016_ST_tWll_MEM_SR_SF_v5.root";
 
 	TString filename_JECdown_ttbar_DiLept = 					"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECdown/ttbar/ntuple_Oct19v1_MC_2016_TTJets_DiLept_MEM_SR_JECdown_SF_v1.root";
 	TString filename_JECdown_ttbar_DiLept_ext1 = 				"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECdown/ttbar/ntuple_Oct19v1_MC_2016_TTJets_DiLept_ext1_MEM_SR_JECdown_SF_v1.root";
@@ -352,35 +358,35 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	TString filename_JECdown_ttbar_SingleLeptFromtbar = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECdown/ttbar/ntuple_Oct19v1_MC_2016_TTJets_SingleLeptFromTbar_MEM_SR_JECdown_SF_v1.root";
 	TString filename_JECdown_ttbar_SingleLeptFromtbar_ext1 = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECdown/ttbar/ntuple_Oct19v3_MC_2016_TTJets_SingleLeptFromTbar_ext1_MEM_SR_JECdown_SF_v1.root";
 
-	TString filename_JECdown_ggHToTauTau = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECdown/ggH/ntuple_Oct19v1_MC_2016_GluGluHToTauTau_MEM_SR_JECdown_SF_v1.root";
-	TString filename_JECdown_ggHToZZ = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECdown/ggH/ntuple_Oct19v1_MC_2016_GluGluHToZZTo4L_MEM_SR_JECdown_SF_v1.root";
-	TString filename_JECdown_ggHToWWToLNuQQ = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECdown/ggH/ntuple_Oct19v1_MC_2016_GluGluHToWWToLNuQQ_MEM_SR_JECdown_SF_v1.root";
-	TString filename_JECdown_ggHToWWTo2L2Nu = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECdown/ggH/ntuple_Oct19v1_MC_2016_GluGluHToWWTo2L2Nu_MEM_SR_JECdown_SF_v1.root";
-	TString filename_JECdown_ggHToMuMu = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECdown/ggH/ntuple_Oct19v1_MC_2016_GluGluHToMuMu_MEM_SR_JECdown_SF_v1.root";
-	TString filename_JECdown_ggHToBB = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECdown/ggH/ntuple_Oct19v1_MC_2016_GluGluHToBB_MEM_SR_JECdown_SF_v1.root";
-	TString filename_JECdown_ggHToBB_ext1 = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECdown/ggH/ntuple_Oct19v6_MC_2016_GluGluHToBB_ext1_MEM_SR_JECdown_SF_v1.root";
-	TString filename_JECdown_ggHToGG = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECdown/ggH/ntuple_Oct19v1_MC_2016_GluGluHToGG_MEM_SR_JECdown_SF_v1.root";
+	TString filename_JECdown_ggHToTauTau = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ggH/ntuple_Oct19v1_MC_2016_GluGluHToTauTau_MEM_SR_SF_v5.root";
+	TString filename_JECdown_ggHToZZ = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ggH/ntuple_Oct19v1_MC_2016_GluGluHToZZTo4L_MEM_SR_SF_v5.root";
+	TString filename_JECdown_ggHToWWToLNuQQ = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ggH/ntuple_Oct19v1_MC_2016_GluGluHToWWToLNuQQ_MEM_SR_SF_v5.root";
+	TString filename_JECdown_ggHToWWTo2L2Nu = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ggH/ntuple_Oct19v1_MC_2016_GluGluHToWWTo2L2Nu_MEM_SR_SF_v5.root";
+	TString filename_JECdown_ggHToMuMu = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ggH/ntuple_Oct19v1_MC_2016_GluGluHToMuMu_MEM_SR_SF_v5.root";
+	TString filename_JECdown_ggHToBB = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ggH/ntuple_Oct19v1_MC_2016_GluGluHToBB_MEM_SR_SF_v5.root";
+	TString filename_JECdown_ggHToBB_ext1 = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ggH/ntuple_Oct19v6_MC_2016_GluGluHToBB_ext1_MEM_SR_SF_v5.root";
+	TString filename_JECdown_ggHToGG = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ggH/ntuple_Oct19v1_MC_2016_GluGluHToGG_MEM_SR_SF_v5.root";
 
-	TString filename_JECdown_VBFHToTauTau = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECdown/VBF/ntuple_Oct19v2_MC_2016_VBFHToTauTau_MEM_SR_JECdown_SF_v1.root";
-	TString filename_JECdown_VBFHToZZ = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECdown/VBF/ntuple_Oct19v2_MC_2016_VBF_HToZZTo4L_MEM_SR_JECdown_SF_v1.root";
-	TString filename_JECdown_VBFHToWWToLNuQQ = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECdown/VBF/ntuple_Oct19v1_MC_2016_VBFHToWWToLNuQQ_MEM_SR_JECdown_SF_v1.root";
-	TString filename_JECdown_VBFHToWWTo2L2Nu = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECdown/VBF/ntuple_Oct19v1_MC_2016_VBFHToWWTo2L2Nu_MEM_SR_JECdown_SF_v1.root";
-	TString filename_JECdown_VBFHToMuMu = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECdown/VBF/ntuple_Oct19v1_MC_2016_VBFHToMuMu_MEM_SR_JECdown_SF_v1.root";
-	TString filename_JECdown_VBFHToBB = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECdown/VBF/ntuple_Oct19v3_MC_2016_VBFHToBB_MEM_SR_JECdown_SF_v1.root";
-	TString filename_JECdown_VBFHToBB_ext1 = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECdown/VBF/ntuple_Oct19v1_MC_2016_VBFHToBB_ext1_MEM_SR_JECdown_SF_v1.root";
-	TString filename_JECdown_VBFHToGG_ext1 = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECdown/VBF/ntuple_Oct19v1_MC_2016_VBFHToGG_ext1_MEM_SR_JECdown_SF_v1.root";
-	TString filename_JECdown_VBFHToGG_ext2 = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECdown/VBF/ntuple_Oct19v1_MC_2016_VBFHToGG_ext2_MEM_SR_JECdown_SF_v1.root";
+	TString filename_JECdown_VBFHToTauTau = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/VBF/ntuple_Oct19v2_MC_2016_VBFHToTauTau_MEM_SR_SF_v5.root";
+	TString filename_JECdown_VBFHToZZ = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/VBF/ntuple_Oct19v2_MC_2016_VBF_HToZZTo4L_MEM_SR_SF_v5.root";
+	TString filename_JECdown_VBFHToWWToLNuQQ = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/VBF/ntuple_Oct19v1_MC_2016_VBFHToWWToLNuQQ_MEM_SR_SF_v5.root";
+	TString filename_JECdown_VBFHToWWTo2L2Nu = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/VBF/ntuple_Oct19v1_MC_2016_VBFHToWWTo2L2Nu_MEM_SR_SF_v5.root";
+	TString filename_JECdown_VBFHToMuMu = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/VBF/ntuple_Oct19v1_MC_2016_VBFHToMuMu_MEM_SR_SF_v5.root";
+	TString filename_JECdown_VBFHToBB = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/VBF/ntuple_Oct19v3_MC_2016_VBFHToBB_MEM_SR_SF_v5.root";
+	TString filename_JECdown_VBFHToBB_ext1 = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/VBF/ntuple_Oct19v1_MC_2016_VBFHToBB_ext1_MEM_SR_SF_v5.root";
+	TString filename_JECdown_VBFHToGG_ext1 = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/VBF/ntuple_Oct19v1_MC_2016_VBFHToGG_ext1_MEM_SR_SF_v5.root";
+	TString filename_JECdown_VBFHToGG_ext2 = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/VBF/ntuple_Oct19v1_MC_2016_VBFHToGG_ext2_MEM_SR_SF_v5.root";
 
-	TString filename_JECdown_VHToNonbb = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECdown/VH/ntuple_Oct19v1_MC_2016_VHToNonbb_MEM_SR_JECdown_SF_v1.root";
-	TString filename_JECdown_ZHToTauTau = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECdown/VH/ntuple_Oct19v1_MC_2016_ZHToTauTau_MEM_SR_JECdown_SF_v1.root";
-	TString filename_JECdown_ZH_HToBB_ZToLL = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECdown/VH/ntuple_Oct19v1_MC_2016_ZH_HToBB_ZToLL_MEM_SR_JECdown_SF_v1.root";
+	TString filename_JECdown_VHToNonbb = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/VH/ntuple_Oct19v1_MC_2016_VHToNonbb_MEM_SR_SF_v5.root";
+	TString filename_JECdown_ZHToTauTau = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/VH/ntuple_Oct19v1_MC_2016_ZHToTauTau_MEM_SR_SF_v5.root";
+	TString filename_JECdown_ZH_HToBB_ZToLL = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/VH/ntuple_Oct19v1_MC_2016_ZH_HToBB_ZToLL_MEM_SR_SF_v5.root";
 
-	TString filename_JECdown_ttWH = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECdown/ttVH/ntuple_Oct19v1_MC_2016_TTWH_MEM_SR_JECdown_SF_v1.root";
-	TString filename_JECdown_ttZH = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECdown/ttVH/ntuple_Oct19v2_MC_2016_TTZH_MEM_SR_JECdown_SF_v1.root";
+	TString filename_JECdown_ttWH = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ttVH/ntuple_Oct19v1_MC_2016_TTWH_MEM_SR_SF_v5.root";
+	TString filename_JECdown_ttZH = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/ttVH/ntuple_Oct19v2_MC_2016_TTZH_MEM_SR_SF_v5.root";
 
-	TString filename_JECdown_ggHHTo2B2VTo2L2Nu = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECdown/HH/ntuple_Oct19v2_MC_2016_GluGluToHHTo2B2VTo2L2Nu_node_SM_MEM_SR_JECdown_SF_v1.root";
-	TString filename_JECdown_ggHHTo2B2Tau = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECdown/HH/ntuple_Oct19v1_MC_2016_GluGluToHHTo2B2Tau_node_SM_MEM_SR_JECdown_SF_v1.root";
-	TString filename_JECdown_ggHHTo4Tau = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/JECdown/HH/ntuple_Oct19v1_MC_2016_GluGluToHHTo4Tau_node_SM_MEM_SR_JECdown_SF_v1.root";
+	TString filename_JECdown_ggHHTo2B2VTo2L2Nu = 	"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/HH/ntuple_Oct19v2_MC_2016_GluGluToHHTo2B2VTo2L2Nu_node_SM_MEM_SR_SF_v5.root";
+	TString filename_JECdown_ggHHTo2B2Tau = 		"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/HH/ntuple_Oct19v1_MC_2016_GluGluToHHTo2B2Tau_node_SM_MEM_SR_SF_v5.root";
+	TString filename_JECdown_ggHHTo4Tau = 			"/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/HH/ntuple_Oct19v1_MC_2016_GluGluToHHTo4Tau_node_SM_MEM_SR_SF_v5.root";
 
 	////////////////////////////////////////////////////////////
 	
@@ -547,17 +553,83 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	///////////////////////////////////////////////////////
 
 	TString filename_norm_JEC_ttH = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/JEC/ttH/ntuple_Oct19v1_MC_2016_ttHJetToNonbb_norm_JEC.root";
-	TString filename_norm_JEC_tHQ_ctcvcp = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/JEC/ttH/ntuple_Oct19v1_MC_2016_THQ_ctcvcp_norm_JEC.root";
-	TString filename_norm_JEC_tHW_ctcvcp = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/JEC/ttH/ntuple_Oct19v1_MC_2016_THW_ctcvcp_norm_JEC.root";
-	
-	TString filename_norm_JEC_ttW = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/JEC/ttV/ntuple_Oct19v1_MC_2016_TTWJetsToLNu_norm_JEC.root";
+	TString filename_norm_JEC_ttH_ctcvcp = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ttH/ntuple_Oct19v1_MC_2016_ttH_ctcvcp_norm.root";
+	TString filename_norm_JEC_tHQ_ctcvcp = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ttH/ntuple_Oct19v1_MC_2016_THQ_ctcvcp_norm_v2.root";
+	TString filename_norm_JEC_tHW_ctcvcp = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ttH/ntuple_Oct19v1_MC_2016_THW_ctcvcp_norm_v2.root";
+
+	TString filename_norm_JEC_ttZ_ext2 = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ttV/ntuple_Oct19v1_MC_2016_TTZToLLNuNu_M-10_ext2_norm.root";
 	TString filename_norm_JEC_ttZ_ext3 = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/JEC/ttV/ntuple_Oct19v1_MC_2016_TTZToLLNuNu_M-10_ext3_norm_JEC.root";
-	
+	TString filename_norm_JEC_ttZ_lowmass = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ttV/ntuple_Oct19v1_MC_2016_TTZToLL_M-1to10_norm.root";
+	TString filename_norm_JEC_ttW = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/JEC/ttV/ntuple_Oct19v1_MC_2016_TTWJetsToLNu_norm_JEC.root";
+	TString filename_norm_JEC_ttWW = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ttV/ntuple_Oct19v1_MC_2016_TTWW_norm.root";
+
+	TString filename_norm_JEC_WW = 			"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/EWK/ntuple_Oct19v1_MC_2016_WWTo2L2Nu_norm.root";
+	TString filename_norm_JEC_WZ = 			"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/EWK/ntuple_Oct19v1_MC_2016_WZTo3LNu_norm.root";
+	TString filename_norm_JEC_ZZ = 			"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/EWK/ntuple_Oct19v1_MC_2016_ZZTo4L_norm.root";
+
+	TString filename_norm_JEC_WWW = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/Rares/ntuple_Oct19v1_MC_2016_WWW_norm.root";
+	TString filename_norm_JEC_WWZ = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/Rares/ntuple_Oct19v1_MC_2016_WWZ_norm.root";
+	TString filename_norm_JEC_WZZ = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/Rares/ntuple_Oct19v1_MC_2016_WZZ_norm.root";
+	TString filename_norm_JEC_ZZZ = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/Rares/ntuple_Oct19v1_MC_2016_ZZZ_norm.root";
+	TString filename_norm_JEC_WZG = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/Rares/ntuple_Oct19v1_MC_2016_WZG_norm.root";
+	TString filename_norm_JEC_WG_ext1 = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/Rares/ntuple_Oct19v1_MC_2016_WGToLNuG_ext1_norm.root";
+	TString filename_norm_JEC_WG_ext2 = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/Rares/ntuple_Oct19v1_MC_2016_WGToLNuG_ext2_norm.root";
+	TString filename_norm_JEC_WG_ext3 = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/Rares/ntuple_Oct19v1_MC_2016_WGToLNuG_ext3_norm.root";
 	TString filename_norm_JEC_ZG = 			"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/JEC/Rares/ntuple_Oct19v1_MC_2016_ZGTo2LG_norm_JEC.root";
-	
-	TString filename_norm_JEC_ttbar_Dilept = 					"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/JEC/ttbar/ntuple_Oct19v1_MC_2016_TTJets_DiLept_ext1_norm_JEC.root";
+	TString filename_norm_JEC_tG = 			"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/Rares/ntuple_Oct19v1_MC_2016_TGJets_leptonDecays_norm.root";
+	TString filename_norm_JEC_ttG = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/Rares/ntuple_Oct19v1_MC_2016_TTGJets_norm.root";
+	TString filename_norm_JEC_ttG_ext1 = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/Rares/ntuple_Oct19v1_MC_2016_TTGJets_ext1_norm.root";
+	TString filename_norm_JEC_tZq = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/Rares/ntuple_Oct19v2_MC_2016_tZq_ll_norm.root";
+	TString filename_norm_JEC_tZq_PS = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/Rares/ntuple_Oct19v1_MC_2016_tZq_ll_PS_norm.root";
+	TString filename_norm_JEC_WpWp = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/Rares/ntuple_Oct19v1_MC_2016_WpWpJJ_norm.root";
+	TString filename_norm_JEC_WW_DS = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/Rares/ntuple_Oct19v2_MC_2016_WWTo2L2Nu_DoubleScattering_norm.root";
+	TString filename_norm_JEC_tttt = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/Rares/ntuple_Oct19v1_MC_2016_TTTT_norm.root";
+
+	TString filename_norm_JEC_St_schannel = 			"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ttbar/ntuple_Oct19v1_MC_2016_ST_s-channel_norm.root";
+	TString filename_norm_JEC_St_schannel_PS = 			"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ttbar/ntuple_Oct19v1_MC_2016_ST_s-channel_PS_norm.root";
+	TString filename_norm_JEC_St_tchannel_top = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ttbar/ntuple_Oct19v1_MC_2016_ST_t-channel_top_norm.root";
+	TString filename_norm_JEC_St_tchannel_antitop = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ttbar/ntuple_Oct19v1_MC_2016_ST_t-channel_antitop_norm.root";
+	TString filename_norm_JEC_St_tchannel_antitop_PS = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ttbar/ntuple_Oct19v1_MC_2016_ST_t-channel_antitop_PS_norm.root";
+	TString filename_norm_JEC_St_tW_top = 				"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ttbar/ntuple_Oct19v1_MC_2016_ST_tW_top_norm.root";
+	TString filename_norm_JEC_St_tW_antitop = 			"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ttbar/ntuple_Oct19v1_MC_2016_ST_tW_antitop_norm.root";
+	TString filename_norm_JEC_St_tWll = 				"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ttbar/ntuple_Oct19v1_MC_2016_ST_tWll_norm.root";
+
+	TString filename_norm_JEC_ttbar_DiLept = 					"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ttbar/ntuple_Oct19v1_MC_2016_TTJets_DiLept_norm.root";
+	TString filename_norm_JEC_ttbar_DiLept_ext1 = 				"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/JEC/ttbar/ntuple_Oct19v1_MC_2016_TTJets_DiLept_ext1_norm_JEC.root";
+	TString filename_norm_JEC_ttbar_SingleLeptFromt = 			"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ttbar/ntuple_Oct19v1_MC_2016_TTJets_SingleLeptFromT_norm.root";
 	TString filename_norm_JEC_ttbar_SingleLeptFromt_ext1 = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/JEC/ttbar/ntuple_Oct19v2_MC_2016_TTJets_SingleLeptFromT_ext1_norm_JEC.root";
+	TString filename_norm_JEC_ttbar_SingleLeptFromtbar = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ttbar/ntuple_Oct19v1_MC_2016_TTJets_SingleLeptFromTbar_norm.root";
 	TString filename_norm_JEC_ttbar_SingleLeptFromtbar_ext1 = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/JEC/ttbar/ntuple_Oct19v3_MC_2016_TTJets_SingleLeptFromTbar_ext1_norm_JEC.root";
+
+	TString filename_norm_JEC_ggHToTauTau = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ggH/ntuple_Oct19v1_MC_2016_GluGluHToTauTau_norm.root";
+	TString filename_norm_JEC_ggHToZZ = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ggH/ntuple_Oct19v1_MC_2016_GluGluHToZZTo4L_norm.root";
+	TString filename_norm_JEC_ggHToWWToLNuQQ = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ggH/ntuple_Oct19v1_MC_2016_GluGluHToWWToLNuQQ_norm.root";
+	TString filename_norm_JEC_ggHToWWTo2L2Nu = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ggH/ntuple_Oct19v1_MC_2016_GluGluHToWWTo2L2Nu_norm.root";
+	TString filename_norm_JEC_ggHToMuMu = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ggH/ntuple_Oct19v1_MC_2016_GluGluHToMuMu_norm.root";
+	TString filename_norm_JEC_ggHToBB = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ggH/ntuple_Oct19v1_MC_2016_GluGluHToBB_norm.root";
+	TString filename_norm_JEC_ggHToBB_ext1 = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ggH/ntuple_Oct19v6_MC_2016_GluGluHToBB_ext1_norm.root";
+	TString filename_norm_JEC_ggHToGG = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ggH/ntuple_Oct19v1_MC_2016_GluGluHToGG_norm.root";
+
+	TString filename_norm_JEC_VBFHToTauTau = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/VBF/ntuple_Oct19v2_MC_2016_VBFHToTauTau_norm.root";
+	TString filename_norm_JEC_VBFHToZZ = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/VBF/ntuple_Oct19v2_MC_2016_VBF_HToZZTo4L_norm.root";
+	TString filename_norm_JEC_VBFHToWWToLNuQQ = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/VBF/ntuple_Oct19v1_MC_2016_VBFHToWWToLNuQQ_norm.root";
+	TString filename_norm_JEC_VBFHToWWTo2L2Nu = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/VBF/ntuple_Oct19v1_MC_2016_VBFHToWWTo2L2Nu_norm.root";
+	TString filename_norm_JEC_VBFHToMuMu = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/VBF/ntuple_Oct19v1_MC_2016_VBFHToMuMu_norm.root";
+	TString filename_norm_JEC_VBFHToBB = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/VBF/ntuple_Oct19v3_MC_2016_VBFHToBB_norm.root";
+	TString filename_norm_JEC_VBFHToBB_ext1 = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/VBF/ntuple_Oct19v1_MC_2016_VBFHToBB_ext1_norm.root";
+	TString filename_norm_JEC_VBFHToGG_ext1 = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/VBF/ntuple_Oct19v1_MC_2016_VBFHToGG_ext1_norm.root";
+	TString filename_norm_JEC_VBFHToGG_ext2 = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/VBF/ntuple_Oct19v1_MC_2016_VBFHToGG_ext2_norm.root";
+
+	TString filename_norm_JEC_VHToNonbb = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/VH/ntuple_Oct19v1_MC_2016_VHToNonbb_norm.root";
+	TString filename_norm_JEC_ZHToTauTau = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/VH/ntuple_Oct19v1_MC_2016_ZHToTauTau_norm.root";
+	TString filename_norm_JEC_ZH_HToBB_ZToLL = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/VH/ntuple_Oct19v1_MC_2016_ZH_HToBB_ZToLL_norm.root";
+
+	TString filename_norm_JEC_ttWH = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ttVH/ntuple_Oct19v1_MC_2016_TTWH_norm.root";
+	TString filename_norm_JEC_ttZH = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/ttVH/ntuple_Oct19v2_MC_2016_TTZH_norm.root";
+
+	TString filename_norm_JEC_ggHHTo2B2VTo2L2Nu = 	"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/HH/ntuple_Oct19v2_MC_2016_GluGluToHHTo2B2VTo2L2Nu_node_SM_norm.root";
+	TString filename_norm_JEC_ggHHTo2B2Tau = 		"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/HH/ntuple_Oct19v1_MC_2016_GluGluToHHTo2B2Tau_node_SM_norm.root";
+	TString filename_norm_JEC_ggHHTo4Tau = 			"/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_normalized/2016/nominal/HH/ntuple_Oct19v1_MC_2016_GluGluToHHTo4Tau_node_SM_norm.root";
 
 	///////////////////////////////////////////////////////
 
@@ -693,6 +765,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_ttH);
 	MC_filename_fakeCR.push_back(filename_fakeCR_ttH);
 	MC_filename_norm.push_back(filename_norm_ttH);
+	MC_filename_JECup.push_back(filename_JECup_ttH);
+	MC_filename_JECdown.push_back(filename_JECdown_ttH);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_ttH);
 	MC_samplename.push_back("ttH_s1");
 	MC_sampletag.push_back("ttH");
 	MC_samplegroup.push_back("ttH");
@@ -708,6 +783,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_ttH);
 	MC_filename_fakeCR.push_back(filename_fakeCR_ttH);
 	MC_filename_norm.push_back(filename_norm_ttH);
+	MC_filename_JECup.push_back(filename_JECup_ttH);
+	MC_filename_JECdown.push_back(filename_JECdown_ttH);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_ttH);
 	MC_samplename.push_back("ttHhww_s1");
 	MC_sampletag.push_back("ttHhww");
 	MC_samplegroup.push_back("ttH_hww");
@@ -723,6 +801,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_ttH);
 	MC_filename_fakeCR.push_back(filename_fakeCR_ttH);
 	MC_filename_norm.push_back(filename_norm_ttH);
+	MC_filename_JECup.push_back(filename_JECup_ttH);
+	MC_filename_JECdown.push_back(filename_JECdown_ttH);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_ttH);
 	MC_samplename.push_back("ttHhzz_s1");
 	MC_sampletag.push_back("ttHhzz");
 	MC_samplegroup.push_back("ttH_hzz");
@@ -738,6 +819,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_ttH);
 	MC_filename_fakeCR.push_back(filename_fakeCR_ttH);
 	MC_filename_norm.push_back(filename_norm_ttH);
+	MC_filename_JECup.push_back(filename_JECup_ttH);
+	MC_filename_JECdown.push_back(filename_JECdown_ttH);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_ttH);
 	MC_samplename.push_back("ttHhtt_s1");
 	MC_sampletag.push_back("ttHhtt");
 	MC_samplegroup.push_back("ttH_htt");
@@ -757,6 +841,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_tHQ_ctcvcp);
 	MC_filename_fakeCR.push_back(filename_fakeCR_tHQ_ctcvcp);
 	MC_filename_norm.push_back(filename_norm_tHQ_ctcvcp);
+	MC_filename_JECup.push_back(filename_JECup_tHQ_ctcvcp);
+	MC_filename_JECdown.push_back(filename_JECdown_tHQ_ctcvcp);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_tHQ_ctcvcp);
 	MC_samplename.push_back("tHQ_s1");
 	MC_sampletag.push_back("tHQ");
 	MC_samplegroup.push_back("tHq");
@@ -772,6 +859,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_tHQ_ctcvcp);
 	MC_filename_fakeCR.push_back(filename_fakeCR_tHQ_ctcvcp);
 	MC_filename_norm.push_back(filename_norm_tHQ_ctcvcp);
+	MC_filename_JECup.push_back(filename_JECup_tHQ_ctcvcp);
+	MC_filename_JECdown.push_back(filename_JECdown_tHQ_ctcvcp);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_tHQ_ctcvcp);
 	MC_samplename.push_back("tHQhww_s1");
 	MC_sampletag.push_back("tHQhww");
 	MC_samplegroup.push_back("tHq_hww");
@@ -787,6 +877,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_tHQ_ctcvcp);
 	MC_filename_fakeCR.push_back(filename_fakeCR_tHQ_ctcvcp);
 	MC_filename_norm.push_back(filename_norm_tHQ_ctcvcp);
+	MC_filename_JECup.push_back(filename_JECup_tHQ_ctcvcp);
+	MC_filename_JECdown.push_back(filename_JECdown_tHQ_ctcvcp);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_tHQ_ctcvcp);
 	MC_samplename.push_back("tHQhzz_s1");
 	MC_sampletag.push_back("tHQhzz");
 	MC_samplegroup.push_back("tHq_hzz");
@@ -802,6 +895,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_tHQ_ctcvcp);
 	MC_filename_fakeCR.push_back(filename_fakeCR_tHQ_ctcvcp);
 	MC_filename_norm.push_back(filename_norm_tHQ_ctcvcp);
+	MC_filename_JECup.push_back(filename_JECup_tHQ_ctcvcp);
+	MC_filename_JECdown.push_back(filename_JECdown_tHQ_ctcvcp);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_tHQ_ctcvcp);
 	MC_samplename.push_back("tHQhtt_s1");
 	MC_sampletag.push_back("tHQhtt");
 	MC_samplegroup.push_back("tHq_htt");
@@ -819,6 +915,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_tHW_ctcvcp);
 	MC_filename_fakeCR.push_back(filename_fakeCR_tHW_ctcvcp);
 	MC_filename_norm.push_back(filename_norm_tHW_ctcvcp);
+	MC_filename_JECup.push_back(filename_JECup_tHW_ctcvcp);
+	MC_filename_JECdown.push_back(filename_JECdown_tHW_ctcvcp);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_tHW_ctcvcp);
 	MC_samplename.push_back("tHW_s1");
 	MC_sampletag.push_back("tHW");
 	MC_samplegroup.push_back("tHW");
@@ -834,6 +933,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_tHW_ctcvcp);
 	MC_filename_fakeCR.push_back(filename_fakeCR_tHW_ctcvcp);
 	MC_filename_norm.push_back(filename_norm_tHW_ctcvcp);
+	MC_filename_JECup.push_back(filename_JECup_tHW_ctcvcp);
+	MC_filename_JECdown.push_back(filename_JECdown_tHW_ctcvcp);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_tHW_ctcvcp);
 	MC_samplename.push_back("tHWhww_s1");
 	MC_sampletag.push_back("tHWhww");
 	MC_samplegroup.push_back("tHW_hww");
@@ -849,6 +951,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_tHW_ctcvcp);
 	MC_filename_fakeCR.push_back(filename_fakeCR_tHW_ctcvcp);
 	MC_filename_norm.push_back(filename_norm_tHW_ctcvcp);
+	MC_filename_JECup.push_back(filename_JECup_tHW_ctcvcp);
+	MC_filename_JECdown.push_back(filename_JECdown_tHW_ctcvcp);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_tHW_ctcvcp);
 	MC_samplename.push_back("tHWhzz_s1");
 	MC_sampletag.push_back("tHWhzz");
 	MC_samplegroup.push_back("tHW_hzz");
@@ -864,6 +969,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_tHW_ctcvcp);
 	MC_filename_fakeCR.push_back(filename_fakeCR_tHW_ctcvcp);
 	MC_filename_norm.push_back(filename_norm_tHW_ctcvcp);
+	MC_filename_JECup.push_back(filename_JECup_tHW_ctcvcp);
+	MC_filename_JECdown.push_back(filename_JECdown_tHW_ctcvcp);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_tHW_ctcvcp);
 	MC_samplename.push_back("tHWhtt_s1");
 	MC_sampletag.push_back("tHWhtt");
 	MC_samplegroup.push_back("tHW_htt");
@@ -883,6 +991,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_VHToNonbb);
 	MC_filename_fakeCR.push_back(filename_fakeCR_VHToNonbb);
 	MC_filename_norm.push_back(filename_norm_VHToNonbb);
+	MC_filename_JECup.push_back(filename_JECup_VHToNonbb);
+	MC_filename_JECdown.push_back(filename_JECdown_VHToNonbb);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_VHToNonbb);
 	MC_samplename.push_back("VHToNonbb_s1");
 	MC_sampletag.push_back("VHToNonbb");
 	MC_samplegroup.push_back("VH");
@@ -898,6 +1009,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_ZHToTauTau);
 	MC_filename_fakeCR.push_back(filename_fakeCR_ZHToTauTau);
 	MC_filename_norm.push_back(filename_norm_ZHToTauTau);
+	MC_filename_JECup.push_back(filename_JECup_ZHToTauTau);
+	MC_filename_JECdown.push_back(filename_JECdown_ZHToTauTau);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_ZHToTauTau);
 	MC_samplename.push_back("ZHToTauTau_s1");
 	MC_sampletag.push_back("ZHToTauTau");
 	MC_samplegroup.push_back("VH");
@@ -913,6 +1027,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_ZH_HToBB_ZToLL);
 	MC_filename_fakeCR.push_back(filename_fakeCR_ZH_HToBB_ZToLL);
 	MC_filename_norm.push_back(filename_norm_ZH_HToBB_ZToLL);
+	MC_filename_JECup.push_back(filename_JECup_ZH_HToBB_ZToLL);
+	MC_filename_JECdown.push_back(filename_JECdown_ZH_HToBB_ZToLL);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_ZH_HToBB_ZToLL);
 	MC_samplename.push_back("HToBBZToLL_s1");
 	MC_sampletag.push_back("ZHToBBZToLL");
 	MC_samplegroup.push_back("VH");
@@ -932,6 +1049,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_ttWH);
 	MC_filename_fakeCR.push_back(filename_fakeCR_ttWH);
 	MC_filename_norm.push_back(filename_norm_ttWH);
+	MC_filename_JECup.push_back(filename_JECup_ttWH);
+	MC_filename_JECdown.push_back(filename_JECdown_ttWH);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_ttWH);
 	MC_samplename.push_back("ttWH_s1");
 	MC_sampletag.push_back("ttWH");
 	MC_samplegroup.push_back("ttVH");
@@ -947,6 +1067,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_ttZH);
 	MC_filename_fakeCR.push_back(filename_fakeCR_ttZH);
 	MC_filename_norm.push_back(filename_norm_ttZH);
+	MC_filename_JECup.push_back(filename_JECup_ttZH);
+	MC_filename_JECdown.push_back(filename_JECdown_ttZH);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_ttZH);
 	MC_samplename.push_back("ttZH_s1");
 	MC_sampletag.push_back("ttZH");
 	MC_samplegroup.push_back("ttVH");
@@ -966,6 +1089,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_ggHToTauTau);
 	MC_filename_fakeCR.push_back(filename_fakeCR_ggHToTauTau);
 	MC_filename_norm.push_back(filename_norm_ggHToTauTau);
+	MC_filename_JECup.push_back(filename_JECup_ggHToTauTau);
+	MC_filename_JECdown.push_back(filename_JECdown_ggHToTauTau);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_ggHToTauTau);
 	MC_samplename.push_back("ggHToTauTau_s1");
 	MC_sampletag.push_back("ggHToTauTau");
 	MC_samplegroup.push_back("ggH");
@@ -981,6 +1107,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_ggHToZZ);
 	MC_filename_fakeCR.push_back(filename_fakeCR_ggHToZZ);
 	MC_filename_norm.push_back(filename_norm_ggHToZZ);
+	MC_filename_JECup.push_back(filename_JECup_ggHToZZ);
+	MC_filename_JECdown.push_back(filename_JECdown_ggHToZZ);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_ggHToZZ);
 	MC_samplename.push_back("ggHToZZ_s1");
 	MC_sampletag.push_back("ggHToZZ");
 	MC_samplegroup.push_back("ggH");
@@ -996,6 +1125,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_ggHToWWToLNuQQ);
 	MC_filename_fakeCR.push_back(filename_fakeCR_ggHToWWToLNuQQ);
 	MC_filename_norm.push_back(filename_norm_ggHToWWToLNuQQ);
+	MC_filename_JECup.push_back(filename_JECup_ggHToWWToLNuQQ);
+	MC_filename_JECdown.push_back(filename_JECdown_ggHToWWToLNuQQ);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_ggHToWWToLNuQQ);
 	MC_samplename.push_back("ggHToWWToLNuQQ_s1");
 	MC_sampletag.push_back("ggHToWWToLNuQQ");
 	MC_samplegroup.push_back("ggH");
@@ -1011,6 +1143,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_ggHToWWTo2L2Nu);
 	MC_filename_fakeCR.push_back(filename_fakeCR_ggHToWWTo2L2Nu);
 	MC_filename_norm.push_back(filename_norm_ggHToWWTo2L2Nu);
+	MC_filename_JECup.push_back(filename_JECup_ggHToWWTo2L2Nu);
+	MC_filename_JECdown.push_back(filename_JECdown_ggHToWWTo2L2Nu);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_ggHToWWTo2L2Nu);
 	MC_samplename.push_back("ggHToWWTo2L2Nu_s1");
 	MC_sampletag.push_back("ggHToWWTo2L2Nu");
 	MC_samplegroup.push_back("ggH");
@@ -1026,6 +1161,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_ggHToMuMu);
 	MC_filename_fakeCR.push_back(filename_fakeCR_ggHToMuMu);
 	MC_filename_norm.push_back(filename_norm_ggHToMuMu);
+	MC_filename_JECup.push_back(filename_JECup_ggHToMuMu);
+	MC_filename_JECdown.push_back(filename_JECdown_ggHToMuMu);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_ggHToMuMu);
 	MC_samplename.push_back("ggHToMuMu_s1");
 	MC_sampletag.push_back("ggHToMuMu");
 	MC_samplegroup.push_back("ggH");
@@ -1041,6 +1179,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_ggHToBB);
 	MC_filename_fakeCR.push_back(filename_fakeCR_ggHToBB);
 	MC_filename_norm.push_back(filename_norm_ggHToBB);
+	MC_filename_JECup.push_back(filename_JECup_ggHToBB);
+	MC_filename_JECdown.push_back(filename_JECdown_ggHToBB);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_ggHToBB);
 	MC_samplename.push_back("ggHToBB_s1");
 	MC_sampletag.push_back("ggHToBB");
 	MC_samplegroup.push_back("ggH");
@@ -1056,6 +1197,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_ggHToGG);
 	MC_filename_fakeCR.push_back(filename_fakeCR_ggHToGG);
 	MC_filename_norm.push_back(filename_norm_ggHToGG);
+	MC_filename_JECup.push_back(filename_JECup_ggHToGG);
+	MC_filename_JECdown.push_back(filename_JECdown_ggHToGG);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_ggHToGG);
 	MC_samplename.push_back("ggHToGG_s1");
 	MC_sampletag.push_back("ggHToGG");
 	MC_samplegroup.push_back("ggH");
@@ -1075,6 +1219,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_VBFHToTauTau);
 	MC_filename_fakeCR.push_back(filename_fakeCR_VBFHToTauTau);
 	MC_filename_norm.push_back(filename_norm_VBFHToTauTau);
+	MC_filename_JECup.push_back(filename_JECup_VBFHToTauTau);
+	MC_filename_JECdown.push_back(filename_JECdown_VBFHToTauTau);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_VBFHToTauTau);
 	MC_samplename.push_back("VBFHToTauTau_s1");
 	MC_sampletag.push_back("VBFHToTauTau");
 	MC_samplegroup.push_back("VBF");
@@ -1090,6 +1237,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_VBFHToZZ);
 	MC_filename_fakeCR.push_back(filename_fakeCR_VBFHToZZ);
 	MC_filename_norm.push_back(filename_norm_VBFHToZZ);
+	MC_filename_JECup.push_back(filename_JECup_VBFHToZZ);
+	MC_filename_JECdown.push_back(filename_JECdown_VBFHToZZ);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_VBFHToZZ);
 	MC_samplename.push_back("VBFHToZZ_s1");
 	MC_sampletag.push_back("VBFHToZZ");
 	MC_samplegroup.push_back("VBF");
@@ -1105,6 +1255,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_VBFHToWWToLNuQQ);
 	MC_filename_fakeCR.push_back(filename_fakeCR_VBFHToWWToLNuQQ);
 	MC_filename_norm.push_back(filename_norm_VBFHToWWToLNuQQ);
+	MC_filename_JECup.push_back(filename_JECup_VBFHToWWToLNuQQ);
+	MC_filename_JECdown.push_back(filename_JECdown_VBFHToWWToLNuQQ);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_VBFHToWWToLNuQQ);
 	MC_samplename.push_back("VBFHToWWToLNuQQ_s1");
 	MC_sampletag.push_back("VBFHToWWToLNuQQ");
 	MC_samplegroup.push_back("VBF");
@@ -1120,6 +1273,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_VBFHToWWTo2L2Nu);
 	MC_filename_fakeCR.push_back(filename_fakeCR_VBFHToWWTo2L2Nu);
 	MC_filename_norm.push_back(filename_norm_VBFHToWWTo2L2Nu);
+	MC_filename_JECup.push_back(filename_JECup_VBFHToWWTo2L2Nu);
+	MC_filename_JECdown.push_back(filename_JECdown_VBFHToWWTo2L2Nu);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_VBFHToWWTo2L2Nu);
 	MC_samplename.push_back("VBFHToWWTo2L2Nu_s1");
 	MC_sampletag.push_back("VBFHToWWTo2L2Nu");
 	MC_samplegroup.push_back("VBF");
@@ -1135,6 +1291,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_VBFHToMuMu);
 	MC_filename_fakeCR.push_back(filename_fakeCR_VBFHToMuMu);
 	MC_filename_norm.push_back(filename_norm_VBFHToMuMu);
+	MC_filename_JECup.push_back(filename_JECup_VBFHToMuMu);
+	MC_filename_JECdown.push_back(filename_JECdown_VBFHToMuMu);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_VBFHToMuMu);
 	MC_samplename.push_back("VBFHToMuMu_s1");
 	MC_sampletag.push_back("VBFHToMuMu");
 	MC_samplegroup.push_back("VBF");
@@ -1150,6 +1309,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_VBFHToBB);
 	MC_filename_fakeCR.push_back(filename_fakeCR_VBFHToBB);
 	MC_filename_norm.push_back(filename_norm_VBFHToBB);
+	MC_filename_JECup.push_back(filename_JECup_VBFHToBB);
+	MC_filename_JECdown.push_back(filename_JECdown_VBFHToBB);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_VBFHToBB);
 	MC_samplename.push_back("VBFHToBB_s1");
 	MC_sampletag.push_back("VBFHToBB");
 	MC_samplegroup.push_back("VBF");
@@ -1165,6 +1327,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_VBFHToGG_ext1);
 	MC_filename_fakeCR.push_back(filename_fakeCR_VBFHToGG_ext1);
 	MC_filename_norm.push_back(filename_norm_VBFHToGG_ext1);
+	MC_filename_JECup.push_back(filename_JECup_VBFHToGG_ext1);
+	MC_filename_JECdown.push_back(filename_JECdown_VBFHToGG_ext1);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_VBFHToGG_ext1);
 	MC_samplename.push_back("VBFHToGG_s1");
 	MC_sampletag.push_back("VBFHToGG");
 	MC_samplegroup.push_back("VBF");
@@ -1184,6 +1349,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_ggHHTo2B2VTo2L2Nu);
 	MC_filename_fakeCR.push_back(filename_fakeCR_ggHHTo2B2VTo2L2Nu);
 	MC_filename_norm.push_back(filename_norm_ggHHTo2B2VTo2L2Nu);
+	MC_filename_JECup.push_back(filename_JECup_ggHHTo2B2VTo2L2Nu);
+	MC_filename_JECdown.push_back(filename_JECdown_ggHHTo2B2VTo2L2Nu);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_ggHHTo2B2VTo2L2Nu);
 	MC_samplename.push_back("ggHHTo2B2VTo2L2Nu_s1");
 	MC_sampletag.push_back("ggHHTo2B2VTo2L2Nu");
 	MC_samplegroup.push_back("HH");
@@ -1199,6 +1367,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_ggHHTo2B2Tau);
 	MC_filename_fakeCR.push_back(filename_fakeCR_ggHHTo2B2Tau);
 	MC_filename_norm.push_back(filename_norm_ggHHTo2B2Tau);
+	MC_filename_JECup.push_back(filename_JECup_ggHHTo2B2Tau);
+	MC_filename_JECdown.push_back(filename_JECdown_ggHHTo2B2Tau);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_ggHHTo2B2Tau);
 	MC_samplename.push_back("ggHHTo2B2Tau_s1");
 	MC_sampletag.push_back("ggHHTo2B2Tau");
 	MC_samplegroup.push_back("HH");
@@ -1214,6 +1385,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_ggHHTo4Tau);
 	MC_filename_fakeCR.push_back(filename_fakeCR_ggHHTo4Tau);
 	MC_filename_norm.push_back(filename_norm_ggHHTo4Tau);
+	MC_filename_JECup.push_back(filename_JECup_ggHHTo4Tau);
+	MC_filename_JECdown.push_back(filename_JECdown_ggHHTo4Tau);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_ggHHTo4Tau);
 	MC_samplename.push_back("ggHHTo4Tau_s1");
 	MC_sampletag.push_back("ggHHTo4Tau");
 	MC_samplegroup.push_back("HH");
@@ -1233,6 +1407,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_ttZ_ext2); 
 	MC_filename_fakeCR.push_back(filename_fakeCR_ttZ_ext2); 
 	MC_filename_norm.push_back(filename_norm_ttZ_ext2);
+	MC_filename_JECup.push_back(filename_JECup_ttZ_ext2); 
+	MC_filename_JECdown.push_back(filename_JECdown_ttZ_ext2); 
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_ttZ_ext2); 
 	MC_samplename.push_back("ttZ_s2");
 	MC_sampletag.push_back("ttZ");
 	MC_samplegroup.push_back("TTZ");
@@ -1248,6 +1425,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_ttZ_ext3); 
 	MC_filename_fakeCR.push_back(filename_fakeCR_ttZ_ext3); 
 	MC_filename_norm.push_back(filename_norm_ttZ_ext3);
+	MC_filename_JECup.push_back(filename_JECup_ttZ_ext3);
+	MC_filename_JECdown.push_back(filename_JECdown_ttZ_ext3);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_ttZ_ext3);
 	MC_samplename.push_back("ttZ_s1");
 	MC_sampletag.push_back("ttZ");
 	MC_samplegroup.push_back("TTZ");
@@ -1263,6 +1443,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_ttZ_lowmass);
 	MC_filename_fakeCR.push_back(filename_fakeCR_ttZ_lowmass);
 	MC_filename_norm.push_back(filename_norm_ttZ_lowmass);
+	MC_filename_JECup.push_back(filename_JECup_ttZ_lowmass);
+	MC_filename_JECdown.push_back(filename_JECdown_ttZ_lowmass);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_ttZ_lowmass);
 	MC_samplename.push_back("ttZm1to10_s1");
 	MC_sampletag.push_back("ttZm1to10");
 	MC_samplegroup.push_back("TTZ");
@@ -1278,6 +1461,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_ttbar_DiLept); 
 	MC_filename_fakeCR.push_back(filename_fakeCR_ttbar_DiLept); 
 	MC_filename_norm.push_back(filename_norm_ttbar_DiLept);
+	MC_filename_JECup.push_back(filename_JECup_ttbar_DiLept);
+	MC_filename_JECdown.push_back(filename_JECdown_ttbar_DiLept);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_ttbar_DiLept);
 	MC_samplename.push_back("ttbarDL_s2");
 	MC_sampletag.push_back("ttbarDL");
 	MC_samplegroup.push_back("TTZ");
@@ -1292,7 +1478,10 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_XS.push_back(XS_ttbar_DiLept);
 	MC_filename.push_back(filename_ttbar_DiLept_ext1); 
 	MC_filename_fakeCR.push_back(filename_fakeCR_ttbar_DiLept_ext1); 
-	MC_filename_norm.push_back(filename_norm_ttbar_DiLept_ext1);
+	MC_filename_norm.push_back(filename_norm_ttbar_DiLept_ext1); 
+	MC_filename_JECup.push_back(filename_JECup_ttbar_DiLept_ext1); 
+	MC_filename_JECdown.push_back(filename_JECdown_ttbar_DiLept_ext1); 
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_ttbar_DiLept_ext1); 
 	MC_samplename.push_back("ttbarDL_s1");
 	MC_sampletag.push_back("ttbarDL");
 	MC_samplegroup.push_back("TTZ");
@@ -1308,6 +1497,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_ttbar_SingleLeptFromt); 
 	MC_filename_fakeCR.push_back(filename_fakeCR_ttbar_SingleLeptFromt); 
 	MC_filename_norm.push_back(filename_norm_ttbar_SingleLeptFromt);
+	MC_filename_JECup.push_back(filename_JECup_ttbar_SingleLeptFromt); 
+	MC_filename_JECdown.push_back(filename_JECdown_ttbar_SingleLeptFromt); 
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_ttbar_SingleLeptFromt); 
 	MC_samplename.push_back("ttbarSLfromT_s2");
 	MC_sampletag.push_back("ttbarSLfromT");
 	MC_samplegroup.push_back("TTZ");
@@ -1323,6 +1515,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_ttbar_SingleLeptFromt_ext1); 
 	MC_filename_fakeCR.push_back(filename_fakeCR_ttbar_SingleLeptFromt_ext1); 
 	MC_filename_norm.push_back(filename_norm_ttbar_SingleLeptFromt_ext1);
+	MC_filename_JECup.push_back(filename_JECup_ttbar_SingleLeptFromt_ext1);
+	MC_filename_JECdown.push_back(filename_JECdown_ttbar_SingleLeptFromt_ext1);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_ttbar_SingleLeptFromt_ext1);
 	MC_samplename.push_back("ttbarSLfromT_s1");
 	MC_sampletag.push_back("ttbarSLfromT");
 	MC_samplegroup.push_back("TTZ");
@@ -1338,6 +1533,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_ttbar_SingleLeptFromtbar); 
 	MC_filename_fakeCR.push_back(filename_fakeCR_ttbar_SingleLeptFromtbar); 
 	MC_filename_norm.push_back(filename_norm_ttbar_SingleLeptFromtbar);
+	MC_filename_JECup.push_back(filename_JECup_ttbar_SingleLeptFromtbar); 
+	MC_filename_JECdown.push_back(filename_JECdown_ttbar_SingleLeptFromtbar); 
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_ttbar_SingleLeptFromtbar); 
 	MC_samplename.push_back("ttbarSLfromTbar_s2");
 	MC_sampletag.push_back("ttbarSLfromTbar");
 	MC_samplegroup.push_back("TTZ");
@@ -1353,6 +1551,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_ttbar_SingleLeptFromtbar_ext1); 
 	MC_filename_fakeCR.push_back(filename_fakeCR_ttbar_SingleLeptFromtbar_ext1); 
 	MC_filename_norm.push_back(filename_norm_ttbar_SingleLeptFromtbar_ext1);
+	MC_filename_JECup.push_back(filename_JECup_ttbar_SingleLeptFromtbar_ext1); 
+	MC_filename_JECdown.push_back(filename_JECdown_ttbar_SingleLeptFromtbar_ext1); 
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_ttbar_SingleLeptFromtbar_ext1); 
 	MC_samplename.push_back("ttbarSLfromTbar_s1");
 	MC_sampletag.push_back("ttbarSLfromTbar");
 	MC_samplegroup.push_back("TTZ");
@@ -1372,6 +1573,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_ttW);
 	MC_filename_fakeCR.push_back(filename_fakeCR_ttW);
 	MC_filename_norm.push_back(filename_norm_ttW);
+	MC_filename_JECup.push_back(filename_JECup_ttW);
+	MC_filename_JECdown.push_back(filename_JECdown_ttW);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_ttW);
 	MC_samplename.push_back("ttW_s1");
 	MC_sampletag.push_back("ttW");
 	MC_samplegroup.push_back("TTW");
@@ -1389,6 +1593,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_ttWW);
 	MC_filename_fakeCR.push_back(filename_fakeCR_ttWW);
 	MC_filename_norm.push_back(filename_norm_ttWW);
+	MC_filename_JECup.push_back(filename_JECup_ttWW);
+	MC_filename_JECdown.push_back(filename_JECdown_ttWW);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_ttWW);
 	MC_samplename.push_back("ttWW_s1");
 	MC_sampletag.push_back("ttWW");
 	MC_samplegroup.push_back("TTWW");
@@ -1408,6 +1615,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_WW);
 	MC_filename_fakeCR.push_back(filename_fakeCR_WW);
 	MC_filename_norm.push_back(filename_norm_WW);
+	MC_filename_JECup.push_back(filename_JECup_WW);
+	MC_filename_JECdown.push_back(filename_JECdown_WW);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_WW);
 	MC_samplename.push_back("WW_s1");
 	MC_sampletag.push_back("WW");
 	MC_samplegroup.push_back("WW");
@@ -1425,6 +1635,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_WZ);
 	MC_filename_fakeCR.push_back(filename_fakeCR_WZ);
 	MC_filename_norm.push_back(filename_norm_WZ);
+	MC_filename_JECup.push_back(filename_JECup_WZ);
+	MC_filename_JECdown.push_back(filename_JECdown_WZ);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_WZ);
 	MC_samplename.push_back("WZ_s1");
 	MC_sampletag.push_back("WZ");
 	MC_samplegroup.push_back("WZ");
@@ -1442,6 +1655,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_ZZ);
 	MC_filename_fakeCR.push_back(filename_fakeCR_ZZ);
 	MC_filename_norm.push_back(filename_norm_ZZ);
+	MC_filename_JECup.push_back(filename_JECup_ZZ);
+	MC_filename_JECdown.push_back(filename_JECdown_ZZ);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_ZZ);
 	MC_samplename.push_back("ZZ_s1");
 	MC_sampletag.push_back("ZZ");
 	MC_samplegroup.push_back("ZZ");
@@ -1461,6 +1677,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_WWW);
 	MC_filename_fakeCR.push_back(filename_fakeCR_WWW);
 	MC_filename_norm.push_back(filename_norm_WWW);
+	MC_filename_JECup.push_back(filename_JECup_WWW);
+	MC_filename_JECdown.push_back(filename_JECdown_WWW);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_WWW);
 	MC_samplename.push_back("WWW_s1");
 	MC_sampletag.push_back("WWW");
 	MC_samplegroup.push_back("Rares");
@@ -1476,6 +1695,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_WWZ);
 	MC_filename_fakeCR.push_back(filename_fakeCR_WWZ);
 	MC_filename_norm.push_back(filename_norm_WWZ);
+	MC_filename_JECup.push_back(filename_JECup_WWZ);
+	MC_filename_JECdown.push_back(filename_JECdown_WWZ);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_WWZ);
 	MC_samplename.push_back("WWZ_s1");
 	MC_sampletag.push_back("WWZ");
 	MC_samplegroup.push_back("Rares");
@@ -1491,6 +1713,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_WZZ);
 	MC_filename_fakeCR.push_back(filename_fakeCR_WZZ);
 	MC_filename_norm.push_back(filename_norm_WZZ);
+	MC_filename_JECup.push_back(filename_JECup_WZZ);
+	MC_filename_JECdown.push_back(filename_JECdown_WZZ);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_WZZ);
 	MC_samplename.push_back("WZZ_s1");
 	MC_sampletag.push_back("WZZ");
 	MC_samplegroup.push_back("Rares");
@@ -1506,6 +1731,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_ZZZ);
 	MC_filename_fakeCR.push_back(filename_fakeCR_ZZZ);
 	MC_filename_norm.push_back(filename_norm_ZZZ);
+	MC_filename_JECup.push_back(filename_JECup_ZZZ);
+	MC_filename_JECdown.push_back(filename_JECdown_ZZZ);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_ZZZ);
 	MC_samplename.push_back("ZZZ_s1");
 	MC_sampletag.push_back("ZZZ");
 	MC_samplegroup.push_back("Rares");
@@ -1521,6 +1749,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_WZG);
 	MC_filename_fakeCR.push_back(filename_fakeCR_WZG);
 	MC_filename_norm.push_back(filename_norm_WZG);
+	MC_filename_JECup.push_back(filename_JECup_WZG);
+	MC_filename_JECdown.push_back(filename_JECdown_WZG);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_WZG);
 	MC_samplename.push_back("WZG_s1");
 	MC_sampletag.push_back("WZG");
 	MC_samplegroup.push_back("Rares");
@@ -1536,6 +1767,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_WG_ext1);
 	MC_filename_fakeCR.push_back(filename_fakeCR_WG_ext1);
 	MC_filename_norm.push_back(filename_norm_WG_ext1);
+	MC_filename_JECup.push_back(filename_JECup_WG_ext1);
+	MC_filename_JECdown.push_back(filename_JECdown_WG_ext1);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_WG_ext1);
 	MC_samplename.push_back("WG_s1");
 	MC_sampletag.push_back("WG");
 	MC_samplegroup.push_back("Rares");
@@ -1551,6 +1785,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_WG_ext2);
 	MC_filename_fakeCR.push_back(filename_fakeCR_WG_ext2);
 	MC_filename_norm.push_back(filename_norm_WG_ext2);
+	MC_filename_JECup.push_back(filename_JECup_WG_ext2);
+	MC_filename_JECdown.push_back(filename_JECdown_WG_ext2);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_WG_ext2);
 	MC_samplename.push_back("WG_s2");
 	MC_sampletag.push_back("WG");
 	MC_samplegroup.push_back("Rares");
@@ -1566,6 +1803,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_WG_ext3);
 	MC_filename_fakeCR.push_back(filename_fakeCR_WG_ext3);
 	MC_filename_norm.push_back(filename_norm_WG_ext3);
+	MC_filename_JECup.push_back(filename_JECup_WG_ext3);
+	MC_filename_JECdown.push_back(filename_JECdown_WG_ext3);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_WG_ext3);
 	MC_samplename.push_back("WG_s3");
 	MC_sampletag.push_back("WG");
 	MC_samplegroup.push_back("Rares");
@@ -1581,6 +1821,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_ZG);
 	MC_filename_fakeCR.push_back(filename_fakeCR_ZG);
 	MC_filename_norm.push_back(filename_norm_ZG);
+	MC_filename_JECup.push_back(filename_JECup_ZG);
+	MC_filename_JECdown.push_back(filename_JECdown_ZG);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_ZG);
 	MC_samplename.push_back("ZG_s1");
 	MC_sampletag.push_back("ZG");
 	MC_samplegroup.push_back("Rares");
@@ -1596,6 +1839,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_tG);
 	MC_filename_fakeCR.push_back(filename_fakeCR_tG);
 	MC_filename_norm.push_back(filename_norm_tG);
+	MC_filename_JECup.push_back(filename_JECup_tG);
+	MC_filename_JECdown.push_back(filename_JECdown_tG);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_tG);
 	MC_samplename.push_back("tG_s1");
 	MC_sampletag.push_back("tG");
 	MC_samplegroup.push_back("Rares");
@@ -1611,6 +1857,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_ttG);
 	MC_filename_fakeCR.push_back(filename_fakeCR_ttG);
 	MC_filename_norm.push_back(filename_norm_ttG);
+	MC_filename_JECup.push_back(filename_JECup_ttG);
+	MC_filename_JECdown.push_back(filename_JECdown_ttG);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_ttG);
 	MC_samplename.push_back("ttG_s1");
 	MC_sampletag.push_back("ttG");
 	MC_samplegroup.push_back("Rares");
@@ -1626,6 +1875,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_ttG_ext1);
 	MC_filename_fakeCR.push_back(filename_fakeCR_ttG_ext1);
 	MC_filename_norm.push_back(filename_norm_ttG_ext1);
+	MC_filename_JECup.push_back(filename_JECup_ttG_ext1);
+	MC_filename_JECdown.push_back(filename_JECdown_ttG_ext1);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_ttG_ext1);
 	MC_samplename.push_back("ttG_s2");
 	MC_sampletag.push_back("ttG");
 	MC_samplegroup.push_back("Rares");
@@ -1641,6 +1893,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_tZq); 
 	MC_filename_fakeCR.push_back(filename_fakeCR_tZq); 
 	MC_filename_norm.push_back(filename_norm_tZq);
+	MC_filename_JECup.push_back(filename_JECup_tZq); 
+	MC_filename_JECdown.push_back(filename_JECdown_tZq); 
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_tZq); 
 	MC_samplename.push_back("tZq_s2");
 	MC_sampletag.push_back("tZq");
 	MC_samplegroup.push_back("Rares");
@@ -1656,6 +1911,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_tZq_PS); 
 	MC_filename_fakeCR.push_back(filename_fakeCR_tZq_PS); 
 	MC_filename_norm.push_back(filename_norm_tZq_PS);
+	MC_filename_JECup.push_back(filename_JECup_tZq_PS); 
+	MC_filename_JECdown.push_back(filename_JECdown_tZq_PS); 
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_tZq_PS); 
 	MC_samplename.push_back("tZq_s1");
 	MC_sampletag.push_back("tZq");
 	MC_samplegroup.push_back("Rares");
@@ -1671,6 +1929,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_WpWp); 
 	MC_filename_fakeCR.push_back(filename_fakeCR_WpWp); 
 	MC_filename_norm.push_back(filename_norm_WpWp);
+	MC_filename_JECup.push_back(filename_JECup_WpWp); 
+	MC_filename_JECdown.push_back(filename_JECdown_WpWp); 
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_WpWp); 
 	MC_samplename.push_back("WpWp_s1");
 	MC_sampletag.push_back("WpWp");
 	MC_samplegroup.push_back("Rares");
@@ -1686,6 +1947,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_WW_DS); 
 	MC_filename_fakeCR.push_back(filename_fakeCR_WW_DS);
 	MC_filename_norm.push_back(filename_norm_WW_DS);
+	MC_filename_JECup.push_back(filename_JECup_WW_DS); 
+	MC_filename_JECdown.push_back(filename_JECdown_WW_DS); 
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_WW_DS); 
 	MC_samplename.push_back("WWss_s1");
 	MC_sampletag.push_back("WWss");
 	MC_samplegroup.push_back("Rares");
@@ -1701,6 +1965,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_tttt); 
 	MC_filename_fakeCR.push_back(filename_fakeCR_tttt); 
 	MC_filename_norm.push_back(filename_norm_tttt);
+	MC_filename_JECup.push_back(filename_JECup_tttt); 
+	MC_filename_JECdown.push_back(filename_JECdown_tttt); 
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_tttt); 
 	MC_samplename.push_back("tttt_s1");
 	MC_sampletag.push_back("tttt");
 	MC_samplegroup.push_back("Rares");
@@ -1716,6 +1983,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_St_schannel); 
 	MC_filename_fakeCR.push_back(filename_fakeCR_St_schannel); 
 	MC_filename_norm.push_back(filename_norm_St_schannel);
+	MC_filename_JECup.push_back(filename_JECup_St_schannel); 
+	MC_filename_JECdown.push_back(filename_JECdown_St_schannel); 
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_St_schannel); 
 	MC_samplename.push_back("TsCh_s1");
 	MC_sampletag.push_back("TsCh");
 	MC_samplegroup.push_back("Rares");
@@ -1731,6 +2001,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_St_schannel_PS); 
 	MC_filename_fakeCR.push_back(filename_fakeCR_St_schannel_PS); 
 	MC_filename_norm.push_back(filename_norm_St_schannel_PS);
+	MC_filename_JECup.push_back(filename_JECup_St_schannel_PS); 
+	MC_filename_JECdown.push_back(filename_JECdown_St_schannel_PS); 
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_St_schannel_PS); 
 	MC_samplename.push_back("TsCh_s2");
 	MC_sampletag.push_back("TsCh");
 	MC_samplegroup.push_back("Rares");
@@ -1746,6 +2019,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_St_tchannel_top); 
 	MC_filename_fakeCR.push_back(filename_fakeCR_St_tchannel_top); 
 	MC_filename_norm.push_back(filename_norm_St_tchannel_top);
+	MC_filename_JECup.push_back(filename_JECup_St_tchannel_top);
+	MC_filename_JECdown.push_back(filename_JECdown_St_tchannel_top);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_St_tchannel_top);
 	MC_samplename.push_back("TtChTop_s1");
 	MC_sampletag.push_back("TtChTop");
 	MC_samplegroup.push_back("Rares");
@@ -1761,6 +2037,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_St_tchannel_antitop); 
 	MC_filename_fakeCR.push_back(filename_fakeCR_St_tchannel_antitop); 
 	MC_filename_norm.push_back(filename_norm_St_tchannel_antitop);
+	MC_filename_JECup.push_back(filename_JECup_St_tchannel_antitop);
+	MC_filename_JECdown.push_back(filename_JECdown_St_tchannel_antitop);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_St_tchannel_antitop);
 	MC_samplename.push_back("TtChAntitop_s1");
 	MC_sampletag.push_back("TtChAntitop");
 	MC_samplegroup.push_back("Rares");
@@ -1776,6 +2055,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_St_tchannel_antitop_PS); 
 	MC_filename_fakeCR.push_back(filename_fakeCR_St_tchannel_antitop_PS); 
 	MC_filename_norm.push_back(filename_norm_St_tchannel_antitop_PS);
+	MC_filename_JECup.push_back(filename_JECup_St_tchannel_antitop);
+	MC_filename_JECdown.push_back(filename_JECdown_St_tchannel_antitop);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_St_tchannel_antitop);
 	MC_samplename.push_back("TtChAntitop_s2");
 	MC_sampletag.push_back("TtChAntitop");
 	MC_samplegroup.push_back("Rares");
@@ -1791,6 +2073,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_St_tW_top); 
 	MC_filename_fakeCR.push_back(filename_fakeCR_St_tW_top); 
 	MC_filename_norm.push_back(filename_norm_St_tW_top);
+	MC_filename_JECup.push_back(filename_JECup_St_tW_top); 
+	MC_filename_JECdown.push_back(filename_JECdown_St_tW_top); 
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_St_tW_top); 
 	MC_samplename.push_back("TtwChTop_s1");
 	MC_sampletag.push_back("TtwChTop");
 	MC_samplegroup.push_back("Rares");
@@ -1806,6 +2091,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_St_tW_antitop); 
 	MC_filename_fakeCR.push_back(filename_fakeCR_St_tW_antitop); 
 	MC_filename_norm.push_back(filename_norm_St_tW_antitop);
+	MC_filename_JECup.push_back(filename_JECup_St_tW_antitop); 
+	MC_filename_JECdown.push_back(filename_JECdown_St_tW_antitop); 
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_St_tW_antitop); 
 	MC_samplename.push_back("TtwChAntitop_s1");
 	MC_sampletag.push_back("TtwChAntitop");
 	MC_samplegroup.push_back("Rares");
@@ -1821,6 +2109,9 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 	MC_filename.push_back(filename_St_tWll); 
 	MC_filename_fakeCR.push_back(filename_fakeCR_St_tWll); 
 	MC_filename_norm.push_back(filename_norm_St_tWll);
+	MC_filename_JECup.push_back(filename_JECup_St_tWll);
+	MC_filename_JECdown.push_back(filename_JECdown_St_tWll);
+	MC_filename_norm_JEC.push_back(filename_norm_JEC_St_tWll);
 	MC_samplename.push_back("TtwChll_s1");
 	MC_sampletag.push_back("TtwChll");
 	MC_samplegroup.push_back("Rares");
@@ -1960,17 +2251,20 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 
 	///////////////////////////////////////////////////////
 
-	return std::make_tuple(MC_XS, MC_filename, MC_filename_fakeCR, MC_filename_norm, MC_samplename, MC_samplecut, MC_sampletag, MC_samplegroup, MC_nsamples, MC_convs_samplecut, MC_faketau_samplecut, MC_faketau_convs_samplecut, MC_gentau_samplecut, MC_gentau_convs_samplecut, Data_SR_filename, Data_fake_filename, Data_flip_filename, luminosity);
+	return std::make_tuple(MC_XS, MC_filename, MC_filename_fakeCR, MC_filename_norm, MC_filename_JECup, MC_filename_JECdown, MC_filename_norm_JEC, MC_samplename, MC_samplecut, MC_sampletag, MC_samplegroup, MC_nsamples, MC_convs_samplecut, MC_faketau_samplecut, MC_faketau_convs_samplecut, MC_gentau_samplecut, MC_gentau_convs_samplecut, Data_SR_filename, Data_fake_filename, Data_flip_filename, luminosity);
 
 }
 
-std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<int>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, float > initialize_2017(){
+std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<int>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, float > initialize_2017(){
 
 	MC_XS.clear();
 
 	MC_filename.clear();
 	MC_filename_fakeCR.clear();
 	MC_filename_norm.clear();
+	MC_filename_JECup.clear();
+	MC_filename_JECdown.clear();
+	MC_filename_norm_JEC.clear();
 	MC_samplename.clear();
 	MC_samplecut.clear();
 	MC_sampletag.clear();
@@ -3868,18 +4162,21 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 
 	///////////////////////////////////////////////////////
 
-	return std::make_tuple(MC_XS, MC_filename, MC_filename_fakeCR, MC_filename_norm, MC_samplename, MC_samplecut, MC_sampletag, MC_samplegroup, MC_nsamples, MC_convs_samplecut, MC_faketau_samplecut, MC_faketau_convs_samplecut, MC_gentau_samplecut, MC_gentau_convs_samplecut, Data_SR_filename, Data_fake_filename, Data_flip_filename, luminosity);
+	return std::make_tuple(MC_XS, MC_filename, MC_filename_fakeCR, MC_filename_norm, MC_filename_JECup, MC_filename_JECdown, MC_filename_norm_JEC, MC_samplename, MC_samplecut, MC_sampletag, MC_samplegroup, MC_nsamples, MC_convs_samplecut, MC_faketau_samplecut, MC_faketau_convs_samplecut, MC_gentau_samplecut, MC_gentau_convs_samplecut, Data_SR_filename, Data_fake_filename, Data_flip_filename, luminosity);
 
 }
 
 
-std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<int>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, float > initialize_2018(){
+std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<int>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, float > initialize_2018(){
 
 	MC_XS.clear();
 
 	MC_filename.clear();
 	MC_filename_fakeCR.clear();
 	MC_filename_norm.clear();
+	MC_filename_JECup.clear();
+	MC_filename_JECdown.clear();
+	MC_filename_norm_JEC.clear();
 	MC_samplename.clear();
 	MC_samplecut.clear();
 	MC_sampletag.clear();
@@ -5446,7 +5743,7 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 
 	///////////////////////////////////////////////////////
 
-	return std::make_tuple(MC_XS, MC_filename, MC_filename_fakeCR, MC_filename_norm, MC_samplename, MC_samplecut, MC_sampletag, MC_samplegroup, MC_nsamples, MC_convs_samplecut, MC_faketau_samplecut, MC_faketau_convs_samplecut, MC_gentau_samplecut, MC_gentau_convs_samplecut, Data_SR_filename, Data_fake_filename, Data_flip_filename, luminosity);
+	return std::make_tuple(MC_XS, MC_filename, MC_filename_fakeCR, MC_filename_norm, MC_filename_JECup, MC_filename_JECdown, MC_filename_norm_JEC, MC_samplename, MC_samplecut, MC_sampletag, MC_samplegroup, MC_nsamples, MC_convs_samplecut, MC_faketau_samplecut, MC_faketau_convs_samplecut, MC_gentau_samplecut, MC_gentau_convs_samplecut, Data_SR_filename, Data_fake_filename, Data_flip_filename, luminosity);
 
 }
 
@@ -5464,7 +5761,7 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
 	TString var = var1 + "*(" + var1 + Form("<=%f) + %f*(",xmax,0.999*xmax) + var1 + Form(">%f)",xmax);
   	cout<<"   Variable: "<<var<<endl;
 
-  	std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<int>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, float > loadedsamples;
+  	std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<int>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, vector<TString>, float > loadedsamples;
   	
   	if(year==2016) loadedsamples = initialize_2016();
   	else if(year==2017) loadedsamples = initialize_2017();
@@ -5475,32 +5772,38 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
   	if(year==2018) s_year = "18";
 
   	// MC_XS, MC_filename, MC_filename_fakeCR, MC_filename_norm
+  	// MC_filename_JECup, MC_filename_JECdown, MC_filename_norm_JEC
   	// MC_samplename, MC_samplecut, MC_sampletag, MC_samplegroup, MC_nsamples, 
   	// MC_convs_samplecut, MC_faketau_samplecut, MC_faketau_convs_samplecut, MC_gentau_samplecut, MC_gentau_convs_samplecut, 
   	// Data_SR_filename, Data_fake_filename, Data_flip_filename, luminosity
 
   	vector<float> 	XS_MC 						= std::get<0>(loadedsamples);
+
   	vector<TString> filename_MC 				= std::get<1>(loadedsamples);
   	vector<TString> filename_MC_fakeCR 			= std::get<2>(loadedsamples);
   	vector<TString> filename_norm_MC 			= std::get<3>(loadedsamples);
 
-  	vector<TString> samplename_MC 				= std::get<4>(loadedsamples);
-  	vector<TString> samplecut_MC 				= std::get<5>(loadedsamples);
-  	vector<TString> sampletag_MC 				= std::get<6>(loadedsamples);
-  	vector<TString> samplegroup_MC 				= std::get<7>(loadedsamples);
-  	vector<int> 	nsamples_MC 				= std::get<8>(loadedsamples);
+  	vector<TString> filename_MC_JECup 			= std::get<4>(loadedsamples);
+  	vector<TString> filename_MC_JECdown 		= std::get<5>(loadedsamples);
+  	vector<TString> filename_norm_JEC_MC 		= std::get<6>(loadedsamples);
 
-  	vector<TString> samplecutconvs_MC 			= std::get<9>(loadedsamples);
-  	vector<TString> samplecutfaketau_MC 		= std::get<10>(loadedsamples);
-  	vector<TString> samplecutconvsfaketau_MC 	= std::get<11>(loadedsamples);
-  	vector<TString> samplecutgentau_MC 			= std::get<12>(loadedsamples);
-  	vector<TString> samplecutconvsgentau_MC 	= std::get<13>(loadedsamples);
+  	vector<TString> samplename_MC 				= std::get<7>(loadedsamples);
+  	vector<TString> samplecut_MC 				= std::get<8>(loadedsamples);
+  	vector<TString> sampletag_MC 				= std::get<9>(loadedsamples);
+  	vector<TString> samplegroup_MC 				= std::get<10>(loadedsamples);
+  	vector<int> 	nsamples_MC 				= std::get<11>(loadedsamples);
 
-  	vector<TString> filename_data_SR 			= std::get<14>(loadedsamples);
-  	vector<TString> filename_data_fake 			= std::get<15>(loadedsamples);
-  	vector<TString> filename_data_flip 			= std::get<16>(loadedsamples);
+  	vector<TString> samplecutconvs_MC 			= std::get<12>(loadedsamples);
+  	vector<TString> samplecutfaketau_MC 		= std::get<13>(loadedsamples);
+  	vector<TString> samplecutconvsfaketau_MC 	= std::get<14>(loadedsamples);
+  	vector<TString> samplecutgentau_MC 			= std::get<15>(loadedsamples);
+  	vector<TString> samplecutconvsgentau_MC 	= std::get<16>(loadedsamples);
 
-  	float 			lumin 						= std::get<17>(loadedsamples);
+  	vector<TString> filename_data_SR 			= std::get<17>(loadedsamples);
+  	vector<TString> filename_data_fake 			= std::get<18>(loadedsamples);
+  	vector<TString> filename_data_flip 			= std::get<19>(loadedsamples);
+
+  	float 			lumin 						= std::get<20>(loadedsamples);
 
   	/*cout<<"SIZES: "<<endl;
   	cout<<XS_MC.size()<<endl;
@@ -5747,22 +6050,149 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
 
     cout<<"OK nominal"<<endl;
 
-    if(!syst){
+    /*if(!syst){
       f_new->Close();
       return;
-    }
+    }*/
 
 
     ////////////////////////////////
     ////       SYSTEMATICS       ///
     ////////////////////////////////
 
+    /////////////
+    //// JEC ////
+    /////////////
+
+    // CHECKED
+
+    cout<<" "<<endl;
+    cout<<"------ JEC SYST ------"<<endl;
+
+    // MC JEC normalization files
+
+	vector<float> norm_MC_JEC;
+	norm_MC_JEC.clear();
+
+	for(unsigned i_MC=0;i_MC<samplename_MC.size();i_MC++){
+
+		TString MC_weight = "MC_weight";
+
+		if( sampletag_MC[i_MC] == "tHQ" || sampletag_MC[i_MC] == "tHW") 
+			MC_weight = "(MC_weights_rwgt[11]/MC_weight_originalXWGTUP)*sign(MC_weight)";
+
+		TString treename = "Tree";
+		if (year==2016 && (sampletag_MC[i_MC]=="ttHhzz" || sampletag_MC[i_MC]=="ttHhww" || sampletag_MC[i_MC]=="ttHhtt" || sampletag_MC[i_MC]=="ttZ" || sampletag_MC[i_MC]=="ttW" || sampletag_MC[i_MC]=="ZG" || sampletag_MC[i_MC]=="ttbarDL" || sampletag_MC[i_MC]=="ttbarSLfromT" || sampletag_MC[i_MC]=="ttbarSLfromTbar" )) 
+			treename = "HTauTauTree";
+
+		TH1F* h_MC_norm_JEC = single_plot(filename_norm_JEC_MC[i_MC],
+			treename,
+			"1",
+			MC_weight+"*PU_weight_v1",
+			3,0,3);
+
+		norm_MC_JEC.push_back(h_MC_norm_JEC->Integral());
+
+	}  
+
+	///////////////////////////////////////////////////////
+
+	for(unsigned i_MC=0;i_MC<samplename_MC.size();i_MC++){
+
+		TString MC_weight = "MC_weight";
+
+		if( sampletag_MC[i_MC] == "tHQ" || sampletag_MC[i_MC] == "tHW") 
+			MC_weight = "(MC_weights_rwgt[11]/MC_weight_originalXWGTUP)";
+
+		////////////////////////////////////////////////////////////////////////////
+
+		TH1F* h_MC_JECup = single_plot(MC_filename_JECup[i_MC],
+			"HTauTauTree_2lss1tau_SR", 
+			var,
+			MC_weight+"*PU_weight_v1*prefire_weight*trigger_weight_v1*leptonID_weight_v1*bTagSF_CSVshape_weight*tauID_weight_v3*tauES_weight_v1*("+samplecut_MC[i_MC]+" && "+cut_cat+")",
+            nbin,xmin,xmax);
+
+		h_MC_JECup->Scale(lumin*XS_MC[i_MC]/norm_MC_JEC[i_MC]);
+		h_MC_JECup->SetNameTitle("x_JECup_"+sampletag_MC[i_MC],"x_JECup_"+sampletag_MC[i_MC]);
+		makeBinContentsPositive(h_MC_JECup,false);
+		//h_MC_JECup->Write();
+
+		TH1F* h_MC_JECdown = single_plot(MC_filename_JECdown[i_MC],
+			"HTauTauTree_2lss1tau_SR", 
+			var,
+			MC_weight+"*PU_weight_v1*prefire_weight*trigger_weight_v1*leptonID_weight_v1*bTagSF_CSVshape_weight*tauID_weight_v3*tauES_weight_v1*("+samplecut_MC[i_MC]+" && "+cut_cat+")",
+            nbin,xmin,xmax);
+
+		h_MC_JECdown->Scale(lumin*XS_MC[i_MC]/norm_MC_JEC[i_MC]);
+		h_MC_JECdown->SetNameTitle("x_JECdown_"+sampletag_MC[i_MC],"x_JECdown_"+sampletag_MC[i_MC]);
+		makeBinContentsPositive(h_MC_JECdown,false);
+		//h_MC_JECdown->Write();
+
+	}
+
+	///////////////////////////////////////////////////////
+
+	for (unsigned i_group=0;i_group<group_names.size();i_group++){
+		
+		TH1F* histo_JECup;
+		TH1F* histo_JECdown;
+
+		int counts = 0;
+
+		for(unsigned i_MC=0;i_MC<samplename_MC.size();i_MC++){
+
+			if( samplegroup_MC[i_MC] == group_names[i_group] ){
+
+				if (counts==0) histo_JECup = (TH1F*)f_new->Get(cat_name+"/x_JECup_"+sampletag_MC[i_MC]);
+				else histo_JECup->Add( (TH1F*)f_new->Get(cat_name+"/x_JECup_"+sampletag_MC[i_MC]) );
+
+				if (counts==0) histo_JECdown = (TH1F*)f_new->Get(cat_name+"/x_JECdown_"+sampletag_MC[i_MC]);
+				else histo_JECdown->Add( (TH1F*)f_new->Get(cat_name+"/x_JECdown_"+sampletag_MC[i_MC]) );
+
+				counts++;
+
+			}
+
+		}
+
+		TH1F* histo_JECnominal = (TH1F*)f_new->Get(cat_name+"/"+group_names[i_group]);
+
+		TString histonameup = group_names[i_group]+"_CMS_scale_jUp";
+		histo_JECup->SetNameTitle(histonameup,histonameup);
+		
+		TString histonamedown = group_names[i_group]+"_CMS_scale_jDown";
+		histo_JECdown->SetNameTitle(histonamedown,histonamedown);
+
+		float central = (histo_JECup->Integral()+histo_JECdown->Integral())/2;
+		float nominal = histo_JECnominal->Integral();
+
+		if (central!=0) {
+			histo_JECup->Scale(nominal/central);
+			histo_JECdown->Scale(nominal/central);
+		}
+
+		histo_JECup->Write();
+		histo_JECdown->Write();
+
+	}
+
+	TH1F* histo_convs_JECup = (TH1F*)f_new->Get(cat_name+"/Convs");
+	histo_convs_JECup->Scale(1.006);
+	histo_convs_JECup->SetNameTitle("Convs_CMS_scale_jUp","Convs_CMS_scale_jUp");
+	histo_convs_JECup->Write();
+
+	TH1F* histo_convs_JECdown = (TH1F*)f_new->Get(cat_name+"/Convs");
+	histo_convs_JECdown->Scale(0.994);
+	histo_convs_JECdown->SetNameTitle("Convs_CMS_scale_jDown","Convs+CMS_scale_jDown");
+	histo_convs_JECdown->Write();
+
+
     ////////////////
     //// THEORY ////
     ////////////////
 
     // CHECKED
-
+    /*
     cout<<" "<<endl;
     cout<<"------ THEORY SYST ------"<<endl;
 
@@ -6113,7 +6543,7 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
 			TString h_name_convs = "x_Convs_"+sampletag_MC[i_MC]+"_btag_"+bTag_syst_names[i_b];
 
 			if(bTag_syst_names[i_b].Contains("Stats"))
-    	   			h_name_convs = "x_Convs_"+sampletag_MC[i_MC]+"_btag_"+bTag_syst_names[i_b];
+    	   		h_name_convs = "x_Convs_"+sampletag_MC[i_MC]+"_btag_"+bTag_syst_names[i_b];
     		if(bTag_syst_names[i_b]=="CFErr1Up")
     	   		h_name_convs = "x_Convs_"+sampletag_MC[i_MC]+"_btag_cErr1Up";
     		else if(bTag_syst_names[i_b]=="CFErr1Down")
@@ -8152,6 +8582,7 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
 	}
 
 	cout<<"OK EWK jet syst"<<endl;
+	*/
 
     ///////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////
