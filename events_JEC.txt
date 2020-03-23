@@ -1,0 +1,101 @@
+**** TTH *****
+
+- Oct19v1_MC_2016_ttHJetToNonbb -> 0, NORM 		// 15571 - 15360
+- Oct19v1_MC_2016_THQ_ctcvcp -> 1				// 2771 - 2673
+- Oct19v1_MC_2016_THW_ctcvcp -> 1				// 4489 - 4382
+
+- Oct19v1_MC_2017_ttHJetToNonbb -> 2			// 17511 - 17220
+- Oct19v1_MC_2017_THQ_ctcvcp -> 2				// 3068 - 2899
+- Oct19v3_MC_2017_THW_ctcvcp -> 1, NORM			// 4541 - 4390
+
+- Oct19v2_MC_2018_ttHJetToNonbb -> (1+2), NORM 	// 10237 - 10019
+- Oct19v1_MC_2018_THQ_ctcvcp -> 7				// 8797 - 8302
+- Oct19v1_MC_2018_THW_ctcvcp -> 4				// 13351 - 12919
+
+**** TTV *****
+
+- Oct19v1_MC_2016_TTZToLLNuNu_M-10_ext3 -> 0, NORM	// 6836 - 6740
+- Oct19v1_MC_2016_TTZToLL_M-1to10 -> 0				// 68 - 66
+- Oct19v1_MC_2016_TTWJetsToLNu -> 0, NORM			// 5532 - 5372
+- Oct19v1_MC_2016_TTWW -> 0							// 216 - 215
+
+- Oct19v1_MC_2017_TTZToLLNuNu_M-10_PS -> 3			// 13932 - 13650
+- Oct19v1_MC_2017_TTZToLL_M-1to10 -> 0				// 95 - 92
+- Oct19v1_MC_2017_TTWJetsToLNu -> 0					// 10811 - 10341
+- Oct19v1_MC_2017_TTWW -> 0							// 505 - 496
+
+- Oct19v1_MC_2018_TTZToLLNuNu_M-10 -> 3 			// 15447 - 15074 
+- Oct19v1_MC_2018_TTZToLL_M-1to10 -> 0				// 81 - 77
+- Oct19v1_MC_2018_TTWJetsToLNu -> 1 				// 9467 - 9077
+- Oct19v1_MC_2018_TTWW_ext2 -> 0					// 1990 - 1956
+
+**** EWK *****
+
+- Oct19v1_MC_2016_WZTo3LNu -> 0					// 590 - 523
+- Oct19v1_MC_2016_ZZTo4L -> 0					// 76 - 65
+
+- Oct19v1_MC_2017_WZTo3LNu -> 1					// 630 - 542
+- Oct19v1_MC_2017_ZZTo4L_ext1 -> 11 			// 1544 - 1235
+
+- Oct19v2_MC_2018_WZTo3LNu_ext1 -> 2, NORM		// 515 - 419
+- Oct19v4_MC_2018_ZZTo4L_ext2 -> 5, NORM		// 483 - 371
+
+**** Rares ****
+
+- Oct19v1_MC_2016_WWW -> 0							// 7 - 7
+- Oct19v1_MC_2016_WWZ -> 0							// 12 - 12
+- Oct19v1_MC_2016_WZZ -> 0							// 20 - 20
+- Oct19v1_MC_2016_ZZZ -> 0							// 4 - 4
+- Oct19v1_MC_2016_WZG -> 0							// 2 - 2		
+- Oct19v1_MC_2016_WGToLNuG_ext1 -> 0				// 0 - 0
+- Oct19v1_MC_2016_ZGTo2LG -> 1, NORM				// 1 - 1
+- Oct19v1_MC_2016_TGJets_leptonDecays -> 0			// 30 - 28
+- Oct19v1_MC_2016_TTGJets -> 0						// 89 - 86
+- Oct19v1_MC_2016_tZq_ll_PS -> 2					// 11348 - 10989
+- Oct19v1_MC_2016_WpWpJJ -> 0						// 29 - 28
+- Oct19v2_MC_2016_WWTo2L2Nu_DoubleScattering -> 0	// 2 - 2
+- Oct19v1_MC_2016_TTTT -> 0							// 543 - 539
+
+- Oct19v1_MC_2017_WWW -> 0							// 11 - 11
+- Oct19v1_MC_2017_WWZ -> 0							// 7 - 7
+- Oct19v2_MC_2017_WZZ -> 0							// 15 - 14
+- Oct19v2_MC_2017_ZZZ -> 0							// 3 - 3
+- Oct19v1_MC_2017_WZG -> 0							// 3 - 3
+- Oct19v1_MC_2017_WGToLNuG -> 0, NORM				// 0 - 0
+- Oct19v1_MC_2017_ZGToLLG -> 3, NORM				// 4 - 2
+- Oct19v1_MC_2017_TGJets -> 1						// 17 - 13
+- Oct19v1_MC_2017_TTGJets_ext1 -> 2					// 147 - 139
+- Oct19v1_MC_2017_tZq_ll -> 2						// 15998 - 15191
+- Oct19v2_MC_2017_WpWpJJ -> 0						// 32 - 31
+- Oct19v1_MC_2017_WWTo2L2Nu_DoubleScattering -> 0	// 4 - 3
+- Oct19v1_MC_2017_TTTT -> 0							// 2758 - 2751
+
+- Oct19v2_MC_2018_WWW -> 0							// 9 - 7
+- Oct19v2_MC_2018_WWZ -> 0							// 7 - 7
+- Oct19v1_MC_2018_WZZ -> 0							// 10 - 10
+- Oct19v1_MC_2018_ZZZ -> 0							// 8 - 8
+- Oct19v1_MC_2018_WZG -> 0							// 3 - 2
+- Oct19v1_MC_2018_WGToLNuG -> 1, NORM				// 0 - 0
+- Oct19v2_MC_2018_ZGToLLG -> 3, NORM				// 5 - 3
+- Oct19v1_MC_2018_TGJets -> 0, NORM					// 14 - 13
+- Oct19v1_MC_2018_TTGJets -> 0, NORM				// 46 - 44
+- Oct19v1_MC_2018_tZq_ll -> 3						// 14389 - 13739 
+- Oct19v1_MC_2018_WpWpJJ -> 0						// 24 - 21
+- Oct19v1_MC_2018_WWTo2L2Nu_DoubleScattering -> 1	// 1 - 1
+- Oct19v1_MC_2018_TTTT -> 0							// 5933 - 5918
+
+
+**** TTBAR ****
+
+- Oct19v1_MC_2016_TTJets_DiLept_ext1 -> 0, NORM					// 46 - 42
+- Oct19v2_MC_2016_TTJets_SingleLeptFromT_ext1 -> 0, NORM		// 11 - 11
+- Oct19v3_MC_2016_TTJets_SingleLeptFromTbar_ext1 -> 0, NORM		// 12 - 12
+
+- Oct19v1_MC_2017_TTJets_DiLept -> 0, NORM					// 23 - 21
+- Oct19v1_MC_2017_TTJets_SingleLeptFromT -> 0, NORM			// 2 - 2
+- Oct19v1_MC_2017_TTJets_SingleLeptFromTbar -> 0, NORM		// 4 - 4
+
+- Oct19v1_MC_2018_TTJets_DiLept -> 0, NORM					// 18 - 17
+- Oct19v1_MC_2018_TTJets_SingleLeptFromT -> 0, NORM			// 6 - 6
+- Oct19v2_MC_2018_TTJets_SingleLeptFromTbar -> 0, NORM		// 7 - 7
+ 

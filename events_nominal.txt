@@ -1,0 +1,475 @@
+
+****
+
+ttH - DONE SR, fake, flip
+
+Oct19v1_MC_2016_ttHJetToNonbb --> 11469,3314,9570
+Oct19v1_MC_2016_ttH_ctcvcp --> 6898,2205,6496 
+Oct19v1_MC_2016_THQ_ctcvcp --> 2718,718,1649 
+Oct19v1_MC_2016_THW_ctcvcp --> 4437,1136,3800 
+
+Oct19v1_MC_2017_ttHJetToNonbb --> 17369,5651,15818 
+Oct19v1_MC_2017_THQ_ctcvcp --> 2973,992,1872 
+Oct19v3_MC_2017_THW_ctcvcp --> 4111,1139,3631 
+Oct19v1_MC_2017_TTH_ctcvcp --> 7330,2472,7456 
+
+Oct19v2_MC_2018_ttHJetToNonbb --> 15496,5369,12888 
+Oct19v2_MC_2018_TTH_ctcvcp --> 19584,7204,18808 
+Oct19v1_MC_2018_THQ_ctcvcp --> 8549,2805,5084 
+Oct19v1_MC_2018_THW_ctcvcp --> 13137,3961,11503 
+
+****
+
+ttV - DONE SR, fake, flip
+
+Oct19v1_MC_2016_TTZToLLNuNu_M-10_ext2 --> 5967,1793,5270 
+Oct19v1_MC_2016_TTZToLLNuNu_M-10_ext3 --> 6014,1791,5389 
+Oct19v1_MC_2016_TTZToLL_M-1to10 --> 66,44,49 
+Oct19v1_MC_2016_TTWJetsToLNu --> 4218,926,2704 
+Oct19v1_MC_2016_TTWW --> 215,42,184 
+
+Oct19v1_MC_2017_TTZToLLNuNu_M-10 --> 10148,3333,9377 
+Oct19v1_MC_2017_TTZToLLNuNu_M-10_PS --> 13788,4568,13149 
+Oct19v1_MC_2017_TTZToLL_M-1to10 --> 94,57,72 
+Oct19v1_MC_2017_TTWJetsToLNu --> 10552,2671,7117 
+Oct19v1_MC_2017_TTWJetsToLNu_PS --> 10113,2496,6748 
+Oct19v1_MC_2017_TTWW --> 500,120,465 
+
+Oct19v1_MC_2018_TTZToLLNuNu_M-10 --> 15279,5454,13777 
+Oct19v1_MC_2018_TTZToLL_M-1to10 --> 78,47,59 
+Oct19v1_MC_2018_TTWJetsToLNu --> 9261,2443,6078 
+Oct19v1_MC_2018_TTWW_ext1 --> 441,106,419 
+Oct19v1_MC_2018_TTWW_ext2 --> 1974,529,1688 
+
+****
+
+Rares - DONE SR, fake, flip
+
+Oct19v1_MC_2016_WWW --> 7,2,6 
+Oct19v1_MC_2016_WWZ --> 12,3,15 
+Oct19v1_MC_2016_WZZ --> 20,7,11 
+Oct19v1_MC_2016_ZZZ --> 4,1,3 
+Oct19v1_MC_2016_WZG --> 2,0,2 
+Oct19v1_MC_2016_WGToLNuG_ext1 --> 0,0,0 
+Oct19v1_MC_2016_WGToLNuG_ext2 --> 0,0,0 
+Oct19v1_MC_2016_WGToLNuG_ext3 --> 0,0,1 
+Oct19v1_MC_2016_ZGTo2LG --> 1,2,40 
+Oct19v1_MC_2016_TGJets_leptonDecays --> 28,21,26 
+Oct19v1_MC_2016_TTGJets --> 86,86,607 
+Oct19v1_MC_2016_TTGJets_ext1 --> 109,147,1068 
+Oct19v2_MC_2016_tZq_ll --> 10207,3080,6386 
+Oct19v1_MC_2016_tZq_ll_PS --> 11170,3442,7073 
+Oct19v1_MC_2016_WpWpJJ --> 28,6,0 
+Oct19v2_MC_2016_WWTo2L2Nu_DoubleScattering --> 2,1,0 
+Oct19v1_MC_2016_TTTT --> 540,150,474 
+
+Oct19v1_MC_2017_WWW --> 11,3,11 
+Oct19v1_MC_2017_WWZ --> 7,2,12 
+Oct19v2_MC_2017_WZZ --> 14,11,12 
+Oct19v2_MC_2017_ZZZ --> 3,2,7 
+Oct19v1_MC_2017_WZG --> 3,1,0 
+Oct19v1_MC_2017_WGToLNuG --> 0,0,2 
+Oct19v1_MC_2017_ZGToLLG --> 3,6,123 
+Oct19v1_MC_2017_TGJets --> 14,27,17 
+Oct19v1_MC_2017_TTGJets --> 112,158,1172 
+Oct19v1_MC_2017_TTGJets_ext1 --> 146,184,1336 
+Oct19v1_MC_2017_tZq_ll --> 15603,5379,10767 
+Oct19v2_MC_2017_WpWpJJ --> 31,8,0 
+Oct19v1_MC_2017_WWTo2L2Nu_DoubleScattering --> 4,2,2 
+Oct19v1_MC_2017_TTTT --> 2752,759,2511 
+Oct19v1_MC_2017_TTTT_PS --> 6252,1671,5652 
+
+Oct19v2_MC_2018_WWW --> 7,2,8 
+Oct19v2_MC_2018_WWZ --> 7,3,7 
+Oct19v1_MC_2018_WZZ --> 10,12,9 
+Oct19v1_MC_2018_ZZZ --> 8,2,4 
+Oct19v1_MC_2018_WZG --> 2,1,2 
+Oct19v1_MC_2018_WGToLNuG --> 0,0,0 
+Oct19v2_MC_2018_ZGToLLG --> 3,7,127 
+Oct19v1_MC_2018_TGJets --> 19,25,21 
+Oct19v1_MC_2018_TTGJets --> 69,93,584 
+Oct19v1_MC_2018_tZq_ll --> 14041,5423,9337 
+Oct19v1_MC_2018_WpWpJJ --> 23,4,0 
+Oct19v1_MC_2018_WWTo2L2Nu_DoubleScattering --> 1,0,3 
+Oct19v1_MC_2018_TTTT --> 5921,1791,5266 
+
+****
+
+EWK - DONE SR, fake, flip
+
+Oct19v1_MC_2016_DYJetsToLL_M-10to50 --> 0,0,1 
+Oct19v1_MC_2016_DYJetsToLL_M-50 --> 0,6,68 
+Oct19v1_MC_2016_WJetsToLNu_ext2 --> 0,0,0 
+Oct19v1_MC_2016_WJetsToLNu --> 0,0,0 
+Oct19v1_MC_2016_WWTo2L2Nu --> 0,0,10 
+Oct19v1_MC_2016_WZTo3LNu --> 564,156,304 
+Oct19v1_MC_2016_ZZTo4L --> 70,37,83 
+
+Oct19v1_MC_2017_DYJetsToLL_M-10to50 --> 0,0,0 
+Oct19v1_MC_2017_DYJetsToLL_M-10to50_ext1 --> 0,0,0 
+Oct19v1_MC_2017_DYJetsToLL_M-50 --> 0,0,44 
+Oct19v3_MC_2017_DYJetsToLL_M-50_ext1 --> 0,1,40 
+Oct19v2_MC_2017_WJetsToLNu --> 0,0,0 
+Oct19v1_MC_2017_WJetsToLNu_ext1 --> 0,1,0 
+Oct19v2_MC_2017_WWTo2L2Nu --> 0,0,8 
+Oct19v1_MC_2017_WWTo2L2Nu_ext1 --> 0,0,18 
+Oct19v1_MC_2017_WZTo3LNu --> 579,203,298 
+Oct19v1_MC_2017_ZZTo4L --> 97,44,106 
+Oct19v1_MC_2017_ZZTo4L_ext1 --> 1385,638,1547 
+Oct19v2_MC_2017_ZZTo4L_ext2 --> 70,31,74 
+
+Oct19v3_MC_2018_DYJetsToLL_M-10to50 --> 0,0,3 
+Oct19v2_MC_2018_DYJetsToLL_M-50 --> 0,0,0 
+Oct19v3_MC_2018_DYJetsToLL_M-50_ext2 --> 0,1,26 
+Oct19v2_MC_2018_WJetsToLNu --> 0,0,0 
+Oct19v3_MC_2018_WWTo2L2Nu --> 1,1,43 
+Oct19v1_MC_2018_WZTo3LNu --> 430,170,235 
+Oct19v2_MC_2018_WZTo3LNu_ext1 --> 454,162,256 
+Oct19v2_MC_2018_ZZTo4L --> 56,41,78 
+Oct19v4_MC_2018_ZZTo4L_ext2 --> 513,252,671 
+
+****
+
+ttbar - DONE SR, fake, flip
+
+Oct19v1_MC_2016_ST_s-channel --> 0,0,0 
+Oct19v1_MC_2016_ST_s-channel_PS --> 1,4,0 
+Oct19v1_MC_2016_ST_t-channel_top --> 1,7,1 
+Oct19v1_MC_2016_ST_t-channel_antitop --> 2,9,0 
+Oct19v1_MC_2016_ST_t-channel_antitop_PS --> 2,8,0 
+Oct19v1_MC_2016_ST_tW_top --> 2,13,139 
+Oct19v1_MC_2016_ST_tW_antitop --> 0,22,149 
+Oct19v1_MC_2016_ST_tWll --> 127,58,96 
+Oct19v1_MC_2016_TTJets_DiLept_ext1 --> 93,578,9892 
+Oct19v1_MC_2016_TTJets_DiLept --> 36,183,3076 
+Oct19v2_MC_2016_TTJets_SingleLeptFromT_ext1 --> 24,159,13 
+Oct19v1_MC_2016_TTJets_SingleLeptFromT --> 7,54,8 
+Oct19v1_MC_2016_TTJets_SingleLeptFromTbar --> 16,61,4 
+Oct19v3_MC_2016_TTJets_SingleLeptFromTbar_ext1 --> 22,170,13 
+
+Oct19v1_MC_2017_ST_s-channel --> 1,4,0 
+Oct19v2_MC_2017_ST_s-channel_PS --> 1,5,0 
+Oct19v1_MC_2017_ST_t-channel_top --> 1,1,0 
+Oct19v2_MC_2017_ST_t-channel_top_PS --> 1,6,2 
+Oct19v1_MC_2017_ST_t-channel_antitop --> 0,1,0 
+Oct19v2_MC_2017_ST_t-channel_antitop_PS --> 0,8,0 
+Oct19v3_MC_2017_ST_tW_top --> 5,23,236 
+Oct19v1_MC_2017_ST_tW_top_PS --> 3,27,216 
+Oct19v1_MC_2017_ST_tW_antitop --> 2,20,231 
+Oct19v1_MC_2017_ST_tW_antitop_PS --> 9,19,236 
+Oct19v1_MC_2017_ST_tWll --> 3050,890,2629 
+Oct19v1_MC_2017_TTJets_DiLept --> 144,696,19865 
+Oct19v1_MC_2017_TTJets_SingleLeptFromT --> 75,305,48 
+Oct19v1_MC_2017_TTJets_SingleLeptFromTbar --> 82,397,51 
+
+Oct19v1_MC_2018_ST_s-channel --> 0,6,2 
+Oct19v2_MC_2018_ST_t-channel_top --> 2,5,0 
+Oct19v3_MC_2018_ST_t-channel_antitop --> 3,14,2 
+Oct19v3_MC_2018_ST_tW_top --> 6,23,227 
+Oct19v1_MC_2018_ST_tW_antitop --> 3,27,217 
+Oct19v1_MC_2018_ST_tWll --> 713,211,542 
+Oct19v1_MC_2018_TTJets_DiLept --> 135,744,17073 
+Oct19v1_MC_2018_TTJets_SingleLeptFromT --> 51,329,41 
+Oct19v2_MC_2018_TTJets_SingleLeptFromTbar --> 38,245,20 
+
+****
+
+ggH - DONE SR, fake, flip
+
+Oct19v1_MC_2016_GluGluHToTauTau --> 1,1,7 
+Oct19v1_MC_2016_GluGluHToZZTo4L --> 65,21,63 
+Oct19v1_MC_2016_GluGluHToWWToLNuQQ --> 0,0,0 
+Oct19v1_MC_2016_GluGluHToWWTo2L2Nu --> 0,0,3 
+Oct19v1_MC_2016_GluGluHToMuMu --> 0,0,7 
+Oct19v1_MC_2016_GluGluHToBB --> 0,0,0 
+Oct19v6_MC_2016_GluGluHToBB_ext1 --> 0,0,0 
+Oct19v1_MC_2016_GluGluHToGG --> 0,0,0 
+
+Oct19v1_MC_2017_GluGluHToTauTau --> 0,0,1 
+Oct19v3_MC_2017_GluGluHToTauTau_ext1 --> 0,0,8 
+Oct19v1_MC_2017_GluGluHToZZTo4L_ext1 --> 50,26,69 
+Oct19v2_MC_2017_GluGluHToZZTo4L_ext3 --> 57,40,65 
+Oct19v1_MC_2017_GluGluHToZZTo4L_ext4 --> 53,40,69 
+Oct19v2_MC_2017_GluGluHToZZTo2L2Q --> 0,0,13 
+Oct19v1_MC_2017_GluGluHToWWToLNuQQ --> 0,0,0 
+Oct19v1_MC_2017_GluGluHToWWTo2L2Nu --> 0,0,6 
+Oct19v3_MC_2017_GluGluHToMuMu --> 0,0,0 
+Oct19v1_MC_2017_GluGluHToMuMu_ext1 --> 0,0,0 
+Oct19v2_MC_2017_GluGluHToBB --> 0,0,0 
+Oct19v3_MC_2017_GluGluHToGG --> 0,0,0 
+
+Oct19v2_MC_2018_GluGluHToTauTau --> 0,3,3 
+Oct19v1_MC_2018_GluGluHToZZTo4L --> 25,20,37 
+Oct19v2_MC_2018_GluGluHToZZTo2L2Q --> 0,1,6 
+Oct19v1_MC_2018_GluGluHToWWToLNuQQ --> 0,0,0 
+Oct19v2_MC_2018_GluGluHToWWTo2L2Nu --> 0,0,2 
+Oct19v1_MC_2018_GluGluHToMuMu --> 0,0,0 
+Oct19v2_MC_2018_GluGluHToMuMu_ext1 --> 0,0,0 
+Oct19v1_MC_2018_GluGluHToBB --> 0,0,0 
+Oct19v1_MC_2018_GluGluHToGG --> 0,0,0 
+
+****
+
+VBF - DONE SR, fake, flip
+
+Oct19v2_MC_2016_VBFHToTauTau --> 1,0,2 
+Oct19v2_MC_2016_VBF_HToZZTo4L --> 61,21,64 
+Oct19v1_MC_2016_VBFHToWWToLNuQQ --> 0,0,0 
+Oct19v1_MC_2016_VBFHToWWTo2L2Nu --> 0,0,3 
+Oct19v1_MC_2016_VBFHToMuMu --> 0,0,0 
+Oct19v3_MC_2016_VBFHToBB --> 0,0,0 
+Oct19v1_MC_2016_VBFHToBB_ext1 --> 0,0,0 
+Oct19v1_MC_2016_VBFHToGG_ext1 --> 0,0,0 
+Oct19v1_MC_2016_VBFHToGG_ext2 --> 0,0,0 
+
+Oct19v1_MC_2017_VBFHToTauTau --> 0,1,8 
+Oct19v2_MC_2017_VBF_HToZZTo4L_ext2 --> 120,66,180 
+Oct19v1_MC_2017_VBF_HToZZTo4L_ext1 --> 173,69,232 
+Oct19v1_MC_2017_VBF_HToZZTo4L --> 41,27,45 
+Oct19v1_MC_2017_VBFHToWWToLNuQQ --> 0,0,0 
+Oct19v1_MC_2017_VBFHToWWTo2L2Nu --> 0,0,5 
+Oct19v1_MC_2017_VBFHToMuMu --> 0,1,0 
+Oct19v1_MC_2017_VBFHToBB --> 0,0,0 
+Oct19v1_MC_2017_VBFHToGG --> 0,0,0 
+Oct19v2_MC_2017_VBFHToGG_PS --> 0,0,0 
+
+Oct19v1_MC_2018_VBFHToTauTau --> 0,2,4 
+Oct19v2_MC_2018_VBF_HToZZTo4L --> 63,42,93 
+Oct19v2_MC_2018_VBFHToWWToLNuQQ --> 0,0,0 
+Oct19v1_MC_2018_VBFHToWWTo2L2Nu --> 0,0,20 
+Oct19v1_MC_2018_VBFHToMuMu --> 0,0,0 
+Oct19v2_MC_2018_VBFHToBB --> 0,0,0 
+Oct19v2_MC_2018_VBFHToGG --> 0,0,0 
+
+****
+
+VH - DONE SR, fake, flip
+
+Oct19v1_MC_2016_VHToNonbb --> 18,3,20 
+Oct19v1_MC_2016_ZH_HToBB_ZToLL --> 3,23,98 
+Oct19v1_MC_2016_ZHToTauTau --> 6,9,8 
+
+Oct19v1_MC_2017_VHToNonbb --> 19,4,18 
+Oct19v1_MC_2017_ZH_HToBB_ZToLL --> 3,26,209 
+Oct19v1_MC_2017_ZHToTauTau --> 83,47,140 
+
+Oct19v2_MC_2018_VHToNonbb --> 19,5,19 
+Oct19v1_MC_2018_ZH_HToBB_ZToLL --> 3,38,211 
+Oct19v3_MC_2018_ZH_HToBB_ZToLL_ext1 --> 1,11,72 
+Oct19v2_MC_2018_ZHToTauTau --> 67,38,126 
+
+****
+
+TTVH - DONE SR, fake, flip
+
+Oct19v1_MC_2016_TTWH --> 179,45,128 
+Oct19v2_MC_2016_TTZH --> 124,42,87 
+
+Oct19v4_MC_2017_TTWH --> 417,101,344 
+Oct19v1_MC_2017_TTZH --> 269,78,238 
+
+Oct19v1_MC_2018_TTWH --> 410,101,316 
+Oct19v2_MC_2018_TTZH --> 236,78,220 
+
+****
+
+HH - DONE SR, fake, flip
+
+Oct19v2_MC_2016_GluGluToHHTo2B2VTo2L2Nu_node_SM --> 0,0,157 
+Oct19v2_MC_2016_GluGluToHHTo2B2VTo2L2Nu_node_box --> 0,5,153 
+Oct19v3_MC_2016_GluGluToHHTo2B2VTo2L2Nu_node_1 --> 0,0,180 
+Oct19v1_MC_2016_GluGluToHHTo2B2VTo2L2Nu_node_2 --> 0,0,1 
+Oct19v1_MC_2016_GluGluToHHTo2B2VTo2L2Nu_node_3 --> 0,2,170 
+Oct19v4_MC_2016_GluGluToHHTo2B2VTo2L2Nu_node_4 --> 1,0,152 
+Oct19v2_MC_2016_GluGluToHHTo2B2VTo2L2Nu_node_5 --> 0,0,176 
+Oct19v2_MC_2016_GluGluToHHTo2B2VTo2L2Nu_node_6 --> 0,3,130 
+Oct19v2_MC_2016_GluGluToHHTo2B2VTo2L2Nu_node_7 --> 0,3,142 
+Oct19v2_MC_2016_GluGluToHHTo2B2VTo2L2Nu_node_8 --> 0,0,168 
+Oct19v3_MC_2016_GluGluToHHTo2B2VTo2L2Nu_node_9 --> 0,2,191 
+Oct19v1_MC_2016_GluGluToHHTo2B2VTo2L2Nu_node_10 --> 0,0,129 
+Oct19v2_MC_2016_GluGluToHHTo2B2VTo2L2Nu_node_11 --> 1,2,133 
+Oct19v1_MC_2016_GluGluToHHTo2B2VTo2L2Nu_node_12 --> 0,1,120 
+Oct19v1_MC_2016_GluGluToHHTo2B2Tau_node_SM --> 3,7,16 
+Oct19v1_MC_2016_GluGluToHHTo2B2Tau_node_box --> 1,10,12 
+Oct19v1_MC_2016_GluGluToHHTo2B2Tau_node_2 --> 2,10,13 
+Oct19v2_MC_2016_GluGluToHHTo2B2Tau_node_9 --> 3,11,6 
+Oct19v1_MC_2016_GluGluToHHTo2B2Tau_node_10 --> 3,4,9 
+Oct19v1_MC_2016_GluGluToHHTo2B2Tau_node_11 --> 2,11,16 
+Oct19v1_MC_2016_GluGluToHHTo2B2Tau_node_12 --> 7,12,17 
+Oct19v3_MC_2016_GluGluToHHTo2B2Tau_node_13 --> 4,12,17 
+Oct19v1_MC_2016_GluGluToHHTo4Tau_node_SM --> 93,30,64 
+Oct19v1_MC_2016_GluGluToHHTo4Tau_node_box --> 80,28,72 
+Oct19v1_MC_2016_GluGluToHHTo4Tau_node_2 --> 125,43,117 
+Oct19v2_MC_2016_GluGluToHHTo4Tau_node_3 --> 98,23,81 
+Oct19v1_MC_2016_GluGluToHHTo4Tau_node_4 --> 90,29,66 
+Oct19v1_MC_2016_GluGluToHHTo4Tau_node_5 --> 141,40,111 
+Oct19v1_MC_2016_GluGluToHHTo4Tau_node_6 --> 79,31,67 
+Oct19v1_MC_2016_GluGluToHHTo4Tau_node_7 --> 62,20,47 
+Oct19v2_MC_2016_GluGluToHHTo4Tau_node_8 --> 102,29,86 
+Oct19v1_MC_2016_GluGluToHHTo4Tau_node_9 --> 117,32,102 
+Oct19v2_MC_2016_GluGluToHHTo4Tau_node_10 --> 49,25,45 
+Oct19v2_MC_2016_GluGluToHHTo4Tau_node_11 --> 81,20,59 
+Oct19v1_MC_2016_GluGluToHHTo4Tau_node_12 --> 51,25,45 
+
+Oct19v2_MC_2017_GluGluToHHTo2B2VTo2L2Nu_node_SM --> 1,8,170 
+Oct19v2_MC_2017_GluGluToHHTo2B2VTo2L2Nu_node_2 --> 0,2,119 
+Oct19v2_MC_2017_GluGluToHHTo2B2VTo2L2Nu_node_3 --> 1,6,142 
+Oct19v1_MC_2017_GluGluToHHTo2B2VTo2L2Nu_node_7 --> 0,9,204 
+Oct19v1_MC_2017_GluGluToHHTo2B2VTo2L2Nu_node_9 --> 2,4,206 
+Oct19v4_MC_2017_GluGluToHHTo2B2VTo2L2Nu_node_12 --> 1,0,219 
+Oct19v1_MC_2017_GluGluToHHTo2B2Tau_node_SM --> 0,7,17 
+Oct19v1_MC_2017_GluGluToHHTo2B2Tau_node_2 --> 3,14,31 
+Oct19v1_MC_2017_GluGluToHHTo2B2Tau_node_3 --> 2,11,30 
+Oct19v1_MC_2017_GluGluToHHTo2B2Tau_node_4 --> 0,16,14 
+Oct19v1_MC_2017_GluGluToHHTo2B2Tau_node_7 --> 3,10,19 
+Oct19v1_MC_2017_GluGluToHHTo2B2Tau_node_9 --> 3,13,30 
+Oct19v1_MC_2017_GluGluToHHTo2B2Tau_node_12 --> 1,17,17 
+Oct19v1_MC_2017_GluGluToHHTo4Tau_node_SM_13 --> 318,141,242 
+Oct19v1_MC_2017_GluGluToHHTo4Tau_node_2 --> 455,159,372 
+Oct19v1_MC_2017_GluGluToHHTo4Tau_node_3 --> 323,132,266 
+Oct19v2_MC_2017_GluGluToHHTo4Tau_node_7 --> 281,97,203 
+Oct19v1_MC_2017_GluGluToHHTo4Tau_node_9 --> 446,157,380 
+Oct19v1_MC_2017_GluGluToHHTo4Tau_node_12 --> 307,116,232 
+Oct19v2_MC_2017_GluGluToHHTo2V2Tau_node_SM --> 235,115,175 
+Oct19v1_MC_2017_GluGluToHHTo2V2Tau_node_2 --> 309,106,217 
+Oct19v2_MC_2017_GluGluToHHTo2V2Tau_node_3 --> 117,43,93 
+Oct19v1_MC_2017_GluGluToHHTo2V2Tau_node_4 --> 255,91,177 
+Oct19v1_MC_2017_GluGluToHHTo2V2Tau_node_5 --> 327,97,212 
+Oct19v1_MC_2017_GluGluToHHTo2V2Tau_node_6 --> 253,84,192 
+Oct19v2_MC_2017_GluGluToHHTo2V2Tau_node_7 --> 200,67,121 
+Oct19v1_MC_2017_GluGluToHHTo2V2Tau_node_8 --> 235,83,182 
+Oct19v1_MC_2017_GluGluToHHTo2V2Tau_node_9 --> 396,105,218 
+Oct19v1_MC_2017_GluGluToHHTo2V2Tau_node_10 --> 263,96,176 
+Oct19v1_MC_2017_GluGluToHHTo2V2Tau_node_11 --> 221,101,177 
+Oct19v2_MC_2017_GluGluToHHTo2V2Tau_node_12 --> 242,98,172 
+Oct19v1_MC_2017_GluGluToHHTo4V_node_SM --> 51,20,46 
+Oct19v2_MC_2017_GluGluToHHTo4V_node_2 --> 48,20,53 
+Oct19v1_MC_2017_GluGluToHHTo4V_node_3 --> 70,14,58 
+Oct19v1_MC_2017_GluGluToHHTo4V_node_4 --> 67,24,44 
+Oct19v1_MC_2017_GluGluToHHTo4V_node_5 --> 63,15,64 
+Oct19v1_MC_2017_GluGluToHHTo4V_node_6 --> 64,20,57 
+Oct19v1_MC_2017_GluGluToHHTo4V_node_7 --> 56,22,49 
+Oct19v1_MC_2017_GluGluToHHTo4V_node_8 --> 62,18,49 
+Oct19v1_MC_2017_GluGluToHHTo4V_node_9 --> 72,23,78 
+Oct19v1_MC_2017_GluGluToHHTo4V_node_10 --> 48,18,59 
+Oct19v2_MC_2017_GluGluToHHTo4V_node_11 --> 70,22,75 
+Oct19v2_MC_2017_GluGluToHHTo4V_node_12 --> 55,22,62 
+
+Oct19v2_MC_2018_GluGluToHHTo2B2Tau_node_SM --> 4,10,12 
+Oct19v1_MC_2018_GluGluToHHTo2B2Tau_node_2 --> 1,17,21 
+Oct19v2_MC_2018_GluGluToHHTo2B2Tau_node_3 --> 1,7,12 
+Oct19v1_MC_2018_GluGluToHHTo2B2Tau_node_4 --> 1,13,17 
+Oct19v1_MC_2018_GluGluToHHTo2B2Tau_node_5 --> 0,13,15 
+Oct19v1_MC_2018_GluGluToHHTo2B2Tau_node_6 --> 2,12,15 
+Oct19v2_MC_2018_GluGluToHHTo2B2Tau_node_7 --> 2,11,12 
+Oct19v3_MC_2018_GluGluToHHTo2B2Tau_node_8 --> 2,4,16 
+Oct19v2_MC_2018_GluGluToHHTo2B2Tau_node_9 --> 0,9,25 
+Oct19v2_MC_2018_GluGluToHHTo2B2Tau_node_10 --> 3,9,10 
+Oct19v3_MC_2018_GluGluToHHTo2B2Tau_node_11 --> 1,13,16 
+Oct19v2_MC_2018_GluGluToHHTo2B2Tau_node_12 --> 3,11,16 
+
+
+Extra  - DONE SR, fake, flip
+
+Oct19v1_MC_2016_WGToLNuG_01J --> 2,0,1
+Oct19v1_MC_2017_WGToLNuG_01J --> 1,0,2
+Oct19v1_MC_2018_WGToLNuG_01J --> 0,2,2
+
+
+*** DATA ****
+
+// 2016  - DONE SR, fake, flip
+
+Oct19v1_Data_2016_SingleElectron_BlockB --> 5,15,273
+Oct19v1_Data_2016_SingleElectron_BlockC --> 3,9,105
+Oct19v1_Data_2016_SingleElectron_BlockD --> 5,13,158
+Oct19v1_Data_2016_SingleElectron_BlockE --> 12,18,395
+Oct19v1_Data_2016_SingleElectron_BlockF --> 1,5,112
+Oct19v1_Data_2016_SingleElectron_BlockG --> 2,15,291
+Oct19v1_Data_2016_SingleElectron_BlockH --> 10,23,298
+
+Oct19v1_Data_2016_SingleMuon_BlockB --> 5,22,187
+Oct19v1_Data_2016_SingleMuon_BlockC --> 3,11,71
+Oct19v1_Data_2016_SingleMuon_BlockD --> 8,25,109
+Oct19v1_Data_2016_SingleMuon_BlockE --> 9,10,108
+Oct19v1_Data_2016_SingleMuon_BlockF --> 3,10,92
+Oct19v1_Data_2016_SingleMuon_BlockG --> 12,20,186
+Oct19v1_Data_2016_SingleMuon_BlockH --> 17,26,194
+
+Oct19v1_Data_2016_DoubleEG_BlockB --> 6,11,201
+Oct19v1_Data_2016_DoubleEG_BlockC --> 1,3,70
+Oct19v1_Data_2016_DoubleEG_BlockD --> 4,2,80
+Oct19v1_Data_2016_DoubleEG_BlockE --> 4,8,62
+Oct19v1_Data_2016_DoubleEG_BlockF --> 1,2,45
+Oct19v1_Data_2016_DoubleEG_BlockG --> 1,6,130
+Oct19v1_Data_2016_DoubleEG_BlockH --> 5,12,154
+
+Oct19v1_Data_2016_DoubleMu_BlockB --> 4,13,53
+Oct19v1_Data_2016_DoubleMu_BlockC --> 2,7,22
+Oct19v1_Data_2016_DoubleMu_BlockD --> 3,13,38
+Oct19v1_Data_2016_DoubleMu_BlockE --> 3,12,22
+Oct19v1_Data_2016_DoubleMu_BlockF --> 3,10,25
+Oct19v1_Data_2016_DoubleMu_BlockG --> 9,15,53
+Oct19v1_Data_2016_DoubleMu_BlockH --> 7,12,59
+
+Oct19v1_Data_2016_MuonEG_BlockB --> 3,19,200
+Oct19v1_Data_2016_MuonEG_BlockC --> 3,8,74
+Oct19v1_Data_2016_MuonEG_BlockD --> 5,15,123
+Oct19v1_Data_2016_MuonEG_BlockE --> 6,13,121
+Oct19v1_Data_2016_MuonEG_BlockF --> 1,11,93
+Oct19v1_Data_2016_MuonEG_BlockG --> 5,17,252
+Oct19v1_Data_2016_MuonEG_BlockH --> 13,24,220
+
+// 2017  - DONE SR, fake, flip
+
+Oct19v1_Data_2017_SingleElectron_BlockB --> 9,9,195
+Oct19v1_Data_2017_SingleElectron_BlockC --> 10,25,485
+Oct19v1_Data_2017_SingleElectron_BlockD --> 6,10,211
+Oct19v1_Data_2017_SingleElectron_BlockE --> 13,21,420
+Oct19v1_Data_2017_SingleElectron_BlockF --> 10,21,531
+
+Oct19v1_Data_2017_SingleMuon_BlockB --> 8,16,130
+Oct19v1_Data_2017_SingleMuon_BlockC --> 13,29,339
+Oct19v1_Data_2017_SingleMuon_BlockD --> 12,14,133
+Oct19v1_Data_2017_SingleMuon_BlockE --> 12,24,266
+Oct19v1_Data_2017_SingleMuon_BlockF --> 18,42,355
+
+Oct19v1_Data_2017_DoubleEG_BlockB --> 5,6,104
+Oct19v1_Data_2017_DoubleEG_BlockC --> 8,7,266
+Oct19v1_Data_2017_DoubleEG_BlockD --> 3,4,113
+Oct19v1_Data_2017_DoubleEG_BlockE --> 6,13,216
+Oct19v1_Data_2017_DoubleEG_BlockF --> 7,8,300
+
+Oct19v1_Data_2017_DoubleMu_BlockB --> 3,10,15
+Oct19v1_Data_2017_DoubleMu_BlockC --> 11,19,74
+Oct19v1_Data_2017_DoubleMu_BlockD --> 6,8,30
+Oct19v1_Data_2017_DoubleMu_BlockE --> 7,15,60
+Oct19v1_Data_2017_DoubleMu_BlockF --> 13,26,83
+
+Oct19v1_Data_2017_MuonEG_BlockB --> 6,12,144
+Oct19v1_Data_2017_MuonEG_BlockC --> 15,37,402
+Oct19v1_Data_2017_MuonEG_BlockD --> 9,10,157
+Oct19v1_Data_2017_MuonEG_BlockE --> 12,15,296
+Oct19v1_Data_2017_MuonEG_BlockF --> 11,31,416
+
+// 2018  - DONE SR, fake, flip
+
+Oct19v1_Data_2018_EGamma_BlockA --> 14,33,673
+Oct19v1_Data_2018_EGamma_BlockB --> 8,14,405
+Oct19v1_Data_2018_EGamma_BlockC --> 12,15,316
+Oct19v1_Data_2018_EGamma_BlockD --> 34,71,1355
+
+Oct19v1_Data_2018_SingleMuon_BlockA --> 23,39,439
+Oct19v1_Data_2018_SingleMuon_BlockB --> 11,26,231
+Oct19v1_Data_2018_SingleMuon_BlockC --> 16,21,225
+Oct19v1_Data_2018_SingleMuon_BlockD --> 56,110,888
+
+Oct19v1_Data_2018_DoubleMu_BlockA --> 17,29,111
+Oct19v1_Data_2018_DoubleMu_BlockB --> 9,14,56
+Oct19v1_Data_2018_DoubleMu_BlockC --> 7,12,51
+Oct19v1_Data_2018_DoubleMu_BlockD --> 32,72,179
+
+Oct19v1_Data_2018_MuonEG_BlockA --> 16,35,502
+Oct19v1_Data_2018_MuonEG_BlockB --> 11,22,266
+Oct19v1_Data_2018_MuonEG_BlockC --> 14,22,240
+Oct19v1_Data_2018_MuonEG_BlockD --> 40,95,1031
