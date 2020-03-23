@@ -6571,7 +6571,7 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
 
 	TString name_MC_fakes = "MC_fakes";
 	histo_MC_fakes->SetNameTitle(name_MC_fakes,name_MC_fakes);
-	histo_MC_fakes->Write();
+	//histo_MC_fakes->Write();
 
 	///////////////////////////////////////////////////////
 
@@ -6605,159 +6605,20 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
 
     cout<<"OK nominal"<<endl;
 
-    /*if(!syst){
+    if(!syst){
       f_new->Close();
       return;
-    }*/
+    }
 
 
     ////////////////////////////////
     ////       SYSTEMATICS       ///
     ////////////////////////////////
 
-    /////////////
-    //// JEC ////
-    /////////////
-
-    // CHECKED
-
-    cout<<" "<<endl;
-    cout<<"------ JEC SYST ------"<<endl;
-
-    // MC JEC normalization files
-
-	vector<float> norm_MC_JEC;
-	norm_MC_JEC.clear();
-
-	for(unsigned i_MC=0;i_MC<samplename_MC.size();i_MC++){
-
-		TString MC_weight = "MC_weight";
-
-		if( sampletag_MC[i_MC] == "tHQ" || sampletag_MC[i_MC] == "tHW") 
-			MC_weight = "(MC_weights_rwgt[11]/MC_weight_originalXWGTUP)*sign(MC_weight)";
-
-		TString treename = "Tree";
-
-		if ( sampletag_MC[i_MC]=="tHQhzz" || sampletag_MC[i_MC]=="tHQhww" || sampletag_MC[i_MC]=="tHQhtt" || sampletag_MC[i_MC]=="tHWhzz" || sampletag_MC[i_MC]=="tHWhww" || sampletag_MC[i_MC]=="tHWhtt" || sampletag_MC[i_MC]=="ttbarDL" || sampletag_MC[i_MC]=="ttbarSLfromT" || sampletag_MC[i_MC]=="ttbarSLfromTbar" )
-			treename = "HTauTauTree";
-
-		if ( year==2016 && (sampletag_MC[i_MC]=="ttHhzz" || sampletag_MC[i_MC]=="ttHhww" || sampletag_MC[i_MC]=="ttHhtt" || sampletag_MC[i_MC]=="ttZ" || sampletag_MC[i_MC]=="ttW" || sampletag_MC[i_MC]=="ZG") )
-			treename = "HTauTauTree";
-
-		else if ( year==2017 && (sampletag_MC[i_MC]=="WG" || sampletag_MC[i_MC]=="ZG") )
-			treename = "HTauTauTree";
-
-		else if ( year==2018 && (sampletag_MC[i_MC]=="ttHhzz" || sampletag_MC[i_MC]=="ttHhww" || sampletag_MC[i_MC]=="ttHhtt" || sampletag_MC[i_MC]=="WZ" || sampletag_MC[i_MC]=="ZZ" || sampletag_MC[i_MC]=="WG" || sampletag_MC[i_MC]=="ZG" || sampletag_MC[i_MC]=="tG" || sampletag_MC[i_MC]=="ttG") )
-			treename = "HTauTauTree";
-
-		TH1F* h_MC_norm_JEC = single_plot(filename_norm_JEC_MC[i_MC],
-			treename,
-			"1",
-			MC_weight+"*PU_weight_v1",
-			3,0,3);
-
-		norm_MC_JEC.push_back(h_MC_norm_JEC->Integral());
-
-	}  
-
-	///////////////////////////////////////////////////////
-
-	for(unsigned i_MC=0;i_MC<samplename_MC.size();i_MC++){
-
-		TString MC_weight = "MC_weight";
-
-		if( sampletag_MC[i_MC] == "tHQ" || sampletag_MC[i_MC] == "tHW") 
-			MC_weight = "(MC_weights_rwgt[11]/MC_weight_originalXWGTUP)";
-
-		////////////////////////////////////////////////////////////////////////////
-
-		TH1F* h_MC_JECup = single_plot(MC_filename_JECup[i_MC],
-			"HTauTauTree_2lss1tau_SR", 
-			var,
-			MC_weight+"*PU_weight_v1*prefire_weight*trigger_weight_v1*leptonID_weight_v1*bTagSF_CSVshape_weight*tauID_weight_v3*tauES_weight_v1*("+samplecut_MC[i_MC]+" && "+cut_cat+")",
-            nbin,xmin,xmax);
-
-		h_MC_JECup->Scale(lumin*XS_MC[i_MC]/norm_MC_JEC[i_MC]);
-		h_MC_JECup->SetNameTitle("x_JECup_"+sampletag_MC[i_MC],"x_JECup_"+sampletag_MC[i_MC]);
-		makeBinContentsPositive(h_MC_JECup,false);
-		//h_MC_JECup->Write();
-
-		TH1F* h_MC_JECdown = single_plot(MC_filename_JECdown[i_MC],
-			"HTauTauTree_2lss1tau_SR", 
-			var,
-			MC_weight+"*PU_weight_v1*prefire_weight*trigger_weight_v1*leptonID_weight_v1*bTagSF_CSVshape_weight*tauID_weight_v3*tauES_weight_v1*("+samplecut_MC[i_MC]+" && "+cut_cat+")",
-            nbin,xmin,xmax);
-
-		h_MC_JECdown->Scale(lumin*XS_MC[i_MC]/norm_MC_JEC[i_MC]);
-		h_MC_JECdown->SetNameTitle("x_JECdown_"+sampletag_MC[i_MC],"x_JECdown_"+sampletag_MC[i_MC]);
-		makeBinContentsPositive(h_MC_JECdown,false);
-		//h_MC_JECdown->Write();
-
-	}
-
-	///////////////////////////////////////////////////////
-
-	for (unsigned i_group=0;i_group<group_names.size();i_group++){
-		
-		TH1F* histo_JECup;
-		TH1F* histo_JECdown;
-
-		int counts = 0;
-
-		for(unsigned i_MC=0;i_MC<samplename_MC.size();i_MC++){
-
-			if( samplegroup_MC[i_MC] == group_names[i_group] ){
-
-				if (counts==0) histo_JECup = (TH1F*)f_new->Get(cat_name+"/x_JECup_"+sampletag_MC[i_MC]);
-				else histo_JECup->Add( (TH1F*)f_new->Get(cat_name+"/x_JECup_"+sampletag_MC[i_MC]) );
-
-				if (counts==0) histo_JECdown = (TH1F*)f_new->Get(cat_name+"/x_JECdown_"+sampletag_MC[i_MC]);
-				else histo_JECdown->Add( (TH1F*)f_new->Get(cat_name+"/x_JECdown_"+sampletag_MC[i_MC]) );
-
-				counts++;
-
-			}
-
-		}
-
-		TH1F* histo_JECnominal = (TH1F*)f_new->Get(cat_name+"/"+group_names[i_group]);
-
-		TString histonameup = group_names[i_group]+"_CMS_scale_jUp";
-		histo_JECup->SetNameTitle(histonameup,histonameup);
-		
-		TString histonamedown = group_names[i_group]+"_CMS_scale_jDown";
-		histo_JECdown->SetNameTitle(histonamedown,histonamedown);
-
-		float central = (histo_JECup->Integral()+histo_JECdown->Integral())/2;
-		float nominal = histo_JECnominal->Integral();
-
-		if (central!=0) {
-			histo_JECup->Scale(nominal/central);
-			histo_JECdown->Scale(nominal/central);
-		}
-
-		histo_JECup->Write();
-		histo_JECdown->Write();
-
-	}
-
-	TH1F* histo_convs_JECup = (TH1F*)f_new->Get(cat_name+"/Convs");
-	histo_convs_JECup->Scale(1.006);
-	histo_convs_JECup->SetNameTitle("Convs_CMS_scale_jUp","Convs_CMS_scale_jUp");
-	histo_convs_JECup->Write();
-
-	TH1F* histo_convs_JECdown = (TH1F*)f_new->Get(cat_name+"/Convs");
-	histo_convs_JECdown->Scale(0.994);
-	histo_convs_JECdown->SetNameTitle("Convs_CMS_scale_jDown","Convs+CMS_scale_jDown");
-	histo_convs_JECdown->Write();
-
-
     ////////////////
     //// THEORY ////
     ////////////////
 
-    // CHECKED
-    /*
     cout<<" "<<endl;
     cout<<"------ THEORY SYST ------"<<endl;
 
@@ -6955,8 +6816,6 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
     //// B-TAG ////
     ///////////////
 
-    // CHECKED
-
     cout<<" "<<endl;
     cout<<"------ B-TAG SYST ------"<<endl;
 
@@ -7144,11 +7003,10 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
 
     cout<<"OK b-tag syst"<<endl;
 
+
     ////////////////////
     ////// TRIGGER /////
     ////////////////////
-
-    // CHECKED
 
     cout<<" "<<endl;
     cout<<"------ TRIGGER SYST ------"<<endl;
@@ -7525,8 +7383,6 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
     ////// PREFIRE /////
     //////////////////// 
 
-    // CHECKED
-
     if(year==2016 || year==2017){
 
       cout<<" "<<endl;
@@ -7671,11 +7527,10 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
 
 	}
 
-	//////////////////////
-	////// PILEUP ////////
-	//////////////////////
 
-    // CHECKED
+	/////////////////////
+	////// PILEUP ///////
+	/////////////////////
 
 	cout<<" "<<endl;
     cout<<"------ PILEUP SYST ------"<<endl;
@@ -7817,11 +7672,10 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
 
     cout<<"OK pileup syst"<<endl;
 
+
     //////////////////////
     ////// LEPTON ID /////
     //////////////////////
-
-    // CHECKED
 	
     cout<<" "<<endl;
     cout<<"------ LEPTON ID SYST ------"<<endl;
@@ -8041,7 +7895,6 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
 
     }
 
-
 	for (unsigned i_group=0;i_group<group_names.size();i_group++){
 
 		//TH1F* histo_up;
@@ -8253,8 +8106,6 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
     ////// TAU ID //////
     ////////////////////
 
-    // CHECKED
-
     cout<<" "<<endl;
     cout<<"------ TAU ID SYST ------"<<endl;
 
@@ -8395,11 +8246,10 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
 
     cout<<"OK tau ID syst"<<endl;
 
+
     ////////////////////
     ////// TAU ES //////
     ////////////////////
-
-    // CHECKED
 
     cout<<" "<<endl;
     cout<<"------ TAU ES SYST ------"<<endl;
@@ -8541,11 +8391,145 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
 
     cout<<"OK tau ES syst"<<endl;
 
+
+    /////////////
+    //// JEC ////
+    /////////////
+
+    cout<<" "<<endl;
+    cout<<"------ JEC SYST ------"<<endl;
+
+	vector<float> norm_MC_JEC;
+	norm_MC_JEC.clear();
+
+	for(unsigned i_MC=0;i_MC<samplename_MC.size();i_MC++){
+
+		TString MC_weight = "MC_weight";
+
+		if( sampletag_MC[i_MC] == "tHQ" || sampletag_MC[i_MC] == "tHW") 
+			MC_weight = "(MC_weights_rwgt[11]/MC_weight_originalXWGTUP)*sign(MC_weight)";
+
+		TString treename = "Tree";
+
+		if ( sampletag_MC[i_MC]=="tHQhzz" || sampletag_MC[i_MC]=="tHQhww" || sampletag_MC[i_MC]=="tHQhtt" || sampletag_MC[i_MC]=="tHWhzz" || sampletag_MC[i_MC]=="tHWhww" || sampletag_MC[i_MC]=="tHWhtt" || sampletag_MC[i_MC]=="ttbarDL" || sampletag_MC[i_MC]=="ttbarSLfromT" || sampletag_MC[i_MC]=="ttbarSLfromTbar" )
+			treename = "HTauTauTree";
+
+		if ( year==2016 && (sampletag_MC[i_MC]=="ttHhzz" || sampletag_MC[i_MC]=="ttHhww" || sampletag_MC[i_MC]=="ttHhtt" || sampletag_MC[i_MC]=="ttZ" || sampletag_MC[i_MC]=="ttW" || sampletag_MC[i_MC]=="ZG") )
+			treename = "HTauTauTree";
+
+		else if ( year==2017 && (sampletag_MC[i_MC]=="WG" || sampletag_MC[i_MC]=="ZG") )
+			treename = "HTauTauTree";
+
+		else if ( year==2018 && (sampletag_MC[i_MC]=="ttHhzz" || sampletag_MC[i_MC]=="ttHhww" || sampletag_MC[i_MC]=="ttHhtt" || sampletag_MC[i_MC]=="WZ" || sampletag_MC[i_MC]=="ZZ" || sampletag_MC[i_MC]=="WG" || sampletag_MC[i_MC]=="ZG" || sampletag_MC[i_MC]=="tG" || sampletag_MC[i_MC]=="ttG") )
+			treename = "HTauTauTree";
+
+		TH1F* h_MC_norm_JEC = single_plot(filename_norm_JEC_MC[i_MC],
+			treename,
+			"1",
+			MC_weight+"*PU_weight_v1",
+			3,0,3);
+
+		norm_MC_JEC.push_back(h_MC_norm_JEC->Integral());
+
+	}  
+
+	///////////////////////////////////////////////////////
+
+	for(unsigned i_MC=0;i_MC<samplename_MC.size();i_MC++){
+
+		TString MC_weight = "MC_weight";
+
+		if( sampletag_MC[i_MC] == "tHQ" || sampletag_MC[i_MC] == "tHW") 
+			MC_weight = "(MC_weights_rwgt[11]/MC_weight_originalXWGTUP)";
+
+		////////////////////////////////////////////////////////////////////////////
+
+		TH1F* h_MC_JECup = single_plot(MC_filename_JECup[i_MC],
+			"HTauTauTree_2lss1tau_SR", 
+			var,
+			MC_weight+"*PU_weight_v1*prefire_weight*trigger_weight_v1*leptonID_weight_v1*bTagSF_CSVshape_weight*tauID_weight_v3*tauES_weight_v1*("+samplecut_MC[i_MC]+" && "+cut_cat+")",
+            nbin,xmin,xmax);
+
+		h_MC_JECup->Scale(lumin*XS_MC[i_MC]/norm_MC_JEC[i_MC]);
+		h_MC_JECup->SetNameTitle("x_JECup_"+sampletag_MC[i_MC],"x_JECup_"+sampletag_MC[i_MC]);
+		makeBinContentsPositive(h_MC_JECup,false);
+		//h_MC_JECup->Write();
+
+		TH1F* h_MC_JECdown = single_plot(MC_filename_JECdown[i_MC],
+			"HTauTauTree_2lss1tau_SR", 
+			var,
+			MC_weight+"*PU_weight_v1*prefire_weight*trigger_weight_v1*leptonID_weight_v1*bTagSF_CSVshape_weight*tauID_weight_v3*tauES_weight_v1*("+samplecut_MC[i_MC]+" && "+cut_cat+")",
+            nbin,xmin,xmax);
+
+		h_MC_JECdown->Scale(lumin*XS_MC[i_MC]/norm_MC_JEC[i_MC]);
+		h_MC_JECdown->SetNameTitle("x_JECdown_"+sampletag_MC[i_MC],"x_JECdown_"+sampletag_MC[i_MC]);
+		makeBinContentsPositive(h_MC_JECdown,false);
+		//h_MC_JECdown->Write();
+
+	}
+
+	///////////////////////////////////////////////////////
+
+	for (unsigned i_group=0;i_group<group_names.size();i_group++){
+		
+		TH1F* histo_JECup;
+		TH1F* histo_JECdown;
+
+		int counts = 0;
+
+		for(unsigned i_MC=0;i_MC<samplename_MC.size();i_MC++){
+
+			if( samplegroup_MC[i_MC] == group_names[i_group] ){
+
+				if (counts==0) histo_JECup = (TH1F*)f_new->Get(cat_name+"/x_JECup_"+sampletag_MC[i_MC]);
+				else histo_JECup->Add( (TH1F*)f_new->Get(cat_name+"/x_JECup_"+sampletag_MC[i_MC]) );
+
+				if (counts==0) histo_JECdown = (TH1F*)f_new->Get(cat_name+"/x_JECdown_"+sampletag_MC[i_MC]);
+				else histo_JECdown->Add( (TH1F*)f_new->Get(cat_name+"/x_JECdown_"+sampletag_MC[i_MC]) );
+
+				counts++;
+
+			}
+
+		}
+
+		TH1F* histo_JECnominal = (TH1F*)f_new->Get(cat_name+"/"+group_names[i_group]);
+
+		TString histonameup = group_names[i_group]+"_CMS_scale_jUp";
+		histo_JECup->SetNameTitle(histonameup,histonameup);
+		
+		TString histonamedown = group_names[i_group]+"_CMS_scale_jDown";
+		histo_JECdown->SetNameTitle(histonamedown,histonamedown);
+
+		float central = (histo_JECup->Integral()+histo_JECdown->Integral())/2;
+		float nominal = histo_JECnominal->Integral();
+
+		if (central!=0) {
+			histo_JECup->Scale(nominal/central);
+			histo_JECdown->Scale(nominal/central);
+		}
+
+		histo_JECup->Write();
+		histo_JECdown->Write();
+
+	}
+
+	TH1F* histo_convs_JECup = (TH1F*)f_new->Get(cat_name+"/Convs");
+	histo_convs_JECup->Scale(1.006);
+	histo_convs_JECup->SetNameTitle("Convs_CMS_scale_jUp","Convs_CMS_scale_jUp");
+	histo_convs_JECup->Write();
+
+	TH1F* histo_convs_JECdown = (TH1F*)f_new->Get(cat_name+"/Convs");
+	histo_convs_JECdown->Scale(0.994);
+	histo_convs_JECdown->SetNameTitle("Convs_CMS_scale_jDown","Convs+CMS_scale_jDown");
+	histo_convs_JECdown->Write();
+
+	cout<<"OK JEC syst"<<endl;
+
+
     /////////////////////////
     //// JET-TO-TAU FR 1 ////
     /////////////////////////
-
-    // CHECKED
 
     cout<<" "<<endl;
     cout<<"------ JET->TAU FR SYST ------"<<endl;
@@ -8717,8 +8701,6 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
     /////////////////////////
     //// JET-TO-TAU FR 2 ////
     /////////////////////////
-
-    // CHECKED
 
     cout<<" "<<endl;
     cout<<"------ JET->TAU MC FR SYST ------"<<endl;
@@ -8921,11 +8903,10 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
 
     cout<<"OK jet->tau FR MC syst"<<endl;
 
+
 	//////////////////////////
     //// JET-TO-LEPTON FR ////
     //////////////////////////
-
-    // CHECKED
 
     cout<<" "<<endl;
     cout<<"------ JET->LEP FR SYST ------"<<endl;
@@ -9015,8 +8996,6 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
     //// FAKE LEPTON CLOSURE ///
     ////////////////////////////
 
-    // CHECKED
-
     cout<<" "<<endl;
     cout<<"------ JET->LEP CLOSURE SYST ------"<<endl;
 
@@ -9096,8 +9075,6 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
     //// EWK JET  ///
     /////////////////
 
-    // CHECKED
-
     cout<<" "<<endl;
     cout<<"------ EWK JET SYST ------"<<endl;
 
@@ -9147,7 +9124,6 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
 	}
 
 	cout<<"OK EWK jet syst"<<endl;
-	*/
 
     ///////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////
@@ -9170,7 +9146,7 @@ void datacard_maker_n_recotauh(int year = 2016){
   	TString cut = "((recotauh_decayMode[0]!=5) && (recotauh_decayMode[0]!=6) && (recotauh_byVVVLooseDeepTau2017v2p1VSe[0]) && (recotauh_byVLooseDeepTau2017v2p1VSmu[0]) )";
   	TString file = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/datacards/2lss_1tau/datacard_nrecotauh_2lss1tau_"+s_year+".root";
 	
-  	datacard_maker(var,nbin,xmin,xmax,cut,file,false,year);
+  	datacard_maker(var,nbin,xmin,xmax,cut,file,true,year);
 
 }
 
@@ -9187,7 +9163,7 @@ void datacard_maker_MEM_nomiss(int year = 2016){
   	TString cut = "integration_type==0 && ((recotauh_decayMode[0]!=5) && (recotauh_decayMode[0]!=6) && (recotauh_byVVVLooseDeepTau2017v2p1VSe[0]) && (recotauh_byVLooseDeepTau2017v2p1VSmu[0]) )";
   	TString file = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/datacards/2lss_1tau/datacard_MEM_nomiss_2lss1tau_"+s_year+".root";
 	
-  	datacard_maker(var,nbin,xmin,xmax,cut,file,false,year);
+  	datacard_maker(var,nbin,xmin,xmax,cut,file,true,year);
 
 }
 
@@ -9204,7 +9180,7 @@ void datacard_maker_MEM_miss(int year = 2016){
   	TString cut = "integration_type==1 && ((recotauh_decayMode[0]!=5) && (recotauh_decayMode[0]!=6) && (recotauh_byVVVLooseDeepTau2017v2p1VSe[0]) && (recotauh_byVLooseDeepTau2017v2p1VSmu[0]) )";
   	TString file = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/datacards/2lss_1tau/datacard_MEM_miss_2lss1tau_"+s_year+".root";
 	
-  	datacard_maker(var,nbin,xmin,xmax,cut,file,false,year);
+  	datacard_maker(var,nbin,xmin,xmax,cut,file,true,year);
 
 }
 
@@ -9221,7 +9197,7 @@ void datacard_maker_MEM_others(int year = 2016){
   	TString cut = "integration_type==-1 && ((recotauh_decayMode[0]!=5) && (recotauh_decayMode[0]!=6) && (recotauh_byVVVLooseDeepTau2017v2p1VSe[0]) && (recotauh_byVLooseDeepTau2017v2p1VSmu[0]) )";
   	TString file = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/datacards/2lss_1tau/datacard_MEM_others_2lss1tau_"+s_year+".root";
 	
-  	datacard_maker(var,nbin,xmin,xmax,cut,file,false,year);
+  	datacard_maker(var,nbin,xmin,xmax,cut,file,true,year);
 
 }
 
