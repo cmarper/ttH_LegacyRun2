@@ -63,8 +63,10 @@ void plot_2lSS1tau(vector<TString> datacards, vector<TString> dirs, TString varn
   h_Rares.SetLineColor(kBlack);
 
   TH1F h_EWK = h_Rares;
-  TH1F EWK = h_from_cards_dir(datacards,dirs,"EWK");
-  h_EWK.Add( &EWK );
+  TH1F WZ = h_from_cards_dir(datacards,dirs,"WZ");
+  TH1F ZZ = h_from_cards_dir(datacards,dirs,"ZZ");
+  h_EWK.Add( &WZ );
+  h_EWK.Add( &ZZ );
   h_EWK.SetFillColor(kViolet-4);
   h_EWK.SetLineColor(kBlack);
 
@@ -76,33 +78,50 @@ void plot_2lSS1tau(vector<TString> datacards, vector<TString> dirs, TString varn
 
   TH1F h_ttW = h_ttZ;
   TH1F TTW = h_from_cards_dir(datacards,dirs,"TTW");
+  TH1F TTWW = h_from_cards_dir(datacards,dirs,"TTWW");
   h_ttW.Add( &TTW );
+  h_ttW.Add( &TTWW );
   h_ttW.SetFillColor(kGreen-5);
   h_ttW.SetLineColor(kBlack);
 
   TH1F h_Higgs = h_ttW;
-  TH1F Higgs = h_from_cards_dir(datacards,dirs,"VH");
-  TH1F ttVH = h_from_cards_dir(datacards,dirs,"TTVH");
+  TH1F VH = h_from_cards_dir(datacards,dirs,"VH");
+  TH1F ttVH = h_from_cards_dir(datacards,dirs,"ttVH");
   TH1F VBF = h_from_cards_dir(datacards,dirs,"VBF");
   TH1F ggH = h_from_cards_dir(datacards,dirs,"ggH");
   TH1F HH = h_from_cards_dir(datacards,dirs,"HH");
-  Higgs.Add(&ttVH);
-  Higgs.Add(&VBF);
-  Higgs.Add(&ggH);
-  Higgs.Add(&HH);
-  h_Higgs.Add( &Higgs );
+  h_Higgs.Add(&VH);
+  h_Higgs.Add(&ttVH);
+  h_Higgs.Add(&VBF);
+  h_Higgs.Add(&ggH);
+  h_Higgs.Add(&HH);
   h_Higgs.SetFillColor(kBlue);
   h_Higgs.SetLineColor(kBlack);
 
   TH1F h_tH = h_Higgs;
-  TH1F tH = h_from_cards_dir(datacards,dirs,"TH");
-  h_tH.Add( &tH );
+  //TH1F h_tH = h_ttW;
+  TH1F tHQww = h_from_cards_dir(datacards,dirs,"tHq_hww");
+  TH1F tHQzz = h_from_cards_dir(datacards,dirs,"tHq_hzz");
+  TH1F tHQtt = h_from_cards_dir(datacards,dirs,"tHq_htt");
+  TH1F tHWww = h_from_cards_dir(datacards,dirs,"tHW_hww");
+  TH1F tHWzz = h_from_cards_dir(datacards,dirs,"tHW_hzz");
+  TH1F tHWtt = h_from_cards_dir(datacards,dirs,"tHW_htt");
+  h_tH.Add( &tHQww );
+  h_tH.Add( &tHQzz );
+  h_tH.Add( &tHQtt );
+  h_tH.Add( &tHWww );
+  h_tH.Add( &tHWzz );
+  h_tH.Add( &tHWtt );
   h_tH.SetFillColor(kRed-3);
   h_tH.SetLineColor(kBlack);
 
   TH1F h_ttH = h_tH;
-  TH1F ttH = h_from_cards_dir(datacards,dirs,"TTH");
-  h_ttH.Add( &ttH );
+  TH1F ttHww = h_from_cards_dir(datacards,dirs,"ttH_hww");
+  TH1F ttHzz = h_from_cards_dir(datacards,dirs,"ttH_hzz");
+  TH1F ttHtt = h_from_cards_dir(datacards,dirs,"ttH_htt");
+  h_ttH.Add( &ttHww );
+  h_ttH.Add( &ttHzz );
+  h_ttH.Add( &ttHtt );
   h_ttH.SetFillColor(kOrange+10);
   h_ttH.SetLineColor(kBlack);
 
@@ -117,7 +136,7 @@ void plot_2lSS1tau(vector<TString> datacards, vector<TString> dirs, TString varn
   h_data_obs.SetMarkerStyle(20);
 
   double error=0;
-  cout<<"Pre-fit Yields"<<endl;
+  /*cout<<"Pre-fit Yields"<<endl;
   TH1F bkg = TTZ;
   bkg.Add(&TTW);
   bkg.Add(&TTZ);
@@ -155,7 +174,7 @@ void plot_2lSS1tau(vector<TString> datacards, vector<TString> dirs, TString varn
   cout<<" +/- "<<error<<endl;
   cout<<"SM expectation : "<<SM.IntegralAndError(0,nbins,error);
   cout<<" +/- "<<error<<endl;
-  if(unblind) cout<<"Data obs : "<<h_data_obs.IntegralAndError(0,nbins,error)<<endl;
+  if(unblind) cout<<"Data obs : "<<h_data_obs.IntegralAndError(0,nbins,error)<<endl;*/
 
   TLegend* leg1=new TLegend(0.2,0.67,0.4,0.87);
   leg1->SetBorderSize(0);
@@ -170,7 +189,7 @@ void plot_2lSS1tau(vector<TString> datacards, vector<TString> dirs, TString varn
   leg2->SetBorderSize(0);
   leg2->SetTextSize(0.045);
   leg2->SetFillStyle(0); 
-  leg2->AddEntry(&h_ttW,"ttW","f");
+  leg2->AddEntry(&h_ttW,"ttW(W)","f");
   leg2->AddEntry(&h_ttZ,"ttZ","f");
   leg2->AddEntry(&h_EWK,"EWK","f");
   leg2->AddEntry(&h_Rares,"Rares","f");
@@ -194,9 +213,9 @@ void plot_2lSS1tau(vector<TString> datacards, vector<TString> dirs, TString varn
 
   TPad *pad1 = new TPad("pad1", "pad1", 0, 0.3, 1, 1.0);
   pad1->SetLeftMargin(0.15);
-  pad1->SetBottomMargin(0); // Upper and lower plot are joined
-  pad1->Draw();             // Draw the upper pad: pad1
-  pad1->cd();               // pad1 becomes the current pad
+  pad1->SetBottomMargin(0);
+  pad1->Draw();
+  pad1->cd();
   gPad->SetTicks();
 
   h_ttH.SetMaximum(1.2*max(h_data_obs.GetMaximum(),h_ttH.GetMaximum()));
@@ -245,54 +264,52 @@ void plot_2lSS1tau(vector<TString> datacards, vector<TString> dirs, TString varn
   axis->SetLabelSize(20);
   axis->Draw();
 
-  // lower plot will be in pad
-  c->cd();          // Go back to the main canvas before defining pad2
+  c->cd(); 
   TPad *pad2 = new TPad("pad2", "pad2", 0, 0.05, 1, 0.3);
   
-  //Convert absolute range
   double a = (h_data_obs.GetBinLowEdge(h_data_obs.GetNbinsX()+1)-h_ttH.GetBinLowEdge(1))/(0.9-0.15);
   double b = h_ttH.GetBinLowEdge(1)-a*0.15;
 
-  //pad2->Range(b,-0.3*2/0.7,a+b,2.);
   pad2->SetLeftMargin(0.15);
   pad2->SetTopMargin(0);
   pad2->SetBottomMargin(0.35);
   pad2->Draw();
-  pad2->cd();       // pad2 becomes the current pad
+  pad2->cd(); 
   gStyle->SetEndErrorSize(0);
   gPad->SetTicks();
 
-  // Define the ratio plot
   TGraphAsymmErrors *h_ratio=new TGraphAsymmErrors();
   h_ratio->Divide(&h_data_obs,&h_ttH,"pois");
 
   //h_ratio->SetLineColor(kBlack);
   h_ratio->SetLineColor(kWhite);
-  h_ratio->SetMinimum(0.);  // Define Y ..
-  h_ratio->SetMaximum(2.); // .. range
+  h_ratio->SetMinimum(0.);
+  h_ratio->SetMaximum(2.);
   if(unblind) h_ratio->SetLineColor(1);
   else h_ratio->SetLineColor(0);
   if(unblind) h_ratio->SetLineWidth(2);
   else h_ratio->SetLineWidth(0);
-  //h_ratio->SetMarkerStyle(20);
-  
-  h_ratio->Draw("ape0");       // Draw the ratio plot
+  if(!unblind) h_ratio->SetFillColor(0);
+  if(!unblind) h_ratio->SetMarkerColor(0);
+
+  h_ratio->Draw("ape0");
 
   TGraphAsymmErrors *h_ratio_MC=new TGraphAsymmErrors();
   h_ratio_MC->Divide(&h_ttH,&h_ttH,"pois");
-  h_ratio_MC->SetMinimum(0.);  // Define Y ..
+  h_ratio_MC->SetMinimum(0.);
   h_ratio_MC->SetMaximum(2.);
   h_ratio_MC->SetLineWidth(0);
-  h_ratio_MC->SetFillStyle(3003);  
-  h_ratio_MC->Draw("e2same"); 
+  if(!unblind) h_ratio_MC->SetLineColor(0);
+  if(!unblind) h_ratio_MC->SetFillColor(0);
+  //h_ratio_MC->SetFillStyle(3003);  
+  
+  //h_ratio_MC->Draw("e2same"); 
 
-  // Y axis histo_emul plot settings
   h_ttH.GetYaxis()->SetTitleSize(22);
   h_ttH.GetYaxis()->SetTitleFont(43);
   h_ttH.GetYaxis()->SetTitleOffset(1.5);
   
-  // Ratio plot (h_ratio) settings
-  h_ratio_MC->SetTitle(""); // Remove the ratio title
+  h_ratio_MC->SetTitle("");
   
   h_ratio_MC->GetYaxis()->SetLabelSize(0.);
   h_ratio_MC->GetYaxis()->SetLabelColor(0.);
@@ -300,22 +317,20 @@ void plot_2lSS1tau(vector<TString> datacards, vector<TString> dirs, TString varn
   h_ratio->GetYaxis()->SetLabelColor(0.);
 
   TGaxis *axis2 = new TGaxis( h_ttH.GetBinLowEdge(1), 0.01, h_ttH.GetBinLowEdge(1), 1.99, 0.01, 1.99, 505,"");
-  axis2->SetLabelFont(43); // Absolute font size in pixel (precision 3)
+  axis2->SetLabelFont(43);
   axis2->SetLabelSize(20);
   axis2->Draw();
   
-  // Y axis ratio plot settings
   h_ratio_MC->GetYaxis()->SetTitle("Data / Pred.");
   h_ratio_MC->GetYaxis()->SetNdivisions(505);
   h_ratio_MC->GetYaxis()->SetTitleSize(22);
   h_ratio_MC->GetYaxis()->SetTitleFont(43);
   h_ratio_MC->GetYaxis()->SetTitleOffset(1.5);
 
-  // X axis ratio plot settings
   h_ratio_MC->GetXaxis()->SetTitleSize(22);
   h_ratio_MC->GetXaxis()->SetTitleFont(43);
   h_ratio_MC->GetXaxis()->SetTitleOffset(4.);
-  h_ratio_MC->GetXaxis()->SetLabelFont(43); // Absolute font size in pixel (precision 3)
+  h_ratio_MC->GetXaxis()->SetLabelFont(43); 
   h_ratio_MC->GetXaxis()->SetLabelSize(20);
   h_ratio_MC->GetXaxis()->SetTitle(varname);
   h_ratio_MC->GetXaxis()->SetLimits(h_data_obs.GetBinLowEdge(1),h_data_obs.GetBinLowEdge(h_data_obs.GetNbinsX()+1));
@@ -326,11 +341,10 @@ void plot_2lSS1tau(vector<TString> datacards, vector<TString> dirs, TString varn
   h_ratio->GetYaxis()->SetTitleFont(43);
   h_ratio->GetYaxis()->SetTitleOffset(1.5);
   
-  // X axis ratio plot settings
   h_ratio->GetXaxis()->SetTitleSize(22);
   h_ratio->GetXaxis()->SetTitleFont(43);
   h_ratio->GetXaxis()->SetTitleOffset(4.);
-  h_ratio->GetXaxis()->SetLabelFont(43); // Absolute font size in pixel (precision 3)
+  h_ratio->GetXaxis()->SetLabelFont(43); 
   h_ratio->GetXaxis()->SetLabelSize(20);
   h_ratio->GetXaxis()->SetTitle(varname);
   h_ratio->GetXaxis()->SetLimits(h_data_obs.GetBinLowEdge(1),h_data_obs.GetBinLowEdge(h_data_obs.GetNbinsX()+1));
@@ -467,7 +481,7 @@ void plot_all(bool unblind=false){
 	plot_MEM_2lSS1tau_nomiss_2017(unblind);
 	plot_MEM_2lSS1tau_miss_2017(unblind);
 
-	plot_MEM_2lSS1tau_nomiss_2018();
+	plot_MEM_2lSS1tau_nomiss_2018(unblind);
 	plot_MEM_2lSS1tau_miss_2018(unblind);
 
 }
