@@ -42,6 +42,8 @@ int main(int argc, char** argv) {
   else if(year==2017) year_s = "17";
   else if(year==2018) year_s = "18";
 
+  cout<<"Year "<<year<<", year string "<<year_s<<endl;
+
   //! [part1]
   // Location of the "auxiliaries" directory where we can source the input files containing the datacard shapes
   string aux_shapes = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/datacards/2lss_1tau/";
@@ -274,9 +276,9 @@ int main(int argc, char** argv) {
   if ( add_shape_sys ) {
 
     cb.cp().process(ch::JoinStr({sig_procs, {"TTZ","TTW","TTWW","WZ","ZZ","Rares","Convs"}}))
-      .AddSyst(cb, "CMS_ttHl"+year_s"+_FRjt_norm", "shape", SystMap<>::init(1.0));
+      .AddSyst(cb, "CMS_ttHl"+year_s+"_FRjt_norm", "shape", SystMap<>::init(1.0));
     cb.cp().process(ch::JoinStr({sig_procs, {"TTZ","TTW","TTWW","WZ","ZZ","Rares","Convs"}}))
-      .AddSyst(cb, "CMS_ttHl"+year_s"+_FRjt_shape", "shape", SystMap<>::init(1.0));
+      .AddSyst(cb, "CMS_ttHl"+year_s+"_FRjt_shape", "shape", SystMap<>::init(1.0));
 
     cb.cp().process(ch::JoinStr({sig_procs, {"TTZ","TTW","TTWW","WZ","ZZ","Rares","Convs"}}))
       .AddSyst(cb, "CMS_ttHl_FRjtMC_shape", "shape", SystMap<>::init(1.0));
@@ -291,11 +293,11 @@ int main(int argc, char** argv) {
   if ( add_shape_sys ) {
 
     cb.cp().process(ch::JoinStr({sig_procs, {"TTZ","TTW","TTWW","WZ","ZZ","Rares","Convs"}}))
-      .AddSyst(cb, "CMS_ttHl"+year_s"+_trigger_ee", "shape", SystMap<>::init(1.0));
+      .AddSyst(cb, "CMS_ttHl"+year_s+"_trigger_ee", "shape", SystMap<>::init(1.0));
     cb.cp().process(ch::JoinStr({sig_procs, {"TTZ","TTW","TTWW","WZ","ZZ","Rares","Convs"}}))
-      .AddSyst(cb, "CMS_ttHl"+year_s"+_trigger_em", "shape", SystMap<>::init(1.0));
+      .AddSyst(cb, "CMS_ttHl"+year_s+"_trigger_em", "shape", SystMap<>::init(1.0));
     cb.cp().process(ch::JoinStr({sig_procs, {"TTZ","TTW","TTWW","WZ","ZZ","Rares","Convs"}}))
-      .AddSyst(cb, "CMS_ttHl"+year_s"+_trigger_mm", "shape", SystMap<>::init(1.0));
+      .AddSyst(cb, "CMS_ttHl"+year_s+"_trigger_mm", "shape", SystMap<>::init(1.0));
 
   }
 
@@ -338,9 +340,11 @@ int main(int argc, char** argv) {
       cb.cp().process(ch::JoinStr({sig_procs, {"TTZ","TTW","TTWW","WZ","ZZ","Rares","Convs"}}))
           .AddSyst(cb, Form("CMS_ttHl_btag_%s", s), "shape", SystMap<>::init(1.0));
     }
+    
     for ( auto s : {"HFStats1", "HFStats2", "LFStats1", "LFStats2"} ) {
+      std::string btag_s = "CMS_ttHl"+year_s+"_btag_"+s;
       cb.cp().process(ch::JoinStr({sig_procs, {"TTZ","TTW","TTWW","WZ","ZZ","Rares","Convs"}}))
-          .AddSyst(cb, Form("CMS_ttHl"+year_s"+_btag_%s", s), "shape", SystMap<>::init(1.0));
+          .AddSyst(cb, btag_s, "shape", SystMap<>::init(1.0));
     } 
   }
 
@@ -352,9 +356,9 @@ int main(int argc, char** argv) {
   cb.cp().process({"tHW_htt"})
     .AddSyst(cb, "CMS_ttHl_UnclusteredEn", "lnN", SystMapAsymm<>::init(0.999,1.001));
 
-  //! [part6]
+  //! [part5]
 
-  //! [part7]
+  //! [part6]
   cb.cp().backgrounds().ExtractShapes(
       aux_shapes + input_file,
       "ttH_2lss_1tau/$PROCESS",
@@ -363,42 +367,40 @@ int main(int argc, char** argv) {
       aux_shapes + input_file,
       "ttH_2lss_1tau/$PROCESS",
       "ttH_2lss_1tau/$PROCESS_$SYSTEMATIC");
-  //! [part7]
+  //! [part6]
 
   // Scale yield of all signal and background processes by lumi/2.3, with 2.3 corresponding to integrated luminosity of 2015 dataset
-  if ( lumi > 0. ) {  
+  /*if ( lumi > 0. ) {  
     std::cout << "scaling signal and background yields to L=" << lumi << "fb^-1 @ 13 TeV." << std::endl;
     cb.cp().process(ch::JoinStr({sig_procs, {"TTW", "TTZ", "WZ", "Rares", "fakes_data", "flips_data"}})).ForEachProc([&](ch::Process* proc) {
       proc->set_rate(proc->rate()*lumi/2.3);
     });
-  }
+  }*/
 
+  // Bin-by-bin uncertainties (obsolete) --> Replace by a string at the end of the file: "* autoMCStats 10"
   //! [part8]
-  auto bbb = ch::BinByBinFactory()
-    .SetAddThreshold(0.1)
-    .SetFixNorm(true);
-  bbb.SetPattern("CMS_$BIN_$PROCESS_bin_$#");
-  bbb.AddBinByBin(cb.cp().backgrounds(), cb);
+  /*auto bbb = ch::BinByBinFactory()
+      .SetAddThreshold(0.1)
+      .SetFixNorm(true);
+    bbb.SetPattern("CMS_$BIN_$PROCESS_bin_$#");
+    bbb.AddBinByBin(cb.cp().backgrounds(), cb);*/
 
   // This function modifies every entry to have a standardised bin name of the form: {analysis}_{channel}_{bin_id}_{era} which is commonly used in the htt analyses
   //ch::SetStandardBinNames(cb);
   //! [part8]
 
   //! [part9]
-  // First we generate a set of bin names:
+  // Produce a set of unique bin names by considering all Observation, Process and Systematic entries in the CombineHarvester instance.
   set<string> bins = cb.bin_set();
-  // This method will produce a set of unique bin names by considering all Observation, Process and Systematic entries in the CombineHarvester instance.
 
-  // We create the output root file that will contain all the shapes.
+  // Output file
   TFile output(output_file.data(), "RECREATE");
 
-  // Finally we iterate through bins and write a datacard.
+  // Iteration through bins, write datacard
   for (auto b : bins) {
     cout << ">> Writing datacard for bin: " << b << "\n";
-    // We need to filter on both the mass and the mass hypothesis, where we must remember to include the "*" mass entry to get all the data and backgrounds.
-    //cb.cp().bin({b}).mass({"*"}).WriteDatacard(b + ".txt", output);
     cb.cp().bin({b}).mass({"*"}).WriteDatacard(
-        TString(output_file.data()).ReplaceAll(".root", ".txt").Data(), output);				       
+      TString(output_file.data()).ReplaceAll(".root", ".txt").Data(), output);				       
   }
   //! [part9]
 
