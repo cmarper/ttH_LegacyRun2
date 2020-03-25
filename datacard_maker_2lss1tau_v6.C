@@ -6473,11 +6473,11 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
 	group_names.push_back("tHW_hww");
 	group_names.push_back("tHW_hzz");
 	group_names.push_back("tHW_htt");
-	group_names.push_back("VH");
-	group_names.push_back("ttVH");
-	group_names.push_back("ggH");
-	group_names.push_back("VBF");
-	group_names.push_back("HH");
+	//group_names.push_back("VH");
+	//group_names.push_back("ttVH");
+	//group_names.push_back("ggH");
+	//group_names.push_back("VBF");
+	//group_names.push_back("HH");
 	group_names.push_back("TTZ");
 	group_names.push_back("TTW");
 	group_names.push_back("TTWW");
@@ -7968,14 +7968,14 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
 		//TString h_name_group_up = group_names[i_group]+"_CMS_ttHl_lepEffUp";
 		//TString h_name_group_down = group_names[i_group]+"_CMS_ttHl_lepEffDown";
 
-		TString h_name_group_eloose_up = group_names[i_group]+"_CMS_ttHl_lepEff_ellooseUp";
-		TString h_name_group_eloose_down = group_names[i_group]+"_CMS_ttHl_lepEff_ellooseDown";
-		TString h_name_group_mloose_up = group_names[i_group]+"_CMS_ttHl_lepEff_mulooseUp";
-		TString h_name_group_mloose_down = group_names[i_group]+"_CMS_ttHl_lepEff_mulooseDown";
-		TString h_name_group_etight_up = group_names[i_group]+"_CMS_ttHl_lepEff_eltightUp";
-		TString h_name_group_etight_down = group_names[i_group]+"_CMS_ttHl_lepEff_eltightDown";
-		TString h_name_group_mtight_up = group_names[i_group]+"_CMS_ttHl_lepEff_mutightUp";
-		TString h_name_group_mtight_down = group_names[i_group]+"_CMS_ttHl_lepEff_mutightDown";
+		TString h_name_group_eloose_up = group_names[i_group]+"_CMS_eff_ttHl_elooseUp";
+		TString h_name_group_eloose_down = group_names[i_group]+"_CMS_eff_ttHl_elooseDown";
+		TString h_name_group_mloose_up = group_names[i_group]+"_CMS_eff_ttHl_mlooseUp";
+		TString h_name_group_mloose_down = group_names[i_group]+"_CMS_eff_ttHl_mlooseDown";
+		TString h_name_group_etight_up = group_names[i_group]+"_CMS_eff_ttHl_etightUp";
+		TString h_name_group_etight_down = group_names[i_group]+"_CMS_eff_ttHl_etightDown";
+		TString h_name_group_mtight_up = group_names[i_group]+"_CMS_eff_ttHl_mtightUp";
+		TString h_name_group_mtight_down = group_names[i_group]+"_CMS_eff_ttHl_mtightDown";
 
 		//histo_up->SetNameTitle(h_name_group_up,h_name_group_up);
 		//histo_down->SetNameTitle(h_name_group_down,h_name_group_down);
@@ -8066,14 +8066,14 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
 	//TString h_name_convs_lepeff_up = "Convs_CMS_ttHl_lepEffUp";
 	//TString h_name_convs_lepeff_down = "Convs_CMS_ttHl_lepEffDown";
 
-	TString h_name_convs_lepeff_up_eloose = "Convs_CMS_ttHl_lepEff_ellooseUp";
-	TString h_name_convs_lepeff_down_eloose = "Convs_CMS_ttHl_lepEff_ellooseDown";
-	TString h_name_convs_lepeff_up_mloose = "Convs_CMS_ttHl_lepEff_mulooseUp";
-	TString h_name_convs_lepeff_down_mloose = "Convs_CMS_ttHl_lepEff_mulooseDown";
-	TString h_name_convs_lepeff_up_etight = "Convs_CMS_ttHl_lepEff_eltightUp";
-	TString h_name_convs_lepeff_down_etight = "Convs_CMS_ttHl_lepEff_eltightDown";
-	TString h_name_convs_lepeff_up_mtight = "Convs_CMS_ttHl_lepEff_mutightUp";
-	TString h_name_convs_lepeff_down_mtight = "Convs_CMS_ttHl_lepEff_mutightDown";
+	TString h_name_convs_lepeff_up_eloose = "Convs_CMS_eff_ttHl_elooseUp";
+	TString h_name_convs_lepeff_down_eloose = "Convs_CMS_eff_ttHl_elooseDown";
+	TString h_name_convs_lepeff_up_mloose = "Convs_CMS_eff_ttHl_mlooseUp";
+	TString h_name_convs_lepeff_down_mloose = "Convs_CMS_eff_ttHl_mlooseDown";
+	TString h_name_convs_lepeff_up_etight = "Convs_CMS_eff_ttHl_etightUp";
+	TString h_name_convs_lepeff_down_etight = "Convs_CMS_eff_ttHl_etightDown";
+	TString h_name_convs_lepeff_up_mtight = "Convs_CMS_eff_ttHl_mtightUp";
+	TString h_name_convs_lepeff_down_mtight = "Convs_CMS_eff_ttHl_mtightDown";
 
 	//histo_convs_lepeff_up->SetNameTitle(h_name_convs_lepeff_up,h_name_convs_lepeff_up);
 	//histo_convs_lepeff_down->SetNameTitle(h_name_convs_lepeff_down,h_name_convs_lepeff_down);
@@ -9144,7 +9144,7 @@ void datacard_maker_n_recotauh(int year = 2016){
   	float xmin = 0.;
   	float xmax = 5.;
   	TString cut = "((recotauh_decayMode[0]!=5) && (recotauh_decayMode[0]!=6) && (recotauh_byVVVLooseDeepTau2017v2p1VSe[0]) && (recotauh_byVLooseDeepTau2017v2p1VSmu[0]) )";
-  	TString file = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/datacards/2lss_1tau/datacard_nrecotauh_2lss1tau_"+s_year+".root";
+  	TString file = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/datacards/2lss_1tau/datacard_MEM_miss_2lss1tau_"+s_year+".root";
 	
   	datacard_maker(var,nbin,xmin,xmax,cut,file,true,year);
 
