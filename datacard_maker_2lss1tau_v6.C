@@ -6473,11 +6473,11 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
 	group_names.push_back("tHW_hww");
 	group_names.push_back("tHW_hzz");
 	group_names.push_back("tHW_htt");
-	//group_names.push_back("VH");
-	//group_names.push_back("ttVH");
-	//group_names.push_back("ggH");
-	//group_names.push_back("VBF");
-	//group_names.push_back("HH");
+	group_names.push_back("VH");
+	group_names.push_back("ttVH");
+	group_names.push_back("ggH");
+	group_names.push_back("VBF");
+	group_names.push_back("HH");
 	group_names.push_back("TTZ");
 	group_names.push_back("TTW");
 	group_names.push_back("TTWW");
@@ -6591,7 +6591,7 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
 
 	// Data
 
-    /*TH1F* h_data_obs =single_plot(filename_data_SR,
+    TH1F* h_data_obs =single_plot(filename_data_SR,
 		    "HTauTauTree_2lss1tau_SR",
 		    var,
             cut_cat,
@@ -6599,7 +6599,7 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
       
     h_data_obs->SetNameTitle("data_obs","data_obs");
     makeBinContentsPositive(h_data_obs,false);
-    h_data_obs->Write();*/
+    h_data_obs->Write();
 
     ///////////////////////////////////////////////////////
 
@@ -8199,8 +8199,10 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
 
 		}
 
-		TString h_name_group_up = group_names[i_group]+"_CMS_eff_tUp";
-		TString h_name_group_down = group_names[i_group]+"_CMS_eff_tDown";
+		//TString h_name_group_up = group_names[i_group]+"_CMS_eff_tUp";
+		//TString h_name_group_down = group_names[i_group]+"_CMS_eff_tDown";
+		TString h_name_group_up = group_names[i_group]+"_CMS_ttHl"+s_year+"_tauIDSFUp";
+		TString h_name_group_down = group_names[i_group]+"_CMS_ttHl"+s_year+"_tauIDSFDown";
 
 		histo_up->SetNameTitle(h_name_group_up,h_name_group_up);
 		histo_down->SetNameTitle(h_name_group_down,h_name_group_down);
@@ -8235,8 +8237,10 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
 
 	}
 
-	TString h_name_convs_tauid_up = "Convs_CMS_eff_tUp";
-	TString h_name_convs_tauid_down = "Convs_CMS_eff_tDown";
+	//TString h_name_convs_tauid_up = "Convs_CMS_eff_tUp";
+	//TString h_name_convs_tauid_down = "Convs_CMS_eff_tDown";
+	TString h_name_convs_tauid_up = "Convs_CMS_ttHl"+s_year+"_tauIDSFUp";
+	TString h_name_convs_tauid_down = "Convs_CMS_ttHl"+s_year+"_tauIDSFDown";
 
 	histo_convs_tauid_up->SetNameTitle(h_name_convs_tauid_up,h_name_convs_tauid_up);
 	histo_convs_tauid_down->SetNameTitle(h_name_convs_tauid_down,h_name_convs_tauid_down);
@@ -8344,8 +8348,8 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
 
 		}
 
-		TString h_name_group_up = group_names[i_group]+"_CMS_scale_tUp";
-		TString h_name_group_down = group_names[i_group]+"_CMS_scale_tDown";
+		TString h_name_group_up = group_names[i_group]+"_CMS_scale_t_20"+s_year+"Up";
+		TString h_name_group_down = group_names[i_group]+"_CMS_scale_t_20"+s_year+"Down";
 
 		histo_up->SetNameTitle(h_name_group_up,h_name_group_up);
 		histo_down->SetNameTitle(h_name_group_down,h_name_group_down);
@@ -8380,8 +8384,8 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
 
 	}
 
-	TString h_name_convs_taues_up = "Convs_CMS_scale_tUp";
-	TString h_name_convs_taues_down = "Convs_CMS_scale_tDown";
+	TString h_name_convs_taues_up = "Convs_CMS_scale_t_20"+s_year+"Up";
+	TString h_name_convs_taues_down = "Convs_CMS_scale_t_20"+s_year+"Down";
 
 	histo_convs_taues_up->SetNameTitle(h_name_convs_taues_up,h_name_convs_taues_up);
 	histo_convs_taues_down->SetNameTitle(h_name_convs_taues_down,h_name_convs_taues_down);
@@ -8516,12 +8520,12 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
 
 	TH1F* histo_convs_JECup = (TH1F*)f_new->Get(cat_name+"/Convs");
 	histo_convs_JECup->Scale(1.006);
-	histo_convs_JECup->SetNameTitle("Convs_CMS_scale_jUp","Convs_CMS_scale_jUp");
+	histo_convs_JECup->SetNameTitle("Convs_CMS_scale_jUp","Convs_CMS_scale_jUp"); // leave this correlated for now
 	histo_convs_JECup->Write();
 
 	TH1F* histo_convs_JECdown = (TH1F*)f_new->Get(cat_name+"/Convs");
 	histo_convs_JECdown->Scale(0.994);
-	histo_convs_JECdown->SetNameTitle("Convs_CMS_scale_jDown","Convs+CMS_scale_jDown");
+	histo_convs_JECdown->SetNameTitle("Convs_CMS_scale_jDown","Convs_CMS_scale_jDown"); // leave this correlated for now
 	histo_convs_JECdown->Write();
 
 	cout<<"OK JEC syst"<<endl;
@@ -8991,7 +8995,6 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
 
     cout<<"OK jet->lep FR syst"<<endl;
 
-
     ////////////////////////////
     //// FAKE LEPTON CLOSURE ///
     ////////////////////////////
@@ -9051,32 +9054,104 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
 	    h_fakes_clos_mu_Down->Add(h_clos_mu_diff,-1); 
 
 	}
+
+	////////////////////////////
    
-    h_fakes_clos_ele_Up->SetNameTitle("data_fakes_CMS_ttHl_Clos_e_shapeUp","data_fakes_CMS_ttHl_Clos_e_shapeUp");
+    h_fakes_clos_ele_Up->SetNameTitle("data_fakes_CMS_ttHl_Clos_e_Up","data_fakes_CMS_ttHl_Clos_e_Up");
     makeBinContentsPositive(h_fakes_clos_ele_Up);
-    h_fakes_clos_ele_Up->Write();
+    //h_fakes_clos_ele_Up->Write();
 
-    h_fakes_clos_ele_Down->SetNameTitle("data_fakes_CMS_ttHl_Clos_e_shapeDown","data_fakes_CMS_ttHl_Clos_e_shapeDown");
+    h_fakes_clos_ele_Down->SetNameTitle("data_fakes_CMS_ttHl_Clos_e_Down","data_fakes_CMS_ttHl_Clos_e_Down");
     makeBinContentsPositive(h_fakes_clos_ele_Down);
-    h_fakes_clos_ele_Down->Write();
+    //h_fakes_clos_ele_Down->Write();
 
-    h_fakes_clos_mu_Up->SetNameTitle("data_fakes_CMS_ttHl_Clos_m_shapeUp","data_fakes_CMS_ttHl_Clos_m_shapeUp");
+    h_fakes_clos_mu_Up->SetNameTitle("data_fakes_CMS_ttHl_Clos_m_Up","data_fakes_CMS_ttHl_Clos_m_Up");
     makeBinContentsPositive(h_fakes_clos_mu_Up);
-    h_fakes_clos_mu_Up->Write();
+    //h_fakes_clos_mu_Up->Write();
 
-    h_fakes_clos_mu_Down->SetNameTitle("data_fakes_CMS_ttHl_Clos_m_shapeDown","data_fakes_CMS_ttHl_Clos_m_shapeDown");
+    h_fakes_clos_mu_Down->SetNameTitle("data_fakes_CMS_ttHl_Clos_m_Down","data_fakes_CMS_ttHl_Clos_m_Down");
     makeBinContentsPositive(h_fakes_clos_mu_Down);
-    h_fakes_clos_mu_Down->Write();
+    //h_fakes_clos_mu_Down->Write();
+
+    ////////////////////////////
+
+    TH1F* h_fakes_clos_ele_Up_shape = (TH1F*)h_fakes_clos_ele_Up->Clone();
+    h_fakes_clos_ele_Up_shape->Scale(h_fakes->Integral()/h_fakes_clos_ele_Up->Integral());
+
+    TH1F* h_fakes_clos_ele_Down_shape = (TH1F*)h_fakes_clos_ele_Down->Clone();
+    h_fakes_clos_ele_Down_shape->Scale(h_fakes->Integral()/h_fakes_clos_ele_Down->Integral());
+
+    TH1F* h_fakes_clos_mu_Up_shape = (TH1F*)h_fakes_clos_mu_Up->Clone();
+    h_fakes_clos_mu_Up_shape->Scale(h_fakes->Integral()/h_fakes_clos_mu_Up->Integral());
+
+    TH1F* h_fakes_clos_mu_Down_shape = (TH1F*)h_fakes_clos_mu_Down->Clone();
+    h_fakes_clos_mu_Down_shape->Scale(h_fakes->Integral()/h_fakes_clos_mu_Down->Integral());
+
+    h_fakes_clos_ele_Up_shape->SetNameTitle("data_fakes_CMS_ttHl_Clos_e_shapeUp","data_fakes_CMS_ttHl_Clos_e_shapeUp");
+    makeBinContentsPositive(h_fakes_clos_ele_Up_shape);
+    h_fakes_clos_ele_Up_shape->Write();
+
+    h_fakes_clos_ele_Down_shape->SetNameTitle("data_fakes_CMS_ttHl_Clos_e_shapeDown","data_fakes_CMS_ttHl_Clos_e_shapeDown");
+    makeBinContentsPositive(h_fakes_clos_ele_Down_shape);
+    h_fakes_clos_ele_Down_shape->Write();
+
+    h_fakes_clos_mu_Up_shape->SetNameTitle("data_fakes_CMS_ttHl_Clos_m_shapeUp","data_fakes_CMS_ttHl_Clos_m_shapeUp");
+    makeBinContentsPositive(h_fakes_clos_mu_Up_shape);
+    h_fakes_clos_mu_Up_shape->Write();
+
+    h_fakes_clos_mu_Down_shape->SetNameTitle("data_fakes_CMS_ttHl_Clos_m_shapeDown","data_fakes_CMS_ttHl_Clos_m_shapeDown");
+    makeBinContentsPositive(h_fakes_clos_mu_Down_shape);
+    h_fakes_clos_mu_Down_shape->Write();
+
+    ////////////////////////////
+
+    TH1F* h_fakes_clos_ele_Up_diff = (TH1F*)h_fakes_clos_ele_Up->Clone();
+    h_fakes_clos_ele_Up_diff->Add(h_fakes_clos_ele_Up_shape,-1.);
+    TH1F* h_fakes_clos_ele_Up_norm = (TH1F*)h_fakes->Clone();
+	h_fakes_clos_ele_Up_norm->Add(h_fakes_clos_ele_Up_diff);
+
+	TH1F* h_fakes_clos_ele_Down_diff = (TH1F*)h_fakes_clos_ele_Down->Clone();
+    h_fakes_clos_ele_Down_diff->Add(h_fakes_clos_ele_Down_shape,-1.);
+    TH1F* h_fakes_clos_ele_Down_norm = (TH1F*)h_fakes->Clone();
+	h_fakes_clos_ele_Down_norm->Add(h_fakes_clos_ele_Down_diff);
+
+	TH1F* h_fakes_clos_mu_Up_diff = (TH1F*)h_fakes_clos_mu_Up->Clone();
+    h_fakes_clos_mu_Up_diff->Add(h_fakes_clos_mu_Up_shape,-1.);
+    TH1F* h_fakes_clos_mu_Up_norm = (TH1F*)h_fakes->Clone();
+	h_fakes_clos_mu_Up_norm->Add(h_fakes_clos_mu_Up_diff);
+
+	TH1F* h_fakes_clos_mu_Down_diff = (TH1F*)h_fakes_clos_mu_Down->Clone();
+    h_fakes_clos_mu_Down_diff->Add(h_fakes_clos_mu_Down_shape,-1.);
+    TH1F* h_fakes_clos_mu_Down_norm = (TH1F*)h_fakes->Clone();
+	h_fakes_clos_mu_Down_norm->Add(h_fakes_clos_mu_Down_diff);
+
+	h_fakes_clos_ele_Up_norm->SetNameTitle("data_fakes_CMS_ttHl_Clos_e_normUp","data_fakes_CMS_ttHl_Clos_e_normUp");
+    makeBinContentsPositive(h_fakes_clos_ele_Up_norm);
+    h_fakes_clos_ele_Up_norm->Write();
+
+    h_fakes_clos_ele_Down_norm->SetNameTitle("data_fakes_CMS_ttHl_Clos_e_normDown","data_fakes_CMS_ttHl_Clos_e_normDown");
+    makeBinContentsPositive(h_fakes_clos_ele_Down_norm);
+    h_fakes_clos_ele_Down_norm->Write();
+
+    h_fakes_clos_mu_Up_norm->SetNameTitle("data_fakes_CMS_ttHl_Clos_m_normUp","data_fakes_CMS_ttHl_Clos_m_normUp");
+    makeBinContentsPositive(h_fakes_clos_mu_Up_norm);
+    h_fakes_clos_mu_Up_norm->Write();
+
+    h_fakes_clos_mu_Down_norm->SetNameTitle("data_fakes_CMS_ttHl_Clos_m_normDown","data_fakes_CMS_ttHl_Clos_m_normDown");
+    makeBinContentsPositive(h_fakes_clos_mu_Down_norm);
+    h_fakes_clos_mu_Down_norm->Write();
+
+    ////////////////////////////
 
     cout<<"OK jet->lep closure syst"<<endl;
 
 
-    /////////////////
-    //// EWK JET  ///
-    /////////////////
+    ///////////////////////
+    //// EWK JET/b-JET  ///
+    ///////////////////////
 
     cout<<" "<<endl;
-    cout<<"------ EWK JET SYST ------"<<endl;
+    cout<<"------ EWK JET/b-JET SYST ------"<<endl;
 
     for(unsigned i_MC=0;i_MC<samplename_MC.size();i_MC++){
 
@@ -9094,7 +9169,7 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
             nbin,xmin,xmax);
 
 		h_MC_highjet->Scale(lumin*XS_MC[i_MC]/norm_MC[i_MC]);
-		h_MC_highjet->SetNameTitle("x_"+sampletag_MC[i_MC]+"highjet","x_"+sampletag_MC[i_MC]+"highjet");
+		//h_MC_highjet->SetNameTitle("x_"+sampletag_MC[i_MC]+"highjet","x_"+sampletag_MC[i_MC]+"highjet");
 		makeBinContentsPositive(h_MC_highjet,false);
 
 		TH1F* h_MC_lowjet = single_plot(filename_MC[i_MC],
@@ -9104,8 +9179,30 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
             nbin,xmin,xmax);
 
 		h_MC_lowjet->Scale(lumin*XS_MC[i_MC]/norm_MC[i_MC]);
-		h_MC_lowjet->SetNameTitle("x_"+sampletag_MC[i_MC]+"lowjet","x_"+sampletag_MC[i_MC]+"lowjet");
+		//h_MC_lowjet->SetNameTitle("x_"+sampletag_MC[i_MC]+"lowjet","x_"+sampletag_MC[i_MC]+"lowjet");
 		makeBinContentsPositive(h_MC_lowjet,false);
+
+		////////////////////////////////////////////////////////////////////////////
+
+		TH1F* h_MC_high_bjet = single_plot(filename_MC[i_MC],
+			"HTauTauTree_2lss1tau_SR", 
+			var,
+			MC_weight+"*(n_recoPFJet_btag_medium>=2)*PU_weight_v1*prefire_weight*trigger_weight_v1*leptonID_weight_v1*bTagSF_CSVshape_weight*tauID_weight_v3*tauES_weight_v1*("+samplecut_MC[i_MC]+" && "+cut_cat+")",
+            nbin,xmin,xmax);
+
+		h_MC_high_bjet->Scale(lumin*XS_MC[i_MC]/norm_MC[i_MC]);
+		//h_MC_high_bjet->SetNameTitle("x_"+sampletag_MC[i_MC]+"high_bjet","x_"+sampletag_MC[i_MC]+"high_bjet");
+		makeBinContentsPositive(h_MC_high_bjet,false);
+
+		TH1F* h_MC_low_bjet = single_plot(filename_MC[i_MC],
+			"HTauTauTree_2lss1tau_SR", 
+			var,
+			MC_weight+"*(n_recoPFJet_btag_medium<2)*PU_weight_v1*prefire_weight*trigger_weight_v1*leptonID_weight_v1*bTagSF_CSVshape_weight*tauID_weight_v3*tauES_weight_v1*("+samplecut_MC[i_MC]+" && "+cut_cat+")",
+            nbin,xmin,xmax);
+
+		h_MC_low_bjet->Scale(lumin*XS_MC[i_MC]/norm_MC[i_MC]);
+		//h_MC_low_bjet->SetNameTitle("x_"+sampletag_MC[i_MC]+"low_bjet","x_"+sampletag_MC[i_MC]+"low_bjet");
+		makeBinContentsPositive(h_MC_low_bjet,false);
 
 		////////////////////////////////////////////////////////////////////////////
 
@@ -9121,9 +9218,21 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
 
 		////////////////////////////////////////////////////////////////////////////
 
+		TH1F* h_MC_bjetUp = (TH1F*) h_MC_low_bjet->Clone();
+      	h_MC_bjetUp->Add(h_MC_high_bjet,1.4);
+      	h_MC_bjetUp->SetNameTitle(sampletag_MC[i_MC]+"_CMS_ttHl_EWK_btagUp",sampletag_MC[i_MC]+"_CMS_ttHl_EWK_btagUp");
+      	h_MC_bjetUp->Write();
+
+      	TH1F* h_MC_bjetDown = (TH1F*) h_MC_low_bjet->Clone();
+      	h_MC_bjetDown->Add(h_MC_high_bjet,0.6);
+      	h_MC_bjetDown->SetNameTitle(sampletag_MC[i_MC]+"_CMS_ttHl_EWK_btagDown",sampletag_MC[i_MC]+"_CMS_ttHl_EWK_btagDown");
+      	h_MC_bjetDown->Write();
+
+		////////////////////////////////////////////////////////////////////////////
+
 	}
 
-	cout<<"OK EWK jet syst"<<endl;
+	cout<<"OK EWK jet/b-jet syst"<<endl;
 
     ///////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////
@@ -9210,6 +9319,10 @@ void datacard_maker_MEM_all(){
 	datacard_maker_MEM_miss(2016);
 	datacard_maker_MEM_miss(2017);
 	datacard_maker_MEM_miss(2018);
+
+	datacard_maker_MEM_others(2016);
+	datacard_maker_MEM_others(2017);
+	datacard_maker_MEM_others(2018);
 
 }
 
