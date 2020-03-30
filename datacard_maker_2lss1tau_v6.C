@@ -675,45 +675,45 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 
 	///////////////////////////////////////////////////////
 
-	TString filename_SingleElectron_BlockB_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_SingleElectron_BlockB_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_SingleElectron_BlockC_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_SingleElectron_BlockC_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_SingleElectron_BlockD_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_SingleElectron_BlockD_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_SingleElectron_BlockE_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_SingleElectron_BlockE_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_SingleElectron_BlockF_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_SingleElectron_BlockF_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_SingleElectron_BlockG_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_SingleElectron_BlockG_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_SingleElectron_BlockH_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_SingleElectron_BlockH_MEM_fake_SF_v2_noOverlap.root";
+	TString filename_SingleElectron_BlockB_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_SingleElectron_BlockB_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_SingleElectron_BlockC_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_SingleElectron_BlockC_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_SingleElectron_BlockD_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_SingleElectron_BlockD_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_SingleElectron_BlockE_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_SingleElectron_BlockE_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_SingleElectron_BlockF_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_SingleElectron_BlockF_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_SingleElectron_BlockG_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_SingleElectron_BlockG_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_SingleElectron_BlockH_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_SingleElectron_BlockH_MEM_fake_SF_v3_noOverlap.root";
 
-	TString filename_SingleMuon_BlockB_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_SingleMuon_BlockB_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_SingleMuon_BlockC_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_SingleMuon_BlockC_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_SingleMuon_BlockD_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_SingleMuon_BlockD_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_SingleMuon_BlockE_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_SingleMuon_BlockE_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_SingleMuon_BlockF_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_SingleMuon_BlockF_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_SingleMuon_BlockG_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_SingleMuon_BlockG_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_SingleMuon_BlockH_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_SingleMuon_BlockH_MEM_fake_SF_v2_noOverlap.root";
+	TString filename_SingleMuon_BlockB_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_SingleMuon_BlockB_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_SingleMuon_BlockC_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_SingleMuon_BlockC_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_SingleMuon_BlockD_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_SingleMuon_BlockD_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_SingleMuon_BlockE_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_SingleMuon_BlockE_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_SingleMuon_BlockF_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_SingleMuon_BlockF_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_SingleMuon_BlockG_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_SingleMuon_BlockG_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_SingleMuon_BlockH_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_SingleMuon_BlockH_MEM_fake_SF_v3_noOverlap.root";
 
-	TString filename_DoubleEG_BlockB_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockB_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_DoubleEG_BlockC_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockC_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_DoubleEG_BlockD_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockD_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_DoubleEG_BlockE_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockE_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_DoubleEG_BlockF_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockF_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_DoubleEG_BlockG_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockG_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_DoubleEG_BlockH_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockH_MEM_fake_SF_v2_noOverlap.root";
+	TString filename_DoubleEG_BlockB_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockB_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_DoubleEG_BlockC_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockC_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_DoubleEG_BlockD_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockD_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_DoubleEG_BlockE_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockE_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_DoubleEG_BlockF_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockF_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_DoubleEG_BlockG_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockG_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_DoubleEG_BlockH_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockH_MEM_fake_SF_v3_noOverlap.root";
 
-	TString filename_DoubleMu_BlockB_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockB_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_DoubleMu_BlockC_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockC_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_DoubleMu_BlockD_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockD_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_DoubleMu_BlockE_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockE_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_DoubleMu_BlockF_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockF_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_DoubleMu_BlockG_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockG_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_DoubleMu_BlockH_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockH_MEM_fake_SF_v2_noOverlap.root";
+	TString filename_DoubleMu_BlockB_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockB_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_DoubleMu_BlockC_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockC_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_DoubleMu_BlockD_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockD_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_DoubleMu_BlockE_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockE_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_DoubleMu_BlockF_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockF_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_DoubleMu_BlockG_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockG_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_DoubleMu_BlockH_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockH_MEM_fake_SF_v3_noOverlap.root";
 
-	TString filename_MuonEG_BlockB_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockB_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_MuonEG_BlockC_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockC_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_MuonEG_BlockD_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockD_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_MuonEG_BlockE_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockE_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_MuonEG_BlockF_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockF_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_MuonEG_BlockG_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockG_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_MuonEG_BlockH_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockH_MEM_fake_SF_v2_noOverlap.root";
+	TString filename_MuonEG_BlockB_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockB_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_MuonEG_BlockC_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockC_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_MuonEG_BlockD_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockD_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_MuonEG_BlockE_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockE_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_MuonEG_BlockF_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockF_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_MuonEG_BlockG_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockG_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_MuonEG_BlockH_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2016/nominal/Data/fake/ntuple_Oct19v1_Data_2016_DoubleEG_BlockH_MEM_fake_SF_v3_noOverlap.root";
 
 	///////////////////////////////////////////////////////
 
@@ -2854,35 +2854,35 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 
 	////////////////////////////////////////////////////////////
 
-	TString filename_SingleElectron_BlockB_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_SingleElectron_BlockB_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_SingleElectron_BlockC_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_SingleElectron_BlockC_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_SingleElectron_BlockD_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_SingleElectron_BlockD_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_SingleElectron_BlockE_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_SingleElectron_BlockE_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_SingleElectron_BlockF_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_SingleElectron_BlockF_MEM_fake_SF_v2_noOverlap.root";
+	TString filename_SingleElectron_BlockB_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_SingleElectron_BlockB_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_SingleElectron_BlockC_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_SingleElectron_BlockC_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_SingleElectron_BlockD_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_SingleElectron_BlockD_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_SingleElectron_BlockE_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_SingleElectron_BlockE_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_SingleElectron_BlockF_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_SingleElectron_BlockF_MEM_fake_SF_v3_noOverlap.root";
 
-	TString filename_SingleMuon_BlockB_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_SingleMuon_BlockB_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_SingleMuon_BlockC_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_SingleMuon_BlockC_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_SingleMuon_BlockD_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_SingleMuon_BlockD_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_SingleMuon_BlockE_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_SingleMuon_BlockE_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_SingleMuon_BlockF_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_SingleMuon_BlockF_MEM_fake_SF_v2_noOverlap.root";
+	TString filename_SingleMuon_BlockB_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_SingleMuon_BlockB_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_SingleMuon_BlockC_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_SingleMuon_BlockC_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_SingleMuon_BlockD_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_SingleMuon_BlockD_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_SingleMuon_BlockE_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_SingleMuon_BlockE_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_SingleMuon_BlockF_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_SingleMuon_BlockF_MEM_fake_SF_v3_noOverlap.root";
 
-	TString filename_DoubleEG_BlockB_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_DoubleEG_BlockB_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_DoubleEG_BlockC_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_DoubleEG_BlockC_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_DoubleEG_BlockD_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_DoubleEG_BlockD_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_DoubleEG_BlockE_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_DoubleEG_BlockE_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_DoubleEG_BlockF_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_DoubleEG_BlockF_MEM_fake_SF_v2_noOverlap.root";
+	TString filename_DoubleEG_BlockB_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_DoubleEG_BlockB_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_DoubleEG_BlockC_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_DoubleEG_BlockC_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_DoubleEG_BlockD_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_DoubleEG_BlockD_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_DoubleEG_BlockE_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_DoubleEG_BlockE_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_DoubleEG_BlockF_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_DoubleEG_BlockF_MEM_fake_SF_v3_noOverlap.root";
 
-	TString filename_DoubleMu_BlockB_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_DoubleEG_BlockB_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_DoubleMu_BlockC_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_DoubleEG_BlockC_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_DoubleMu_BlockD_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_DoubleEG_BlockD_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_DoubleMu_BlockE_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_DoubleEG_BlockE_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_DoubleMu_BlockF_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_DoubleEG_BlockF_MEM_fake_SF_v2_noOverlap.root";
+	TString filename_DoubleMu_BlockB_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_DoubleEG_BlockB_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_DoubleMu_BlockC_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_DoubleEG_BlockC_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_DoubleMu_BlockD_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_DoubleEG_BlockD_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_DoubleMu_BlockE_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_DoubleEG_BlockE_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_DoubleMu_BlockF_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_DoubleEG_BlockF_MEM_fake_SF_v3_noOverlap.root";
 
-	TString filename_MuonEG_BlockB_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_DoubleEG_BlockB_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_MuonEG_BlockC_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_DoubleEG_BlockC_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_MuonEG_BlockD_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_DoubleEG_BlockD_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_MuonEG_BlockE_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_DoubleEG_BlockE_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_MuonEG_BlockF_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_DoubleEG_BlockF_MEM_fake_SF_v2_noOverlap.root";
+	TString filename_MuonEG_BlockB_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_DoubleEG_BlockB_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_MuonEG_BlockC_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_DoubleEG_BlockC_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_MuonEG_BlockD_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_DoubleEG_BlockD_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_MuonEG_BlockE_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_DoubleEG_BlockE_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_MuonEG_BlockF_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2017/nominal/Data/fake/ntuple_Oct19v1_Data_2017_DoubleEG_BlockF_MEM_fake_SF_v3_noOverlap.root";
 
 	////////////////////////////////////////////////////////////
 
@@ -4966,25 +4966,25 @@ std::tuple< vector<float>, vector<TString>, vector<TString>, vector<TString>, ve
 
 	///////////////////////////////////////////////////////
 
-	TString filename_EGamma_BlockA_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/fake/ntuple_Oct19v1_Data_2018_EGamma_BlockA_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_EGamma_BlockB_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/fake/ntuple_Oct19v1_Data_2018_EGamma_BlockB_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_EGamma_BlockC_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/fake/ntuple_Oct19v1_Data_2018_EGamma_BlockC_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_EGamma_BlockD_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/fake/ntuple_Oct19v1_Data_2018_EGamma_BlockD_MEM_fake_SF_v2_noOverlap.root";
+	TString filename_EGamma_BlockA_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/fake/ntuple_Oct19v1_Data_2018_EGamma_BlockA_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_EGamma_BlockB_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/fake/ntuple_Oct19v1_Data_2018_EGamma_BlockB_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_EGamma_BlockC_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/fake/ntuple_Oct19v1_Data_2018_EGamma_BlockC_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_EGamma_BlockD_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/fake/ntuple_Oct19v1_Data_2018_EGamma_BlockD_MEM_fake_SF_v3_noOverlap.root";
 
-	TString filename_SingleMuon_BlockA_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/fake/ntuple_Oct19v1_Data_2018_SingleMuon_BlockA_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_SingleMuon_BlockB_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/fake/ntuple_Oct19v1_Data_2018_SingleMuon_BlockB_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_SingleMuon_BlockC_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/fake/ntuple_Oct19v1_Data_2018_SingleMuon_BlockC_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_SingleMuon_BlockD_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/fake/ntuple_Oct19v1_Data_2018_SingleMuon_BlockD_MEM_fake_SF_v2_noOverlap.root";
+	TString filename_SingleMuon_BlockA_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/fake/ntuple_Oct19v1_Data_2018_SingleMuon_BlockA_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_SingleMuon_BlockB_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/fake/ntuple_Oct19v1_Data_2018_SingleMuon_BlockB_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_SingleMuon_BlockC_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/fake/ntuple_Oct19v1_Data_2018_SingleMuon_BlockC_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_SingleMuon_BlockD_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/fake/ntuple_Oct19v1_Data_2018_SingleMuon_BlockD_MEM_fake_SF_v3_noOverlap.root";
 	
-	TString filename_DoubleMu_BlockA_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/fake/ntuple_Oct19v1_Data_2018_DoubleMu_BlockA_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_DoubleMu_BlockB_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/fake/ntuple_Oct19v1_Data_2018_DoubleMu_BlockB_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_DoubleMu_BlockC_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/fake/ntuple_Oct19v1_Data_2018_DoubleMu_BlockC_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_DoubleMu_BlockD_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/fake/ntuple_Oct19v1_Data_2018_DoubleMu_BlockD_MEM_fake_SF_v2_noOverlap.root";
+	TString filename_DoubleMu_BlockA_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/fake/ntuple_Oct19v1_Data_2018_DoubleMu_BlockA_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_DoubleMu_BlockB_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/fake/ntuple_Oct19v1_Data_2018_DoubleMu_BlockB_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_DoubleMu_BlockC_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/fake/ntuple_Oct19v1_Data_2018_DoubleMu_BlockC_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_DoubleMu_BlockD_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/fake/ntuple_Oct19v1_Data_2018_DoubleMu_BlockD_MEM_fake_SF_v3_noOverlap.root";
 
-	TString filename_MuonEG_BlockA_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/fake/ntuple_Oct19v1_Data_2018_MuonEG_BlockA_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_MuonEG_BlockB_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/fake/ntuple_Oct19v1_Data_2018_MuonEG_BlockB_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_MuonEG_BlockC_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/fake/ntuple_Oct19v1_Data_2018_MuonEG_BlockC_MEM_fake_SF_v2_noOverlap.root";
-	TString filename_MuonEG_BlockD_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/fake/ntuple_Oct19v1_Data_2018_MuonEG_BlockD_MEM_fake_SF_v2_noOverlap.root";
+	TString filename_MuonEG_BlockA_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/fake/ntuple_Oct19v1_Data_2018_MuonEG_BlockA_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_MuonEG_BlockB_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/fake/ntuple_Oct19v1_Data_2018_MuonEG_BlockB_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_MuonEG_BlockC_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/fake/ntuple_Oct19v1_Data_2018_MuonEG_BlockC_MEM_fake_SF_v3_noOverlap.root";
+	TString filename_MuonEG_BlockD_fake = "/data_CMPerez/mperez/ttH_Legacy/ntuples_datacards/2018/nominal/Data/fake/ntuple_Oct19v1_Data_2018_MuonEG_BlockD_MEM_fake_SF_v3_noOverlap.root";
 
 	///////////////////////////////////////////////////////
 
@@ -6527,7 +6527,7 @@ void datacard_maker(TString var1, int nbin, float xmin, float xmax,
     TH1F* h_fakes = single_plot(filename_data_fake,
 			"HTauTauTree_2lss1tau_fake",
 			var,
-			"event_weight_ttH_v2*("+cut_cat+")",
+			"event_weight_ttH_v3*("+cut_cat+")",
 			nbin,xmin,xmax);
     
     h_fakes->SetNameTitle("data_fakes","data_fakes");

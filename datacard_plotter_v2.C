@@ -136,45 +136,83 @@ void plot_2lSS1tau(vector<TString> datacards, vector<TString> dirs, TString varn
   h_data_obs.SetMarkerStyle(20);
 
   double error=0;
-  /*cout<<"Pre-fit Yields"<<endl;
-  TH1F bkg = TTZ;
-  bkg.Add(&TTW);
-  bkg.Add(&TTZ);
-  bkg.Add(&Higgs);
-  bkg.Add(&tH);
-  bkg.Add(&EWK);
-  bkg.Add(&Rares);
-  bkg.Add(&Convs);
-  bkg.Add(&fakes);
+  cout<<"Pre-fit Yields"<<endl;
+  TH1F bkg;
   bkg.Add(&flips);
-  TH1F SM = bkg;
-  SM.Add(&ttH);
-  double nbins = ttH.GetNbinsX();
-  cout<<"ttH :"<<ttH.IntegralAndError(0,nbins,error);
-  cout<<" +/- "<<error<<endl;
-  cout<<"tH :"<<tH.IntegralAndError(0,nbins,error);
-  cout<<" +/- "<<error<<endl;
-  cout<<"Other H :"<<Higgs.IntegralAndError(0,nbins,error);
-  cout<<" +/- "<<error<<endl;
-  cout<<"ttZ :"<<TTZ.IntegralAndError(0,nbins,error);
-  cout<<" +/- "<<error<<endl;
-  cout<<"ttW :"<<TTW.IntegralAndError(0,nbins,error);
-  cout<<" +/- "<<error<<endl;
-  cout<<"EWK :"<<EWK.IntegralAndError(0,nbins,error);
-  cout<<" +/- "<<error<<endl;
-  cout<<"Rares :"<<Rares.IntegralAndError(0,nbins,error);
-  cout<<" +/- "<<error<<endl;
-  cout<<"Convs :"<<Convs.IntegralAndError(0,nbins,error);
-  cout<<" +/- "<<error<<endl;  
-  cout<<"Flips : "<<flips.IntegralAndError(0,nbins,error);
-  cout<<" +/- "<<error<<endl;
-  cout<<"Fakes : "<<fakes.IntegralAndError(0,nbins,error);
-  cout<<" +/- "<<error<<endl;
-  cout<<"Total bkg : "<<bkg.IntegralAndError(0,nbins,error);
-  cout<<" +/- "<<error<<endl;
-  cout<<"SM expectation : "<<SM.IntegralAndError(0,nbins,error);
-  cout<<" +/- "<<error<<endl;
-  if(unblind) cout<<"Data obs : "<<h_data_obs.IntegralAndError(0,nbins,error)<<endl;*/
+  bkg.Add(&fakes);
+  bkg.Add(&Convs);
+  bkg.Add(&Rares);
+  bkg.Add(&WZ);
+  bkg.Add(&ZZ);
+  bkg.Add(&TTZ);
+  bkg.Add(&TTW);
+  bkg.Add(&TTWW);
+  bkg.Add(&VH);
+  bkg.Add(&ttVH);
+  bkg.Add(&VBF);
+  bkg.Add(&ggH);
+  bkg.Add(&HH);
+
+  TH1F sig_tH;
+  sig_tH.Add(&tHQww);
+  sig_tH.Add(&tHQzz);
+  sig_tH.Add(&tHQtt);
+  sig_tH.Add(&tHWww);
+  sig_tH.Add(&tHWzz);
+  sig_tH.Add(&tHWtt);
+
+  bkg.Add(&sig_tH);
+
+  TH1F sig_ttH;
+  sig_ttH.Add(&ttHww);
+  sig_ttH.Add(&ttHzz);
+  sig_ttH.Add(&ttHtt);
+
+  TH1F SM;
+  SM.Add(&bkg);
+  SM.Add(&sig_ttH);
+
+  double nbins = sig_ttH.GetNbinsX();
+
+  /*cout<<"flips: "<<flips.IntegralAndError(0,nbins,error)<<" +/- "<<error<<endl;
+  cout<<"fakes: "<<fakes.IntegralAndError(0,nbins,error)<<" +/- "<<error<<endl;
+  cout<<"Convs: "<<Convs.IntegralAndError(0,nbins,error)<<" +/- "<<error<<endl;
+  cout<<"Rares: "<<Rares.IntegralAndError(0,nbins,error)<<" +/- "<<error<<endl;
+  cout<<"WZ: "<<WZ.IntegralAndError(0,nbins,error)<<" +/- "<<error<<endl;
+  cout<<"ZZ: "<<ZZ.IntegralAndError(0,nbins,error)<<" +/- "<<error<<endl;
+  cout<<"TTZ: "<<TTZ.IntegralAndError(0,nbins,error)<<" +/- "<<error<<endl;
+  cout<<"TTW: "<<TTW.IntegralAndError(0,nbins,error)<<" +/- "<<error<<endl;
+  cout<<"TTWW: "<<TTWW.IntegralAndError(0,nbins,error)<<" +/- "<<error<<endl;
+  cout<<"VH: "<<VH.IntegralAndError(0,nbins,error)<<" +/- "<<error<<endl;
+  cout<<"ttVH: "<<ttVH.IntegralAndError(0,nbins,error)<<" +/- "<<error<<endl;
+  cout<<"VBF: "<<VBF.IntegralAndError(0,nbins,error)<<" +/- "<<error<<endl;
+  cout<<"ggH: "<<ggH.IntegralAndError(0,nbins,error)<<" +/- "<<error<<endl;
+  cout<<"HH: "<<HH.IntegralAndError(0,nbins,error)<<" +/- "<<error<<endl;
+  cout<<"tHQww: "<<tHQww.IntegralAndError(0,nbins,error)<<" +/- "<<error<<endl;
+  cout<<"tHQzz: "<<tHQzz.IntegralAndError(0,nbins,error)<<" +/- "<<error<<endl;
+  cout<<"tHQtt: "<<tHQtt.IntegralAndError(0,nbins,error)<<" +/- "<<error<<endl;
+  cout<<"tHWww: "<<tHWww.IntegralAndError(0,nbins,error)<<" +/- "<<error<<endl;
+  cout<<"tHWzz: "<<tHWzz.IntegralAndError(0,nbins,error)<<" +/- "<<error<<endl;
+  cout<<"tHWtt: "<<tHWtt.IntegralAndError(0,nbins,error)<<" +/- "<<error<<endl;
+  cout<<"ttHww: "<<ttHww.IntegralAndError(0,nbins,error)<<" +/- "<<error<<endl;
+  cout<<"ttHzz: "<<ttHzz.IntegralAndError(0,nbins,error)<<" +/- "<<error<<endl;
+  cout<<"ttHtt: "<<ttHtt.IntegralAndError(0,nbins,error)<<" +/- "<<error<<endl;*/
+  
+  cout<<"Prefit yields"<<endl;
+  cout<<"ttH: "<<ttHww.Integral()+ttHzz.Integral()+ttHtt.Integral()<<endl;
+  cout<<"tH: "<<tHQww.Integral()+tHQzz.Integral()+tHQtt.Integral()+tHWww.Integral()+tHWzz.Integral()+tHWtt.Integral()<<endl;
+  cout<<"Other H: "<<VH.Integral()+ttVH.Integral()+VBF.Integral()+ggH.Integral()+HH.Integral()<<endl;
+  cout<<"ttW(W): "<<TTW.Integral()+TTWW.Integral()<<endl;
+  cout<<"ttZ: "<<TTZ.Integral()<<endl;
+  cout<<"EWK: "<<WZ.Integral()+ZZ.Integral()<<endl;
+  cout<<"Rares: "<<Rares.Integral()<<endl;
+  cout<<"Convs: "<<Convs.Integral()<<endl;
+  cout<<"Fakes: "<<fakes.Integral()<<endl;
+  cout<<"Flips: "<<flips.Integral()<<endl;
+  cout<<"  "<<endl;
+  cout<<"Total bkg : "<<bkg.Integral()<<" +/- "<<error<<endl;
+  cout<<"SM expectation : "<<SM.Integral()<<" +/- "<<error<<endl;
+  if(unblind) cout<<"Data obs : "<<h_data_obs.Integral()<<endl;
 
   TLegend* leg1=new TLegend(0.2,0.67,0.4,0.87);
   leg1->SetBorderSize(0);
@@ -364,7 +402,7 @@ void plot_MEM_2lSS1tau_nomiss_2016(bool unblind=false){
   float luminosity = 35920.;
 
   vector<TString> datacards;
-  datacards.push_back("/data_CMS/cms/mperez/ttH_Legacy/Oct19/datacards/2lss_1tau/datacard_MEM_nomiss_2lss1tau_2016.root");
+  datacards.push_back("/data_CMS/cms/mperez/ttH_Legacy/Oct19/datacards/2lss_1tau/datacards_MEM_syst_30Mar/datacard_MEM_nomiss_2lss1tau_2016.root");
 
   vector<TString> dirs;
   dirs.push_back("ttH_2lss_1tau");
@@ -383,7 +421,7 @@ void plot_MEM_2lSS1tau_miss_2016(bool unblind=false){
   float luminosity = 35920.;
 
   vector<TString> datacards;
-  datacards.push_back("/data_CMS/cms/mperez/ttH_Legacy/Oct19/datacards/2lss_1tau/datacard_MEM_miss_2lss1tau_2016.root");
+  datacards.push_back("/data_CMS/cms/mperez/ttH_Legacy/Oct19/datacards/2lss_1tau/datacards_MEM_syst_30Mar/datacard_MEM_miss_2lss1tau_2016.root");
 
   vector<TString> dirs;
   dirs.push_back("ttH_2lss_1tau");
@@ -402,7 +440,7 @@ void plot_MEM_2lSS1tau_nomiss_2017(bool unblind=false){
   float luminosity = 41530.;
 
   vector<TString> datacards;
-  datacards.push_back("/data_CMS/cms/mperez/ttH_Legacy/Oct19/datacards/2lss_1tau/datacard_MEM_nomiss_2lss1tau_2017.root");
+  datacards.push_back("/data_CMS/cms/mperez/ttH_Legacy/Oct19/datacards/2lss_1tau/datacards_MEM_syst_30Mar/datacard_MEM_nomiss_2lss1tau_2017.root");
 
   vector<TString> dirs;
   dirs.push_back("ttH_2lss_1tau");
@@ -421,7 +459,7 @@ void plot_MEM_2lSS1tau_miss_2017(bool unblind=false){
   float luminosity = 41530.;
 
   vector<TString> datacards;
-  datacards.push_back("/data_CMS/cms/mperez/ttH_Legacy/Oct19/datacards/2lss_1tau/datacard_MEM_miss_2lss1tau_2017.root");
+  datacards.push_back("/data_CMS/cms/mperez/ttH_Legacy/Oct19/datacards/2lss_1tau/datacards_MEM_syst_30Mar/datacard_MEM_miss_2lss1tau_2017.root");
 
   vector<TString> dirs;
   dirs.push_back("ttH_2lss_1tau");
@@ -440,7 +478,7 @@ void plot_MEM_2lSS1tau_nomiss_2018(bool unblind=false){
   float luminosity = 59740.;
 
   vector<TString> datacards;
-  datacards.push_back("/data_CMS/cms/mperez/ttH_Legacy/Oct19/datacards/2lss_1tau/datacard_MEM_nomiss_2lss1tau_2018.root");
+  datacards.push_back("/data_CMS/cms/mperez/ttH_Legacy/Oct19/datacards/2lss_1tau/datacards_MEM_syst_30Mar/datacard_MEM_nomiss_2lss1tau_2018.root");
 
   vector<TString> dirs;
   dirs.push_back("ttH_2lss_1tau");
@@ -459,7 +497,7 @@ void plot_MEM_2lSS1tau_miss_2018(bool unblind=false){
   float luminosity = 59740.;
 
   vector<TString> datacards;
-  datacards.push_back("/data_CMS/cms/mperez/ttH_Legacy/Oct19/datacards/2lss_1tau/datacard_MEM_miss_2lss1tau_2018.root");
+  datacards.push_back("/data_CMS/cms/mperez/ttH_Legacy/Oct19/datacards/2lss_1tau/datacards_MEM_syst_30Mar/datacard_MEM_miss_2lss1tau_2018.root");
 
   vector<TString> dirs;
   dirs.push_back("ttH_2lss_1tau");
