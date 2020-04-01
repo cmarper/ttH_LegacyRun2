@@ -5,7 +5,7 @@
 ## ./commands_table_systs.py
 
 dowhat='step1'
-POIs = [ "r_ttW", "r_ttZ", "r_ttH"]#,
+POIs = ["r_ttW", "r_ttZ", "r_ttH"]#,
 
 systsGroup = {
     'taus' : ['CMS_ttHl18_tauIDSF','CMS_ttHl17_tauIDSF','CMS_ttHl16_tauIDSF','CMS_scale_t_2016','CMS_scale_t_2017','CMS_scale_t_2018','CMS_eff_t'],
