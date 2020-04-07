@@ -52,51 +52,54 @@ int main(int argc, char** argv) {
   vector<string> ttH_procs;
   vector<string> tHq_procs;
   vector<string> tHW_procs;
+  vector<string> bkg_procs;
+  vector<string> bkg_procs_mc;
 
   sig_procs.clear();
   ttH_procs.clear();
   tHq_procs.clear();
   tHW_procs.clear();
+  bkg_procs.clear();
+  bkg_procs_mc.clear();
 
-  sig_procs = {"ttH_hww","ttH_hzz","ttH_htt","tHq_htt","tHW_hww","tHW_htt"};
   ttH_procs = {"ttH_hww","ttH_hzz","ttH_htt"};
   tHq_procs = {"tHq_htt"};
   tHW_procs = {"tHW_hww","tHW_htt"};
 
-  vector<string> bkg_procs;
-  vector<string> bkg_procs_mc;
-  
-  bkg_procs.clear();
-  bkg_procs_mc.clear();
-
   if(year==2016 && subcategory=="nomiss"){
-    bkg_procs = {"TTWH_htt","TTZ","TTW","TTWW","WZ","Rares","data_fakes","data_flips"}; //ZZ,Convs
-    bkg_procs_mc = {"TTWH_htt","TTZ","TTW","TTWW","WZ","Rares"};
+    sig_procs = {"ttH_hww","ttH_hzz","ttH_htt","tHq_htt","tHW_hww","tHW_htt","TTWH_htt"};
+    bkg_procs = {"TTZ","TTW","TTWW","WZ","Rares","data_fakes","data_flips"}; //ZZ,Convs
+    bkg_procs_mc = {"TTZ","TTW","TTWW","WZ","Rares"};
   }
 
   else if(year==2017 && subcategory=="nomiss"){
+    sig_procs = {"ttH_hww","ttH_hzz","ttH_htt","tHq_htt","tHW_hww","tHW_htt"};
     bkg_procs = {"TTZ","TTW","TTWW","WZ","ZZ","Rares","Convs","data_fakes","data_flips"};
     bkg_procs_mc = {"TTZ","TTW","TTWW","WZ","ZZ","Rares","Convs"};
   }
 
   else if(year==2018 && subcategory=="nomiss"){
-    bkg_procs = {"TTZH_hww","TTZH_htt","TTWH_htt","TTZ","TTW","TTWW","WZ","ZZ","Rares","Convs","data_fakes","data_flips"};
-    bkg_procs_mc = {"TTZH_hww","TTZH_htt","TTWH_htt","TTZ","TTW","TTWW","WZ","ZZ","Rares","Convs"};   
+    sig_procs = {"ttH_hww","ttH_hzz","ttH_htt","tHq_htt","tHW_hww","tHW_htt","TTZH_hww","TTZH_htt","TTWH_htt",};
+    bkg_procs = {"TTZ","TTW","TTWW","WZ","ZZ","Rares","Convs","data_fakes","data_flips"};
+    bkg_procs_mc = {"TTZ","TTW","TTWW","WZ","ZZ","Rares","Convs"};   
   }
 
   else if(year==2016 && subcategory=="miss"){
-    bkg_procs = {"WH_htt","TTZH_hww","TTWH_htt","TTZ","TTW","TTWW","WZ","ZZ","Rares","Convs","data_fakes","data_flips"};
-    bkg_procs_mc = {"WH_htt","TTZH_hww","TTWH_htt","TTZ","TTW","TTWW","WZ","ZZ","Rares","Convs"};
+    sig_procs = {"ttH_hww","ttH_hzz","ttH_htt","tHq_htt","tHW_hww","tHW_htt","WH_htt","TTZH_hww","TTWH_htt"};
+    bkg_procs = {"TTZ","TTW","TTWW","WZ","ZZ","Rares","Convs","data_fakes","data_flips"};
+    bkg_procs_mc = {"TTZ","TTW","TTWW","WZ","ZZ","Rares","Convs"};
   }
 
   else if(year==2017 && subcategory=="miss"){
-    bkg_procs = {"ZH_htt","TTZH_hww","TTZH_htt","TTWH_htt","TTZ","TTW","TTWW","WZ","ZZ","Rares","Convs","data_fakes","data_flips"};
-    bkg_procs_mc = {"ZH_htt","TTZH_hww","TTZH_htt","TTWH_htt","TTZ","TTW","TTWW","WZ","ZZ","Rares","Convs"};    
+    sig_procs = {"ttH_hww","ttH_hzz","ttH_htt","tHq_htt","tHW_hww","tHW_htt","ZH_htt","TTZH_hww","TTZH_htt","TTWH_htt"};
+    bkg_procs = {"TTZ","TTW","TTWW","WZ","ZZ","Rares","Convs","data_fakes","data_flips"};
+    bkg_procs_mc = {"TTZ","TTW","TTWW","WZ","ZZ","Rares","Convs"};    
   }
 
   else if(year==2018 && subcategory=="miss"){
-    bkg_procs = {"ZH_htt","TTZH_hww","TTZH_htt","TTWH_htt","TTZ","TTW","TTWW","WZ","ZZ","Rares","Convs","data_fakes","data_flips"};
-    bkg_procs_mc = {"ZH_htt","TTZH_hww","TTZH_htt","TTWH_htt","TTZ","TTW","TTWW","WZ","ZZ","Rares","Convs"};    
+    sig_procs = {"ttH_hww","ttH_hzz","ttH_htt","tHq_htt","tHW_hww","tHW_htt","ZH_htt","TTZH_hww","TTZH_htt","TTWH_htt",};
+    bkg_procs = {"TTZ","TTW","TTWW","WZ","ZZ","Rares","Convs","data_fakes","data_flips"};
+    bkg_procs_mc = {"TTZ","TTW","TTWW","WZ","ZZ","Rares","Convs"};    
   }
 
   vector<string> hww_procs;
