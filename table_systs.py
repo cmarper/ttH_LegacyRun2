@@ -4,6 +4,19 @@
 ## chmod +x commands_table_systs.py
 ## ./commands_table_systs.py
 
+# Trigger efficiency: trigger
+# Electron/Muon reconstruction and id efficiency: lep
+# Tau ID efficiency: taus
+# B-tagging efficiency: btag
+# Mis-id leptons: fakes
+# Jet energy scale and resolution: jecs
+# MC and sideband statistical uncertainty: mc_stat
+# Theory related sources: theory
+# Prefiring: prefiring
+# Normalization of MC estimation processes: floating
+# Luminosity: lumi
+# Statistical uncertainty: stat
+
 dowhat='step1'
 POIs = [ "r_ttW", "r_ttZ", "r_ttH"]#,
 
