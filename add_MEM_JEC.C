@@ -14,7 +14,7 @@ void merge_MEM(TString sample, TString year, TString type){
 
     ////////////////////////////////////////////////////////////////////////////////
 
-    TString filein1 = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_splitted/"+year+"/JECdown/"+type+"/ntuple_"+sample+"_JECdown.root";
+    TString filein1 = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_splitted/"+year+"/JECup/"+type+"/ntuple_"+sample+"_JECup.root";
     //cout<<"Split file: "<<filein1<<endl;
 
     TString treename1;
@@ -28,7 +28,7 @@ void merge_MEM(TString sample, TString year, TString type){
     ////////////////////////////////////////////////////////////////////////////////
 
     TString fileout;
-    fileout = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_splitted_MEM/"+year+"/JECdown/"+type+"/ntuple_"+sample+"_MEM_SR_JECdown.root";
+    fileout = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_splitted_MEM/"+year+"/JECup/"+type+"/ntuple_"+sample+"_MEM_SR_JECup.root";
     cout<<fileout<<endl;
     //cout<<"....."<<endl;
 
@@ -58,7 +58,7 @@ void merge_MEM(TString sample, TString year, TString type){
     ////////////////////////////////////////////////////////////////////////////////
 
     TString filein2;
-    filein2 = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_MEM/"+year+"/JECdown/"+type+"/ntuple_"+sample+"_MEM_SR_JECdown.root";
+    filein2 = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_MEM/"+year+"/JECup/"+type+"/ntuple_"+sample+"_MEM_SR_JECup.root";
 
 	TChain * tree2 = new TChain("T");
 	tree2->Add(filein2);

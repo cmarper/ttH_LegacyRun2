@@ -33,7 +33,7 @@ void create_scripts( TString sample="Oct19v1_MC_2016_ttHJetToNonbb", int maxspli
   TString dirin = "/data_CMPerez/mperez/ttH_Legacy/ntuples_converted/";
   dirin += year;
   //dirin += "/nominal/";
-  dirin += "/JECup/";
+  dirin += "/JECdown/";
   dirin += type;
   dirin += "/";
 
@@ -42,7 +42,7 @@ void create_scripts( TString sample="Oct19v1_MC_2016_ttHJetToNonbb", int maxspli
   TString dirout = "/data_CMS/cms/mperez/ttH_Legacy/Oct19/ntuples_splitted/";
   dirout += year;
   //dirout += "/nominal/";
-  dirout += "/JECup/";
+  dirout += "/JECdown/";
   dirout += type;
   dirout += "/";
 
@@ -52,11 +52,11 @@ void create_scripts( TString sample="Oct19v1_MC_2016_ttHJetToNonbb", int maxspli
 
     std::string isample = std::to_string(j);
 
-    TString filename = "ntuple_"+sample+"_"+isample+"_JECup.root";
+    TString filename = "ntuple_"+sample+"_"+isample+"_JECdown.root";
 
     //cout<<filename<<endl;
 
-    TString ScriptName = Form("script_tier3_MC/"+year+"/split_"+sample+"_%i_JECup.sh",j);
+    TString ScriptName = Form("script_tier3_MC/"+year+"/split_"+sample+"_%i_JECdown.sh",j);
     ofstream myscript;
     myscript.open (ScriptName.Data());
     myscript << "#!/bin/bash\n";
@@ -81,7 +81,7 @@ void launch_scripts( TString sample="Oct19v1_MC_2016_ttHJetToNonbb", int maxspli
   for(int j=0;j<maxsplit+1;j++){
     
     TString LaunchExec = "/opt/exp_soft/cms/t3/t3submit ";
-    LaunchExec += Form("script_tier3_MC/"+year+"/split_"+sample+"_%i_JECup.sh",j);
+    LaunchExec += Form("script_tier3_MC/"+year+"/split_"+sample+"_%i_JECdown.sh",j);
     gSystem->Exec(LaunchExec.Data());
  
   }
@@ -91,7 +91,7 @@ void launch_scripts( TString sample="Oct19v1_MC_2016_ttHJetToNonbb", int maxspli
 void launch_single_script( TString sample="Oct19v1_MC_2016_THQ_ctcvcp", int isplit=0, TString year="2016", TString type="MC" ){
 
   TString LaunchExec = "/opt/exp_soft/cms/t3/t3submit ";
-  LaunchExec += Form("script_tier3_MC/"+year+"/split_"+sample+"_%i_JECup.sh",isplit);
+  LaunchExec += Form("script_tier3_MC/"+year+"/split_"+sample+"_%i_JECdown.sh",isplit);
   gSystem->Exec(LaunchExec.Data());
  
 }
@@ -201,7 +201,7 @@ create_scripts("Oct19v1_MC_2018_TTTT",0,"2018","Rares");
 
     create_scripts("Oct19v2_MC_2017_WWTo2L2Nu",0,"2017","EWK");
     create_scripts("Oct19v1_MC_2017_WZTo3LNu", 1, "2017", "EWK");
-    create_scripts("Oct19v1_MC_2017_ZZTo4L_ext1", 11, "2017", "EWK"); // repeat 5 JECup
+    create_scripts("Oct19v1_MC_2017_ZZTo4L_ext1", 11, "2017", "EWK"); // repeat 5 JECdown
 
     create_scripts("Oct19v3_MC_2018_WWTo2L2Nu",1, "2018","EWK");
     create_scripts("Oct19v2_MC_2018_WZTo3LNu_ext1",2,"2018","EWK");

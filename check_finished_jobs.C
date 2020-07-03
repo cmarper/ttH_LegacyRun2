@@ -34,7 +34,6 @@ int loadfiles (vector<char*> fileset){
 
     for(unsigned int i=0; i<fileset.size(); i++){
         //CheckWord(fileset.at(i), "FINISHED");
-        //CheckWord(fileset.at(i), "***FINISHED SUCCESSFULLY***");
         CheckWord(fileset.at(i), "4l CR fake");
     }
 
@@ -48,11 +47,10 @@ void test(){
 
     //myfiles.push_back("split_Oct19v1_MC_2016_THQ_ctcvcp_1_JECup.sh.o617002");
 
-    myfiles.push_back("split_Oct19v2_MC_2018_TTJets_SingleLeptFromTbar_0_JECup.sh.o624784");
-    myfiles.push_back("split_Oct19v1_MC_2017_TTJets_SingleLeptFromTbar_0_JECup.sh.o624782");
-    myfiles.push_back("split_Oct19v2_MC_2018_TTJets_SingleLeptFromTbar_0_JECdown.sh.o624789");
-    myfiles.push_back("split_Oct19v1_MC_2018_TTJets_DiLept_0_JECup.sh.o624783");
-    myfiles.push_back("split_Oct19v1_MC_2017_TTJets_SingleLeptFromTbar_0_JECdown.sh.o624787");
+    myfiles.push_back("split_Oct19v1_MC_2016_TTJets_DiLept_ext1_0_JECup.sh.o625204");
+    myfiles.push_back("split_Oct19v3_MC_2016_TTJets_SingleLeptFromTbar_ext1_0_JECdown.sh.o625207");
+    myfiles.push_back("split_Oct19v3_MC_2016_TTJets_SingleLeptFromTbar_ext1_0_JECup.sh.o625205");
+    myfiles.push_back("split_Oct19v1_MC_2016_TTJets_DiLept_ext1_0_JECdown.sh.o625206");
     
     loadfiles(myfiles);
 
