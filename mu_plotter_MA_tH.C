@@ -14,47 +14,47 @@
 
 void plot_mu_comb(int era){
 
-  double mu_2lss = +3.18;  
-  double mu_2lss_m1s = 4.83;
-  double mu_2lss_p1s = 4.80;
+  double mu_2lss = +3.2;  
+  double mu_2lss_m1s = 4.8;
+  double mu_2lss_p1s = 4.8;
 
-  double mu_3l = +15.52;  
-  double mu_3l_m1s = 7.65;
-  double mu_3l_p1s = 8.12;
+  double mu_3l = +15.5;  
+  double mu_3l_m1s = 7.7;
+  double mu_3l_p1s = 8.1;
 
-  double mu_2lss1tau = +8.06;  
-  double mu_2lss1tau_m1s = 7.46;
-  double mu_2lss1tau_p1s = 8.17;
+  double mu_2lss1tau = +8.1;  
+  double mu_2lss1tau_m1s = 7.5;
+  double mu_2lss1tau_p1s = 8.2;
 
-  double mu_comb = +5.67;  
-  double mu_comb_m1s = 3.98;
-  double mu_comb_p1s = 4.05;
-  double mu_comb_m1s_stat = 2.68;
-  double mu_comb_p1s_stat = 2.75;
-  double mu_comb_m1s_syst=2.95;
-  double mu_comb_p1s_syst=2.98;
+  double mu_comb = +5.7;  
+  double mu_comb_m1s = 4.0;
+  double mu_comb_p1s = 4.1;
+  double mu_comb_m1s_stat = 2.7;
+  double mu_comb_p1s_stat = 2.8;
+  double mu_comb_m1s_syst=3.0;
+  double mu_comb_p1s_syst=3.0;
 
   if(era==0){
 
-    mu_2lss = +3.18;  
-    mu_2lss_m1s = 4.83;
-    mu_2lss_p1s = 4.80;
+    mu_2lss = +3.2;  
+    mu_2lss_m1s = 4.8;
+    mu_2lss_p1s = 4.8;
 
-    mu_3l = +15.52;  
-    mu_3l_m1s = 7.65;
-    mu_3l_p1s = 8.12;
+    mu_3l = +15.5;  
+    mu_3l_m1s = 7.7;
+    mu_3l_p1s = 8.1;
 
-    mu_2lss1tau = +8.06;  
-    mu_2lss1tau_m1s = 7.46;
-    mu_2lss1tau_p1s = 8.17;
+    mu_2lss1tau = +8.1;  
+    mu_2lss1tau_m1s = 7.5;
+    mu_2lss1tau_p1s = 8.2;
 
-    mu_comb = +5.67;  
-    mu_comb_m1s = 3.98;
-    mu_comb_p1s = 4.05;
-    mu_comb_m1s_stat = 2.68;
-    mu_comb_p1s_stat = 2.75;
-    mu_comb_m1s_syst=2.95;
-    mu_comb_p1s_syst=2.98;
+    mu_comb = +5.7;  
+    mu_comb_m1s = 4.0;
+    mu_comb_p1s = 4.1;
+    mu_comb_m1s_stat = 2.7;
+    mu_comb_p1s_stat = 2.8;
+    mu_comb_m1s_syst=3.0;
+    mu_comb_p1s_syst=3.0;
 
   }
 
@@ -201,7 +201,7 @@ void plot_mu_comb(int era){
   gr_mu_comb_syst->GetYaxis()->SetLabelSize(0);
   gr_mu_comb_syst->GetYaxis()->SetTickSize(0);
   gr_mu_comb_syst->GetYaxis()->SetTickLength(0.0);
-  gr_mu_comb_syst->GetXaxis()->SetTitle("Best fit #mu(tH)");
+  gr_mu_comb_syst->GetXaxis()->SetTitle("Best fit #hat{#mu}_{tH}");
   gr_mu_comb_syst->GetXaxis()->SetTitleOffset(1.3);
 
   gPad->RedrawAxis();
@@ -209,7 +209,8 @@ void plot_mu_comb(int era){
   double luminosity=137000;
   TLatex tex;
   tex.SetTextSize(0.035);
-  tex.DrawLatexNDC(0.26,0.91,"CMS #bf{#it{Preliminary}}");
+  //tex.DrawLatexNDC(0.26,0.91,"CMS #bf{#it{Preliminary}}");
+  tex.DrawLatexNDC(0.26,0.91,"CMS");
 
   if(era==0)
     tex.DrawLatexNDC(0.66,0.91,"#bf{137 fb^{-1} (13 TeV)}");
@@ -234,15 +235,15 @@ void plot_mu_comb(int era){
   if(era!=0) scale = 3.7;
 
   tex.SetTextSize(0.027);
-  tex.DrawLatex(-13*scale,y_2lss,Form("#bf{#mu = %.2f ^{+%.2f}_{-%.2f}}",mu_2lss,mu_2lss_p1s,mu_2lss_m1s));
-  tex.DrawLatex(-13*scale,y_3l,Form("#bf{#mu = %.2f ^{+%.2f}_{-%.2f}}",mu_3l,mu_3l_p1s,mu_3l_m1s));
-  tex.DrawLatex(-13*scale,y_2lss1tau,Form("#bf{#mu = %.2f ^{+%.2f}_{-%.2f}}",mu_2lss1tau,mu_2lss1tau_p1s,mu_2lss1tau_m1s));
+  tex.DrawLatex(-13*scale,y_2lss,Form("#bf{#hat{#mu}_{tH} = %.1f ^{+%.1f}_{-%.1f}}",mu_2lss,mu_2lss_p1s,mu_2lss_m1s));
+  tex.DrawLatex(-13*scale,y_3l,Form("#bf{#hat{#mu}_{tH} = %.1f ^{+%.1f}_{-%.1f}}",mu_3l,mu_3l_p1s,mu_3l_m1s));
+  tex.DrawLatex(-13*scale,y_2lss1tau,Form("#bf{#hat{#mu}_{tH} = %.1f ^{+%.1f}_{-%.1f}}",mu_2lss1tau,mu_2lss1tau_p1s,mu_2lss1tau_m1s));
 
   tex.SetTextSize(0.036);
   if(era==0)
-    tex.DrawLatex(-13*scale,10,Form("#mu = %.2f ^{+%.2f}_{-%.2f} #bf{#left[ {}^{+%.2f}_{-%.2f} (stat) {}^{+%.2f}_{-%.2f} (syst) #right]}",mu_comb,mu_comb_p1s,mu_comb_m1s,mu_comb_p1s_stat,mu_comb_m1s_stat,mu_comb_p1s_syst,mu_comb_m1s_syst));
+    tex.DrawLatex(-13*scale,10,Form("#hat{#mu}_{tH} = %.1f ^{+%.1f}_{-%.1f} #bf{#left[ {}^{+%.1f}_{-%.1f} (stat) {}^{+%.1f}_{-%.1f} (syst) #right]}",mu_comb,mu_comb_p1s,mu_comb_m1s,mu_comb_p1s_stat,mu_comb_m1s_stat,mu_comb_p1s_syst,mu_comb_m1s_syst));
   else
-    tex.DrawLatex(-13*scale,10,Form("#mu = %.2f ^{+%.2f}_{-%.2f}",mu_comb,mu_comb_p1s,mu_comb_m1s));
+    tex.DrawLatex(-13*scale,10,Form("#mu = %.1f ^{+%.1f}_{-%.1f}",mu_comb,mu_comb_p1s,mu_comb_m1s));
 
   TString erastring = std::to_string(era);
   c->SaveAs("test_mu_tH_"+erastring+"_2.pdf");

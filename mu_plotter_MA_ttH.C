@@ -411,7 +411,7 @@ void plot_mu_comb(int era){
   gr_mu_comb_syst->GetYaxis()->SetLabelSize(0);
   gr_mu_comb_syst->GetYaxis()->SetTickSize(0);
   gr_mu_comb_syst->GetYaxis()->SetTickLength(0.0);
-  gr_mu_comb_syst->GetXaxis()->SetTitle("Best fit #mu(t#bar{t}H)");
+  gr_mu_comb_syst->GetXaxis()->SetTitle("Best fit #hat{#mu}_{t#bar{t}H}");
   gr_mu_comb_syst->GetXaxis()->SetTitleOffset(1.3);
 
   gPad->RedrawAxis();
@@ -452,22 +452,22 @@ void plot_mu_comb(int era){
   if(era!=0) scale = 3.6;
 
   tex.SetTextSize(0.027);
-  tex.DrawLatex(-2.65*scale,y_2lss,Form("#bf{#mu = %.2f ^{+%.2f}_{-%.2f}}",mu_2lss,mu_2lss_p1s,mu_2lss_m1s));
-  tex.DrawLatex(-2.65*scale,y_3l,Form("#bf{#mu = %.2f ^{+%.2f}_{-%.2f}}",mu_3l,mu_3l_p1s,mu_3l_m1s));
-  tex.DrawLatex(-2.65*scale,y_2lss1tau,Form("#bf{#mu = %.2f ^{+%.2f}_{-%.2f}}",mu_2lss1tau,mu_2lss1tau_p1s,mu_2lss1tau_m1s));
-  tex.DrawLatex(-2.65*scale,y_1l2tau,Form("#bf{#mu = %.2f ^{+%.2f}_{-%.2f}}",mu_1l2tau,mu_1l2tau_p1s,mu_1l2tau_m1s));
-  tex.DrawLatex(-2.65*scale,y_2los1tau,Form("#bf{#mu = %.2f ^{+%.2f}_{-%.2f}}",mu_2los1tau,mu_2los1tau_p1s,mu_2los1tau_m1s));
-  tex.DrawLatex(-2.65*scale,y_3l1tau,Form("#bf{#mu = %.2f ^{+%.2f}_{-%.2f}}",mu_3l1tau,mu_3l1tau_p1s,mu_3l1tau_m1s));
-  tex.DrawLatex(-2.65*scale,y_2l2tau,Form("#bf{#mu = %.2f ^{+%.2f}_{-%.2f}}",mu_2l2tau,mu_2l2tau_p1s,mu_2l2tau_m1s));
-  tex.DrawLatex(-2.65*scale,y_4l,Form("#bf{#mu = %.2f ^{+%.2f}_{-%.2f}}",mu_4l,mu_4l_p1s,mu_4l_m1s));
-  tex.DrawLatex(-2.65*scale,y_2tau,Form("#bf{#mu = %.2f ^{+%.2f}_{-%.2f}}",mu_2tau,mu_2tau_p1s,mu_2tau_m1s));
-  tex.DrawLatex(-2.65*scale,y_1l1tau,Form("#bf{#mu = %.2f ^{+%.2f}_{-%.2f}}",mu_1l1tau,mu_1l1tau_p1s,mu_1l1tau_m1s));
+  tex.DrawLatex(-2.65*scale,y_2lss,Form("#bf{#hat{#mu}_{t#bar{t}H} = %.2f ^{+%.2f}_{-%.2f}}",mu_2lss,mu_2lss_p1s,mu_2lss_m1s));
+  tex.DrawLatex(-2.65*scale,y_3l,Form("#bf{#hat{#mu}_{t#bar{t}H} = %.2f ^{+%.2f}_{-%.2f}}",mu_3l,mu_3l_p1s,mu_3l_m1s));
+  tex.DrawLatex(-2.65*scale,y_2lss1tau,Form("#bf{#hat{#mu}_{t#bar{t}H} = %.2f ^{+%.2f}_{-%.2f}}",mu_2lss1tau,mu_2lss1tau_p1s,mu_2lss1tau_m1s));
+  tex.DrawLatex(-2.65*scale,y_1l2tau,Form("#bf{#hat{#mu}_{t#bar{t}H} = %.2f ^{+%.2f}_{-%.2f}}",mu_1l2tau,mu_1l2tau_p1s,mu_1l2tau_m1s));
+  tex.DrawLatex(-2.65*scale,y_2los1tau,Form("#bf{#hat{#mu}_{t#bar{t}H} = %.2f ^{+%.2f}_{-%.2f}}",mu_2los1tau,mu_2los1tau_p1s,mu_2los1tau_m1s));
+  tex.DrawLatex(-2.65*scale,y_3l1tau,Form("#bf{#hat{#mu}_{t#bar{t}H} = %.2f ^{+%.2f}_{-%.2f}}",mu_3l1tau,mu_3l1tau_p1s,mu_3l1tau_m1s));
+  tex.DrawLatex(-2.65*scale,y_2l2tau,Form("#bf{#hat{#mu}_{t#bar{t}H} = %.2f ^{+%.2f}_{-%.2f}}",mu_2l2tau,mu_2l2tau_p1s,mu_2l2tau_m1s));
+  tex.DrawLatex(-2.65*scale,y_4l,Form("#bf{#hat{#mu}_{t#bar{t}H} = %.2f ^{+%.2f}_{-%.2f}}",mu_4l,mu_4l_p1s,mu_4l_m1s));
+  tex.DrawLatex(-2.65*scale,y_2tau,Form("#bf{#hat{#mu}_{t#bar{t}H} = %.2f ^{+%.2f}_{-%.2f}}",mu_2tau,mu_2tau_p1s,mu_2tau_m1s));
+  tex.DrawLatex(-2.65*scale,y_1l1tau,Form("#bf{#hat{#mu}_{t#bar{t}H} = %.2f ^{+%.2f}_{-%.2f}}",mu_1l1tau,mu_1l1tau_p1s,mu_1l1tau_m1s));
 
   tex.SetTextSize(0.036);
   if(era==0)
-    tex.DrawLatex(-2.65*scale,10,Form("#mu = %.2f ^{+%.2f}_{-%.2f} #bf{#left[ {}^{+%.2f}_{-%.2f} (stat) {}^{+%.2f}_{-%.2f} (syst) #right]}",mu_comb,mu_comb_p1s,mu_comb_m1s,mu_comb_p1s_stat,mu_comb_m1s_stat,mu_comb_p1s_syst,mu_comb_m1s_syst));
+    tex.DrawLatex(-2.65*scale,10,Form("#hat{#mu}_{t#bar{t}H} = %.2f ^{+%.2f}_{-%.2f} #bf{#left[ {}^{+%.2f}_{-%.2f} (stat) {}^{+%.2f}_{-%.2f} (syst) #right]}",mu_comb,mu_comb_p1s,mu_comb_m1s,mu_comb_p1s_stat,mu_comb_m1s_stat,mu_comb_p1s_syst,mu_comb_m1s_syst));
   else
-    tex.DrawLatex(-2.65*scale,10,Form("#mu = %.2f ^{+%.2f}_{-%.2f}",mu_comb,mu_comb_p1s,mu_comb_m1s));
+    tex.DrawLatex(-2.65*scale,10,Form("#hat{#mu}_{t#bar{t}H} = %.2f ^{+%.2f}_{-%.2f}",mu_comb,mu_comb_p1s,mu_comb_m1s));
 
   TString erastring = std::to_string(era);
   c->SaveAs("test_mu_ttH_"+erastring+"_2.pdf");
